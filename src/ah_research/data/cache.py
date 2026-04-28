@@ -10,10 +10,13 @@ Design:
   reopening a cache is safe.
 - **Upserts via DELETE + INSERT.** DuckDB supports ``INSERT OR REPLACE`` in
   newer versions but we use the DELETE + INSERT pattern for portability and
-  clarity. All price writes are idempotent on ``(date, symbol)``.
+  clarity. All writes are idempotent on their natural key.
+- **PIT reads for bitemporal / versioned entities.** ``read_fundamentals_asof``
+  and ``read_constituents_asof`` filter with ``known_as_of <= asof`` /
+  ``effective_from <= asof < effective_to`` respectively, then dedupe to one
+  row per natural key (preferring later-known rows for restatements).
 
-See spec §3 "Cache" and §10 data-layer contract. Entities beyond prices
-land in Tasks 1.6 through 1.9.
+See spec §3 "Cache" and §10 data-layer contract.
 """
 
 from __future__ import annotations
@@ -81,22 +84,8 @@ class DuckDBCache:
     # ── prices ─────────────────────────────────────────────────────────────
 
     def write_prices(self, df: pd.DataFrame) -> None:
-        """Upsert (date, symbol) rows. Idempotent. Transactional."""
-        if len(df) == 0:
-            return
-        self._conn.register("df", df)
-        try:
-            self._conn.execute("BEGIN TRANSACTION")
-            self._conn.execute(
-                "DELETE FROM prices WHERE (date, symbol) IN (SELECT date, symbol FROM df)"
-            )
-            self._conn.execute("INSERT INTO prices SELECT * FROM df")
-            self._conn.execute("COMMIT")
-        except Exception:
-            self._conn.execute("ROLLBACK")
-            raise
-        finally:
-            self._conn.unregister("df")
+        """Upsert ``(date, symbol)`` rows. Idempotent. Transactional."""
+        self._upsert("prices", ["date", "symbol"], df)
 
     def read_prices(
         self,
@@ -105,7 +94,7 @@ class DuckDBCache:
         end: date,
     ) -> pd.DataFrame:
         """Return all cached price rows for ``symbols`` within ``[start, end]``
-        inclusive, ordered by (symbol, date)."""
+        inclusive, ordered by ``(symbol, date)``."""
         result: pd.DataFrame = self._conn.execute(
             "SELECT * FROM prices "
             "WHERE symbol = ANY(?) "
@@ -126,3 +115,186 @@ class DuckDBCache:
         if row is None or row[0] is None:
             return None
         return row[0], row[1]
+
+    # ── fundamentals (bitemporal, PIT-aware reads) ─────────────────────────
+
+    def write_fundamentals(self, df: pd.DataFrame) -> None:
+        """Upsert on (symbol, report_date, known_as_of, statement_kind)."""
+        self._upsert(
+            "fundamentals",
+            ["symbol", "report_date", "known_as_of", "statement_kind"],
+            df,
+        )
+
+    def read_fundamentals_asof(
+        self,
+        symbols: list[str],
+        asof: date,
+    ) -> pd.DataFrame:
+        """Return the PIT-correct fundamentals snapshot at ``asof``.
+
+        A row is included iff ``publication_date <= asof AND known_as_of <= asof``.
+        For each ``(symbol, report_date)`` we pick the **most recent** row by
+        ``known_as_of`` (so restated figures win once they're published), with
+        ``statement_kind`` precedence ``restated > audited > preliminary`` as
+        a tiebreak when two rows share the same ``known_as_of``.
+        """
+        result: pd.DataFrame = self._conn.execute(
+            """
+            SELECT * FROM (
+                SELECT *, ROW_NUMBER() OVER (
+                    PARTITION BY symbol, report_date
+                    ORDER BY
+                        known_as_of DESC,
+                        CASE statement_kind
+                            WHEN 'restated' THEN 3
+                            WHEN 'audited' THEN 2
+                            WHEN 'preliminary' THEN 1
+                            ELSE 0
+                        END DESC
+                ) AS _rn
+                FROM fundamentals
+                WHERE symbol = ANY(?)
+                  AND publication_date <= ?
+                  AND known_as_of <= ?
+            )
+            WHERE _rn = 1
+            ORDER BY symbol, report_date
+            """,
+            [symbols, asof, asof],
+        ).fetchdf()
+        if "_rn" in result.columns:
+            result = result.drop(columns=["_rn"])
+        return result
+
+    # ── index constituents (PIT) ───────────────────────────────────────────
+
+    def write_constituents(self, df: pd.DataFrame) -> None:
+        """Upsert on (index_name, symbol, effective_from).
+
+        Caller passes a DataFrame with columns matching the table schema;
+        ``effective_to`` may be ``NaT`` / ``None`` for open-ended memberships.
+        """
+        self._upsert(
+            "index_constituents",
+            ["index_name", "symbol", "effective_from"],
+            df,
+        )
+
+    def read_constituents_asof(
+        self,
+        index_name: str,
+        asof: date,
+    ) -> pd.DataFrame:
+        """Return members of ``index_name`` that were active at ``asof``.
+
+        A row is active iff ``effective_from <= asof AND
+        (effective_to IS NULL OR effective_to > asof)``.
+        """
+        result: pd.DataFrame = self._conn.execute(
+            """
+            SELECT * FROM index_constituents
+            WHERE index_name = ?
+              AND effective_from <= ?
+              AND (effective_to IS NULL OR effective_to > ?)
+            ORDER BY symbol
+            """,
+            [index_name, asof, asof],
+        ).fetchdf()
+        return result
+
+    # ── trading calendar ───────────────────────────────────────────────────
+
+    def write_calendar(self, df: pd.DataFrame) -> None:
+        """Upsert on (exchange, date)."""
+        self._upsert("calendars", ["exchange", "date"], df)
+
+    def read_calendar(
+        self,
+        exchange: str,
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        result: pd.DataFrame = self._conn.execute(
+            "SELECT * FROM calendars WHERE exchange = ? AND date BETWEEN ? AND ? ORDER BY date",
+            [exchange, start, end],
+        ).fetchdf()
+        return result
+
+    # ── FX rates ───────────────────────────────────────────────────────────
+
+    def write_fx(self, df: pd.DataFrame) -> None:
+        """Upsert on (date, pair)."""
+        self._upsert("fx_rates", ["date", "pair"], df)
+
+    def read_fx(
+        self,
+        pair: str,
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        result: pd.DataFrame = self._conn.execute(
+            "SELECT * FROM fx_rates WHERE pair = ? AND date BETWEEN ? AND ? ORDER BY date",
+            [pair, start, end],
+        ).fetchdf()
+        return result
+
+    # ── sector classification ──────────────────────────────────────────────
+
+    def write_sectors(self, df: pd.DataFrame) -> None:
+        """Upsert on (symbol). One sector per symbol."""
+        self._upsert("sectors", ["symbol"], df)
+
+    def read_sectors(self, symbols: list[str]) -> pd.DataFrame:
+        result: pd.DataFrame = self._conn.execute(
+            "SELECT * FROM sectors WHERE symbol = ANY(?) ORDER BY symbol",
+            [symbols],
+        ).fetchdf()
+        return result
+
+    # ── corporate actions ──────────────────────────────────────────────────
+
+    def write_corporate_actions(self, df: pd.DataFrame) -> None:
+        """Upsert on (symbol, ex_date, kind)."""
+        self._upsert("corporate_actions", ["symbol", "ex_date", "kind"], df)
+
+    def read_corporate_actions(
+        self,
+        symbols: list[str],
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        result: pd.DataFrame = self._conn.execute(
+            "SELECT * FROM corporate_actions "
+            "WHERE symbol = ANY(?) AND ex_date BETWEEN ? AND ? "
+            "ORDER BY symbol, ex_date",
+            [symbols, start, end],
+        ).fetchdf()
+        return result
+
+    # ── internal ───────────────────────────────────────────────────────────
+
+    def _upsert(self, table: str, key_cols: list[str], df: pd.DataFrame) -> None:
+        """Transactional upsert: DELETE existing rows whose key matches,
+        then INSERT new rows. No-op on empty input.
+
+        ``table`` and ``key_cols`` are interpolated into SQL — callers must
+        only pass trusted literals. This is private; all public writers
+        pass hard-coded strings.
+        """
+        if len(df) == 0:
+            return
+        key_expr = ", ".join(key_cols)
+        self._conn.register("df", df)
+        try:
+            self._conn.execute("BEGIN TRANSACTION")
+            self._conn.execute(
+                f"DELETE FROM {table} WHERE ({key_expr}) IN (SELECT {key_expr} FROM df)"
+            )
+            self._conn.execute(f"INSERT INTO {table} SELECT * FROM df")
+            self._conn.execute("COMMIT")
+        except Exception:
+            self._conn.execute("ROLLBACK")
+            raise
+        finally:
+            self._conn.unregister("df")
