@@ -24,6 +24,7 @@ other methods land in subsequent commits.
 from __future__ import annotations
 
 from datetime import date
+from typing import Any
 
 import pandas as pd
 
@@ -41,6 +42,7 @@ from ah_research.integrations import (
 )
 from ah_research.logging import get_logger
 from ah_research.model.schemas import PriceFrameSchema
+from ah_research.model.types import AHPair, Freq
 
 log = get_logger(__name__)
 
@@ -274,10 +276,178 @@ class DataRepository:
             self._cache.write_corporate_actions(raw)
         return self._cache.read_corporate_actions(symbols, start, end)
 
+    # ── trading calendar ───────────────────────────────────────────────────
+
+    def get_trading_calendar(self, exchange: str, start: date, end: date) -> pd.DataFrame:
+        """Return trading-day flags for ``exchange`` within ``[start, end]``.
+
+        Cache miss triggers one upstream fetch; result is stored in cache
+        and returned on the read-back. ``is_trading_day`` is ``bool``;
+        callers typically filter ``df[df.is_trading_day].date``.
+        """
+        self._validate_date_range(start, end)
+        cached = self._cache.read_calendar(exchange, start, end)
+        if len(cached) > 0:
+            return cached
+        raw = self._calendar_source.fetch_calendar(exchange, start, end)
+        if len(raw) > 0:
+            self._cache.write_calendar(raw)
+        return self._cache.read_calendar(exchange, start, end)
+
+    # ── sectors ────────────────────────────────────────────────────────────
+
+    def get_sector(self, symbols: list[str]) -> pd.DataFrame:
+        """Return the current SWS / industry classification for ``symbols``.
+
+        Sector tags are effectively static (they change only on reclassification
+        events which we don't model), so one fetch per symbol suffices.
+        """
+        if len(symbols) == 0:
+            return pd.DataFrame(columns=["symbol", "sector_l1", "sector_l2"])
+        cached = self._cache.read_sectors(symbols)
+        cached_set = set(cached["symbol"].tolist()) if len(cached) > 0 else set()
+        missing = [s for s in symbols if s not in cached_set]
+        if missing:
+            raw = self._sector_source.fetch_sectors(missing)
+            if len(raw) > 0:
+                self._cache.write_sectors(raw)
+        return self._cache.read_sectors(symbols)
+
+    # ── AH premium ─────────────────────────────────────────────────────────
+
+    def compute_ah_premium(
+        self,
+        pair: AHPair,
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        """Return the per-day AH premium for ``pair`` within ``[start, end]``.
+
+        Premium definition::
+
+            premium(t) = close_A(t) / (close_H(t) * FX_HKD_to_CNY(t)) - 1
+
+        i.e., how much more expensive the A-share leg is than the H-share
+        leg, priced in CNY. Positive premium is the default regime.
+
+        Only dates where BOTH legs trade are kept (inner-join on date). FX
+        is asof-filled forward: the most recent known rate on or before
+        date t is used. Output columns: ``date``, ``close_a``, ``close_h``,
+        ``fx_rate``, ``premium``.
+        """
+        self._validate_date_range(start, end)
+
+        a_sym = str(pair.a_symbol)
+        h_sym = str(pair.h_symbol)
+
+        a_prices = self.get_prices([a_sym], start, end)
+        h_prices = self.get_prices([h_sym], start, end)
+        fx = self._fetch_fx_cny_hkd(start, end)
+
+        if len(a_prices) == 0 or len(h_prices) == 0 or len(fx) == 0:
+            return pd.DataFrame(columns=["date", "close_a", "close_h", "fx_rate", "premium"])
+
+        a_slim = a_prices[["date", "close"]].rename(columns={"close": "close_a"})
+        h_slim = h_prices[["date", "close"]].rename(columns={"close": "close_h"})
+        fx_slim = fx[["date", "rate"]].rename(columns={"rate": "fx_rate"})
+
+        merged = a_slim.merge(h_slim, on="date", how="inner").sort_values("date")
+        merged = pd.merge_asof(merged, fx_slim.sort_values("date"), on="date", direction="backward")
+        merged = merged.dropna(subset=["fx_rate"])
+        # close_h (HKD) * fx_rate (CNY per HKD) = close_h in CNY
+        merged["premium"] = merged["close_a"] / (merged["close_h"] * merged["fx_rate"]) - 1.0
+        return merged.reset_index(drop=True)
+
+    def _fetch_fx_cny_hkd(self, start: date, end: date) -> pd.DataFrame:
+        """Fetch (and cache) the CNY/HKD rate series for ``[start, end]``.
+
+        The stored table keeps one row per (date, pair); this method is
+        the only caller for this specific pair so we treat a non-empty cache
+        read as sufficient coverage.
+        """
+        pair = "CNY_HKD"
+        cached = self._cache.read_fx(pair, start, end)
+        if len(cached) > 0:
+            return cached
+        raw = self._fx_source.fetch_fx(pair, start, end)
+        if len(raw) > 0:
+            self._cache.write_fx(raw)
+        return self._cache.read_fx(pair, start, end)
+
+    # ── resample (D → W / M / Q) ───────────────────────────────────────────
+
+    @staticmethod
+    def resample(frame: pd.DataFrame, freq: Freq | str) -> pd.DataFrame:
+        """Resample a daily ``PriceFrameSchema``-valid frame to a lower
+        frequency.
+
+        Aggregation rules (per symbol, per period):
+            close, close_hfq, total_return, limit_up, limit_down → last
+            open                                                 → first
+            high                                                 → max
+            low                                                  → min
+            volume, amount                                       → sum
+            turnover                                             → mean
+            is_suspended, is_st, hit_limit_up, hit_limit_down    → any
+
+        The period label is the period *end* (e.g., Friday for W, month-end
+        for M, quarter-end for Q).
+        """
+        freq_str = freq.value if isinstance(freq, Freq) else freq
+        pandas_freq = _PANDAS_FREQ.get(freq_str)
+        if pandas_freq is None:
+            raise UserInputError(f"unsupported resample freq {freq_str!r}; expected D|W|M|Q")
+        if len(frame) == 0:
+            return frame.copy()
+        # Resample per symbol then stitch results back together. Pandas
+        # ``resample().agg({...})`` accepts column-keyed names including
+        # "first"/"last"/"sum"/"mean"/"max"/"min"; for booleans we use a
+        # callable because the string "any" isn't always recognised.
+        any_bool = lambda s: bool(s.any())  # noqa: E731
+        agg_map: dict[str, Any] = {
+            "open": "first",
+            "high": "max",
+            "low": "min",
+            "close": "last",
+            "close_hfq": "last",
+            "total_return": "last",
+            "volume": "sum",
+            "amount": "sum",
+            "turnover": "mean",
+            "is_suspended": any_bool,
+            "is_st": any_bool,
+            "limit_up": "last",
+            "limit_down": "last",
+            "hit_limit_up": any_bool,
+            "hit_limit_down": any_bool,
+        }
+        # Filter to present columns so resample works on partial frames.
+        present_agg = {k: v for k, v in agg_map.items() if k in frame.columns}
+        parts: list[pd.DataFrame] = []
+        for sym, group in frame.groupby("symbol"):
+            resampled = (
+                group.set_index("date")
+                .drop(columns=["symbol"])
+                .resample(pandas_freq)
+                .agg(present_agg)  # type: ignore[arg-type]
+                .reset_index()
+            )
+            resampled.insert(1, "symbol", sym)
+            parts.append(resampled)
+        return pd.concat(parts, ignore_index=True)
+
     @staticmethod
     def _validate_date_range(start: date, end: date) -> None:
         if start > end:
             raise UserInputError(f"start ({start}) must not be after end ({end})")
+
+
+_PANDAS_FREQ: dict[str, str] = {
+    "D": "D",
+    "W": "W-FRI",
+    "M": "ME",
+    "Q": "QE",
+}
 
 
 def _empty_price_frame() -> pd.DataFrame:
