@@ -53,7 +53,8 @@ def compute_symbols(
         index = "CSI300" if universe_lower == "csi300" else "HSI"
         fake = FakeSources(seed=42)
         df = fake.constituents.fetch_constituents(index, date.today())
-        return df["symbol"].tolist()
+        symbols: list[str] = df["symbol"].astype(str).tolist()
+        return symbols
     raise NotImplementedError(
         f"universe={universe!r} requires live integration (Phase 1 Tasks 1.21/1.22)"
     )
