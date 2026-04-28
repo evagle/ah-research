@@ -9,6 +9,13 @@ repos:
     rev: v1.10.0
     hooks:
       - id: mypy
-        additional_dependencies: [pandas-stubs, pydantic, pydantic-settings, types-pyyaml, typer, structlog]
+        additional_dependencies:
+          - pandas-stubs
+          - pydantic
+          - pydantic-settings
+          - types-pyyaml
+          - typer
+          - structlog
+          - pandera[pandas]
         args: [--strict, --ignore-missing-imports]
         files: ^src/
