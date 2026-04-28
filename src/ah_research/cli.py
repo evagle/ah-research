@@ -22,7 +22,7 @@ def version() -> None:
 @app.command()
 def init() -> None:
     """Bootstrap config + cache dir + API keys."""
-    from scripts.ah_init import run as _run_init
+    from ah_research.scripts.ah_init import run as _run_init
 
     _run_init()
 
@@ -30,7 +30,7 @@ def init() -> None:
 @app.command()
 def doctor() -> None:
     """Run a health check (deps, sources reachable, cache writable)."""
-    from scripts.ah_doctor import run as _run_doctor
+    from ah_research.scripts.ah_doctor import run as _run_doctor
 
     _run_doctor()
 
@@ -41,6 +41,6 @@ def warmup(
     years: int = typer.Option(5, help="How many years of history to pre-fetch"),
 ) -> None:
     """Pre-fetch data for a universe to warm the cache."""
-    from scripts.ah_warmup import run as _run_warmup
+    from ah_research.scripts.ah_warmup import run as _run_warmup
 
     _run_warmup(universe=universe, years=years)
