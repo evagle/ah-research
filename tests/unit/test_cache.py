@@ -62,12 +62,13 @@ def test_cache_applies_initial_migration(tmp_path):
 
 
 def test_cache_reopening_does_not_re_run_migration(tmp_path):
-    """The migration uses IF NOT EXISTS so reopening is safe."""
+    """Migrations use IF NOT EXISTS / INSERT OR IGNORE so reopening is safe."""
     path = tmp_path / "cache.duckdb"
     c1 = DuckDBCache(path)
+    v1 = c1.schema_version()
     c1.close()
     c2 = DuckDBCache(path)
-    assert c2.schema_version() == 1
+    assert c2.schema_version() == v1
     c2.close()
 
 

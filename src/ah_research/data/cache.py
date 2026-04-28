@@ -151,6 +151,22 @@ class DuckDBCache:
             df,
         )
 
+    def log_fundamentals_fetch(self, symbol: str, start: date, end: date) -> None:
+        self._conn.execute(
+            "INSERT OR IGNORE INTO fundamentals_fetch_log "
+            "(symbol, fetched_start, fetched_end) VALUES (?, ?, ?)",
+            [symbol, start, end],
+        )
+
+    def has_fundamentals_fetch_covering(self, symbol: str, start: date, end: date) -> bool:
+        row = self._conn.execute(
+            "SELECT 1 FROM fundamentals_fetch_log "
+            "WHERE symbol = ? AND fetched_start <= ? AND fetched_end >= ? "
+            "LIMIT 1",
+            [symbol, start, end],
+        ).fetchone()
+        return row is not None
+
     def read_fundamentals_asof(
         self,
         symbols: list[str],
@@ -205,6 +221,20 @@ class DuckDBCache:
             ["index_name", "symbol", "effective_from"],
             df,
         )
+
+    def log_constituents_fetch(self, index_name: str, asof: date) -> None:
+        self._conn.execute(
+            "INSERT OR IGNORE INTO constituents_fetch_log (index_name, fetched_asof) VALUES (?, ?)",
+            [index_name, asof],
+        )
+
+    def has_constituents_fetch(self, index_name: str, asof: date) -> bool:
+        row = self._conn.execute(
+            "SELECT 1 FROM constituents_fetch_log "
+            "WHERE index_name = ? AND fetched_asof = ? LIMIT 1",
+            [index_name, asof],
+        ).fetchone()
+        return row is not None
 
     def read_constituents_asof(
         self,
