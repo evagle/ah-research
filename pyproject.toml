@@ -47,7 +47,10 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM", "RUF"]
-ignore = ["E501"]
+ignore = [
+    "E501",   # line length handled by formatter
+    "N818",   # exception names intentionally omit "Error" suffix (e.g. SourceRateLimit, LeakageDetected) for raise-site readability
+]
 
 [tool.mypy]
 python_version = "3.11"
