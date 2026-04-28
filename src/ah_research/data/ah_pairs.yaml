@@ -1,0 +1,43 @@
+# Curated dual-listed A + H pairs as of 2026-04-28.
+# Edit with care — this is a hand-maintained starter set. The universe is larger
+# than this (~150 pairs exist); this list covers the commonly-traded names most
+# useful for value / contrarian research. Quarterly audit recommended.
+#
+# Schema:
+#   a         : A-share symbol (SH or SZ)
+#   h         : H-share symbol (HK); null means A-only (kept here for value-dossier reasons)
+#   name_en   : English name
+#   name_zh   : Chinese name
+#
+# load_ah_pairs() returns only entries with both a and h.
+pairs:
+  - {a: "601318.SH", h: "2318.HK", name_en: "Ping An Insurance",                  name_zh: "中国平安"}
+  - {a: "601398.SH", h: "1398.HK", name_en: "ICBC",                               name_zh: "工商银行"}
+  - {a: "601939.SH", h: "0939.HK", name_en: "China Construction Bank",            name_zh: "建设银行"}
+  - {a: "601288.SH", h: "1288.HK", name_en: "Agricultural Bank of China",         name_zh: "农业银行"}
+  - {a: "601988.SH", h: "3988.HK", name_en: "Bank of China",                      name_zh: "中国银行"}
+  - {a: "601328.SH", h: "3328.HK", name_en: "Bank of Communications",             name_zh: "交通银行"}
+  - {a: "600028.SH", h: "0386.HK", name_en: "Sinopec",                            name_zh: "中国石化"}
+  - {a: "601857.SH", h: "0857.HK", name_en: "PetroChina",                         name_zh: "中国石油"}
+  - {a: "601088.SH", h: "1088.HK", name_en: "China Shenhua",                      name_zh: "中国神华"}
+  - {a: "600519.SH", h: null,       name_en: "Kweichow Moutai",                    name_zh: "贵州茅台"}
+  - {a: "601601.SH", h: "2601.HK", name_en: "China Pacific Insurance",            name_zh: "中国太保"}
+  - {a: "601628.SH", h: "2628.HK", name_en: "China Life",                         name_zh: "中国人寿"}
+  - {a: "600036.SH", h: "3968.HK", name_en: "China Merchants Bank",               name_zh: "招商银行"}
+  - {a: "600900.SH", h: null,       name_en: "Yangtze Power",                      name_zh: "长江电力"}
+  - {a: "601668.SH", h: "3323.HK", name_en: "China State Construction Engr",      name_zh: "中国建筑"}
+  - {a: "601390.SH", h: "0390.HK", name_en: "China Railway Group",                name_zh: "中国中铁"}
+  - {a: "601186.SH", h: "1186.HK", name_en: "China Railway Construction",         name_zh: "中国铁建"}
+  - {a: "601800.SH", h: "1800.HK", name_en: "China Communications Construction",  name_zh: "中国交建"}
+  - {a: "600050.SH", h: "0762.HK", name_en: "China Unicom",                       name_zh: "中国联通"}
+  - {a: "601728.SH", h: "0728.HK", name_en: "China Telecom",                      name_zh: "中国电信"}
+  - {a: "600941.SH", h: "0941.HK", name_en: "China Mobile",                       name_zh: "中国移动"}
+  - {a: "601985.SH", h: "1816.HK", name_en: "CGN Power",                          name_zh: "中国广核"}
+  - {a: "601669.SH", h: "1133.HK", name_en: "Power Construction Corp",            name_zh: "中国电建"}
+  - {a: "601888.SH", h: "1888.HK", name_en: "China Tourism Group Duty Free",      name_zh: "中国中免"}
+  - {a: "601336.SH", h: "1336.HK", name_en: "New China Life Insurance",           name_zh: "新华保险"}
+  - {a: "600887.SH", h: null,       name_en: "Inner Mongolia Yili",                name_zh: "伊利股份"}
+  - {a: "600276.SH", h: "2269.HK", name_en: "Hengrui Pharmaceutical",             name_zh: "恒瑞医药"}
+  - {a: "600309.SH", h: null,       name_en: "Wanhua Chemical",                    name_zh: "万华化学"}
+  - {a: "601166.SH", h: null,       name_en: "Industrial Bank",                    name_zh: "兴业银行"}
+  - {a: "600048.SH", h: null,       name_en: "Poly Developments",                  name_zh: "保利发展"}
