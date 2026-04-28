@@ -216,3 +216,25 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Environment
+.env
+.env.local
+.venv/
+
+# Cache (user-writable; not project-local by default, but local test runs)
+cache.duckdb
+cache.duckdb.wal
+data/cache/
+
+# Test artifacts
+.coverage
+htmlcov/
+.pytest_cache/
+.hypothesis/
+.mypy_cache/
+.ruff_cache/
+
+# Editor
+.vscode/
+.idea/
