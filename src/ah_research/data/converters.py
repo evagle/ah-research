@@ -217,6 +217,124 @@ def convert_fundamentals(raw: pd.DataFrame) -> pd.DataFrame:
 # ── internal ─────────────────────────────────────────────────────────────────
 
 
+# ── source-specific normalizers ─────────────────────────────────────────────
+#
+# Each concrete client returns a DataFrame in its own native shape (column
+# names, dtypes, extras). Normalisers convert those to the common input
+# shape expected by ``convert_prices`` / ``convert_fundamentals``:
+#
+#     PRICES:  date, symbol, open, high, low, close, volume, amount,
+#              turnover, is_suspended, is_st
+#
+# Adding a new source means adding one ``normalize_<source>_prices`` here;
+# the rest of the pipeline is unchanged.
+
+
+def normalize_baostock_prices(raw: pd.DataFrame) -> pd.DataFrame:
+    """Baostock ``query_history_k_data_plus`` output → convert_prices input.
+
+    Baostock returns everything as strings; maps:
+    - ``turn`` → ``turnover``
+    - ``tradestatus != "1"`` → ``is_suspended = True``
+    - ``isST == "1"`` → ``is_st = True``
+    """
+    if len(raw) == 0:
+        return pd.DataFrame(
+            columns=[
+                "date",
+                "symbol",
+                "open",
+                "high",
+                "low",
+                "close",
+                "volume",
+                "amount",
+                "turnover",
+                "is_suspended",
+                "is_st",
+            ]
+        )
+    df = raw.copy()
+    df["date"] = pd.to_datetime(df["date"])
+    for col in ("open", "high", "low", "close", "amount", "turn"):
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    df["volume"] = pd.to_numeric(df["volume"], errors="coerce").fillna(0).astype(int)
+    df["amount"] = df["amount"].fillna(0.0)
+    df["turnover"] = df["turn"].fillna(0.0)
+    df["is_suspended"] = df["tradestatus"].astype(str) != "1"
+    df["is_st"] = df["isST"].astype(str) == "1"
+    return df[
+        [
+            "date",
+            "symbol",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "turnover",
+            "is_suspended",
+            "is_st",
+        ]
+    ].reset_index(drop=True)
+
+
+def normalize_akshare_prices(raw: pd.DataFrame) -> pd.DataFrame:
+    """AKShare ``stock_hk_hist`` output (already English-renamed by the
+    client) → convert_prices input.
+
+    The client already renamed Chinese columns and added
+    ``is_suspended`` / ``is_st`` placeholders; we just drop extras and
+    coerce dtypes.
+    """
+    if len(raw) == 0:
+        return pd.DataFrame(
+            columns=[
+                "date",
+                "symbol",
+                "open",
+                "high",
+                "low",
+                "close",
+                "volume",
+                "amount",
+                "turnover",
+                "is_suspended",
+                "is_st",
+            ]
+        )
+    df = raw.copy()
+    df["date"] = pd.to_datetime(df["date"])
+    for col in ("open", "high", "low", "close", "amount", "turnover"):
+        df[col] = pd.to_numeric(df[col], errors="coerce")
+    # AKShare turnover is published as a percentage (e.g. 0.3 means 0.3%);
+    # our schema treats turnover as a fraction, so scale down by 100.
+    df["turnover"] = df["turnover"].astype(float) / 100.0
+    df["volume"] = pd.to_numeric(df["volume"], errors="coerce").fillna(0).astype(int)
+    df["amount"] = df["amount"].fillna(0.0)
+    df["is_suspended"] = df["is_suspended"].astype(bool)
+    df["is_st"] = df["is_st"].astype(bool)
+    return df[
+        [
+            "date",
+            "symbol",
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "amount",
+            "turnover",
+            "is_suspended",
+            "is_st",
+        ]
+    ].reset_index(drop=True)
+
+
+# ── internal ─────────────────────────────────────────────────────────────────
+
+
 def _validate(schema: type[pa.DataFrameModel], df: pd.DataFrame) -> pd.DataFrame:
     """Run a pandera schema and return the (possibly coerced) DataFrame.
 

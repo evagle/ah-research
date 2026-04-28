@@ -17,5 +17,6 @@ repos:
           - typer
           - structlog
           - pandera[pandas]
+          - tenacity
         args: [--strict, --ignore-missing-imports]
         files: ^src/
