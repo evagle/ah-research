@@ -1,0 +1,32 @@
+{
+  "stockList": [
+    {
+      "code": "000001",
+      "pinyin": "payh",
+      "category": "A股",
+      "orgId": "gssz0000001",
+      "zwjc": "平安银行"
+    },
+    {
+      "code": "000002",
+      "pinyin": "wka",
+      "category": "A股",
+      "orgId": "gssz0000002",
+      "zwjc": "万科A"
+    },
+    {
+      "code": "300750",
+      "pinyin": "ndsd",
+      "category": "A股",
+      "orgId": "GD165627",
+      "zwjc": "宁德时代"
+    },
+    {
+      "code": "600519",
+      "pinyin": "gzmt",
+      "category": "A股",
+      "orgId": "gssh0600519",
+      "zwjc": "贵州茅台"
+    }
+  ]
+}
