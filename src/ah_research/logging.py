@@ -8,7 +8,7 @@ from __future__ import annotations
 
 import logging
 import sys
-from typing import TextIO
+from typing import Any, TextIO
 
 import structlog
 
@@ -46,6 +46,10 @@ def configure_logging(
     )
 
 
-def get_logger(name: str) -> structlog.stdlib.BoundLogger:
-    """Return a bound logger. Modules call ``log = get_logger(__name__)`` at top."""
+def get_logger(name: str) -> Any:
+    """Return a bound logger. Modules call ``log = get_logger(__name__)`` at top.
+
+    Return type is ``Any`` because ``structlog.get_logger`` is untyped by design:
+    the bound logger gains attributes at runtime from the configured wrapper class.
+    """
     return structlog.get_logger(name)
