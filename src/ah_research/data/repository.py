@@ -24,7 +24,6 @@ other methods land in subsequent commits.
 from __future__ import annotations
 
 from datetime import date
-from typing import Any
 
 import pandas as pd
 
@@ -399,39 +398,48 @@ class DataRepository:
             raise UserInputError(f"unsupported resample freq {freq_str!r}; expected D|W|M|Q")
         if len(frame) == 0:
             return frame.copy()
-        # Resample per symbol then stitch results back together. Pandas
-        # ``resample().agg({...})`` accepts column-keyed names including
-        # "first"/"last"/"sum"/"mean"/"max"/"min"; for booleans we use a
-        # callable because the string "any" isn't always recognised.
-        any_bool = lambda s: bool(s.any())  # noqa: E731
-        agg_map: dict[str, Any] = {
-            "open": "first",
-            "high": "max",
-            "low": "min",
-            "close": "last",
-            "close_hfq": "last",
-            "total_return": "last",
-            "volume": "sum",
-            "amount": "sum",
-            "turnover": "mean",
-            "is_suspended": any_bool,
-            "is_st": any_bool,
-            "limit_up": "last",
-            "limit_down": "last",
-            "hit_limit_up": any_bool,
-            "hit_limit_down": any_bool,
-        }
-        # Filter to present columns so resample works on partial frames.
-        present_agg = {k: v for k, v in agg_map.items() if k in frame.columns}
+
+        # Per-symbol, per-column aggregation. Each call is a typed Series
+        # method (.first / .max / .any / ...), so mypy checks everything
+        # without casts or ignores. Verbose but fully type-safe.
         parts: list[pd.DataFrame] = []
         for sym, group in frame.groupby("symbol"):
-            resampled = (
-                group.set_index("date")
-                .drop(columns=["symbol"])
-                .resample(pandas_freq)
-                .agg(present_agg)  # type: ignore[arg-type]
-                .reset_index()
-            )
+            g = group.set_index("date").drop(columns=["symbol"])
+            rs = g.resample(pandas_freq)
+            columns: dict[str, pd.Series] = {}
+
+            if "open" in g.columns:
+                columns["open"] = rs["open"].first()
+            if "high" in g.columns:
+                columns["high"] = rs["high"].max()
+            if "low" in g.columns:
+                columns["low"] = rs["low"].min()
+            if "close" in g.columns:
+                columns["close"] = rs["close"].last()
+            if "close_hfq" in g.columns:
+                columns["close_hfq"] = rs["close_hfq"].last()
+            if "total_return" in g.columns:
+                columns["total_return"] = rs["total_return"].last()
+            if "volume" in g.columns:
+                columns["volume"] = rs["volume"].sum()
+            if "amount" in g.columns:
+                columns["amount"] = rs["amount"].sum()
+            if "turnover" in g.columns:
+                columns["turnover"] = rs["turnover"].mean()
+            if "is_suspended" in g.columns:
+                columns["is_suspended"] = rs["is_suspended"].any()
+            if "is_st" in g.columns:
+                columns["is_st"] = rs["is_st"].any()
+            if "limit_up" in g.columns:
+                columns["limit_up"] = rs["limit_up"].last()
+            if "limit_down" in g.columns:
+                columns["limit_down"] = rs["limit_down"].last()
+            if "hit_limit_up" in g.columns:
+                columns["hit_limit_up"] = rs["hit_limit_up"].any()
+            if "hit_limit_down" in g.columns:
+                columns["hit_limit_down"] = rs["hit_limit_down"].any()
+
+            resampled = pd.DataFrame(columns).reset_index()
             resampled.insert(1, "symbol", sym)
             parts.append(resampled)
         return pd.concat(parts, ignore_index=True)
