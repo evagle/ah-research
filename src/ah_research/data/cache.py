@@ -106,8 +106,9 @@ class DuckDBCache:
 
     def price_coverage(self, symbol: str) -> tuple[date, date] | None:
         """Return ``(min_date, max_date)`` cached for ``symbol``, or ``None``
-        if the symbol has no rows. Used by the repository to decide what
-        date slice to fetch from upstream."""
+        if the symbol has no rows. Informational only — do not use to decide
+        whether to refetch, since data dates (trading days) are narrower than
+        request ranges (calendar days). Use ``has_price_fetch_covering``."""
         row = self._conn.execute(
             "SELECT MIN(date), MAX(date) FROM prices WHERE symbol = ?",
             [symbol],
@@ -115,6 +116,30 @@ class DuckDBCache:
         if row is None or row[0] is None:
             return None
         return row[0], row[1]
+
+    def log_price_fetch(self, symbol: str, start: date, end: date) -> None:
+        """Record that ``[start, end]`` has been fetched for ``symbol``.
+        Called by the repository after a successful upstream fetch + write.
+        Idempotent on (symbol, start, end)."""
+        self._conn.execute(
+            "INSERT OR IGNORE INTO price_fetch_log (symbol, fetched_start, fetched_end) "
+            "VALUES (?, ?, ?)",
+            [symbol, start, end],
+        )
+
+    def has_price_fetch_covering(self, symbol: str, start: date, end: date) -> bool:
+        """True iff any logged fetch for ``symbol`` spans ``[start, end]``.
+
+        v1 checks for a single row covering the range. A later optimisation
+        could union multiple rows to reason about fragmented fetches.
+        """
+        row = self._conn.execute(
+            "SELECT 1 FROM price_fetch_log "
+            "WHERE symbol = ? AND fetched_start <= ? AND fetched_end >= ? "
+            "LIMIT 1",
+            [symbol, start, end],
+        ).fetchone()
+        return row is not None
 
     # ── fundamentals (bitemporal, PIT-aware reads) ─────────────────────────
 
@@ -285,13 +310,18 @@ class DuckDBCache:
         if len(df) == 0:
             return
         key_expr = ", ".join(key_cols)
+        # Explicit column list ensures df columns map to table columns BY NAME,
+        # not by position. Without this, a df whose columns are in a different
+        # order than the table silently writes values into the wrong columns.
+        cols = list(df.columns)
+        cols_expr = ", ".join(cols)
         self._conn.register("df", df)
         try:
             self._conn.execute("BEGIN TRANSACTION")
             self._conn.execute(
                 f"DELETE FROM {table} WHERE ({key_expr}) IN (SELECT {key_expr} FROM df)"
             )
-            self._conn.execute(f"INSERT INTO {table} SELECT * FROM df")
+            self._conn.execute(f"INSERT INTO {table} ({cols_expr}) SELECT {cols_expr} FROM df")
             self._conn.execute("COMMIT")
         except Exception:
             self._conn.execute("ROLLBACK")

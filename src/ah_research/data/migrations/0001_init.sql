@@ -102,6 +102,16 @@ CREATE TABLE IF NOT EXISTS corporate_actions (
     PRIMARY KEY (symbol, ex_date, kind)
 );
 
+-- price_fetch_log: tracks *request ranges* so the repository can check
+-- "have we already asked upstream for [start, end]?" without confusing calendar
+-- days with trading days. One row per fetch; coverage is a UNION of rows.
+CREATE TABLE IF NOT EXISTS price_fetch_log (
+    symbol        VARCHAR NOT NULL,
+    fetched_start DATE NOT NULL,
+    fetched_end   DATE NOT NULL,
+    PRIMARY KEY (symbol, fetched_start, fetched_end)
+);
+
 CREATE INDEX IF NOT EXISTS idx_prices_symbol_date ON prices (symbol, date);
 CREATE INDEX IF NOT EXISTS idx_fundamentals_symbol_pub ON fundamentals (symbol, publication_date);
 CREATE INDEX IF NOT EXISTS idx_index_constituents_asof ON index_constituents (index_name, effective_from, effective_to);
