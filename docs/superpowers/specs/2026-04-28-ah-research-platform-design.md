@@ -1,23 +1,44 @@
 # ah-research — Platform Design
 
 **Date:** 2026-04-28
-**Status:** Validated design, ready for implementation planning
+**Status:** Validated design (v2 after expert critique), ready for implementation planning
 **Owner:** Brian Huang
+**Reviewers:** self + three expert role-plays (quant/value, UX, principal engineer) — critiques accepted and incorporated
+
+## 0. Revision notes
+
+v2 incorporates findings from three expert critiques:
+- **Quant/value:** survivorship bias, back-adjusted/total-return series, T+1 settlement, price-limit/ST handling, bitemporal fundamentals, sector neutralization, total-return benchmarks, raw financial line items.
+- **UX:** `ah init` / `ah doctor` onboarding, kernel-state visibility, reasoning trail, session-as-durable-artifact, CN color convention, watchlists.
+- **Principal engineer:** DuckDB cache (replace Parquet-per-file), `pandera` schemas at boundaries, `Protocol`-based integration DI, exception hierarchy, concurrency story, pyproject extras, property-based tests over coverage.
+
+Killed: `Issuer` synthetic ID, artifact-by-reference broker, `DualMomentum` sample strategy, three-way `align=` parameter, `max_weight_per_sector` (replaced by real sector support, not a stub).
 
 ## 1. Purpose & Scope
 
 `ah-research` is a personal stock-research platform focused on A-shares (Shanghai / Shenzhen) and Hong Kong listings, with first-class treatment of AH dual-listings. It is **not** a trading system. Its purpose is fundamental analysis and daily/weekly/monthly trading-data research, with an emphasis on long-term value investing.
 
-### In scope
+### Key correctness principles (non-negotiable)
+
+These govern every design decision below:
+
+1. **Point-in-time everywhere** — universes (index constituents), fundamentals (bitemporal: `report_date`, `publication_date`, `known_as_of`), and prices (back-adjusted so historical values are stable under new corporate actions).
+2. **Survivorship-free universes** — historical index constituents drive historical fetches, so delisted / absorbed / removed names are in the cache.
+3. **Back-adjusted / total-return default** — price series default to back-adjusted (`hfq`); benchmarks default to total-return index (CSI 300 TR, HSI TR, HSCEI TR).
+4. **Tradability-aware** — price-limit (涨跌停), ST/*ST flags, trading halts, and T+1 (A-shares) / T+2 (HK) settlement are modeled in the backtest engine.
+5. **Sector-aware by default** — factor research is sector-neutralized by default because A-shares CSI 300 is ~35% financials and otherwise every value factor becomes a short-banks bet.
+
+### In scope (v1)
 
 - Daily bars as the primitive; weekly/monthly derived by resampling.
-- Price/volume + fundamentals + AH-pair linkage + index constituents.
-- Vectorized backtesting (daily/weekly/monthly rebalance).
-- Factor research: IC, quantile analysis, cross-sectional factor studies.
-- Portfolio construction: equal-weight / market-cap / risk-parity + caps.
-- Strategy verification: walk-forward, param sensitivity, cost sensitivity.
-- Value-investor tooling: fundamental screens, company dossier, owner-earnings / FCF trajectory, valuation-band plotter, dividend consistency.
-- Three AI-UI surfaces over a shared tool registry: `ah.ask()` notebook helper, a Streamlit chat UI attached to a live Jupyter kernel, and an MCP server (later phase).
+- Price/volume + **raw financial statement line items** + AH-pair linkage + PIT index constituents + sector tags (SWS from AKshare) + corporate actions + trading-halt/ST/price-limit flags.
+- Vectorized backtesting (daily/weekly/monthly rebalance) with **T+1 / T+2 settlement, price-limit-aware fills, dividend-reinvestment policy, time-varying cost tables**.
+- Factor research: IC (with Newey-West std errors), quantile analysis, cross-sectional factor studies with sector-neutralization default on.
+- Portfolio construction: equal-weight / market-cap (free-float-adjusted) / risk-parity + caps.
+- Strategy verification: walk-forward, param sensitivity, cost sensitivity, **leakage canary**.
+- Value-investor tooling: fundamental screens, company dossier, owner-earnings / FCF trajectory, valuation-band plotter, dividend consistency, **watchlist**.
+- Three AI-UI surfaces over a shared tool registry: `ah.ask()` notebook helper, a Streamlit chat UI attached to a live Jupyter kernel with **session management, reasoning trail, and kernel-state panel**, and an MCP server (deferred / optional).
+- **Onboarding commands:** `ah init` (bootstrap config + cache + keys), `ah doctor` (health check), `ah warmup` (sample data pre-fetch).
 
 ### Out of scope (v1)
 
@@ -26,91 +47,121 @@
 - Multi-factor regression models (Fama-Macbeth, Barra-style).
 - Optimization-based portfolio construction (CVXPY).
 - Options and derivatives.
-- Sector-tagged analysis (framework-ready, disabled by default until a clean source is identified).
+- Consensus analyst estimates (Baostock/AKshare don't provide).
+- MCP server deferred to post-v1 — shipped only if the notebook + chat surfaces prove insufficient.
 
 ## 2. Architecture
 
 ### Layer model
 
-Core principle: the unified domain model is the contract. Every layer above depends only on the model and the layer directly below; no layer reaches around another.
+Core principle: the unified domain model is the contract. Every layer above depends only on the model and the layer directly below; no layer reaches around another. Cross-cutting concerns (schemas, errors, logging, concurrency) apply uniformly.
 
 ```
 ┌────────────────────────────────────────────────────────────────────┐
 │  5. AI Interface Layer                                             │
-│     Chat Web UI (Streamlit + live kernel)                          │
+│     Chat Web UI (Streamlit + live kernel + session store)          │
 │     ah.ask() notebook helper                                       │
-│     MCP server (Phase 6)                                           │
+│     MCP server (deferred)                                          │
 │                ↓ calls                                             │
-│     Tool Registry (JSON schemas over library functions)            │
+│     Tool Registry — thin marshaling over library functions         │
+│       (date parsing, symbol validation, figure serialization)      │
 ├────────────────────────────────────────────────────────────────────┤
 │  4. Research Layer                                                 │
-│     Strategies │ Factor Research │ Portfolio │ Backtest │ Metrics  │
-│     Value Analysis (dossier, owner-earnings, valuation bands, ...) │
+│     Strategies │ Factor │ Portfolio │ Backtest │ Metrics │ Analysis│
+│     (watchlist, dossier, owner-earnings, valuation bands, ...)     │
 ├────────────────────────────────────────────────────────────────────┤
-│  3. Data Layer  (internal view of the world)                       │
-│     DataRepository (public API)                                    │
-│     Converters (source-native → domain)  +  Parquet cache          │
+│  3. Data Layer                                                     │
+│     DataRepository (public API; DI on integrations + cache)        │
+│     Converters (source-native → domain model; pandera-validated)   │
 ├────────────────────────────────────────────────────────────────────┤
-│  2. Integration Layer  (external world)                            │
-│     BaostockClient    │   AKShareClient    │   FXClient            │
-│     - login/session   │   - endpoint route │   - CNY↔HKD           │
-│     - rate-limit/retry│   - rate-limit/retry                       │
-│     - pagination      │   - error mapping                          │
-│     → source-native DataFrames                                     │
+│  2. Integration Layer                                              │
+│     PriceSource | FundamentalsSource | FXSource | CalendarSource   │
+│     (Protocols with concrete Baostock/AKshare/FX implementations)  │
 ├────────────────────────────────────────────────────────────────────┤
-│  1. External Sources (out of our control)                          │
-│     Baostock (A-shares)       AKShare (HK + FX + macro)            │
+│  1. External Sources                                               │
+│     Baostock (A-shares)     AKShare (HK, FX, sector, macro)        │
 └────────────────────────────────────────────────────────────────────┘
 
-Domain Model — pure types, imported by any layer, owned by none.
+Cross-cutting:
+  - Domain Model (pure types, pandera schemas) — used by every layer
+  - Exception hierarchy — errors remapped at integration boundary
+  - Structured logging (structlog) — every repo call + backtest run logged
+  - Concurrency — ThreadPool for I/O, ProcessPool for CPU-bound backtests
 ```
 
 ### Boundary rules
 
-1. **Integration Layer** — the only code importing `baostock` or `akshare`. Returns pandas DataFrames with **source-native** column names/dtypes/units. Handles session/login, rate limiting, retries, pagination, error mapping. Zero knowledge of the domain model.
-2. **Data Layer** — the only code that knows both worlds. `converters/` map source-native → domain model (pure functions). `cache/` stores Parquet in **domain-model schema** so the cache survives future source swaps. `DataRepository` composes integration + converter + cache and is the library's public API.
-3. **Research Layer** — sees only `DataRepository` and domain types. Pure Python; no network; no knowledge that sources exist.
-4. **AI Interface Layer** — calls only via the Tool Registry. Three consumers (chat UI, `ah.ask`, MCP server) share one registry.
+1. **Integration Layer** — the only code importing `baostock` or `akshare`. Concrete clients conform to `Protocol`s (`PriceSource`, `FundamentalsSource`, `FXSource`, `CalendarSource`, `SectorSource`). Handles session/login, rate limiting (tenacity retries), pagination, error mapping to our exception hierarchy. Returns source-native DataFrames. No knowledge of domain model.
+2. **Data Layer** — only code that knows both worlds. `converters/` map source-native → domain model (pure functions; **pandera-validated** on output). `DataRepository` takes Protocols + cache by DI; composes cache-lookup + integration-fetch + converter. Cache is **DuckDB** (one `cache.duckdb` file, tables per entity, schema evolution via `ALTER`, atomic transactions).
+3. **Research Layer** — sees only `DataRepository` and domain types. Pure Python; no network; no knowledge of sources. Functions are typed, schema-validated at boundaries, free of side effects outside explicit side-effect functions.
+4. **AI Interface Layer** — calls only via the Tool Registry. Three consumers share one registry. Registry handles marshaling (dates from strings, symbol validation, figure JSON, `_ref` resolution for kernel-scoped objects in chat). Research functions remain pure; the registry layer does the ref-handling — research never sees `_ref` strings.
 
 ### Package layout
 
 ```
 ah_research/
-├── model/                   # domain types (pure)
-├── integrations/            # LAYER 2 — external calls only
+├── model/                   # domain types + pandera schemas
+│   ├── types.py             # Symbol, AHPair, IndexConstituent, Freq, Exchange, Adjust
+│   ├── schemas.py           # pandera SchemaModels for PriceFrame, FundamentalsFrame, ...
+│   └── frames.py            # thin wrappers around DataFrames with schema-validated construction
+├── exceptions.py            # AHResearchError hierarchy (see §10)
+├── config.py                # pydantic-settings: cache dir, API keys (keyring), profile path
+├── logging.py               # structlog configuration
+├── concurrency.py           # ThreadPool / ProcessPool helpers with backpressure
+├── integrations/
+│   ├── __init__.py          # Protocols: PriceSource, FundamentalsSource, FXSource, ...
 │   ├── baostock/
-│   │   ├── client.py
+│   │   ├── client.py        # implements PriceSource, FundamentalsSource, CalendarSource
 │   │   └── source_schemas.py
 │   ├── akshare/
-│   │   ├── client.py
+│   │   ├── client.py        # implements HK PriceSource, FXSource, SectorSource, ...
 │   │   └── source_schemas.py
-│   └── fx/
-│       └── client.py
-├── data/                    # LAYER 3 — domain view + cache
-│   ├── converters/
-│   ├── cache/
-│   ├── repository.py
+│   └── fake/                # test-only deterministic implementations of all Protocols
+├── data/
+│   ├── converters/          # source-native → pandera-validated domain
+│   ├── cache/               # DuckDB schema + migrations + repository-facing API
+│   ├── repository.py        # DataRepository with DI on integrations + cache
 │   └── ah_pairs.yaml        # manually curated dual-listing map
-├── strategies/              # LAYER 4 — research
-├── backtest/                #   engine, verify, cost model
-├── metrics/                 #   empyrical wrapper + own
-├── factor/                  #   research, screener
-├── portfolio/               #   constructors, constraints
-├── analysis/                #   value-investor tools
-│   ├── company.py           #   dossier
-│   ├── owner_earnings.py    #   Buffett-style FCF trajectory
-│   ├── valuation_bands.py   #   percentile bands over 10y
-│   └── dividend_consistency.py
-├── tools/                   # LAYER 5a — tool registry
+├── strategies/
+├── backtest/                # engine (T+1/T+2 + price-limit + dividends), verify, costs
+├── metrics/
+├── factor/                  # research (Newey-West IC), screener
+├── portfolio/               # constructors, constraints
+├── analysis/                # dossier, owner_earnings, valuation_bands, dividend_consistency, watchlist
+├── tools/                   # tool registry (thin marshaling)
 └── ui/
-    ├── chat/                # LAYER 5b — Streamlit + live kernel
-    ├── notebook.py          #   ah.ask()
-    └── mcp_server/          #   Phase 6
-
+    ├── chat/                # Streamlit + live kernel + session store
+    ├── notebook.py          # ah.ask()
+    ├── theme.py             # CN-aware color convention + plotly theme
+    └── mcp_server/          # deferred
+scripts/
+├── ah_init.py               # bootstrap
+├── ah_doctor.py             # health check
+├── ah_warmup.py             # sample data pre-fetch
+└── audit_ah_pairs.py        # quarterly diff against HKEX / CSRC
 tests/
 notebooks/
 docs/superpowers/specs/
 ```
+
+### Python packaging extras
+
+```toml
+[project]
+dependencies = [
+  "pandas", "pyarrow", "duckdb", "pandera",
+  "tenacity", "structlog", "pydantic-settings", "keyring",
+  "empyrical-reloaded", "plotly", "matplotlib",
+  "baostock", "akshare",
+]
+
+[project.optional-dependencies]
+ai = ["anthropic"]
+chat = ["streamlit", "jupyter_client"]
+dev = ["pytest", "pytest-cov", "hypothesis", "ruff", "mypy", "pre-commit"]
+```
+
+The base install is library-only. Library users don't pull Streamlit; chat users opt in via `pip install ah-research[chat,ai]`.
 
 ## 3. Domain Model & Data Layer
 
@@ -120,7 +171,7 @@ Format: `<code>.<exchange>`
 - A-shares: `600519.SH`, `000001.SZ`
 - HK: `0700.HK`, `2318.HK`
 
-Exchanges: `SH` (Shanghai), `SZ` (Shenzhen), `HK` (Hong Kong). Integration layer translates to/from each source's native format (`sh.600519` for Baostock, raw codes + market hint for AKshare).
+Exchanges: `SH`, `SZ`, `HK`. Integration layer translates to/from each source's native format.
 
 ### Core types
 
@@ -132,92 +183,176 @@ class Symbol:
     currency: Currency   # CNY, HKD
 
 @dataclass(frozen=True)
-class Issuer:
-    issuer_id: str       # our synthetic ID, stable across sources
+class AHPair:
+    a_symbol: Symbol    # e.g., 601318.SH
+    h_symbol: Symbol    # e.g., 2318.HK
     name_en: str
     name_zh: str
-    listings: tuple[Symbol, ...]
-
-@dataclass(frozen=True)
-class AHPair:
-    issuer: Issuer
-    a_symbol: Symbol
-    h_symbol: Symbol
 
 @dataclass(frozen=True)
 class IndexConstituent:
-    index: str           # "CSI300", "HSI", "HSCEI", ...
+    index: str           # "CSI300", "HSI", "HSCEI"
     symbol: Symbol
     weight: float | None
     effective_from: date
-    effective_to: date | None   # None = currently a member
+    effective_to: date | None
+
+@dataclass(frozen=True)
+class CorporateAction:
+    symbol: Symbol
+    ex_date: date
+    kind: Literal["cash_dividend", "stock_dividend", "split", "reverse_split", "rights_issue", "spin_off"]
+    params: dict         # kind-specific, e.g. {"ratio": 0.1} or {"amount_per_share": 2.5, "currency": "CNY"}
 ```
 
-Frames:
+(`Issuer` synthetic-ID concept dropped — `AHPair` is keyed on the A symbol.)
 
-- `PriceFrame` — wide DataFrame; index = dates, columns = (symbol, field) where field ∈ {open, high, low, close, adj_close, volume, amount, turnover}. Carries `.meta` with data source + adjustment policy.
-- `FundamentalsFrame` — long DataFrame; (report_date, symbol) → fields (pe, pb, ps, ev_ebitda, roe, roa, gross_margin, net_margin, dividend_yield, market_cap, ...). Point-in-time: each row carries `publication_date` so strategies never see future information. Additional fields discovered during Phase 1 based on Baostock/AKshare availability.
-- `TradingCalendar` — per-exchange trading-day calendar.
+### Frames (pandera-validated)
 
-### `DataRepository` — public API
+```python
+# model/schemas.py
+class PriceFrameSchema(pa.SchemaModel):
+    date: Series[pa.DateTime]
+    symbol: Series[str]
+    open: Series[float]
+    high: Series[float]
+    low: Series[float]
+    close: Series[float]
+    close_hfq: Series[float]           # back-adjusted, DEFAULT for research
+    total_return: Series[float]        # cum-dividend-reinvested
+    volume: Series[int] = pa.Field(ge=0)
+    amount: Series[float] = pa.Field(ge=0)
+    turnover: Series[float]
+    is_suspended: Series[bool]
+    is_st: Series[bool]                # ST / *ST warning
+    limit_up: Series[float]            # today's price-limit ceiling
+    limit_down: Series[float]          # today's price-limit floor
+    hit_limit_up: Series[bool]
+    hit_limit_down: Series[bool]
+
+class FundamentalsFrameSchema(pa.SchemaModel):
+    symbol: Series[str]
+    report_date: Series[pa.DateTime]          # fiscal period end
+    publication_date: Series[pa.DateTime]     # when first released (preliminary or audited)
+    known_as_of: Series[pa.DateTime]          # when THIS version was known (for restatements)
+    statement_kind: Series[str]               # "preliminary" | "audited" | "restated"
+
+    # raw line items (not just vendor ratios)
+    revenue: Series[float]
+    net_income: Series[float]
+    net_income_ex_nonrecurring: Series[float]  # 扣非净利润
+    operating_cash_flow: Series[float]
+    capex: Series[float]
+    total_assets: Series[float]
+    total_equity: Series[float]
+    total_debt: Series[float]
+    goodwill: Series[float]
+    minority_interest: Series[float]
+    d_and_a: Series[float]
+    working_capital_change: Series[float]
+
+    # vendor / derived ratios (kept as convenience)
+    pe: Series[float]
+    pb: Series[float]
+    ps: Series[float]
+    ev_ebitda: Series[float]
+    roe: Series[float]
+    roic: Series[float]                        # computed
+    roa: Series[float]
+    gross_margin: Series[float]
+    net_margin: Series[float]
+    dividend_yield: Series[float]
+    market_cap: Series[float]
+    market_cap_free_float: Series[float]
+
+    # flags
+    is_soe: Series[bool]                       # state-owned enterprise
+    is_stock_connect_eligible: Series[bool]
+```
+
+Wide `(date × symbol × field)` is for display only; canonical internal form is **long** `(date, symbol, field)`.
+
+### `DataRepository` — public API, DI'd
 
 ```python
 class DataRepository:
-    def get_prices(self, symbols, start, end, freq="D", adjust="forward") -> PriceFrame: ...
-    def get_fundamentals(self, symbols, start, end, fields=None, asof=None) -> FundamentalsFrame: ...
+    def __init__(
+        self,
+        price_source: PriceSource,
+        fundamentals_source: FundamentalsSource,
+        fx_source: FXSource,
+        calendar_source: CalendarSource,
+        sector_source: SectorSource,
+        cache: DuckDBCache,
+    ): ...
+
+    def get_prices(
+        self, symbols: list[str], start: date, end: date,
+        freq: Freq = "D",
+        adjust: Adjust = "hfq",            # DEFAULT: back-adjusted (NOT forward)
+        price_kind: PriceKind = "total_return",  # "total_return" | "price_only"
+    ) -> PriceFrame: ...
+
+    def get_fundamentals(
+        self, symbols: list[str], start: date, end: date,
+        fields: list[str] | None = None,
+        asof: date | None = None,          # point-in-time cutoff (publication_date <= asof)
+        statement_kind: StatementKind = "audited",  # "preliminary" | "audited" | "auto"
+    ) -> FundamentalsFrame: ...
+
     def get_ah_pairs(self) -> list[AHPair]: ...
-    def get_index_constituents(self, index, asof=None) -> list[IndexConstituent]: ...
+
+    def get_index_constituents(
+        self, index: str, asof: date | None = None,
+    ) -> list[IndexConstituent]: ...        # PIT by default
+
+    def get_universe_over_time(
+        self, index: str, start: date, end: date,
+    ) -> pd.DataFrame:                      # (date, symbol) pairs — drives survivorship-free fetches
+        ...
+
     def get_trading_calendar(self, exchange, start, end) -> TradingCalendar: ...
 
-    def resample(self, frame: PriceFrame, freq) -> PriceFrame: ...
-    def compute_ah_premium(self, pair: AHPair, start, end) -> pd.Series: ...
+    def get_corporate_actions(self, symbols, start, end) -> pd.DataFrame: ...
+
+    def get_sector(self, symbols: list[str], level: int = 1) -> dict[str, str]: ...
+
+    def resample(self, frame, freq) -> PriceFrame: ...
+    def compute_ah_premium(self, pair: AHPair, start, end) -> pd.Series: ...  # uses same-day FX
 ```
 
-Each method's control flow: `cache.lookup() ?? (integration.fetch() → converter.to_domain() → cache.store())`.
+Control flow: `cache.lookup() ?? (integration.fetch() → converter.to_domain() → pandera.validate() → cache.store())`.
 
-### Cache layout
+### Cache — DuckDB
 
-Location default: `~/.ah-research/cache/` (user-global; multiple projects share). Override via config.
+Single file at `~/.ah-research/cache.duckdb` (user-global; overridable via config). Tables: `prices`, `fundamentals`, `corporate_actions`, `index_constituents`, `calendars`, `fx`, `sectors`, `meta` (schema version, last-fetched ranges).
 
-```
-~/.ah-research/cache/
-├── prices/
-│   ├── SH/600519.parquet        # daily bars per symbol
-│   └── HK/0700.parquet
-├── fundamentals/
-│   ├── SH/600519.parquet
-│   └── ...
-├── ah_pairs.parquet
-├── index_constituents/
-│   ├── CSI300.parquet
-│   └── HSI.parquet
-├── calendars/
-│   ├── SH.parquet
-│   └── HK.parquet
-├── fx/CNY_HKD.parquet
-└── raw/                         # optional: source-native for forensics
-    └── {source}/{endpoint}/...
-```
+Why DuckDB over per-symbol Parquet:
+- Atomic transactions (no half-written files).
+- Schema evolution via `ALTER TABLE ADD COLUMN`.
+- Range queries fast without loading full symbol history.
+- Single file — easy to copy / back up / share / delete.
+- No fragmentation from partial fetches.
 
-Policy:
-- One Parquet file per symbol; writes are cheap and parallel-safe.
-- Monotonic date append extends files rather than rewriting.
-- Each file stores metadata (last_fetched, source, schema_version) in Parquet key-value metadata.
-- `get_*(refresh=False)` returns from cache when range is covered; otherwise fetches missing slice and extends.
+Migration strategy: `data/cache/migrations/` holds numbered SQL migrations; `ah doctor` runs pending migrations. Schema version stored in `meta` table.
 
-### Cross-currency + calendar alignment
+### Corporate-actions pipeline
 
-AH premium requires `CNY / HKD` FX from a third integration (`fx/`, AKshare-backed), cached under `fx/CNY_HKD.parquet`.
+Corporate actions are the source of truth; `close_hfq` and `total_return` are derived from `close` + actions. Rebuilding adjusted series requires no re-download; only a recompute. This means adding a new action (e.g., a dividend announced yesterday) invalidates derived columns but not raw `close`.
 
-Alignment across exchanges is explicit per call: `align="union" | "intersection" | "sh" | "hk"`. Default `"union"` with NaN on non-trading days. AH pair work naturally uses `"intersection"`.
+### Cross-currency + AH premium
+
+AH premium uses same-day CNY/HKD (offshore CNH rate) and day-level alignment on the **intersection** of SH and HK trading calendars — default for AH work. `get_prices` for mixed A/HK universes defaults to **union**; AH-specific tools use intersection.
 
 ### Point-in-time correctness
 
-Fundamentals carry both `report_date` (fiscal period end) and `publication_date` (release date). `get_fundamentals(..., asof=d)` returns only rows with `publication_date <= d` — enforcing no look-ahead bias at the repository level rather than in every strategy.
+Bitemporal fundamentals: `report_date`, `publication_date`, `known_as_of`. `get_fundamentals(asof=d)` returns rows where `publication_date <= d` and `known_as_of <= d`. This handles preliminary vs audited releases (two rows per report: `preliminary` then `audited`) and restatements (later row with later `known_as_of`).
+
+`get_index_constituents(asof=d)` returns the membership as-of that date — not "today's 300."
 
 ### AH pair curation
 
-`data/ah_pairs.yaml` is a checked-in, manually curated starter list (~30 notable pairs). A quarterly `scripts/audit_ah_pairs.py` compares it against HKEX / CSRC listings to flag drift.
+`data/ah_pairs.yaml` starts with ~30 liquid pairs (Ping An, ICBC, CCB, China Mobile, Moutai-none [A-only], etc.); a quarterly `scripts/audit_ah_pairs.py` diffs against HKEX + CSRC listings to flag drift. Target coverage: all ~150 current dual-listings within a month of launch.
 
 ## 4. Strategies, Backtest, Metrics
 
@@ -231,20 +366,21 @@ class Strategy(Protocol):
 
 @dataclass(frozen=True)
 class StrategyOutput:
-    signals: pd.DataFrame | None    # (date × symbol) continuous scores
-    weights: pd.DataFrame | None    # (date × symbol) target weights
-    rebalance: Freq = "M"           # value-investor default: monthly
+    signals: pd.DataFrame | None
+    weights: pd.DataFrame | None
+    rebalance: Freq = "M"
     meta: dict
 ```
 
-A strategy produces either signals (raw scores) OR weights (directly tradable), not both. Signals flow to factor research and/or portfolio construction; weights go straight to the backtest engine.
+Strategies receive PIT `repo` — `universe()` must use `get_index_constituents(asof=...)` or `get_universe_over_time(...)`.
 
-### v1 example strategies (also serve as end-to-end smoke tests)
+### v1 example strategies
 
-- `MomentumStrategy` — 12-1 month momentum on CSI 300.
-- `AHPremiumMeanReversion` — AH premium z-score threshold trading on curated pairs.
-- `ValueFactorStrategy` — composite PE/PB/PS sort on a universe, long top quintile.
-- `DualMomentum` — CSI 300 vs HSI cross-asset comparison.
+- `MomentumStrategy` — 12-1 month momentum on CSI 300 (PIT universe).
+- `AHPremiumMeanReversion` — z-score of AH premium, long-discount / short-premium side, on curated pairs (HK-short side only on HK-listable names, since A-shares can't be shorted by retail).
+- `ValueFactorStrategy` — composite PE/PB/PS sort on PIT CSI 300, sector-neutralized, long top quintile.
+
+(`DualMomentum` dropped.)
 
 ### Backtest engine
 
@@ -253,12 +389,28 @@ def run_backtest(
     weights: pd.DataFrame,
     prices: PriceFrame,
     *,
-    rebalance: Freq = "M",            # value default: monthly
-    costs: CostModel = DefaultCosts(),
-    benchmark: str | pd.Series | None = "CSI300",
+    rebalance: Freq = "M",
+    fill_price: FillPrice = "next_open",      # "next_open" | "next_vwap" | "next_close"
+    costs: CostModel = TimeVaryingCosts(),    # historical cost table
+    dividend_policy: DividendPolicy = "reinvest",  # "reinvest" | "cash" | "withheld"
+    settlement: Settlement = "auto",          # "T+1" for A, "T+2" for HK; auto detects from exchange
+    benchmark: str | pd.Series | None = "CSI300_TR",  # TOTAL-RETURN benchmark default
+    allow_short: dict[Exchange, bool] = {SH: False, SZ: False, HK: True},
     start=None, end=None,
 ) -> BacktestResult: ...
+```
 
+Engine mechanics:
+1. **Fill constraints:** on each rebalance date, attempted trades fail if `hit_limit_up` (for buys) or `hit_limit_down` (for sells); position stays unchanged, logged.
+2. **Settlement:** A-share buys on day `t` cannot be sold until `t+1`; HK T+2 sell-eligibility. Engine tracks `sellable_date` per lot.
+3. **Suspensions:** zero trade; inherit weight.
+4. **Delistings:** position marked at last traded price (not zero); flagged.
+5. **Dividends:** per policy — reinvest into same symbol, hold as cash, or withhold (for tax-adjusted returns).
+6. **Costs:** time-varying — A-share stamp duty table (2008 0.1%→0.1% 2023 0.05%), HK stamp (0.13%→0.1% 2023), commissions. Cost model is a pure function `(weights_before, weights_after, side, exchange, date) → cost_bps`.
+7. **Short availability:** A-share retail short forbidden; `allow_short` dict enforces. Attempted A-short → raises `UnsupportedOperation`.
+8. **Limit-aware partial fills:** optional — if open hits limit, check VWAP; if still limit, mark as failed fill; log.
+
+```python
 @dataclass
 class BacktestResult:
     returns: pd.Series
@@ -266,58 +418,33 @@ class BacktestResult:
     positions: pd.DataFrame
     turnover: pd.Series
     costs: pd.Series
+    failed_fills: pd.DataFrame         # date, symbol, reason (limit_up/down, suspended, short_forbidden)
     benchmark_returns: pd.Series | None
     metrics: MetricsBundle
-    meta: dict
+    meta: dict                         # params, data schema version, run time, git SHA
 ```
 
-Mechanics (daily-rebal example):
-1. Shift target weights forward one day (execute at next-day open; no look-ahead).
-2. `ret[t] = (weights_held[t-1] * asset_ret[t]).sum()` minus cost drag.
-3. Costs applied on rebalance days: `turnover * (commission + slippage + stamp)`. Stamp duty applies only to A-sells and both sides in HK.
-4. Suspensions: symbol inherits prior weight; no trade occurs that day; flagged in `positions`.
-5. Delistings: position marked to zero, cash freed, logged in `meta`.
+### Benchmarks — total-return by default
 
-Cost-model defaults (overridable, set from real-world case):
-- A-shares: commission 0.025% round-trip, slippage 0.05%, stamp duty 0.1% sell-side.
-- HK: commission 0.04%, stamp duty 0.1% both sides, SFC levy 0.0027%.
+Built-in: `CSI300_TR`, `CSI500_TR`, `CSI1000_TR`, `HSI_TR`, `HSCEI_TR`. Price-only variants also available (`CSI300_PR`) for chart aesthetics but NOT default for metrics.
 
-### Metrics
+### Cost model — realistic, time-varying
 
-`empyrical-reloaded` for standard metrics + own implementations for IC, turnover, exposure:
+- A-share: commission 0.025% min each way + 0.1% stamp sell-side + 0.001% transfer fee (SH) — **round-trip ~0.15%**, not 0.05%.
+- HK: commission ~0.04% per side + stamp 0.1% each side post-2023 (was 0.13%) + SFC levy 0.0027% + clearing 0.0027%.
+- Stock Connect: northbound stamp applies normally; different rates than local HK for southbound.
 
-```python
-@dataclass(frozen=True)
-class MetricsBundle:
-    cagr: float
-    volatility_ann: float
-    sharpe: float
-    sortino: float
-    calmar: float
-    max_drawdown: float
-    max_drawdown_duration: int
-    hit_rate: float
-    turnover_ann: float
-    information_ratio: float | None
-    alpha_beta: tuple[float, float] | None
-    exposure: dict
-```
+All tunable; default table ships in `backtest/costs/defaults.yaml`.
 
-### Benchmarks
+### Strategy verification
 
-Pre-fetched: `CSI300`, `CSI500`, `CSI1000`, `HSI`, `HSCEI`. Custom benchmark via `pd.Series` of returns.
-
-### Strategy verification (distinct from one backtest)
-
-`backtest/verify.py` — robustness on demand, not every run:
+`backtest/verify.py`:
 - Walk-forward / out-of-sample splits.
 - Parameter sensitivity.
-- Turnover & capacity sanity.
+- Turnover & capacity sanity (position × ADV check).
 - Transaction-cost sensitivity (2× cost stress test).
-- Benchmark robustness.
-- Look-ahead leakage scanner.
-
-This is kept separate from `factor/research.py` (the IC/quantile toolkit) — different questions, different tools.
+- **Leakage canary** — feed last-period close as this-period signal; IC must be ≈0. Built-in; runs as part of a strategy's self-test.
+- Survivorship check — assert universe at t uses PIT constituents, not today's list.
 
 ## 5. Factor Research, Portfolio, Value Analysis
 
@@ -326,110 +453,118 @@ This is kept separate from `factor/research.py` (the IC/quantile toolkit) — di
 ```python
 def run_factor_study(
     signals, prices, *,
-    horizons=[20, 60, 120, 240],    # long-term value default: 1m/3m/6m/12m
+    horizons=[20, 60, 120, 240],
     quantiles=5,
-    sector_neutral=False,
-    winsorize=(0.01, 0.99),
+    sector_neutral=True,                 # DEFAULT ON for A-shares
+    sector_source="sws_l1",
+    winsorize=(0.01, 0.99),              # BEFORE ranking
+    newey_west_lag=None,                 # auto = max(horizons); overridable
 ) -> FactorStudy: ...
 ```
 
-Answers: "does this signal have predictive power?" via IC (Spearman corr, mean + t-stat + IR), quantile returns, Q5−Q1 spread, IC decay, autocorrelation.
+IC t-stats use Newey-West with lag ≥ the forward-return horizon to correct for autocorrelation. Q5−Q1 spread significance uses block bootstrap.
+
+Processing pipeline (explicit in docstring):
+1. Cross-sectional winsorize → 2. z-score → 3. (optional) sector demean → 4. rank → 5. compute IC vs forward return.
 
 ### Fundamental screener (`factor/screener.py`)
 
-Natural for value work — often more useful than factor models:
-
 ```python
 def screen(repo, asof, universe="CSI300", rules=[...], sort_by="dividend_yield", top_n=None) -> pd.DataFrame:
-    """E.g. rules=[PE < 15, PB < 2, ROE > 0.15, debt_to_equity < 0.5]."""
+    """E.g. rules=[PE < 15, PB < 2, ROIC > 0.12, debt_to_equity < 0.5, is_soe=False]."""
 ```
 
-Rules compose from pure primitives over the fundamentals frame.
-
-### Portfolio construction (`portfolio/`)
+### Portfolio construction
 
 ```python
-# Direct constructors
 def equal_weight(symbols, asof) -> pd.Series: ...
-def market_cap_weight(symbols, asof, repo, cap=0.10) -> pd.Series: ...
+def market_cap_weight(symbols, asof, repo, cap=0.10, use_free_float=True) -> pd.Series: ...
 def risk_parity(symbols, asof, repo, lookback_days=60, cap=0.10) -> pd.Series: ...
 
-# Common path: signals → diversified weights
 def signal_to_weights(
     signals, *,
     method="top_quantile",          # or "rank_weighted" | "long_short_demeaned"
     quantile=0.2,
-    scheme="equal",                 # or "proportional" | "risk_parity"
+    scheme="equal",
     max_weight=0.05,
+    sector_neutral=True,            # weights balance sector exposure to benchmark
     long_only=True,
     gross_exposure=1.0,
     net_exposure=None,
 ) -> pd.DataFrame: ...
 ```
 
-### Constraints (post-processing)
-
-```python
-@dataclass(frozen=True)
-class PortfolioConstraints:
-    max_weight_per_name: float = 0.05
-    max_weight_per_sector: float | None = None
-    long_only: bool = True
-    gross_exposure: float = 1.0
-    net_exposure: float | None = None
-    min_price_cny: float | None = None
-    min_adv_cny: float | None = None
-```
-
-Applied as pure post-processing over weights DataFrames; constructors stay composable.
+`max_weight_per_sector` in constraints REMOVED (was stillborn) — sector handling now real and built in.
 
 ### Value-investor analysis modules (`analysis/`)
 
-- `company.py::company_dossier(repo, symbol, years=10)` — one-stop view: price history + valuation bands + fundamentals trajectory + dividend history + AH premium (if dual-listed) + peer comparison.
-- `owner_earnings.py` — Buffett-style: `net_income + D&A − maintenance capex ± WC changes`. Plots FCF and owner-earnings trajectory side-by-side with reported earnings.
-- `valuation_bands.py` — price chart with PE (and PB, EV/EBITDA) percentile bands over trailing 10y; dark-red "expensive" >90th, green "cheap" <10th zones.
-- `dividend_consistency.py` — streak tracker: years of uninterrupted payment, years of growth, 5/10/15y CAGR, payout-ratio trend.
+- `company.py::company_dossier(repo, symbol, years=10)` — headline block (price, PE, PB, dividend yield, AH premium if any, sector) at top, then valuation bands, fundamentals trajectory, dividend history, AH premium (if dual-listed), peer comparison within sector.
+- `owner_earnings.py` — `net_income_ex_nonrecurring + D&A − maintenance_capex_estimate ± WC_change − stock_based_comp − minority_interest_adjustment`. Maintenance capex heuristic documented + configurable. Caveats printed in output.
+- `valuation_bands.py` — PE/PB/EV-EBITDA 10y percentile bands; CN convention used (red = "expensive" high, green = "cheap" low) — documented; amber/teal palette available for clarity.
+- `dividend_consistency.py` — streak tracker (uninterrupted payment, growth), 5/10/15y CAGR, payout-ratio trend, policy stability flag.
+- `watchlist.py` — first-class `Watchlist` object: named, tagged, per-symbol notes + conviction level + last-reviewed date. Supports "dossier-since-last-visit" diff.
 
 ### Example end-to-end pipeline
 
 ```python
 signals = ValueFactorStrategy().generate(repo, start, end).signals
-study   = factor.run_factor_study(signals, prices)
+study   = factor.run_factor_study(signals, prices, sector_neutral=True)
 weights = portfolio.signal_to_weights(signals, method="top_quantile",
-                                      quantile=0.2, max_weight=0.05)
-result  = backtest.run_backtest(weights, prices, rebalance="M", benchmark="CSI300")
+                                      quantile=0.2, max_weight=0.05,
+                                      sector_neutral=True)
+result  = backtest.run_backtest(weights, prices, rebalance="M",
+                                benchmark="CSI300_TR",
+                                dividend_policy="reinvest",
+                                fill_price="next_open")
 backtest.verify.walk_forward(ValueFactorStrategy, repo, splits=5)
+backtest.verify.leakage_canary(ValueFactorStrategy, repo)  # must pass
 ```
 
 ## 6. AI Interface Layer
 
-Three surfaces, one shared foundation.
-
 ### Shared foundation: Tool Registry (`tools/`)
+
+Tools are **typed wrappers** over library functions. They handle marshaling only: string→date parsing, symbol validation, figure serialization, `_ref` resolution for kernel-scoped objects in chat. Research functions stay pure — they accept typed args, return typed objects. The chat/notebook surfaces resolve `_ref` strings at the boundary.
 
 ```python
 @tool(name="get_prices", description="Fetch daily OHLCV for symbols over a date range.")
-def _(symbols: list[str], start: date, end: date, adjust: Adjust = "forward") -> dict: ...
+def _(symbols: list[str], start: date, end: date,
+      adjust: Literal["hfq","qfq","none"] = "hfq",
+      price_kind: Literal["total_return","price_only"] = "total_return") -> dict: ...
 
 @tool(name="screen_value", description="Run a value screen on a universe with rules.")
-def _(universe: str, asof: date, rules: list[dict], top_n: int = 30) -> dict: ...
+def _(universe: str, asof: date, rules: list[Rule], top_n: int = 30) -> dict: ...
 
-@tool(name="company_dossier", description="Full one-name dossier.")
+@tool(name="company_dossier", description="One-name dossier: price+valuation bands+fundamentals+dividends+AH premium.")
 def _(symbol: str, years: int = 10) -> dict: ...
 
-@tool(name="run_backtest", description="Vectorized backtest given target weights.")
-def _(weights_ref: str, benchmark="CSI300", rebalance="M",
-      start=None, end=None) -> dict: ...
+@tool(name="run_backtest", description="Vectorized backtest with T+1/T+2 settlement, price-limit fills, realistic costs.")
+def _(strategy_name: str, start: date, end: date, benchmark: str = "CSI300_TR",
+      rebalance: Literal["D","W","M","Q"] = "M") -> dict: ...
 
-@tool(name="factor_study", description="IC + quantile analysis for a signal.")
-def _(signals_ref: str, horizons=[20, 60, 120, 240], quantiles=5) -> dict: ...
+@tool(name="factor_study", description="IC + quantile analysis for a signal; sector-neutral by default.")
+def _(signal_name: str, horizons: list[int] = [20, 60, 120, 240],
+      quantiles: int = 5, sector_neutral: bool = True) -> dict: ...
 ```
 
-Properties:
-- Single source of truth; three interfaces consume the same registry.
-- Tool schemas auto-generated from type hints + docstrings (pydantic / JSONSchema).
-- **Artifact-by-reference.** Large payloads (PriceFrame, StrategyOutput, BacktestResult) are kept in the kernel under IDs. Tools accept/return `_ref` handles instead of serializing megabytes through the chat.
-- Rich result payload: `{"summary": str, "table": records, "figure": plotly_json | null, "artifact_ref": str | null, "meta": dict}`.
+Rich result payload:
+```
+{
+  "summary": str,
+  "table": records | None,
+  "figure": plotly_json | None,
+  "artifact_name": str,       # variable name in kernel scope (e.g., "_last_dossier")
+  "meta": {
+    "params_resolved": {...},           # fully-resolved params including defaults + provenance
+    "param_provenance": {...},          # "explicit" | "profile" | "default" | "inferred"
+    "tool_call_id": str,
+    "kernel_id": str,
+    "schema_version": str,
+  }
+}
+```
+
+`artifact_name` replaces the `_ref` broker: variables live under predictable names in the notebook kernel; if garbage collection matters (it rarely does for a solo user), the user explicitly `del`s them.
 
 ### Surface 1: `ah.ask()` (notebook helper)
 
@@ -437,133 +572,178 @@ Properties:
 def ask(prompt: str, *, model="claude-sonnet-4-6", kernel_scope=True) -> Response: ...
 ```
 
-Runs a Claude tool-use loop against the registry. Returns a `Response` with `.text / .tables / .figures / .trace`, renders inline via `__repr_html__`. When `kernel_scope=True`, results bind to the notebook namespace (`_last_result`, `_last_figure`) so exploration continues.
-
-Uses Anthropic SDK with prompt caching: system prompt + tool schemas form a static cache prefix; only the user prompt varies. Expected cache hit rate >90% after the first turn.
+Runs a Claude tool-use loop against the registry. Inline Jupyter rendering via `__repr_html__`. Anthropic SDK with prompt caching.
 
 ### Surface 2: Chat UI attached to live Jupyter kernel (`ui/chat/`)
 
-A Streamlit app that runs a Claude tool-use loop backed by the **same registry**, additionally attaching to a live Jupyter kernel via `jupyter_client`.
+Streamlit app. Additions over the v1 design:
 
-What kernel-attachment buys:
-1. Persistent Python state across chat turns. No re-fetching, no re-computing.
-2. Two-way visibility with JupyterLab — the same kernel can be opened in JupyterLab; chat-computed variables appear there, and vice versa.
-3. Code-level override — drop to the notebook, tweak, return. Chat sees updated state.
-4. Generated code is inspectable — each tool call goes through a visible "code cell" step with code + output; users can copy/save/edit.
+**Onboarding gate:** if `~/.ah-research/profile.yaml` or `cache.duckdb` is missing, route to an onboarding page that runs `ah init` interactively. If `ah doctor` reports a red, show the remediation before chat becomes usable.
 
-Flow of one turn:
-
+**Persistent status bar:**
 ```
-User prompt → Streamlit backend → Anthropic SDK (prompt-cached system+tools)
-             → Claude selects tool(s) → backend dispatches via jupyter_client
-             → kernel executes `from ah_research.x import y; _ah_result = y(...)`
-             → captures execute_reply (text, figures, artifact_ref)
-             → result flows back to Claude → Claude writes summary
-             → Chat renders: summary + plotly chart + data table + "see code" fold
+kernel: abc123 · started 14:22 · 312MB · 4 artifacts · tokens 184k/500k · $2.41 · [Open in JupyterLab]
 ```
 
-**Chat can:** call any registry tool; chain tools; read/write kernel state by name; render figures inline; save a turn as a notebook cell (one-way `.ipynb` append — not bidirectional sync).
+**Kernel-state panel (collapsible sidebar):** variables in scope with type, shape, size, source ("set by turn #7", "set by user in JupyterLab at 14:31"). Polls kernel namespace after each turn and on tab-focus. Drift banner if namespace changed outside chat.
 
-**Chat cannot (v1, by design):** generate arbitrary Python; edit existing `.ipynb` cells. Constrained to registered tools. A future "power mode" toggle can relax this.
+**Tool-call breadcrumb (above each result):**
+```
+screen_value · universe=CSI300 (profile) · asof=2026-04-28 (default) · rules=[PE<15, ROIC>0.12] (explicit) · top_n=30 (default)
+```
+Parameter provenance badges: `explicit` / `profile` / `default` / `inferred`. Hover for explanation.
 
-### Surface 3: MCP server (`ui/mcp_server/`, Phase 6)
+**Reasoning trail panel (per turn):** plan → tool calls → results → summary, collapsible.
 
-Thin FastAPI/stdio MCP server exposing the same tool registry. Adapter between MCP tool-call protocol and the registry dispatcher.
+**Refine affordance:** every tool result has a "Refine" button that opens a parameter editor pre-filled; `[Re-run]` re-invokes with edits.
+
+**Session store:** named, resumable sessions at `~/.ah-research/sessions/<slug>/`: `messages.jsonl`, `artifacts/` (pickled), `budget.json`, `cell_exports/`. Auto-named from first prompt; user-renamable. `ah chat --resume <slug>` reconstitutes.
+
+**In-chat search:** cmd-K across the session's turn summaries, tool names, artifact names.
+
+**Bookmarks / labels:** ⭐ pins a turn; pinned turns tagged, queryable, sorted into `journal/`.
+
+**Export as report:** one-click `session → Jupyter notebook + HTML` using pinned turns as sections.
+
+**Notebook-cell export:** one-way push; `cell_exports/` contains snapshots.
+
+**Budget widget:** tokens used / ceiling / cached hit rate / $ estimate; per-turn breakdown on click.
+
+**Constraints (unchanged from v1):** chat constrained to registered tools. Free-form Python (`run_code`) deferred to a future "power mode" with a confirmation UI.
+
+### Surface 3: MCP server (deferred)
+
+Not in v1. Moved to optional future work. If reached, it's a FastAPI/stdio adapter over the same registry.
 
 ### Model + cost
 
 - Default: `claude-sonnet-4-6`.
-- Escalation: user toggles `claude-opus-4-7` per-turn for harder reasoning.
-- Prompt caching on system prompt + tool schemas.
-- Configurable per-session token ceiling with warn-before-exceed.
+- Escalation: `claude-opus-4-7` per-turn.
+- Prompt caching on system prompt + tool schemas (>90% hit rate per session).
+- Per-session token ceiling with warn-before-exceed; soft pause at 90%.
 
 ### User profile (`~/.ah-research/profile.yaml`)
 
 ```yaml
 investor_style: value
-horizon: long_term          # >60 days
-default_universe: CSI300+HSI
+horizon: long_term
+default_universe: CSI300          # or HSI / CSI500 / "CSI300+HSI"
 default_rebalance: M
 default_metrics: [cagr, sharpe, max_drawdown, dividend_yield_avg]
 preferred_visualizations: [valuation_bands, dossier]
+cn_color_convention: cn           # "cn" = red up / green down (default); "west" for opposite
+api_budget_usd_per_session: 5.0
 ```
 
-Loaded into system prompt. Edited by the user; no UI for editing in v1.
+### Visualization theme (`ui/theme.py`)
+
+Centralized palette, fonts, axis formatters (¥ / HK$), CJK fallback, responsiveness. CN color convention (red=up, green=down) default. Valuation-band colors use amber/teal to avoid collision with directional colors; expensive/cheap written as explicit annotations.
 
 ## 7. Implementation Phases
 
-Each phase ships something useful on its own; the library does not require the chat UI to be valuable.
-
 | Phase | Scope | Est. |
 |---|---|---|
-| 0 | Scaffold: uv + Python 3.11+, layout, ruff + mypy + pytest + pre-commit + CI | ½ day |
-| 1 | Integration + Data Layer: Baostock + AKshare + FX clients, converters, Parquet cache, DataRepository, curated `ah_pairs.yaml` | ~1 week |
-| 2 | Backtest + Metrics + first strategies: vectorized engine, cost model, suspensions/delistings, `verify.py`, metrics bundle, 4 example strategies, first notebook | ~1 week |
-| 3 | Factor + Portfolio + Value analysis: factor study, screener, portfolio constructors + constraints, dossier, owner-earnings, valuation bands, dividend consistency; value notebooks | ~1 week |
-| 4 | Tool Registry + `ah.ask()`: decorator, JSON-schema generation, artifact store, tool wrappers, notebook helper with SDK + prompt caching | ~½ week |
-| 5 | Chat UI with live kernel: Streamlit app, jupyter_client attachment, figure rendering, notebook-cell export, profile loader, model toggle, launcher | ~1 week |
-| 6 | MCP server + polish: FastAPI/stdio adapter, documentation, recipe notebooks | ~2-3 days |
+| 0 | Scaffold + bootstrap: uv + Python 3.11+, layout, ruff + mypy + pytest + hypothesis + pre-commit + CI. `ah init`, `ah doctor`, `ah warmup`. `config.py` (pydantic-settings + keyring). `exceptions.py`. `logging.py`. `concurrency.py`. pandera schemas skeleton. | ~1 day |
+| 1 | Integration + Data Layer: `Protocol`-based `PriceSource`/`FundamentalsSource`/`FXSource`/`CalendarSource`/`SectorSource` + Baostock + AKshare + FX + `fake/` impls. DuckDB cache + migrations. Converters (pandera-validated). `DataRepository` with DI. Corporate actions + bitemporal fundamentals + PIT constituents + sector tags + ST/limit flags. Curated `ah_pairs.yaml`. | ~1.5 weeks |
+| 2 | Backtest + Metrics + first strategies: vectorized engine (T+1/T+2, price-limit-aware fills, dividend policy, time-varying costs, delisting mark-at-last), `verify.py` (walk-forward, sensitivity, leakage canary, survivorship check), metrics bundle with Newey-West, 3 example strategies, first notebook. | ~1.5 weeks |
+| 3 | Factor + Portfolio + Value analysis: factor study (sector-neutral default, NW IC, block-bootstrap significance), screener, portfolio constructors + constraints (free-float MCW, real sector neutrality), dossier, owner-earnings, valuation bands, dividend consistency, watchlist. Value notebooks. | ~1 week |
+| 4 | Tool Registry + `ah.ask()`: decorator, JSON-schema generation, type coercion (dates, symbols, literals), notebook helper with SDK + prompt caching. Visualization theme module. | ~3 days |
+| 5 | Chat UI with live kernel: Streamlit app, jupyter_client attachment, kernel-state panel, status bar, reasoning trail, parameter provenance, refine affordance, session store (save/resume/search/pin/export), budget widget, onboarding gate, "Open in JupyterLab". | ~1.5 weeks |
+| 6 | Polish + docs + optional MCP: recipe notebooks, architecture docs, CONTRIBUTING.md. MCP server shipped only if needed. | ~3 days |
 
-Total: ~4-5 weeks focused work. Parallelism possible (integrations vs backtest scaffolding) once the domain model stabilizes.
+Total: ~6 weeks focused (up from 4-5 in v1 due to correctness work and DuckDB + pandera + sessions).
 
-Dependency chain: Phase 0 → 1 → 2 → 3 → 4 → 5 → 6. Phases 2 and 3 can partially overlap once the domain model and repository API are stable. Phase 5 depends on Phase 4 because both use the shared tool registry.
+Dependency chain: 0 → 1 → 2 → 3 → 4 → 5 → 6. Phase 2 and 3 partially overlap once the domain model + repository API stabilize.
 
 ## 8. Testing Strategy
 
-| Layer | Test type | Approach |
-|---|---|---|
-| Integrations | Unit | Mock upstream; recorded fixtures. Live tests gated by `AH_RESEARCH_LIVE=1` env var; manual/nightly. |
-| Data converters | Unit | Pure functions; source-native DataFrame in → domain-model DataFrame out. |
-| Cache | Unit | tmp_path; round-trip; schema-version upgrade path. |
-| DataRepository | Integration | Fake integrations with deterministic data; verify cache composition & slicing. |
-| Strategies | Unit | Deterministic tiny universes; snapshot StrategyOutput. |
-| Backtest engine | Unit | Known-answer tests: constant-weight portfolio → weighted asset return exact. Turnover on no-trade day = 0. Cost drag = cost_model × turnover. |
-| Metrics | Unit | Compare to empyrical on known series. |
-| Factor research | Unit | Synthetic signal perfectly predicting forward returns → IC = 1.0, Q5−Q1 > 0 monotone. |
-| Portfolio constructors | Unit | Weight sums, caps, exposure limits. |
-| Tool registry | Unit | Per tool: JSON-schema validates, returns serializable payload, handles bad input. |
-| `ah.ask` / Chat UI | Integration | Mocked Anthropic; simulate tool-use loops end-to-end. |
-| Kernel attachment | Integration | Launch isolated kernel, send code, assert outputs. |
+Replace "≥90% coverage on pure layers" with:
 
-**Coverage target:** ≥90% on pure layers (domain model, converters, backtest engine, metrics, factor, portfolio). Best-effort on I/O layers (integrations, kernel, chat UI).
+- **Every pure module: at least one known-answer test + one property-based test (hypothesis).** Coverage is a side effect.
+- **Backtest engine:** known-answer (constant weights → weighted asset return exact; no-trade day turnover = 0); property (shuffling future prices leaves past P&L unchanged — leakage canary at the engine level).
+- **Metrics:** compared to empyrical on reference series.
+- **Factor research:** synthetic signal perfectly predicting forward returns → IC = 1.0; decorrelated signal → IC ≈ 0 with CI containing 0.
+- **Converters:** test data spans real source quirks — suspension days, splits, bonus issues, rights issues, delistings, ST transitions.
+- **Integrations:** mock upstream; recorded fixtures (real JSON/CSV responses captured and checked in). Live tests gated by `AH_RESEARCH_LIVE=1` env var; manual/nightly.
+- **Cache:** round-trip per table; schema-migration tests that simulate adding a column; transaction rollback on error.
+- **`DataRepository`:** uses `fake/` integrations + real cache; verifies cache composition, range slicing, PIT behavior.
+- **Tool registry:** per tool — JSON-schema validates, arg coercion correct, returns serializable payload, handles malformed input.
+- **Chat/notebook:** mocked Anthropic; simulate tool-use loops end-to-end. Kernel attachment: launch isolated kernel, send code, assert outputs.
+- **Property tests via hypothesis:** symbol parsing round-trips, PIT monotonicity (fundamentals with asof=d can never contain `known_as_of > d`), adjustment idempotence (applying same corporate-action set twice = once).
 
 ## 9. Dev Tooling
 
-- `uv` for env + deps
+- `uv` env + deps
 - `ruff` lint + format
-- `mypy --strict` (where practical — pandas typing is imperfect)
-- `pytest` + `pytest-cov`
-- `pre-commit` runs ruff + mypy + pytest-quick
-- GitHub Actions: lint + type + unit on every PR; live integration tests on manual dispatch
+- `mypy --strict` (where practical)
+- `pytest` + `pytest-cov` + `hypothesis`
+- `pre-commit`: ruff + mypy + pytest-quick
+- GitHub Actions: lint + type + unit on every PR; live integration tests on manual dispatch + nightly.
+- Python 3.11+.
 
-Python 3.11+. Key deps: `pandas`, `pyarrow`, `empyrical-reloaded`, `plotly`, `matplotlib`, `baostock`, `akshare`, `anthropic`, `streamlit`, `jupyter_client`.
+Secrets: `ANTHROPIC_API_KEY` + any source credentials via `keyring` (primary) with `.env` fallback for CI. Never in `profile.yaml`. Managed by `ah_research.config.Settings` (pydantic-settings).
 
-## 10. Risks & Mitigations
+Observability: `structlog` JSON logs for every `DataRepository.get_*` (cache hit/miss, rows, elapsed) and every backtest run (n_rebalances, n_trades, elapsed, git SHA).
 
-1. **Baostock / AKshare upstream instability.** Community libraries; schemas change. Mitigation: explicit error-mapping layer in each integration raising our own exceptions (`SourceRateLimitError`, `SourceSchemaError`, `SourceUnavailable`); tests use recorded fixtures so CI is immune.
-2. **Point-in-time / look-ahead bias in fundamentals.** Value work is fragile to this. Mitigation: `publication_date` tracked separately from `report_date`; `asof=` parameter on `get_fundamentals`; `backtest.verify.leakage_check()` scans for look-ahead.
-3. **AH pair curation drift.** Listings change. Mitigation: checked-in `ah_pairs.yaml`; quarterly `scripts/audit_ah_pairs.py` compares against HKEX / CSRC.
-4. **Jupyter kernel attachment fragility.** Kernel can die mid-session. Mitigation: chat UI detects kernel death, offers reconnect; artifacts serialized to disk so they survive.
-5. **Claude API cost.** Mitigation: prompt-cached system + tool schemas (>90% hit rate per session); per-session token budget with warn-before-exceed.
-6. **Calendar edge cases (Chinese New Year, HK typhoons).** Mitigation: use exchange-official calendars from the sources; alignment policy explicit per call.
+## 10. Exception Hierarchy & Error Policy
 
-## 11. Deferred (future phases)
+```
+AHResearchError
+├── SourceError                    # raised at integration boundary; upstream errors remapped here
+│   ├── SourceRateLimit            # RETRY with exponential backoff (tenacity)
+│   ├── SourceUnavailable          # RETRY with longer backoff
+│   ├── SourceSchemaError          # NOT RETRY — drift, needs code fix
+│   ├── SourceAuthError            # NOT RETRY — config / login issue
+│   └── SourceDataError            # NOT RETRY — empty response, malformed data
+├── DataIntegrityError             # cache corruption, schema mismatch, pandera validation failure
+├── UserInputError                 # bad symbol, invalid date range, unknown index, conflicting params
+└── ResearchError                  # logic errors in strategy / factor / backtest
+    ├── LeakageDetected
+    ├── UnsupportedOperation       # e.g., A-share short
+    └── InsufficientData
+```
+
+Retry policy: tenacity `retry_if_exception_type((SourceRateLimit, SourceUnavailable))` with exponential backoff, only in the integration layer. Above the data layer, no retries. `baostock.*` / `akshare.*` exceptions are remapped at the integration boundary and never surface upward.
+
+## 11. Concurrency
+
+- **I/O-bound (integrations):** `concurrent.futures.ThreadPoolExecutor` for bulk fetches. Baostock/AKshare are blocking; threads trivially 5-10x the throughput.
+- **CPU-bound (backtests, factor studies):** `concurrent.futures.ProcessPoolExecutor` for walk-forward / param sweeps.
+- **Streamlit chat:** long-running tools (backtests >5s) run in a background thread with progress callbacks; UI shows a progress bar and `[Cancel]`. Kernel dispatch through `jupyter_client` is async-compatible; we wrap it in an asyncio helper.
+- **Async is NOT used for integrations** — Baostock/AKshare are blocking and async wrappers add no value.
+
+Backpressure: per-source rate-limit tokens live in a thread-safe bucket; integration clients acquire before requesting.
+
+## 12. Risks & Mitigations
+
+1. **Baostock / AKshare upstream instability.** Mitigation: `Protocol`-based boundary, concrete clients raise our exception hierarchy; tests use recorded fixtures so CI is immune; schema drift auto-caught via pandera at the converter boundary.
+2. **Point-in-time / look-ahead bias.** Mitigation: bitemporal fundamentals; PIT constituents; `leakage_canary` in verify; hypothesis property tests.
+3. **Cache schema migration risk.** Mitigation: numbered SQL migrations in `data/cache/migrations/`; `ah doctor` runs pending; schema version in `meta` table.
+4. **AH pair curation drift.** Mitigation: quarterly `scripts/audit_ah_pairs.py`; checked-in `ah_pairs.yaml`.
+5. **Jupyter kernel fragility.** Mitigation: heartbeat detection; reconnect flow; artifacts survive via session store pickle.
+6. **Claude API cost.** Mitigation: prompt caching; per-session token budget with warn-at-90%.
+7. **Calendar edge cases** (Chinese New Year, HK typhoons, circuit breakers). Mitigation: exchange-official calendars; explicit alignment per call.
+8. **Sector data quality.** Mitigation: SWS from AKshare as primary; `get_sector` cached; expose `is_soe` + `is_stock_connect_eligible` flags separately.
+9. **DuckDB lock contention** (unlikely with single-user solo workflow but possible if chat + JupyterLab both write). Mitigation: serialize writes through a single `DuckDBCache` instance per process; reads are concurrent.
+
+## 13. Deferred (post-v1)
 
 - Multi-factor regression models (Fama-Macbeth, Barra).
 - Optimization-based weighting (CVXPY).
-- Pairs-trading cointegration beyond the hardcoded AH case.
-- Sector-tagged analysis (requires a clean sector source).
-- "Power mode" for the chat (free-form Python generation, guarded).
-- Database-backed storage layer replacing the Parquet cache (drop-in; `DataRepository` is the only code that needs to change).
+- Pairs-trading cointegration beyond the AH case.
+- "Power mode" for chat (free-form Python generation, guarded).
+- MCP server.
+- Consensus-estimate data (needs paid source like Tushare Pro).
 - Intraday bars.
+- Multi-user / collaboration features.
 
-## 12. Success Criteria
+## 14. Success Criteria
 
-The platform is done enough when, from a notebook or the chat UI, the user can:
-
-1. Fetch daily bars for any A/HK symbol or curated AH pair over a multi-year range in <2s warm / <30s cold.
-2. Screen CSI 300 or HSI by fundamental rules and get a sorted table of survivors.
-3. Pull a company dossier for any symbol with valuation bands, fundamentals trajectory, dividend history.
-4. Define a strategy, backtest it monthly-rebalanced over 10y with realistic costs, and get a metrics bundle + equity curve vs CSI 300.
-5. Run a factor study on a signal and see IC statistics, quantile returns, IC decay.
-6. Do all of the above by asking the chat UI in natural language, with inline plots and persisted kernel state.
+1. **Fresh clone → working "hello world" dossier in <5 minutes.** `uv sync && ah init && ah warmup --sample && python -c "from ah_research import ah; ah.ask('dossier for 600519.SH')"`.
+2. Fetch daily bars for any A/HK symbol or curated AH pair over a multi-year range in <2s warm / <60s cold (first fetch pulls from source + populates DuckDB).
+3. Screen CSI 300 or HSI by fundamental rules, PIT-correct, sorted results within 5s.
+4. Pull a company dossier for any symbol with valuation bands, fundamentals trajectory, dividend history, AH premium if dual-listed, sector peers.
+5. Define a strategy, backtest 10y monthly-rebal with T+1/T+2 settlement, realistic time-varying costs, price-limit-aware fills → metrics bundle + equity curve vs total-return benchmark.
+6. Run a factor study with sector-neutralization → Newey-West IC stats, quantile returns, IC decay, block-bootstrapped Q5-Q1 significance.
+7. `leakage_canary` and `survivorship_check` both pass for every example strategy.
+8. Do all of (2)-(6) by asking the chat UI in natural language, with inline plots, parameter provenance, reasoning trail, persistent kernel state, and resumable sessions.
