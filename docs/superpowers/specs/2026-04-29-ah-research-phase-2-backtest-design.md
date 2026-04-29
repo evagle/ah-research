@@ -92,7 +92,7 @@ tests/
 
 ## 4. Core types and data contracts
 
-### 4.1 Literals and enums (extensions to `data/types.py`)
+### 4.1 Literals and enums (extensions to `model/types.py`)
 
 ```python
 Freq = Literal["D", "W", "M", "Q"]
