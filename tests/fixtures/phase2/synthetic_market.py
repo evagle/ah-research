@@ -521,10 +521,15 @@ def build_synthetic_market(
         halt_days: dict[str, list[date]]   -- is_suspended=True on these dates
         limit_up_days: dict[str, list[date]] -- hit_limit_up=True on these dates
         limit_down_days: dict[str, list[date]] -- hit_limit_down=True on these dates
+        extra_corporate_actions: list[dict] -- additional corporate-action rows
+            Each dict must have keys: symbol, ex_date, kind, params_json.
+            These are appended to the auto-generated corporate actions and
+            must be CorporateActionSchema-valid.
     """
     halt_days: dict[str, list[date]] = kwargs.get("halt_days", {})
     limit_up_days: dict[str, list[date]] = kwargs.get("limit_up_days", {})
     limit_down_days: dict[str, list[date]] = kwargs.get("limit_down_days", {})
+    extra_corporate_actions: list[dict[str, Any]] = kwargs.get("extra_corporate_actions", [])
 
     # Pick the first A-share for the dividend injection
     a_symbols = [s for s in symbols if s.endswith(".SH") or s.endswith(".SZ")]
@@ -548,6 +553,22 @@ def build_synthetic_market(
         dividend_ex_dates,
     )
     corporate_actions = _build_corporate_actions(symbols, dividend_ex_dates)
+
+    # Append any caller-supplied extra corporate actions
+    if extra_corporate_actions:
+        extra_rows = []
+        for ca in extra_corporate_actions:
+            extra_rows.append(
+                {
+                    "symbol": str(ca["symbol"]),
+                    "ex_date": pd.Timestamp(ca["ex_date"]),
+                    "kind": str(ca["kind"]),
+                    "params_json": str(ca["params_json"]),
+                }
+            )
+        extra_df = CorporateActionSchema.validate(pd.DataFrame(extra_rows))
+        corporate_actions = pd.concat([corporate_actions, extra_df], ignore_index=True)
+
     calendar = _build_calendar(symbols, start, end)
     fx = _build_fx(start, end, seed)
     fundamentals = _build_fundamentals(symbols, start, end)
