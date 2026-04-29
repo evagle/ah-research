@@ -246,5 +246,5 @@ htmlcov/
 data/research/唐书房/*.pdf
 data/research/唐书房/_extracted/
 
-# Research reports: keep .md (extracted text), exclude .pdf (source, too large)
-data/filings/**/research/*.pdf
+# Source PDFs: keep .md (extracted text), exclude .pdf (too large)
+data/filings/**/*.pdf
