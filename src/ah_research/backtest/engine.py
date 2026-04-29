@@ -75,25 +75,196 @@ def _get_code_version() -> str:
         return "unknown"
 
 
+_BENCHMARK_SYMBOL: dict[str, str] = {
+    "CSI300_TR": "000300.SH",
+    "HSI_TR": "HSI.HK",
+}
+
+# Maximum number of consecutive NaN days we forward-fill silently.
+_BENCHMARK_FFILL_LIMIT = 3
+
+
+def resolve_benchmark(
+    spec: str | pd.Series,
+    start: date,
+    end: date,
+    repo: Any,
+    trading_days: list[date] | None = None,
+) -> pd.Series:
+    """Resolve a BenchmarkSpec to a daily pd.Series aligned on trading_days.
+
+    Parameters
+    ----------
+    spec:
+        One of: ``"CSI300_TR"``, ``"HSI_TR"``, ``"zero"``, or a ``pd.Series``
+        of cumulative-return values.
+    start, end:
+        Date range used when fetching prices from ``repo``.
+    repo:
+        A DataRepository-compatible object; used for named benchmark specs.
+    trading_days:
+        Optional list of trading dates for the final index. When omitted the
+        index of a supplied Series is used as-is (or constructed from SH
+        calendar for named specs).
+
+    Returns
+    -------
+    pd.Series indexed by ``pd.DatetimeIndex`` aligned to ``trading_days``.
+
+    Raises
+    ------
+    ValueError
+        For unrecognised string specs.
+    """
+    if trading_days is not None:
+        idx = pd.DatetimeIndex([pd.Timestamp(d) for d in trading_days])
+    else:
+        idx = None
+
+    # ── constant 1.0 series ───────────────────────────────────────────────
+    if isinstance(spec, str) and spec == "zero":
+        if idx is None:
+            raise ValueError("trading_days must be provided when spec='zero'")
+        return pd.Series(1.0, index=idx)
+
+    # ── explicit Series passthrough ────────────────────────────────────────
+    if isinstance(spec, pd.Series):
+        series: pd.Series = spec.copy() if idx is None else spec.reindex(idx)
+        # Detect gaps larger than the limit before filling
+        nan_runs = _max_consecutive_nans(series)
+        if nan_runs > _BENCHMARK_FFILL_LIMIT:
+            import warnings
+
+            warnings.warn(
+                f"Benchmark Series has a gap of {nan_runs} consecutive NaN days "
+                f"(limit = {_BENCHMARK_FFILL_LIMIT}); forward-filling with limit={_BENCHMARK_FFILL_LIMIT}. "
+                "Values beyond the fill limit remain NaN and are back-filled from the next valid bar.",
+                UserWarning,
+                stacklevel=2,
+            )
+        # Forward-fill up to the limit; then back-fill remaining NaN
+        filled = series.ffill(limit=_BENCHMARK_FFILL_LIMIT).bfill()
+        return filled
+
+    # ── named benchmarks via repo prices ─────────────────────────────────
+    if isinstance(spec, str) and spec in _BENCHMARK_SYMBOL:
+        sym = _BENCHMARK_SYMBOL[spec]
+        try:
+            prices_df = repo.get_prices([sym], start, end)
+        except Exception as exc:
+            logger.warning(
+                "Failed to fetch benchmark %r (%s) from repo: %s. Falling back to constant 1.0.",
+                spec,
+                sym,
+                exc,
+            )
+            if idx is None:
+                raise
+            return pd.Series(1.0, index=idx)
+
+        if prices_df.empty:
+            logger.warning(
+                "Benchmark %r (%s) returned no price data; falling back to constant 1.0.",
+                spec,
+                sym,
+            )
+            if idx is None:
+                raise ValueError(f"Benchmark {spec!r} returned no price data.")
+            return pd.Series(1.0, index=idx)
+
+        # Use total_return if available; fall back to close_hfq with a warning
+        if "total_return" in prices_df.columns:
+            col = "total_return"
+        else:
+            logger.warning(
+                "Benchmark %r: 'total_return' column not found in price data; "
+                "using 'close_hfq' as approximation.",
+                spec,
+            )
+            col = "close_hfq"
+
+        prices_df = prices_df.copy()
+        prices_df["_ts"] = prices_df["date"].apply(pd.Timestamp)
+        raw: pd.Series = prices_df.set_index("_ts")[col].sort_index()
+
+        # Normalize to start at 1.0
+        first_val = float(raw.iloc[0]) if len(raw) > 0 else 0.0
+        if first_val != 0.0:
+            raw = raw.div(first_val)
+
+        if idx is not None:
+            aligned: pd.Series = raw.reindex(idx)
+            nan_runs = _max_consecutive_nans(aligned)
+            if nan_runs > _BENCHMARK_FFILL_LIMIT:
+                import warnings
+
+                warnings.warn(
+                    f"Benchmark {spec!r} has a gap of {nan_runs} consecutive NaN days "
+                    f"(limit = {_BENCHMARK_FFILL_LIMIT}) after reindexing; forward-filling.",
+                    UserWarning,
+                    stacklevel=2,
+                )
+            raw = aligned.ffill(limit=_BENCHMARK_FFILL_LIMIT).bfill().fillna(1.0)
+        return raw
+
+    # ── unknown spec ─────────────────────────────────────────────────────
+    if isinstance(spec, str):
+        raise ValueError(
+            f"Unknown benchmark spec {spec!r}. "
+            f"Supported string values: 'CSI300_TR', 'HSI_TR', 'zero'. "
+            "Pass a pd.Series for a custom benchmark."
+        )
+
+    raise ValueError(f"Unsupported benchmark spec type {type(spec).__name__!r}.")
+
+
+def _max_consecutive_nans(series: pd.Series) -> int:
+    """Return the length of the longest run of NaN values in series."""
+    if not series.isna().any():
+        return 0
+    max_run = 0
+    current_run = 0
+    for val in series:
+        if pd.isna(val):
+            current_run += 1
+            max_run = max(max_run, current_run)
+        else:
+            current_run = 0
+    return max_run
+
+
 def _resolve_benchmark(
     spec: str | pd.Series,
     trading_days: list[date],
+    repo: Any | None = None,
+    start: date | None = None,
+    end: date | None = None,
 ) -> pd.Series:
-    """Resolve a BenchmarkSpec to a daily index aligned on trading_days.
+    """Internal shim: delegate to the public resolve_benchmark function.
 
-    For Task 9-14, only 'zero' and pd.Series are fully supported.
-    Full resolution (CSI300_TR, HSI_TR via repo) is added in Task 19.
+    Kept for backward-compatibility with the engine loop.
     """
+    if repo is not None and start is not None and end is not None:
+        return resolve_benchmark(spec, start, end, repo, trading_days=trading_days)
+
+    # Legacy path (no repo): handle 'zero' and Series only
     idx = pd.DatetimeIndex([pd.Timestamp(d) for d in trading_days])
     if isinstance(spec, pd.Series):
-        return spec.reindex(idx).ffill()
+        series = spec.reindex(idx)
+        nan_runs = _max_consecutive_nans(series)
+        if nan_runs > _BENCHMARK_FFILL_LIMIT:
+            import warnings
+
+            warnings.warn(
+                f"Benchmark Series has {nan_runs} consecutive NaN days; forward-filling.",
+                UserWarning,
+                stacklevel=2,
+            )
+        return series.ffill(limit=_BENCHMARK_FFILL_LIMIT).bfill().fillna(1.0)
     if spec == "zero":
         return pd.Series(1.0, index=idx)
-    # For named benchmarks (CSI300_TR, HSI_TR), return 1.0 with a warning
-    # until Task 19 wires up proper resolution.
     logger.warning(
-        "Benchmark %r not resolved in Tasks 9-14; returning constant 1.0. "
-        "Full resolution is added in Task 19.",
+        "Benchmark %r cannot be resolved without repo; returning constant 1.0.",
         spec,
     )
     return pd.Series(1.0, index=idx)
@@ -427,7 +598,13 @@ def run_backtest(
             ca_by_date.setdefault(ex_dt, []).append(row)
 
     # ── Benchmark ────────────────────────────────────────────────────────────
-    benchmark_curve = _resolve_benchmark(config.benchmark, all_days)
+    benchmark_curve = _resolve_benchmark(
+        config.benchmark,
+        all_days,
+        repo=repo,
+        start=config.start,
+        end=config.end,
+    )
 
     # ── State ─────────────────────────────────────────────────────────────────
     cash: dict[Currency, Decimal] = {
