@@ -294,7 +294,7 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 - **禁用 8 条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5 必填。
 - **5 步护城河分析** (§3 必需): a 分类（大 / 准 / 强 / 省 / 专）+ b 2 项可证伪检验（提价 / 对手 / 切换成本 / ROE 路标 任选二）+ c 跨年定量追溯（毛利率 / 净利率 / ROE 5y, CFO/NI 比值, 带页码）+ d 悲观情景（具体技术 / 偏好 / 监管 / 对手情景, 禁空话）+ e 宽 / 中 / 窄 / 弱 标签。具体数字准绳见 `.claude/skills/value-profile/references/moat-framework.md` / template §3。
-- **管理层 承诺 vs 兑现** (§4 必需): 5 年 forecast vs actual 表, 每行带页码; gap > 10% 连续 ≥ 3 年 → `**置信度:** 低`; 目标突然消失 = 强信号, 必须指出。
+- **§4 管理层分析** → **delegate 到 `management-analysis` 子 skill**, 传参 `--target-profile <path> --section §4`; 详细流程（承诺 vs 兑现 5 年表 / 董事长 5 年评估 / 股东回报 / 道德红旗 一票否决）见 `.claude/skills/management-analysis/SKILL.md` §2-§3。Fallback (子 skill 不可用): 5 年 forecast vs actual 表每行带页码, gap > 10% 连续 ≥ 3 年 → `**置信度:** 低`, 目标突然消失 = 强信号必须指出, 言行一致检验 ≥ 2 事件。具体执行见 management-analysis 子 skill。
 
 #### 3c. Main-agent review
 
@@ -329,21 +329,13 @@ profile 内容中文; operator 菜单双语:
 
 ### Step 5 — 排雷清单模式 (§4.5)
 
-1. 派 ONE 子 agent: 对 Part 4 §4.5 29 项逐项, 读最新年报 extracted `text.md` 的 资产负债表 / 利润表 / 现金流量表 / 附注。每项回答 `是 / 否 / 不适用 / 需人工` + 1 句证据 + 页码。嵌入 template §4.5 完整 list。
+**Delegate 到 `financial-redflag-scan` 子 skill**, 传参 `--target-profile <path> --section §4.5`; 详细流程（29 项清单 + 6 项高危 overlay + 三表勾稽 4 条 + summary + 强制 `[accept / edit / research more]` 不 `defer / skip`）见 `.claude/skills/financial-redflag-scan/SKILL.md` §2-§3。
 
-   **财报高危模式 overlay**（§K overlay, 自动 flag）:
-   - 商誉 / 净资产 > 20% → 雷区, 未来可能一次性减值
-   - 其他应收款 异常（≥ 10% 流动资产, 或单一关联方长年挂账）→ 关联方占款
-   - 在建工程 长年不转固 → 挂账操纵折旧
-   - CFO / NI < 50% 连续 2 年 → 利润真实性红旗
-   - 生物资产 / 农林渔牧 → 造假高危（獐子岛 style）
-   - 管理层道德红旗（历史虚假陈述 / 违规处罚 / 股东利益输送）→ 直接大幅降级
+**Fallback（子 skill 不可用时, 主 skill 跑简化版）**:
 
-   详细红旗清单见 `.claude/skills/value-profile/references/financial-reading.md` §4 / §6; 行业 overlay 见 `.claude/skills/value-profile/references/industry-overlays.md`。金融资产 4 分类 / 合同负债口径 等深度财报机制见 `.claude/skills/value-profile/references/financial-reading.md` §2。
+1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德红旗一票否决）。详细阈值 / 三表勾稽 / 附注 12 项 见 `.claude/skills/value-profile/references/financial-reading.md` §3-§6。
+2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的红旗 summary:**` 1-2 段。用户确认仅 `[accept / edit / research more]`。
 
-2. 主 agent 复核缺引用, 必要时 re-dispatch。
-3. 写 `**发现的红旗 summary:**` 段落（1-2 段）, 聚焦 `是 / 需人工` 项, 说明雷是什么、为何对本 ticker 重要、交叉验证下一步。
-4. 用户确认节点 — 仅 `[accept / edit / research more]`。**不 offer `defer` / `skip`**。排雷是强制的。
 
 ### Step 6 — 执行摘要合成 (Part 0 估值)
 
