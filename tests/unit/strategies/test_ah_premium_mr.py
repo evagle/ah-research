@@ -201,7 +201,11 @@ def test_ah_premium_mr_z_positive_skipped(caplog):
     ):
         weights = s.generate(repo, _STRATEGY_START, _STRATEGY_END)
 
-    # The pair should produce zero or no weight (not a short-A entry).
+    # The WARNING must have fired (ICBC or Ping An pair skipped due to z > +2).
+    assert any("A rich" in r.message for r in caplog.records), (
+        "Expected a structured WARNING for A-rich regime"
+    )
+    # A-leg must never be short (negative weight) — the skip rule prevents short-A entries.
     if not weights.df.empty:
         a_ws = weights.df[weights.df["symbol"] == _PING_AN_A]["weight"]
-        assert (a_ws <= 0).all(), "A-leg must not be short when z > +2"
+        assert (a_ws >= 0).all(), "A-leg must not be short when z > +2"
