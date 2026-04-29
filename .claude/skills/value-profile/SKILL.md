@@ -40,6 +40,18 @@ The skill never terminates voluntarily. It always returns control to the user af
    - Otherwise list what's available:
      > `Found N 年报 (<years comma-separated>). 招股说明书: present / missing. 研报/: K files.`
 
+2.5. **Extraction cache prep (new)**
+    For each `年报-*.pdf` in the filings dir, check if `data/filings/<ticker>/_extracted/<pdf-stem>/text.md` exists. If any are missing, offer a bilingual prompt:
+    > `PDFs not extracted yet. Run pre-extraction now? 可以加速后续 section worker. [yes / skip]`
+    - `yes` → shell out via Bash, e.g.:
+      ```bash
+      for pdf in data/filings/<ticker>/年报-*.pdf; do python scripts/extract_pdf.py "$pdf"; done
+      ```
+      Also extract `招股说明书.pdf` if present. Stream progress to the user.
+    - `skip` → continue; the section worker will Read PDFs directly (slower, no page markers).
+
+    Note: the pre-extracted `text.md` files have page markers (`<!-- page N -->`) and are Read-tool friendly. Images (chart/table screenshots with LLM descriptions) live under `_extracted/<pdf-stem>/images/`. Subagents should prefer these caches over raw PDFs whenever available. See `scripts/extract_pdf.py` for cache layout details.
+
 3. **Derive output path** `profiles/<ticker>-<YYYY-MM-DD>.md` where the date is today from `date +%Y-%m-%d`.
    - If today's file already exists → load it (this is a continuation session).
    - If only a prior-date file exists → ask the user:
@@ -71,9 +83,30 @@ The skill never terminates voluntarily. It always returns control to the user af
 
 ### Step 3 — Section worker (inner loop, per section)
 
-#### 3a. PDF pre-read targeting
+#### 3.pre — 三大前提 gate (唐朝 framework)
 
-Based on the section's `<!-- 数据源: ... -->` hint (parsed out of the template file in the profile), decide which 年报 pages to pull. 年报 ToC is highly standardized, so use this mapping as a starting point and refine from the hint:
+Before investing any effort in §1 / §3 qualitative output (or any Part 4 valuation work), the section subagent MUST first confirm or flag 唐朝's **三大前提** — the load-bearing "承重墙" beneath every subsequent claim. Any answer of `假 / 存疑` downgrades the whole profile to `**置信度:** 低` and blocks Step 6 valuation synthesis.
+
+1. **财报是真实的吗?** (True audit) — pull the 年报 第十节 "审计报告" section. Expect `标准无保留意见`. Any other opinion (保留 / 无法表示意见 / 否定 / 强调事项 with substance) → `假`. Flag the auditor name and any auditor change in the last 3 years.
+2. **盈利质量是真实的吗?** (True earnings) — run these checks against the 年报 第五节 "财务报告" / the extracted `text.md`:
+   - `近3年 经营活动现金流净额 累计 ≥ 近3年 净利润 累计` (鉴定 "纸面利润" vs. "真金白银")
+   - `销售收现率 = 销售商品提供劳务收到的现金 / (营业收入 × (1+增值税率)) ≥ ~1.0` (±5%)
+   - 若任一 check 持续 ≤ 0.5 ratio 超过 2 年 → `假 / 存疑`.
+3. **盈利是可持续的吗?** (Durability) — ROE 稳定 ≥ 15% 近 5 年? 毛利率 未剧烈波动 (±5 点内)? 无一次性大额非经常损益 主导利润 (扣非净利润 / 净利润 ≥ 0.85)?
+
+**Gate behaviour**: if ANY of the three → `假 / 存疑`, the subagent halts deep qualitative research, marks the section `**置信度:** 低` with the failure reason as the opening citation, and does NOT proceed to valuation (Step 6 must abort with an "估值前置 checklist failed" banner referencing this gate).
+
+Full derivation + examples: `docs/value-profile/methodology-tang.md` §A.2.
+
+#### 3a. PDF pre-read
+
+**Prefer the pre-extracted text cache over raw PDFs.**
+
+- If `data/filings/<ticker>/_extracted/<年报-YYYY>/text.md` exists → READ IT. Use line-offset navigation; the `<!-- page N -->` markers let subagents ToC-target specific 章节 cheaply.
+- If the cache is missing → either Read the `.pdf` directly (slow, no page markers) OR trigger extraction first: `Bash: python scripts/extract_pdf.py <pdf>`, then Read the output.
+- Images: `_extracted/<pdf-stem>/images/` holds chart / table screenshots, each with an LLM-generated description sidecar. These are a gold mine for §1-§2 business analysis (产能 / 销量 / 渠道 breakdowns often live in charts not prose).
+
+ToC targeting — use this standardized 年报 ToC mapping as a starting point and refine from the section's `<!-- 数据源: ... -->` hint:
 
 | 小节类型 | 年报章节 (近似) |
 |---|---|
@@ -88,6 +121,7 @@ Based on the section's `<!-- 数据源: ... -->` hint (parsed out of the templat
 | §5 风险 | 第四节 "管理层讨论与分析" (风险提示小节) |
 | §Q1–§Q12 定量 | 第五节 "财务报告" (全部) |
 | Part 4 §4.5 排雷 | 第五节 "财务报告" 附注 (逐项) |
+| 三大前提 gate (§3.pre) | 第十节 "审计报告" + 第五节 现金流量表 + 附注 |
 
 #### 3b. Scoped research dispatch
 
@@ -95,11 +129,44 @@ Dispatch ONE `general-purpose` subagent. The prompt is in English (subagent inst
 
 - The section heading + the template's 本节目标 / 指导问题 prompt block.
 - The parsed `<!-- 数据源: ... -->` hint.
-- Absolute paths to the relevant 年报 PDFs in `data/filings/<ticker>/` and the instructed page ranges (from 3a).
+- Absolute paths to the relevant 年报 extracted text.md caches (or raw PDFs as fallback) in `data/filings/<ticker>/_extracted/` and the instructed page ranges (from 3a).
 - Ticker, Chinese company name, exchange, report_date.
 - Already-filled adjacent sections as context (e.g. for §1.3 pass §1.1 and §1.2 content, for §3.x pass §1 商业模式).
-- **Language directive:** respond in Chinese. Every fact cites either `年报-YYYY.pdf p.NN` or a web URL. Flag anything unverifiable as `证据不足, 需人工补充`. **No hedging platitudes** (ban phrases like "公司具有较强的竞争力", "行业前景广阔" without evidence).
+- **Language directive:** respond in Chinese. Every fact cites either `年报-YYYY.pdf p.NN` (from the `<!-- page N -->` marker in the extracted text.md) or a web URL. Flag anything unverifiable as `证据不足, 需人工补充`.
+- **三大前提 gate** (§3.pre) — required for §1 / §3 / §5 sections. Subagent must output the 3-line gate verdict BEFORE any qualitative prose.
 - **Spin-check directive** (ONLY for Part 1 §1–§5 qualitative sections): populate the `管理层口径校核` field noting where 年报 framing may differ from external signals (研报 / 价盘 / 媒体报道 / 监管披露). A trivial "年报 says X, we agree X" is a rejection.
+
+**唐朝 disciplines (must follow, not optional):**
+
+1. **Ban 8 hedging phrases.** Reject and rewrite any section containing the following stock phrases without concrete follow-up evidence (names, numbers, dates, citations):
+   - "具有强大品牌" / "技术领先" / "行业龙头" / "管理优秀" / "市场广阔"
+   - "核心竞争力突出" / "护城河宽广" / "成长空间巨大"
+
+2. **护城河 5-step structure** (required for any §3 subsection):
+   a. **Classification** — label the moat as one (or multi-select) of: `大` (有效规模 / 自然垄断) / `准` (监管 or 许可壁垒) / `强` (品牌 + 定价权) / `省` (低成本结构) / `专` (专利 / 工艺 + 时间).
+   b. **Prove with 2 falsifiable reality checks.** Pick any two:
+      - 提价 test: did the company raise prices in the last 5 years without volume loss? Cite year, magnitude, volume delta.
+      - 对手 test: who are the top 3 challengers; are they gaining share? Cite concrete share numbers.
+      - 切换成本 scenario: write a one-paragraph "我是客户, 为什么不换" specific example.
+      - ROE 路标: is ROE sustained ≥ 15%? If it fell, in which year and why? Where are the high-ROE "账本外的资产"?
+   c. **Quantitative trace** — cite specific 年报 rows: 近 5 年 毛利率 / 净利率 / ROE 稳定性, 经营现金流 / 净利润 比值.
+   d. **Bear case** — name one specific scenario that would break the moat (tech shift / 消费偏好 / 监管 / 对手变招).
+   e. **Label** — 宽 / 中 / 窄 / 弱.
+
+3. **管理层 verification** (required for §4):
+   - Pull 3-5 years of 年报 "年度经营计划" / "管理层讨论与分析" sections (year-over-year).
+   - Build a 承诺 vs. 兑现 table (forecast vs. actual delivery). Cite page numbers per row.
+   - If gap > 10% repeatedly (≥ 3 years) → `**置信度:** 低` and flag systematic over/under-promise bias in the `管理层口径校核` field.
+   - For §4.3 企业家 checklist, apply the 言行一致 test with at least 2 specific examples (decision + date + outcome).
+
+4. **财报 forensic** (required for §5 风险 + Part 4 §4.5 排雷):
+   - 真实销售 formula (removes 预收款 manipulation):
+     `真实营收 = 报表营收 + (期末预收 − 期初预收) / 1.17`
+   - 销售收现 cross-check:
+     `销售收现 = 营业收入 × (1+增值税率) − Δ应收账款 − Δ应收票据 + Δ预收账款 / 合同负债`
+     Compare to 现金流量表 "销售商品提供劳务收到的现金". **Any divergence > 5% → investigate and flag in the section output.**
+
+Methodology source: `docs/value-profile/methodology-tang.md` §H.2 (prompt-ready copy), §C / §D / §E for full derivation.
 
 #### 3c. Main-agent review
 
@@ -149,9 +216,17 @@ When the user picks any Part 2 §Q* section:
 ### Step 5 — 排雷 checklist mode (triggered on §4.5 selection, Part 4)
 
 1. Dispatch ONE `general-purpose` subagent with a compound prompt:
-   > For each of the 29 items in Part 4 §4.5 排雷清单, read `data/filings/<ticker>/年报-<latest>.pdf` 资产负债表 + 利润表 + 现金流量表 + 财务报表附注. For each item answer `是` / `否` / `不适用` / `需人工`, plus a 1-sentence evidence summary and a 年报 page citation.
+   > For each of the 29 items in Part 4 §4.5 排雷清单, read `data/filings/<ticker>/_extracted/年报-<latest>/text.md` (fallback: the raw PDF) 资产负债表 + 利润表 + 现金流量表 + 财务报表附注. For each item answer `是` / `否` / `不适用` / `需人工`, plus a 1-sentence evidence summary and a 年报 page citation.
 
    Include the full 29-item list (pull from the §4.5 table already present in the template, which the profile file inherits).
+
+   **唐朝 forensic overlay** (methodology-tang.md §D.1-D.3): flag these high-severity patterns explicitly even if they are not listed verbatim in §4.5:
+   - **商誉 / 净资产 > 20%** → 雷区, 未来可能一次性减值.
+   - **其他应收款 异常大额** (≥ 10% 流动资产, 或对单一关联方挂账长年) → 关联方占款疑点.
+   - **在建工程** 长年不转固定资产 → 挂账操纵折旧.
+   - **经营现金流净额 < 50% 净利润** 连续 2 年 → 利润真实性红旗.
+   - **生物资产 / 农林渔牧** 主业 → 造假高危区 (獐子岛 style).
+   - **管理层道德红旗** — 历史上曾出现虚假陈述 / 违规处罚 / 股东利益输送 → 直接大幅降级.
 
 2. Subagent returns a filled table.
 
@@ -161,20 +236,37 @@ When the user picks any Part 2 §Q* section:
 
 5. User gate — offer only `[accept / edit: <text> / research more: <hint>]`. **`defer` and `skip` are NOT offered.** 排雷 is mandatory; skipping it would invalidate the whole profile.
 
-### Step 6 — Executive summary synthesis (Part 0)
+### Step 6 — Executive summary synthesis (Part 0, 老唐估值法 output)
 
 Triggered when ≥ 80% of sections are `已完成` (compute from the progress map in Step 2).
 
+**Gate-check first**: if §3.pre 三大前提 gate marked any of the three as `假 / 存疑`, abort Step 6 with a banner:
+> `❌ 估值前置 checklist failed (三大前提 §<which> = 假/存疑). 无法进入老唐估值法. 请先修复 §3.pre, 或将 Part 0 标记为 "不可估值 — 仅定性研究".`
+
+Otherwise:
+
 1. Offer:
-   > `执行摘要 synthesis ready? / Ready to draft Part 0? [yes / not yet]`
+   > `执行摘要 synthesis ready? / Ready to draft Part 0 (老唐估值法)? [yes / not yet]`
 
-2. `yes` → main agent reads the completed sections and extracts:
-   - **3-bullet 投资论点** from §1 商业模式 + §3 护城河 + §4 管理 (是否买 / 什么价位 / 为什么).
-   - **估值** (current PE / PB / 股息率 / 3y 合理市值) from Part 4 §4.1–§4.3.
-   - **Top 3 风险** from §5 风险分析 + §4.5 发现的红旗.
-   - **确信度** aggregated from the 置信度 stats: `高` if ≥ 60% of sections are 高; `中` if mixed; `低` if any block is 未做.
+2. `yes` → main agent reads the completed sections and drafts Part 0 in Chinese with the following **7-field 结构化 output** (from 老唐估值法, methodology-tang.md §F). Any missing field → section is `进行中`, not `已完成`.
 
-   Draft Part 0 in Chinese. Include `最近审阅日期 = today`.
+   1. **3 年后 归母净利润 (三档)** — 业务板块拆解 (至少 2 块, 每块列 量 × 价 × 净利率):
+      - 乐观: `<N>` 亿元 — 假设 `<具体假设>`
+      - 中性: `<N>` 亿元 — base case
+      - 悲观: `<N>` 亿元 — 假设 `<具体假设>`
+   2. **合理 PE** = `1 / 当前 10y 国债 收益率`. 当前无风险收益率约 3.5% → 合理 PE ≈ 28x (典型区间 25-30; 超出需 justify). **注意**: 合理 PE **不** 随增速调整 — 增速已经反映在 3y 净利润 number 中。
+   3. **合理估值** = 中性 3y 净利润 × 合理 PE (± 10% 带宽).
+   4. **买点 (Buy point)** = 合理估值 × 0.5 (常规). 高杠杆标的打 7 折, 即 × 0.35 — 必须在字段中说明为何判定高杠杆 (e.g. 有息负债 / 净资产, 经营现金流 / 有息负债).
+   5. **卖点 (Sell point)** = `min(合理估值 × 1.5, 当年 净利润 × 50 PE)`. 两 candidate 都列, 取较低者.
+   6. **持仓姿态 (discrete)**:
+      - `加仓 / 建仓` — 当前市值 < 买点
+      - `持有不动 (收工睡觉)` — 买点 ≤ 当前市值 < 卖点
+      - `分批清仓` — 当前市值 > 卖点 (触发即卖 1/3; 再涨 10% 卖 1/3; 再涨 10% 清仓)
+   7. **Top 3 风险** (ranked) — 来自 §5 风险分析 + §4.5 发现的红旗; 每条 1-2 句 + 触发条件.
+
+   **确信度** aggregate: `**置信度:** 高` if ≥ 60% of sections are 高 AND §3.pre 三大前提 全部 = 真; `中` if mixed; `低` if any block is 未做 OR 任一前提 = 存疑.
+
+   **Labeling**: every Part 0 draft must end with the line `> 本摘要基于 AI 研究 + 用户审阅, 非投资建议. 最近审阅日期 = <today>.`
 
 3. User gate (`[accept / edit / research more]`) → save.
 
@@ -184,6 +276,8 @@ Triggered when ≥ 80% of sections are `已完成` (compute from the progress ma
 - **Operator-facing output** (gate prompts, status summaries, errors): bilingual. Chinese first, English parenthetical when useful. Users operate this skill in both languages.
 - **Subagent prompts:** English (the instruction language is English; the data / output directive inside forces Chinese output).
 - **Commit messages:** English.
+
+**Methodology reference:** `docs/value-profile/methodology-tang.md` is the canonical 深度分析 framework for this skill (唐朝 / 唐书房). When in doubt about how deep to go, what questions to ask, or how to structure a moat / management / valuation section, consult §B (商业模式) through §G (Moutai seed) of that doc. §H.2 contains prompt-ready copy for subagent dispatch.
 
 ## What this skill MUST NOT do
 
