@@ -57,6 +57,8 @@ class AHPremiumMeanReversionStrategy:
     max_gross: float = 0.20
     lookback_days: int = 60
     name: str = field(default="ah_premium_mr")
+    # AH premium strategy uses only price data and FX; no fundamentals.
+    uses_fundamentals: bool = field(default=False, init=False, repr=False)
 
     def __post_init__(self) -> None:
         # Mutable state: dict of pair_name -> {a_sym: float, h_sym: float}
