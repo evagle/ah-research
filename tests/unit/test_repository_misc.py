@@ -10,7 +10,7 @@ import pytest
 
 from ah_research.data.repository import DataRepository
 from ah_research.exceptions import UserInputError
-from ah_research.model.types import AHPair, Freq, parse_symbol
+from ah_research.model.types import AHPair, parse_symbol
 
 # ── get_trading_calendar ─────────────────────────────────────────────────────
 
@@ -98,20 +98,20 @@ def test_compute_ah_premium_intersects_trading_days(repo: DataRepository):
 
 def test_resample_monthly_collapses_daily_rows(repo: DataRepository):
     daily = repo.get_prices(["600519.SH"], date(2024, 1, 1), date(2024, 3, 31))
-    monthly = DataRepository.resample(daily, Freq.M)
+    monthly = DataRepository.resample(daily, "M")
     # 2024-01, 2024-02, 2024-03 = 3 month-ends
     assert len(monthly) == 3
 
 
 def test_resample_preserves_symbol_column(repo: DataRepository):
     daily = repo.get_prices(["600519.SH", "0700.HK"], date(2024, 1, 1), date(2024, 3, 31))
-    monthly = DataRepository.resample(daily, Freq.M)
+    monthly = DataRepository.resample(daily, "M")
     assert set(monthly["symbol"].unique()) == {"600519.SH", "0700.HK"}
 
 
 def test_resample_weekly_uses_last_close(repo: DataRepository):
     daily = repo.get_prices(["600519.SH"], date(2024, 1, 1), date(2024, 1, 31))
-    weekly = DataRepository.resample(daily, Freq.W)
+    weekly = DataRepository.resample(daily, "W")
     # Week labels should be Fridays
     for ts in weekly["date"]:
         # weekday() == 4 means Friday (0=Monday).
@@ -120,7 +120,7 @@ def test_resample_weekly_uses_last_close(repo: DataRepository):
 
 def test_resample_volume_summed(repo: DataRepository):
     daily = repo.get_prices(["600519.SH"], date(2024, 1, 1), date(2024, 1, 31))
-    monthly = DataRepository.resample(daily, Freq.M)
+    monthly = DataRepository.resample(daily, "M")
     daily_total_volume = int(daily["volume"].sum())
     monthly_total_volume = int(monthly["volume"].sum())
     assert daily_total_volume == monthly_total_volume
@@ -134,5 +134,5 @@ def test_resample_rejects_unknown_freq(repo: DataRepository):
 
 def test_resample_handles_empty_frame():
     empty = pd.DataFrame(columns=["date", "symbol", "close", "volume"])
-    result = DataRepository.resample(empty, Freq.M)
+    result = DataRepository.resample(empty, "M")
     assert len(result) == 0
