@@ -59,10 +59,14 @@ class DummyWeightStrategy:
 def test_signal_strategy_protocol() -> None:
     s = DummySignalStrategy()
     assert isinstance(s, SignalStrategy)
-    assert not isinstance(s, WeightStrategy)
+    # Note: Python runtime_checkable Protocols use structural subtyping.
+    # DummySignalStrategy also matches WeightStrategy structurally because it
+    # has `name` + `generate` — runtime isinstance cannot distinguish based on
+    # return-type annotations. The key check is that it IS a SignalStrategy.
 
 
 def test_weight_strategy_protocol() -> None:
     w = DummyWeightStrategy()
     assert isinstance(w, WeightStrategy)
+    # DummyWeightStrategy has no `to_weights` so it is NOT a SignalStrategy.
     assert not isinstance(w, SignalStrategy)
