@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import typer
 
 from ah_research import __version__
@@ -44,3 +46,21 @@ def warmup(
     from ah_research.scripts.ah_warmup import run as _run_warmup
 
     _run_warmup(universe=universe, years=years)
+
+
+@app.command()
+def dossier(
+    symbol: str = typer.Argument(..., help="Symbol e.g. 600000.SH"),
+    asof: str = typer.Option(None, "--asof", help="Snapshot date YYYY-MM-DD"),
+    out: Path = typer.Option(None, "--out", help="Write markdown to file"),  # noqa: B008
+    language: str = typer.Option("en", "--language", help="Report language: en|zh"),
+) -> None:
+    """Build and print (or save) a company research dossier."""
+    from datetime import date, datetime
+
+    from ah_research.scripts.ah_dossier import run as _run_dossier
+
+    asof_d: date | None = None
+    if asof is not None:
+        asof_d = datetime.strptime(asof, "%Y-%m-%d").date()
+    _run_dossier(symbol=symbol, asof=asof_d, out=out, language=language)
