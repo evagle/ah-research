@@ -87,7 +87,8 @@ _CONSTRUCTOR_SYMBOLS = [
 @given(seed=st.integers(0, 2**31 - 1))
 @settings(max_examples=10, deadline=60_000)
 def test_constructor_weights_sum_to_one_when_all_slack(seed: int) -> None:
-    """With no binding constraints, final weights sum to 1.0."""
+    """With a top_quantile selection (always picks positions) and no binding weight
+    constraints, final weights sum to 1.0."""
     from ah_research.backtest.types import Signals
     from ah_research.portfolio.constructor import Constraint, ConstructionReport, Constructor
 
@@ -102,7 +103,8 @@ def test_constructor_weights_sum_to_one_when_all_slack(seed: int) -> None:
     signals_data = {
         "date": pd.to_datetime(["2023-06-30"] * n),
         "symbol": symbols,
-        "signal": [float(rng.standard_normal()) for _ in range(n)],
+        # Use abs() so all signals are positive — all_positive always selects all
+        "signal": [abs(float(rng.standard_normal())) + 0.01 for _ in range(n)],
     }
     signals = Signals.from_dataframe(pd.DataFrame(signals_data))
 
@@ -116,6 +118,7 @@ def test_constructor_weights_sum_to_one_when_all_slack(seed: int) -> None:
     )
 
     assert isinstance(report, ConstructionReport)
+    assert report.final_position_count > 0, "Expected at least one position"
     total_weight = float(report.weights["weight"].sum())
     # Weights should sum to 1.0 (±1e-6) when constraint is slack
     assert abs(total_weight - 1.0) < 1e-6, f"Weights sum to {total_weight}, expected 1.0"
