@@ -48,6 +48,15 @@ def warmup(
     _run_warmup(universe=universe, years=years)
 
 
+def _register_watchlist() -> None:
+    from ah_research.scripts.ah_watchlist import app as _wl_app
+
+    app.add_typer(_wl_app, name="watchlist")
+
+
+_register_watchlist()
+
+
 @app.command()
 def dossier(
     symbol: str = typer.Argument(..., help="Symbol e.g. 600000.SH"),
