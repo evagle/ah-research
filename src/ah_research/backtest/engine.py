@@ -855,12 +855,43 @@ def run_backtest(
                 cost_base = cost_total * fx_rate_local_to_base
 
                 if notional_base + cost_base > total_cash_base:
-                    # Compute max affordable shares in base-currency terms
+                    # Compute max affordable shares in base-currency terms, then shrink
+                    # one lot at a time until (notional + costs) fits in available cash.
+                    # An iterative reduction is required because the cost model is not
+                    # a flat rate: commission has a fixed minimum (5 CNY for A-shares),
+                    # so a purely notional-based division (cash / price) can still
+                    # overdraw by up to `cost_total` once costs are added back in.
                     lot = _LOT_SIZE[exchange_obj]
                     price_base = fill_price * fx_rate_local_to_base
                     if price_base > Decimal("0") and total_cash_base > Decimal("0"):
                         max_affordable_base = int(float(total_cash_base) / float(price_base))
                         max_lots = (max_affordable_base // lot) * lot
+                        trial_notional_local = fill_price * Decimal(str(max_lots))
+                        try:
+                            trial_cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
+                                order.side, trial_notional_local
+                            )
+                            trial_cost_total = sum(trial_cost_breakdown.values())
+                        except (KeyError, AttributeError):
+                            trial_cost_breakdown = {}
+                            trial_cost_total = Decimal("0")
+                        while max_lots > 0:
+                            trial_notional_base = trial_notional_local * fx_rate_local_to_base
+                            trial_cost_base = trial_cost_total * fx_rate_local_to_base
+                            if trial_notional_base + trial_cost_base <= total_cash_base:
+                                break
+                            max_lots -= lot
+                            if max_lots <= 0:
+                                break
+                            trial_notional_local = fill_price * Decimal(str(max_lots))
+                            try:
+                                trial_cost_breakdown = cost_model.for_exchange(
+                                    exchange_obj
+                                ).compute(order.side, trial_notional_local)
+                                trial_cost_total = sum(trial_cost_breakdown.values())
+                            except (KeyError, AttributeError):
+                                trial_cost_breakdown = {}
+                                trial_cost_total = Decimal("0")
                         if max_lots <= 0:
                             logger.warning(
                                 "Insufficient cash (%.2f base) to buy any lots of %s at %.4f; "
@@ -880,16 +911,9 @@ def run_backtest(
                             max_lots,
                         )
                         shares = max_lots
-                        notional_local = fill_price * Decimal(str(shares))
-                        # Recompute costs for reduced shares
-                        try:
-                            cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
-                                order.side, notional_local
-                            )
-                            cost_total = sum(cost_breakdown.values())
-                        except (KeyError, AttributeError):
-                            cost_breakdown = {}
-                            cost_total = Decimal("0")
+                        notional_local = trial_notional_local
+                        cost_breakdown = trial_cost_breakdown
+                        cost_total = trial_cost_total
                     else:
                         continue
 
