@@ -483,6 +483,10 @@ class SyntheticMarket:
         a_slim = a_prices[["date", "close"]].rename(columns={"close": "close_a"})
         h_slim = h_prices[["date", "close"]].rename(columns={"close": "close_h"})
         fx_slim = fx[["date", "rate"]].rename(columns={"rate": "fx_rate"})
+        # Normalise all date columns to the same datetime64 resolution before
+        # pd.merge_asof, which requires identical key dtypes.
+        for _df in (a_slim, h_slim, fx_slim):
+            _df["date"] = _df["date"].astype("datetime64[us]")
         merged = a_slim.merge(h_slim, on="date", how="inner").sort_values("date")
         merged = pd.merge_asof(merged, fx_slim.sort_values("date"), on="date", direction="backward")
         merged = merged.dropna(subset=["fx_rate"])

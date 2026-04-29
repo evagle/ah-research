@@ -536,11 +536,14 @@ def run_backtest(
     # Call strategy.generate once (outside the per-date loop) to get all weights.
     # Re-raise ValueError (e.g. NaN weights from pandera) immediately.
     try:
-        if isinstance(strategy, WeightStrategy):
-            all_weights = strategy.generate(repo, config.start, config.end)
-        elif isinstance(strategy, SignalStrategy):
+        # Check SignalStrategy first: it has both generate() and to_weights(),
+        # whereas WeightStrategy has only generate(). A strategy implementing
+        # both protocols is treated as SignalStrategy so to_weights() is called.
+        if isinstance(strategy, SignalStrategy) and hasattr(strategy, "to_weights"):
             s = strategy.generate(repo, config.start, config.end)
             all_weights = strategy.to_weights(s, repo)
+        elif isinstance(strategy, WeightStrategy):
+            all_weights = strategy.generate(repo, config.start, config.end)
         else:
             result_obj = strategy.generate(repo, config.start, config.end)
             if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
@@ -565,33 +568,37 @@ def run_backtest(
     if all_weights is not None:
         wdf = all_weights.df.copy()
 
-        # NaN check (belt-and-suspenders; pandera should have caught this already)
-        if wdf["weight"].isna().any():
-            bad = wdf[wdf["weight"].isna()]
-            raise ValueError(
-                f"Strategy emitted NaN weights on {bad['date'].unique().tolist()} "
-                f"for symbols {bad['symbol'].tolist()}. Fix the strategy before running."
-            )
+        if wdf.empty or "weight" not in wdf.columns:
+            all_weights = None  # treat as no weights emitted
 
-        # Weight-sum validation when allow_leverage=False
-        if not config.allow_leverage:
-            for grp_date, grp in wdf.groupby("date"):
-                abs_sum = float(grp["weight"].abs().sum())
-                if abs_sum > 1.0 + 1e-6:
-                    raise ValueError(
-                        f"Weight sum {abs_sum:.6f} exceeds 1.0 on {grp_date} "
-                        f"with allow_leverage=False. Either set allow_leverage=True "
-                        f"or ensure abs(weights).sum() ≤ 1.0 per rebalance date."
-                    )
+        else:
+            # NaN check (belt-and-suspenders; pandera should have caught this already)
+            if wdf["weight"].isna().any():
+                bad = wdf[wdf["weight"].isna()]
+                raise ValueError(
+                    f"Strategy emitted NaN weights on {bad['date'].unique().tolist()} "
+                    f"for symbols {bad['symbol'].tolist()}. Fix the strategy before running."
+                )
 
-        for r_date in rebalance_dates:
-            date_mask = wdf["date"].dt.date == r_date
-            day_w = wdf[date_mask]
-            if day_w.empty:
-                continue
-            # Reconstruct a Weights object for this date (already validated above)
-            per_rebalance_weights[r_date] = Weights(df=day_w.reset_index(drop=True))
-            all_symbols_str.update(day_w["symbol"].tolist())
+            # Weight-sum validation when allow_leverage=False
+            if not config.allow_leverage:
+                for grp_date, grp in wdf.groupby("date"):
+                    abs_sum = float(grp["weight"].abs().sum())
+                    if abs_sum > 1.0 + 1e-6:
+                        raise ValueError(
+                            f"Weight sum {abs_sum:.6f} exceeds 1.0 on {grp_date} "
+                            f"with allow_leverage=False. Either set allow_leverage=True "
+                            f"or ensure abs(weights).sum() ≤ 1.0 per rebalance date."
+                        )
+
+            for r_date in rebalance_dates:
+                date_mask = wdf["date"].dt.date == r_date
+                day_w = wdf[date_mask]
+                if day_w.empty:
+                    continue
+                # Reconstruct a Weights object for this date (already validated above)
+                per_rebalance_weights[r_date] = Weights(df=day_w.reset_index(drop=True))
+                all_symbols_str.update(day_w["symbol"].tolist())
 
     if not all_symbols_str:
         logger.warning("Strategy emitted no weights; returning empty result.")
