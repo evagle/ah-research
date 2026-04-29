@@ -124,8 +124,36 @@ def test_corporate_action_rejects_unknown_kind():
         )
 
 
-def test_freq_enum_values():
-    assert Freq.D.value == "D"
-    assert Freq.W.value == "W"
-    assert Freq.M.value == "M"
-    assert Freq.Q.value == "Q"
+def test_freq_enum_values() -> None:
+    # Freq is now a Literal; values are inspectable via get_args
+    from typing import get_args
+
+    assert set(get_args(Freq)) == {"D", "W", "M", "Q"}
+
+
+# ── Phase-2 literal tests ─────────────────────────────────────────────────────
+
+from typing import get_args  # noqa: E402
+
+from ah_research.model.types import (  # noqa: E402
+    DividendPolicy,
+    FillPrice,
+    OrderSide,
+    Settlement,
+)
+
+
+def test_fill_price_values() -> None:
+    assert set(get_args(FillPrice)) == {"next_open", "next_vwap", "next_close"}
+
+
+def test_settlement_values() -> None:
+    assert set(get_args(Settlement)) == {"auto", "T+0", "T+1", "T+2"}
+
+
+def test_dividend_policy_values() -> None:
+    assert set(get_args(DividendPolicy)) == {"reinvest", "cash"}
+
+
+def test_order_side_values() -> None:
+    assert set(get_args(OrderSide)) == {"buy", "sell", "short", "cover"}

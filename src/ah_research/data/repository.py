@@ -392,7 +392,7 @@ class DataRepository:
         The period label is the period *end* (e.g., Friday for W, month-end
         for M, quarter-end for Q).
         """
-        freq_str = freq.value if isinstance(freq, Freq) else freq
+        freq_str = str(freq)
         pandas_freq = _PANDAS_FREQ.get(freq_str)
         if pandas_freq is None:
             raise UserInputError(f"unsupported resample freq {freq_str!r}; expected D|W|M|Q")
