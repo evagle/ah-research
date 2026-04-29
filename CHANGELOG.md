@@ -5,7 +5,65 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [Unreleased] — Phase 3
+
+### Added
+
+#### Phase 3 — Analysis & Watchlist (Tasks 1-27)
+
+**Analysis helpers** (`src/ah_research/analysis/`)
+
+- `owner_earnings_series()` — Buffett (1986) owner-earnings formula (NI + D&A - CapEx - WC change) from bitemporal fundamentals
+- `compute_valuation_bands()` + `ValuationBand` — trailing N-year P/E, P/B, P/S percentile bands with current-percentile readout
+- `dividend_consistency_grade()` — A–F grader for dividend consistency over a configurable trailing window
+- `run_screen()` + `ScreenResult` — vectorized screener with serializable predicate dict (`<`, `<=`, `>`, `>=`, `==`, `!=`, `between`, `in`, `not_in`), lazy derived-column catalog (`roe_3y_avg`, `revenue_growth_3y_cagr`, `dividend_consistency_grade`, etc.), and typo-suggestion `KeyError`
+- `factor_study()` + `FactorReport` — cross-sectional factor study with Spearman IC (Newey-West t-stat), quantile returns, IC decay by horizon, block bootstrap confidence interval for long-short spread, sector neutralization, and `_InlineSignalStrategy` adapter for DataFrame input
+- `build_dossier()` + `Dossier` — single-symbol research dossier composing all helpers into sections (OverviewSection, FundamentalsSection, OwnerEarningsSection, ValuationBandsSection, DividendSection, AHPremiumSection, PeersSection, DossierMetadata); `to_markdown(language)` renderer (English + Chinese), `to_html()`, `to_dict()`
+
+**Watchlist** (`src/ah_research/watchlist/`)
+
+- `WatchlistStore` — DuckDB-backed CRUD (create, get, list_all, add_symbol, remove_symbol, delete, export_yaml, import_yaml) over `watchlist_definitions` and `watchlist_snapshots` tables (migration #3)
+- `WatchlistSnapshot` — point-in-time metric snapshot per symbol (pe, pb, dividend_yield, roe, market_cap, sector_l1, price); immutability guard unless `force=True`
+- `diff_snapshots()` — computes per-metric delta columns between two snapshot dates
+
+**Portfolio Constructor** (`src/ah_research/portfolio/constructor.py`)
+
+- `Constraint` — frozen dataclass with factory classmethods: `max_weight`, `max_gross`, `sector_neutral_to`, `tracking_error`, `min_positions`, `max_positions`
+- `Constructor` — fluent builder chain: `.method()` → `.weight_by()` → `.constrain()` → `.build()`; methods: `top_quantile`, `top_n`, `all_positive`; schemes: `equal`, `signal_proportional`, `free_float_mcw`, `mcw`; heuristic constraint relaxation with `ConstraintResult` and `relaxation_notes`
+- `ConstructionReport` — full construction output: weights DataFrame, position count, per-constraint results, method/scheme used
+
+**CLI extensions**
+
+- `ah dossier <SYMBOL>` — build and print/save a Dossier as Markdown (`--asof`, `--out`, `--language`)
+- `ah watchlist list/create/snapshot/diff/export/import` — full watchlist lifecycle via CLI
+
+**Reference notebooks** (`notebooks/`)
+
+- `phase3_factor_study_value.ipynb` — IC summary + quantile returns + bootstrap on ValueFactorStrategy over synthetic market
+- `phase3_screener_workflow.ipynb` — screener → watchlist → snapshot → diff → YAML export flow
+- `phase3_dossier_example.ipynb` — full Dossier build + Markdown rendering (en + zh) + to_dict round-trip
+- `phase3_portfolio_construction.ipynb` — Constructor chain with all constraint types, shows ConstructionReport
+
+**Tests**
+
+- Unit tests for all new modules (owner_earnings, valuation_bands, dividend_history, screener, factor_study IC/quantile/bootstrap, dossier types/build/render, watchlist store/snapshot, constraint, constructor)
+- Integration tests: end-to-end factor study, screener→watchlist, dossier pipelines
+- Property tests (Hypothesis): screener idempotence, constructor weights sum to 1, factor study shuffled-signals IC near zero
+- Notebook tests: `tests/integration/test_phase3_notebooks_run.py` — `@pytest.mark.slow`, runs all four notebooks via `nbclient`
+
+### Changed
+
+- `src/ah_research/analysis/__init__.py` — public re-exports for `factor_study`, `FactorReport`, `run_screen`, `ScreenResult`, `build_dossier`, `Dossier`, `owner_earnings_series`, `compute_valuation_bands`, `ValuationBand`, `dividend_consistency_grade`
+- `src/ah_research/watchlist/__init__.py` — public re-exports for `Watchlist`, `WatchlistStore`, `WatchlistSnapshot`
+- `src/ah_research/portfolio/__init__.py` — public re-exports include `Constructor`, `Constraint`, `ConstructionReport`
+- `src/ah_research/cli.py` — wired `ah dossier` and `ah watchlist` subcommands
+
+### References
+
+- Spec: `docs/superpowers/specs/2026-04-29-ah-research-phase-3-analysis-design.md`
+- Plan: `docs/superpowers/plans/2026-04-29-ah-research-phase-3.md`
+
+---
 
 ### Added
 

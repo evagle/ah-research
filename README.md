@@ -8,6 +8,23 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+### Phase 3 — Analysis & Watchlist
+
+- **Factor study** (`ah_research.analysis.factor_study`): `factor_study()` — cross-sectional Spearman IC, quantile returns, IC decay, block bootstrap CI for long-short spread, sector neutralization
+- **Screener** (`ah_research.analysis.screener`): `run_screen()` — vectorized predicate dict (`<`, `>`, `between`, `in`, …), lazy derived-column catalog (ROE averages, revenue CAGR, dividend grades, etc.)
+- **Dossier** (`ah_research.analysis.dossier`): `build_dossier()` — single-symbol research report with overview, 10-year fundamentals, owner earnings, valuation bands, dividend history, AH premium; `to_markdown(language)` in English and Chinese
+- **Analysis helpers**: `owner_earnings_series()`, `compute_valuation_bands()`, `dividend_consistency_grade()`
+- **Watchlist** (`ah_research.watchlist`): `WatchlistStore` — DuckDB-backed CRUD, point-in-time snapshots, metric diffs, YAML import/export
+- **Portfolio Constructor** (`ah_research.portfolio.constructor`): `Constructor` fluent chain — `.method()` → `.weight_by()` → `.constrain()` → `.build()`; full `ConstructionReport` with per-constraint status and relaxation notes
+- **CLI**: `ah dossier`, `ah watchlist list/create/snapshot/diff/export/import`
+- **Reference notebooks** (`notebooks/`):
+  - [`phase3_factor_study_value.ipynb`](notebooks/phase3_factor_study_value.ipynb) — IC summary + quantile returns + bootstrap on ValueFactorStrategy
+  - [`phase3_screener_workflow.ipynb`](notebooks/phase3_screener_workflow.ipynb) — screener → watchlist → snapshot → diff flow
+  - [`phase3_dossier_example.ipynb`](notebooks/phase3_dossier_example.ipynb) — full dossier build + Markdown rendering (en + zh)
+  - [`phase3_portfolio_construction.ipynb`](notebooks/phase3_portfolio_construction.ipynb) — Constructor chain with all constraint types
+
+See [`docs/superpowers/specs/2026-04-29-ah-research-phase-3-analysis-design.md`](docs/superpowers/specs/2026-04-29-ah-research-phase-3-analysis-design.md) for the spec and [`docs/superpowers/plans/2026-04-29-ah-research-phase-3.md`](docs/superpowers/plans/2026-04-29-ah-research-phase-3.md) for the implementation plan.
+
 ### Phase 2 — Backtest Engine & Strategies
 
 - **Backtest engine** (`ah_research.backtest`): event-driven daily simulation with multi-currency cash, FX mark-to-market, HK lot-size rounding, T+N settlement, limit-up/down and suspension handling, corporate action processing, and full `MetricsBundle` (CAGR, Sharpe, Sortino, max drawdown, Newey-West alpha/beta)
