@@ -138,7 +138,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
   | 高杠杆（地产 / 部分电力 / 开发商）| PE 下调到 8-12 | 35% | 硬指标: 有息负债 / 净资产 > 1 或 / CFO 近3年 > 3 |
   | 公用事业（水电 / 高速 / 港口）| DCF 简化版 | 股息率 > rf × 1.3 | 用 稳态 FCF / (rf + 2%); 看 折旧 vs 维持性 CapEx 差额 |
 
-  同时符合多类 (如 高杠杆 + 周期) → 取最严档。"不适用 PE" / "默认回避" → Step 6 不输出估值数字, Part 0 标 "定性研究 only"。完整准绳见 `docs/references/tangshufang/02-估值法完整框架.md` + `docs/references/tangshufang/methodology.md` §F。
+  同时符合多类 (如 高杠杆 + 周期) → 取最严档。"不适用 PE" / "默认回避" → Step 6 不输出估值数字, Part 0 标 "定性研究 only"。完整准绳见 `.claude/skills/value-profile/references/valuation.md` §3。
 
 ### §2.4 3 年窗口与可预估度
 
@@ -187,7 +187,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 ### §2.11 年报阅读纪律
 
 - **§2.11.1 优先 extracted text cache**: 派子 agent 前, `data/filings/<ticker>/_extracted/<年报-YYYY>/text.md` 必须存在（带 `<!-- page N -->` marker）。缺失则先 shell out `python scripts/extract_pdf.py`。
-- **§2.11.2 必读附注 12 项**: 货币资金受限 / 应收账款 5 大客户 + 账龄 / 应收票据 银票 vs 商票 / 预付账款对象 / 其他应收款关联方 / 存货分项 + 跌价 / 在建工程转固 / 商誉减值假设 / 合同负债占营收 / 应付账款议价权 / 长投 + 可供出售金融资产 / 有息负债。详见 `docs/references/tangshufang/methodology.md` §J.1。
+- **§2.11.2 必读附注 12 项**: 货币资金受限 / 应收账款 5 大客户 + 账龄 / 应收票据 银票 vs 商票 / 预付账款对象 / 其他应收款关联方 / 存货分项 + 跌价 / 在建工程转固 / 商誉减值假设 / 合同负债占营收 / 应付账款议价权 / 长投 + 可供出售金融资产 / 有息负债。详见 `.claude/skills/value-profile/references/financial-reading.md` §3。
 - **§2.11.3 禁用 8 条空话**: "具有强大品牌 / 技术领先 / 行业龙头 / 管理优秀 / 市场广阔 / 核心竞争力突出 / 护城河宽广 / 成长空间巨大" 无具体佐证（人名 / 数字 / 日期 / 引用） 一律退回重写。
 - **§2.11.4 管理层口径校核**: Part 1 §1-§5 每个 section 必填, 对比年报 vs 研报 vs 财新 vs 经销商反馈 vs 价盘 vs 监管披露, 指出哪里年报做了美化 / 避而不谈。"年报说 X, 我们同意 X" 视为不合格, 退回重做。
 
@@ -293,7 +293,7 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 - **能力圈四问** (§2.6) — §1 所有 subsection 必需, 4 段独立答。
 - **禁用 8 条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5 必填。
-- **5 步护城河分析** (§3 必需): a 分类（大 / 准 / 强 / 省 / 专）+ b 2 项可证伪检验（提价 / 对手 / 切换成本 / ROE 路标 任选二）+ c 跨年定量追溯（毛利率 / 净利率 / ROE 5y, CFO/NI 比值, 带页码）+ d 悲观情景（具体技术 / 偏好 / 监管 / 对手情景, 禁空话）+ e 宽 / 中 / 窄 / 弱 标签。具体数字准绳见 `docs/references/tangshufang/methodology.md` §C / template §3。
+- **5 步护城河分析** (§3 必需): a 分类（大 / 准 / 强 / 省 / 专）+ b 2 项可证伪检验（提价 / 对手 / 切换成本 / ROE 路标 任选二）+ c 跨年定量追溯（毛利率 / 净利率 / ROE 5y, CFO/NI 比值, 带页码）+ d 悲观情景（具体技术 / 偏好 / 监管 / 对手情景, 禁空话）+ e 宽 / 中 / 窄 / 弱 标签。具体数字准绳见 `.claude/skills/value-profile/references/moat-framework.md` / template §3。
 - **管理层 承诺 vs 兑现** (§4 必需): 5 年 forecast vs actual 表, 每行带页码; gap > 10% 连续 ≥ 3 年 → `**置信度:** 低`; 目标突然消失 = 强信号, 必须指出。
 
 #### 3c. Main-agent review
@@ -339,7 +339,7 @@ profile 内容中文; operator 菜单双语:
    - 生物资产 / 农林渔牧 → 造假高危（獐子岛 style）
    - 管理层道德红旗（历史虚假陈述 / 违规处罚 / 股东利益输送）→ 直接大幅降级
 
-   详细 20 项 排雷清单 + 行业 overlay 见 `docs/references/tangshufang/methodology.md` §K。金融资产 4 分类 / 合同负债口径 等深度财报陷阱见 `docs/references/tangshufang/01-财报阅读深度.md`。
+   详细红旗清单见 `.claude/skills/value-profile/references/financial-reading.md` §4 / §6; 行业 overlay 见 `.claude/skills/value-profile/references/industry-overlays.md`。金融资产 4 分类 / 合同负债口径 等深度财报机制见 `.claude/skills/value-profile/references/financial-reading.md` §2。
 
 2. 主 agent 复核缺引用, 必要时 re-dispatch。
 3. 写 `**发现的红旗 summary:**` 段落（1-2 段）, 聚焦 `是 / 需人工` 项, 说明雷是什么、为何对本 ticker 重要、交叉验证下一步。
