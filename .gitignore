@@ -241,3 +241,7 @@ htmlcov/
 # Editor
 .vscode/
 .idea/
+
+# Third-party copyrighted materials (read-only research cache, do not commit)
+data/research/唐书房/*.pdf
+data/research/唐书房/_extracted/
