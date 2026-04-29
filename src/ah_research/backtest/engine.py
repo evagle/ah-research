@@ -540,13 +540,13 @@ def run_backtest(
             all_weights = strategy.generate(repo, config.start, config.end)
         elif isinstance(strategy, SignalStrategy):
             s = strategy.generate(repo, config.start, config.end)
-            all_weights = strategy.to_weights(s)
+            all_weights = strategy.to_weights(s, repo)
         else:
             result_obj = strategy.generate(repo, config.start, config.end)
             if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
                 all_weights = result_obj
             else:
-                all_weights = strategy.to_weights(result_obj)
+                all_weights = strategy.to_weights(result_obj, repo)
     except (ValueError, TypeError):
         # Validation errors (NaN weights, bad schema) are user-input errors — re-raise.
         raise

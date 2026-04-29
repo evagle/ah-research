@@ -28,7 +28,7 @@ class DummySignalStrategy:
         )
         return Signals.from_dataframe(df)
 
-    def to_weights(self, signals: Signals) -> Weights:
+    def to_weights(self, signals: Signals, repo: object) -> Weights:
         df = signals.df.copy()
         df["weight"] = 1.0
         df = df.drop(columns=["signal"])

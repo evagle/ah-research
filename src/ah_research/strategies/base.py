@@ -11,7 +11,13 @@ from ah_research.data.repository import DataRepository
 
 @runtime_checkable
 class SignalStrategy(Protocol):
-    """Emits a per-symbol scalar signal; converted to weights via ``to_weights``."""
+    """Emits a per-symbol scalar signal; converted to weights via ``to_weights``.
+
+    ``to_weights`` accepts an optional ``repo`` argument so implementations can
+    fetch sector classifications (or other repo data) at weight-construction time.
+    The engine always passes ``repo``; callers that do not need it may ignore the
+    argument by accepting ``**kwargs`` or an explicit ``repo`` parameter.
+    """
 
     name: str
 
@@ -19,8 +25,13 @@ class SignalStrategy(Protocol):
         """Generate signals for all universe members over ``[start, end]``."""
         ...
 
-    def to_weights(self, signals: Signals) -> Weights:
-        """Convert signals to target portfolio weights."""
+    def to_weights(self, signals: Signals, repo: DataRepository) -> Weights:
+        """Convert signals to target portfolio weights.
+
+        Args:
+            signals: The signal frame produced by ``generate``.
+            repo: The data repository; available for sector lookups etc.
+        """
         ...
 
 
