@@ -29,7 +29,7 @@ from typing import Any, Literal
 import pandas as pd
 
 from ah_research.backtest.costs import DEFAULT_COSTS_2024, CostModelBundle
-from ah_research.backtest.metrics import MetricsBundle
+from ah_research.backtest.metrics import compute_metrics
 from ah_research.backtest.types import (
     BacktestConfig,
     BacktestResult,
@@ -867,7 +867,14 @@ def run_backtest(
         else pd.DataFrame(columns=["date", "symbol", "shares", "mkt_value_local", "mkt_value_base"])
     )
 
-    metrics = MetricsBundle()
+    metrics = compute_metrics(
+        equity=equity_curve,
+        benchmark=benchmark_curve,
+        trades=trades_df,
+        positions_history=positions_history,
+        start=config.start,
+        end=config.end,
+    )
 
     return BacktestResult(
         config=config,
