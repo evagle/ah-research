@@ -8,6 +8,7 @@ dependencies = [
     "pyarrow>=15",
     "duckdb>=1.0",
     "pandera[pandas]>=0.20",
+    "statsmodels>=0.14",
     "tenacity>=8.5",
     "structlog>=24",
     "pydantic-settings>=2.2",
