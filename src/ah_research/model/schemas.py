@@ -148,3 +148,27 @@ class CorporateActionSchema(pa.DataFrameModel):
     class Config:
         strict = True
         coerce = True
+
+
+class SignalsSchema(pa.DataFrameModel):
+    """Per-symbol scalar signal, one row per (date, symbol)."""
+
+    date: Series[pa.DateTime]
+    symbol: Series[str] = pa.Field(str_matches=r"^[0-9]{4,6}\.(SH|SZ|HK)$")
+    signal: Series[float] = pa.Field(nullable=False)
+
+    class Config:
+        strict = True
+        unique = ["date", "symbol"]  # noqa: RUF012
+
+
+class WeightsSchema(pa.DataFrameModel):
+    """Target portfolio weights, one row per (date, symbol)."""
+
+    date: Series[pa.DateTime]
+    symbol: Series[str] = pa.Field(str_matches=r"^[0-9]{4,6}\.(SH|SZ|HK)$")
+    weight: Series[float] = pa.Field(nullable=False)
+
+    class Config:
+        strict = True
+        unique = ["date", "symbol"]  # noqa: RUF012

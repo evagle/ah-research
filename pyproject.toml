@@ -8,6 +8,7 @@ dependencies = [
     "pyarrow>=15",
     "duckdb>=1.0",
     "pandera[pandas]>=0.20",
+    "statsmodels>=0.14",
     "tenacity>=8.5",
     "structlog>=24",
     "pydantic-settings>=2.2",
@@ -29,6 +30,9 @@ dev = [
     "mypy>=1.10",
     "pre-commit>=3.7",
     "types-pyyaml",
+    "nbclient>=0.10",
+    "nbformat>=5.10",
+    "ipykernel>=6",
 ]
 
 [project.scripts]
@@ -69,3 +73,4 @@ markers = [
 members = [
     "ah-research",
 ]
+

@@ -357,6 +357,21 @@ class DataRepository:
         merged["premium"] = merged["close_a"] / (merged["close_h"] * merged["fx_rate"]) - 1.0
         return merged.reset_index(drop=True)
 
+    def get_fx_series(self, pair: str, start: date, end: date) -> pd.DataFrame:
+        """Return daily FX rates for ``pair`` (e.g. ``CNY_HKD``) within
+        ``[start, end]``.
+
+        Rate convention: 1 unit of the left-hand currency = rate units of the
+        right-hand currency. Currently only ``CNY_HKD`` is supported via the
+        underlying FX source; other pairs raise ``UserInputError``.
+
+        Columns: ``date``, ``pair``, ``rate``.
+        """
+        self._validate_date_range(start, end)
+        if pair != "CNY_HKD":
+            raise UserInputError(f"unsupported FX pair {pair!r}; only 'CNY_HKD' is available")
+        return self._fetch_fx_cny_hkd(start, end)
+
     def _fetch_fx_cny_hkd(self, start: date, end: date) -> pd.DataFrame:
         """Fetch (and cache) the CNY/HKD rate series for ``[start, end]``.
 
@@ -392,7 +407,7 @@ class DataRepository:
         The period label is the period *end* (e.g., Friday for W, month-end
         for M, quarter-end for Q).
         """
-        freq_str = freq.value if isinstance(freq, Freq) else freq
+        freq_str = str(freq)
         pandas_freq = _PANDAS_FREQ.get(freq_str)
         if pandas_freq is None:
             raise UserInputError(f"unsupported resample freq {freq_str!r}; expected D|W|M|Q")

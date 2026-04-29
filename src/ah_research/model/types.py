@@ -31,16 +31,16 @@ class Currency(StrEnum):
     HKD = "HKD"
 
 
-class Freq(StrEnum):
-    """Resampling frequency for price / fundamentals time series."""
-
-    D = "D"  # daily
-    W = "W"  # weekly (Friday close)
-    M = "M"  # monthly (month-end close)
-    Q = "Q"  # quarterly (quarter-end close)
-
-
 # ── Literal narrow types ─────────────────────────────────────────────────────
+
+Freq = Literal["D", "W", "M", "Q"]
+"""Resampling frequency for price / fundamentals time series.
+
+- ``D``: daily
+- ``W``: weekly (Friday close)
+- ``M``: monthly (month-end close)
+- ``Q``: quarterly (quarter-end close)
+"""
 
 Adjust = Literal["hfq", "qfq", "none"]
 """Price-adjustment mode.
@@ -64,6 +64,12 @@ FillPrice = Literal["next_open", "next_vwap", "next_close"]
 
 Settlement = Literal["auto", "T+1", "T+2", "T+0"]
 """Settlement convention. ``auto`` picks from venue (A-share T+1, HK T+2)."""
+
+DividendPolicy = Literal["reinvest", "cash"]
+"""How received dividends are handled in the backtest."""
+
+OrderSide = Literal["buy", "sell", "short", "cover"]
+"""Direction of a simulated order."""
 
 CorporateActionKind = Literal[
     "cash_dividend",
