@@ -55,6 +55,8 @@ The immediate goal is NOT a polished system but a fast feedback loop: does the f
 | `scripts/download_filings.py` | Python CLI: fetch 年报 + 招股说明书 from cninfo for a ticker (v3 addition) | Yes |
 | `tests/test_download_filings.py` | pytest — uses recorded cninfo JSON fixtures (v3 addition) | Yes |
 | `tests/fixtures/cninfo/` | Recorded API responses for test replay (v3 addition) | Yes |
+| `scripts/download_research.py` | Python CLI: fetch 卖方深度研报 from 东方财富 for a ticker (filename `<broker-pinyin>-<title>-<YYYYMMDD>.pdf`) | Yes |
+| `tests/test_download_research.py` | pytest — mocks urllib, covers pinyin / sanitize / depth filter / PDF URL fallback / idempotent skip | Yes |
 | `data/filings/<ticker>/` | 年报, 招股说明书, 研报 PDFs (fetched or user-placed) | Yes (incl. PDFs) |
 | `data/filings/README.md` | Naming conventions + fetcher usage | Yes |
 | `profiles/` | Directory holding per-ticker profile outputs | Yes (dir) |

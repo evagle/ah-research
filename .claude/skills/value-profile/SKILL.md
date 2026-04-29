@@ -38,7 +38,12 @@ The skill never terminates voluntarily. It always returns control to the user af
      - `no` → abort with the manual-download instructions (巨潮资讯网 http://www.cninfo.com.cn, search ticker, download 年报 + 招股说明书, save to `data/filings/<ticker>/` with the naming convention in `data/filings/README.md`).
      - `show-command` → print the exact CLI (`python scripts/download_filings.py <ticker> --years 5 --include-prospectus`) and abort without running it.
    - Otherwise list what's available:
-     > `Found N 年报 (<years comma-separated>). 招股说明书: present / missing. 研报/: K files.`
+     > `Found N 年报 (<years comma-separated>). 招股说明书: present / missing. research/: K files.`
+
+   - Additionally, check `data/filings/<ticker>/research/`. If the directory is missing or empty, offer a non-blocking prompt:
+     > `研报 cache 为空. 是否运行 python scripts/download_research.py <ticker> --years 3 --depth-only --max 15? (东方财富 API, 可选, 非阻塞) / Research cache empty — fetch depth reports? [yes / no / show-command]`
+     - `yes` → shell out via Bash, stream output. On fetcher exit 0 re-audit. On non-zero exit, print the failure and continue (research is optional — do NOT abort the profile).
+     - `no` / `show-command` → continue without research PDFs. The profile can still be written; 研报 is a supplementary signal, not a blocker.
 
 2.5. **Extraction cache prep (new)**
     For each `年报-*.pdf` in the filings dir, check if `data/filings/<ticker>/_extracted/<pdf-stem>/text.md` exists. If any are missing, offer a bilingual prompt:
