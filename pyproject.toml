@@ -16,6 +16,7 @@ dependencies = [
     "baostock>=0.8.8",
     "akshare>=1.14",
     "typer>=0.12",
+    "pypinyin>=0.52",
 ]
 
 [project.optional-dependencies]
