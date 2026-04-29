@@ -533,28 +533,65 @@ def run_backtest(
     per_rebalance_weights: dict[date, Weights] = {}
     all_symbols_str: set[str] = set()
 
-    for r_date in rebalance_dates:
-        try:
-            if isinstance(strategy, WeightStrategy):
-                w = strategy.generate(repo, config.start, config.end)
-            elif isinstance(strategy, SignalStrategy):
-                s = strategy.generate(repo, config.start, config.end)
-                w = strategy.to_weights(s)
+    # Call strategy.generate once (outside the per-date loop) to get all weights.
+    # Re-raise ValueError (e.g. NaN weights from pandera) immediately.
+    try:
+        if isinstance(strategy, WeightStrategy):
+            all_weights = strategy.generate(repo, config.start, config.end)
+        elif isinstance(strategy, SignalStrategy):
+            s = strategy.generate(repo, config.start, config.end)
+            all_weights = strategy.to_weights(s)
+        else:
+            result_obj = strategy.generate(repo, config.start, config.end)
+            if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
+                all_weights = result_obj
             else:
-                # Fallback: try generate; check return type
-                result_obj = strategy.generate(repo, config.start, config.end)
-                if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
-                    w = result_obj
-                else:
-                    s = result_obj
-                    w = strategy.to_weights(s)
+                all_weights = strategy.to_weights(result_obj)
+    except (ValueError, TypeError):
+        # Validation errors (NaN weights, bad schema) are user-input errors — re-raise.
+        raise
+    except Exception as exc:
+        # Re-raise schema/validation errors from pandera or other validators.
+        # These carry class names containing "Schema" or "Validation".
+        exc_type = type(exc).__name__
+        if "Schema" in exc_type or "Validation" in exc_type:
+            raise ValueError(f"Strategy emitted invalid weights: {exc}") from exc
+        logger.warning("Strategy.generate failed: %s", exc)
+        all_weights = None
 
-            per_rebalance_weights[r_date] = w
-            date_mask = w.df["date"].dt.date == r_date
-            syms = w.df.loc[date_mask, "symbol"].tolist()
-            all_symbols_str.update(syms)
-        except Exception as exc:
-            logger.warning("Strategy failed to generate weights for %s: %s", r_date, exc)
+    # Validate weights and split by rebalance date.
+    _warned_missing_symbols: set[str] = set()  # track per-run missing symbol warnings
+
+    if all_weights is not None:
+        wdf = all_weights.df.copy()
+
+        # NaN check (belt-and-suspenders; pandera should have caught this already)
+        if wdf["weight"].isna().any():
+            bad = wdf[wdf["weight"].isna()]
+            raise ValueError(
+                f"Strategy emitted NaN weights on {bad['date'].unique().tolist()} "
+                f"for symbols {bad['symbol'].tolist()}. Fix the strategy before running."
+            )
+
+        # Weight-sum validation when allow_leverage=False
+        if not config.allow_leverage:
+            for grp_date, grp in wdf.groupby("date"):
+                abs_sum = float(grp["weight"].abs().sum())
+                if abs_sum > 1.0 + 1e-6:
+                    raise ValueError(
+                        f"Weight sum {abs_sum:.6f} exceeds 1.0 on {grp_date} "
+                        f"with allow_leverage=False. Either set allow_leverage=True "
+                        f"or ensure abs(weights).sum() ≤ 1.0 per rebalance date."
+                    )
+
+        for r_date in rebalance_dates:
+            date_mask = wdf["date"].dt.date == r_date
+            day_w = wdf[date_mask]
+            if day_w.empty:
+                continue
+            # Reconstruct a Weights object for this date (already validated above)
+            per_rebalance_weights[r_date] = Weights(df=day_w.reset_index(drop=True))
+            all_symbols_str.update(day_w["symbol"].tolist())
 
     if not all_symbols_str:
         logger.warning("Strategy emitted no weights; returning empty result.")
@@ -802,6 +839,53 @@ def run_backtest(
             current_shares = pos.shares if pos is not None else 0
 
             if order.side in ("buy", "cover"):
+                # Pre-execution cash-sufficiency check.
+                # Use total cash-in-base as the pool to handle cross-currency buys
+                # (e.g. buying HKD-denominated shares when only CNY cash is held).
+                total_cash_base = _cash_in_base(cash, config.base_currency, d, fx_lookup)
+                fx_rate_local_to_base = _fx_to_base(ccy, config.base_currency, d, fx_lookup)
+                notional_base = notional_local * fx_rate_local_to_base
+                cost_base = cost_total * fx_rate_local_to_base
+
+                if notional_base + cost_base > total_cash_base:
+                    # Compute max affordable shares in base-currency terms
+                    lot = _LOT_SIZE[exchange_obj]
+                    price_base = fill_price * fx_rate_local_to_base
+                    if price_base > Decimal("0") and total_cash_base > Decimal("0"):
+                        max_affordable_base = int(float(total_cash_base) / float(price_base))
+                        max_lots = (max_affordable_base // lot) * lot
+                        if max_lots <= 0:
+                            logger.warning(
+                                "Insufficient cash (%.2f base) to buy any lots of %s at %.4f; "
+                                "skipping order.",
+                                float(total_cash_base),
+                                sym_str,
+                                float(fill_price),
+                            )
+                            continue
+                        logger.warning(
+                            "Insufficient cash (%.2f base) for %d shares of %s at %.4f; "
+                            "reducing to %d shares.",
+                            float(total_cash_base),
+                            shares,
+                            sym_str,
+                            float(fill_price),
+                            max_lots,
+                        )
+                        shares = max_lots
+                        notional_local = fill_price * Decimal(str(shares))
+                        # Recompute costs for reduced shares
+                        try:
+                            cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
+                                order.side, notional_local
+                            )
+                            cost_total = sum(cost_breakdown.values())
+                        except (KeyError, AttributeError):
+                            cost_breakdown = {}
+                            cost_total = Decimal("0")
+                    else:
+                        continue
+
                 new_shares = current_shares + shares
                 if pos is not None:
                     # Weighted average cost
@@ -833,8 +917,20 @@ def run_backtest(
                     avg_cost=new_avg_cost,
                     locked_until=locked_until,
                 )
-                # Debit cash: notional + costs
+                # Debit cash: notional + costs.
+                # If the native currency balance would go negative, draw the
+                # shortfall from the base currency (implicit FX conversion).
                 cash[ccy] = cash.get(ccy, Decimal("0")) - notional_local - cost_total
+                if cash[ccy] < Decimal("0") and ccy != config.base_currency:
+                    # Convert shortfall back to base currency
+                    shortfall_local = -cash[ccy]
+                    shortfall_base = shortfall_local * _fx_to_base(
+                        ccy, config.base_currency, d, fx_lookup
+                    )
+                    cash[config.base_currency] = (
+                        cash.get(config.base_currency, Decimal("0")) - shortfall_base
+                    )
+                    cash[ccy] = Decimal("0")
 
             elif order.side in ("sell", "short"):
                 new_shares = current_shares - shares
@@ -865,6 +961,21 @@ def run_backtest(
                     "cost_total": float(cost_total),
                 }
             )
+
+            # Cash-negative guard: raise RuntimeError with state dump
+            for _ccy, _bal in cash.items():
+                if _bal < Decimal("-1"):  # allow tiny rounding artefacts up to -1
+                    _pos_snapshot = {
+                        str(s): {"shares": p.shares, "avg_cost": float(p.avg_cost)}
+                        for s, p in positions.items()
+                    }
+                    _last_trades = trades_log[-5:]
+                    raise RuntimeError(
+                        f"Cash balance for {_ccy} went negative ({float(_bal):.2f}) "
+                        f"on {d} after executing {order.side} {shares} {sym_str}.\n"
+                        f"Positions snapshot: {_pos_snapshot}\n"
+                        f"Last 5 trades: {_last_trades}"
+                    )
 
             # Expire T+N locks immediately if settlement==T+0
             # (full lock expiry is at end of day step 5)
