@@ -23,3 +23,10 @@ def test_constructor_accepts_optimizer_kwarg() -> None:
     c = Constructor(_synthetic_signals(), optimizer=None)
     # No exception means kwarg is accepted.
     assert c is not None
+
+
+def test_weight_by_optimize_is_accepted_literal() -> None:
+    c = Constructor(_synthetic_signals())
+    returned = c.weight_by("optimize")
+    assert returned is c
+    assert c._weighting == "optimize"  # type: ignore[attr-defined]

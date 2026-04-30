@@ -175,7 +175,13 @@ class Constructor:
 
     def weight_by(
         self,
-        scheme: Literal["equal", "signal_proportional", "free_float_mcw", "mcw"],
+        scheme: Literal[
+            "equal",
+            "signal_proportional",
+            "free_float_mcw",
+            "mcw",
+            "optimize",
+        ],
     ) -> Constructor:
         """Set the weighting scheme."""
         self._weighting = scheme
