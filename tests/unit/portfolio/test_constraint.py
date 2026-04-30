@@ -67,3 +67,38 @@ def test_all_factories_return_constraint() -> None:
     ]
     for c in factories:
         assert isinstance(c, Constraint)
+
+
+def test_long_only_factory_default_enabled():
+    c = Constraint.long_only()
+    assert c.kind == "long_only"
+    assert c.params == {"enabled": True}
+
+
+def test_long_only_factory_disabled():
+    c = Constraint.long_only(enabled=False)
+    assert c.params == {"enabled": False}
+
+
+def test_max_turnover_factory_without_baseline():
+    c = Constraint.max_turnover(0.25)
+    assert c.kind == "max_turnover"
+    assert c.params == {"value": 0.25, "baseline": None}
+
+
+def test_max_turnover_factory_with_baseline():
+    import pandas as pd
+
+    base = pd.Series({"600519.SH": 0.5, "000858.SZ": 0.5})
+    c = Constraint.max_turnover(0.1, baseline=base)
+    assert c.params["value"] == 0.1
+    pd.testing.assert_series_equal(c.params["baseline"], base)
+
+
+def test_max_turnover_value_must_be_in_zero_two():
+    import pytest
+
+    with pytest.raises(ValueError, match="value"):
+        Constraint.max_turnover(-0.1)
+    with pytest.raises(ValueError, match="value"):
+        Constraint.max_turnover(2.1)
