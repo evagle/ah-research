@@ -205,7 +205,7 @@ description: 教主 agent 如何系统阅读一份上市公司年报 / 中报 / 
 
 ## §2 阅读规则（从 §1 推出的操作纪律）
 
-本节规则编号 `§2.N.x` 可追溯到原则 `§1.N`。规则给**框架**，不给详细阈值清单（详细阈值留在 `references/statement-reading.md` 和 `financial-redflag-scan/references/fraud-library.md` 的 29 项 + 6 项 overlay）。
+本节规则编号 `§2.N.x` 可追溯到原则 `§1.N`。规则给**框架**，不给详细阈值清单（详细阈值留在 `references/statement-reading.md` 和 `financial-redflag-scan/references/fraud-library.md` 的 29 项 + 6 项 附加检查）。
 
 ### §2.1 排除优先（§1.1 推出）
 
@@ -539,7 +539,7 @@ read-filing   (阅读层, 本 skill)
         │
         ├── 产出事实笔记 (页码引用 / 附注覆盖 / 勾稽结果)
         │
-        ├──▶ financial-redflag-scan    (排雷层 — 29 项 + 6 项 overlay)
+        ├──▶ financial-redflag-scan    (排雷层 — 29 项 + 6 项 附加检查)
         │
         ├──▶ management-analysis        (管理层诚信度)
         │
@@ -588,7 +588,7 @@ read-filing   (阅读层, 本 skill)
 **项目内其他 reference**:
 - `../financial-redflag-scan/references/fraud-library.md` — 勾稽 4 公式 + 风险 10 项阈值 + 造假 5 维度 + pattern A1/A2/A3
 - `../value-profile/references/discipline.md` — 分析纪律
-- `../financial-redflag-scan/SKILL.md` — 29 项排雷 + 6 项 overlay 的**判断**侧
+- `../financial-redflag-scan/SKILL.md` — 29 项排雷 + 6 项 附加检查 的**判断**侧
 - `../management-analysis/SKILL.md` — 管理层诚信度**判断**侧
 
 **外部法规**:

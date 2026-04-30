@@ -360,11 +360,11 @@ profile 内容中文; operator 菜单双语:
 
 ### Step 5 — 排雷清单模式 (§4.5)
 
-**Delegate 到 `financial-redflag-scan` 子 skill**, 传参 `--target-profile <path> --section §4.5`; 详细流程（29 项清单 + 6 项高危 overlay + 三表勾稽 4 条 + summary + 强制 `[accept / edit / research more]` 不 `defer / skip`）见 `.claude/skills/financial-redflag-scan/SKILL.md` §2-§3。
+**Delegate 到 `financial-redflag-scan` 子 skill**, 传参 `--target-profile <path> --section §4.5`; 详细流程（29 项清单 + 6 项高危 附加检查 + 三表勾稽 4 条 + summary + 强制 `[accept / edit / research more]` 不 `defer / skip`）见 `.claude/skills/financial-redflag-scan/SKILL.md` §2-§3。
 
 **Fallback（子 skill 不可用时, 主 skill 跑简化版）**:
 
-1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德风险一票否决）。详细阈值 / 三表勾稽 / 造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注 12 项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
+1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 附加检查 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德风险一票否决）。详细阈值 / 三表勾稽 / 造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注 12 项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
 2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的风险 summary:**` 1-2 段。用户确认仅 `[accept / edit / research more]`。
 
 

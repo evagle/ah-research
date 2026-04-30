@@ -1,6 +1,6 @@
 # Industry Overlays — 按行业的 KPI 与判读参考
 
-本文件为本项目 value-profile skill 在不同行业场景下的 KPI overlay 和阈值表。用于 §1-§3 的行业 context 阶段和 Step 5 的排雷阶段。
+本文件为本项目 value-profile skill 在不同行业场景下的 KPI 附加检查 和阈值表。用于 §1-§3 的行业 context 阶段和 Step 5 的排雷阶段。
 
 ---
 
