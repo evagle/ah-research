@@ -187,7 +187,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 ### §2.11 年报阅读纪律
 
 - **§2.11.1 优先 extracted text cache**: 派子 agent 前, `data/filings/<ticker>/_extracted/<年报-YYYY>/text.md` 必须存在（带 `<!-- page N -->` marker）。缺失则先 shell out `python scripts/extract_pdf.py`。
-- **§2.11.2 必读附注 12 项**: 货币资金受限 / 应收账款 5 大客户 + 账龄 / 应收票据 银票 vs 商票 / 预付账款对象 / 其他应收款关联方 / 存货分项 + 跌价 / 在建工程转固 / 商誉减值假设 / 合同负债占营收 / 应付账款议价权 / 长投 + 可供出售金融资产 / 有息负债。详见 `.claude/skills/value-profile/references/financial-reading.md` §3。
+- **§2.11.2 必读附注 12 项**: 货币资金受限 / 应收账款 5 大客户 + 账龄 / 应收票据 银票 vs 商票 / 预付账款对象 / 其他应收款关联方 / 存货分项 + 跌价 / 在建工程转固 / 商誉减值假设 / 合同负债占营收 / 应付账款议价权 / 长投 + 可供出售金融资产 / 有息负债。详见 `.claude/skills/read-filing/references/statement-reading.md` §3。
 - **§2.11.3 禁用 8 条空话**: "具有强大品牌 / 技术领先 / 行业龙头 / 管理优秀 / 市场广阔 / 核心竞争力突出 / 护城河宽广 / 成长空间巨大" 无具体佐证（人名 / 数字 / 日期 / 引用） 一律退回重写。
 - **§2.11.4 管理层口径校核**: Part 1 §1-§5 每个 section 必填, 对比年报 vs 研报 vs 财新 vs 经销商反馈 vs 价盘 vs 监管披露, 指出哪里年报做了美化 / 避而不谈。"年报说 X, 我们同意 X" 视为不合格, 退回重做。
 
@@ -364,7 +364,7 @@ profile 内容中文; operator 菜单双语:
 
 **Fallback（子 skill 不可用时, 主 skill 跑简化版）**:
 
-1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德红旗一票否决）。详细阈值 / 三表勾稽 / 附注 12 项 见 `.claude/skills/value-profile/references/financial-reading.md` §3-§6。
+1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德红旗一票否决）。详细阈值 / 三表勾稽 / 造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注 12 项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
 2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的红旗 summary:**` 1-2 段。用户确认仅 `[accept / edit / research more]`。
 
 
