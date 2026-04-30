@@ -9,6 +9,9 @@ dependencies = [
     "duckdb>=1.0",
     "pandera[pandas]>=0.20",
     "statsmodels>=0.14",
+    "scikit-learn>=1.4",
+    "clarabel>=0.9,<1.0",
+    "cvxpy>=1.5,<2.0",
     "tenacity>=8.5",
     "structlog>=24",
     "pydantic-settings>=2.2",
@@ -62,6 +65,10 @@ ignore = [
 python_version = "3.11"
 strict = true
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+module = "cvxpy.*"
+follow_imports = "skip"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
