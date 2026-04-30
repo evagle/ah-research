@@ -196,6 +196,20 @@ class Constructor:
 
     def build(self) -> ConstructionReport:
         """Execute the full construction pipeline and return a report."""
+        # Optimize-mode preconditions
+        if self._weighting == "optimize":
+            if self._optimizer is None:
+                raise ValueError("weight_by('optimize') requires Constructor(optimizer=...)")
+            if self._repo is None:
+                raise ValueError("weight_by('optimize') requires Constructor(repo=...)")
+            if self._asof is None:
+                raise ValueError("weight_by('optimize') requires Constructor(asof=...)")
+            if self._constraints:
+                raise ValueError(
+                    "weight_by('optimize') is incompatible with .constrain(...); "
+                    "set constraints on Optimizer instead"
+                )
+
         sig_df = self._signals.df.copy()
 
         # 1. Selection

@@ -3,6 +3,7 @@ from __future__ import annotations
 from datetime import date
 
 import pandas as pd
+import pytest
 
 from ah_research.backtest.types import Signals
 from ah_research.portfolio.constructor import Constructor
@@ -30,3 +31,51 @@ def test_weight_by_optimize_is_accepted_literal() -> None:
     returned = c.weight_by("optimize")
     assert returned is c
     assert c._weighting == "optimize"  # type: ignore[attr-defined]
+
+
+def test_optimize_without_optimizer_raises() -> None:
+    c = Constructor(_synthetic_signals()).weight_by("optimize")
+    with pytest.raises(ValueError, match=r"requires Constructor\(optimizer="):
+        c.build()
+
+
+def test_optimize_without_repo_raises() -> None:
+    fake_opt = object()
+    c = Constructor(
+        _synthetic_signals(),
+        asof=date(2024, 6, 30),
+        optimizer=fake_opt,  # type: ignore[arg-type]
+    ).weight_by("optimize")
+    with pytest.raises(ValueError, match=r"requires Constructor\(repo="):
+        c.build()
+
+
+def test_optimize_without_asof_raises() -> None:
+    fake_opt = object()
+    fake_repo = object()
+    c = Constructor(
+        _synthetic_signals(),
+        repo=fake_repo,
+        optimizer=fake_opt,  # type: ignore[arg-type]
+    ).weight_by("optimize")
+    with pytest.raises(ValueError, match=r"requires Constructor\(asof="):
+        c.build()
+
+
+def test_optimize_with_constrain_queue_raises() -> None:
+    from ah_research.portfolio.constructor import Constraint
+
+    fake_opt = object()
+    fake_repo = object()
+    c = (
+        Constructor(
+            _synthetic_signals(),
+            repo=fake_repo,
+            asof=date(2024, 6, 30),
+            optimizer=fake_opt,  # type: ignore[arg-type]
+        )
+        .weight_by("optimize")
+        .constrain(Constraint.max_weight(0.3))
+    )
+    with pytest.raises(ValueError, match=r"incompatible with \.constrain"):
+        c.build()
