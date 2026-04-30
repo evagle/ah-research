@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 4.7 — LLM-Based Profile Grading (2026-05-01)
+
+### Added
+- `GradedProfile` + `ProfileGrader` — grade value-investing profiles via Claude API into structured fields (moat_grade, mgmt_grade, redflag_count, confidence, rationale) with sha256-based disk cache so identical profiles are never re-graded.
+- `ah profile grade <symbol>` CLI subcommand.
+
+### Dependencies
+- `anthropic>=0.40.0`
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-4-7-profile-grading-design.md`
+
 ## Phase 4.6 — Filings + Profile Corpus Summary (2026-04-30)
 
 ### Added

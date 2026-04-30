@@ -34,6 +34,11 @@ Personal A-shares + HK stock research platform.
   (default on). See
   [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md).
 
+### Phase 4.7: LLM Profile Grading
+
+- **Phase 4.7: LLM Profile Grading** — `ProfileGrader` grades profiles via
+  Claude API with disk caching. CLI: `ah profile grade <symbol>`.
+
 ### Phase 4.6: Corpus Summary
 
 - **Phase 4.6: Corpus Summary** — `build_corpus_summary()` + `ah filings
