@@ -92,11 +92,10 @@ def build_cvxpy_constraints(
             if base is None:
                 base = prev_weights
             if base is None:
-                raise ValidationError(
-                    "max_turnover requires a baseline: either set via "
-                    "Constraint.max_turnover(value, baseline=series) or pass "
-                    "prev_weights= to Optimizer.build()"
-                )
+                # No baseline available (first rebalance with no prior portfolio).
+                # Skip the constraint rather than raising — turnover is undefined
+                # when there is no prior position to compare against.
+                continue
             base_aligned = pd.Series(base).reindex(symbols).fillna(0.0).values
             cvx_cons.append(cp.norm(w - base_aligned, 1) <= c.params["value"])
             names.append("max_turnover")
