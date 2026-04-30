@@ -28,6 +28,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Design doc
 - `docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md`
 
+## Phase 4.2 — Filings + Profile Repositories (2026-04-30)
+
+### Added
+- `src/ah_research/filings/` package: `Filing` + `Profile` frozen dataclasses,
+  `FilingsRepository` (indexes `data/filings/<ticker>/{年报,招股说明书,research}/*.md`),
+  `ProfileRepository` (indexes `profiles/<ticker>-<date>.md` with markdown section parser).
+- CLI sub-apps: `ah filings list/show`, `ah profile list/show [--section | --list-sections]`.
+- Acceptance notebook `notebooks/phase4_2_filings_example.ipynb`.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md`
+
+### Deferred to Phase 4.3
+- Dossier / Screener integration
+- Structured grading of profile content (moat_grade, redflag_count, etc.)
+
+
 ## [Unreleased] — Phase 3
 
 ### Added

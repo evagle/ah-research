@@ -8,6 +8,7 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+
 ### Phase 4.1 — Portfolio Optimizer
 
 - **Phase 4.1: Portfolio Optimizer** — CVXPY-based mean-variance + risk-parity
@@ -15,6 +16,15 @@ Personal A-shares + HK stock research platform.
   feasibility (with soft-mode fallback), and a `WeightStrategy` plug-in for
   walk-forward backtests. See
   [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md).
+
+### Phase 4.2: Filings + Profile Repositories
+
+- **Phase 4.2: Filings + Profile Repositories** — `FilingsRepository`
+  and `ProfileRepository` surface markdown artifacts (年报, 招股说明书,
+  analyst research, value-investing profiles) as typed Python data.
+  CLI: `ah filings list/show`, `ah profile list/show`.
+  See [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md).
+
 
 ### Phase 3 — Analysis & Watchlist
 

@@ -244,7 +244,9 @@ htmlcov/
 
 # Third-party copyrighted materials (read-only research cache, do not commit)
 data/research/唐书房/*.pdf
+data/research/唐书房/*.txt
 data/research/唐书房/_extracted/
+data/research/**/.DS_Store
 
 # Source PDFs: keep .md (extracted text), exclude .pdf (too large)
 data/filings/**/*.pdf
