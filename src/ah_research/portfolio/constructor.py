@@ -7,13 +7,16 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 import numpy as np
 import pandas as pd
 
 from ah_research.backtest.types import Signals
 from ah_research.portfolio.construction import top_quantile_weights
+
+if TYPE_CHECKING:
+    from ah_research.portfolio.optimizer.result import OptimizationResult
 
 # ---------------------------------------------------------------------------
 # Constraint
@@ -118,6 +121,7 @@ class ConstructionReport:
     method_used: str
     weighting_scheme: str
     relaxation_notes: list[str] = field(default_factory=list)
+    optimization_result: OptimizationResult | None = None
 
 
 # ---------------------------------------------------------------------------
