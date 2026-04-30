@@ -36,6 +36,7 @@ dependencies = [
 [package.optional-dependencies]
 ai = [
     { name = "anthropic" },
+    { name = "pillow" },
 ]
 chat = [
     { name = "jupyter-client" },
@@ -72,6 +73,7 @@ requires-dist = [
     { name = "nbformat", marker = "extra == 'dev'", specifier = ">=5.10" },
     { name = "pandas", specifier = ">=2.2" },
     { name = "pandera", extras = ["pandas"], specifier = ">=0.20" },
+    { name = "pillow", marker = "extra == 'ai'", specifier = ">=10.0" },
     { name = "plotly", marker = "extra == 'chat'", specifier = ">=5.22" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=3.7" },
     { name = "pyarrow", specifier = ">=15" },

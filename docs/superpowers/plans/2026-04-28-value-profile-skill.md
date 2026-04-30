@@ -1354,4 +1354,63 @@ Before handing off to executor, verified by plan author:
 
 ---
 
+## Execution record (post-hoc, 2026-04-28)
+
+What actually happened vs the plan. `git log --oneline` is the canonical history; this section captures intent and deviations.
+
+### Branching setup (not in original plan)
+
+The original plan assumed single-branch execution on `feat/phase-0-1-scaffold`. Mid-execution, another agent was concurrently committing Phase 0/1 platform-scaffold work to the same branch. To prevent commit-hygiene pollution, a git worktree was created:
+
+- `/Users/brian_huang/repos/ah-research-vp` → branch `feat/value-profile` (branched from `feat/phase-0-1-scaffold` HEAD after T1-T4)
+- All execution from T5 onward happened in the worktree. The original repo kept the other agent's Phase 0/1 work undisturbed.
+
+### Task completion map
+
+| Plan task(s) | Actual commit(s) | Notes |
+|---|---|---|
+| T1 — template file skeleton | `8e25bfa` | On `feat/phase-0-1-scaffold`, inherited by worktree |
+| T2 — filings README + 600519.SH dir | `81b0aa6` | Commit bloat: swept in pre-staged `src/ah_research/cli.py` from the other agent |
+| T3 — profiles dir | `daff7d2` | |
+| T4 — skill file skeleton (frontmatter only) | `cf65185` | |
+| (v3 spec revision — not originally in plan) | `620ee94` | Added automated fetcher scope + worktree notes |
+| **Inserted: "T4.5" fetcher build** (not in original plan) | `20d2da2` (code + tests) + `f03744b` (Moutai PDFs) | User-requested scope addition mid-execution. Replaces T19's "manual PDF download" step. Single consolidated commit for code (subagent's call) instead of the plan's 3 separate commits — justified in commit body |
+| T5-T13 — template body (Parts 0-5 + verification) | `e16645f` | **Bundled**: single subagent dispatch + single commit. 1567 lines, 67 subsections, 29-row 排雷 table. Grep verification inline |
+| T14-T18 — skill body (bootstrap + section worker + modes + guardrails + smoke test) | `6ada96a` | **Bundled**: single subagent dispatch + single commit. 255 lines, 6 behavior steps. Frontmatter YAML parseable; skill registers and is visible in the Claude Code skill list as `value-profile` |
+| T19 — manual Moutai PDF download | superseded | Replaced by `python scripts/download_filings.py 600519.SH --years 5 --include-prospectus` (T4.5 output). Ran live against cninfo; 5× 年报 (2021-2025) + 招股说明书 downloaded |
+| T20-T25 — dogfood run on Moutai | pending user | User-interactive. Skill ready; invoke with `/value-profile 600519.SH` from the worktree |
+
+### Bundling rationale
+
+The plan split template body into 8 tasks (T5-T12) and skill body into 5 tasks (T14-T18) for bite-sized granularity. In practice, both were bundled into single subagent dispatches. Reasons:
+
+1. Template body is repetitive pattern-application across ~50 subsections — a single subagent with the full inventory produced a coherent file faster than 8 sequential dispatches with cross-task continuity concerns.
+2. Skill body is a single coherent operational document — splitting it across 5 commits would produce broken intermediate states.
+3. Subagent output was verified inline via grep counts (Parts, subsections, 置信度 fields, 排雷 rows) — the plan's per-task verification steps fold into one final verification per bundle.
+
+This deviation is acceptable for a markdown/skill-definition artifact; a code change of this scale would warrant keeping the finer granularity for reviewability.
+
+### Concrete artifacts produced
+
+All in `/Users/brian_huang/repos/ah-research-vp`:
+
+- `docs/value-profile/template-zh.md` — 1567 lines, Chinese framework scaffold
+- `.claude/skills/value-profile/SKILL.md` — 255 lines, skill operational spec
+- `scripts/download_filings.py` — 330 lines, cninfo fetcher
+- `tests/test_download_filings.py` — 33 tests, all offline (fixture-based)
+- `tests/fixtures/cninfo/` — recorded API responses for test replay
+- `data/filings/600519.SH/` — 5× `年报-YYYY.pdf` (2021-2025) + `招股说明书.pdf`, ~15 MB total
+- `profiles/.gitkeep` — empty output directory
+- `data/filings/README.md` — fetcher usage + naming conventions
+- `docs/superpowers/specs/2026-04-28-value-profile-skill-design.md` — v3, 138 lines (after v3 rewrite)
+
+### Unverified claims / known caveats
+
+- The skill has NOT been dogfooded end-to-end yet. Step 1 bootstrap (filings audit, fetcher offer, template copy) is designed but untested in an actual skill invocation. The dogfood run (T20+) is the verification event.
+- Spec §9 success criterion 7 (fetcher works without manual intervention) IS verified — live run on Moutai succeeded with idempotency confirmed on re-run.
+- Subagent prompt templates inside SKILL.md Step 3b are self-written (by the skill-body subagent); their effectiveness is only verifiable by running the skill against a real section.
+- No linter / formatter runs against markdown content. Rendering was eyeballed via grep + line count, not rendered preview.
+
+---
+
 **End of plan.**
