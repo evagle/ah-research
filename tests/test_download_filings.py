@@ -22,6 +22,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parent.parent
 SCRIPT_PATH = REPO_ROOT / "scripts" / "download_filings.py"
 FIXTURES = REPO_ROOT / "tests" / "fixtures" / "cninfo"
+HKEX_FIXTURES = REPO_ROOT / "tests" / "fixtures" / "hkex"
 
 
 def _load_module():
@@ -237,6 +238,12 @@ def test_search_prospectus_excludes_appendix(moutai_prospectus_bytes):
         ("000001.SZ", ("000001", "SZ")),
         ("600519.sh", ("600519", "SH")),
         ("  600519.SH  ", ("600519", "SH")),
+        # HK: 1-5 digit codes, with or without leading zeros
+        ("0700.HK", ("0700", "HK")),
+        ("00700.HK", ("00700", "HK")),
+        ("700.HK", ("700", "HK")),
+        ("0700.hk", ("0700", "HK")),
+        ("1.HK", ("1", "HK")),  # CK Hutchison
     ],
 )
 def test_parse_ticker_valid(ticker, expected):
@@ -245,7 +252,16 @@ def test_parse_ticker_valid(ticker, expected):
 
 @pytest.mark.parametrize(
     "bad",
-    ["600519", "600519.HK", "60519.SH", "abcdef.SH", "600519.NYSE", ""],
+    [
+        "600519",
+        "600519.HK",  # HK must be 1-5 digits
+        "60519.SH",  # SH must be 6 digits
+        "abcdef.SH",
+        "600519.NYSE",
+        "",
+        ".HK",  # empty code
+        "123456.HK",  # HK 6-digit overflow
+    ],
 )
 def test_parse_ticker_invalid(bad):
     with pytest.raises(ValueError):
@@ -394,3 +410,310 @@ def test_module_has_no_side_effects_on_import():
 # future test additions) — no-op assertion.
 def test_io_import_is_stable():
     assert io.BytesIO(b"x").read() == b"x"
+
+
+# ---------------------------------------------------------------------------
+# 8. HKEX — stock-id resolution + annual report search
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture
+def hkex_activestock_bytes() -> bytes:
+    return (HKEX_FIXTURES / "activestock_subset.json").read_bytes()
+
+
+@pytest.fixture
+def tencent_annual_en_bytes() -> bytes:
+    return (HKEX_FIXTURES / "tencent_annual_en.json").read_bytes()
+
+
+@pytest.fixture
+def tencent_annual_zh_bytes() -> bytes:
+    return (HKEX_FIXTURES / "tencent_annual_zh.json").read_bytes()
+
+
+@pytest.mark.parametrize(
+    ("title", "expected"),
+    [
+        ("ANNUAL REPORT 2024", 2024),
+        ("Annual Report 2023", 2023),
+        ("2023 Annual Report", 2023),
+        ("2023 年報", 2023),
+        ("腾讯2020年年度报告", 2020),
+        ("Interim Report 2023", 2023),  # extractable; filtered elsewhere
+        ("Notice of AGM", None),
+        ("Some 1800 text", None),  # out of valid year range
+    ],
+)
+def test_extract_year_hk(title, expected):
+    assert df._extract_year_hk(title) == expected
+
+
+# -- resolve_hkex_stock_id --
+
+
+def test_resolve_hkex_stock_id_tencent(hkex_activestock_bytes):
+    assert df.resolve_hkex_stock_id("0700", stocklist_bytes=hkex_activestock_bytes) == "7609"
+    assert df.resolve_hkex_stock_id("700", stocklist_bytes=hkex_activestock_bytes) == "7609"
+    assert df.resolve_hkex_stock_id("00700", stocklist_bytes=hkex_activestock_bytes) == "7609"
+
+
+def test_resolve_hkex_stock_id_other_code(hkex_activestock_bytes):
+    assert df.resolve_hkex_stock_id("1", stocklist_bytes=hkex_activestock_bytes) == "1"
+    assert df.resolve_hkex_stock_id("941", stocklist_bytes=hkex_activestock_bytes) == "8031"
+
+
+def test_resolve_hkex_stock_id_unknown_code(hkex_activestock_bytes):
+    with pytest.raises(ValueError, match="not found"):
+        df.resolve_hkex_stock_id("9999", stocklist_bytes=hkex_activestock_bytes)
+
+
+def test_resolve_hkex_stock_id_schema_drift():
+    with pytest.raises(df.FetchSchemaError):
+        df.resolve_hkex_stock_id("0700", stocklist_bytes=b'{"foo": "bar"}')
+
+
+def test_resolve_hkex_stock_id_not_json():
+    with pytest.raises(df.FetchSchemaError):
+        df.resolve_hkex_stock_id("0700", stocklist_bytes=b"not json")
+
+
+# -- search_hkex_annual_reports --
+
+
+def test_search_hkex_english_fixture(tencent_annual_en_bytes):
+    results = df.search_hkex_annual_reports(
+        "0700", years=5, stock_id="7609", raw_response=tencent_annual_en_bytes
+    )
+    assert len(results) == 5
+    assert [r.year for r in results] == [2024, 2023, 2022, 2021, 2020]
+    # English variants — plain `.pdf`, no `_c.pdf` suffix
+    for r in results:
+        assert not r.adjunct_url.lower().endswith("_c.pdf"), r.adjunct_url
+    assert all("ANNUAL REPORT" in r.title.upper() for r in results)
+
+
+def test_search_hkex_chinese_fixture(tencent_annual_zh_bytes):
+    results = df.search_hkex_annual_reports(
+        "0700",
+        years=5,
+        stock_id="7609",
+        prefer_lang="zh",
+        raw_response=tencent_annual_zh_bytes,
+    )
+    assert len(results) == 5
+    for r in results:
+        assert r.adjunct_url.lower().endswith("_c.pdf"), r.adjunct_url
+    # All titles contain 年報 (traditional) in this fixture
+    assert all("年報" in r.title for r in results)
+
+
+def test_search_hkex_year_cap(tencent_annual_en_bytes):
+    r3 = df.search_hkex_annual_reports(
+        "0700", years=3, stock_id="7609", raw_response=tencent_annual_en_bytes
+    )
+    assert len(r3) == 3
+    assert [r.year for r in r3] == [2024, 2023, 2022]
+
+
+def test_search_hkex_urls_are_absolute(tencent_annual_en_bytes):
+    results = df.search_hkex_annual_reports(
+        "0700", years=5, stock_id="7609", raw_response=tencent_annual_en_bytes
+    )
+    for r in results:
+        assert r.adjunct_url.startswith("https://www1.hkexnews.hk/"), r.adjunct_url
+
+
+def test_search_hkex_resolves_stock_id_internally(hkex_activestock_bytes, tencent_annual_en_bytes):
+    """Omitting stock_id triggers activestock lookup via raw_stocklist."""
+    results = df.search_hkex_annual_reports(
+        "0700",
+        years=2,
+        raw_response=tencent_annual_en_bytes,
+        raw_stocklist=hkex_activestock_bytes,
+    )
+    assert len(results) == 2
+    assert results[0].year == 2024
+
+
+def test_search_hkex_parses_bare_array_response():
+    """Back-compat: older API variants returned a bare JSON array."""
+    payload = json.dumps(
+        [
+            {
+                "TITLE": "ANNUAL REPORT 2023",
+                "FILE_LINK": "/listedco/listconews/sehk/2024/0404/foo.pdf",
+                "DATE_TIME": "04/04/2024 18:23",
+            },
+        ]
+    ).encode("utf-8")
+    results = df.search_hkex_annual_reports("0700", years=5, stock_id="7609", raw_response=payload)
+    assert len(results) == 1
+    assert results[0].year == 2023
+
+
+def test_search_hkex_parses_dict_wrapped_list_response():
+    """Dict payload with list-valued result key."""
+    payload = json.dumps(
+        {
+            "result": [
+                {
+                    "TITLE": "ANNUAL REPORT 2023",
+                    "FILE_LINK": "/listedco/listconews/sehk/2024/0404/foo.pdf",
+                    "DATE_TIME": "04/04/2024 18:23",
+                },
+            ]
+        }
+    ).encode("utf-8")
+    results = df.search_hkex_annual_reports("0700", years=5, stock_id="7609", raw_response=payload)
+    assert len(results) == 1
+
+
+def test_search_hkex_schema_drift_raises():
+    with pytest.raises(df.FetchSchemaError):
+        df.search_hkex_annual_reports(
+            "0700", years=5, stock_id="7609", raw_response=b'{"foo": "bar"}'
+        )
+
+
+def test_search_hkex_not_valid_json_raises():
+    with pytest.raises(df.FetchSchemaError):
+        df.search_hkex_annual_reports("0700", years=5, stock_id="7609", raw_response=b"not json")
+
+
+def test_search_hkex_result_string_not_json_raises():
+    """When `result` is a string but not valid JSON, error is diagnosed."""
+    payload = json.dumps({"result": "this is not json"}).encode("utf-8")
+    with pytest.raises(df.FetchSchemaError, match="not JSON"):
+        df.search_hkex_annual_reports("0700", years=5, stock_id="7609", raw_response=payload)
+
+
+def test_search_hkex_bad_prefer_lang_raises():
+    with pytest.raises(ValueError, match="prefer_lang"):
+        df.search_hkex_annual_reports(
+            "0700", years=5, stock_id="7609", prefer_lang="fr", raw_response=b"[]"
+        )
+
+
+# ---------------------------------------------------------------------------
+# 9. HKEX main() integration — mock urlopen end-to-end
+# ---------------------------------------------------------------------------
+
+
+def _fake_hkex_urlopen_factory(
+    annual_en_bytes: bytes,
+    activestock_bytes: bytes,
+    annual_zh_bytes: bytes | None = None,
+):
+    """Route HKEX requests to the recorded fixtures.
+
+    - activestock JSON → stock-id lookup table
+    - titleSearchServlet with lang=EN → annual_en_bytes
+    - titleSearchServlet with lang=ZH → annual_zh_bytes (if given)
+    - Any hkexnews.hk *.pdf → dummy 2 MB PDF body
+    """
+    pdf_body = b"%PDF-1.4\n" + b"X" * (2 * 1024 * 1024)
+
+    class _Resp:
+        def __init__(self, body: bytes, url: str = "") -> None:
+            self._body = body
+            self.status = 200
+            self.url = url
+
+        def read(self) -> bytes:
+            return self._body
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    def fake_urlopen(req, timeout=None):
+        del timeout
+        url = req.full_url if hasattr(req, "full_url") else req.get_full_url()
+        if "activestock_sehk" in url:
+            return _Resp(activestock_bytes, url)
+        if "titleSearchServlet" in url:
+            if "lang=ZH" in url:
+                if annual_zh_bytes is None:
+                    raise AssertionError("zh fixture not provided but lang=ZH requested")
+                return _Resp(annual_zh_bytes, url)
+            return _Resp(annual_en_bytes, url)
+        if "hkexnews.hk" in url and url.lower().endswith(".pdf"):
+            return _Resp(pdf_body, url)
+        raise AssertionError(f"unexpected HK request: url={url!r}")
+
+    return fake_urlopen
+
+
+def test_main_hk_writes_expected_files(tmp_path, tencent_annual_en_bytes, hkex_activestock_bytes):
+    out_dir = tmp_path / "filings" / "0700.HK"
+    fake = _fake_hkex_urlopen_factory(tencent_annual_en_bytes, hkex_activestock_bytes)
+    with mock.patch("urllib.request.urlopen", side_effect=fake):
+        rc = df.main(["0700.HK", "--years", "5", "--out", str(out_dir)])
+    assert rc == 0
+    names = sorted(p.name for p in out_dir.iterdir())
+    # 5 fiscal years in fixture: 2024..2020
+    assert "年报-2024.pdf" in names
+    assert "年报-2020.pdf" in names
+    assert len([n for n in names if n.startswith("年报-")]) == 5
+    assert "招股说明书.pdf" not in names
+    for n in names:
+        assert (out_dir / n).stat().st_size > 100 * 1024
+
+
+def test_main_hk_include_prospectus_is_ignored(
+    tmp_path, tencent_annual_en_bytes, hkex_activestock_bytes, capsys
+):
+    out_dir = tmp_path / "filings" / "0700.HK"
+    fake = _fake_hkex_urlopen_factory(tencent_annual_en_bytes, hkex_activestock_bytes)
+    with mock.patch("urllib.request.urlopen", side_effect=fake):
+        rc = df.main(["0700.HK", "--years", "5", "--include-prospectus", "--out", str(out_dir)])
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert "ignored for HK" in out
+
+
+def test_main_hk_idempotent_second_run(
+    tmp_path, tencent_annual_en_bytes, hkex_activestock_bytes, capsys
+):
+    out_dir = tmp_path / "filings" / "0700.HK"
+    fake = _fake_hkex_urlopen_factory(tencent_annual_en_bytes, hkex_activestock_bytes)
+    with mock.patch("urllib.request.urlopen", side_effect=fake):
+        assert df.main(["0700.HK", "--years", "5", "--out", str(out_dir)]) == 0
+        capsys.readouterr()
+        assert df.main(["0700.HK", "--years", "5", "--out", str(out_dir)]) == 0
+    out = capsys.readouterr().out
+    assert "downloaded=0" in out
+    assert "skipped=5" in out
+
+
+def test_main_hk_lang_zh_fetches_chinese_variants(
+    tmp_path, tencent_annual_en_bytes, tencent_annual_zh_bytes, hkex_activestock_bytes
+):
+    """--lang zh routes through lang=ZH search → `_c.pdf` URLs get fetched."""
+    out_dir = tmp_path / "filings" / "0700.HK"
+    fake = _fake_hkex_urlopen_factory(
+        tencent_annual_en_bytes, hkex_activestock_bytes, tencent_annual_zh_bytes
+    )
+    requested_urls: list[str] = []
+    original_get = df._http_get
+
+    def recording_get(url: str) -> bytes:
+        requested_urls.append(url)
+        return original_get(url)
+
+    with (
+        mock.patch("urllib.request.urlopen", side_effect=fake),
+        mock.patch.object(df, "_http_get", side_effect=recording_get),
+    ):
+        rc = df.main(["0700.HK", "--years", "5", "--lang", "zh", "--out", str(out_dir)])
+    assert rc == 0
+    # Search URL was built with lang=ZH
+    assert any("lang=ZH" in u for u in requested_urls), requested_urls
+    # All fetched PDFs are _c.pdf
+    pdf_urls = [u for u in requested_urls if u.lower().endswith(".pdf")]
+    assert len(pdf_urls) == 5
+    for u in pdf_urls:
+        assert u.lower().endswith("_c.pdf"), f"expected Chinese variant, got {u}"
