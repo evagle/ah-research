@@ -34,6 +34,12 @@ Personal A-shares + HK stock research platform.
   (default on). See
   [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md).
 
+### Phase 4.6: Corpus Summary
+
+- **Phase 4.6: Corpus Summary** — `build_corpus_summary()` + `ah filings
+  summary` audit local research coverage at a glance (filings counts,
+  freshness, profile presence, staleness).
+
 ### Phase 4.5: Filings Text Search
 
 - **Phase 4.5: Filings Text Search** — `FilingsRepository.search()`

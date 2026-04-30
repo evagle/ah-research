@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 4.6 — Filings + Profile Corpus Summary (2026-04-30)
+
+### Added
+- `build_corpus_summary(filings_repo, profiles_repo)` — pure DataFrame builder (10 columns per ticker: filings counts, freshness, profile presence, staleness).
+- `ah filings summary [--sort-by COLUMN]` CLI subcommand.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-6-corpus-summary-design.md`
+
 ## Phase 4.5 — Filings Text Search (2026-04-30)
 
 ### Added
