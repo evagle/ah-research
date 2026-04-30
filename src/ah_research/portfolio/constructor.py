@@ -26,6 +26,8 @@ ConstraintKind = Literal[
     "max_gross",
     "min_positions",
     "max_positions",
+    "max_turnover",
+    "long_only",
 ]
 
 
@@ -68,6 +70,26 @@ class Constraint:
     def max_positions(cls, n: int) -> Constraint:
         """Allow at most *n* positions."""
         return cls(kind="max_positions", params={"n": n}, priority=20)
+
+    @classmethod
+    def max_turnover(
+        cls, value: float, *, baseline: pd.Series | None = None, priority: int = 0
+    ) -> Constraint:
+        """Constrain |w - baseline|_1 <= value. `baseline` is an L1 anchor
+        series indexed by ticker string; missing entries default to 0."""
+        if not (0.0 <= value <= 2.0):
+            raise ValueError(
+                f"max_turnover value must be in [0, 2] (|w - base|_1 ranges "
+                f"over [0, 2] for long-only sum-to-1); got {value}"
+            )
+        return cls(
+            kind="max_turnover", params={"value": value, "baseline": baseline}, priority=priority
+        )
+
+    @classmethod
+    def long_only(cls, enabled: bool = True, *, priority: int = 0) -> Constraint:
+        """Constrain w >= 0 when enabled."""
+        return cls(kind="long_only", params={"enabled": enabled}, priority=priority)
 
 
 # ---------------------------------------------------------------------------

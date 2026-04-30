@@ -23,6 +23,7 @@ Optional kwargs (for engine rule tests):
 from __future__ import annotations
 
 import json
+import zlib
 from datetime import date, timedelta
 from typing import Any
 
@@ -88,7 +89,7 @@ def _build_prices(
     rows: list[dict[str, Any]] = []
 
     for sym in symbols:
-        rng = np.random.default_rng(seed + hash(sym) % 2**32)
+        rng = np.random.default_rng(seed + zlib.crc32(sym.encode()) % 2**32)
         log_returns = rng.normal(0.0, _LOG_RETURN_STD, len(bdates))
         closes = _START_PRICE * np.exp(np.cumsum(log_returns))
 

@@ -5,17 +5,30 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## Phase 4.4 — Screener Filings Enrichment (2026-04-30)
+ 
+## Phase 4.1 — Portfolio Optimizer (2026-04-30)
 
 ### Added
-- `enrich_with_filings(df, filings_repo=..., profiles_repo=...)` — pure function that adds 5 columns (`has_ipo`, `n_annual`, `latest_annual_year`, `n_research`, `has_profile`) to a symbol-indexed DataFrame. Lets Phase 3 Screener users compose qualitative-data filters via standard pandas (e.g. `df[df["has_profile"] & (df["n_annual"] >= 5)]`) without modifying the Screener itself.
+- `src/ah_research/portfolio/optimizer/` package: `Optimizer`, `OptimizationResult`,
+  `CovarianceEstimator` / `ExpectedReturnsEstimator` protocols with 2+3 built-in
+  implementations (`SampleCovariance`, `LedoitWolfCovariance`, `UserSuppliedReturns`,
+  `HistoricalMeanReturns`, `SignalBasedReturns`).
+- Two CVXPY objectives: mean-variance (QP via OSQP) and risk-parity (SOCP via CLARABEL).
+- `OptimizedWeightStrategy` — Phase 2 `WeightStrategy` that drives `Optimizer.build()`
+  at each rebalance; retains full `OptimizationResult` history.
+- Two new `Constraint` kinds: `max_turnover` (L1 anchor to prev weights) and
+  `long_only` (explicit form of the default-on kwarg).
+- `OptimizationResult.to_dict()` / `.to_markdown()` for serialization and reporting.
+- Acceptance notebook `notebooks/phase4_1_optimizer_example.ipynb`.
+
+### Dependencies
+- `cvxpy>=1.5,<2.0`
+- `clarabel>=0.9,<1.0`
+- `scikit-learn` (added as runtime dep for `LedoitWolfCovariance`)
 
 ### Design doc
-- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-4-screener-enrichment-design.md`
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md`
 
-### Deferred to future phase
-- Structured grading (moat_grade, redflag_count) — requires LLM
-- Profile section-presence predicates
 
 ## Phase 4.2 — Filings + Profile Repositories (2026-04-30)
 
@@ -29,9 +42,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Design doc
 - `docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md`
 
-### Deferred to Phase 4.3
-- Dossier / Screener integration
-- Structured grading of profile content (moat_grade, redflag_count, etc.)
+## Phase 4.3 — Dossier + Filings/Profile Integration (2026-04-30)
+
+### Added
+- `FilingsSection` + `ProfileSection` dataclasses surfaced on `Dossier` — summarize filings inventory (annual count, latest year, IPO flag, research count) and profile metadata (date, section names).
+- `build_dossier(symbol, ..., include_qualitative=True, filings_repo=..., profiles_repo=...)` wires Phase 4.2 repositories into the Dossier pipeline.
+- `Dossier.to_markdown()` renders "## Filings inventory" and "## Qualitative profile" sections.
+- CLI flag `ah dossier <symbol> --qualitative / --no-qualitative` (default: qualitative on).
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md`
+
+
+## Phase 4.4 — Screener Filings Enrichment (2026-04-30)
+
+### Added
+- `enrich_with_filings(df, filings_repo=..., profiles_repo=...)` — pure function that adds 5 columns (`has_ipo`, `n_annual`, `latest_annual_year`, `n_research`, `has_profile`) to a symbol-indexed DataFrame. Lets Phase 3 Screener users compose qualitative-data filters via standard pandas (e.g. `df[df["has_profile"] & (df["n_annual"] >= 5)]`) without modifying the Screener itself.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-4-screener-enrichment-design.md`
+
+### Deferred to future phase
+- Structured grading (moat_grade, redflag_count) — requires LLM
+- Profile section-presence predicates
 
 ## [Unreleased] — Phase 3
 

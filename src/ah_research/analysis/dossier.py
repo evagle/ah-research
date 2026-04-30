@@ -92,6 +92,24 @@ class PeersSection:
 
 
 @dataclass(frozen=True)
+class FilingsSection:
+    n_annual: int
+    latest_annual_year: int | None
+    has_ipo: bool
+    n_research: int
+    latest_research_date: date | None
+    latest_annual_path: str | None
+
+
+@dataclass(frozen=True)
+class ProfileSection:
+    has_profile: bool
+    latest_profile_date: date | None
+    section_names: tuple[str, ...]
+    latest_profile_path: str | None
+
+
+@dataclass(frozen=True)
 class DossierMetadata:
     asof: date
     repo_snapshot_date: date
@@ -157,6 +175,9 @@ class Dossier:
     ah_premium: AHPremiumSection | None
     peers: PeersSection
     metadata: DossierMetadata
+    # Optional qualitative sections — populated when include_qualitative=True
+    filings_section: FilingsSection | None = None
+    profile_section: ProfileSection | None = None
 
     # ── Renderers ─────────────────────────────────────────────────────────
 
@@ -259,6 +280,40 @@ class Dossier:
         lines.append(f"- Code Version: {meta.code_version}")
         lines.append("")
 
+        # Filings inventory (optional qualitative section)
+        if self.filings_section is not None and _has_any_filings(self.filings_section):
+            fls = self.filings_section
+            lines.append("## Filings inventory")
+            lines.append("")
+            annual_line = f"- Annual reports: {fls.n_annual}"
+            if fls.latest_annual_year:
+                annual_line += f" (latest: {fls.latest_annual_year})"
+            lines.append(annual_line)
+            lines.append(f"- IPO prospectus: {'yes' if fls.has_ipo else 'no'}")
+            research_line = f"- Analyst research: {fls.n_research} reports"
+            if fls.latest_research_date:
+                research_line += f" (latest: {fls.latest_research_date})"
+            lines.append(research_line)
+            if fls.latest_annual_path:
+                lines.append(f"- Latest annual: `{fls.latest_annual_path}`")
+            lines.append("")
+
+        # Qualitative profile (optional)
+        if self.profile_section is not None and self.profile_section.has_profile:
+            prs = self.profile_section
+            lines.append("## Qualitative profile")
+            lines.append("")
+            lines.append(f"- Profile date: {prs.latest_profile_date}")
+            if prs.section_names:
+                lines.append(f"- Sections ({len(prs.section_names)}):")
+                for name in prs.section_names[:20]:
+                    lines.append(f"  - {name}")
+                if len(prs.section_names) > 20:
+                    lines.append(f"  - ... ({len(prs.section_names) - 20} more)")
+            if prs.latest_profile_path:
+                lines.append(f"- Path: `{prs.latest_profile_path}`")
+            lines.append("")
+
         return "\n".join(lines)
 
     def to_html(self, language: str = "en") -> str:
@@ -324,11 +379,23 @@ def build_dossier(
     repo: Any,
     asof: date | None = None,
     peers_n: int = 5,
+    *,
+    include_qualitative: bool = True,
+    filings_repo: Any = None,
+    profiles_repo: Any = None,
+    _qualitative_symbol_override: str | None = None,
 ) -> Dossier:
     """Build a full Dossier for *symbol* from *repo* as of *asof*.
 
     Raises ValueError (matching "not available") if the symbol has no price
     data at *asof* — i.e., it is delisted or outside the repo's coverage.
+
+    Optional qualitative kwargs:
+        include_qualitative: bool — if False, filings_section and profile_section are None.
+        filings_repo: FilingsRepository | None — injectable; defaults to FilingsRepository().
+        profiles_repo: ProfileRepository | None — injectable; defaults to ProfileRepository().
+        _qualitative_symbol_override: str | None — test-only: look up qualitative data under
+            a different symbol (e.g., to test missing-symbol behaviour).
     """
     from ah_research.analysis.dividend_history import dividend_consistency_grade
     from ah_research.analysis.owner_earnings import owner_earnings_series
@@ -515,6 +582,20 @@ def build_dossier(
         warnings=warnings,
     )
 
+    # ── Qualitative sections (injectable repositories) ────────────────────────
+    filings_section: FilingsSection | None = None
+    profile_section: ProfileSection | None = None
+    if include_qualitative:
+        from ah_research.filings import FilingsRepository, ProfileRepository
+
+        if filings_repo is None:
+            filings_repo = FilingsRepository()
+        if profiles_repo is None:
+            profiles_repo = ProfileRepository()
+        qual_sym = _qualitative_symbol_override or sym_str
+        filings_section = _build_filings_section(qual_sym, filings_repo)
+        profile_section = _build_profile_section(qual_sym, profiles_repo)
+
     return Dossier(
         symbol=sym,
         asof=asof,
@@ -526,4 +607,50 @@ def build_dossier(
         ah_premium=ah_section,
         peers=peers,
         metadata=metadata,
+        filings_section=filings_section,
+        profile_section=profile_section,
     )
+
+
+# ── Qualitative section builders ─────────────────────────────────────────────
+
+
+def _build_filings_section(symbol: str, repo: Any) -> FilingsSection:
+    """Build a FilingsSection summary from a FilingsRepository."""
+    filings = repo.list_filings(symbol)
+    annuals = [f for f in filings if f.kind == "annual"]
+    researches = [f for f in filings if f.kind == "research"]
+    has_ipo = any(f.kind == "ipo" for f in filings)
+    latest_annual = max(annuals, key=lambda f: f.year or 0, default=None)
+    latest_research = max(researches, key=lambda f: f.date or date.min, default=None)
+    return FilingsSection(
+        n_annual=len(annuals),
+        latest_annual_year=latest_annual.year if latest_annual else None,
+        has_ipo=has_ipo,
+        n_research=len(researches),
+        latest_research_date=latest_research.date if latest_research else None,
+        latest_annual_path=str(latest_annual.path) if latest_annual else None,
+    )
+
+
+def _build_profile_section(symbol: str, repo: Any) -> ProfileSection:
+    """Build a ProfileSection summary from a ProfileRepository."""
+    latest = repo.latest(symbol)
+    if latest is None:
+        return ProfileSection(
+            has_profile=False,
+            latest_profile_date=None,
+            section_names=(),
+            latest_profile_path=None,
+        )
+    return ProfileSection(
+        has_profile=True,
+        latest_profile_date=latest.date,
+        section_names=tuple(latest.sections.keys()),
+        latest_profile_path=str(latest.path),
+    )
+
+
+def _has_any_filings(fs: FilingsSection) -> bool:
+    """Return True if the FilingsSection has any content worth rendering."""
+    return fs.n_annual > 0 or fs.has_ipo or fs.n_research > 0
