@@ -115,6 +115,13 @@ class Optimizer:
             mu = None
 
         # 4. Build problem
+        # On the first rebalance prev_weights is None; skip max_turnover then
+        # (turnover is undefined with no prior portfolio to compare against).
+        effective_constraints = (
+            [c for c in self.constraints if c.kind != "max_turnover"]
+            if prev_weights is None
+            else self.constraints
+        )
         if self.objective == "mean_variance":
             assert mu is not None
             prob, w = build_mean_variance(
@@ -122,7 +129,7 @@ class Optimizer:
                 mu=mu,
                 sigma=sigma,
                 risk_aversion=self.risk_aversion,
-                constraints=self.constraints,
+                constraints=effective_constraints,
                 long_only=self.long_only,
                 prev_weights=prev_weights,
                 soft=self.soft,
@@ -132,7 +139,7 @@ class Optimizer:
             prob, w = build_risk_parity(
                 symbols=symbols,
                 sigma=sigma,
-                constraints=self.constraints,
+                constraints=effective_constraints,
                 long_only=self.long_only,
                 prev_weights=prev_weights,
                 soft=self.soft,
