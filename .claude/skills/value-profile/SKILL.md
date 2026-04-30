@@ -224,7 +224,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### §2.12 好生意 > 好公司
 
-- **§2.12.1 §1 verdict 字段**: §1 收尾给出 `好生意: 是 / 否 / 存疑` verdict; Step 6 估值 必须 引用 此 verdict; "否" 直接 Part 0 标 "定性研究 only"。
+- **§2.12.1 §1 结论 字段**: §1 收尾给出 `好生意: 是 / 否 / 存疑` 结论; Step 6 估值 必须 引用 此 结论; "否" 直接 Part 0 标 "定性研究 only"。
 - **§2.12.2 §4 风险 一票否决**: 即使 §1 = 是, §4 出现 道德风险 / 大股东占款 / 系统性画大饼（连续 3 年年初 guidance 大幅高于实际）/ 虚假陈述 处罚记录 → 直接淘汰, profile 终止。
 
 ---
@@ -293,7 +293,7 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 
 **优先 extracted text cache**:
 - `_extracted/<年报-YYYY>/text.md` 存在 → 直接 Read, 用 line-offset + `<!-- page N -->` marker 导航。
-- 缺失 → 触发 `scripts/extract_pdf.py` 或 fallback raw PDF。
+- 缺失 → 触发 `scripts/extract_pdf.py` 或 兜底 raw PDF。
 - 图片 `_extracted/<pdf-stem>/images/` 带 LLM 描述 sidecar, §1-§2 业务分析金矿。
 
 **ToC targeting 起点**:
@@ -317,7 +317,7 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 
 - section heading + template 的 本节目标 / 指导问题。
 - 解析出的 `<!-- 数据源: ... -->` hint。
-- extracted `text.md` 绝对路径（或 raw PDF fallback）+ 3a 给出的 page range。
+- extracted `text.md` 绝对路径（或 raw PDF 兜底）+ 3a 给出的 page range。
 - ticker, 中文公司名, exchange, report_date。
 - 已填好的相邻 section 作为上下文。
 - **三大前提** (§2.2) — §1 / §3 / §5 必需, 3 行判定。

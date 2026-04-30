@@ -40,7 +40,7 @@ description: 教主 agent 如何系统阅读一份上市公司年报 / 中报 / 
    - A 股 / 北交所 (`.SH` / `.SZ` / `.BJ`) → `references/filing-structure-cn.md` — 证监会第 2 号准则 10 节结构 + 季报披露时限 + 业绩预告
    - 港股 (`.HK`) → `references/filing-structure-hk.md` — HKEX Main Board Appendix 16 章节结构 + 中报披露时限 + profit alert
 3. `references/quick-lookup.md` — 术语 / 时间预算 / 新准则 / CFO 画像 / 所有者利润速算 / 自检 / 20 条反模式
-4. `../financial-redflag-scan/references/fraud-library.md` — 风险 10 项 + 三表勾稽 4 条公式 + 5 维度造假手法 + pattern narrative。Step 5 勾稽时必读
+4. `../financial-redflag-scan/references/fraud-library.md` — 风险 10 项 + 三表勾稽 4 条公式 + 5 维度造假手法 + pattern 叙述。Step 5 勾稽时必读
 
 ---
 
