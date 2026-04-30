@@ -280,6 +280,40 @@ class Dossier:
         lines.append(f"- Code Version: {meta.code_version}")
         lines.append("")
 
+        # Filings inventory (optional qualitative section)
+        if self.filings_section is not None and _has_any_filings(self.filings_section):
+            fls = self.filings_section
+            lines.append("## Filings inventory")
+            lines.append("")
+            annual_line = f"- Annual reports: {fls.n_annual}"
+            if fls.latest_annual_year:
+                annual_line += f" (latest: {fls.latest_annual_year})"
+            lines.append(annual_line)
+            lines.append(f"- IPO prospectus: {'yes' if fls.has_ipo else 'no'}")
+            research_line = f"- Analyst research: {fls.n_research} reports"
+            if fls.latest_research_date:
+                research_line += f" (latest: {fls.latest_research_date})"
+            lines.append(research_line)
+            if fls.latest_annual_path:
+                lines.append(f"- Latest annual: `{fls.latest_annual_path}`")
+            lines.append("")
+
+        # Qualitative profile (optional)
+        if self.profile_section is not None and self.profile_section.has_profile:
+            prs = self.profile_section
+            lines.append("## Qualitative profile")
+            lines.append("")
+            lines.append(f"- Profile date: {prs.latest_profile_date}")
+            if prs.section_names:
+                lines.append(f"- Sections ({len(prs.section_names)}):")
+                for name in prs.section_names[:20]:
+                    lines.append(f"  - {name}")
+                if len(prs.section_names) > 20:
+                    lines.append(f"  - ... ({len(prs.section_names) - 20} more)")
+            if prs.latest_profile_path:
+                lines.append(f"- Path: `{prs.latest_profile_path}`")
+            lines.append("")
+
         return "\n".join(lines)
 
     def to_html(self, language: str = "en") -> str:
