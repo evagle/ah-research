@@ -20,7 +20,7 @@ def _regularize_sigma(sigma: pd.DataFrame, jitter: float = 1e-10) -> np.ndarray:
     eigs = np.linalg.eigvalsh(s)
     if eigs.min() < 0:
         s = s + (abs(eigs.min()) + jitter) * np.eye(s.shape[0])
-    return s
+    return np.asarray(s, dtype=float)
 
 
 def build_mean_variance(

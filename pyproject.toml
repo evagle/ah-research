@@ -66,6 +66,10 @@ python_version = "3.11"
 strict = true
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "cvxpy.*"
+follow_imports = "skip"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-v --tb=short --strict-markers"
