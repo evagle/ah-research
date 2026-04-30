@@ -8,6 +8,14 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+### Phase 4.2: Filings + Profile Repositories
+
+- **Phase 4.2: Filings + Profile Repositories** — `FilingsRepository`
+  and `ProfileRepository` surface markdown artifacts (年报, 招股说明书,
+  analyst research, value-investing profiles) as typed Python data.
+  CLI: `ah filings list/show`, `ah profile list/show`.
+  See [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md).
+
 ### Phase 3 — Analysis & Watchlist
 
 - **Factor study** (`ah_research.analysis.factor_study`): `factor_study()` — cross-sectional Spearman IC, quantile returns, IC decay, block bootstrap CI for long-short spread, sector neutralization
