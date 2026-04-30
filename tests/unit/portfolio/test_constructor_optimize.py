@@ -145,3 +145,74 @@ def test_optimize_mode_happy_path() -> None:
     assert (report.weights["weight"] >= -1e-8).all()
     assert report.optimization_result is not None
     assert report.optimization_result.solver_status in ("optimal", "optimal_inaccurate")
+
+
+def test_optimize_empty_selection_raises() -> None:
+    from ah_research.portfolio.optimizer import Optimizer
+    from ah_research.portfolio.optimizer.estimators.covariance import LedoitWolfCovariance
+
+    class EmptyRepo:
+        def get_prices(self, *a, **kw):  # type: ignore[no-untyped-def]
+            return pd.DataFrame(columns=["ds", "symbol", "total_return"])
+
+    signals_df = pd.DataFrame(
+        {
+            "date": pd.to_datetime([date(2024, 6, 30)] * 2),
+            "symbol": ["600000.SH", "600001.SH"],
+            "signal": [-1.0, -2.0],  # all negative → all_positive selects nothing
+        }
+    )
+    signals = Signals.from_dataframe(signals_df)
+    opt = Optimizer(
+        objective="risk_parity",
+        cov_estimator=LedoitWolfCovariance(),
+    )
+    c = (
+        Constructor(signals, repo=EmptyRepo(), asof=date(2024, 6, 30), optimizer=opt)
+        .method("all_positive")
+        .weight_by("optimize")
+    )
+    with pytest.raises(ValueError, match=r"nothing selected"):
+        c.build()
+
+
+def test_optimize_risk_parity_runs() -> None:
+    import numpy as np
+
+    from ah_research.portfolio.optimizer import Optimizer
+    from ah_research.portfolio.optimizer.estimators.covariance import LedoitWolfCovariance
+
+    symbols = ["600000.SH", "600001.SH", "600002.SH"]
+    dates = pd.date_range("2024-01-01", periods=300, freq="B")
+    rng = np.random.default_rng(7)
+    ret_matrix = rng.normal(0.0005, 0.015, size=(len(dates), len(symbols)))
+    rows = []
+    for i, d in enumerate(dates):
+        for j, s in enumerate(symbols):
+            rows.append({"ds": d, "symbol": s, "total_return": ret_matrix[i, j]})
+    prices_df = pd.DataFrame(rows)
+
+    class FakeRepo:
+        def get_prices(self, symbols, start, end):  # type: ignore[no-untyped-def]
+            return prices_df[
+                (prices_df["ds"] >= pd.Timestamp(start)) & (prices_df["ds"] <= pd.Timestamp(end))
+            ].copy()
+
+    signals_df = pd.DataFrame(
+        {
+            "date": pd.to_datetime([date(2024, 6, 30)] * 3),
+            "symbol": symbols,
+            "signal": [1.0, 0.5, 0.3],
+        }
+    )
+    signals = Signals.from_dataframe(signals_df)
+    opt = Optimizer(objective="risk_parity", cov_estimator=LedoitWolfCovariance())
+
+    report = (
+        Constructor(signals, repo=FakeRepo(), asof=date(2024, 6, 30), optimizer=opt)
+        .method("all_positive")
+        .weight_by("optimize")
+        .build()
+    )
+    assert abs(report.weights["weight"].sum() - 1.0) < 1e-4
+    assert report.optimization_result is not None
