@@ -8,6 +8,13 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+### Phase 4.4: Screener Filings Enrichment
+
+- **Phase 4.4: Screener Filings Enrichment** — `enrich_with_filings()`
+  adds `has_profile` / `n_annual` / `has_ipo` / `latest_annual_year` /
+  `n_research` columns to a symbol-indexed DataFrame. Compose with
+  Phase 3 Screener via standard pandas filters.
+
 ### Phase 4.2: Filings + Profile Repositories
 
 - **Phase 4.2: Filings + Profile Repositories** — `FilingsRepository`

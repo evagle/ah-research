@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 4.4 — Screener Filings Enrichment (2026-04-30)
+
+### Added
+- `enrich_with_filings(df, filings_repo=..., profiles_repo=...)` — pure function that adds 5 columns (`has_ipo`, `n_annual`, `latest_annual_year`, `n_research`, `has_profile`) to a symbol-indexed DataFrame. Lets Phase 3 Screener users compose qualitative-data filters via standard pandas (e.g. `df[df["has_profile"] & (df["n_annual"] >= 5)]`) without modifying the Screener itself.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-4-screener-enrichment-design.md`
+
+### Deferred to future phase
+- Structured grading (moat_grade, redflag_count) — requires LLM
+- Profile section-presence predicates
+
 ## Phase 4.2 — Filings + Profile Repositories (2026-04-30)
 
 ### Added
