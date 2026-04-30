@@ -92,6 +92,24 @@ class PeersSection:
 
 
 @dataclass(frozen=True)
+class FilingsSection:
+    n_annual: int
+    latest_annual_year: int | None
+    has_ipo: bool
+    n_research: int
+    latest_research_date: date | None
+    latest_annual_path: str | None
+
+
+@dataclass(frozen=True)
+class ProfileSection:
+    has_profile: bool
+    latest_profile_date: date | None
+    section_names: tuple[str, ...]
+    latest_profile_path: str | None
+
+
+@dataclass(frozen=True)
 class DossierMetadata:
     asof: date
     repo_snapshot_date: date
