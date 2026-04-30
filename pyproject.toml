@@ -4,6 +4,7 @@ version = "0.0.1"
 description = "Personal A-shares + HK stock research platform"
 requires-python = ">=3.11"
 dependencies = [
+    "anthropic>=0.40.0",
     "pandas>=2.2",
     "pyarrow>=15",
     "duckdb>=1.0",
