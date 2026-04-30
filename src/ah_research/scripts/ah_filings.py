@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import cast
 
 import typer
 from rich.console import Console
 from rich.table import Table
 
 from ah_research.filings.filings_repository import FilingsRepository
+from ah_research.filings.types import FilingKind
 
 filings_app = typer.Typer(name="filings", help="Query local filings (年报 / 招股说明书 / 研报)")
 console = Console()
@@ -90,3 +92,57 @@ def show_filing(
         console.print("\n".join(lines[:head_lines]))
         if len(lines) > head_lines:
             console.print(f"[dim]... ({len(lines) - head_lines} more lines; use --full)[/]")
+
+
+@filings_app.command("search")
+def search_filings(
+    query: str = typer.Argument(..., help="Text or regex pattern to search for."),
+    symbols: str = typer.Option("", help="Comma-separated symbols, e.g. 600519.SH,000001.SZ."),
+    kinds: str = typer.Option("", help="Comma-separated kinds: annual, ipo, research."),
+    regex: bool = typer.Option(False, "--regex", help="Treat query as regex."),
+    max_per_file: int = typer.Option(0, help="Max hits per file (0 = unlimited)."),
+    root: Path = typer.Option(Path("data/filings"), help="Filings root."),  # noqa: B008
+) -> None:
+    """Search across all filings (年报 / 招股说明书 / 研报) for QUERY."""
+    repo = FilingsRepository(root=root)
+
+    symbol_list: list[str] | None = [s.strip() for s in symbols.split(",") if s.strip()] or None
+    _raw_kinds = [k.strip() for k in kinds.split(",") if k.strip()]
+    kind_list: list[FilingKind] | None = cast(list[FilingKind], _raw_kinds) if _raw_kinds else None
+    max_hits: int | None = max_per_file if max_per_file > 0 else None
+
+    try:
+        hits = repo.search(
+            query,
+            symbols=symbol_list,
+            kinds=kind_list,
+            regex=regex,
+            max_hits_per_file=max_hits,
+        )
+    except ValueError as exc:
+        console.print(f"[red]Error:[/] {exc}")
+        raise typer.Exit(code=1) from exc
+
+    if not hits:
+        console.print("[yellow]No hits found.[/]")
+        raise typer.Exit(code=0)
+
+    table = Table(title=f"Search results for {query!r} ({len(hits)} hits)")
+    table.add_column("symbol")
+    table.add_column("kind")
+    table.add_column("year/date")
+    table.add_column("line_no", justify="right")
+    table.add_column("snippet")
+
+    for hit in hits:
+        f = hit.filing
+        if f.kind == "annual":
+            year_date = str(f.year) if f.year is not None else "-"
+        elif f.kind == "research":
+            year_date = str(f.date) if f.date is not None else "-"
+        else:
+            year_date = "-"
+        snippet = hit.line[:80]
+        table.add_row(f.symbol, f.kind, year_date, str(hit.line_no), snippet)
+
+    console.print(table)
