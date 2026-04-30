@@ -8,6 +8,14 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+### Phase 4.3: Dossier + Filings/Profile Integration
+
+- **Phase 4.3: Dossier + Filings/Profile Integration** — `Dossier` now
+  optionally includes `FilingsSection` + `ProfileSection` summaries surfaced
+  from Phase 4.2 repositories. CLI flag `ah dossier build --qualitative`
+  (default on). See
+  [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md).
+
 ### Phase 4.2: Filings + Profile Repositories
 
 - **Phase 4.2: Filings + Profile Repositories** — `FilingsRepository`
