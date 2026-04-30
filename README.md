@@ -8,6 +8,14 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+### Phase 4.1 — Portfolio Optimizer
+
+- **Phase 4.1: Portfolio Optimizer** — CVXPY-based mean-variance + risk-parity
+  optimization with pluggable covariance / expected-returns estimators, strict
+  feasibility (with soft-mode fallback), and a `WeightStrategy` plug-in for
+  walk-forward backtests. See
+  [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md).
+
 ### Phase 3 — Analysis & Watchlist
 
 - **Factor study** (`ah_research.analysis.factor_study`): `factor_study()` — cross-sectional Spearman IC, quantile returns, IC decay, block bootstrap CI for long-short spread, sector neutralization
