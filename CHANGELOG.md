@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 5 — Research Chat UI (2026-05-01)
+
+### Added
+- `ResearchChat` — conversational agent with tool-use loop over 8 platform tools (`list_universe`, `get_dossier`, `get_profile_markdown`, `get_graded_profile`, `get_screener_row`, `search_filings`, `get_corpus_summary`, `construct_portfolio`).
+- `ChatSession` — JSONL-persisted conversation history at `~/.ah-research/chat/<session-id>.jsonl` with `--resume` support.
+- `ah chat [TICKER] [--resume ID] [--model NAME] [--list]` — REPL CLI.
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-5-research-chat-design.md`
+
 ## Phase 4.7 — LLM-Based Profile Grading (2026-05-01)
 
 ### Added

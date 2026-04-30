@@ -9,6 +9,12 @@ Personal A-shares + HK stock research platform.
 ## Features
 
 
+### Phase 5 — Research Chat UI
+
+- **Phase 5: Research chat** — `ah chat <ticker>` opens a REPL that reasons over your local Dossier / Profile / Screener / Filings data via Claude tool use. Eight tools wire the chat to the platform; sessions persist at `~/.ah-research/chat/`.
+  See [design spec](docs/superpowers/specs/2026-05-01-ah-research-phase-5-research-chat-design.md).
+
+
 ### Phase 4.1 — Portfolio Optimizer
 
 - **Phase 4.1: Portfolio Optimizer** — CVXPY-based mean-variance + risk-parity
