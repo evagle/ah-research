@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 4.5 — Filings Text Search (2026-04-30)
+
+### Added
+- `FilingsRepository.search(query, *, symbols=None, kinds=None, regex=False, max_hits_per_file=None)` — substring / regex search across 年报, 招股说明书, and research reports. Returns `SearchHit` objects with file, line number, matching line, and 3-line context window.
+- `ah filings search <query>` CLI subcommand with `--symbols`, `--kinds`, `--regex`, `--max-per-file` flags.
+- `SearchHit` frozen dataclass exported from `ah_research.filings`.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-5-filings-search-design.md`
+
  
 ## Phase 4.1 — Portfolio Optimizer (2026-04-30)
 

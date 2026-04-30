@@ -34,6 +34,12 @@ Personal A-shares + HK stock research platform.
   (default on). See
   [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md).
 
+### Phase 4.5: Filings Text Search
+
+- **Phase 4.5: Filings Text Search** — `FilingsRepository.search()`
+  grep across all filings in the corpus (年报, 招股说明书, research).
+  CLI: `ah filings search "渠道改革" --symbols 600519.SH --kinds annual`.
+
 ### Phase 4.4: Screener Filings Enrichment
 
 - **Phase 4.4: Screener Filings Enrichment** — `enrich_with_filings()`
