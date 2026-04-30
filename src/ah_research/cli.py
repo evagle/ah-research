@@ -54,7 +54,16 @@ def _register_watchlist() -> None:
     app.add_typer(_wl_app, name="watchlist")
 
 
+def _register_filings() -> None:
+    from ah_research.scripts.ah_filings import filings_app
+    from ah_research.scripts.ah_profile import profile_app
+
+    app.add_typer(filings_app)
+    app.add_typer(profile_app)
+
+
 _register_watchlist()
+_register_filings()
 
 
 @app.command()
