@@ -5,11 +5,13 @@ from __future__ import annotations
 from pathlib import Path
 from typing import cast
 
+import pandas as pd
 import typer
 from rich.console import Console
 from rich.table import Table
 
 from ah_research.filings.filings_repository import FilingsRepository
+from ah_research.filings.profile_repository import ProfileRepository
 from ah_research.filings.types import FilingKind
 
 filings_app = typer.Typer(name="filings", help="Query local filings (年报 / 招股说明书 / 研报)")
@@ -145,4 +147,30 @@ def search_filings(
         snippet = hit.line[:80]
         table.add_row(f.symbol, f.kind, year_date, str(hit.line_no), snippet)
 
+    console.print(table)
+
+
+@filings_app.command("summary")
+def summary(
+    sort_by: str = typer.Option("profile_age_days", help="Column to sort by (desc)."),
+    root_filings: Path = typer.Option(Path("data/filings"), help="Filings root."),  # noqa: B008
+    root_profiles: Path = typer.Option(Path("profiles"), help="Profiles root."),  # noqa: B008
+) -> None:
+    """Print a one-row-per-ticker corpus coverage table."""
+    from ah_research.filings.summary import build_corpus_summary
+
+    fr = FilingsRepository(root=root_filings)
+    pr = ProfileRepository(root=root_profiles)
+    df = build_corpus_summary(fr, pr)
+    if df.empty:
+        console.print("[yellow]No symbols found in either repo[/]")
+        raise typer.Exit(code=1)
+    if sort_by in df.columns:
+        df = df.sort_values([sort_by, "symbol"], ascending=[False, True], na_position="last")
+    # Render Rich table with all 10 columns
+    table = Table(title="Corpus summary")
+    for col in df.columns:
+        table.add_column(col)
+    for _, row in df.iterrows():
+        table.add_row(*[str(v) if not pd.isna(v) else "-" for v in row])
     console.print(table)
