@@ -40,10 +40,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Design doc
 - `docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md`
 
-### Deferred to Phase 4.3
-- Dossier / Screener integration
-- Structured grading of profile content (moat_grade, redflag_count, etc.)
+## Phase 4.3 — Dossier + Filings/Profile Integration (2026-04-30)
 
+### Added
+- `FilingsSection` + `ProfileSection` dataclasses surfaced on `Dossier` — summarize filings inventory (annual count, latest year, IPO flag, research count) and profile metadata (date, section names).
+- `build_dossier(symbol, ..., include_qualitative=True, filings_repo=..., profiles_repo=...)` wires Phase 4.2 repositories into the Dossier pipeline.
+- `Dossier.to_markdown()` renders "## Filings inventory" and "## Qualitative profile" sections.
+- CLI flag `ah dossier <symbol> --qualitative / --no-qualitative` (default: qualitative on).
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md`
+
+### Deferred to Phase 4.4
+- Structured grading / scoring of profile content (moat_grade, redflag_count)
+- Screener predicates backed by qualitative grades
+- Research report deep-parsing / deduplication
 
 ## [Unreleased] — Phase 3
 
