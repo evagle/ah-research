@@ -216,22 +216,41 @@ class Constructor:
         selected = self._apply_method(sig_df)
 
         # 2. Weighting
-        weights_series = self._apply_weighting(selected)
+        opt_result: OptimizationResult | None = None
+        if self._weighting == "optimize":
+            assert self._optimizer is not None
+            assert self._repo is not None
+            assert self._asof is not None
 
-        # 3. Constraints (sorted ascending by priority)
-        sorted_constraints = sorted(self._constraints, key=lambda c: c.priority)
+            symbols_selected = selected["symbol"].tolist()
+            if not symbols_selected:
+                raise ValueError("nothing selected — cannot optimize empty universe")
+
+            opt_result = self._optimizer.build(
+                symbols=symbols_selected,
+                as_of=pd.Timestamp(self._asof),
+                repo=self._repo,
+                prev_weights=None,
+            )
+            weights_series = opt_result.weights.copy()
+        else:
+            weights_series = self._apply_weighting(selected)
+
+        # 3. Constraints — skipped entirely in optimize mode
         constraint_results: list[ConstraintResult] = []
         relaxation_notes: list[str] = []
 
-        for c in sorted_constraints:
-            weights_series, result, notes = self._apply_constraint(c, weights_series, selected)
-            constraint_results.append(result)
-            relaxation_notes.extend(notes)
+        if self._weighting != "optimize":
+            sorted_constraints = sorted(self._constraints, key=lambda c: c.priority)
+            for c in sorted_constraints:
+                weights_series, result, notes = self._apply_constraint(c, weights_series, selected)
+                constraint_results.append(result)
+                relaxation_notes.extend(notes)
 
-        # Normalise to sum=1 after all constraints
-        total = weights_series.sum()
-        if total > 0:
-            weights_series = weights_series / total
+            # Normalise to sum=1 after all constraints (not needed in optimize mode)
+            total = weights_series.sum()
+            if total > 0:
+                weights_series = weights_series / total
 
         weights_df = pd.DataFrame({"symbol": weights_series.index, "weight": weights_series.values})
 
@@ -242,6 +261,7 @@ class Constructor:
             method_used=self._method,
             weighting_scheme=self._weighting,
             relaxation_notes=relaxation_notes,
+            optimization_result=opt_result,
         )
 
     # ── internal helpers ───────────────────────────────────────────────────

@@ -79,3 +79,69 @@ def test_optimize_with_constrain_queue_raises() -> None:
     )
     with pytest.raises(ValueError, match=r"incompatible with \.constrain"):
         c.build()
+
+
+def test_optimize_mode_happy_path() -> None:
+    """End-to-end MV optimization through Constructor."""
+    import numpy as np
+
+    from ah_research.portfolio.optimizer import Optimizer
+    from ah_research.portfolio.optimizer.estimators.covariance import LedoitWolfCovariance
+    from ah_research.portfolio.optimizer.estimators.returns import UserSuppliedReturns
+
+    # Build a tiny fake repo that returns synthetic returns
+    symbols = ["600000.SH", "600001.SH", "600002.SH", "600003.SH", "600004.SH"]
+    n_days = 300
+    dates = pd.date_range("2024-01-01", periods=n_days, freq="B")
+
+    rng = np.random.default_rng(42)
+    ret_matrix = rng.normal(0.0005, 0.015, size=(n_days, len(symbols)))
+
+    rows = []
+    for i, d in enumerate(dates):
+        for j, s in enumerate(symbols):
+            rows.append({"ds": d, "symbol": s, "total_return": ret_matrix[i, j]})
+    prices_df = pd.DataFrame(rows)
+
+    class FakeRepo:
+        def get_prices(
+            self,
+            symbols: list[str],
+            start,  # type: ignore[no-untyped-def]
+            end,  # type: ignore[no-untyped-def]
+        ) -> pd.DataFrame:
+            return prices_df[
+                (prices_df["ds"] >= pd.Timestamp(start)) & (prices_df["ds"] <= pd.Timestamp(end))
+            ].copy()
+
+    mu = pd.Series([0.01, 0.008, 0.006, 0.012, 0.005], index=symbols)
+    optimizer = Optimizer(
+        objective="mean_variance",
+        cov_estimator=LedoitWolfCovariance(),
+        returns_estimator=UserSuppliedReturns(mu),
+        risk_aversion=1.0,
+    )
+
+    signals_df = pd.DataFrame(
+        {
+            "date": pd.to_datetime([date(2024, 6, 30)] * 5),
+            "symbol": symbols,
+            "signal": [1.0, 0.5, 0.2, 0.9, 0.1],
+        }
+    )
+    signals = Signals.from_dataframe(signals_df)
+
+    report = (
+        Constructor(signals, repo=FakeRepo(), asof=date(2024, 6, 30), optimizer=optimizer)
+        .method("all_positive")
+        .weight_by("optimize")
+        .build()
+    )
+
+    # Contract checks
+    assert report.weighting_scheme == "optimize"
+    assert report.final_position_count > 0
+    assert abs(report.weights["weight"].sum() - 1.0) < 1e-4
+    assert (report.weights["weight"] >= -1e-8).all()
+    assert report.optimization_result is not None
+    assert report.optimization_result.solver_status in ("optimal", "optimal_inaccurate")
