@@ -16,6 +16,7 @@ from ah_research.backtest.types import Signals
 from ah_research.portfolio.construction import top_quantile_weights
 
 if TYPE_CHECKING:
+    from ah_research.portfolio.optimizer import Optimizer
     from ah_research.portfolio.optimizer.result import OptimizationResult
 
 # ---------------------------------------------------------------------------
@@ -149,10 +150,12 @@ class Constructor:
         *,
         repo: Any | None = None,
         asof: date | None = None,
+        optimizer: Optimizer | None = None,
     ) -> None:
         self._signals = signals
         self._repo = repo
         self._asof = asof
+        self._optimizer = optimizer
         self._method: str = "top_quantile"
         self._method_kwargs: dict[str, Any] = {"quantile": 0.2}
         self._weighting: str = "equal"
