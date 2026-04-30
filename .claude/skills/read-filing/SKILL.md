@@ -40,7 +40,7 @@ description: 教主 agent 如何系统阅读一份上市公司年报 / 中报 / 
    - A 股 / 北交所 (`.SH` / `.SZ` / `.BJ`) → `references/filing-structure-cn.md` — 证监会第 2 号准则 10 节结构 + 季报披露时限 + 业绩预告
    - 港股 (`.HK`) → `references/filing-structure-hk.md` — HKEX Main Board Appendix 16 章节结构 + 中报披露时限 + profit alert
 3. `references/quick-lookup.md` — 术语 / 时间预算 / 新准则 / CFO 画像 / 所有者利润速算 / 自检 / 20 条反模式
-4. `../financial-redflag-scan/references/fraud-library.md` — 红旗 10 项 + 三表勾稽 4 条公式 + 5 维度造假手法 + pattern narrative。Step 5 勾稽时必读
+4. `../financial-redflag-scan/references/fraud-library.md` — 风险 10 项 + 三表勾稽 4 条公式 + 5 维度造假手法 + pattern narrative。Step 5 勾稽时必读
 
 ---
 
@@ -100,7 +100,7 @@ description: 教主 agent 如何系统阅读一份上市公司年报 / 中报 / 
 
 **信念**: 年报正文里的数字都是**汇总后**的结果。汇总后 "应收账款 10 亿" 是一个黑箱——这 10 亿是 1000 个客户分散欠的，还是 1 个关联方欠的？账龄 1 年内 还是 3 年以上？**只有附注逐行读才能打开黑箱**。企业"**必须披露又不太想让你明白**"的东西都藏在这里。
 
-**必读附注 12 项** (货币资金 / 应收账款 / 应收票据 / 预付账款 / 其他应收款 / 存货 / 在建工程 / 商誉 / 合同负债 / 应付账款 / 长投 / 有息负债) 完整清单 + 每项红旗阈值见 `references/statement-reading.md` §3。
+**必读附注 12 项** (货币资金 / 应收账款 / 应收票据 / 预付账款 / 其他应收款 / 存货 / 在建工程 / 商誉 / 合同负债 / 应付账款 / 长投 / 有息负债) 完整清单 + 每项风险阈值见 `references/statement-reading.md` §3。
 
 **违反症状**:
 - 笔记中的财务数字全部来自"财务摘要"或三大表正表，没有一条来自附注
@@ -364,7 +364,7 @@ description: 教主 agent 如何系统阅读一份上市公司年报 / 中报 / 
 
 **三表互证 4 条双面照** (在 Step 5 勾稽节强制跑):
 1. 高毛利率 **+** 低 Capex/NI → 真护城河; 高毛利率 **+** 高 Capex/NI → 假护城河 (折旧不充分或快过时的壁垒)
-2. AR 增速 > 营收增速 连续 2 年 → 塞货红旗; AR/营收 低于同业 → 议价力
+2. AR 增速 > 营收增速 连续 2 年 → 塞货风险; AR/营收 低于同业 → 议价力
 3. 长期负债 < 3-4 年 NI 可偿清 → 护城河; > 5 年 → 激进杠杆
 4. 留存收益 10y 年化增速 ≥ 8% → 护城河复利; 下行 → 护城河瓦解 leading indicator
 
@@ -546,14 +546,14 @@ read-filing   (阅读层, 本 skill)
         └──▶ value-profile              (主 profile 体系)
 ```
 
-- **和 `financial-redflag-scan` 的分工**: 本 skill 产出**附注 12 项原始数据 + 勾稽 4 条结果**，作为 redflag-scan 29 项排雷的**输入**。redflag-scan 负责按阈值**判断**红旗触发与否
+- **和 `financial-redflag-scan` 的分工**: 本 skill 产出**附注 12 项原始数据 + 勾稽 4 条结果**，作为 redflag-scan 29 项排雷的**输入**。redflag-scan 负责按阈值**判断**风险触发与否
 - **和 `management-analysis` 的分工**: 本 skill 产出**管理层讨论对照 + 承诺履行 事实清单**，作为 management-analysis 诚信度判断的**输入**
 - **和 `value-profile` 的分工**: 本 skill 产出的笔记是 profile 的 **§阅读笔记** section 素材，尤其为 §1.1-§1.7 生意模式、§3 财务表现、§4.5 排雷 提供事实基础
 
 **不重复做的事**:
 - 本 skill **不算估值**（留给 value-profile §6）
 - 本 skill **不下"好生意 / 好公司" 判断**（留给 value-profile §1 / §4）
-- 本 skill **不打红旗**（留给 financial-redflag-scan）
+- 本 skill **不打风险**（留给 financial-redflag-scan）
 - 本 skill **不做管理层诚信度评分**（留给 management-analysis）
 
 本 skill 唯一做的是：**把年报 / 季报读成一份事实清单**，页码引用完整、附注覆盖完整、勾稽跑完。
@@ -586,7 +586,7 @@ read-filing   (阅读层, 本 skill)
 - `quick-lookup.md` — 术语 / 时间预算 / 新准则 / CFO 画像 / 所有者利润速算 / 自检表 / 20 条反模式
 
 **项目内其他 reference**:
-- `../financial-redflag-scan/references/fraud-library.md` — 勾稽 4 公式 + 红旗 10 项阈值 + 造假 5 维度 + pattern A1/A2/A3
+- `../financial-redflag-scan/references/fraud-library.md` — 勾稽 4 公式 + 风险 10 项阈值 + 造假 5 维度 + pattern A1/A2/A3
 - `../value-profile/references/discipline.md` — 分析纪律
 - `../financial-redflag-scan/SKILL.md` — 29 项排雷 + 6 项 overlay 的**判断**侧
 - `../management-analysis/SKILL.md` — 管理层诚信度**判断**侧

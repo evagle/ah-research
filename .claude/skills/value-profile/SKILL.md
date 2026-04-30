@@ -100,7 +100,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### §1.12 好生意 优先级 高于 好管理层
 
-三好标准的顺序不可换: **好生意 → 好公司 → 好价格**。一流生意 + 三流管理层 通常优于 三流生意 + 一流管理层, 因为一流生意的经济商誉能让平庸管理层也挣到钱 (粤高速、长江电力), 而三流生意 + 一流管理层 = 管理层被迫不断重组 / 转型 / 跨界, 成功稀少且不可复制。§1 (好生意) 判定 "否" 不要指望 §4 (管理层) 救回; §1 判定 "是" 时, §4 平庸可接受, 只要不存在 §4 红旗 (道德 / 大股东占款 / 系统性画大饼)。
+三好标准的顺序不可换: **好生意 → 好公司 → 好价格**。一流生意 + 三流管理层 通常优于 三流生意 + 一流管理层, 因为一流生意的经济商誉能让平庸管理层也挣到钱 (粤高速、长江电力), 而三流生意 + 一流管理层 = 管理层被迫不断重组 / 转型 / 跨界, 成功稀少且不可复制。§1 (好生意) 判定 "否" 不要指望 §4 (管理层) 救回; §1 判定 "是" 时, §4 平庸可接受, 只要不存在 §4 风险 (道德 / 大股东占款 / 系统性画大饼)。
 
 违反症状: 用 "管理层优秀" 对冲 "商业模式平庸"; 期待明星 CEO 能把垃圾生意做成金矿。
 
@@ -225,7 +225,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 ### §2.12 好生意 > 好公司
 
 - **§2.12.1 §1 verdict 字段**: §1 收尾给出 `好生意: 是 / 否 / 存疑` verdict; Step 6 估值 必须 引用 此 verdict; "否" 直接 Part 0 标 "定性研究 only"。
-- **§2.12.2 §4 红旗 一票否决**: 即使 §1 = 是, §4 出现 道德红旗 / 大股东占款 / 系统性画大饼（连续 3 年年初 guidance 大幅高于实际）/ 虚假陈述 处罚记录 → 直接淘汰, profile 终止。
+- **§2.12.2 §4 风险 一票否决**: 即使 §1 = 是, §4 出现 道德风险 / 大股东占款 / 系统性画大饼（连续 3 年年初 guidance 大幅高于实际）/ 虚假陈述 处罚记录 → 直接淘汰, profile 终止。
 
 ---
 
@@ -325,7 +325,7 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 - **禁用 8 条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5 必填。
 - **5 步护城河分析** (§3 必需): a 分类（大 / 准 / 强 / 省 / 专）+ b 2 项可证伪检验（提价 / 对手 / 切换成本 / ROE 路标 任选二）+ c 跨年定量追溯（毛利率 / 净利率 / ROE 5y, CFO/NI 比值, 带页码）+ d 悲观情景（具体技术 / 偏好 / 监管 / 对手情景, 禁空话）+ e 宽 / 中 / 窄 / 弱 标签。具体数字准绳见 `.claude/skills/value-profile/references/moat-framework.md` / template §3。
-- **§4 管理层分析** → **delegate 到 `management-analysis` 子 skill**, 传参 `--target-profile <path> --section §4`; 详细流程（承诺 vs 兑现 5 年表 / 董事长 5 年评估 / 股东回报 / 道德红旗 一票否决）见 `.claude/skills/management-analysis/SKILL.md` §2-§3。Fallback (子 skill 不可用): 5 年 forecast vs actual 表每行带页码, gap > 10% 连续 ≥ 3 年 → `**置信度:** 低`, 目标突然消失 = 强信号必须指出, 言行一致检验 ≥ 2 事件。具体执行见 management-analysis 子 skill。
+- **§4 管理层分析** → **delegate 到 `management-analysis` 子 skill**, 传参 `--target-profile <path> --section §4`; 详细流程（承诺 vs 兑现 5 年表 / 董事长 5 年评估 / 股东回报 / 道德风险 一票否决）见 `.claude/skills/management-analysis/SKILL.md` §2-§3。Fallback (子 skill 不可用): 5 年 forecast vs actual 表每行带页码, gap > 10% 连续 ≥ 3 年 → `**置信度:** 低`, 目标突然消失 = 强信号必须指出, 言行一致检验 ≥ 2 事件。具体执行见 management-analysis 子 skill。
 
 #### 3c. Main-agent review
 
@@ -364,8 +364,8 @@ profile 内容中文; operator 菜单双语:
 
 **Fallback（子 skill 不可用时, 主 skill 跑简化版）**:
 
-1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德红旗一票否决）。详细阈值 / 三表勾稽 / 造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注 12 项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
-2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的红旗 summary:**` 1-2 段。用户确认仅 `[accept / edit / research more]`。
+1. 派 ONE 子 agent 对 Part 4 §4.5 29 项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6 项高危 overlay 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德风险一票否决）。详细阈值 / 三表勾稽 / 造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注 12 项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
+2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的风险 summary:**` 1-2 段。用户确认仅 `[accept / edit / research more]`。
 
 
 ### Step 6 — 执行摘要合成 (Part 0 估值)

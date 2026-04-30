@@ -27,7 +27,7 @@
 
 ---
 
-## 3. 红旗阈值卡 (10 项高危模式)
+## 3. 风险阈值卡 (10 项高危模式)
 
 见 `../../financial-redflag-scan/references/fraud-library.md` §1。
 
