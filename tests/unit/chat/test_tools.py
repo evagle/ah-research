@@ -385,8 +385,8 @@ def test_construct_portfolio_unknown_weight_by() -> None:
     assert "error" in out
 
 
-def test_construct_portfolio_optimize_unavailable() -> None:
-    """optimize scheme not merged yet on this branch — friendly error."""
+def test_construct_portfolio_unknown_objective() -> None:
+    """Optimize with an unrecognized objective returns a friendly error."""
     deps = ChatDeps(
         data_repo=MagicMock(),
         filings_repo=MagicMock(),
@@ -399,8 +399,9 @@ def test_construct_portfolio_optimize_unavailable() -> None:
             "symbols": ["600519.SH", "000001.SZ"],
             "asof": "2024-06-30",
             "weight_by": "optimize",
+            "objective": "not_a_real_objective",
         },
         deps,
     )
     assert "error" in out
-    assert "Phase 4.8" in out["error"] or "not available" in out["error"].lower()
+    assert "unknown objective" in out["error"].lower()

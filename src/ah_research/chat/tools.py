@@ -310,7 +310,6 @@ def _search_filings(params: dict[str, Any], deps: ChatDeps) -> dict[str, Any]:
 
 
 def _construct_portfolio(params: dict[str, Any], deps: ChatDeps) -> dict[str, Any]:
-    import inspect
     from datetime import datetime as _dt
 
     from ah_research.backtest.types import Signals
@@ -322,19 +321,6 @@ def _construct_portfolio(params: dict[str, Any], deps: ChatDeps) -> dict[str, An
     if weight_by not in ("equal", "optimize"):
         return {"error": f"weight_by must be 'equal' or 'optimize', got {weight_by!r}"}
 
-    # Phase 4.8 is being shipped on a separate branch. If Constructor
-    # doesn't yet support the 'optimizer' kwarg, fall back to a friendly
-    # error rather than crashing.
-    if weight_by == "optimize" and (
-        "optimizer" not in inspect.signature(Constructor.__init__).parameters
-    ):
-        return {
-            "error": (
-                "Optimize weighting not available in this build "
-                "(requires Phase 4.8). Use weight_by='equal' instead."
-            )
-        }
-
     sig_df = pd.DataFrame(
         {
             "date": [pd.Timestamp(asof)] * len(symbols),
@@ -344,10 +330,37 @@ def _construct_portfolio(params: dict[str, Any], deps: ChatDeps) -> dict[str, An
     )
     signals = Signals.from_dataframe(sig_df)
 
-    ctor = Constructor(signals, repo=deps.data_repo, asof=asof)
-    report = ctor.method("all_positive").weight_by("equal").build()
+    optimizer: Any = None
+    if weight_by == "optimize":
+        from ah_research.portfolio.optimizer import Optimizer
+        from ah_research.portfolio.optimizer.estimators.covariance import LedoitWolfCovariance
+        from ah_research.portfolio.optimizer.estimators.returns import HistoricalMeanReturns
+
+        objective = params.get("objective", "mean_variance")
+        lookback = int(params.get("lookback_days", 252))
+        if objective == "mean_variance":
+            optimizer = Optimizer(
+                objective="mean_variance",
+                cov_estimator=LedoitWolfCovariance(),
+                returns_estimator=HistoricalMeanReturns(lookback_days=lookback),
+                risk_aversion=float(params.get("risk_aversion", 1.0)),
+                lookback_days=lookback,
+            )
+        elif objective == "risk_parity":
+            optimizer = Optimizer(
+                objective="risk_parity",
+                cov_estimator=LedoitWolfCovariance(),
+                lookback_days=lookback,
+            )
+        else:
+            return {"error": f"unknown objective: {objective!r}"}
+
+    ctor = Constructor(signals, repo=deps.data_repo, asof=asof, optimizer=optimizer)
+    report = ctor.method("all_positive").weight_by(weight_by).build()
     weights = dict(zip(report.weights["symbol"], report.weights["weight"], strict=True))
     out: dict[str, Any] = {"weights": {k: float(v) for k, v in weights.items()}}
+    if report.optimization_result is not None:
+        out["solver_status"] = report.optimization_result.solver_status
     return out
 
 
