@@ -7,13 +7,17 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
 import numpy as np
 import pandas as pd
 
 from ah_research.backtest.types import Signals
 from ah_research.portfolio.construction import top_quantile_weights
+
+if TYPE_CHECKING:
+    from ah_research.portfolio.optimizer import Optimizer
+    from ah_research.portfolio.optimizer.result import OptimizationResult
 
 # ---------------------------------------------------------------------------
 # Constraint
@@ -118,6 +122,7 @@ class ConstructionReport:
     method_used: str
     weighting_scheme: str
     relaxation_notes: list[str] = field(default_factory=list)
+    optimization_result: OptimizationResult | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -145,10 +150,12 @@ class Constructor:
         *,
         repo: Any | None = None,
         asof: date | None = None,
+        optimizer: Optimizer | None = None,
     ) -> None:
         self._signals = signals
         self._repo = repo
         self._asof = asof
+        self._optimizer = optimizer
         self._method: str = "top_quantile"
         self._method_kwargs: dict[str, Any] = {"quantile": 0.2}
         self._weighting: str = "equal"
@@ -168,7 +175,13 @@ class Constructor:
 
     def weight_by(
         self,
-        scheme: Literal["equal", "signal_proportional", "free_float_mcw", "mcw"],
+        scheme: Literal[
+            "equal",
+            "signal_proportional",
+            "free_float_mcw",
+            "mcw",
+            "optimize",
+        ],
     ) -> Constructor:
         """Set the weighting scheme."""
         self._weighting = scheme
@@ -183,28 +196,61 @@ class Constructor:
 
     def build(self) -> ConstructionReport:
         """Execute the full construction pipeline and return a report."""
+        # Optimize-mode preconditions
+        if self._weighting == "optimize":
+            if self._optimizer is None:
+                raise ValueError("weight_by('optimize') requires Constructor(optimizer=...)")
+            if self._repo is None:
+                raise ValueError("weight_by('optimize') requires Constructor(repo=...)")
+            if self._asof is None:
+                raise ValueError("weight_by('optimize') requires Constructor(asof=...)")
+            if self._constraints:
+                raise ValueError(
+                    "weight_by('optimize') is incompatible with .constrain(...); "
+                    "set constraints on Optimizer instead"
+                )
+
         sig_df = self._signals.df.copy()
 
         # 1. Selection
         selected = self._apply_method(sig_df)
 
         # 2. Weighting
-        weights_series = self._apply_weighting(selected)
+        opt_result: OptimizationResult | None = None
+        if self._weighting == "optimize":
+            assert self._optimizer is not None
+            assert self._repo is not None
+            assert self._asof is not None
 
-        # 3. Constraints (sorted ascending by priority)
-        sorted_constraints = sorted(self._constraints, key=lambda c: c.priority)
+            symbols_selected = selected["symbol"].tolist()
+            if not symbols_selected:
+                raise ValueError("nothing selected — cannot optimize empty universe")
+
+            opt_result = self._optimizer.build(
+                symbols=symbols_selected,
+                as_of=pd.Timestamp(self._asof),
+                repo=self._repo,
+                prev_weights=None,
+            )
+            weights_series = opt_result.weights.copy()
+        else:
+            weights_series = self._apply_weighting(selected)
+
+        # 3. Constraints — skipped entirely in optimize mode
         constraint_results: list[ConstraintResult] = []
         relaxation_notes: list[str] = []
 
-        for c in sorted_constraints:
-            weights_series, result, notes = self._apply_constraint(c, weights_series, selected)
-            constraint_results.append(result)
-            relaxation_notes.extend(notes)
+        if self._weighting != "optimize":
+            sorted_constraints = sorted(self._constraints, key=lambda c: c.priority)
+            for c in sorted_constraints:
+                weights_series, result, notes = self._apply_constraint(c, weights_series, selected)
+                constraint_results.append(result)
+                relaxation_notes.extend(notes)
 
-        # Normalise to sum=1 after all constraints
-        total = weights_series.sum()
-        if total > 0:
-            weights_series = weights_series / total
+            # Normalise to sum=1 after all constraints (not needed in optimize mode)
+            total = weights_series.sum()
+            if total > 0:
+                weights_series = weights_series / total
 
         weights_df = pd.DataFrame({"symbol": weights_series.index, "weight": weights_series.values})
 
@@ -215,6 +261,7 @@ class Constructor:
             method_used=self._method,
             weighting_scheme=self._weighting,
             relaxation_notes=relaxation_notes,
+            optimization_result=opt_result,
         )
 
     # ── internal helpers ───────────────────────────────────────────────────

@@ -23,6 +23,10 @@ Personal A-shares + HK stock research platform.
   walk-forward backtests. See
   [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md).
 
+### Phase 4.8: Constructor Optimize Mode
+
+- **Constructor optimize mode** — `Constructor(optimizer=...).weight_by("optimize")` runs the Phase 4.1 convex optimizer inline; `ConstructionReport.optimization_result` carries the full result (dual prices, active constraints, solver status).
+
 
 ### Phase 4.2: Filings + Profile Repositories
 
