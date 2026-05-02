@@ -62,11 +62,11 @@ def _register_filings() -> None:
     app.add_typer(profile_app)
 
 
-
 def _register_chat() -> None:
     from ah_research.scripts.ah_chat import app as chat_app
 
     app.add_typer(chat_app)
+
 
 def _register_construct() -> None:
     from ah_research.scripts.ah_construct import construct_app
@@ -74,12 +74,10 @@ def _register_construct() -> None:
     app.add_typer(construct_app)
 
 
-
 _register_watchlist()
 _register_filings()
 _register_chat()
 _register_construct()
-
 
 
 @app.command()
