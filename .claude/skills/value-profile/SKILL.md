@@ -123,6 +123,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
   ③ 近5年 ROE 稳定 ≥ 15%; 毛利率 波动 ≤ ±5点; 扣非 NI / NI ≥ 0.85
 - **§2.2.2任一 假/存疑 → 全局降级**: 整份 profile `**置信度:** 低`, 阻断 §3 Step 6估值; Step 6需 abort 并打 "估值前置清单未通过" 提示条。
 - **§2.2.3销售收现 交叉验证**: 应有销售收现 = 营收 × (1+VAT) − Δ应收账款 − Δ应收票据 + Δ合同负债 − 贴现财务费用。对比现金流量表实际值, **背离 > 5% 连续2年 → §4.5排雷 触发深调**。
+- **§2.2.4 auto-mode 深调查原则**: Auto mode 下, 当 main-agent review 发现 subagent 证据薄弱、空白或论断 generic, 默认动作是**再派一次 subagent 做更深调查**——扩 PDF year range / 新读附注项 / 扫更多研报 / web search / 查监管披露 / 读招股说明书。连续 **2次 深调查 仍无法获得关键证据** → 标 `**置信度:** 中/低` + `**需人工跟进:** <具体什么信息没找到>` 备注并继续下一节, 不 abort 不静默。Interactive mode 不强制此条——用户可在 Step 3d `research more` 主动指方向。关键: 宁愿多花 subagent 调用也不让用户后补 "给我再研究一下 X"——研究的主动性归 agent, 不是 user。
 
 ### §2.3商业模式 → 估值方法对照
 
@@ -157,8 +158,8 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### §2.6能力圈四问是 §1前置条件
 
-- **§2.6.1四问逐段答**: §1商业模式所有 subsection（§1.1-§1.7）子 agent 开场必先独立答 四问, 每问 ≥ 50字, 含 ticker 特定证据（产品 SKU / 客户场景/竞品名/挑战者份额/假想敌推演）, 禁品牌复读和结论标签。
-- **§2.6.2任一失败 = 退回 §0重审**: 主 agent 复核任一问 < 50字或仅品牌复读或仅结论无场景 → 退回子 agent 补证据; 反复退回仍失败 → §1全部子 section 标 `**置信度:** 低`, 在 §1.1头部标 "能力圈四问第 X 问未达标 — 需补充证据或放弃", profile 降级为仅定性观察, 不得进入 Step 6估值。
+- **§2.6.1四问是 §1末节 synthesis, 不是 §1开场前置**: §1.8能力圈四问 = §1.1-§1.7 具体拆解之后的综合判定章节（非 gate）。子 agent 在 §1.1-§1.7 全部填完之后才填 §1.8, 4段独立作答, 每问 ≥ 50字, 含 ticker 特定证据（产品 SKU / 客户场景/竞品名/挑战者份额/假想敌推演）, 呼应 §1.1-§1.7的引用（不另起炉灶）, 禁品牌复读和结论标签。**理由**: 读懂业务才能判定是否在能力圈, 反之是结论先行——与价值投资"看懂再下注"精神相反。
+- **§2.6.2任一失败 = profile 整体降级**: 主 agent 复核任一问 < 50字或仅品牌复读或仅结论无场景 → 退回子 agent 补证据（auto mode 扩大 scope 重派, 最多2次）; 反复退回仍失败 → §1.8本节标 `**置信度:** 低` + 头部加 "能力圈四问第 X 问未达标 — 需补充证据或放弃"; §1.1-§1.7保留原置信度但 profile 整体降级为 "观察档案, 不下注", 不得进入 Step 6估值。§1.8失败不否定 §1.1-§1.7——前者是 synthesis 判定, 后者是 evidence 拆解, 两者独立。
 
 ### §2.7波动纪律
 
@@ -186,6 +187,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### §2.11年报阅读纪律
 
+- **§2.11.0 优先引用最新年报 (越新越好)**: 当期数据 (量价 / 资产 / 现金流 / 毛利 / 客户 / 供应商 / 合同负债 等) 必须从最新年报取, 不默认用上一年。优先级: **最新年报 (审计过) > 半年报 (未审计) > 季报 (信息最少) > 旧年报 (仅用于跨年对比)**。旧年报 (≥ 2 年) 只作 5 年 ROE / 毛利稳定性 / 承诺 vs 兑现 / 提价历史 等跨年维度。半年报 / 季报 引用需节末 `**置信度:**` 降一档 (未审计 = 证据等级低)。为什么: 年报数据 1 年就过时, 估值前置清单 (§3.pre 三大前提) 基于 stale 数据 = 错判。
 - **§2.11.1优先 extracted text cache**: 派子 agent 前, `data/filings/<ticker>/_extracted/<年报-YYYY>/text.md` 必须存在（带 `<!-- page N -->` marker）。缺失则先 shell out `python scripts/extract_pdf.py`。
 - **§2.11.2必读附注12项**: 货币资金受限/应收账款5大客户 + 账龄/应收票据 银票 vs 商票/预付账款对象/其他应收款关联方/存货分项 + 跌价/在建工程转固/商誉减值假设/合同负债占营收/应付账款议价权/长投 + 可供出售金融资产/有息负债。详见 `.claude/skills/read-filing/references/statement-reading.md` §3。
 - **§2.11.3禁用8条空话**: "具有强大品牌/技术领先/行业龙头/管理优秀/市场广阔/核心竞争力突出/护城河宽广/成长空间巨大" 无具体佐证（人名/数字/日期/引用） 一律退回重写。
@@ -222,6 +224,23 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
   
   **操作/压缩率 参考**: 研报清洗后保留 < 原长度30% 视为正常, 保留 > 60% 几乎肯定没删干净 (深度报告 首次覆盖 例外, 可20-40%)。每条保留内容必须能通过两个自问: ① "这条事实年报有吗?" 答 "有" 立即删。② "这条是分析师猜的还是客观发生的?" 答 "猜的" 立即删。清洗后的研报用于 §2.11.4管理层口径校核 的交叉比对 和 §4.5排雷 的运营数据补充。
 
+- **§2.11.6 抓核心矛盾, 不给笼统总数**: 每个 subsection 的数据必须拆到能体现核心矛盾的颗粒度, 禁用"给个合计就完事"的写法。判准: 拆分后各组的**单位经济 (利润率 / 毛利率 / 增速 / 客户性质) 差异显著** → 必须拆; 差异不大 → 合计 OK。
+
+  **常见必须拆分维度**:
+  - **分产品 / 分业务**: 主力 vs 次要 (茅台酒 vs 系列酒 / iPhone vs 服务 / 主营 vs 投资收益), 合计掩盖利润结构。
+  - **分渠道**: 直销 vs 批发 vs 电商 (毛利差异常 > 5pp), 合计掩盖议价权。
+  - **分地区 / 分客户类型**: 国内 vs 国外 / 2C vs 2B / 2G, 政策敞口与单位经济不同。
+  - **分时间切面**: 量 / 价分解 (产销量 × 单价 → 营收), 合计的 "营收 + X%" 掩盖是价格驱动还是数量驱动。**方向组合解读**: 销量 + / 收入 + = 健康增长; 销量 + / 收入 - = **降价走量** (pricing power 减弱, 值得 flag); 销量 - / 收入 + = 涨价保利 (需求强 / 提价空间); 销量 - / 收入 - = 衰退。
+  - **关联 vs 非关联方**: 关联交易定价通常非市场化 (见 §2.11.7)。
+
+- **§2.11.7 关联交易 ≠ 真实议价权 (A 股国企 / 民企 均需识别)**: "前 N 供应商 / 客户 中关联方占比 X%" 不是真正的供应链议价权指标, 而是**大股东利益转移通道**。分析时必须区分:
+
+  **真实市场议价权** (对非关联方): 上游供应商是否高度分散 / 有替代 / 议价弱; 下游客户是否有切换成本 / 大客户依赖。
+  
+  **关联交易 (对关联方)**: 采购/销售价格是否偏离市场公允价; 账龄 / 回款是否正常; 定价机制是否披露。偏高采购价 = 大股东占款的合规替代; 偏低销售价 = 集团补贴子公司逻辑。审计报告 KAM (关键审计事项) 把关联交易单列 = 审计师已做专项程序, 值得关注。
+
+  **判定原则**: 分析议价权时, 先把关联方从供应商 / 客户列表剥离, 再判非关联部分的市场结构。关联方占比 > 20% 必在节末 `**置信度:**` 降一档或 flag "定价公允性待跟踪"。
+
 ### §2.12好生意 > 好公司
 
 - **§2.12.1 §1结论 字段**: §1收尾给出 `好生意: 是 / 否 / 存疑` 结论; Step 6估值 必须 引用 此 结论; "否" 直接 Part 0标 "定性研究 only"。
@@ -235,11 +254,27 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### Invocation
 
-- **Primary:** `/value-profile <ticker>` — ticker 是 `<code>.<exchange>`（例: `600519.SH`, `000001.SZ`, `0700.HK`）, 验证正则 `^[0-9]{4,6}\.(SH|SZ|HK)$`。
+- **Primary:** `/value-profile <ticker>` — ticker 是 `<code>.<exchange>`（例: `600519.SH`, `000001.SZ`, `0700.HK`）, 验证正则 `^[0-9]{4,6}\.(SH|SZ|HK)$`。**默认 auto mode**（见下）。
+- **`--interactive`** — 切到 interactive mode, 每个 section 完成后停下来与用户交互。默认为 auto。
+- **`--auto`** — 显式 auto mode（与 default 等价）。
 - **`--section <id>`** — 跳到指定 section, 例 `/value-profile 600519.SH --section 1.3`。跳过 Step 2 progress summary, 直接进入 Step 3。
 - **`--resume`** — 强制加载最近一个 `profiles/<ticker>-*.md`, 不询问日期。
 
-Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回用户。
+#### 两种运行模式
+
+**Auto mode (default)**: 一次性跑完 Part 0 → Part 5 + §Q + §4.5 + playbook, 中途不停, 只在以下 genuine 故障时才停下来问用户或 abort:
+
+- Step 1 invalid ticker / 缺年报 PDF 且 fetcher 失败。
+- Step 1.4 resume-vs-start-fresh（同一 ticker 旧日期文件存在时的 fork, 语义选择不是进度 checkpoint）。
+- §3.pre 三大前提 判为 假 → 强制降级为 "仅定性研究", 通告用户并暂停 Step 6; 子 agent 的 Step 1-5 继续跑但估值部分不输出。
+- §2.12.2 §4风险 一票否决（道德/占款/画大饼/处罚）触发 → 整份 profile 终止, 通告用户。
+- Section-level 问题**不** abort: 子 agent 连续2次深调查仍无法获得关键证据 → 标 `**置信度:** 中` + `**需人工跟进:** <具体什么没找到>` 备注后继续下一节。
+
+**关键原则**: 当 main-agent review (Step 3c) 发现 subagent 输出证据薄弱 / 空白 / 论断 generic 时, auto mode 的默认动作是**扩大调查 scope 并重派 subagent**（多读1-2年年报 / 增查研报 B类运营明细 / 展开附注项 / web search 行业数据 / 读招股说明书对应章节）。**不**走 fallback `待补充 — 需人工` 占位, **不**等用户介入。宁愿多花 subagent 调用也要把证据找全 (§2.2.4)。
+
+**Interactive mode (`--interactive`)**: 每个 section 完成后 Step 3d 印菜单等用户 `accept / edit / defer / skip / research more`; Step 2 进度表印完后等用户 `continue / pick-section / exit`; Step 4 / Step 5 / Step 6 需用户 confirm。适合想逐节审阅、想在中间修正方向的场景。
+
+两种模式的 section-level 质量要求完全一致（§1-§2规则不变）——区别只在"是否让用户介入 section 推进节奏"。Skill 在 auto mode 下会自行终止（Step 6完成或 abort）; interactive mode 下每个 checkpoint 把控制权交回用户。
 
 ### Step 1 — Bootstrap + filings audit
 
@@ -260,34 +295,40 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 4. **Derive output path** `profiles/<ticker>-<YYYY-MM-DD>.md`:
    - 今日文件已存在 → 直接加载（continuation session）。
    - 只有旧日期文件 → `[resume / start-fresh]`; `resume` → 改名为今日 日期（one-file-per-ticker-per-day 不变量）; `start-fresh` → 新建, 旧文件保留。
-   - 无文件 → 复制 `.claude/skills/value-profile/template-zh.md` 到输出路径, 填 Part 0 header（ticker / exchange / researcher = `git config user.name` / report_date = 今日/中英文公司名 派轻量子 agent 一句话查）。
+   - 无文件 → 复制 `.claude/skills/value-profile/template-zh.md` 到输出路径, 然后做**强制3项 cleanup**（template 含 meta 文档, 必须在开跑前剥离, 否则最终 profile 会残留不属于 ticker-specific 内容的模板说明）:
+     1. **Title**: 第一行 `# 价值投资个股研究 Profile — Template` → `# 价值投资个股研究 Profile — <中文公司名> (<ticker>) <report_date>`（例: `# 价值投资个股研究 Profile — 贵州茅台 (600519.SH) 2026-05-01`）。
+     2. **删 HTML comment block**: template 开头 `<!-- 模板版本 v2 ... Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐节填写。 -->` 整段删除。
+     3. **删 "阅读姿态/分析框架" 段**: 从 `## 阅读姿态/分析框架（读前必读）` 到随后的 `---` separator 整段删除（指向 SKILL/references 的阅读指引, 属 skill-internal doc, 不属 profile 内容）。
+     4. **删 heading 里的 template-instruction parenthetical**: 扫 `^#+` 所有 heading, 删除尾部给填写者的指令性括号 annotation。典型要删的 pattern: `（本节最后填写）` / `（PRIMARY — 先填）` / `（OPTIONAL — 后填）` / `（填入...）` / `（待填）` / `（SECONDARY — 定量补充）`等。heading 本身 title 留下, 只剥离尾部给 filler 的 meta 指示。Ticker-specific 的 title 修饰（如"§3护城河分析"后面的结论性标签）不动。
+     
+     然后填 Part 0 header（ticker / exchange / researcher = `git config user.name` / report_date = 今日; 中英文公司名 派轻量子 agent 一句话查）。Auto / interactive 两种模式都必须做此 cleanup, 不可跳过。
 
 ### Step 2 — Progress map
 
 1. **Parse output file**: 对每个 `^### §` 或 `^## §`, 在其 block 内查找 `**置信度:**`。构造 dict `{section_id: status}`, 值域 `{已完成, 进行中, 未做, 已跳过, 需人工}`。
 
-2. **Render bilingual summary**:
+2. **Render bilingual summary**（两种模式都印, 方便 logging / 用户 observe 进度）:
    ```
    已完成 4 / 67 节（§0, §1.1, §1.2, §1.6）.
    下一节（next undone）: §1.3 差异化
-   [continue / pick-section / exit]
    ```
 
-3. **Route**:
-   - `continue` → Step 3 on next-undone。
-   - `pick-section` → 询问 id; §Q* 去 Step 4; §4.5去 Step 5; 其他 Step 3。
-   - `exit` → 停。
+3. **Route by mode**:
+   - **Auto mode (default)**: **直接进 Step 3 on next-undone, 不等输入**。Section 完成后回 Step 2 重新印进度表 + 跳下一节, 循环直到: 所有 undone section 填完 / 触发 abort 条件（§3.pre 假、§4风险 一票否决、Step 1 fetcher 失败）/ 达到 Step 6估值触发条件（≥ 80% 已完成）。
+   - **Interactive mode (`--interactive`)**: 印 `[continue / pick-section / exit]` 菜单, 等用户:
+     - `continue` → Step 3 on next-undone。
+     - `pick-section` → 询问 id; §Q* 去 Step 4; §4.5去 Step 5; 其他 Step 3。
+     - `exit` → 停。
 
-**`--section` 跳过 Step 2**, 直接进 Step 3。
+**`--section` 跳过 Step 2**（两种模式都是）, 直接进 Step 3。
 
 ### Step 3 — Section worker (per section)
 
-#### 3.pre — §3.pre 三大前提 + §3.pre-1能力圈四问
+#### 3.pre — §3.pre 三大前提（§1 / §3 / §5 前置 gate）
 
-- §3.pre 三大前提 judgement: 子 agent 在 定性段落前先输出3行判定, 依据 §2.2.1。任一假/存疑 → §2.2.2全局降级。
-- §3.pre-1能力圈四问: §1所有 subsection 必走, 依据 §2.6.1 / §2.6.2。主 agent 复核不合格退回。
+- **§3.pre 三大前提 judgement**: 子 agent 在 §1 / §3 / §5 定性段落前先输出3行判定, 依据 §2.2.1。审计/CFO/ROE 属纯财务数据检查, 与业务理解无关, 所以可做前置 gate。任一假/存疑 → §2.2.2全局降级。
 
-两者并列前置条件, 缺一不可。
+**§1.8 能力圈四问 ≠ 前置 gate**: 四问是 **§1.1-§1.7 拆解完成后**的 synthesis 章节（见 §2.6）, 不是 §1.1 开场前的 gate。子 agent 在 §1.1-§1.7 全部填完之后, 基于已建立的业务理解综合回答四问。理由: 能力圈判定需要对业务先有认知, 才能给出实质性答案; 前置 gate 版本 = "没读就下结论", 与价值投资"看懂再下注"精神反着走。
 
 #### 3a. PDF pre-read
 
@@ -333,18 +374,21 @@ Skill 不会自行终止, 每个 section 确认节点后都会把控制权交回
 - 事实缺引用。
 - 管理层口径校核 缺失或琐碎复读。
 - 填写区 generic, 无 ticker 特定细节。§3护城河 写茅台 必须引用 茅台镇水源 / 12987工艺/基酒5年陈化/品牌价格带。
-- §1 subsection 四问任一 < 50字/品牌复读/结论标签无场景 → §2.6.2退回。
+- §1.8 四问任一 < 50字/品牌复读/结论标签无场景 → §2.6.2退回; 退回的是 §1.8本节, 不动 §1.1-§1.7。
+
+**Auto mode 重派方式 (§2.2.4深调查)**: 不简单重跑同 prompt, 必须**扩大 scope**——指示子 agent (a) 多读 1-2年年报横向追溯趋势 / (b) 增查研报 B类运营明细 / (c) 展开附注项具体条款 / (d) web search 行业同行数据 / (e) 读招股说明书对应章节 / (f) 查监管披露 或 交易所问询函。**重派最多2次**; 仍薄弱 → Acceptable 放宽为 `**置信度:** 中` + 填 `**需人工跟进:** <具体缺什么>` 备注, 继续进下一节, 不 abort。Interactive mode 下用户可在 3d 主动 `research more: <hint>` 给方向, 主 agent 不强制自动加深。
 
 Acceptable 后写中文终稿, 填 `**引用:**` `**置信度:**` `**管理层口径校核:**`（Part 1 §1-§5）。
 
-#### 3d. 用户确认节点
+#### 3d. Save by mode
 
-profile 内容中文; operator 菜单双语:
-- `accept` → 保存, 覆盖原内容, 进度标 `已完成`。
-- `edit: <text>` → 应用修改, 保存为 `已完成`。
-- `defer` → 不保存, 标 `未做`, 回 Step 2。
-- `skip` → 填 `N/A — <原因>`, 标 `已跳过`, 保存。
-- `research more: <hint>` → 回3b, 把 hint 附到子 agent prompt。
+- **Auto mode (default)**: 3c review 通过 → **隐式 accept**, 直接原子写入 profile（`**置信度:**` 由 3c 写好）, 回 Step 2 找下一节, **不印 menu 不等用户**。3c 连续2次深调查仍不达标 → 隐式 accept 为 `**置信度:** 中` + `**需人工跟进:**` 备注, 继续。
+- **Interactive mode (`--interactive`)**: 印 profile 内容中文 + 双语菜单:
+  - `accept` → 保存, 覆盖原内容, 进度标 `已完成`。
+  - `edit: <text>` → 应用修改, 保存为 `已完成`。
+  - `defer` → 不保存, 标 `未做`, 回 Step 2。
+  - `skip` → 填 `N/A — <原因>`, 标 `已跳过`, 保存。
+  - `research more: <hint>` → 回3b, 把 hint 附到子 agent prompt。
 
 #### 3e. Save and continue
 
@@ -352,11 +396,11 @@ profile 内容中文; operator 菜单双语:
 
 ### Step 4 — Part 2 bulk mode (§Q1-§Q12)
 
-1. offer `[bulk / by-section]`。
+1. **Auto mode**: 默认直接走 `bulk`, 不 offer。**Interactive mode**: offer `[bulk / by-section]` 等用户选。
 2. `bulk` → ONE 子 agent: Read 每个年报第五节, 逐年抽 营收 / NI / 扣非 NI / 毛利率/净利率 / ROE / ROA / CFO / CapEx / 有息负债/现金/总资产/总负债/净资产/应收/存货, 就地填 Part 2 §Q1-§Q12表, 每 cell `**来源:**` 带 `年报-YYYY.pdf p.NN`。顶行（ROE / 毛利/净利率）雪球 F10联网交叉验证。
-3. 呈给用户: `Random-sample 5 cells: given <ROE 2024 = X%>, does 雪球 agree? [all-match / mismatch: <details>]`
+3. **Auto mode**: 子 agent 在 prompt 里明确要求它自己执行 random-sample 5 cells 雪球校核 + 汇报结果, 主 agent 收到后自动按 ≥ 4/5一致 规则判决（≥ 4/5 → 所有 §Q* 标 `已完成`; 否则 不一致行 标 `需人工`）, 不问用户。**Interactive mode**: 呈给用户 `Random-sample 5 cells: given <ROE 2024 = X%>, does 雪球 agree? [all-match / mismatch: <details>]`, 用户回复后主 agent 按规则判决。
 4. ≥ 4/5一致 → 所有 §Q* 标 `已完成`; 否则 不一致行 标 `需人工`。
-5. `by-section` → 走标准 Step 3。
+5. `by-section` (interactive only) → 走标准 Step 3。
 
 ### Step 5 — 排雷清单模式 (§4.5)
 
@@ -365,7 +409,8 @@ profile 内容中文; operator 菜单双语:
 **Fallback（子 skill 不可用时, 主 skill 跑简化版）**:
 
 1. 派 ONE 子 agent 对 Part 4 §4.5 29项逐项扫, 每项 `是 / 否 / 不适用 / 需人工` + 证据 + 页码; 6项高危 附加检查 显式 flag（商誉/净资产>20% | 其他应收≥10%流动资产 | 在建工程长年不转固 | CFO/NI<50%连续2年 | 生物资产/农林渔牧 | 管理层道德风险一票否决）。详细阈值/三表勾稽/造假模式 见 `.claude/skills/financial-redflag-scan/references/fraud-library.md` §1-§4; 附注12项 见 `.claude/skills/read-filing/references/statement-reading.md` §3。
-2. 主 agent 复核缺引用 → re-dispatch。写 `**发现的风险 summary:**` 1-2段。用户确认仅 `[accept / edit / research more]`。
+2. 主 agent 复核缺引用 → re-dispatch（§2.2.4深调查）。写 `**发现的风险 summary:**` 1-2段。
+3. **Auto mode**: 3c 通过即保存, 不 confirm。**Interactive mode**: 用户确认 `[accept / edit / research more]`。
 
 
 ### Step 6 — 执行摘要合成 (Part 0估值)
@@ -390,9 +435,8 @@ profile 内容中文; operator 菜单双语:
 
 **置信度汇总**: `高` 当 ≥ 60% section 高 AND §3.pre 全真; `中` 混合; `低` 任一块未做 OR 任一前提 存疑。
 
-**Labeling**: 每份 Part 0末尾必须 `> 本摘要基于 AI 研究 + 用户审阅, 非投资建议. 最近审阅日期 = <today>.`
-
-用户确认 `[accept / edit / research more]` → save。
+- **Auto mode**: 3c review 通过（7字段完整、数字源头可追溯、§3.pre 全真或已 mark 降级）即 save 并 **skill 自行终止**。打 final summary: `✅ Profile 完成. N/67 sections 已完成, 估值 Part 0已合成. 路径: profiles/<ticker>-<date>.md`。
+- **Interactive mode**: 印摘要 + 双语菜单 `[accept / edit / research more]`, 等用户确认 → save。
 
 ---
 
@@ -421,7 +465,7 @@ profile 内容中文; operator 菜单双语:
 
 | Failure | Recovery |
 |---|---|
-| 子 agent 输出缺引用 | 主 agent 把无引用论断改写为 `证据不足, 需人工补充`——**绝不编造** |
+| 子 agent 输出缺引用 | **Auto**: 重派 subagent 扩大 scope (最多2次, §2.2.4); 仍缺 → 标 `**置信度:** 中` + `**需人工跟进:** <具体什么缺>`, 继续下一节不 abort。**Interactive**: 主 agent 把无引用论断改写为 `证据不足, 需人工补充`, 等用户下一步。**两种模式都绝不编造** |
 | `管理层口径校核` 琐碎话漏网 | Step 3c 应拦住; 作 skill-regression 信号 |
 | 年报 PDF 损坏 | 标 `年报-YYYY.pdf（unreadable）`, 用其他来源, 不 abort 该 section |
 | 两个 session 并发编辑 profile | 不自动 resolve; warning, 用户手动解决 |
@@ -436,7 +480,83 @@ profile 内容中文; operator 菜单双语:
 3. **定性 section**（§1-§5, §4.5定性项）继续 PDF。没有数据源能替代管理层原话。
 4. **`scripts/download_filings.py`** 挪进 `src/ah_research/integrations/cninfo_client.py`, 暴露为 repo 方法。
 
-### §4.5子 agent prompt 模板（Step 3b dispatch 示例）
+### §4.6 Profile 输出风格 — 给人读的, 不是给 AI 读的
+
+Profile 的读者是人（研究员 / 投资人 / 审阅人）, 不是另一个 AI agent。写法必须服务于人类 scan + 理解。
+
+- **§4.6.1 浓缩原则**: 核心是"内容少但每句精华, 信息量高"。Part 0 执行摘要用 **bullet 分层**（每项"状态行" + 3-5 个 sub-bullet 核心证据, 每个 sub-bullet 1 句浓缩）, **不必压缩到 1 行**。目标: 读完 Part 0 约 1-2 分钟能抓到所有结论 + 跟踪项。细节留 Part 1-5 / §Q / §4.5。
+- **§4.6.2 禁用 AI 自引用 + 内嵌文献引用 (全 profile 非仅 Part 0)**: narrative body 禁两类内嵌 refs:
+
+  **(a) 禁 `(§x.y)` 自引用**: 例 "毛利率92% (§1.1)"——事实自证, 不需指向源 section。允许的 § 引用形式: `**引用:**` 结构字段 / 开头为 "依据 §2.2 三大前提..." 的规则指向句 / "SKILL §2.9 守则" 这类 rule pointer。禁: 句尾裸括号 section id 如 `XXX (§1.5)`。
+
+  **(b) 禁 inline 文献引用塞段落中**: 禁 `XXX (年报-YYYY.md p.NN)`、`YYY (华鑫研报 p.260)`、`ZZZ (Kantar BrandZ, 年报-YYYY.md p.19)` 样在段落文字里内嵌 page-specific cites——这些是 AI "to prove I'm not hallucinating" 式标注, 对 reader 是 noise。**引用集中到本节末尾 `**引用:**` 字段**, 身体段落直接陈述事实即可。读者需追溯时翻 `**引用:**` 字段。
+
+- **§4.6.2.bis body 段落 readability**: 每个 section 身体段落写给人读, 不是给 AI dump:
+  - 禁 `(a)(b)(c)(d)` / `①②③④` inline list 散排在段落内——用真 markdown `- xxx` bullet, 每条独立一行。
+  - 禁 wall-of-text 长段落——每个独立概念一段, 段间空行, 每段 3-5 句上限。
+  - 数字尽量配紧凑上下文, 不用"在...的情况下/基于...的考虑"长从句包数字。
+  - 子标题 `**核心资产**` / `**生产流程**` / `**分产品收入**` 用粗体分块, 帮 reader 快 scan。
+- **§4.6.3 英文强制中文化** (依据 §4.1 language policy): Part 0 执行摘要 + Part 1-5 narrative 里, **除白名单外所有英文单词一律中文化**——包括英文缩写和英文普通词。白名单外的英文出现 = Step 3c review 驳回重派 subagent 重写。
+
+  - **白名单保留** (业内普及到 ≈ 中文, 缩写形式保留): ROE / ROIC / ROA / DCF / GDP / PE / PB / PS / PEG / EV / ESG / CAGR / YoY / QoQ / TTM / MAU / DAU / ARPU / LTV / CAC / CR5 / CR10 / GMV / KPI / OKR / ABT / SKU / IPO / IPO / H 股 / A 股。
+  
+  - **英文缩写强制中文化**:
+    - CFO → 经营现金流 / NI → 净利润 / CapEx → 资本开支 / FCF → 自由现金流
+    - EBITDA → 息税折旧摊销前利润 / NOPAT → 税后经营利润 / WACC → 加权平均资本成本
+    - TAM → 潜在市场规模 / SAM → 可服务市场规模 / SOM → 实际拿下市场规模
+    - SG&A → 销售管理费用 / COGS → 营业成本 / DSO → 应收周转天数 / DPO → 应付周转天数 / DIO → 存货周转天数
+
+  - **英文普通词强制中文化** (业内偶用但有天然中文对应):
+    - framework → 框架 / guidance → 指引 / pass → 通过 / fail → 未通过 / clean → 合规 或 无警示 (context 而定) / checklist → 清单 / summary → 摘要
+    - scope → 范围 / benchmark → 基准 / overlay → 叠加 / actual → 实际 / forecast → 预测 / narrative → 叙述 / reference → 参考
+    - cross-section → 跨 (类别 / 年份 / 行业) / Top N → 前 N / bear case → 悲观情景 / bull case → 乐观情景 / base case → 中性情景
+    - stakeholder → 利益相关方 / SOE → 国企
+    - mix → 产品结构 / 收入结构 / 产品组合 (context 而定) / product mix → 产品组合 / channel mix → 渠道结构 / revenue mix → 收入结构
+- **§4.6.4 Part 0 结论标签 + 顺序 + 状态词 → 见 template**: schema 的 single source of truth 在 `.claude/skills/value-profile/template-zh.md` 的 Part 0 placeholder。填写时必须严格照 template 的 6 项顺序 (好生意 → 护城河 → 管理层 → 财报排雷 → 能力圈四问 → 估值三大前提) 和状态词选项（`<宽 / 中 / 窄 / 弱 / 否>` 这类尖括号列表）。**禁自造状态词 + 禁 AI 直译**（本规则适用**全 profile**, 不仅 Part 0）:
+
+  | ❌ AI 直译 / 意译 (禁) | ✅ 自然中文金融词 | 用于 |
+  |---|---|---|
+  | 清洁 / clean | **无触发** / **零触发项** / **无警示** / **合规** | 排雷扫描结果 |
+  | 清洁（指管理层）| **合规** / **诚信合规** / **未触发一票否决** | 管理层扫描 |
+  | pass / 通过 | **通过** (状态 OK) / **未触发** (排雷) / **达标** (指标) | 检验 / 扫描 |
+  | clean audit / 干净审计 | **标准无保留审计意见** | 审计结果 |
+  | healthy / 健康 | **财务稳健** / **结构稳健** | 财务状况 |
+  | risk-free / 无风险 | **未识别重大风险** | 风险扫描 |
+  | robust / 稳健 | **稳健** OK; 但避免直译 "robustly" → "健壮地" 这类 | 通用 |
+  | green flag / 绿灯 | **积极信号** / **正面信号** | 信号判定 |
+  | red flag / 红旗 | **风险信号** / **警示项** | 风险条目 |
+
+  **判定原则**: 若某词看起来像"英文直接翻译过来", 查行业中文表述; 没有 exact 中文对应就用描述性短句（"本项扫描未发现异常" vs "清洁"）。**禁创新中文状态词**——只能用 template 列的 schema 选项。若需新增状态词, 改 template 先, 不在 profile 里自造。
+
+- **§4.6.5 跟踪项 / 风险项 视觉强调**: Part 0 + section 内遇到"需跟踪 / 需注意 / 风险信号"条目, 用 `⚠️ **跟踪 N**:` 或 `⚠️ **注意**:` 格式显式 flag, reader 一眼识别"哪些项需持续观察"。
+- **§4.6.6 Part 0 heading 唯一**: 使用 `### 执行摘要` 作为 Part 0 结论块的唯一 heading, **不另套 `### 结论速览` / `### 结论` 等二级 heading**（重复 + 冗余）。
+- **§4.6.7 自然中文措辞 / 词序 — 禁 AI 风格 awkward 句式**: Profile 的每段中文写完必须通过"母语 reader 自读流畅度 check"——读起来像原生中文, 不是"英文思路翻译过来"。以下 pattern 是 AI 直译高频 awkward 病症, 必须替换:
+
+  | ❌ AI-style awkward | ✅ 自然中文 |
+  |---|---|
+  | 靠什么生产 | 怎么生产 / 生产方式 |
+  | 靠什么环节赚什么钱（"靠什么 X 赚什么 Y" 双疑问空洞式）| 在哪个环节赚钱 / 赚钱的核心环节 |
+  | 具备...可持续性 | 能否持续 / 可不可持续 |
+  | 在...的情况下 | 拆成短句去掉 "情况下" |
+  | 使得 + 长从句 | 拆成两个短句 |
+  | 作为一个...公司 | 这家公司 / 本公司 |
+  | 不仅...而且... 冗余对仗 | 改成一个短句 |
+  | 通过...的方式 | 直接说动作, 不用"方式" |
+  | 对于...来说 | 直接用"X 如何..." |
+  | 基于...的考虑 | "考虑到 X" 或直接说原因 |
+
+  **判定办法**: 写完一段读一遍——读起来卡、需停顿才懂、像翻译腔 = awkward, 改成母语自然说法。Step 3c 主 agent review 时抽查本节目标 / 结论句 / 填写区头尾句, 发现 awkward 句退回重派。
+
+- **§4.6.8 禁写 AI-runtime meta blocks**: Profile 是 ticker-specific research doc, 不含运行 telemetry。**禁写**以下块:
+  - "本 profile 完成状态" / "填写 section 数 67/67" / "Auto mode 完成时间" / "Profile 定位" / "✅ Profile 完成" 等完成状态 meta
+  - "> 本摘要基于 AI 研究 + 用户审阅, 非投资建议" 等 AI-generated disclaimer
+  - "置信度分布: 高 X% / 中 Y% / 低 Z%" 等 profile-level 统计（section 级 `**置信度:**` 字段保留）
+  - "最近审阅日期" 除非已填 Part 0 header 表格里
+  
+  Skill 运行 telemetry (完成数 / 路径 / 时间) 走**console final summary**（主 agent 自行打出, 不入文件）, 不是 profile 内容。
+- **§4.6.9 Step 1.4 cleanup + §2.11.3 禁用空话 + 本 §4.6 narrative 守则** 共同构成"给人读"的 output quality。Auto mode 跑完应人工快扫 Part 0 1-2 分钟能 read off 所有关键结论 + 跟踪项——做不到 (浓缩失败 / 英文缩写残留 / heading 重复 / 自引用没清 / meta block 残留 / awkward 翻译腔) = regression, 需修正。
+
+### §4.7子 agent prompt 模板（Step 3b dispatch 示例）
 
 针对600519.SH §1.3; 换 section 时替换目标 block / 数据源 hint / page range。
 
