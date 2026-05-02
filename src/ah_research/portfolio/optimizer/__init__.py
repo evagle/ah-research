@@ -90,21 +90,57 @@ class Optimizer:
         *,
         prev_weights: pd.Series | None = None,
     ) -> OptimizationResult:
+        """Orchestrates load -> estimate -> build -> solve -> result.
+
+        Behavioural invariant: identical to the pre-refactor monolith.
+        Each step is extracted into a named helper so failures point at the
+        right phase and each step can be tested in isolation.
+        """
         if not symbols:
             raise ValidationError("symbols must be non-empty")
 
-        # 1. Load returns via repo (PIT-safe: strictly < as_of)
+        returns = self._load_returns(symbols, as_of, repo)
+        sigma, mu = self._estimate_inputs(returns, symbols, as_of, repo)
+        prob, w = self._build_problem(symbols, mu, sigma, prev_weights)
+
+        solver_name = self._choose_solver()
+        status, solve_ms = self._solve(prob, solver_name)
+        self._check_status(status, prob)
+
+        return self._build_result(
+            prob=prob,
+            w=w,
+            symbols=symbols,
+            mu=mu,
+            sigma=sigma,
+            prev_weights=prev_weights,
+            status=status,
+            solver_name=solver_name,
+            solve_ms=solve_ms,
+        )
+
+    # -- build() sub-steps ---------------------------------------------------
+
+    def _load_returns(
+        self, symbols: list[str], as_of: pd.Timestamp, repo: DataRepository
+    ) -> pd.DataFrame:
+        """Step 1: fetch PIT-safe returns (strictly < as_of) for `lookback_days`."""
         start = (as_of - timedelta(days=int(self.lookback_days * 1.6))).date()
         end = as_of.date()
         prices = repo.get_prices(symbols, start, end)
         wide = prices.pivot(index="ds", columns="symbol", values="total_return").sort_index()
         wide = wide[wide.index < pd.Timestamp(as_of)].tail(self.lookback_days)
-        returns = wide.reindex(columns=symbols)
+        return wide.reindex(columns=symbols)
 
-        # 2. Sigma
+    def _estimate_inputs(
+        self,
+        returns: pd.DataFrame,
+        symbols: list[str],
+        as_of: pd.Timestamp,
+        repo: DataRepository,
+    ) -> tuple[pd.DataFrame, pd.Series | None]:
+        """Steps 2+3: covariance (all modes), expected returns (MV only)."""
         sigma = self.cov_estimator.estimate(returns)
-
-        # 3. mu (MV only)
         mu: pd.Series | None
         if self.objective == "mean_variance":
             assert self.returns_estimator is not None  # validated in __init__
@@ -113,10 +149,20 @@ class Optimizer:
                 raise ValidationError("mu contains NaN")
         else:
             mu = None
+        return sigma, mu
 
-        # 4. Build problem
-        # On the first rebalance prev_weights is None; skip max_turnover then
-        # (turnover is undefined with no prior portfolio to compare against).
+    def _build_problem(
+        self,
+        symbols: list[str],
+        mu: pd.Series | None,
+        sigma: pd.DataFrame,
+        prev_weights: pd.Series | None,
+    ) -> tuple[cp.Problem, cp.Variable]:
+        """Step 4: dispatch to MV or RP problem builder.
+
+        On the first rebalance `prev_weights is None`; max_turnover is skipped
+        because turnover is undefined without a prior portfolio.
+        """
         effective_constraints = (
             [c for c in self.constraints if c.kind != "max_turnover"]
             if prev_weights is None
@@ -124,7 +170,7 @@ class Optimizer:
         )
         if self.objective == "mean_variance":
             assert mu is not None
-            prob, w = build_mean_variance(
+            return build_mean_variance(
                 symbols=symbols,
                 mu=mu,
                 sigma=sigma,
@@ -135,27 +181,25 @@ class Optimizer:
                 soft=self.soft,
                 soft_penalty=self.soft_penalty,
             )
-        else:
-            prob, w = build_risk_parity(
-                symbols=symbols,
-                sigma=sigma,
-                constraints=effective_constraints,
-                long_only=self.long_only,
-                prev_weights=prev_weights,
-                soft=self.soft,
-                soft_penalty=self.soft_penalty,
-            )
+        return build_risk_parity(
+            symbols=symbols,
+            sigma=sigma,
+            constraints=effective_constraints,
+            long_only=self.long_only,
+            prev_weights=prev_weights,
+            soft=self.soft,
+            soft_penalty=self.soft_penalty,
+        )
 
-        # 5. Choose solver
-        solver_name = self._choose_solver()
-
-        # 6. Solve
+    def _solve(self, prob: cp.Problem, solver_name: str) -> tuple[str, float]:
+        """Step 6: solve and time."""
         t0 = time.perf_counter()
         prob.solve(solver=solver_name.upper())
         solve_ms = (time.perf_counter() - t0) * 1000
+        return prob.status, solve_ms
 
-        # 7. Handle statuses
-        status = prob.status
+    def _check_status(self, status: str, prob: cp.Problem) -> None:
+        """Step 7: raise InfeasibleError / NumericalError on bad status."""
         if status in ("infeasible", "unbounded") and not self.soft:
             raise InfeasibleError(
                 f"Problem is {status}. Use soft=True for best-effort.",
@@ -168,7 +212,20 @@ class Optimizer:
                     f"optimal_inaccurate with residual {residual:.2e} > {self.solver_tol * 100:.2e}"
                 )
 
-        # Post-process
+    def _build_result(
+        self,
+        *,
+        prob: cp.Problem,
+        w: cp.Variable,
+        symbols: list[str],
+        mu: pd.Series | None,
+        sigma: pd.DataFrame,
+        prev_weights: pd.Series | None,
+        status: str,
+        solver_name: str,
+        solve_ms: float,
+    ) -> OptimizationResult:
+        """Post-process solver output into an OptimizationResult."""
         w_value = np.asarray(w.value)
         if self.objective == "risk_parity":
             # log-barrier formulation needs post-hoc normalization
@@ -198,13 +255,12 @@ class Optimizer:
             assert mu is not None
             mu_np = np.asarray(mu.reindex(symbols).values, dtype=float)
             exp_ret = float(mu_np @ w_np)
-            rc = None
+            rc: pd.Series | None = None
         else:
             exp_ret = None
             raw_rc = w_np * (sigma_np_aligned @ w_np)
             rc = pd.Series(raw_rc / raw_rc.sum(), index=symbols)
 
-        # Extract slack if soft
         slack: dict[str, float] = {}
         if self.soft:
             for v in prob.variables():
@@ -212,8 +268,6 @@ class Optimizer:
                     val = v.value
                     if val is not None and float(val) > 1e-8:
                         slack[v.name()] = float(val)
-
-        inputs_hash = self._hash_inputs(symbols, mu, sigma)
 
         return OptimizationResult(
             weights=weights,
@@ -227,7 +281,7 @@ class Optimizer:
             risk_contributions=rc,
             solver_name=solver_name,
             solve_time_ms=solve_ms,
-            inputs_hash=inputs_hash,
+            inputs_hash=self._hash_inputs(symbols, mu, sigma),
         )
 
     # -- helpers -------------------------------------------------------------

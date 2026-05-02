@@ -462,19 +462,9 @@ class _SignalShiftedStrategy:
         self.name = getattr(inner, "name", "shifted")
 
     def generate(self, repo: Any, start: date, end: date) -> Weights:
-        from ah_research.strategies.base import SignalStrategy, WeightStrategy
+        from ah_research.strategies.base import resolve_weights
 
-        if isinstance(self._inner, WeightStrategy):
-            weights = self._inner.generate(repo, start, end)
-        elif isinstance(self._inner, SignalStrategy):
-            sigs = self._inner.generate(repo, start, end)
-            weights = self._inner.to_weights(sigs, repo)
-        else:
-            result = self._inner.generate(repo, start, end)
-            if hasattr(result, "df") and "weight" in result.df.columns:
-                weights = result
-            else:
-                weights = self._inner.to_weights(result, repo)
+        weights = resolve_weights(self._inner, repo, start, end)
 
         # Shift dates back by 1 trading day
         df = weights.df.copy()

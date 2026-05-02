@@ -1,5 +1,14 @@
 """DataRepository — the façade every research function calls.
 
+.. admonition:: Refactor candidate (H4 in 2026-05-02 code review)
+
+   This class has accumulated ~20 public methods covering prices,
+   fundamentals, constituents, corporate actions, FX, calendar, sectors,
+   resample, AH premium. A follow-up PR should split by entity type
+   (``PriceRepository``, ``FundamentalsRepository``, ``ConfigRepository``)
+   and compose them into a façade for convenience. Scoping that change
+   separately because every research module depends on this class.
+
 Responsibilities:
 
 - **Compose** integration sources + the DuckDB cache behind a single

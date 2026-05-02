@@ -41,7 +41,7 @@ from ah_research.constants import LEVERAGE_SUM_TOLERANCE
 from ah_research.exceptions import DataIntegrityError, SourceError, UserInputError
 from ah_research.meta import code_version
 from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
-from ah_research.strategies.base import SignalStrategy, WeightStrategy
+from ah_research.strategies.base import resolve_weights
 
 logger = logging.getLogger(__name__)
 
@@ -481,6 +481,16 @@ def run_backtest(
 ) -> BacktestResult:
     """Run a daily-loop event-driven backtest.
 
+    .. admonition:: Refactor candidate (C1 in 2026-05-02 code review)
+
+       This function has grown to ~720 lines and owns: calendar merging,
+       universe discovery, corporate actions, order execution, T+N lock,
+       slippage, costs, cash back-solve, rebalancing, and MTM. A follow-up
+       PR should carve it into collaborators (``BacktestLoop`` +
+       ``OrderExecutor``, ``RebalanceScheduler``, ``CashLedger``,
+       ``CorporateActionHandler``, ``MTMAccumulator``). Scoping it here to
+       avoid an unreviewable diff.
+
     Parameters
     ----------
     strategy:
@@ -527,22 +537,11 @@ def run_backtest(
     all_symbols_str: set[str] = set()
 
     # Call strategy.generate once (outside the per-date loop) to get all weights.
-    # Re-raise ValueError (e.g. NaN weights from pandera) immediately.
+    # Dispatch logic lives in strategies.base.resolve_weights so engine.py and
+    # verify.py share one source of truth. Re-raise ValueError (e.g. NaN
+    # weights from pandera) immediately.
     try:
-        # Check SignalStrategy first: it has both generate() and to_weights(),
-        # whereas WeightStrategy has only generate(). A strategy implementing
-        # both protocols is treated as SignalStrategy so to_weights() is called.
-        if isinstance(strategy, SignalStrategy) and hasattr(strategy, "to_weights"):
-            s = strategy.generate(repo, config.start, config.end)
-            all_weights = strategy.to_weights(s, repo)
-        elif isinstance(strategy, WeightStrategy):
-            all_weights = strategy.generate(repo, config.start, config.end)
-        else:
-            result_obj = strategy.generate(repo, config.start, config.end)
-            if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
-                all_weights = result_obj
-            else:
-                all_weights = strategy.to_weights(result_obj, repo)
+        all_weights = resolve_weights(strategy, repo, config.start, config.end)
     except (ValueError, TypeError):
         # Validation errors (NaN weights, bad schema) are user-input errors — re-raise.
         raise
