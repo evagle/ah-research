@@ -13,6 +13,7 @@ import numpy as np
 import pandas as pd
 
 from ah_research.backtest.types import Signals
+from ah_research.constants import BPS_PER_UNIT, TRADING_DAYS_PER_YEAR
 from ah_research.portfolio.construction import top_quantile_weights
 
 if TYPE_CHECKING:
@@ -471,12 +472,12 @@ class Constructor:
             bm_w = pd.Series(1.0 / n, index=weights.index)
             active = weights - bm_w
             active_arr = active.to_numpy(dtype=float)
-            te_bps = float(np.std(active_arr) * np.sqrt(252) * 10000)
+            te_bps = float(np.std(active_arr) * np.sqrt(TRADING_DAYS_PER_YEAR) * BPS_PER_UNIT)
             if te_bps <= bps:
                 return weights, ConstraintResult(constraint=constraint, status="slack"), notes
             # Shrink: w_new = alpha*w + (1-alpha)*bm_w; solve for alpha
-            target = bps / 10000.0  # as fraction
-            current_te_frac = float(np.std(active_arr) * np.sqrt(252))
+            target = bps / BPS_PER_UNIT  # as fraction
+            current_te_frac = float(np.std(active_arr) * np.sqrt(TRADING_DAYS_PER_YEAR))
             if current_te_frac == 0:
                 return weights, ConstraintResult(constraint=constraint, status="slack"), notes
             alpha = target / current_te_frac

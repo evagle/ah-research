@@ -2,9 +2,15 @@
 
 from __future__ import annotations
 
+from ah_research.exceptions import ResearchError
 
-class OptimizerError(Exception):
-    """Base class for all optimizer errors."""
+
+class OptimizerError(ResearchError):
+    """Base class for all optimizer errors.
+
+    Inherits from ResearchError so optimizer exceptions share the package-wide
+    ``AHResearchError`` root — ``except AHResearchError`` catches them too.
+    """
 
 
 class InfeasibleError(OptimizerError):

@@ -106,17 +106,18 @@ See [`docs/superpowers/specs/2026-04-29-ah-research-phase-3-analysis-design.md`]
 ## Quick Start
 
 ```bash
-# Install
-pip install -e ".[dev]"
+# Install (uv is the project's package manager; uv.lock is committed)
+uv sync --extra dev
+# or: pip install -e ".[dev]"
 
 # Warm up local cache (A-shares sample)
-ah warmup sample
+uv run ah warmup sample
 
-# Run unit tests
-pytest -q
+# Run unit + property tests
+uv run pytest tests/unit tests/property -q
 
 # Run acceptance notebook (slow)
-pytest tests/integration/test_acceptance_notebook_runs.py -m slow -v
+uv run pytest tests/integration/test_acceptance_notebook_runs.py -m slow -v
 ```
 
 ## Development

@@ -19,6 +19,7 @@ import pandas as pd
 from ah_research.backtest.engine import run_backtest
 from ah_research.backtest.metrics import MetricsBundle
 from ah_research.backtest.types import BacktestConfig, Weights
+from ah_research.constants import CANARY_EQUITY_TOLERANCE
 from ah_research.model.types import Exchange
 
 logger = logging.getLogger(__name__)
@@ -528,7 +529,7 @@ def _canary_future_price_shuffle(
 
     divergence = (aligned.iloc[:, 0] - aligned.iloc[:, 1]).abs()
     max_div = float(divergence.max())
-    tol = 1e-6  # allow small floating-point rounding
+    tol = CANARY_EQUITY_TOLERANCE
 
     passed = max_div < tol
     return CanaryResult(
@@ -588,7 +589,7 @@ def _canary_future_fundamentals_shuffle(
 
     divergence = (aligned.iloc[:, 0] - aligned.iloc[:, 1]).abs()
     max_div = float(divergence.max())
-    tol = 1e-6
+    tol = CANARY_EQUITY_TOLERANCE
 
     passed = max_div < tol
     return CanaryResult(

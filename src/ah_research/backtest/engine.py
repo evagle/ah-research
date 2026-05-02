@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import json
 import logging
-import subprocess
 from dataclasses import replace
 from datetime import date
 from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
@@ -38,6 +37,8 @@ from ah_research.backtest.types import (
     Weights,
     hash_config,
 )
+from ah_research.constants import LEVERAGE_SUM_TOLERANCE
+from ah_research.meta import code_version
 from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
 from ah_research.strategies.base import SignalStrategy, WeightStrategy
 
@@ -63,16 +64,7 @@ _hk_borrow_warned: set[str] = set()
 
 def _get_code_version() -> str:
     """Return the short git SHA of the current HEAD, or 'unknown'."""
-    try:
-        result = subprocess.run(
-            ["git", "rev-parse", "--short", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        return result.stdout.strip()
-    except Exception:
-        return "unknown"
+    return code_version()
 
 
 _BENCHMARK_SYMBOL: dict[str, str] = {
@@ -584,7 +576,7 @@ def run_backtest(
             if not config.allow_leverage:
                 for grp_date, grp in wdf.groupby("date"):
                     abs_sum = float(grp["weight"].abs().sum())
-                    if abs_sum > 1.0 + 1e-6:
+                    if abs_sum > 1.0 + LEVERAGE_SUM_TOLERANCE:
                         raise ValueError(
                             f"Weight sum {abs_sum:.6f} exceeds 1.0 on {grp_date} "
                             f"with allow_leverage=False. Either set allow_leverage=True "
