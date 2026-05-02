@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## Phase 4.8 — Constructor Optimize Mode (2026-05-01)
+
+### Added
+- `Constructor.weight_by("optimize")` — delegates portfolio weighting to Phase 4.1 `Optimizer` when an `optimizer=` is supplied to `Constructor(...)`.
+- `ConstructionReport.optimization_result` — the full `OptimizationResult` attached when optimize mode is used.
+- `ah construct <universe> --weight-by optimize --objective [mean_variance|risk_parity] [--max-turnover]` CLI subcommand.
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-4-8-constructor-optimize-design.md`
+
 ## Phase 4.7 — LLM-Based Profile Grading (2026-05-01)
 
 ### Added
