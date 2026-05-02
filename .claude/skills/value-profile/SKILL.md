@@ -507,7 +507,8 @@ Profile 的读者是人（研究员 / 投资人 / 审阅人）, 不是另一个 
   - 时间 / 比率: CAGR / YoY / QoQ / TTM
   - 用户指标: MAU / DAU / ARPU / LTV / CAC
   - 集中度: CR5 / CR10 / GMV
-  - 宏观 / 合规: GDP / ESG / IPO / H 股 / A 股 / KPI / OKR / ABT / SKU
+  - 宏观 / 合规: GDP / ESG / IPO / H 股 / A 股 / SKU
+  - 管理 / 指标术语: KPI / OKR / ABT
   
   白名单外一概中文化。若某词业内找不到自然中文对应, 用描述性短句, 不自造新英文或混用。
 
