@@ -5,6 +5,84 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## Phase 5 — Research Chat UI (2026-05-01)
+
+### Added
+- `ResearchChat` — conversational agent with tool-use loop over 8 platform tools (`list_universe`, `get_dossier`, `get_profile_markdown`, `get_graded_profile`, `get_screener_row`, `search_filings`, `get_corpus_summary`, `construct_portfolio`).
+- `ChatSession` — JSONL-persisted conversation history at `~/.ah-research/chat/<session-id>.jsonl` with `--resume` support.
+- `ah chat [TICKER] [--resume ID] [--model NAME] [--list]` — REPL CLI.
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-5-research-chat-design.md`
+
+## Phase 4.8 — Constructor Optimize Mode (2026-05-01)
+
+### Added
+- `Constructor.weight_by("optimize")` — delegates portfolio weighting to Phase 4.1 `Optimizer` when an `optimizer=` is supplied to `Constructor(...)`.
+- `ConstructionReport.optimization_result` — the full `OptimizationResult` attached when optimize mode is used.
+- `ah construct <universe> --weight-by optimize --objective [mean_variance|risk_parity] [--max-turnover]` CLI subcommand.
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-4-8-constructor-optimize-design.md`
+
+
+## Phase 4.7 — LLM-Based Profile Grading (2026-05-01)
+
+### Added
+- `GradedProfile` + `ProfileGrader` — grade value-investing profiles via Claude API into structured fields (moat_grade, mgmt_grade, redflag_count, confidence, rationale) with sha256-based disk cache so identical profiles are never re-graded.
+- `ah profile grade <symbol>` CLI subcommand.
+
+### Dependencies
+- `anthropic>=0.40.0`
+
+### Design doc
+- `docs/superpowers/specs/2026-05-01-ah-research-phase-4-7-profile-grading-design.md`
+
+## Phase 4.6 — Filings + Profile Corpus Summary (2026-04-30)
+
+### Added
+- `build_corpus_summary(filings_repo, profiles_repo)` — pure DataFrame builder (10 columns per ticker: filings counts, freshness, profile presence, staleness).
+- `ah filings summary [--sort-by COLUMN]` CLI subcommand.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-6-corpus-summary-design.md`
+
+## Phase 4.5 — Filings Text Search (2026-04-30)
+
+### Added
+- `FilingsRepository.search(query, *, symbols=None, kinds=None, regex=False, max_hits_per_file=None)` — substring / regex search across 年报, 招股说明书, and research reports. Returns `SearchHit` objects with file, line number, matching line, and 3-line context window.
+- `ah filings search <query>` CLI subcommand with `--symbols`, `--kinds`, `--regex`, `--max-per-file` flags.
+- `SearchHit` frozen dataclass exported from `ah_research.filings`.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-5-filings-search-design.md`
+
+ 
+## Phase 4.1 — Portfolio Optimizer (2026-04-30)
+
+### Added
+- `src/ah_research/portfolio/optimizer/` package: `Optimizer`, `OptimizationResult`,
+  `CovarianceEstimator` / `ExpectedReturnsEstimator` protocols with 2+3 built-in
+  implementations (`SampleCovariance`, `LedoitWolfCovariance`, `UserSuppliedReturns`,
+  `HistoricalMeanReturns`, `SignalBasedReturns`).
+- Two CVXPY objectives: mean-variance (QP via OSQP) and risk-parity (SOCP via CLARABEL).
+- `OptimizedWeightStrategy` — Phase 2 `WeightStrategy` that drives `Optimizer.build()`
+  at each rebalance; retains full `OptimizationResult` history.
+- Two new `Constraint` kinds: `max_turnover` (L1 anchor to prev weights) and
+  `long_only` (explicit form of the default-on kwarg).
+- `OptimizationResult.to_dict()` / `.to_markdown()` for serialization and reporting.
+- Acceptance notebook `notebooks/phase4_1_optimizer_example.ipynb`.
+
+### Dependencies
+- `cvxpy>=1.5,<2.0`
+- `clarabel>=0.9,<1.0`
+- `scikit-learn` (added as runtime dep for `LedoitWolfCovariance`)
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md`
+
+
 ## Phase 4.2 — Filings + Profile Repositories (2026-04-30)
 
 ### Added
@@ -17,9 +95,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Design doc
 - `docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md`
 
-### Deferred to Phase 4.3
-- Dossier / Screener integration
-- Structured grading of profile content (moat_grade, redflag_count, etc.)
+## Phase 4.3 — Dossier + Filings/Profile Integration (2026-04-30)
+
+### Added
+- `FilingsSection` + `ProfileSection` dataclasses surfaced on `Dossier` — summarize filings inventory (annual count, latest year, IPO flag, research count) and profile metadata (date, section names).
+- `build_dossier(symbol, ..., include_qualitative=True, filings_repo=..., profiles_repo=...)` wires Phase 4.2 repositories into the Dossier pipeline.
+- `Dossier.to_markdown()` renders "## Filings inventory" and "## Qualitative profile" sections.
+- CLI flag `ah dossier <symbol> --qualitative / --no-qualitative` (default: qualitative on).
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md`
+
+
+## Phase 4.4 — Screener Filings Enrichment (2026-04-30)
+
+### Added
+- `enrich_with_filings(df, filings_repo=..., profiles_repo=...)` — pure function that adds 5 columns (`has_ipo`, `n_annual`, `latest_annual_year`, `n_research`, `has_profile`) to a symbol-indexed DataFrame. Lets Phase 3 Screener users compose qualitative-data filters via standard pandas (e.g. `df[df["has_profile"] & (df["n_annual"] >= 5)]`) without modifying the Screener itself.
+
+### Design doc
+- `docs/superpowers/specs/2026-04-30-ah-research-phase-4-4-screener-enrichment-design.md`
+
+### Deferred to future phase
+- Structured grading (moat_grade, redflag_count) — requires LLM
+- Profile section-presence predicates
 
 ## [Unreleased] — Phase 3
 

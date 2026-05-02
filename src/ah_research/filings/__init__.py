@@ -1,7 +1,22 @@
 """ah_research.filings — Phase 4.2 markdown artifact repositories."""
 
-from ah_research.filings.filings_repository import FilingsRepository
+from ah_research.filings.enrichment import enrich_with_filings
+from ah_research.filings.filings_repository import FilingsRepository, SearchHit
+from ah_research.filings.grading import GradedProfile, ProfileGrader, ValidationError
 from ah_research.filings.profile_repository import ProfileRepository
+from ah_research.filings.summary import build_corpus_summary
 from ah_research.filings.types import Filing, FilingKind, Profile
 
-__all__ = ["Filing", "FilingKind", "FilingsRepository", "Profile", "ProfileRepository"]
+__all__ = [
+    "Filing",
+    "FilingKind",
+    "FilingsRepository",
+    "GradedProfile",
+    "Profile",
+    "ProfileGrader",
+    "ProfileRepository",
+    "SearchHit",
+    "ValidationError",
+    "build_corpus_summary",
+    "enrich_with_filings",
+]

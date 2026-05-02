@@ -8,6 +8,26 @@ Personal A-shares + HK stock research platform.
 
 ## Features
 
+
+### Phase 5 — Research Chat UI
+
+- **Phase 5: Research chat** — `ah chat <ticker>` opens a REPL that reasons over your local Dossier / Profile / Screener / Filings data via Claude tool use. Eight tools wire the chat to the platform; sessions persist at `~/.ah-research/chat/`.
+  See [design spec](docs/superpowers/specs/2026-05-01-ah-research-phase-5-research-chat-design.md).
+
+
+### Phase 4.1 — Portfolio Optimizer
+
+- **Phase 4.1: Portfolio Optimizer** — CVXPY-based mean-variance + risk-parity
+  optimization with pluggable covariance / expected-returns estimators, strict
+  feasibility (with soft-mode fallback), and a `WeightStrategy` plug-in for
+  walk-forward backtests. See
+  [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md).
+
+### Phase 4.8: Constructor Optimize Mode
+
+- **Constructor optimize mode** — `Constructor(optimizer=...).weight_by("optimize")` runs the Phase 4.1 convex optimizer inline; `ConstructionReport.optimization_result` carries the full result (dual prices, active constraints, solver status).
+
+
 ### Phase 4.2: Filings + Profile Repositories
 
 - **Phase 4.2: Filings + Profile Repositories** — `FilingsRepository`
@@ -16,6 +36,38 @@ Personal A-shares + HK stock research platform.
   CLI: `ah filings list/show`, `ah profile list/show`.
   See [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-2-filings-design.md).
 
+### Phase 4.3: Dossier + Filings/Profile Integration
+
+- **Phase 4.3: Dossier + Filings/Profile Integration** — `Dossier` now
+  optionally includes `FilingsSection` + `ProfileSection` summaries surfaced
+  from Phase 4.2 repositories. CLI flag `ah dossier build --qualitative`
+  (default on). See
+  [design spec](docs/superpowers/specs/2026-04-30-ah-research-phase-4-3-dossier-integration-design.md).
+
+### Phase 4.7: LLM Profile Grading
+
+- **Phase 4.7: LLM Profile Grading** — `ProfileGrader` grades profiles via
+  Claude API with disk caching. CLI: `ah profile grade <symbol>`.
+
+### Phase 4.6: Corpus Summary
+
+- **Phase 4.6: Corpus Summary** — `build_corpus_summary()` + `ah filings
+  summary` audit local research coverage at a glance (filings counts,
+  freshness, profile presence, staleness).
+
+### Phase 4.5: Filings Text Search
+
+- **Phase 4.5: Filings Text Search** — `FilingsRepository.search()`
+  grep across all filings in the corpus (年报, 招股说明书, research).
+  CLI: `ah filings search "渠道改革" --symbols 600519.SH --kinds annual`.
+
+### Phase 4.4: Screener Filings Enrichment
+
+- **Phase 4.4: Screener Filings Enrichment** — `enrich_with_filings()`
+  adds `has_profile` / `n_annual` / `has_ipo` / `latest_annual_year` /
+  `n_research` columns to a symbol-indexed DataFrame. Compose with
+  Phase 3 Screener via standard pandas filters.
+  
 ### Phase 3 — Analysis & Watchlist
 
 - **Factor study** (`ah_research.analysis.factor_study`): `factor_study()` — cross-sectional Spearman IC, quantile returns, IC decay, block bootstrap CI for long-short spread, sector neutralization

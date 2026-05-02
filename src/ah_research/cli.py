@@ -62,8 +62,22 @@ def _register_filings() -> None:
     app.add_typer(profile_app)
 
 
+def _register_chat() -> None:
+    from ah_research.scripts.ah_chat import app as chat_app
+
+    app.add_typer(chat_app)
+
+
+def _register_construct() -> None:
+    from ah_research.scripts.ah_construct import construct_app
+
+    app.add_typer(construct_app)
+
+
 _register_watchlist()
 _register_filings()
+_register_chat()
+_register_construct()
 
 
 @app.command()
@@ -72,6 +86,11 @@ def dossier(
     asof: str = typer.Option(None, "--asof", help="Snapshot date YYYY-MM-DD"),
     out: Path = typer.Option(None, "--out", help="Write markdown to file"),  # noqa: B008
     language: str = typer.Option("en", "--language", help="Report language: en|zh"),
+    qualitative: bool = typer.Option(
+        True,
+        "--qualitative/--no-qualitative",
+        help="Include filings + profile sections (default: on).",
+    ),
 ) -> None:
     """Build and print (or save) a company research dossier."""
     from datetime import date, datetime
@@ -81,4 +100,4 @@ def dossier(
     asof_d: date | None = None
     if asof is not None:
         asof_d = datetime.strptime(asof, "%Y-%m-%d").date()
-    _run_dossier(symbol=symbol, asof=asof_d, out=out, language=language)
+    _run_dossier(symbol=symbol, asof=asof_d, out=out, language=language, qualitative=qualitative)

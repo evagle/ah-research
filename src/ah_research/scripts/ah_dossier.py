@@ -46,11 +46,12 @@ def run(
     asof: date | None = None,
     out: Path | None = None,
     language: str = "en",
+    qualitative: bool = True,
 ) -> None:
     """Core logic — separated so tests can call it directly."""
     repo = _make_repo()
     asof_d = asof or date.today()
-    dossier = build_dossier(symbol, repo, asof=asof_d)
+    dossier = build_dossier(symbol, repo, asof=asof_d, include_qualitative=qualitative)
     md = dossier.to_markdown(language=language)
     if out is not None:
         out.write_text(md)
@@ -65,9 +66,14 @@ def dossier_cmd(
     asof: str = typer.Option(None, "--asof", help="Snapshot date YYYY-MM-DD (default: today)"),
     out: Path = typer.Option(None, "--out", help="Write markdown to this file path"),  # noqa: B008
     language: str = typer.Option("en", "--language", help="Report language: en|zh"),
+    qualitative: bool = typer.Option(
+        True,
+        "--qualitative/--no-qualitative",
+        help="Include filings + profile sections (default: on).",
+    ),
 ) -> None:
     """Build and print (or save) a company research dossier."""
     asof_d: date | None = None
     if asof is not None:
         asof_d = datetime.strptime(asof, "%Y-%m-%d").date()
-    run(symbol=symbol, asof=asof_d, out=out, language=language)
+    run(symbol=symbol, asof=asof_d, out=out, language=language, qualitative=qualitative)
