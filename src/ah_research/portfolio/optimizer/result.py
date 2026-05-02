@@ -16,6 +16,10 @@ SolverStatus = Literal["optimal", "optimal_inaccurate", "soft_relaxed"]
 class OptimizationResult:
     """Frozen container for optimizer output + diagnostics.
 
+    ``weights`` and ``risk_contributions`` are deep-copied in ``__post_init__``
+    so callers cannot retroactively mutate the Series under the (otherwise-
+    frozen) container.
+
     See docs/superpowers/specs/2026-04-30-ah-research-phase-4-1-optimizer-design.md §5.4.
     """
 
@@ -31,6 +35,13 @@ class OptimizationResult:
     solver_name: str
     solve_time_ms: float
     inputs_hash: str
+
+    def __post_init__(self) -> None:
+        # Defensive copy: frozen=True only blocks attribute reassignment,
+        # not mutation of the referenced pandas object.
+        object.__setattr__(self, "weights", self.weights.copy(deep=True))
+        if self.risk_contributions is not None:
+            object.__setattr__(self, "risk_contributions", self.risk_contributions.copy(deep=True))
 
     def to_dict(self) -> dict[str, object]:
         """JSON-serializable dict representation."""

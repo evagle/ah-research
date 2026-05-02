@@ -38,6 +38,7 @@ from ah_research.backtest.types import (
     hash_config,
 )
 from ah_research.constants import LEVERAGE_SUM_TOLERANCE
+from ah_research.exceptions import DataIntegrityError, SourceError, UserInputError
 from ah_research.meta import code_version
 from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
 from ah_research.strategies.base import SignalStrategy, WeightStrategy
@@ -143,7 +144,7 @@ def resolve_benchmark(
         sym = _BENCHMARK_SYMBOL[spec]
         try:
             prices_df = repo.get_prices([sym], start, end)
-        except Exception as exc:
+        except (SourceError, DataIntegrityError) as exc:
             logger.warning(
                 "Failed to fetch benchmark %r (%s) from repo: %s. Falling back to constant 1.0.",
                 spec,
@@ -387,7 +388,7 @@ def _apply_corporate_action(
 
     try:
         symbol = parse_symbol(sym_str)
-    except Exception:
+    except UserInputError:
         logger.warning("Cannot parse symbol %r in corporate action; skipping.", sym_str)
         return
 
@@ -606,13 +607,22 @@ def run_backtest(
         else pd.DataFrame(columns=["symbol", "ex_date", "kind", "params_json"])
     )
 
-    # FX data
+    # FX data — degrade gracefully only for expected data-availability errors.
+    # Any other exception (type error, solver bug) propagates so a real bug
+    # does not silently produce a backtest that treats HK as CNY.
     try:
         fx_df = repo.get_fx_series("CNY_HKD", config.start, config.end)
         fx_lookup: dict[date, float] = {
             pd.Timestamp(row["date"]).date(): float(row["rate"]) for _, row in fx_df.iterrows()
         }
-    except Exception:
+    except (SourceError, DataIntegrityError) as exc:
+        logger.warning(
+            "FX series unavailable (CNY_HKD, %s .. %s); cross-currency "
+            "positions will use 1.0 fallback: %s",
+            config.start,
+            config.end,
+            exc,
+        )
         fx_lookup = {}
 
     # Build fast lookup: (date, symbol) -> bar row
@@ -1028,7 +1038,7 @@ def run_backtest(
 
                     try:
                         sym_w = parse_symbol(sym_str_w)
-                    except Exception:
+                    except UserInputError:
                         logger.warning("Cannot parse symbol %r; skipping.", sym_str_w)
                         continue
 
