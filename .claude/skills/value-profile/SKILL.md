@@ -496,22 +496,40 @@ Profile 的读者是人（研究员 / 投资人 / 审阅人）, 不是另一个 
   - 禁 wall-of-text 长段落——每个独立概念一段, 段间空行, 每段 3-5 句上限。
   - 数字尽量配紧凑上下文, 不用"在...的情况下/基于...的考虑"长从句包数字。
   - 子标题 `**核心资产**` / `**生产流程**` / `**分产品收入**` 用粗体分块, 帮 reader 快 scan。
-- **§4.6.3 英文强制中文化** (依据 §4.1 language policy): Part 0 执行摘要 + Part 1-5 narrative 里, **除白名单外所有英文单词一律中文化**——包括英文缩写和英文普通词。白名单外的英文出现 = Step 3c review 驳回重派 subagent 重写。
+- **§4.6.3 英文强制中文化 — 白名单原则** (依据 §4.1 language policy): Part 0 执行摘要 + Part 1-5 narrative 里, **只允许白名单英文**, 白名单外的任何英文单词 / 缩写 (不管是 "mix" / "framework" / "clean" / "CFO" / "EBITDA" / 还是任何别的未见过的词) **一律中文化**。
 
-  - **白名单保留** (业内普及到 ≈ 中文, 缩写形式保留): ROE / ROIC / ROA / DCF / GDP / PE / PB / PS / PEG / EV / ESG / CAGR / YoY / QoQ / TTM / MAU / DAU / ARPU / LTV / CAC / CR5 / CR10 / GMV / KPI / OKR / ABT / SKU / IPO / IPO / H 股 / A 股。
+  **判定规则** (单向): 只看 "是否在白名单里"。不在 = 禁, 查中文对应翻; 在 = 保留。**无需维护黑名单**——新出现的英文默认禁, 对照表非 exhaustive, 只是常见词参考。
   
-  - **英文缩写强制中文化**:
-    - CFO → 经营现金流 / NI → 净利润 / CapEx → 资本开支 / FCF → 自由现金流
-    - EBITDA → 息税折旧摊销前利润 / NOPAT → 税后经营利润 / WACC → 加权平均资本成本
-    - TAM → 潜在市场规模 / SAM → 可服务市场规模 / SOM → 实际拿下市场规模
-    - SG&A → 销售管理费用 / COGS → 营业成本 / DSO → 应收周转天数 / DPO → 应付周转天数 / DIO → 存货周转天数
+  Step 3c 主 agent review 时发现白名单外英文 = 驳回 subagent 重派 (不是主 agent 自己打补丁加对照表)。
 
-  - **英文普通词强制中文化** (业内偶用但有天然中文对应):
-    - framework → 框架 / guidance → 指引 / pass → 通过 / fail → 未通过 / clean → 合规 或 无警示 (context 而定) / checklist → 清单 / summary → 摘要
-    - scope → 范围 / benchmark → 基准 / overlay → 叠加 / actual → 实际 / forecast → 预测 / narrative → 叙述 / reference → 参考
-    - cross-section → 跨 (类别 / 年份 / 行业) / Top N → 前 N / bear case → 悲观情景 / bull case → 乐观情景 / base case → 中性情景
-    - stakeholder → 利益相关方 / SOE → 国企
-    - mix → 产品结构 / 收入结构 / 产品组合 (context 而定) / product mix → 产品组合 / channel mix → 渠道结构 / revenue mix → 收入结构
+  **白名单** (业内普及到 ≈ 中文, 缩写形式保留):
+  - 估值指标: ROE / ROIC / ROA / DCF / PE / PB / PS / PEG / EV / EBITDA
+  - 时间 / 比率: CAGR / YoY / QoQ / TTM
+  - 用户指标: MAU / DAU / ARPU / LTV / CAC
+  - 集中度: CR5 / CR10 / GMV
+  - 宏观 / 合规: GDP / ESG / IPO / H 股 / A 股 / KPI / OKR / ABT / SKU
+  
+  白名单外一概中文化。若某词业内找不到自然中文对应, 用描述性短句, 不自造新英文或混用。
+
+  **常见词中文对应参考** (非 exhaustive, 仅帮 subagent 快查常见词):
+
+  | 英文 | 中文 |
+  |---|---|
+  | CFO / NI / CapEx / FCF | 经营现金流 / 净利润 / 资本开支 / 自由现金流 |
+  | NOPAT / WACC | 税后经营利润 / 加权平均资本成本 |
+  | TAM / SAM / SOM | 潜在市场规模 / 可服务市场规模 / 实际拿下市场规模 |
+  | SG&A / COGS / DSO / DPO / DIO | 销售管理费用 / 营业成本 / 应收 / 应付 / 存货周转天数 |
+  | framework / guidance / pass / fail / clean | 框架 / 指引 / 通过 / 未通过 / 合规 (context 而定) |
+  | checklist / summary / scope / benchmark | 清单 / 摘要 / 范围 / 基准 |
+  | overlay / actual / forecast / narrative / reference | 叠加 / 实际 / 预测 / 叙述 / 参考 |
+  | cross-section / Top N | 跨 (类别 / 年份 / 行业) / 前 N |
+  | bear / base / bull case | 悲观 / 中性 / 乐观情景 |
+  | stakeholder / SOE | 利益相关方 / 国企 |
+  | mix / product mix / channel mix / revenue mix | 产品结构 / 产品组合 / 渠道结构 / 收入结构 (context 而定) |
+  | red flag / green flag | 风险信号 / 积极信号 |
+  | M&A / IPO (动词 / 事件时) | 并购 / 上市 (IPO 作缩写保留, "to IPO" 这类动词用法禁) |
+
+  遇到上表没有的白名单外英文 = 按规则先禁, 然后查行业中文表述再译。
 - **§4.6.4 Part 0 结论标签 + 顺序 + 状态词 → 见 template**: schema 的 single source of truth 在 `.claude/skills/value-profile/template-zh.md` 的 Part 0 placeholder。填写时必须严格照 template 的 6 项顺序 (好生意 → 护城河 → 管理层 → 财报排雷 → 能力圈四问 → 估值三大前提) 和状态词选项（`<宽 / 中 / 窄 / 弱 / 否>` 这类尖括号列表）。**禁自造状态词 + 禁 AI 直译**（本规则适用**全 profile**, 不仅 Part 0）:
 
   | ❌ AI 直译 / 意译 (禁) | ✅ 自然中文金融词 | 用于 |
