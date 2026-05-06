@@ -25,6 +25,24 @@ def _prices_fixture(symbols: list[str], n_days: int = 260, seed: int = 0) -> pd.
     return pd.DataFrame(rows)
 
 
+@pytest.fixture
+def prices_repo():
+    """Build (symbols, mocked-repo) for HistoricalMeanReturns tests.
+
+    Factored out so the three historical-mean tests below stop duplicating
+    the same 4-line setup. Returns a callable so each test picks its own
+    symbol list (different cardinality) but shares the repo+fixture wiring.
+    """
+
+    def _build(symbols: list[str], seed: int = 0) -> tuple[list[str], MagicMock]:
+        prices = _prices_fixture(symbols, seed=seed)
+        repo = MagicMock()
+        repo.get_prices.return_value = prices
+        return symbols, repo
+
+    return _build
+
+
 def test_user_supplied_returns_passthrough():
     mu = pd.Series({"600519.SH": 0.05, "000858.SZ": 0.03})
     est = UserSuppliedReturns(mu)
@@ -39,36 +57,44 @@ def test_user_supplied_returns_raises_on_index_mismatch():
         est.estimate(["600519.SH", "000858.SZ"], pd.Timestamp("2025-12-31"), MagicMock())
 
 
-def test_historical_mean_computes_sample_mean():
-    symbols = ["600519.SH", "000858.SZ"]
-    prices = _prices_fixture(symbols)
-    repo = MagicMock()
-    repo.get_prices.return_value = prices
-
-    est = HistoricalMeanReturns(lookback_days=252, shrinkage=0.0)
+@pytest.mark.parametrize(
+    ("shrinkage", "shrink_to"),
+    [
+        (0.0, "zero"),
+        (0.5, "zero"),
+        (1.0, "zero"),
+        (0.5, "cross_sectional_mean"),
+        (1.0, "cross_sectional_mean"),
+    ],
+    ids=[
+        "no-shrinkage",
+        "half-toward-zero",
+        "full-toward-zero",
+        "half-toward-xs-mean",
+        "full-toward-xs-mean",
+    ],
+)
+def test_historical_mean_smoke(prices_repo, shrinkage: float, shrink_to: str) -> None:
+    """Smoke: across all shrinkage configurations the estimator returns a
+    finite float64 Series indexed by the requested symbols."""
+    symbols, repo = prices_repo(["600519.SH", "000858.SZ"])
+    est = HistoricalMeanReturns(lookback_days=252, shrinkage=shrinkage, shrink_to=shrink_to)
     out = est.estimate(symbols, pd.Timestamp("2025-12-31"), repo)
     assert list(out.index) == symbols
     assert out.dtype == np.float64
+    assert np.isfinite(out.values).all()
 
 
-def test_historical_mean_full_shrinkage_collapses_to_cross_sectional_mean():
-    symbols = ["A", "B", "C"]
-    prices = _prices_fixture(symbols)
-    repo = MagicMock()
-    repo.get_prices.return_value = prices
-
+def test_historical_mean_full_shrinkage_collapses_to_cross_sectional_mean(prices_repo) -> None:
+    symbols, repo = prices_repo(["A", "B", "C"])
     est = HistoricalMeanReturns(lookback_days=252, shrinkage=1.0, shrink_to="cross_sectional_mean")
     out = est.estimate(symbols, pd.Timestamp("2025-12-31"), repo)
     # all entries equal (within tol)
     assert out.std() < 1e-10
 
 
-def test_historical_mean_zero_shrinkage_equals_raw():
-    symbols = ["A", "B"]
-    prices = _prices_fixture(symbols)
-    repo = MagicMock()
-    repo.get_prices.return_value = prices
-
+def test_historical_mean_zero_shrinkage_equals_raw(prices_repo) -> None:
+    symbols, repo = prices_repo(["A", "B"])
     est_raw = HistoricalMeanReturns(lookback_days=252, shrinkage=0.0)
     est_half = HistoricalMeanReturns(lookback_days=252, shrinkage=0.5, shrink_to="zero")
     raw = est_raw.estimate(symbols, pd.Timestamp("2025-12-31"), repo)
