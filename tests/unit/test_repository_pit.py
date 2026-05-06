@@ -80,8 +80,8 @@ def test_get_index_constituents_second_call_hits_cache(repo: DataRepository, mon
     from unittest.mock import MagicMock
 
     _ = repo.get_index_constituents("CSI300", date(2024, 6, 30))
-    spy = MagicMock(wraps=repo._constituents_source.fetch_constituents)
-    monkeypatch.setattr(repo._constituents_source, "fetch_constituents", spy)
+    spy = MagicMock(wraps=repo._config._constituents_source.fetch_constituents)
+    monkeypatch.setattr(repo._config._constituents_source, "fetch_constituents", spy)
 
     _ = repo.get_index_constituents("CSI300", date(2024, 6, 30))
     assert spy.call_count == 0

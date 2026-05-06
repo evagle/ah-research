@@ -1,0 +1,229 @@
+"""PriceRepository — first carved-out collaborator from ``DataRepository``.
+
+This module owns *price-shaped* reads:
+
+* ``get_prices`` -- OHLCV with PIT-adjusted close_hfq / total_return,
+  cache-first.
+* ``get_corporate_actions`` -- dividends/splits/etc., populated as a
+  side-effect of price fetches.
+* ``get_trading_calendar`` -- per-exchange trading-day flags.
+* ``get_fx_series`` -- daily FX rates (currently CNY_HKD only).
+* ``compute_ah_premium`` -- per-day A vs H share premium for a pair.
+
+Holds a reference to the shared ``DuckDBCache`` plus the four price-
+adjacent integration sources. Behaviour-preserving extraction:
+``DataRepository`` wraps this class and delegates by method.
+"""
+
+from __future__ import annotations
+
+from datetime import date
+
+import pandas as pd
+
+from ah_research.data._validation import validate_date_range
+from ah_research.data.cache import DuckDBCache
+from ah_research.data.converters import convert_prices
+from ah_research.exceptions import UserInputError
+from ah_research.integrations import (
+    CalendarSource,
+    CorporateActionsSource,
+    FXSource,
+    PriceSource,
+)
+from ah_research.logging import get_logger
+from ah_research.model.schemas import PriceFrameSchema
+from ah_research.model.types import AHPair
+
+log = get_logger(__name__)
+
+
+class PriceRepository:
+    """Domain sub-repository for price-shaped reads (prices, corporate
+    actions, calendar, FX, AH premium)."""
+
+    def __init__(
+        self,
+        *,
+        price_source: PriceSource,
+        fx_source: FXSource,
+        calendar_source: CalendarSource,
+        corp_actions_source: CorporateActionsSource,
+        cache: DuckDBCache,
+    ) -> None:
+        self._price_source = price_source
+        self._fx_source = fx_source
+        self._calendar_source = calendar_source
+        self._corp_actions_source = corp_actions_source
+        self._cache = cache
+
+    # ── prices ─────────────────────────────────────────────────────────────
+
+    def get_prices(
+        self,
+        symbols: list[str],
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        """Return ``PriceFrameSchema``-valid prices for ``symbols`` within
+        ``[start, end]`` inclusive.
+
+        Fetching strategy (v1): for each symbol whose cache coverage does not
+        fully span the requested range, fetch ``[start, end]`` from upstream
+        (along with corporate actions over the same window), convert to the
+        domain schema, and upsert into the cache. Then read from cache.
+        """
+        validate_date_range(start, end)
+        if len(symbols) == 0:
+            return PriceFrameSchema.validate(empty_price_frame())
+
+        symbols_to_fetch = [
+            sym for sym in symbols if not self._price_range_fully_cached(sym, start, end)
+        ]
+        if symbols_to_fetch:
+            self._fetch_and_cache_prices(symbols_to_fetch, start, end)
+
+        return self._cache.read_prices(symbols, start, end)
+
+    def _price_range_fully_cached(self, symbol: str, start: date, end: date) -> bool:
+        # Use the fetch log (request-range) not the data coverage
+        # (trading-day range) so calendar/trading-day mismatches don't
+        # trigger spurious refetches.
+        return self._cache.has_price_fetch_covering(symbol, start, end)
+
+    def _fetch_and_cache_prices(self, symbols: list[str], start: date, end: date) -> None:
+        log.info(
+            "fetch_prices",
+            symbols=symbols,
+            start=start.isoformat(),
+            end=end.isoformat(),
+        )
+        raw = self._price_source.fetch_prices(symbols, start, end)
+        actions = self._corp_actions_source.fetch_corporate_actions(symbols, start, end)
+        if len(raw) > 0:
+            converted = convert_prices(raw, actions)
+            self._cache.write_prices(converted)
+        # Log the fetch even if it returned no rows, so we don't retry forever
+        # against a symbol that has no data.
+        for sym in symbols:
+            self._cache.log_price_fetch(sym, start, end)
+
+    # ── corporate actions ──────────────────────────────────────────────────
+
+    def get_corporate_actions(self, symbols: list[str], start: date, end: date) -> pd.DataFrame:
+        """Return corporate actions for ``symbols`` within ``[start, end]``.
+
+        Reads from cache (populated as a side-effect of ``get_prices``). If
+        the cache has no rows for these symbols, does a direct fetch.
+        """
+        validate_date_range(start, end)
+        if len(symbols) == 0:
+            return pd.DataFrame(columns=["symbol", "ex_date", "kind", "params_json"])
+        cached = self._cache.read_corporate_actions(symbols, start, end)
+        if len(cached) > 0:
+            return cached
+        raw = self._corp_actions_source.fetch_corporate_actions(symbols, start, end)
+        if len(raw) > 0:
+            self._cache.write_corporate_actions(raw)
+        return self._cache.read_corporate_actions(symbols, start, end)
+
+    # ── trading calendar ───────────────────────────────────────────────────
+
+    def get_trading_calendar(self, exchange: str, start: date, end: date) -> pd.DataFrame:
+        """Return trading-day flags for ``exchange`` within ``[start, end]``."""
+        validate_date_range(start, end)
+        cached = self._cache.read_calendar(exchange, start, end)
+        if len(cached) > 0:
+            return cached
+        raw = self._calendar_source.fetch_calendar(exchange, start, end)
+        if len(raw) > 0:
+            self._cache.write_calendar(raw)
+        return self._cache.read_calendar(exchange, start, end)
+
+    # ── FX ─────────────────────────────────────────────────────────────────
+
+    def get_fx_series(self, pair: str, start: date, end: date) -> pd.DataFrame:
+        """Return daily FX rates for ``pair`` (e.g. ``CNY_HKD``) within
+        ``[start, end]``.
+
+        Rate convention: 1 unit of the left-hand currency = rate units of the
+        right-hand currency. Currently only ``CNY_HKD`` is supported via the
+        underlying FX source; other pairs raise ``UserInputError``.
+        """
+        validate_date_range(start, end)
+        if pair != "CNY_HKD":
+            raise UserInputError(f"unsupported FX pair {pair!r}; only 'CNY_HKD' is available")
+        return self._fetch_fx_cny_hkd(start, end)
+
+    def _fetch_fx_cny_hkd(self, start: date, end: date) -> pd.DataFrame:
+        """Fetch (and cache) the CNY/HKD rate series for ``[start, end]``."""
+        pair = "CNY_HKD"
+        cached = self._cache.read_fx(pair, start, end)
+        if len(cached) > 0:
+            return cached
+        raw = self._fx_source.fetch_fx(pair, start, end)
+        if len(raw) > 0:
+            self._cache.write_fx(raw)
+        return self._cache.read_fx(pair, start, end)
+
+    # ── AH premium ─────────────────────────────────────────────────────────
+
+    def compute_ah_premium(
+        self,
+        pair: AHPair,
+        start: date,
+        end: date,
+    ) -> pd.DataFrame:
+        """Return the per-day AH premium for ``pair`` within ``[start, end]``.
+
+        Premium definition::
+
+            premium(t) = close_A(t) / (close_H(t) * FX_HKD_to_CNY(t)) - 1
+        """
+        validate_date_range(start, end)
+
+        a_sym = str(pair.a_symbol)
+        h_sym = str(pair.h_symbol)
+
+        a_prices = self.get_prices([a_sym], start, end)
+        h_prices = self.get_prices([h_sym], start, end)
+        fx = self._fetch_fx_cny_hkd(start, end)
+
+        if len(a_prices) == 0 or len(h_prices) == 0 or len(fx) == 0:
+            return pd.DataFrame(columns=["date", "close_a", "close_h", "fx_rate", "premium"])
+
+        a_slim = a_prices[["date", "close"]].rename(columns={"close": "close_a"})
+        h_slim = h_prices[["date", "close"]].rename(columns={"close": "close_h"})
+        fx_slim = fx[["date", "rate"]].rename(columns={"rate": "fx_rate"})
+
+        merged = a_slim.merge(h_slim, on="date", how="inner").sort_values("date")
+        merged = pd.merge_asof(merged, fx_slim.sort_values("date"), on="date", direction="backward")
+        merged = merged.dropna(subset=["fx_rate"])
+        # close_h (HKD) * fx_rate (CNY per HKD) = close_h in CNY
+        merged["premium"] = merged["close_a"] / (merged["close_h"] * merged["fx_rate"]) - 1.0
+        return merged.reset_index(drop=True)
+
+
+def empty_price_frame() -> pd.DataFrame:
+    """Build a zero-row DataFrame with columns matching PriceFrameSchema."""
+    return pd.DataFrame(
+        {
+            "date": pd.Series([], dtype="datetime64[ns]"),
+            "symbol": pd.Series([], dtype=str),
+            "open": pd.Series([], dtype=float),
+            "high": pd.Series([], dtype=float),
+            "low": pd.Series([], dtype=float),
+            "close": pd.Series([], dtype=float),
+            "close_hfq": pd.Series([], dtype=float),
+            "total_return": pd.Series([], dtype=float),
+            "volume": pd.Series([], dtype="int64"),
+            "amount": pd.Series([], dtype=float),
+            "turnover": pd.Series([], dtype=float),
+            "is_suspended": pd.Series([], dtype=bool),
+            "is_st": pd.Series([], dtype=bool),
+            "limit_up": pd.Series([], dtype=float),
+            "limit_down": pd.Series([], dtype=float),
+            "hit_limit_up": pd.Series([], dtype=bool),
+            "hit_limit_down": pd.Series([], dtype=bool),
+        }
+    )

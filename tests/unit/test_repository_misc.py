@@ -44,8 +44,8 @@ def test_get_sector_second_call_does_not_refetch(repo: DataRepository, monkeypat
     from unittest.mock import MagicMock
 
     _ = repo.get_sector(["600519.SH"])
-    spy = MagicMock(wraps=repo._sector_source.fetch_sectors)
-    monkeypatch.setattr(repo._sector_source, "fetch_sectors", spy)
+    spy = MagicMock(wraps=repo._config._sector_source.fetch_sectors)
+    monkeypatch.setattr(repo._config._sector_source, "fetch_sectors", spy)
 
     _ = repo.get_sector(["600519.SH"])
     assert spy.call_count == 0

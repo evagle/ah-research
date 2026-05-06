@@ -32,8 +32,8 @@ def test_get_prices_returns_requested_symbols_only(repo: DataRepository):
 
 def test_get_prices_second_call_hits_cache(repo: DataRepository, monkeypatch):
     """Second call over a fully-covered range must not touch the source."""
-    spy = MagicMock(wraps=repo._price_source.fetch_prices)
-    monkeypatch.setattr(repo._price_source, "fetch_prices", spy)
+    spy = MagicMock(wraps=repo._prices._price_source.fetch_prices)
+    monkeypatch.setattr(repo._prices._price_source, "fetch_prices", spy)
 
     _ = repo.get_prices(["600519.SH"], date(2024, 1, 1), date(2024, 3, 31))
     assert spy.call_count == 1
@@ -48,8 +48,8 @@ def test_get_prices_fetches_only_missing_symbols(repo: DataRepository, monkeypat
     # Prime cache for 600519.SH
     _ = repo.get_prices(["600519.SH"], date(2024, 1, 1), date(2024, 3, 31))
 
-    spy = MagicMock(wraps=repo._price_source.fetch_prices)
-    monkeypatch.setattr(repo._price_source, "fetch_prices", spy)
+    spy = MagicMock(wraps=repo._prices._price_source.fetch_prices)
+    monkeypatch.setattr(repo._prices._price_source, "fetch_prices", spy)
 
     _ = repo.get_prices(["600519.SH", "0700.HK"], date(2024, 1, 1), date(2024, 3, 31))
     # Only 0700.HK should be fetched from upstream
