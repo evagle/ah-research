@@ -1,0 +1,71 @@
+{
+  "benchmark_curve": {
+    "first": 1.0,
+    "last": 1.0,
+    "len": 64,
+    "max": 1.0,
+    "mean": 1.0,
+    "min": 1.0,
+    "sha256": "f536620d1905f9236fbd12dd32d00508155465ae895dd5a87b488c4dd99bf4c5"
+  },
+  "cash_history": {
+    "count": 64,
+    "sha256": "72b2aff9a9ba47dbb6fcd498e9af669c692bae07fa7c778df70a2bcc2f8ce8f1"
+  },
+  "config_hash": "a3c5fa6a759bb6ab66569812f4f9f6ba09df989e0421781c78f391c2bb0b8d1f",
+  "equity_curve": {
+    "first": 1000000.0,
+    "last": 893176.12808702,
+    "len": 64,
+    "max": 1014096.32473174,
+    "mean": 970969.08642413,
+    "min": 893176.12808702,
+    "sha256": "9b609bc2d6b809683977f3e78247ddf24656e83e6c985f1453fcc908b7a3c425"
+  },
+  "metrics": {
+    "alpha": -0.0017932,
+    "alpha_pvalue": 0.29886846,
+    "alpha_se": 0.00172612,
+    "alpha_t_stat": -1.03886299,
+    "annualized_turnover": 4.53682702,
+    "annualized_vol": 0.30653019,
+    "avg_dividend_yield": 0.0,
+    "avg_holding_period_days": 0.0,
+    "avg_positions": 1.0,
+    "beta": 0.0,
+    "beta_se": 0.0,
+    "beta_t_stat": null,
+    "cagr": -0.37767042,
+    "calmar": -3.16733018,
+    "excess_return": -0.45188594,
+    "information_ratio": -1.47419717,
+    "max_dd_duration_days": 9,
+    "max_drawdown": -0.11923936,
+    "newey_west_lag": 3,
+    "sharpe": -1.47419717,
+    "sortino": -2.25073963,
+    "total_return": -0.10682387,
+    "tracking_error": 0.30653019
+  },
+  "positions_history": {
+    "count": 1,
+    "sha256": "ed75d8af17de07c6c0cc8f918007b3ec0cc186d99059ac8bbd326e4b1f4b9a70",
+    "unique_symbols": 1
+  },
+  "rejected_orders_count": 0,
+  "returns": {
+    "first": 0.0,
+    "last": -0.01909717,
+    "len": 64,
+    "max": 0.06546654,
+    "mean": -0.00158262,
+    "min": -0.04765738,
+    "sha256": "5335fea9a52a2abfdee86e9c3b1db96dc23851453f80e9b4ce9236e240696ca1"
+  },
+  "trades": {
+    "count": 2,
+    "sha256": "c3a78c08470d68640f6891476ff9623538f0410d34a542de70b0da5acf43dd31",
+    "total_cost": "0.0000000000",
+    "total_notional": "1049268.5410094540"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "benchmark_curve": {
+    "first": 1.0,
+    "last": 1.0,
+    "len": 64,
+    "max": 1.0,
+    "mean": 1.0,
+    "min": 1.0,
+    "sha256": "f536620d1905f9236fbd12dd32d00508155465ae895dd5a87b488c4dd99bf4c5"
+  },
+  "cash_history": {
+    "count": 64,
+    "sha256": "9a16f33cb26a1afb2ff591b2b567cdc9433fcd03fdd72f90ebf0edbeba36892c"
+  },
+  "config_hash": "a3c5fa6a759bb6ab66569812f4f9f6ba09df989e0421781c78f391c2bb0b8d1f",
+  "equity_curve": {
+    "first": 1000000.0,
+    "last": 830956.47179894,
+    "len": 64,
+    "max": 1001426.36042149,
+    "mean": 947015.08830901,
+    "min": 830956.47179894,
+    "sha256": "0df71a9ac3e227f37d291adbe110991fbf66266f34ea7d6817ceb9b07819ab46"
+  },
+  "metrics": {
+    "alpha": -0.00293933,
+    "alpha_pvalue": 0.04147934,
+    "alpha_se": 0.00144176,
+    "alpha_t_stat": -2.03870635,
+    "annualized_turnover": 4.35078928,
+    "annualized_vol": 0.21873677,
+    "avg_dividend_yield": 0.0,
+    "avg_holding_period_days": 0.0,
+    "avg_positions": 2.0,
+    "beta": 0.0,
+    "beta_se": 0.0,
+    "beta_t_stat": null,
+    "cagr": -0.54041334,
+    "calmar": -3.17466135,
+    "excess_return": -0.74071146,
+    "information_ratio": -3.3863143,
+    "max_dd_duration_days": 56,
+    "max_drawdown": -0.17022708,
+    "newey_west_lag": 3,
+    "sharpe": -3.3863143,
+    "sortino": -4.27189266,
+    "total_return": -0.16904353,
+    "tracking_error": 0.21873677
+  },
+  "positions_history": {
+    "count": 2,
+    "sha256": "8bb10f812d24f9dbcf522ca1535fb88c8baf8dd410b531fac8885fdb31a92e8a",
+    "unique_symbols": 2
+  },
+  "rejected_orders_count": 0,
+  "returns": {
+    "first": 0.0,
+    "last": -0.007035,
+    "len": 64,
+    "max": 0.03339065,
+    "mean": -0.00279764,
+    "min": -0.04227957,
+    "sha256": "6c3dabea24442c35e92680663bc49f34a9c093db731c5cb4840553e83bd4ef89"
+  },
+  "trades": {
+    "count": 4,
+    "sha256": "07cebc6222e6d821f2030ac47efde50be3c8011036b00760721fa772b19b2293",
+    "total_cost": "0.0000000000",
+    "total_notional": "981417.9037069874"
+  }
+}

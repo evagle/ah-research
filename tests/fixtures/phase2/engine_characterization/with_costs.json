@@ -1,0 +1,71 @@
+{
+  "benchmark_curve": {
+    "first": 1.0,
+    "last": 1.0,
+    "len": 64,
+    "max": 1.0,
+    "mean": 1.0,
+    "min": 1.0,
+    "sha256": "f536620d1905f9236fbd12dd32d00508155465ae895dd5a87b488c4dd99bf4c5"
+  },
+  "cash_history": {
+    "count": 64,
+    "sha256": "a7f3f7a2b047c9c6629c68bde241c75dd4ccabef5fa181ccf08c4f9dc04b17ef"
+  },
+  "config_hash": "a3c5fa6a759bb6ab66569812f4f9f6ba09df989e0421781c78f391c2bb0b8d1f",
+  "equity_curve": {
+    "first": 1000000.0,
+    "last": 892447.83940605,
+    "len": 64,
+    "max": 1013253.20205586,
+    "mean": 970464.86429064,
+    "min": 892447.83940605,
+    "sha256": "33d62686e49615ddbdaf3e6da6787f6e41154e522f5c50860ae029abdc0b3a90"
+  },
+  "metrics": {
+    "alpha": -0.00180615,
+    "alpha_pvalue": 0.29560427,
+    "alpha_se": 0.00172687,
+    "alpha_t_stat": -1.04590635,
+    "annualized_turnover": 4.53711731,
+    "annualized_vol": 0.30643091,
+    "avg_dividend_yield": 0.0,
+    "avg_holding_period_days": 0.0,
+    "avg_positions": 1.0,
+    "beta": 0.0,
+    "beta_se": 0.0,
+    "beta_t_stat": null,
+    "cagr": -0.37979803,
+    "calmar": -3.1855504,
+    "excess_return": -0.45514884,
+    "information_ratio": -1.48532286,
+    "max_dd_duration_days": 9,
+    "max_drawdown": -0.11922525,
+    "newey_west_lag": 3,
+    "sharpe": -1.48532286,
+    "sortino": -2.26740582,
+    "total_return": -0.10755216,
+    "tracking_error": 0.30643091
+  },
+  "positions_history": {
+    "count": 1,
+    "sha256": "88dd1087666c0acc22f500b92c91ec81db943b0fcb0d730514fb33a97197d1a0",
+    "unique_symbols": 1
+  },
+  "rejected_orders_count": 0,
+  "returns": {
+    "first": 0.0,
+    "last": -0.01909465,
+    "len": 64,
+    "max": 0.06545175,
+    "mean": -0.00159546,
+    "min": -0.04764703,
+    "sha256": "0c14845da6e7dcc19c228f3fc9a301e618c6a7abc96788a3b98bfb6f3d842b56"
+  },
+  "trades": {
+    "count": 2,
+    "sha256": "5bb29c5b1f4b03a9b78f211382b627f0cd20f5cab75bf097dac1ae435466c7c8",
+    "total_cost": "308.4493623865",
+    "total_notional": "1048790.7595596629"
+  }
+}
