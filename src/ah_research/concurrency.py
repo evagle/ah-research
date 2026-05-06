@@ -9,16 +9,9 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterable
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-from typing import TypeVar
-
-# NOTE: old-style TypeVar (not PEP 695) because the pre-commit mypy mirror
-# is pinned at v1.10.0 which does not yet support PEP 695 generics. Re-enable
-# `def thread_map[T, R](...)` syntax once the mirror is bumped (follow-up).
-T = TypeVar("T")
-R = TypeVar("R")
 
 
-def thread_map(  # noqa: UP047
+def thread_map[T, R](
     fn: Callable[[T], R],
     items: Iterable[T],
     *,
@@ -30,7 +23,7 @@ def thread_map(  # noqa: UP047
         return list(ex.map(fn, items))
 
 
-def process_map(  # noqa: UP047
+def process_map[T, R](
     fn: Callable[[T], R],
     items: Iterable[T],
     *,
