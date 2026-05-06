@@ -303,6 +303,12 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
      
      然后填 Part 0 header（ticker / exchange / researcher = `git config user.name` / report_date = 今日; 中英文公司名 派轻量子 agent 一句话查）。Auto / interactive 两种模式都必须做此 cleanup, 不可跳过。
 
+     **5. Cleanup 验证 gate** (强制, abort 条件): cleanup 完成后 grep 验证 4 项, 任一残留 → abort 并 re-cleanup:
+     ```
+     grep -nE "Profile — Template|## 阅读姿态/分析框架|本模板是 \*\*输出结构|（PRIMARY|（SECONDARY|（OPTIONAL|（本节最后填写|（待填|（填入" profiles/<ticker>-<date>.md
+     ```
+     若任一 match → cleanup 未做完, 必须重做。Resume / continuation session 启动时也要跑此 gate, 因旧 profile 可能在 cleanup 引入前创建。
+
 ### Step 2 — Progress map
 
 1. **Parse output file**: 对每个 `^### §` 或 `^## §`, 在其 block 内查找 `**置信度:**`。构造 dict `{section_id: status}`, 值域 `{已完成, 进行中, 未做, 已跳过, 需人工}`。
