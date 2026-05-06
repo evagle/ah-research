@@ -15,6 +15,7 @@ description: Walk a user through filling out a 价值投资 profile for a single
 > - 6 类生意估值矩阵详细公式: `references/valuation.md`
 > - 行业附加检查 KPI: `references/industry-overlays.md`
 > - 持仓纪律: `references/discipline.md`
+> - **每 section 完整指导问题 + 数据源 hint**: `template-guidance.md` (anchor `### §X.Y` 可 grep, subagent dispatch 必引用)
 
 ## §0 Skill 运行方式
 
@@ -134,7 +135,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 - **3.pre**: §1 / §3 / §5 前置 gate — 子 agent 先输 3 行三大前提判定。任一假 → 全局降级。
 - **3a PDF pre-read**: 优先 `_extracted/<年报-YYYY>/text.md` + `<!-- page N -->` marker 导航; ToC targeting 表见 references/operations.md。
-- **3b dispatch**: ONE `general-purpose` 子 agent, prompt 英文/输出中文, 必含 section heading + 数据源 hint + PDF 路径 + 已填邻 section 上下文 + 三大前提 + 能力圈四问 (§1) + 禁 8 条空话 + 管理层口径校核 (Part 1 §1-§5) + 5 步护城河 (§3) + delegate management-analysis (§4)。
+- **3b dispatch**: ONE `general-purpose` 子 agent, prompt 英文/输出中文。**主 agent 必须在 prompt 里 inline 该 section 的 `template-guidance.md §X.Y` 完整内容** (用 grep + Read offset/limit 取该 anchor 段, ~30-80 行), 不依赖 subagent 自己去读 (subagent context 越精简越好)。Prompt 必含: section heading + 从 guidance 抽出的本节目标/指导问题/数据源 hint + PDF 路径 + 已填邻 section 上下文 + 三大前提 + 能力圈四问 (§1) + 禁 8 条空话 + 管理层口径校核 (Part 1 §1-§5) + 5 步护城河 (§3) + delegate management-analysis (§4)。
 - **3c review**: 缺引用 / 校核琐碎 / 论断 generic / §1.8 < 50字 → 驳回。Auto mode 重派需扩 scope (多年/研报/附注/web/招股), ≤ 2 次, 仍薄弱 → `中` + `需人工跟进:`。
 - **3d save by mode**: auto 隐式 accept; interactive 印菜单 `[accept / edit / defer / skip / research more]`。
 - **3e**: 原子写入 (`.tmp` + `mv`), 回 Step 2。
@@ -229,16 +230,11 @@ Profile 读者是人, 不是 AI agent。Step 3c 主 agent review 必拦回以下
 
 > 完整 §4.6.1-§4.6.9 (含中英文对照表 + AI-style awkward 句式表 + 状态词替换表) 见 `references/operations.md` §4.6。
 
-### §4.7 缓存成本纪律 (operator 自律)
+### §4.7 缓存纪律
 
-主 agent (调用本 skill 的 Claude Code 主进程) 必须遵守:
-
-1. **Read 默认带 offset/limit**: 除非真要全文, 大文件 (≥ 200 行) 用 offset+limit 读窗口。SKILL.md / template-zh.md 全文 Read = 反 pattern。
-2. **大任务开新 session**: regen / 多 subagent 编排 / 一次填 30+ section 这类任务 starts in fresh session, 不在已有 200K+ context 的 session 里跑。旧 session 历史 + 新任务 = cache 爆。
-3. **Subagent prompt 上限 ≤ 1500 tokens**: orchestrator prompt 不抄整个 SKILL/template, 只引 references 路径 + section ID + 关键约束 5-10 条。
-4. **完成里程碑后 /compact**: 减少 conversation history 大小。
-5. **Lazy-load references**: SKILL.md core 不再含详细阈值, subagent 需要时才 Read references/*.md。
-
-为什么: cache read 占整体 cost 90%+, base context size 直接决定每 turn 成本。详见 ccusage daily / blocks 输出。
+- Read 用 offset/limit (≥ 200 行不全 Read)
+- 大任务开新 session, 不续 200K+ context
+- Subagent prompt ≤ 1500 tok
+- Lazy-load references, 不主动全 Read
 
 > §4.5 子 agent prompt 模板示例见 `references/operations.md` 末尾。
