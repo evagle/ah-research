@@ -29,6 +29,11 @@ import pandas as pd
 
 from ah_research.backtest.costs import DEFAULT_COSTS_2024, CostModelBundle
 from ah_research.backtest.metrics import compute_metrics
+from ah_research.backtest.order_executor import (
+    OrderExecutor,
+    OrderRejection,
+    PricedFill,
+)
 from ah_research.backtest.types import (
     BacktestConfig,
     BacktestResult,
@@ -672,6 +677,10 @@ def run_backtest(
     # Dividend reinvestment cash earmarks: symbol -> Decimal
     dividend_earmarks: dict[Symbol, Decimal] = {}
 
+    # OrderExecutor: stateless pre-execution decider (validation + pricing +
+    # cost). Constructed once per run because cost_model is fixed.
+    order_executor = OrderExecutor(cost_model=cost_model)
+
     # ── Daily loop ────────────────────────────────────────────────────────────
     for d in all_days:
         # 1. Apply corporate actions
@@ -687,99 +696,41 @@ def run_backtest(
             sym_str = str(sym)
             bar = prices_by_date_sym.get((d, sym_str))
 
-            if bar is None:
-                # Symbol not trading today (no price bar)
+            # OrderExecutor (C1-02) owns: validation, dividend-sentinel
+            # resolution, fill price, slippage, notional+cost. The cash
+            # sufficiency check + position/cash mutation below stay here
+            # until C1-03 carves out CashLedger.
+            attempt = order_executor.attempt_fill(
+                order=order,
+                bar=bar,
+                position=positions.get(sym),
+                config=config,
+                dividend_earmarks=dividend_earmarks,
+                d=d,
+            )
+
+            if attempt is None:
+                # Dividend-reinvestment no-op (no earmark / zero base price);
+                # silent skip matches engine.py historical behaviour.
+                continue
+
+            if isinstance(attempt, OrderRejection):
                 rejected_log.append(
                     {
                         "date": d,
                         "symbol": sym_str,
                         "side": order.side,
                         "shares": order.shares,
-                        "reason": "no_price_bar",
+                        "reason": attempt.reason,
                     }
                 )
+                if attempt.retry:
+                    next_pending.append(order)
                 continue
 
-            is_suspended = bool(bar["is_suspended"])
-            hit_limit_up = bool(bar["hit_limit_up"])
-            hit_limit_down = bool(bar["hit_limit_down"])
-
-            # Suspension check
-            if is_suspended:
-                rejected_log.append(
-                    {
-                        "date": d,
-                        "symbol": sym_str,
-                        "side": order.side,
-                        "shares": order.shares,
-                        "reason": "suspended",
-                    }
-                )
-                next_pending.append(order)  # retry tomorrow
-                continue
-
-            # Limit-up check: buys blocked on limit-up
-            if order.side in ("buy", "cover") and hit_limit_up:
-                rejected_log.append(
-                    {
-                        "date": d,
-                        "symbol": sym_str,
-                        "side": order.side,
-                        "shares": order.shares,
-                        "reason": "limit_up",
-                    }
-                )
-                next_pending.append(order)  # retry tomorrow
-                continue
-
-            # Limit-down check: sells/shorts blocked on limit-down
-            if order.side in ("sell", "short") and hit_limit_down:
-                rejected_log.append(
-                    {
-                        "date": d,
-                        "symbol": sym_str,
-                        "side": order.side,
-                        "shares": order.shares,
-                        "reason": "limit_down",
-                    }
-                )
-                next_pending.append(order)  # retry tomorrow
-                continue
-
-            # T+N lock check: sells/covers blocked during lock period
-            if order.side in ("sell", "cover"):
-                pos = positions.get(sym)
-                if pos is not None and pos.locked_until is not None and d <= pos.locked_until:
-                    rejected_log.append(
-                        {
-                            "date": d,
-                            "symbol": sym_str,
-                            "side": order.side,
-                            "shares": order.shares,
-                            "reason": "T+N lock",
-                        }
-                    )
-                    # T+N lock is a real constraint; do NOT re-queue
-                    continue
-
-            # A-share short check
-            if (
-                order.side == "short"
-                and sym.exchange in (Exchange.SH, Exchange.SZ)
-                and not config.a_share_short_allowed
-            ):
-                rejected_log.append(
-                    {
-                        "date": d,
-                        "symbol": sym_str,
-                        "side": order.side,
-                        "shares": order.shares,
-                        "reason": "a_share_short_disallowed",
-                    }
-                )
-                continue
-
-            # HK short borrow cost warning (once per symbol per run)
+            # HK short borrow cost warning (once per symbol per run).
+            # Stays in engine for now -- it's a logging side effect, not a
+            # validation result.
             if (
                 order.side == "short"
                 and sym.exchange == Exchange.HK
@@ -788,58 +739,16 @@ def run_backtest(
                 logger.warning("HK short borrow cost ignored in Phase 2 for symbol %s", sym_str)
                 _hk_borrow_warned.add(sym_str)
 
-            # Determine fill price
-            open_price = float(bar["open"])
-            vwap = (
-                float(bar["amount"]) / float(bar["volume"])
-                if float(bar["volume"]) > 0
-                else open_price
-            )
-            close_price = float(bar["close"])
-
-            base_price_map = {
-                "next_open": open_price,
-                "next_vwap": vwap,
-                "next_close": close_price,
-            }
-            base_price = base_price_map.get(config.fill_price, open_price)
-
-            # Determine actual shares for dividend-reinvestment sentinel orders
-            shares = order.shares
-            if shares == -1:
-                # Sentinel: dividend reinvestment buy
-                earmarked = dividend_earmarks.pop(sym, Decimal("0"))
-                if earmarked <= 0 or base_price <= 0:
-                    continue  # nothing to reinvest
-                lot = _LOT_SIZE[sym.exchange]
-                shares = _round_to_lot(float(earmarked) / base_price, lot, is_buy=True)
-                if shares <= 0:
-                    continue
-
-            # Compute slippage and fill price
+            assert isinstance(attempt, PricedFill)
+            shares = attempt.shares
+            fill_price = attempt.fill_price
+            notional_local = attempt.notional_local
+            cost_total = attempt.cost_total
+            # NOTE: ``attempt.cost_breakdown`` is intentionally not unpacked --
+            # engine.py never reads it (the trade log records only cost_total).
+            # CashLedger (C1-03) may surface it later if the cost breakdown
+            # becomes part of the persisted Trade record.
             exchange_obj = sym.exchange
-            try:
-                cost_m = cost_model.for_exchange(exchange_obj)
-                slippage_bps = cost_m.slippage_bps
-            except (KeyError, AttributeError):
-                slippage_bps = 0.0
-
-            slip = slippage_bps / 1e4
-            sign = 1 if order.side in ("buy", "cover") else -1
-            fill_price = Decimal(str(base_price * (1 + sign * slip)))
-
-            notional_local = fill_price * Decimal(str(shares))
-
-            # Compute costs
-            try:
-                cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
-                    order.side, notional_local
-                )
-                cost_total = sum(cost_breakdown.values())
-            except (KeyError, AttributeError):
-                cost_breakdown = {}
-                cost_total = Decimal("0")
-
             ccy = sym.currency
 
             # Execute: update positions and cash
@@ -872,7 +781,7 @@ def run_backtest(
                             trial_cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
                                 order.side, trial_notional_local
                             )
-                            trial_cost_total = sum(trial_cost_breakdown.values())
+                            trial_cost_total = sum(trial_cost_breakdown.values(), Decimal("0"))
                         except (KeyError, AttributeError):
                             trial_cost_breakdown = {}
                             trial_cost_total = Decimal("0")
@@ -889,7 +798,7 @@ def run_backtest(
                                 trial_cost_breakdown = cost_model.for_exchange(
                                     exchange_obj
                                 ).compute(order.side, trial_notional_local)
-                                trial_cost_total = sum(trial_cost_breakdown.values())
+                                trial_cost_total = sum(trial_cost_breakdown.values(), Decimal("0"))
                             except (KeyError, AttributeError):
                                 trial_cost_breakdown = {}
                                 trial_cost_total = Decimal("0")
@@ -913,7 +822,9 @@ def run_backtest(
                         )
                         shares = max_lots
                         notional_local = trial_notional_local
-                        cost_breakdown = trial_cost_breakdown
+                        # NOTE: cost_breakdown is unused beyond this point
+                        # (the trade log only records cost_total). Kept the
+                        # comment so future C1-03 (CashLedger) work is aware.
                         cost_total = trial_cost_total
                     else:
                         continue
