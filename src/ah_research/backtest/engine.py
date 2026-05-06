@@ -27,6 +27,15 @@ from typing import Any, Literal
 
 import pandas as pd
 
+from ah_research.backtest.cash_ledger import (
+    CashLedger,
+)
+from ah_research.backtest.cash_ledger import (
+    cash_in_base as _cash_in_base,
+)
+from ah_research.backtest.cash_ledger import (
+    fx_to_base as _fx_to_base,
+)
 from ah_research.backtest.costs import DEFAULT_COSTS_2024, CostModelBundle
 from ah_research.backtest.metrics import compute_metrics
 from ah_research.backtest.order_executor import (
@@ -326,56 +335,6 @@ def _infer_side(
     if current_shares < 0 and target_shares < current_shares:
         return "short"
     return "sell"
-
-
-def _fx_to_base(
-    ccy: Currency,
-    base_ccy: Currency,
-    d: date,
-    fx_lookup: dict[date, float],
-) -> Decimal:
-    """Return exchange rate to convert ccy -> base_ccy on date d."""
-    if ccy == base_ccy:
-        return Decimal("1")
-    if ccy == Currency.HKD and base_ccy == Currency.CNY:
-        # fx_lookup is CNY_HKD rate (1 CNY = X HKD); invert for HKD -> CNY
-        rate = fx_lookup.get(d)
-        if rate is None:
-            # Fall back to nearest available date
-            dates = sorted(fx_lookup.keys())
-            past = [x for x in dates if x <= d]
-            rate = fx_lookup[past[-1]] if past else next(iter(fx_lookup.values()))
-        return Decimal("1") / Decimal(str(rate))
-    if ccy == Currency.CNY and base_ccy == Currency.HKD:
-        rate = fx_lookup.get(d)
-        if rate is None:
-            dates = sorted(fx_lookup.keys())
-            past = [x for x in dates if x <= d]
-            rate = fx_lookup[past[-1]] if past else next(iter(fx_lookup.values()))
-        return Decimal(str(rate))
-    return Decimal("1")
-
-
-def _cash_in_base(
-    cash: dict[Currency, Decimal],
-    base_ccy: Currency,
-    d: date,
-    fx_lookup: dict[date, float],
-) -> Decimal:
-    """Convert all cash balances to base currency."""
-    total = Decimal("0")
-    for ccy, bal in cash.items():
-        total += bal * _fx_to_base(ccy, base_ccy, d, fx_lookup)
-    return total
-
-
-def _next_n_trading_days(trading_days: list[date], from_date: date, n: int) -> date:
-    """Return the date that is n trading days after from_date."""
-    future = [d for d in trading_days if d > from_date]
-    if len(future) >= n:
-        return future[n - 1]
-    # If not enough future days, return the last available + 1
-    return future[-1] if future else from_date
 
 
 def _apply_corporate_action(
@@ -681,6 +640,19 @@ def run_backtest(
     # cost). Constructed once per run because cost_model is fixed.
     order_executor = OrderExecutor(cost_model=cost_model)
 
+    # CashLedger: owns the cash + positions books and the rules that mutate
+    # them after a PricedFill is validated. Holds positions/cash by reference
+    # so engine.py and the ledger always observe the same state.
+    cash_ledger = CashLedger(
+        positions=positions,
+        cash=cash,
+        cost_model=cost_model,
+        config=config,
+        sh_days=sh_days,
+        hk_days=hk_days,
+        logger=logger,
+    )
+
     # ── Daily loop ────────────────────────────────────────────────────────────
     for d in all_days:
         # 1. Apply corporate actions
@@ -740,158 +712,24 @@ def run_backtest(
                 _hk_borrow_warned.add(sym_str)
 
             assert isinstance(attempt, PricedFill)
-            shares = attempt.shares
-            fill_price = attempt.fill_price
-            notional_local = attempt.notional_local
-            cost_total = attempt.cost_total
-            # NOTE: ``attempt.cost_breakdown`` is intentionally not unpacked --
-            # engine.py never reads it (the trade log records only cost_total).
-            # CashLedger (C1-03) may surface it later if the cost breakdown
-            # becomes part of the persisted Trade record.
-            exchange_obj = sym.exchange
-            ccy = sym.currency
 
-            # Execute: update positions and cash
-            pos = positions.get(sym)
-            current_shares = pos.shares if pos is not None else 0
+            # CashLedger (C1-03) owns the cash-sufficiency back-solve plus the
+            # positions/cash mutation. Returns the values the trade log needs
+            # (shares may differ from the PricedFill if the back-solve had to
+            # reduce the order; ``skipped=True`` is the engine-continue case).
+            application = cash_ledger.apply_fill(
+                fill=attempt,
+                d=d,
+                fx_lookup=fx_lookup,
+            )
+            if application.skipped:
+                continue
 
-            if order.side in ("buy", "cover"):
-                # Pre-execution cash-sufficiency check.
-                # Use total cash-in-base as the pool to handle cross-currency buys
-                # (e.g. buying HKD-denominated shares when only CNY cash is held).
-                total_cash_base = _cash_in_base(cash, config.base_currency, d, fx_lookup)
-                fx_rate_local_to_base = _fx_to_base(ccy, config.base_currency, d, fx_lookup)
-                notional_base = notional_local * fx_rate_local_to_base
-                cost_base = cost_total * fx_rate_local_to_base
-
-                if notional_base + cost_base > total_cash_base:
-                    # Compute max affordable shares in base-currency terms, then shrink
-                    # one lot at a time until (notional + costs) fits in available cash.
-                    # An iterative reduction is required because the cost model is not
-                    # a flat rate: commission has a fixed minimum (5 CNY for A-shares),
-                    # so a purely notional-based division (cash / price) can still
-                    # overdraw by up to `cost_total` once costs are added back in.
-                    lot = _LOT_SIZE[exchange_obj]
-                    price_base = fill_price * fx_rate_local_to_base
-                    if price_base > Decimal("0") and total_cash_base > Decimal("0"):
-                        max_affordable_base = int(float(total_cash_base) / float(price_base))
-                        max_lots = (max_affordable_base // lot) * lot
-                        trial_notional_local = fill_price * Decimal(str(max_lots))
-                        try:
-                            trial_cost_breakdown = cost_model.for_exchange(exchange_obj).compute(
-                                order.side, trial_notional_local
-                            )
-                            trial_cost_total = sum(trial_cost_breakdown.values(), Decimal("0"))
-                        except (KeyError, AttributeError):
-                            trial_cost_breakdown = {}
-                            trial_cost_total = Decimal("0")
-                        while max_lots > 0:
-                            trial_notional_base = trial_notional_local * fx_rate_local_to_base
-                            trial_cost_base = trial_cost_total * fx_rate_local_to_base
-                            if trial_notional_base + trial_cost_base <= total_cash_base:
-                                break
-                            max_lots -= lot
-                            if max_lots <= 0:
-                                break
-                            trial_notional_local = fill_price * Decimal(str(max_lots))
-                            try:
-                                trial_cost_breakdown = cost_model.for_exchange(
-                                    exchange_obj
-                                ).compute(order.side, trial_notional_local)
-                                trial_cost_total = sum(trial_cost_breakdown.values(), Decimal("0"))
-                            except (KeyError, AttributeError):
-                                trial_cost_breakdown = {}
-                                trial_cost_total = Decimal("0")
-                        if max_lots <= 0:
-                            logger.warning(
-                                "Insufficient cash (%.2f base) to buy any lots of %s at %.4f; "
-                                "skipping order.",
-                                float(total_cash_base),
-                                sym_str,
-                                float(fill_price),
-                            )
-                            continue
-                        logger.warning(
-                            "Insufficient cash (%.2f base) for %d shares of %s at %.4f; "
-                            "reducing to %d shares.",
-                            float(total_cash_base),
-                            shares,
-                            sym_str,
-                            float(fill_price),
-                            max_lots,
-                        )
-                        shares = max_lots
-                        notional_local = trial_notional_local
-                        # NOTE: cost_breakdown is unused beyond this point
-                        # (the trade log only records cost_total). Kept the
-                        # comment so future C1-03 (CashLedger) work is aware.
-                        cost_total = trial_cost_total
-                    else:
-                        continue
-
-                new_shares = current_shares + shares
-                if pos is not None:
-                    # Weighted average cost
-                    total_cost_basis = pos.avg_cost * Decimal(str(current_shares))
-                    new_avg_cost = (total_cost_basis + notional_local) / Decimal(str(new_shares))
-                else:
-                    new_avg_cost = fill_price
-
-                # T+N lock: set locked_until = exec_date + N trading days
-                if config.settlement == "auto":
-                    n_days = _SETTLEMENT_DAYS[exchange_obj]
-                elif config.settlement == "T+1":
-                    n_days = 1
-                elif config.settlement == "T+2":
-                    n_days = 2
-                else:
-                    n_days = 0
-
-                if n_days > 0:
-                    # Use the exchange-specific calendar for lock expiry
-                    exch_days = sh_days if exchange_obj in (Exchange.SH, Exchange.SZ) else hk_days
-                    locked_until = _next_n_trading_days(exch_days, d, n_days)
-                else:
-                    locked_until = None
-
-                positions[sym] = Position(
-                    symbol=sym,
-                    shares=new_shares,
-                    avg_cost=new_avg_cost,
-                    locked_until=locked_until,
-                )
-                # Debit cash: notional + costs.
-                # If the native currency balance would go negative, draw the
-                # shortfall from the base currency (implicit FX conversion).
-                cash[ccy] = cash.get(ccy, Decimal("0")) - notional_local - cost_total
-                if cash[ccy] < Decimal("0") and ccy != config.base_currency:
-                    # Convert shortfall back to base currency
-                    shortfall_local = -cash[ccy]
-                    shortfall_base = shortfall_local * _fx_to_base(
-                        ccy, config.base_currency, d, fx_lookup
-                    )
-                    cash[config.base_currency] = (
-                        cash.get(config.base_currency, Decimal("0")) - shortfall_base
-                    )
-                    cash[ccy] = Decimal("0")
-
-            elif order.side in ("sell", "short"):
-                new_shares = current_shares - shares
-                if new_shares == 0:
-                    positions.pop(sym, None)
-                else:
-                    if pos is not None:
-                        positions[sym] = replace(pos, shares=new_shares)
-                    else:
-                        # Short opening: no prior position
-                        positions[sym] = Position(
-                            symbol=sym,
-                            shares=-shares,
-                            avg_cost=fill_price,
-                            locked_until=None,
-                        )
-                # Credit cash: notional - costs
-                cash[ccy] = cash.get(ccy, Decimal("0")) + notional_local - cost_total
+            shares = application.shares
+            fill_price = application.fill_price
+            notional_local = application.notional_local
+            cost_total = application.cost_total
+            sym_str = str(sym)
 
             trades_log.append(
                 {
