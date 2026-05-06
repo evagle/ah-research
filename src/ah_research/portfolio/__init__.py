@@ -12,12 +12,14 @@ from ah_research.portfolio.constructor import (
     ConstructionReport,
     Constructor,
 )
+from ah_research.portfolio.optimizer import Optimizer
 
 __all__ = [
     "Constraint",
     "ConstraintResult",
     "ConstructionReport",
     "Constructor",
+    "Optimizer",
     "cap_at",
     "sector_neutralize",
     "signal_to_weights",

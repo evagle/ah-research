@@ -19,7 +19,14 @@ NOTEBOOK_PATH = (
 
 @pytest.mark.slow
 def test_acceptance_notebook_runs() -> None:
-    """Execute the acceptance notebook top-to-bottom; assert no cell raises."""
+    """Execute the acceptance notebook top-to-bottom.
+
+    Two-level assertion:
+      1. No code cell raised (no ``output_type == "error"``).
+      2. At least one cell actually produced non-empty output. Without (2)
+         a silently-short-circuited notebook (e.g. ``if False: ...``) would
+         pass the error check.
+    """
     nb = nbformat.read(str(NOTEBOOK_PATH), as_version=4)
     client = NotebookClient(
         nb,
@@ -29,6 +36,7 @@ def test_acceptance_notebook_runs() -> None:
     )
     client.execute()
 
+    cells_with_output = 0
     for cell in nb.cells:
         if cell.cell_type != "code":
             continue
@@ -38,3 +46,13 @@ def test_acceptance_notebook_runs() -> None:
                 f"Source: {cell.source[:200]}\n"
                 f"Error: {output.get('ename')}: {output.get('evalue')}"
             )
+            # Count cells that produced any real output (stream, display, or
+            # execute_result). `error` already rejected above.
+            if output.get("output_type") in {"stream", "display_data", "execute_result"}:
+                cells_with_output += 1
+                break
+
+    assert cells_with_output >= 1, (
+        "No code cell produced output. A silently-short-circuited notebook "
+        "would pass the no-error check; require at least one real output."
+    )

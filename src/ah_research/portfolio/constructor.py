@@ -5,19 +5,25 @@ Phase 3 Task 15-16. ``construction.py`` (Phase 2) is left untouched.
 
 from __future__ import annotations
 
+import logging
 from dataclasses import dataclass, field
 from datetime import date
 from typing import TYPE_CHECKING, Any, Literal
 
 import numpy as np
 import pandas as pd
+from pandera.errors import SchemaError
 
 from ah_research.backtest.types import Signals
+from ah_research.constants import BPS_PER_UNIT, TRADING_DAYS_PER_YEAR
+from ah_research.exceptions import DataIntegrityError, SourceError
 from ah_research.portfolio.construction import top_quantile_weights
 
 if TYPE_CHECKING:
     from ah_research.portfolio.optimizer import Optimizer
     from ah_research.portfolio.optimizer.result import OptimizationResult
+
+logger = logging.getLogger(__name__)
 
 # ---------------------------------------------------------------------------
 # Constraint
@@ -114,7 +120,11 @@ class ConstraintResult:
 
 @dataclass(frozen=True)
 class ConstructionReport:
-    """Full output from ``Constructor.build()``."""
+    """Full output from ``Constructor.build()``.
+
+    ``weights`` is deep-copied in ``__post_init__`` so callers cannot
+    retroactively mutate the frame under the (otherwise-frozen) container.
+    """
 
     weights: pd.DataFrame  # columns: [symbol, weight]
     final_position_count: int
@@ -123,6 +133,11 @@ class ConstructionReport:
     weighting_scheme: str
     relaxation_notes: list[str] = field(default_factory=list)
     optimization_result: OptimizationResult | None = None
+
+    def __post_init__(self) -> None:
+        # Defensive copy: frozen=True only blocks attribute reassignment,
+        # not mutation of the referenced DataFrame.
+        object.__setattr__(self, "weights", self.weights.copy(deep=True))
 
 
 # ---------------------------------------------------------------------------
@@ -307,7 +322,10 @@ class Constructor:
             return signals / total
 
         if self._weighting in ("free_float_mcw", "mcw"):
-            # Attempt to fetch market cap from repo; fall back to equal
+            # Attempt to fetch market cap from repo; fall back to equal weight
+            # ONLY on expected data-availability failures. Unexpected exceptions
+            # propagate so a real bug does not masquerade as a valid MCW
+            # portfolio.
             if self._repo is not None and self._asof is not None:
                 try:
                     funds = self._repo.get_fundamentals(
@@ -333,8 +351,15 @@ class Constructor:
                         if total_mc > 0:
                             result_series: pd.Series = mc / total_mc
                             return result_series
-                except Exception:
-                    pass
+                except (SourceError, DataIntegrityError, SchemaError, KeyError) as exc:
+                    logger.warning(
+                        "MCW fallback to equal-weight: fundamentals unavailable "
+                        "(weighting=%s, asof=%s, n_symbols=%d): %s",
+                        self._weighting,
+                        self._asof,
+                        len(symbols),
+                        exc,
+                    )
             # Fall back to equal weight
             n = len(symbols)
             return pd.Series(1.0 / n, index=symbols)
@@ -450,7 +475,16 @@ class Constructor:
 
                 status_sn: ConstraintStatus = "infeasible_relaxed" if missing else "bound"
                 return new_w, ConstraintResult(constraint=constraint, status=status_sn), notes
-            except Exception as e:
+            except (SourceError, DataIntegrityError, SchemaError, KeyError) as e:
+                # Expected failure modes: benchmark not cached, sector data
+                # missing, or column-name drift. Anything else (TypeError,
+                # ArithmeticError) is a bug and should propagate.
+                logger.warning(
+                    "sector_neutral_to relaxed: data unavailable (benchmark=%s, asof=%s): %s",
+                    benchmark,
+                    self._asof,
+                    e,
+                )
                 notes.append(f"sector_neutral_to: error {e}; skipping")
                 return (
                     weights,
@@ -471,12 +505,12 @@ class Constructor:
             bm_w = pd.Series(1.0 / n, index=weights.index)
             active = weights - bm_w
             active_arr = active.to_numpy(dtype=float)
-            te_bps = float(np.std(active_arr) * np.sqrt(252) * 10000)
+            te_bps = float(np.std(active_arr) * np.sqrt(TRADING_DAYS_PER_YEAR) * BPS_PER_UNIT)
             if te_bps <= bps:
                 return weights, ConstraintResult(constraint=constraint, status="slack"), notes
             # Shrink: w_new = alpha*w + (1-alpha)*bm_w; solve for alpha
-            target = bps / 10000.0  # as fraction
-            current_te_frac = float(np.std(active_arr) * np.sqrt(252))
+            target = bps / BPS_PER_UNIT  # as fraction
+            current_te_frac = float(np.std(active_arr) * np.sqrt(TRADING_DAYS_PER_YEAR))
             if current_te_frac == 0:
                 return weights, ConstraintResult(constraint=constraint, status="slack"), notes
             alpha = target / current_te_frac

@@ -20,7 +20,6 @@ from __future__ import annotations
 
 import json
 import logging
-import subprocess
 from dataclasses import replace
 from datetime import date
 from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
@@ -38,8 +37,11 @@ from ah_research.backtest.types import (
     Weights,
     hash_config,
 )
+from ah_research.constants import LEVERAGE_SUM_TOLERANCE
+from ah_research.exceptions import DataIntegrityError, SourceError, UserInputError
+from ah_research.meta import code_version
 from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
-from ah_research.strategies.base import SignalStrategy, WeightStrategy
+from ah_research.strategies.base import resolve_weights
 
 logger = logging.getLogger(__name__)
 
@@ -63,16 +65,7 @@ _hk_borrow_warned: set[str] = set()
 
 def _get_code_version() -> str:
     """Return the short git SHA of the current HEAD, or 'unknown'."""
-    try:
-        result = subprocess.run(
-            ["git", "rev-parse", "--short", "HEAD"],
-            capture_output=True,
-            text=True,
-            check=True,
-        )
-        return result.stdout.strip()
-    except Exception:
-        return "unknown"
+    return code_version()
 
 
 _BENCHMARK_SYMBOL: dict[str, str] = {
@@ -151,7 +144,7 @@ def resolve_benchmark(
         sym = _BENCHMARK_SYMBOL[spec]
         try:
             prices_df = repo.get_prices([sym], start, end)
-        except Exception as exc:
+        except (SourceError, DataIntegrityError) as exc:
             logger.warning(
                 "Failed to fetch benchmark %r (%s) from repo: %s. Falling back to constant 1.0.",
                 spec,
@@ -395,7 +388,7 @@ def _apply_corporate_action(
 
     try:
         symbol = parse_symbol(sym_str)
-    except Exception:
+    except UserInputError:
         logger.warning("Cannot parse symbol %r in corporate action; skipping.", sym_str)
         return
 
@@ -488,6 +481,16 @@ def run_backtest(
 ) -> BacktestResult:
     """Run a daily-loop event-driven backtest.
 
+    .. admonition:: Refactor candidate (C1 in 2026-05-02 code review)
+
+       This function has grown to ~720 lines and owns: calendar merging,
+       universe discovery, corporate actions, order execution, T+N lock,
+       slippage, costs, cash back-solve, rebalancing, and MTM. A follow-up
+       PR should carve it into collaborators (``BacktestLoop`` +
+       ``OrderExecutor``, ``RebalanceScheduler``, ``CashLedger``,
+       ``CorporateActionHandler``, ``MTMAccumulator``). Scoping it here to
+       avoid an unreviewable diff.
+
     Parameters
     ----------
     strategy:
@@ -534,22 +537,11 @@ def run_backtest(
     all_symbols_str: set[str] = set()
 
     # Call strategy.generate once (outside the per-date loop) to get all weights.
-    # Re-raise ValueError (e.g. NaN weights from pandera) immediately.
+    # Dispatch logic lives in strategies.base.resolve_weights so engine.py and
+    # verify.py share one source of truth. Re-raise ValueError (e.g. NaN
+    # weights from pandera) immediately.
     try:
-        # Check SignalStrategy first: it has both generate() and to_weights(),
-        # whereas WeightStrategy has only generate(). A strategy implementing
-        # both protocols is treated as SignalStrategy so to_weights() is called.
-        if isinstance(strategy, SignalStrategy) and hasattr(strategy, "to_weights"):
-            s = strategy.generate(repo, config.start, config.end)
-            all_weights = strategy.to_weights(s, repo)
-        elif isinstance(strategy, WeightStrategy):
-            all_weights = strategy.generate(repo, config.start, config.end)
-        else:
-            result_obj = strategy.generate(repo, config.start, config.end)
-            if hasattr(result_obj, "df") and "weight" in result_obj.df.columns:
-                all_weights = result_obj
-            else:
-                all_weights = strategy.to_weights(result_obj, repo)
+        all_weights = resolve_weights(strategy, repo, config.start, config.end)
     except (ValueError, TypeError):
         # Validation errors (NaN weights, bad schema) are user-input errors — re-raise.
         raise
@@ -584,7 +576,7 @@ def run_backtest(
             if not config.allow_leverage:
                 for grp_date, grp in wdf.groupby("date"):
                     abs_sum = float(grp["weight"].abs().sum())
-                    if abs_sum > 1.0 + 1e-6:
+                    if abs_sum > 1.0 + LEVERAGE_SUM_TOLERANCE:
                         raise ValueError(
                             f"Weight sum {abs_sum:.6f} exceeds 1.0 on {grp_date} "
                             f"with allow_leverage=False. Either set allow_leverage=True "
@@ -614,13 +606,22 @@ def run_backtest(
         else pd.DataFrame(columns=["symbol", "ex_date", "kind", "params_json"])
     )
 
-    # FX data
+    # FX data — degrade gracefully only for expected data-availability errors.
+    # Any other exception (type error, solver bug) propagates so a real bug
+    # does not silently produce a backtest that treats HK as CNY.
     try:
         fx_df = repo.get_fx_series("CNY_HKD", config.start, config.end)
         fx_lookup: dict[date, float] = {
             pd.Timestamp(row["date"]).date(): float(row["rate"]) for _, row in fx_df.iterrows()
         }
-    except Exception:
+    except (SourceError, DataIntegrityError) as exc:
+        logger.warning(
+            "FX series unavailable (CNY_HKD, %s .. %s); cross-currency "
+            "positions will use 1.0 fallback: %s",
+            config.start,
+            config.end,
+            exc,
+        )
         fx_lookup = {}
 
     # Build fast lookup: (date, symbol) -> bar row
@@ -1036,7 +1037,7 @@ def run_backtest(
 
                     try:
                         sym_w = parse_symbol(sym_str_w)
-                    except Exception:
+                    except UserInputError:
                         logger.warning("Cannot parse symbol %r; skipping.", sym_str_w)
                         continue
 

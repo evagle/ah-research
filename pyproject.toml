@@ -2,7 +2,7 @@
 name = "ah-research"
 version = "0.0.1"
 description = "Personal A-shares + HK stock research platform"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 dependencies = [
     "anthropic>=0.40.0",
     "pandas>=2.2",
@@ -53,7 +53,7 @@ packages = ["src/ah_research"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM", "RUF"]
@@ -63,7 +63,7 @@ ignore = [
 ]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 strict = true
 ignore_missing_imports = true
 
@@ -77,10 +77,5 @@ addopts = "-v --tb=short --strict-markers"
 markers = [
     "live: integration tests that hit real APIs (set AH_RESEARCH_LIVE=1)",
     "slow: tests that take >1s",
-]
-
-[tool.uv.workspace]
-members = [
-    "ah-research",
 ]
 

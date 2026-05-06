@@ -19,6 +19,7 @@ import pandas as pd
 from ah_research.backtest.engine import run_backtest
 from ah_research.backtest.metrics import MetricsBundle
 from ah_research.backtest.types import BacktestConfig, Weights
+from ah_research.constants import CANARY_EQUITY_TOLERANCE
 from ah_research.model.types import Exchange
 
 logger = logging.getLogger(__name__)
@@ -461,19 +462,9 @@ class _SignalShiftedStrategy:
         self.name = getattr(inner, "name", "shifted")
 
     def generate(self, repo: Any, start: date, end: date) -> Weights:
-        from ah_research.strategies.base import SignalStrategy, WeightStrategy
+        from ah_research.strategies.base import resolve_weights
 
-        if isinstance(self._inner, WeightStrategy):
-            weights = self._inner.generate(repo, start, end)
-        elif isinstance(self._inner, SignalStrategy):
-            sigs = self._inner.generate(repo, start, end)
-            weights = self._inner.to_weights(sigs, repo)
-        else:
-            result = self._inner.generate(repo, start, end)
-            if hasattr(result, "df") and "weight" in result.df.columns:
-                weights = result
-            else:
-                weights = self._inner.to_weights(result, repo)
+        weights = resolve_weights(self._inner, repo, start, end)
 
         # Shift dates back by 1 trading day
         df = weights.df.copy()
@@ -528,7 +519,7 @@ def _canary_future_price_shuffle(
 
     divergence = (aligned.iloc[:, 0] - aligned.iloc[:, 1]).abs()
     max_div = float(divergence.max())
-    tol = 1e-6  # allow small floating-point rounding
+    tol = CANARY_EQUITY_TOLERANCE
 
     passed = max_div < tol
     return CanaryResult(
@@ -588,7 +579,7 @@ def _canary_future_fundamentals_shuffle(
 
     divergence = (aligned.iloc[:, 0] - aligned.iloc[:, 1]).abs()
     max_div = float(divergence.max())
-    tol = 1e-6
+    tol = CANARY_EQUITY_TOLERANCE
 
     passed = max_div < tol
     return CanaryResult(

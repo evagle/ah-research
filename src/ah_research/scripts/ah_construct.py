@@ -40,25 +40,15 @@ def _parse_universe(path: Path) -> dict[str, float]:
 
 
 def _make_repo() -> object:
-    """Build a DataRepository from the default cache. Extracted for test mocking."""
-    from ah_research.config import get_settings
-    from ah_research.data.cache import DuckDBCache
-    from ah_research.data.repository import DataRepository
-    from ah_research.integrations.fake import FakeSources
+    """Build a DataRepository from the default cache. Extracted for test mocking.
 
-    settings = get_settings()
-    sources = FakeSources(seed=42)
-    cache = DuckDBCache(settings.cache_duckdb_path)
-    return DataRepository(
-        price_source=sources.prices,
-        fundamentals_source=sources.fundamentals,
-        fx_source=sources.fx,
-        calendar_source=sources.calendar,
-        sector_source=sources.sectors,
-        corp_actions_source=sources.corporate_actions,
-        constituents_source=sources.constituents,
-        cache=cache,
-    )
+    Implementation in ah_research.scripts._factories; kept here as a thin
+    passthrough so tests that patch ``ah_research.scripts.ah_construct._make_repo``
+    keep working.
+    """
+    from ah_research.scripts._factories import make_repo
+
+    return make_repo()
 
 
 @construct_app.callback(invoke_without_command=True)

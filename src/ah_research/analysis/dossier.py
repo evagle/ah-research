@@ -3,13 +3,13 @@
 from __future__ import annotations
 
 import dataclasses
-import subprocess
 from dataclasses import dataclass
 from datetime import date
 from typing import Any, cast
 
 import pandas as pd
 
+from ah_research.meta import code_version
 from ah_research.model.types import AHPair, Symbol
 
 # ── Section dataclasses ───────────────────────────────────────────────────────
@@ -565,20 +565,10 @@ def build_dossier(
     # PeersSection (stub — peers require full universe scan, deferred)
     peers = PeersSection(peer_symbols=[], peer_table=pd.DataFrame())
 
-    # Metadata
-    try:
-        sha = subprocess.check_output(
-            ["git", "rev-parse", "--short", "HEAD"],
-            text=True,
-            cwd="/Users/brian_huang/repos/ah-research",
-        ).strip()
-    except Exception:
-        sha = "unknown"
-
     metadata = DossierMetadata(
         asof=asof,
         repo_snapshot_date=asof,
-        code_version=sha,
+        code_version=code_version(),
         warnings=warnings,
     )
 
