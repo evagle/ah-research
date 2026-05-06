@@ -18,9 +18,7 @@ Task 14: Short orders — blocked on A-shares by default.
 
 from __future__ import annotations
 
-import json
 import logging
-from dataclasses import replace
 from datetime import date
 from decimal import Decimal
 from typing import Any
@@ -30,14 +28,10 @@ import pandas as pd
 from ah_research.backtest.cash_ledger import (
     CashLedger,
 )
-from ah_research.backtest.cash_ledger import (
-    cash_in_base as _cash_in_base,
-)
-from ah_research.backtest.cash_ledger import (
-    fx_to_base as _fx_to_base,
-)
+from ah_research.backtest.corporate_actions import CorporateActionHandler
 from ah_research.backtest.costs import DEFAULT_COSTS_2024, CostModelBundle
 from ah_research.backtest.metrics import compute_metrics
+from ah_research.backtest.mtm_accumulator import MTMAccumulator
 from ah_research.backtest.order_executor import (
     OrderExecutor,
     OrderRejection,
@@ -58,9 +52,9 @@ from ah_research.backtest.types import (
     hash_config,
 )
 from ah_research.constants import LEVERAGE_SUM_TOLERANCE
-from ah_research.exceptions import DataIntegrityError, SourceError, UserInputError
+from ah_research.exceptions import DataIntegrityError, SourceError
 from ah_research.meta import code_version
-from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
+from ah_research.model.types import Currency, Exchange, Symbol
 from ah_research.strategies.base import resolve_weights
 
 logger = logging.getLogger(__name__)
@@ -282,107 +276,6 @@ def _merge_calendars(sh_days: list[date], hk_days: list[date]) -> list[date]:
     return sorted(set(sh_days) | set(hk_days))
 
 
-def _apply_corporate_action(
-    positions: dict[Symbol, Position],
-    cash: dict[Currency, Decimal],
-    ca_row: pd.Series,
-    dividend_policy: str,
-    pending_orders: list[Order],
-    d: date,
-) -> None:
-    """Apply a single corporate action to positions and cash."""
-    sym_str = str(ca_row["symbol"])
-    kind = str(ca_row["kind"])
-    params = json.loads(str(ca_row["params_json"]))
-
-    try:
-        symbol = parse_symbol(sym_str)
-    except UserInputError:
-        logger.warning("Cannot parse symbol %r in corporate action; skipping.", sym_str)
-        return
-
-    if symbol not in positions:
-        return
-
-    pos = positions[symbol]
-
-    if kind == "cash_dividend":
-        amount_per_share = Decimal(str(params.get("amount_per_share", 0)))
-        dividend_cash = amount_per_share * pos.shares
-        ccy = symbol.currency
-        cash[ccy] = cash.get(ccy, Decimal("0")) + dividend_cash
-        logger.debug(
-            "Cash dividend %s %s per share for %s; credited %s %s",
-            amount_per_share,
-            ccy,
-            sym_str,
-            dividend_cash,
-            ccy,
-        )
-        if dividend_policy == "reinvest" and dividend_cash > 0:
-            # Queue a buy order for next trading day; shares determined at execution
-            # We queue with shares=0 as a sentinel; engine resolves shares at execution
-            # Actually, we need to store the cash amount for reinvestment.
-            # The simplest approach: mark dividend cash as "earmarked" for this symbol.
-            # We'll handle this by queuing a special reinvestment order.
-            pending_orders.append(
-                Order(
-                    ready_date=d,
-                    symbol=symbol,
-                    side="buy",
-                    shares=-1,  # sentinel: compute shares at execution using available cash
-                )
-            )
-
-    elif kind in ("stock_dividend", "split"):
-        ratio = Decimal(str(params.get("ratio", 1)))
-        # stock_dividend: ratio=0.1 means 10 extra shares per 100 held
-        # split: ratio=2.0 means 2-for-1
-        if kind == "stock_dividend":
-            new_shares = int(pos.shares * (1 + float(ratio)))
-        else:
-            new_shares = int(pos.shares * float(ratio))
-        # Adjust avg_cost so total cost basis stays the same
-        if new_shares > 0 and pos.shares > 0:
-            new_avg_cost = pos.avg_cost * Decimal(str(pos.shares)) / Decimal(str(new_shares))
-        else:
-            new_avg_cost = pos.avg_cost
-        positions[symbol] = replace(pos, shares=new_shares, avg_cost=new_avg_cost)
-        logger.info(
-            "Corporate action %s for %s: shares %d -> %d",
-            kind,
-            sym_str,
-            pos.shares,
-            new_shares,
-        )
-
-    elif kind == "reverse_split":
-        ratio = Decimal(str(params.get("ratio", 1)))
-        # reverse_split: ratio=0.5 means 1-for-2
-        new_shares = int(pos.shares * float(ratio))
-        if new_shares > 0 and pos.shares > 0:
-            new_avg_cost = pos.avg_cost * Decimal(str(pos.shares)) / Decimal(str(new_shares))
-        else:
-            new_avg_cost = pos.avg_cost
-        positions[symbol] = replace(pos, shares=new_shares, avg_cost=new_avg_cost)
-        logger.info(
-            "Reverse split for %s: shares %d -> %d",
-            sym_str,
-            pos.shares,
-            new_shares,
-        )
-
-    elif kind in ("rights_issue", "spin_off"):
-        logger.warning(
-            "Corporate action %r for %s treated as cash-equivalent in Phase 2; "
-            "no shares issued. Adjust manually if needed.",
-            kind,
-            sym_str,
-        )
-    else:
-        logger.warning("Unknown corporate action kind %r for %s; skipping.", kind, sym_str)
-
-
 def run_backtest(
     strategy: Any,
     repo: Any,
@@ -575,8 +468,6 @@ def run_backtest(
 
     trades_log: list[dict[str, Any]] = []
     rejected_log: list[dict[str, Any]] = []
-    equity_daily: list[tuple[date, Decimal]] = []
-    cash_hist: list[dict[str, Any]] = []
 
     # Dividend reinvestment cash earmarks: symbol -> Decimal
     dividend_earmarks: dict[Symbol, Decimal] = {}
@@ -603,12 +494,32 @@ def run_backtest(
     # ``d in rebalance_dates`` check); scheduler owns the *what*.
     rebalance_scheduler = RebalanceScheduler(config=config, logger=logger)
 
+    # CorporateActionHandler: applies dividends/splits/etc. at the open
+    # (step 1 of the daily loop). Holds positions/cash by reference.
+    corp_action_handler = CorporateActionHandler(
+        positions=positions,
+        cash=cash,
+        logger=logger,
+    )
+
+    # MTMAccumulator: end-of-day NAV recording, lock expiry, final
+    # positions snapshot. Owns equity_daily + cash_history internally.
+    mtm = MTMAccumulator(
+        positions=positions,
+        cash=cash,
+        prices_by_date_sym=prices_by_date_sym,
+        config=config,
+    )
+
     # ── Daily loop ────────────────────────────────────────────────────────────
     for d in all_days:
-        # 1. Apply corporate actions
+        # 1. Apply corporate actions (C1-05: CorporateActionHandler).
         for ca_row in ca_by_date.get(d, []):
-            _apply_corporate_action(
-                positions, cash, ca_row, config.dividend_policy, pending_orders, d
+            corp_action_handler.apply(
+                ca_row=ca_row,
+                dividend_policy=config.dividend_policy,
+                pending_orders=pending_orders,
+                d=d,
             )
 
         # 2. Execute pending orders
@@ -727,34 +638,15 @@ def run_backtest(
                 )
             )
 
-        # 4. Mark-to-market end-of-day NAV
-        nav_d = _cash_in_base(cash, config.base_currency, d, fx_lookup)
-        for sym_s, pos in positions.items():
-            bar_data = prices_by_date_sym.get((d, str(sym_s)))
-            if bar_data is not None:
-                price_local = Decimal(str(float(bar_data["close"])))
-                fx_rate = _fx_to_base(sym_s.currency, config.base_currency, d, fx_lookup)
-                # Signed: short positions contribute negative MV
-                nav_d += Decimal(str(pos.shares)) * price_local * fx_rate
+        # 4. Mark-to-market end-of-day NAV (C1-05: MTMAccumulator).
+        mtm.record_eod(d=d, fx_lookup=fx_lookup)
 
-        equity_daily.append((d, nav_d))
-
-        cash_hist.append(
-            {
-                "date": d,
-                "CNY": float(cash.get(Currency.CNY, Decimal("0"))),
-                "HKD": float(cash.get(Currency.HKD, Decimal("0"))),
-            }
-        )
-
-        # 5. Expire T+N locks
-        for sym_lock, pos_lock in list(positions.items()):
-            if pos_lock.locked_until is not None and pos_lock.locked_until <= d:
-                positions[sym_lock] = replace(pos_lock, locked_until=None)
+        # 5. Expire T+N locks.
+        mtm.expire_locks(d)
 
     # ── Finalize ──────────────────────────────────────────────────────────────
-    ec_dates = [pd.Timestamp(d) for d, _ in equity_daily]
-    ec_values = [float(v) for _, v in equity_daily]
+    ec_dates = [pd.Timestamp(d) for d, _ in mtm.equity_daily]
+    ec_values = [float(v) for _, v in mtm.equity_daily]
     equity_curve = pd.Series(ec_values, index=pd.DatetimeIndex(ec_dates))
 
     # Log returns
@@ -787,25 +679,13 @@ def run_backtest(
     )
 
     cash_hist_df = (
-        pd.DataFrame(cash_hist) if cash_hist else pd.DataFrame(columns=["date", "CNY", "HKD"])
+        pd.DataFrame(mtm.cash_history)
+        if mtm.cash_history
+        else pd.DataFrame(columns=["date", "CNY", "HKD"])
     )
 
-    # Build positions history (end-of-run snapshot)
-    pos_rows = []
-    for last_d, _ in equity_daily[-1:]:
-        for sym_s, pos in positions.items():
-            bar_data = prices_by_date_sym.get((last_d, str(sym_s)))
-            price_f = float(bar_data["close"]) if bar_data is not None else 0.0
-            fx_rate_f = float(_fx_to_base(sym_s.currency, config.base_currency, last_d, fx_lookup))
-            pos_rows.append(
-                {
-                    "date": last_d,
-                    "symbol": str(sym_s),
-                    "shares": pos.shares,
-                    "mkt_value_local": pos.shares * price_f,
-                    "mkt_value_base": pos.shares * price_f * fx_rate_f,
-                }
-            )
+    # Build positions history (end-of-run snapshot via MTMAccumulator).
+    pos_rows = mtm.build_positions_history(fx_lookup)
     positions_history = (
         pd.DataFrame(pos_rows)
         if pos_rows
