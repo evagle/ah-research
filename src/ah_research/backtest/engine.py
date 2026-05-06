@@ -22,8 +22,8 @@ import json
 import logging
 from dataclasses import replace
 from datetime import date
-from decimal import ROUND_CEILING, ROUND_FLOOR, Decimal
-from typing import Any, Literal
+from decimal import Decimal
+from typing import Any
 
 import pandas as pd
 
@@ -43,6 +43,12 @@ from ah_research.backtest.order_executor import (
     OrderRejection,
     PricedFill,
 )
+from ah_research.backtest.rebalance_scheduler import (
+    RebalanceScheduler,
+)
+from ah_research.backtest.rebalance_scheduler import (
+    compute_rebalance_dates as _compute_rebalance_dates,
+)
 from ah_research.backtest.types import (
     BacktestConfig,
     BacktestResult,
@@ -58,20 +64,6 @@ from ah_research.model.types import Currency, Exchange, Symbol, parse_symbol
 from ah_research.strategies.base import resolve_weights
 
 logger = logging.getLogger(__name__)
-
-# Lot sizes (shares per board lot)
-_LOT_SIZE: dict[Exchange, int] = {
-    Exchange.SH: 100,
-    Exchange.SZ: 100,
-    Exchange.HK: 100,  # Phase 2 simplification; warning logged at start
-}
-
-# T+N settlement days per exchange under "auto"
-_SETTLEMENT_DAYS: dict[Exchange, int] = {
-    Exchange.SH: 1,
-    Exchange.SZ: 1,
-    Exchange.HK: 2,
-}
 
 # Symbols warned about HK borrow cost (per-run set)
 _hk_borrow_warned: set[str] = set()
@@ -288,53 +280,6 @@ def _trading_days_for_exchange(repo: Any, exchange: Exchange, start: date, end: 
 def _merge_calendars(sh_days: list[date], hk_days: list[date]) -> list[date]:
     """Return sorted union of two calendar lists."""
     return sorted(set(sh_days) | set(hk_days))
-
-
-def _compute_rebalance_dates(all_days: list[date], freq: str) -> list[date]:
-    """Return the last trading day of each period (M/Q/W/D) in all_days."""
-    if not all_days:
-        return []
-    ts_index = pd.DatetimeIndex([pd.Timestamp(d) for d in all_days])
-    s = pd.Series(ts_index, index=ts_index)
-
-    pandas_freq = {"M": "ME", "Q": "QE", "W": "W-FRI", "D": "D"}.get(freq, "ME")
-
-    rebalance_ts: list[date] = []
-    # Group by period and pick the last day
-    for _period, group in s.groupby(pd.Grouper(freq=pandas_freq)):
-        if len(group) > 0:
-            last_day = group.index[-1].date()
-            rebalance_ts.append(last_day)
-    return rebalance_ts
-
-
-def _round_to_lot(target_shares: float, lot_size: int, is_buy: bool) -> int:
-    """Round shares to the nearest lot. Floor on buys, ceiling on sells."""
-    if lot_size <= 0:
-        lot_size = 1
-    lots = Decimal(str(target_shares)) / Decimal(str(lot_size))
-    if is_buy:
-        rounded_lots = int(lots.to_integral_value(rounding=ROUND_FLOOR))
-    else:
-        rounded_lots = int(lots.to_integral_value(rounding=ROUND_CEILING))
-    return rounded_lots * lot_size
-
-
-def _infer_side(
-    current_shares: int, target_shares: int
-) -> Literal["buy", "sell", "short", "cover"]:
-    """Infer order side from current and target shares."""
-    if current_shares >= 0 and target_shares > current_shares:
-        return "buy"
-    if current_shares > 0 and target_shares < current_shares:
-        return "sell"
-    if current_shares == 0 and target_shares < 0:
-        return "short"
-    if current_shares < 0 and target_shares > current_shares:
-        return "cover"
-    if current_shares < 0 and target_shares < current_shares:
-        return "short"
-    return "sell"
 
 
 def _apply_corporate_action(
@@ -653,6 +598,11 @@ def run_backtest(
         logger=logger,
     )
 
+    # RebalanceScheduler: stateless translator from per-rebalance-date target
+    # weights to a list of new orders. Engine still owns the *when* (the
+    # ``d in rebalance_dates`` check); scheduler owns the *what*.
+    rebalance_scheduler = RebalanceScheduler(config=config, logger=logger)
+
     # ── Daily loop ────────────────────────────────────────────────────────────
     for d in all_days:
         # 1. Apply corporate actions
@@ -763,93 +713,19 @@ def run_backtest(
 
         pending_orders = next_pending
 
-        # 3. If d is a rebalance date, compute target orders for next trading day
+        # 3. If d is a rebalance date, compute target orders for next trading day.
+        # RebalanceScheduler (C1-04) owns the target-weights -> orders translation.
         if d in rebalance_dates and d in per_rebalance_weights:
-            w = per_rebalance_weights[d]
-            date_mask = w.df["date"].dt.date == d
-            day_weights = w.df[date_mask]
-
-            if not day_weights.empty:
-                # Compute NAV
-                nav_base = _cash_in_base(cash, config.base_currency, d, fx_lookup)
-                for sym_s, pos in positions.items():
-                    bar_data = prices_by_date_sym.get((d, str(sym_s)))
-                    if bar_data is not None:
-                        price_local = Decimal(str(float(bar_data["close"])))
-                        fx_rate = _fx_to_base(sym_s.currency, config.base_currency, d, fx_lookup)
-                        nav_base += Decimal(str(abs(pos.shares))) * price_local * fx_rate
-
-                target_symbols: set[Symbol] = set()
-                for _, wrow in day_weights.iterrows():
-                    sym_str_w = str(wrow["symbol"])
-                    target_w = float(wrow["weight"])
-
-                    try:
-                        sym_w = parse_symbol(sym_str_w)
-                    except UserInputError:
-                        logger.warning("Cannot parse symbol %r; skipping.", sym_str_w)
-                        continue
-
-                    target_symbols.add(sym_w)
-                    bar_data = prices_by_date_sym.get((d, sym_str_w))
-                    if bar_data is None:
-                        logger.warning(
-                            "No price bar for %s on rebalance date %s; skipping.",
-                            sym_str_w,
-                            d,
-                        )
-                        continue
-
-                    price_local_f = float(bar_data["close"])
-                    if price_local_f <= 0:
-                        continue
-
-                    fx_rate_f = float(
-                        _fx_to_base(sym_w.currency, config.base_currency, d, fx_lookup)
-                    )
-                    if fx_rate_f <= 0:
-                        fx_rate_f = 1.0
-
-                    target_shares_raw = float(nav_base) * target_w / (price_local_f * fx_rate_f)
-                    lot = _LOT_SIZE[sym_w.exchange]
-                    is_buy = target_shares_raw >= 0
-                    target_shares = _round_to_lot(abs(target_shares_raw), lot, is_buy=is_buy)
-                    if target_w < 0:
-                        target_shares = -target_shares
-
-                    current_pos = positions.get(sym_w)
-                    current_shares_val = current_pos.shares if current_pos is not None else 0
-                    diff = target_shares - current_shares_val
-
-                    if diff == 0:
-                        continue
-
-                    side = _infer_side(current_shares_val, target_shares)
-                    pending_orders.append(
-                        Order(
-                            ready_date=d,
-                            symbol=sym_w,
-                            side=side,
-                            shares=abs(diff),
-                        )
-                    )
-
-                # Close positions not in target
-                for sym_close in set(positions.keys()) - target_symbols:
-                    pos_close = positions[sym_close]
-                    if pos_close.shares == 0:
-                        continue
-                    close_side: Literal["sell", "cover"] = (
-                        "sell" if pos_close.shares > 0 else "cover"
-                    )
-                    pending_orders.append(
-                        Order(
-                            ready_date=d,
-                            symbol=sym_close,
-                            side=close_side,
-                            shares=abs(pos_close.shares),
-                        )
-                    )
+            pending_orders.extend(
+                rebalance_scheduler.compute_orders(
+                    d=d,
+                    weights=per_rebalance_weights[d],
+                    positions=positions,
+                    cash=cash,
+                    prices_by_date_sym=prices_by_date_sym,
+                    fx_lookup=fx_lookup,
+                )
+            )
 
         # 4. Mark-to-market end-of-day NAV
         nav_d = _cash_in_base(cash, config.base_currency, d, fx_lookup)
