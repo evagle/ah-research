@@ -15,12 +15,14 @@ description: Use when a user asks what a company truly sells, how its products a
 
 **共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充产品分析特有规则。
 
+**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。AI自由组织分析正文；共享目录、run隔离和无感resolver只以该文件为准。
+
 ### Mode A—Standalone
 
-- **Invocation**:`/product-analysis <ticker> [--as-of YYYY-MM-DD] [--resume|--start-fresh] [--auto|--interactive]`
+- **Invocation**:`/product-analysis <ticker> [--as-of YYYY-MM-DD] [--auto|--interactive]`。只有用户明确要求“完全重新分析”时内部resolver使用`--clean`
 - 参数只有ticker时默认进入Mode A，模式默认为`--auto`。
 - 独立完成ticker验证、证据准备、分析和复核。
-- 输出`profiles/<ticker>-product-<YYYY-MM-DD>[-vN].md`。
+- 输出`data/filings/<ticker>/runs/<run-id>/report.md`。
 - 适用于只想看懂一家公司产品、交付系统和竞争位置的请求。
 
 ### Mode B—As-subroutine
@@ -29,6 +31,7 @@ description: Use when a user asks what a company truly sells, how its products a
 - 必填参数为`--target-profile <absolute-path> --section <part1/§1.1|part1/§1.3> --ticker <ticker> --year <YYYY> --as-of <YYYY-MM-DD> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`，并在`--filing <absolute-pdf-path>`和`--extracted-text <absolute-text-path>`中恰选一个。A+H发行人必须逐法域传入全部counterpart。
 - Mode B复用父skill已绑定证据，但仍执行路径、SHA-256、AS_OF和目标section校验。
 - Mode B不得直接修改`target-profile`，无论`--auto`还是`--interactive`都只返回草稿；父skill是唯一写入者和确认菜单所有者。
+- Mode B不调用run store，也不创建run。
 - `part1/§1.1`承载产品、流程和单位经济；`part1/§1.3`承载客户选择、竞争阶梯和价值机制。
 - 本skill只返回`moat_handoff`事实。最终护城河等级继续由父skill依据`moat-framework.md`计算。
 
@@ -49,10 +52,11 @@ Ticker格式为`\d{6}\.(SH|SZ)`或`\d{1,5}\.HK`；港股代码立即左补零为
 
 ### §1.2 Mode A准备
 
-1. 验证ticker、YEAR和AS_OF。
-2. 按`../read-filing/SKILL.md`的Mode A证据规则准备目标年报、最多10年连续年报、招股书或上市文件、事件证据和持久抽取文本。资料不足时运行`uv run python scripts/download_filings.py <ticker> --years 10 --end-year <latest-required-fiscal-year> --as-of AS_OF --listing-date <official-listing-date> --listing-profile-bundle <actual-official-query-bundle-path> --manifest-out <temporary-annual-manifest-path>`；A股需要招股书时追加`--include-prospectus`，港股改查HKEX官方上市文件目录。
-3. 保存annual manifest与event manifest的真实绝对路径及SHA-256。缺少完整官方目录、选中报告或哈希时停止，不得用网络摘要代替。
-4. 建立可恢复scratch，保存`ticker/YEAR/AS_OF/completed_steps/manifest_paths/manifest_sha256s/output_path`。证据变化时使受影响步骤失效。
+1. 验证ticker、YEAR和AS_OF，先运行`read-filing` Mode A准备或复用目标年报、最多10年连续年报、招股书或上市文件、事件证据和持久抽取文本。
+2. 取得annual、event及全部counterpart manifest的真实绝对路径、SHA-256和artifact ID后，调用`scripts/financial_run_store.py resolve`；不得使用`待建立`占位指纹。
+3. `resumed`继续checkpoint中的未完成步骤；`reused`直接返回已完成报告；`created`只在返回的run路径工作。正常入口不得询问恢复或新建。
+4. 使用返回manifest调用`read-filing` Mode B取得完整`facts/citations/warnings/screening_flags`。缺少完整官方目录、选中报告或哈希时停止，不得用网络摘要代替。
+5. 把执行状态保存到run内`checkpoint.json`，正文保存到同run的`report.md`。验证通过的facts、metrics、citations和analyses通过通用或专用内容寻址发布器提升到ticker共享层；输入变化只使依赖artifact失效。
 
 ### §1.3 Mode B准备
 

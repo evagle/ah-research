@@ -55,12 +55,13 @@ artifact_id = sha256(
   | schema_version
   | sorted(input_artifact_ids)
   | normalized_parameters
+  | content_sha256
 )
 ```
 
-事实输入指纹至少包含ticker、target fiscal year、AS_OF、annual/event/counterpart manifest哈希和抽取器版本。指标追加计算器版本、单位和参数。分析artifact追加skill版本、judgment domain、subject、目标section、模板版本及全部依赖artifact ID。
+事实输入指纹至少包含ticker、target fiscal year、AS_OF、实际构造并验证后的annual/event/counterpart manifest哈希和抽取器版本；query plan哈希不能代替实际响应与manifest哈希。指标追加计算器版本、单位和参数。分析artifact追加skill版本、judgment domain、subject、目标section、模板版本及全部依赖artifact ID。
 
-指纹完全一致才能直接复用；任一输入变化只使依赖图中的下游artifact失效。
+`content_sha256`用于已生成artifact的发布地址；run输入指纹在artifact生成前不包含该字段。指纹完全一致才能直接复用；任一输入变化只使依赖图中的下游artifact失效。
 
 ## 有条件共享的分析结果
 
@@ -144,7 +145,7 @@ run resolver对用户不可见；run ID只用于恢复、审计和并发隔离�
 profiles/<ticker>-<YYYY-MM-DD>[-vN].md
 ```
 
-其入口也使用相同resolver自动选择已有未完成profile、复用完成artifact或创建增量分析，不再显示resume/start-fresh选择。
+其入口也使用相同resolver自动选择已有未完成profile、复用完成artifact或创建增量分析，不再显示resume/start-fresh选择。完成时通过`complete --result-path <absolute-profile-path>`登记外部结果路径，复用时resolver直接返回该profile。
 
 ## Manifest提升与原子性
 

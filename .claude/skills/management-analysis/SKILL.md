@@ -11,15 +11,17 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 
 **共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充管理层判断特有规则。
 
+**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享目录、run隔离、无感resolver和旧路径兼容只以该文件为准。
+
 ## §0运行模式
 
 本 skill 支持两种模式, 主 agent 根据 invocation 参数选择:
 
 ### Mode A — Standalone
 
-- **Invocation**:`/management-analysis <ticker> [--resume|--start-fresh] [--as-of YYYY-MM-DD] [--auto|--interactive]`/`分析管理层 <ticker>`/`管理层分析 <ticker>`
+- **Invocation**:`/management-analysis <ticker> [--as-of YYYY-MM-DD] [--auto|--interactive]`/`分析管理层 <ticker>`/`管理层分析 <ticker>`。只有用户明确要求“完全重新分析”时内部resolver使用`--clean`
 - **行为**: 子 skill 独立完成 ticker 验证 + filings audit + PDF 抽取 cache 检查 + 派子 agent 抓年报 + 主 agent 复核 + 写 standalone 报告
-- **Output path**:`profiles/<ticker>-mgmt-<YYYY-MM-DD>[-vN].md`—self-contained报告,仅含本skill覆盖的管理层相关内容,约100-200行。
+- **Output path**:`data/filings/<ticker>/runs/<run-id>/report.md`—self-contained报告,仅含本skill覆盖的管理层相关内容,约100-200行。
 - **典型场景**: 用户只想评估某 ticker 的管理层, 不需要完整 value-profile。
 
 ### Mode B — As-subroutine
@@ -27,11 +29,12 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 - **Invocation**:主value-profile skill在Step 3遇到Part 1 §4时delegate,传参`--target-profile <path> --section part1/§4 --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> --auto|--interactive`
 - **行为**: 信任主 skill 已做过 Step 1 (ticker 验证 + filings audit + PDF 抽取 cache); 跳过这些, 直接从 Step 3 (派子 agent) 开始
 - **Output**:仅返回`draft_sections`和结构化flags,父skill是唯一写入者;本skill不直接修改`<target-profile>`
+- **运行边界**:Mode B不调用run store，也不创建run
 - **典型场景**: 用户跑 `/value-profile <ticker>`, 主 skill 推进到 §4时自动调用本 skill
 
 ### Invocation 解析
 
-- 参数只有ticker→Mode A（Standalone）,默认`--auto`;Mode A接受`--resume`、`--start-fresh`和`--as-of YYYY-MM-DD`,`--resume`与`--start-fresh`互斥
+- 参数只有ticker→Mode A（Standalone），默认`--auto`；固定目标财年和AS_OF后由resolver自动续跑、复用或增量新建，不显示恢复选择
 - 参数含`--target-profile <path> --section <part1/§4|part1/§4.pre|part1/§4.1-§4.8> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> --auto|--interactive`→Mode B（As-subroutine）;两个manifest参数必须是已持久化JSON文件的绝对路径,不得接受内联JSON、相对路径或不存在的文件;未传任一manifest或模式时报契约错误
 - Ticker验证:沪深A股使用`\d{6}\.(SH|SZ)`,港股使用`\d{1,5}\.HK`。港股代码立即左补零为五位,后续路径、manifest、查询参数和输出只使用canonical ticker
 
@@ -165,10 +168,10 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 Mode B 跳过本步, 信主 skill 已做。
 
 1. **Validate ticker**:沪深A股使用`\d{6}\.(SH|SZ)`,港股使用`\d{1,5}\.HK`。港股代码立即左补零为五位。失败双语报错并abort。
-2. **选择standalone状态**:目标路径模式为`profiles/<ticker>-mgmt-<YYYY-MM-DD>[-vN].md`;候选先按报告日期降序,同日再按`-vN`中的N降序,base文件按v1处理,最后按完整路径稳定排序。先检查排序后最近报告的`**运行状态:**`。显式`--resume`加载最近报告,显式`--start-fresh`保留旧报告并新建;未完成报告默认resume,已完成报告默认start-fresh,其中`已否决`也是已完成的terminal状态并默认start-fresh。resume分支已有standalone报告时加载而非新建;manifest为`待建立`时先恢复采集,不得在manifest校验前拒绝该合法恢复状态;证据已绑定后才校验两个manifest路径和`management_pending/pending_gate/unresolved_rows`。字段缺失时迁移为保守pending状态,不得覆盖已有正文。发现持久化`management_pending=true`时,`--auto`原样返回pending终态并退出;只有`--interactive`显示`[edit/research more/start-fresh/exit]`,未显式选择前不得重派、清空未决行或进入后续阶段。
-3. **建立统一证据截止日**:resume必须沿用报告内持久化的AS_OF;显式`--as-of`与该值冲突时abort。start-fresh才允许初始化新AS_OF:优先使用显式`--as-of`;未提供时先进入只读discovery阶段,只查询交易所官方目录元数据以选择目标完整年报首次有效披露日,不下载PDF、不写manifest。固定AS_OF后才执行正式下载、事件查询和manifest构建。把AS_OF持久化到standalone报告,不得使用当前日期代替。
-3.5. **保存下载前基线**:所有模式都在运行下载器之前执行,覆盖resume和start-fresh。resume先以报告持久化的manifest路径和SHA-256定位不可变snapshot;找不到即abort,不得把当前canonical文件作为旧报告基线。覆盖canonical manifest之前检查现有年报和事件manifest,分别复制为只读不可变snapshot并记录旧SHA-256;比较完成前不得覆盖canonical文件。若被旧报告引用,旧报告改为引用不可变snapshot,对每份报告逐份CAS改绑到snapshot并回读;成功改绑的报告继续绑定不可变snapshot,任一报告失败则停止且不得替换canonical,不宣称多报告CAS具备跨文件原子性。全部成功后才允许替换canonical。resume必须以报告绑定snapshot与重建manifest逐字段比较。
-3.55. **先创建standalone恢复骨架和证据阶段checkpoint**:Mode A在采集器前创建或加载standalone报告,至少持久化AS_OF、证据阶段、`**运行状态:**进行中`、`**失败原因:**无`和待建立manifest字段。此时`证据阶段=未建立`,用`publish_text_cas.py`和目标基线保存骨架但不附加manifest guard;转为已绑定后每次保存才强制全部guard。采集失败时在同一骨架写具体失败原因和`需人工`,下一次从该状态resume;不得等Step 2才创建报告。
+2. **准备共享证据**:显式`--as-of`按原值执行；未提供时先只读交易所官方目录，选择目标完整年报首次有效披露日。固定目标财年和AS_OF后，先运行`read-filing` Mode A准备或复用annual、event及全部counterpart manifest，并取得真实路径、SHA-256和artifact ID。
+3. **解析standalone状态**:使用上述真实artifact ID调用`scripts/financial_run_store.py resolve`。`resumed`从返回run的checkpoint继续，`reused`直接返回已完成report，`created`在新run中执行；只有“完全重新分析”传`--clean`。不得使用待建立指纹，也不得询问用户resume、新run或run ID。
+3.5. **保存下载前基线**:共享canonical manifest只新增内容寻址版本，不覆盖旧版本。run内候选manifest、query和日志只写当前run；通过复核后使用run store提升到ticker共享层。
+3.55. **先创建standalone恢复骨架和证据阶段checkpoint**:Mode A只使用resolver返回的`checkpoint.json`和`report.md`，至少持久化AS_OF、证据阶段、`**运行状态:**进行中`、`**失败原因:**无`和待建立manifest字段。采集失败时写具体原因和`需人工`，下次正常调用由resolver自动恢复。
 3.6. **先采集官方查询bundle**:在任何`download_filings.py`命令前,按`../read-filing/references/event-query-plan.schema.json`生成计划,上市代码与日期只接受listing profile官方响应中的`listing_codes/listing_dates`,并保存实际请求要求的请求头。运行`uv run python scripts/collect_event_evidence.py --plan <absolute-query-plan.json> --bundle-out <absolute-official-query-bundle.json> --evidence-dir <absolute-immutable-evidence-dir>`并验证成功后,读取采集器stdout返回的真实bundle路径;后续下载器和构建器只使用该真实路径。失败时返回并持久化具体错误,不得先下载。
 4. **Audit`data/filings/<ticker>/`**:
    - 承诺兑现5行需要至少6份年报形成5个完整`N→N+1`比较;资本分配测试准备最近10个财年
@@ -184,7 +187,7 @@ Mode B 跳过本步, 信主 skill 已做。
    - 无 `--target-profile` → Mode A
    - 有`--target-profile <path> --section <part1/§4|part1/§4.pre|part1/§4.1-§4.8> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> --auto|--interactive`→Mode B;显式定向时保留该复合section ID,不得归一为整个§4
 
-2. **Mode A 准备**:先查找该ticker最近的standalone报告`profiles/<ticker>-mgmt-*.md`;仅当Step 1选择resume时存在则加载并迁移AS_OF、manifest及pending字段,保留全部正文。`仅不存在时新建`只适用于resume分支;Step 1明确选择start-fresh时即使旧报告存在也保留旧文件并新建。新文件优先使用`profiles/<ticker>-mgmt-<YYYY-MM-DD>.md`;start-fresh遇到同日路径冲突时使用最小可用`-vN`后缀并写minimal header:
+2. **Mode A 准备**:使用resolver返回的`data/filings/<ticker>/runs/<run-id>/report.md`。`created`时写minimal header；`resumed`时加载同run报告并迁移缺失字段；`reused`不进入本步：
 
    ```markdown
    # <中英文公司名> 管理层分析 — <ticker>
@@ -245,7 +248,7 @@ Mode B 跳过本步, 信主 skill 已做。
    [合格 / 有保留 / 弃权]
    ```
 
-以下三道gate完成条件由Mode A和Mode B共享。Mode A恢复standalone时也必须逐行执行,机器字段或section置信度不能替代逐行校验。
+以下三道gate完成条件由Mode A和Mode B共享。Mode A恢复run时也必须逐行执行，机器字段或section置信度不能替代逐行校验。
 
 3. **Mode B准备**:读取`<target-profile>`、`--filing-manifest <absolute-json-path>`和`--event-manifest <absolute-json-path>`;拒绝内联JSON、相对路径和不存在或无法解析的文件。从profile的Part 0解析ticker、exchange和AS_OF。年报路径允许仓库内`data/filings/<ticker>/manifests/annual-reports-<AS_OF>.json`或`annual-reports-<AS_OF>-<content-sha256>.json`,事件路径允许`events-<AS_OF>.json`或其内容寻址版本;两者唯一准绳都是Part 0持久化路径及SHA-256完全一致。annual manifest标量`查询发行人代码`必须等于`Part 0查询发行人代码映射[exchange]`;event manifest的`查询发行人代码映射完整相等`,不得把标量和映射直接比较。A+H时还逐项绑定Part 0的`counterpart_filing_manifests`,并重放逐法域官方年报目录。两个manifest顶层的`ticker`、`exchange`和`AS_OF`必须逐项等于Part 0,查询参数中的发行人也必须与该ticker和exchange一致;任一不符立即abort,不能只凭canonical路径信任身份。event manifest顶层`live_revalidation_required`必须为`true`,每个事件必须读取`offense_type`、`legal_effect`、`subject_role_at_occurrence`和`issuer_connection`;字段缺失立即返回父skill重建。每类事件重放必须读取manifest持久化的`http_method/request_encoding/request_headers/query_params/response_schema/response_adapter`,不得假定GET、query编码或固定分页字段;缺少任一适用字段立即返回父skill重建。主体名册同样读取其`source_url/http_method/request_encoding/request_headers/query_params/response_schema/response_adapter`,按对应请求契约重新请求主体名册,不得使用构建器固定的GET+query请求契约;复核实时响应哈希、结果总数和完整主体列表,任一变化都abort并要求父skill重建。annual-report manifest必须记录官方目录查询URL、查询参数、响应哈希、候选总数和每个财年的全部候选版本;每个候选版本必须含财年、报告期末日、完整披露时间、公告标题、报告类型、有效状态、替代关系、公告ID或官方URL和是否为选中版本,只有选中版本必须含绝对路径和文件SHA-256。使用保存的URL和参数重新请求官方目录并重算响应哈希;逐候选比较官方元数据,公告ID/URL、标题、报告类型、披露时间、有效状态和替代关系必须与新响应一致,不能只比较候选ID集合。形成任何否定性结论前,按event manifest保存的完整请求契约重新请求全部分页,复核响应哈希、结果总数和逐事件内容哈希。对每个选中版本重新下载选中官方URL到临时文件,计算官方文件SHA-256并与本地文件重算SHA-256及manifest值三方一致后删除临时文件。随后验证候选总数、每财年唯一选中版本、排序和逐年连续性;缺失中间年份或任一校验失败时返回父skill重建。在判断任何section已完成之前比较重建前后的manifest;manifest重建或live revalidation发现内容变化时,父skill先备份现有§4正文,再使旧`§4.pre`和`§4.1-§4.8`全部失效并重新调用本skill,不得继续复用旧完成状态。
 
@@ -327,7 +330,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 **Mode A**:
 - 使用Step 2选定的standalone路径,先记录standalone基线SHA-256,生成完整draft后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <standalone-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`;非A+H省略counterpart guard,并发冲突或guard变化时不得覆盖
 - 发布前运行`uv run python scripts/download_filings.py --revalidate <bound-annual-manifest-path>`和`uv run python scripts/build_event_manifest.py --revalidate <bound-event-manifest-path>`;A+H还逐一重验证`counterpart_filing_manifests`,全部通过后才执行CAS
-- 每次保存前重算两个manifest文件SHA-256并与本轮已复核值一致,把路径与已持久化SHA-256同正文一次原子写入。resume先核对两个路径与已持久化SHA-256;缺失字段时从报告原绑定文件或其不可变snapshot补齐,文件已变化且无旧snapshot时abort,不得把当前canonical文件冒充旧证据
+- 每次保存前重算两个manifest文件SHA-256并与本轮已复核值一致，把路径与已持久化SHA-256同正文一次原子写入。恢复时先核对两个路径与checkpoint哈希；输入变化由resolver创建增量子run，不得把当前canonical文件冒充旧证据
 - Mode A不存在父skill;`accept`、自动重试耗尽或交互pending菜单显示前,把section正文、`**管理层否决:**`、`**人工处理清单:**`、`**运行状态:**`、`**management_pending:**`、`**pending_gate:**`和`**unresolved_rows:**`在同一次原子写入中保存。存在未决行时三个机器字段必须反映真实未决状态且运行状态写`需人工`;交互模式选择exit时保留pending终态,恢复时从持久字段继续。未决清零且全部gate通过后才写`已完成`
 - 最末尾补`## 总结与结论`—3选1:`合格/有保留/弃权`
 - 若结论=弃权,额外加`> ⚠️ 管理层道德风险:<描述>.建议主value-profile在同一原子事务中写Part 0管理层否决:是—<原因>,并写估值阻断:是—管理层否决。`
