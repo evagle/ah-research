@@ -10,7 +10,7 @@
 2. 精简`value-profile`，使其只保留编排、接收门槛、状态传播和最终结论所有权。
 3. 为三个判断型子skill统一“严格JSON信封+自由Markdown正文”。
 4. 让`read-filing`Mode B默认返回完整事实，不因L1至L3初筛提前停止。
-5. 让跨skill重复发现具有稳定ID，并由`value-profile`统一去重计数。
+5. 让跨skill共享证据和各自判断都具有稳定ID，并由`value-profile`按判断主体去重。
 
 ## 2.保持不变的职责
 
@@ -94,18 +94,26 @@ Mode B不再因L1至L3提前停止：
 
 这样保证事实层不替判断层做流程终止决策。
 
-## 6.跨Skill发现与去重
+## 6.共享证据、独立判断与去重
 
-三个判断型子skill的Mode B返回统一`findings`数组。每项至少包含：
+同一份监管文书、年报事实或关联交易可以同时支持不同判断：
+
+- `financial-redflag-scan`判断公司财务报表、财务行为和财务风险。
+- `management-analysis`判断管理层或实控人的诚信、尽责程度和治理响应。
+- `product-analysis`判断产品系统和竞争力。
+
+三个skill复用`read-filing`提供的稳定证据ID，但各自生成独立finding。Mode B统一返回`findings`数组，每项至少包含：
 
 ```json
 {
   "canonical_finding_id": "<sha256>",
   "owner_skill": "financial-redflag-scan",
+  "judgment_domain": "company_financials",
   "finding_type": "fund_occupation",
-  "subject": "<主体>",
+  "subject_type": "listed_company",
+  "subject_id": "<canonical issuer ID>",
   "occurrence_date": "YYYY-MM-DD",
-  "source_event_ids": ["<稳定事件ID>"],
+  "canonical_evidence_ids": ["<稳定事实或事件ID>"],
   "severity": "high_risk",
   "evidence_grade": "high",
   "judgment": "<专题解释>",
@@ -116,36 +124,49 @@ Mode B不再因L1至L3提前停止：
 `canonical_finding_id`按以下规范化输入计算：
 
 ```text
-sha256(finding_type|canonical_subject|occurrence_date|sorted(source_event_ids))
+sha256(judgment_domain|subject_type|subject_id|finding_type|
+       occurrence_date|sorted(canonical_evidence_ids))
 ```
 
-ID不包含skill、严重度或判断文字，因此两个skill处理同一底层事件时得到相同ID。
+ID不包含严重度或判断文字。同一skill或同一判断域重复处理相同主体、类型和证据时得到相同ID；判断主体或判断域不同则得到不同ID。
+
+例如，同一份财务造假处罚可以形成：
+
+- 公司财务finding：主体为上市公司，判断财务报表可信度。
+- 管理层finding：主体为涉事董事长、CFO或实控人，判断诚信与责任。
+
+两者复用相同`canonical_evidence_ids`，但不是同一个判断，不得合并或让一个结论覆盖另一个。
 
 ### 6.1所有权
 
-- 财务造假、虚假财务陈述、资金占用和非公允关联交易的财务风险判断由`financial-redflag-scan`拥有。
-- 操纵市场、内幕交易、承诺失信、治理响应和责任归因由`management-analysis`拥有。
+- 财务造假、虚假财务陈述、资金占用和非公允关联交易对公司财务可信度的影响，由`financial-redflag-scan`拥有。
+- 上述事件及操纵市场、内幕交易、承诺失信对管理层诚信、尽责程度和治理响应的影响，由`management-analysis`拥有。
 - 产品流程与竞争力失效由`product-analysis`拥有。
 
-### 6.2复用顺序
+一个skill不得直接采用另一个skill的结论作为自身结论，只能复用底层证据、引用和已核验事实。
 
-完整`value-profile`流程在进入管理层重叠检查前确保`financial-redflag-scan`已生成可复核handoff。`management-analysis`消费该handoff：
+### 6.2复用方式
 
-- 复用财务风险事实、引用和`canonical_finding_id`。
-- 只补充责任归因、治理响应和诚信影响。
-- 不重复执行相同资金占用或关联交易财务检查。
+`read-filing`负责给底层事实和事件生成稳定`canonical_evidence_id`。三个判断型skill消费同一事实对象：
 
-Mode A独立运行`management-analysis`时没有父流程handoff，可以自行取得所需事实，但仍按同一ID算法输出发现。
+- `financial-redflag-scan`不重新下载或重新抽取管理层已使用的同一证据。
+- `management-analysis`不重复核算完整财务排雷清单，只读取与管理层责任相关的已核验事实。
+- 两者必须独立完成各自的判断链路，不能把另一个skill的severity或judgment直接复制为本领域结论。
+- 两者没有执行先后依赖，可以由`value-profile`按section需要分别调用。
+
+Mode A独立运行时，skill可以通过`read-filing`取得所需事实，但仍使用相同证据ID和finding ID算法。
 
 ### 6.3父Skill聚合
 
 `value-profile`按`canonical_finding_id`分组：
 
-- 同一ID只进入风险计数一次。
+- 同一判断域、同一主体和同一finding ID只进入该维度计数一次。
 - 严重度取所有解释中的最高值。
-- 所有skill的`judgment`和引用均保留为解释列表。
-- owner冲突时按`finding_type`所有权表选择canonical owner。
-- 缺少稳定事件ID时不得伪造ID，返回`unresolved_items`并阻断完成。
+- 公司财务finding和管理层finding分别保留，不能因为引用同一证据而互相抵消。
+- 最终报告按`canonical_evidence_id`把相关判断并列展示，避免重复叙述同一事件。
+- 估值阻断原因使用稳定集合去重；同一事件同时触发财务阻断和管理层否决时，保留两个判断维度，但不重复写两遍事件事实。
+- owner冲突时按`judgment_domain+finding_type`所有权表选择canonical owner。
+- 缺少稳定证据ID时不得伪造finding ID，返回`unresolved_items`并阻断完成。
 
 ## 7.`value-profile`精简范围
 
@@ -192,8 +213,9 @@ Mode A独立运行`management-analysis`时没有父流程handoff，可以自行�
 至少覆盖：
 
 - 年报命中早退事实后，`read-filing`Mode B仍返回完整目标事实。
-- 资金占用同时出现在排雷和管理层分析时，只产生一个canonical risk count。
-- 管理层保留独立的责任归因解释。
+- 资金占用证据同时被两个skill使用时，产生公司财务和管理层诚信两个不同finding。
+- 同一判断域内重复执行不会重复计数。
+- 最终报告只叙述一次底层事件，同时保留两个判断主体的独立结论。
 - 产品分析自由Markdown结构不受Schema限制。
 
 ## 10.验收标准
@@ -203,6 +225,7 @@ Mode A独立运行`management-analysis`时没有父流程handoff，可以自行�
 - 三个判断型子skill的Mode B响应均通过对应Schema。
 - Mode B正文保持自由Markdown。
 - `read-filing`Mode B不早退。
-- 同一底层风险事件只计数一次。
+- 同一判断主体的相同finding只计数一次。
+- 不同判断主体可以复用同一证据并保留独立结论。
 - 现有财务skill契约测试全部通过。
 - 中文字符之间不存在不恰当空格。
