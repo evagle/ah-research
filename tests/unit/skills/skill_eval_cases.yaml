@@ -1,0 +1,41 @@
+version: 1
+skills:
+  read-filing:
+    should_trigger:
+      - "读一下600519.SH的2024年年报"
+      - "帮我系统梳理腾讯最新年报和附注"
+    should_not_trigger:
+      - "计算这个投资组合的最大回撤"
+    workflow_checks:
+      - "A股财务报表应路由到第十节"
+      - "港股应按语义标题定位综合财务报表"
+      - "缺失年报时使用真实存在的下载参数"
+  financial-redflag-scan:
+    should_trigger:
+      - "给600519.SH做财报排雷"
+      - "检查这家公司有没有收入造假信号"
+    should_not_trigger:
+      - "分析这家公司的品牌护城河"
+    workflow_checks:
+      - "逐项完成29项清单"
+      - "销售收现勾稽不得命名为真实营收"
+      - "阈值从共享注册表读取"
+  management-analysis:
+    should_trigger:
+      - "分析0700.HK管理层是否可信"
+      - "比较管理层过去五年的承诺和兑现"
+    should_not_trigger:
+      - "只计算公司的自由现金流"
+    workflow_checks:
+      - "港股无监事会时改查独立非执行董事和审计委员会"
+      - "Mode B逐section更新§4.1至§4.8"
+  value-profile:
+    should_trigger:
+      - "为600519.SH建立完整价值投资档案"
+      - "研究0700.HK并给出估值前提"
+    should_not_trigger:
+      - "只下载一份公司公告"
+    workflow_checks:
+      - "进度总数从模板动态计算"
+      - "重复section使用Part和section复合标识"
+      - "财务报告按市场正确路由"

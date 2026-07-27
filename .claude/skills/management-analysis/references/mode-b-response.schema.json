@@ -1,0 +1,508 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research.local/schemas/management-mode-b-response-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "terminal_status",
+    "failure_reason",
+    "stage",
+    "draft_sections",
+    "draft_veto",
+    "management_veto",
+    "management_pending",
+    "pending_gate",
+    "filing_manifest_sha256",
+    "event_manifest_sha256",
+    "counterpart_filing_manifest_sha256s",
+    "workflow_complete",
+    "reason",
+    "citations",
+    "unresolved_rows",
+    "action_requests"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "terminal_status": {
+      "enum": ["success", "pending", "failure", "dependency_failure", "vetoed"]
+    },
+    "failure_reason": {"type": ["string", "null"]},
+    "stage": {"enum": ["A", "B", "C"]},
+    "draft_sections": {
+      "type": "object",
+      "propertyNames": {"pattern": "^part1/§4(?:\\.pre|\\.[1-8])$"},
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "pattern": "\\*\\*机器引用清单:\\*\\*"
+      }
+    },
+    "draft_veto": {"type": "boolean"},
+    "management_veto": {"const": false},
+    "management_pending": {"type": "boolean"},
+    "pending_gate": {"type": "boolean"},
+    "filing_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "event_manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "counterpart_filing_manifest_sha256s": {
+      "type": "object",
+      "propertyNames": {"enum": ["SH", "SZ", "HK"]},
+      "additionalProperties": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+    },
+    "workflow_complete": {"type": "boolean"},
+    "reason": {"type": ["string", "null"]},
+    "citations": {"type": "array", "items": {"$ref": "#/$defs/citation"}},
+    "unresolved_rows": {"type": "array", "items": {"type": "string"}},
+    "action_requests": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "reason", "citations"],
+        "properties": {
+          "type": {"enum": ["rebuild_evidence", "research_more", "edit"]},
+          "reason": {"type": "string", "minLength": 1},
+          "citations": {"type": "array", "items": {"$ref": "#/$defs/citation"}}
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "commonCitation": {
+      "type": "object",
+      "required": [
+        "section_id",
+        "jurisdiction",
+        "source_type",
+        "artifact_path",
+        "artifact_sha256",
+        "page",
+        "quote"
+      ],
+      "properties": {
+        "section_id": {"type": "string", "pattern": "^part1/§4(?:\\.pre|\\.[1-8])$"},
+        "jurisdiction": {"enum": ["SH", "SZ", "HK"]},
+        "source_type": {"enum": ["filing_text", "filing_pdf", "event_document"]},
+        "artifact_path": {"type": "string", "pattern": "^/"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "quote": {"type": "string", "minLength": 1},
+        "source_pdf_sha256": {"$ref": "#/$defs/sha256"},
+        "event_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "document_url": {"type": "string", "format": "uri"},
+        "content_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "citation": {
+      "oneOf": [
+        {
+          "allOf": [
+            {"$ref": "#/$defs/commonCitation"},
+            {
+              "required": ["source_pdf_sha256"],
+              "properties": {
+                "source_type": {"enum": ["filing_text", "filing_pdf"]},
+                "page": {"type": "integer", "minimum": 1}
+              },
+              "not": {
+                "anyOf": [
+                  {"required": ["event_manifest_sha256"]},
+                  {"required": ["document_url"]},
+                  {"required": ["content_sha256"]}
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/commonCitation"},
+            {
+              "required": [
+                "event_manifest_sha256",
+                "document_url",
+                "content_sha256"
+              ],
+              "properties": {"source_type": {"const": "event_document"}},
+              "not": {"required": ["source_pdf_sha256"]}
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"pending_gate": {"const": true}}},
+      "then": {"properties": {"management_pending": {"const": true}}}
+    },
+    {
+      "if": {"properties": {"unresolved_rows": {"minItems": 1}}},
+      "then": {"properties": {"management_pending": {"const": true}}}
+    },
+    {
+      "if": {"properties": {"draft_veto": {"const": true}}},
+      "then": {
+        "properties": {
+          "reason": {"type": "string", "minLength": 1},
+          "citations": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"workflow_complete": {"const": true}}},
+      "then": {
+        "properties": {
+          "terminal_status": {"const": "success"},
+          "stage": {"const": "C"},
+          "management_pending": {"const": false},
+          "pending_gate": {"const": false},
+          "unresolved_rows": {"maxItems": 0}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"stage": {"const": "A"}}},
+      "then": {
+        "properties": {
+          "draft_sections": {
+            "propertyNames": {"const": "part1/§4.pre"}
+          },
+          "citations": {
+            "items": {
+              "properties": {"section_id": {"const": "part1/§4.pre"}}
+            }
+          },
+          "action_requests": {
+            "items": {
+              "properties": {
+                "citations": {
+                  "items": {
+                    "properties": {"section_id": {"const": "part1/§4.pre"}}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"stage": {"const": "B"}}},
+      "then": {
+        "properties": {
+          "draft_sections": {
+            "propertyNames": {"pattern": "^part1/§4\\.[12]$"}
+          },
+          "citations": {
+            "items": {
+              "properties": {
+                "section_id": {"enum": ["part1/§4.1", "part1/§4.2"]}
+              }
+            }
+          },
+          "action_requests": {
+            "items": {
+              "properties": {
+                "citations": {
+                  "items": {
+                    "properties": {
+                      "section_id": {"enum": ["part1/§4.1", "part1/§4.2"]}
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {"properties": {"stage": {"const": "C"}}},
+      "then": {
+        "properties": {
+          "draft_sections": {
+            "propertyNames": {"pattern": "^part1/§4\\.[3-8]$"}
+          },
+          "citations": {
+            "items": {
+              "properties": {
+                "section_id": {
+                  "enum": [
+                    "part1/§4.3",
+                    "part1/§4.4",
+                    "part1/§4.5",
+                    "part1/§4.6",
+                    "part1/§4.7",
+                    "part1/§4.8"
+                  ]
+                }
+              }
+            }
+          },
+          "action_requests": {
+            "items": {
+              "properties": {
+                "citations": {
+                  "items": {
+                    "properties": {
+                      "section_id": {
+                        "enum": [
+                          "part1/§4.3",
+                          "part1/§4.4",
+                          "part1/§4.5",
+                          "part1/§4.6",
+                          "part1/§4.7",
+                          "part1/§4.8"
+                        ]
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.pre"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.pre"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.1"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.1"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.2"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.2"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.3"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.3"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.4"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.4"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.5"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.5"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.6"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.6"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.7"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.7"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "draft_sections": {"required": ["part1/§4.8"]}
+        },
+        "required": ["draft_sections"]
+      },
+      "then": {
+        "properties": {
+          "citations": {
+            "contains": {
+              "properties": {"section_id": {"const": "part1/§4.8"}},
+              "required": ["section_id"]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "oneOf": [
+    {
+      "properties": {
+        "terminal_status": {"const": "success"},
+        "failure_reason": {"const": null},
+        "management_veto": {"const": false},
+        "management_pending": {"const": false},
+        "pending_gate": {"const": false},
+        "draft_sections": {"minProperties": 1},
+        "citations": {"minItems": 1},
+        "unresolved_rows": {"maxItems": 0},
+        "action_requests": {"maxItems": 0}
+      }
+    },
+    {
+      "properties": {
+        "terminal_status": {"const": "pending"},
+        "failure_reason": {"type": "string", "minLength": 1},
+        "draft_sections": {"minProperties": 1},
+        "management_veto": {"const": false},
+        "management_pending": {"const": true},
+        "pending_gate": {"type": "boolean"},
+        "unresolved_rows": {"minItems": 1},
+        "workflow_complete": {"const": false},
+        "citations": {"minItems": 1}
+      }
+    },
+    {
+      "properties": {
+        "terminal_status": {"const": "failure"},
+        "failure_reason": {"type": "string", "minLength": 1},
+        "draft_sections": {"maxProperties": 0},
+        "draft_veto": {"const": false},
+        "management_veto": {"const": false},
+        "management_pending": {"const": false},
+        "pending_gate": {"const": false},
+        "unresolved_rows": {"maxItems": 0},
+        "workflow_complete": {"const": false},
+        "action_requests": {
+          "minItems": 1,
+          "contains": {
+            "properties": {"type": {"const": "rebuild_evidence"}},
+            "required": ["type"]
+          }
+        }
+      }
+    },
+    {
+      "properties": {
+        "terminal_status": {"const": "dependency_failure"},
+        "failure_reason": {"type": "string", "minLength": 1},
+        "draft_sections": {"maxProperties": 0},
+        "draft_veto": {"type": "boolean"},
+        "management_veto": {"const": false},
+        "management_pending": {"const": true},
+        "pending_gate": {"const": true},
+        "unresolved_rows": {"minItems": 1},
+        "workflow_complete": {"const": false}
+      }
+    },
+    {
+      "properties": {
+        "terminal_status": {"const": "vetoed"},
+        "failure_reason": {"const": null},
+        "draft_sections": {"maxProperties": 0},
+        "draft_veto": {"const": true},
+        "management_veto": {"const": false},
+        "management_pending": {"const": false},
+        "pending_gate": {"const": false},
+        "unresolved_rows": {"maxItems": 0},
+        "workflow_complete": {"const": false},
+        "reason": {"type": "string", "minLength": 1},
+        "citations": {"minItems": 1}
+      }
+    }
+  ]
+}

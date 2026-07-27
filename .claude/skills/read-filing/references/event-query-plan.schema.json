@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research.local/schemas/event-query-plan-v1.json",
+  "title": "Official regulatory event query plan",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "ticker",
+    "exchange",
+    "AS_OF",
+    "query_issuer_code",
+    "issuer_type",
+    "listing_profile",
+    "subject_roster",
+    "categories"
+  ],
+  "properties": {
+    "schema_version": {"const": 1},
+    "ticker": {"type": "string"},
+    "exchange": {"enum": ["SH", "SZ", "HK"]},
+    "AS_OF": {"type": "string", "format": "date"},
+    "query_issuer_code": {"type": "string"},
+    "issuer_type": {"enum": ["bank", "insurer", "non_bank"]},
+    "listing_profile": {"$ref": "#/$defs/singleQuery"},
+    "subject_roster": {"$ref": "#/$defs/subjectRosterQuery"},
+    "categories": {
+      "type": "array",
+      "minItems": 8,
+      "items": {"$ref": "#/$defs/eventQuery"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "singleQuery": {
+      "type": "object",
+      "required": [
+        "source_url",
+        "http_method",
+        "request_encoding",
+        "query_params",
+        "response_schema"
+      ],
+      "properties": {
+        "source_url": {"type": "string", "format": "uri"},
+        "http_method": {"enum": ["GET", "POST"]},
+        "request_encoding": {"enum": ["query", "json", "form"]},
+        "query_params": {"type": "object"},
+        "request_headers": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "response_schema": {"type": "string"},
+        "response_adapter": {"type": "object"}
+      },
+      "additionalProperties": true,
+      "oneOf": [
+        {
+          "properties": {
+            "http_method": {"const": "GET"},
+            "request_encoding": {"const": "query"}
+          }
+        },
+        {
+          "properties": {
+            "http_method": {"const": "POST"},
+            "request_encoding": {"enum": ["json", "form"]}
+          }
+        }
+      ]
+    },
+    "subjectRosterQuery": {
+      "allOf": [
+        {"$ref": "#/$defs/singleQuery"},
+        {
+          "type": "object",
+          "required": [
+            "coverage_start",
+            "coverage_end",
+            "management_history_complete",
+            "controller_history_complete",
+            "management_roles_covered",
+            "controller_status"
+          ],
+          "properties": {
+            "coverage_start": {"type": "string", "format": "date"},
+            "coverage_end": {"type": "string", "format": "date"},
+            "management_history_complete": {"const": true},
+            "controller_history_complete": {"const": true},
+            "management_roles_covered": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"type": "string"},
+              "uniqueItems": true
+            },
+            "controller_status": {
+              "enum": ["identified", "none_identified"]
+            }
+          }
+        }
+      ]
+    },
+    "eventQuery": {
+      "type": "object",
+      "required": [
+        "category",
+        "source_id",
+        "scope",
+        "query_start",
+        "query_end",
+        "query_url",
+        "http_method",
+        "request_encoding",
+        "response_schema",
+        "query_params",
+        "query_issuer_code",
+        "query_subject_ids"
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "formal_sanctions",
+            "related_party_harm",
+            "auditor_changes",
+            "auditor_investigations",
+            "material_restatements",
+            "controller_criminal_cases",
+            "late_filings",
+            "other_regulatory_events"
+          ]
+        },
+        "source_id": {
+          "enum": [
+            "csrc",
+            "sse",
+            "szse",
+            "hkex",
+            "sfc",
+            "afrc",
+            "mof",
+            "nfra",
+            "pbc",
+            "hkma",
+            "ia",
+            "hkpf",
+            "icac",
+            "hkjd"
+          ]
+        },
+        "scope": {"enum": ["listing_history", "rolling_3y"]},
+        "query_start": {"type": "string", "format": "date"},
+        "query_end": {"type": "string", "format": "date"},
+        "query_url": {"type": "string", "format": "uri"},
+        "http_method": {"enum": ["GET", "POST"]},
+        "request_encoding": {"enum": ["query", "json", "form"]},
+        "response_schema": {"type": "string"},
+        "response_adapter": {"type": "object"},
+        "query_params": {"type": "object"},
+        "request_headers": {
+          "type": "object",
+          "additionalProperties": {"type": "string"}
+        },
+        "query_issuer_code": {"type": "string"},
+        "query_subject_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string"},
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {"scope": {"const": "rolling_3y"}},
+            "required": ["scope"]
+          },
+          "then": {
+            "properties": {
+              "query_params": {
+                "type": "object",
+                "required": ["include_open_before_start"],
+                "properties": {
+                  "include_open_before_start": {"const": true}
+                }
+              }
+            }
+          }
+        }
+      ],
+      "oneOf": [
+        {
+          "properties": {
+            "http_method": {"const": "GET"},
+            "request_encoding": {"const": "query"}
+          }
+        },
+        {
+          "properties": {
+            "http_method": {"const": "POST"},
+            "request_encoding": {"enum": ["json", "form"]}
+          }
+        }
+      ]
+    }
+  }
+}
