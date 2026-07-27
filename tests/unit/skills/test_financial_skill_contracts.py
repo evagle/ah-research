@@ -34,6 +34,7 @@ def test_skill_frontmatter_is_discoverable_and_safe() -> None:
     assert set(SKILL_PATHS) == {
         "financial-redflag-scan",
         "management-analysis",
+        "product-analysis",
         "read-filing",
         "value-profile",
     }
@@ -45,6 +46,77 @@ def test_skill_frontmatter_is_discoverable_and_safe() -> None:
         assert len(description) < 500
         assert "<" not in description
         assert ">" not in description
+
+
+def test_product_analysis_has_mode_and_parent_ownership_contracts() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    assert "参数只有ticker" in skill
+    assert "默认进入Mode A" in skill
+    assert "含`--target-profile`" in skill
+    assert "进入Mode B" in skill
+    assert "不得直接修改" in skill
+    assert "父skill" in skill
+    assert "最终护城河" in skill
+    assert "--counterpart-filing-manifest <exchange>:<absolute-json-path>" in skill
+    assert "counterpart_filing_manifest_sha256s" in skill
+
+
+def test_product_analysis_enforces_the_eight_step_chain() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    expected = (
+        "产品边界",
+        "生产或服务流程",
+        "流程经济性",
+        "客户价值",
+        "相对竞争力",
+        "需求侧机制",
+        "财报映射",
+        "失效测试",
+    )
+    positions = [skill.index(item) for item in expected]
+    assert positions == sorted(positions)
+    assert "不机械使用" in skill
+    assert "50%" in skill
+
+
+def test_product_analysis_requires_process_economics_and_cost_discipline() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    process = read(SKILLS_ROOT / "product-analysis/references/process-playbooks.md")
+    for field in ("周期", "产能", "良率", "瓶颈", "单位成本"):
+        assert field in skill
+    for route in ("制造业", "软件与互联网", "零售", "专业服务"):
+        assert route in process
+    assert "潮玩与IP衍生品" in process
+    assert "公式" in skill
+    assert "假设" in skill
+    assert "敏感性" in skill
+    assert "不得伪造" in skill
+    assert "success或pending都必须保留以下10个栏目" in skill
+
+
+def test_product_analysis_requires_relative_competition_and_evidence() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    mechanisms = read(SKILLS_ROOT / "product-analysis/references/value-mechanisms.md")
+    for comparison in ("直接竞品", "替代方案", "适用龙头"):
+        assert comparison in skill
+    assert "2至3项" in skill
+    assert "高毛利" in skill
+    assert "不能单独证明" in skill
+    for grade in ("`高`", "`中`", "`低`", "`需人工`"):
+        assert grade in skill
+    assert "行为证据" in mechanisms
+    assert "财务证据" in mechanisms
+
+
+def test_value_profile_delegates_product_sections_without_moving_moat_ownership() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile/template-zh.md")
+    assert "`product-analysis`" in skill
+    assert "`part1/§1.1`" in skill
+    assert "`part1/§1.3`" in skill
+    assert "`moat_handoff`" in skill
+    assert "最终护城河" in skill
+    assert "产品与流程证据" in template
 
 
 def test_a_share_financial_report_routes_to_section_ten() -> None:

@@ -427,13 +427,16 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - extracted `text.md` 绝对路径（或 raw PDF 兜底）+ 3a 给出的 page range。
 - ticker, 中文公司名, exchange, report_date。
 - `AS_OF证据截止日`;研究、同业、公告和事件不得使用AS_OF之后发布或发生的证据。
-- read-filing返回的`facts/citations/warnings`必须传给普通worker并要求输出逐项引用对应citation;不得只调用后丢弃对象。management-analysis和financial-redflag-scan不接收隐式内存handoff,必须各自按相同绑定参数调用read-filing Mode B取得并复核事实。
+- read-filing返回的`facts/citations/warnings`必须传给普通worker并要求输出逐项引用对应citation;不得只调用后丢弃对象。product-analysis、management-analysis和financial-redflag-scan不接收隐式内存handoff,必须各自按相同绑定参数调用read-filing Mode B取得并复核事实。
 - 已填好的相邻 section 作为上下文。
 - **三大前提** (§2.2) — §1 / §3 / §5必需, 3行判定。
 - **能力圈四问** (§2.6) — 仅当目标为§1.8时必需,输出4段独立回答;§1.1-§1.7只提供形成答案所需的事实。
 - **禁用8条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5必填。
 - **5步护城河分析** (§3必需):非银行按a分类（大/准/强/省/专）+b可证伪检验+c跨年定量追溯+d悲观情景+e宽/中/窄/弱标签执行。非银行必须完成资本消耗测试,并从提价、对手、切换成本、ROE路标中任选1项。**银行分支**只运行`industry-overlays.md`定义的银行quality bundle并据此完成同样的定性、可证伪、跨年、压力情景和标签步骤,不要求毛利率、CFO/NI或资本开支。具体数字准绳见`.claude/skills/value-profile/references/moat-framework.md`和template §3。
+- **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析出`part1/§1.1`或`part1/§1.3`后,先调用该skill的Mode B,不得派普通worker重复分析。调用参数为`--target-profile <path> --section <resolved-section> --ticker <ticker> --year <YYYY> --as-of <AS_OF> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`,并在`--filing`和`--extracted-text`中恰选一个。A+H逐法域传入全部counterpart。全流程分别定向调用两个section;显式定向调用只允许返回该目标。Mode B不得直接修改profile,父skill复核后才通过Step 3e原子写入。
+- **产品分析接收门槛**:只接受`terminal_status=success`、`target_sections`和`draft_sections`键集合都恰好等于当前目标、annual和event哈希以及`counterpart_filing_manifest_sha256s`与Part 0及当前文件三方一致、每条citation的`section_id`属于当前目标的响应。父skill把`moat_handoff`中的`claim/evidence/counterevidence/citation_ids/evidence_grade`持久化为目标section的`**产品与流程证据:**`,供§3在resume后重建输入;不得只保存在内存中。`moat_handoff`出现`宽/中/窄/弱`等最终护城河标签时拒绝响应;最终护城河仍由父skill按`moat-framework.md`计算。
+- **产品分析pending和失败**:`pending`先保存已复核草稿、`unresolved_items`和真实`需人工`状态,加入人工处理清单并阻断依赖该section的§1.8和§3;`failure`不得保存草稿;`dependency_failure`按返回原因重建证据或补前置section后重试。Auto最多按明确缺口重派2次;Interactive确认仍由父skill Step 3d处理,子skill不显示第二套菜单。
 - **§4管理层分析**→**delegate到`management-analysis`子skill**。全流程进入管理层block时传`--section part1/§4`;显式定向某个管理层subsection时必须传`--section <resolved-part1/§4.x>`,不得扩大目标。其余参数为`--target-profile <path> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path>`并继承当前`--auto`或`--interactive`;AS_OF从Part 0读取,两个manifest都传持久化后的真实绝对路径,不得省略。Mode B子skill无论模式都只返回`draft_sections`和结构化flags,父skill是Mode B唯一写入者;父skill复核后把section正文、管理层状态、人工清单和阻断原因在同一次原子写入中保存。详细流程见`.claude/skills/management-analysis/SKILL.md`§2-§3。Fallback:5个完整`N→N+1`比较需6份年报,每行来源写入该section`**引用:**`;连续未达标记guidance不可信风险,证据置信度不因管理层未兑现而降低,目标突然消失必须指出,言行一致检验≥2事件。
 
 **管理层否决handoff**:Mode B子skill无论auto或interactive都只返回`draft_veto`和`management_veto=false`;父skill只对用户或auto已接受的内存草稿执行事务,interactive以accept或edit后的已接受正文为准。系统性画大饼唯一引用`management-analysis§2.7.2`:只在同一指标ID、连续3个可比财年、单位口径和目标方向一致时累计;不同指标不得拼接。父skill先预先计算完整事务:命中时同步写`**管理层:**一票否决触发`和`**管理层否决:**是—<reason>`,未命中时清除旧`管理层否决`阻断原因。随后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <profile-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`完成一次CAS原子写入;非A+H省略counterpart guard。正文、Part 0状态和阻断原因集合一次保存,不存在“先保存正文再补Part 0”的中间状态,冲突时全部保持原状态。
@@ -455,6 +458,8 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 读子 agent 产出。**驳回并重派**若任一:
 - 事实缺引用。
 - 管理层口径校核缺失或琐碎复读。
+- §1.1缺核心产品利润地图、设计和交付流程、流程经济性或单位经济;§1.3缺直接竞品、替代方案、适用龙头、龙头差距、2至3项价值机制或财报映射。
+- 产品流程、竞争比较或价值机制缺显式证据等级;未披露成本被写成精确单点值;高毛利被直接写成品牌、身份、情绪或稀缺性证明。
 - 填写区 generic, 无 ticker 特定细节。§3护城河写茅台必须引用茅台镇水源 / 12987工艺/基酒5年陈化/品牌价格带。
 - §1.8 四问任一 < 50字/品牌复读/结论标签无场景 → §2.6.2退回; 退回的是 §1.8本节, 不动 §1.1-§1.7。
 
