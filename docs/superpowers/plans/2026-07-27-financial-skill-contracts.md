@@ -495,6 +495,6 @@ git diff --stat feat/product-analysis-skill..HEAD
 
 只允许明确有语义的Markdown或引用空格。确认`.claude/worktrees/`、`AGENTS.md`和`tmp/`未被暂存。
 
-- [ ] **Step 5:提交并创建堆叠PR**
+- [x] **Step 5:提交并创建堆叠PR**
 
 提交实现，推送`refactor/financial-skill-contracts`，以`feat/product-analysis-skill`为base创建草稿PR。PR正文列出Schema行为测试、完整契约测试和行为复测结果。
