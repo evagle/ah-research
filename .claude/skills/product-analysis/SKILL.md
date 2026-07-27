@@ -13,7 +13,7 @@ description: Use when a user asks what a company truly sells, how its products a
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充产品分析特有规则。
 
 ### Mode A—Standalone
 
@@ -57,7 +57,7 @@ Ticker格式为`\d{6}\.(SH|SZ)`或`\d{1,5}\.HK`；港股代码立即左补零为
 ### §1.3 Mode B准备
 
 1. 验证传入annual、event及全部counterpart manifest与父profile Part 0中的路径及SHA-256完全一致；counterpart法域键集合也必须完全相等。
-2. 调用`read-filing`Mode B取得目标section所需`facts/citations/warnings`；不得依赖未持久化的内存事实。
+2. 调用`read-filing`Mode B取得目标section完整`facts/citations/warnings/screening_flags`；Mode B默认完整事实语义，不得依赖未持久化的内存事实。
 3. `part1/§1.1`和`part1/§1.3`以外的目标立即返回契约错误。
 4. Mode B只读现有证据。需要扩窗、重新抽取或补充官方证据时返回`rebuild_evidence`，由父skill执行后重试。
 
@@ -205,17 +205,20 @@ success或pending都必须保留以下10个栏目，并按此顺序生成。pend
 
 ### §4.2 Mode B
 
-只返回一个结构化对象：
+只返回一个结构化对象，并在返回前通过`references/mode-b-response.schema.json`校验。Schema只固定机器信封；`draft_sections`中的正文是自由Markdown，不限制行业表格、段落或流程步骤数量。
 
 ```json
 {
+  "schema_version": "1.0",
   "terminal_status": "success|pending|failure|dependency_failure",
+  "failure_reason": null,
   "target_sections": ["part1/§1.1"],
   "draft_sections": {"part1/§1.1": "<markdown>"},
   "product_facts": [],
   "process_facts": [],
   "competition_facts": [],
   "moat_handoff": [],
+  "findings": [],
   "citations": [],
   "warnings": [],
   "unresolved_items": [],
@@ -226,6 +229,8 @@ success或pending都必须保留以下10个栏目，并按此顺序生成。pend
 ```
 
 显式调用只返回目标section；父skill需要两个section时分别定向调用，避免一次调用越权改写相邻内容。`moat_handoff`每项包含`claim/evidence/counterevidence/citation_ids/evidence_grade`，不得包含最终护城河标签。
+
+`findings`只判断产品系统，固定`judgment_domain=product_competitiveness`，主体使用`product_system/product/service/business_segment`。每项ID按`sha256(judgment_domain|subject_type|subject_id|finding_type|occurrence_date|sorted(canonical_evidence_ids))`生成；不得把公司财务或管理层诚信判断写入本数组。
 
 `success`要求目标section完成门槛全部通过且`unresolved_items=[]`。`pending`保留可用草稿并列出未决字段；`failure`不返回可保存草稿；`dependency_failure`表示父skill必须先修复证据绑定或前置section。
 

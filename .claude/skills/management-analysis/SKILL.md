@@ -9,7 +9,7 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充管理层判断特有规则。
 
 ## §0运行模式
 
@@ -294,7 +294,7 @@ pending gate解决后或非gate section的pending解决后,都进入同一路径
 - **道德风险附加检查**（§2.7）:先扫前置否决项;系统性画大饼必须在§4.2表完成后判断;§4.8按reference生成10行基础schema,银行额外生成银行4行扩展
 - **财务分配4大测试**（§2.8）:识别为银行时只派发§2.8银行资本分配替代bundle,逐项检查ROA/RORWA、分红与内生资本、核心一级资本、拨备与信用成本、关联授信和股权稀释;非银行才派发通用ROE稳定性、分红vs回购、并购克制和债务政策。两类均输出10年窗口实际数据及`通过/中间/不通过/证据不足`;窗口不足时写实际年数并按§2.8聚合
 - **禁用空话**: "管理层优秀/战略正确/执行力强/具企业家精神" 无具体佐证一律退回
-- **数字必须可追溯**:表格单元格可直接带页码或URL;Mode B叙述段数字写入本section`**引用:**`逐条映射
+- **数字必须可追溯**:表格单元格可直接带页码或URL;Mode B叙述段数字写入本section`**引用:**`逐条映射。调用`read-filing`Mode B时直接消费默认完整`facts/citations/warnings/screening_flags`,不得用初筛命中缩小管理层责任事实范围
 
 子agent只输出当前阶段且尚未完成的目标section。§2.8结果在阶段C并入§4.6及总结。
 
@@ -343,6 +343,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
     "terminal_status": "success",
     "failure_reason": null,
     "stage": "A",
+    "target_sections": ["part1/§4.pre"],
     "draft_sections": {"part1/§4.pre": "<完整section正文,含**机器引用清单:**>"},
     "draft_veto": false,
     "management_veto": false,
@@ -354,12 +355,14 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
     "workflow_complete": false,
     "reason": null,
     "citations": [{"section_id":"part1/§4.pre","jurisdiction":"SZ","source_type":"event_document","event_manifest_sha256":"bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","document_url":"https://official.example/document","artifact_path":"/absolute/evidence/document","content_sha256":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc","artifact_sha256":"cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc","page":null,"quote":"<exact quote>"}],
+    "findings": [{"canonical_finding_id":"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd","owner_skill":"management-analysis","judgment_domain":"management_integrity","finding_type":"integrity_risk","subject_type":"management_team","subject_id":"000001.SZ/management","occurrence_date":"2025-01-15","canonical_evidence_ids":["eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"],"severity":"warning","evidence_grade":"high","judgment":"基于已核验证据形成的管理层判断","citation_ids":["ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"]}],
     "unresolved_rows": [],
     "action_requests": []
   }
   ```
   失败响应沿用同一顶层schema,例如`"terminal_status": "failure"`和`"failure_reason": "<preflight或live revalidation失败的具体证据>"`,并返回非空`action_requests=[{"type":"rebuild_evidence","reason":"<具体漂移>","citations":[]}]`。当前stage已生成草稿但含未决行时写`"terminal_status":"pending"`及具体`failure_reason`,同时返回非空draft_sections和unresolved_rows、`management_pending=true`、按目标section计算的pending_gate及`workflow_complete=false`;可并发返回`draft_veto=true`及非空reason/citations。profile已有持久化否决也必须回显为`draft_veto=true`并返回原reason/citations,确保pending响应可无损resume。依赖失败写`"terminal_status": "dependency_failure"`及`"failure_reason": "<未通过的前置gate及证据>"`;dependency_failure时同时满足`draft_sections={}`、`management_pending=true`、`pending_gate=true`并返回真实unresolved_rows,已有否决时还保留`draft_veto=true/reason/citations`。
 		  `terminal_status`只允许`success/pending/failure/dependency_failure/vetoed`。`success`表示当前stage草稿通过schema和本stage完成条件,因此必须`management_pending=false/pending_gate=false/unresolved_rows=[]`;本stage新发现否决时仍返回`success+draft_veto=true`以携带待父skill保存的草稿。`pending`表示当前stage草稿必须先持久化但仍有未决行,不得抹除同时返回的draft_veto或profile中已有持久化否决。只有Stage C全流程调用已通过§4.pre及§4.1-§4.8时才返回`workflow_complete=true`,其余stage成功均为false。preflight或live revalidation失败为failure。显式定向调用只有前置gate未决时才返回dependency_failure、`management_pending=true/pending_gate=true`及真实未决行;前置gate已在profile中持久化否决时返回`terminal_status":"vetoed"`、空draft_sections、`draft_veto=true`、`management_pending=false`及原reason/citations。`stage`只允许A/B/C。success或pending的draft_sections键必须是canonical复合section ID;每个返回键至少有一条相同section_id的citation,且citation必须匹配stage;`draft_veto=true`时reason非空且citations至少1条;所有已完成section至少一条非占位机器引用,所有引用不得晚于AS_OF。
+- `findings`固定`judgment_domain=management_integrity`,主体只能是管理团队、董事、CFO、实控人或其他管理责任人。每项ID按`sha256(judgment_domain|subject_type|subject_id|finding_type|occurrence_date|sorted(canonical_evidence_ids))`生成。财务造假、资金占用或关联交易证据可以复用,但本skill只判断管理层诚信、尽责和治理响应,不得复制`financial-redflag-scan`对公司财务的severity或judgment。
 - 不改父级§4说明、HTML注释、section标题或Part 1以外内容
 - 任一目标section不存在或重复定位时立即报schema不兼容,不得猜测边界
 - 若本次stage触发一票否决,Mode B无论auto或interactive都返回`terminal_status=success`、含Part 1证据的草稿、`draft_veto=true`、`management_veto=false`及`reason/citations`;父skill先在内存中重算否决及联动字段,再与正文单次原子写入。只有调用开始前已持久化的前置否决才返回`terminal_status=vetoed`和空草稿。子skill不直接修改Part 0、Part 1或Part 4

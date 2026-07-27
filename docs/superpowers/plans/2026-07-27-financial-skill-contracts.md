@@ -39,7 +39,7 @@
 - Consumes:现有AS_OF、annual/event/counterpart manifest、citation和CAS规则。
 - Produces:所有5个skill引用的唯一公共证据契约。
 
-- [ ] **Step 1:写失败契约测试**
+- [x] **Step 1:写失败契约测试**
 
 新增：
 
@@ -63,7 +63,7 @@ def test_all_financial_skills_share_one_evidence_contract() -> None:
 
 该测试防止共享契约文件缺失或任一skill脱离公共规范。
 
-- [ ] **Step 2:运行测试确认RED**
+- [x] **Step 2:运行测试确认RED**
 
 运行：
 
@@ -74,7 +74,7 @@ def test_all_financial_skills_share_one_evidence_contract() -> None:
 
 预期：因`evidence-contract.md`不存在而失败。
 
-- [ ] **Step 3:写最小共享契约**
+- [x] **Step 3:写最小共享契约**
 
 契约必须定义：
 
@@ -89,7 +89,7 @@ def test_all_financial_skills_share_one_evidence_contract() -> None:
 
 把5个`SKILL.md`开头的重复上市资料绑定段替换为对该文件的强制引用；保留各skill特有的业务条件。
 
-- [ ] **Step 4:运行测试确认GREEN**
+- [x] **Step 4:运行测试确认GREEN**
 
 运行：
 
@@ -117,7 +117,7 @@ def test_all_financial_skills_share_one_evidence_contract() -> None:
 - Consumes:现有三个Mode B返回对象。
 - Produces:三个可由`Draft202012Validator`验证的Schema；Markdown字段只要求非空和必要机器引用标记。
 
-- [ ] **Step 1:增加测试fixture和失败测试**
+- [x] **Step 1:增加测试fixture和失败测试**
 
 新增fixture：
 
@@ -160,7 +160,7 @@ def test_judgment_schemas_allow_free_markdown_and_reject_unknown_envelope_fields
 
 再分别构造合法success响应，正文使用不同标题和行业表格；断言验证通过。给每个响应增加`unexpected_top_level_field`后断言验证失败。
 
-- [ ] **Step 2:运行测试确认RED**
+- [x] **Step 2:运行测试确认RED**
 
 运行：
 
@@ -171,7 +171,7 @@ def test_judgment_schemas_allow_free_markdown_and_reject_unknown_envelope_fields
 
 预期：product和redflag Schema缺失，management Schema缺`findings`而失败。
 
-- [ ] **Step 3:实现三个Schema**
+- [x] **Step 3:实现三个Schema**
 
 三个Schema共同要求：
 
@@ -207,7 +207,7 @@ citation_ids
 
 更新三个`SKILL.md`，要求Mode B返回前执行对应Schema校验。
 
-- [ ] **Step 4:运行Schema测试确认GREEN**
+- [x] **Step 4:运行Schema测试确认GREEN**
 
 运行：
 
@@ -233,7 +233,7 @@ citation_ids
 - Consumes:L1至L3初筛事实。
 - Produces:Mode B完整`facts/citations/warnings/screening_flags`；`--complete-facts`仅作为兼容参数。
 
-- [ ] **Step 1:写失败测试**
+- [x] **Step 1:写失败测试**
 
 ```python
 def test_read_filing_mode_b_never_early_exits() -> None:
@@ -247,7 +247,7 @@ def test_read_filing_mode_b_never_early_exits() -> None:
     assert "Mode B早退" not in skill
 ```
 
-- [ ] **Step 2:运行测试确认RED**
+- [x] **Step 2:运行测试确认RED**
 
 运行：
 
@@ -258,7 +258,7 @@ def test_read_filing_mode_b_never_early_exits() -> None:
 
 预期：因现有Mode B早退规则而失败。
 
-- [ ] **Step 3:修改Mode B流程**
+- [x] **Step 3:修改Mode B流程**
 
 保留Mode A早退。把Step 2终止分支改为：
 
@@ -269,7 +269,7 @@ Mode B→记录screening_flags并继续Step 2.5及目标事实提取
 
 三个判断型skill不再需要显式依赖`--complete-facts`才能取得完整事实，但继续接受旧调用形式。
 
-- [ ] **Step 4:运行测试确认GREEN**
+- [x] **Step 4:运行测试确认GREEN**
 
 运行：
 
@@ -299,7 +299,7 @@ Mode B→记录screening_flags并继续Step 2.5及目标事实提取
 - Consumes:`read-filing`产生的`canonical_evidence_id`。
 - Produces:稳定finding ID、明确判断所有权，以及父skill按主体去重的聚合规则。
 
-- [ ] **Step 1:写失败契约与Schema测试**
+- [x] **Step 1:写失败契约与Schema测试**
 
 ```python
 def test_financial_and_management_findings_share_evidence_but_not_judgment_identity() -> None:
@@ -319,7 +319,7 @@ def test_financial_and_management_findings_share_evidence_but_not_judgment_ident
 
 用同一`canonical_evidence_ids`构造公司财务和管理层两个finding，分别通过对应Schema；将management finding错误设置为`subject_type=listed_company`时必须失败。
 
-- [ ] **Step 2:运行测试确认RED**
+- [x] **Step 2:运行测试确认RED**
 
 运行：
 
@@ -330,7 +330,7 @@ def test_financial_and_management_findings_share_evidence_but_not_judgment_ident
 
 预期：因finding协议尚未存在而失败。
 
-- [ ] **Step 3:实现判断所有权和ID算法**
+- [x] **Step 3:实现判断所有权和ID算法**
 
 `read-filing`为事实和事件返回`canonical_evidence_id`，不返回判断严重度。
 
@@ -344,7 +344,7 @@ financial-redflag-scan=company_financials
 
 `value-profile`按`canonical_finding_id`在同一判断域和主体内去重；不同主体finding分别保留。最终呈现按`canonical_evidence_id`聚合同一底层事件，估值阻断原因使用稳定集合去重。
 
-- [ ] **Step 4:运行测试确认GREEN**
+- [x] **Step 4:运行测试确认GREEN**
 
 运行：
 
@@ -367,7 +367,7 @@ financial-redflag-scan=company_financials
 - Consumes:共享证据契约和三个子skill Schema。
 - Produces:更短的总编排器，同时保留调用、接收、阻断、CAS和最终结论所有权。
 
-- [ ] **Step 1:写失败测试**
+- [x] **Step 1:写失败测试**
 
 ```python
 def test_value_profile_delegates_contract_details_to_owned_references() -> None:
@@ -384,7 +384,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 
 660行门槛从当前693行出发，只要求删除重复协议，不迫使删除投资方法。
 
-- [ ] **Step 2:运行测试确认RED**
+- [x] **Step 2:运行测试确认RED**
 
 运行：
 
@@ -395,7 +395,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 
 预期：因尚未引用全部Schema且行数超过门槛而失败。
 
-- [ ] **Step 3:删除重复说明**
+- [x] **Step 3:删除重复说明**
 
 优先精简：
 
@@ -412,7 +412,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 - pending、否决和估值阻断传播。
 - CAS原子保存和最终护城河、估值所有权。
 
-- [ ] **Step 4:运行测试确认GREEN**
+- [x] **Step 4:运行测试确认GREEN**
 
 运行：
 
@@ -434,7 +434,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 - Consumes:完成后的5个skill和3个Schema。
 - Produces:行为证据、完整测试结果和提交前清单。
 
-- [ ] **Step 1:运行三个行为场景**
+- [x] **Step 1:运行三个行为场景**
 
 场景A：
 
@@ -460,7 +460,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 
 通过条件：自由Markdown正文通过product Schema，未知顶层字段仍被拒绝。
 
-- [ ] **Step 2:运行完整契约测试**
+- [x] **Step 2:运行完整契约测试**
 
 ```bash
 .venv/bin/pytest tests/unit/skills/test_financial_skill_contracts.py -q
@@ -468,7 +468,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 
 预期：全部通过。
 
-- [ ] **Step 3:运行静态验证**
+- [x] **Step 3:运行静态验证**
 
 ```bash
 .venv/bin/ruff check tests/unit/skills/test_financial_skill_contracts.py
@@ -480,7 +480,7 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
 git diff --check
 ```
 
-- [ ] **Step 4:运行中文间距和范围检查**
+- [x] **Step 4:运行中文间距和范围检查**
 
 ```bash
 rg -nP '[\p{Han}][ \t]+[\p{Han}]' \

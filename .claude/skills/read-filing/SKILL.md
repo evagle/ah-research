@@ -11,7 +11,7 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围,不得声称可完成同等证据闭环。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充年报阅读特有规则。
 ## §0运行模式
 
 ### Mode A — Standalone
@@ -24,7 +24,7 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 ### Mode B — As-subroutine
 
 - **Invocation**:主`value-profile`/`financial-redflag-scan`/`management-analysis`传参`--target-profile <path> --section <part_id/section_id> --ticker <ticker> --year <YYYY> (--filing <absolute-pdf-path>|--extracted-text <absolute-text-path>) --as-of <YYYY-MM-DD> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive [--complete-facts]`;`--filing <absolute-pdf-path>|--extracted-text <absolute-text-path>`二者恰好提供一个
-- **行为**:AS_OF是统一信息截止日。filing manifest必须按交易所官方目录枚举每个财年的全部候选公告,不能仅列选中版本。所有候选必须有官方URL、报告类型、有效状态和替代关系,并包含财年、报告期末日、完整公告时间戳、公告顺序ID、公告ID或官方URL、公告标题和是否选中;只有选中完整年报必须有绝对路径和SHA-256,未选中候选保留官方URL且本地字段可为null。撤销或更正通知的报告期末日写`不适用`。manifest顶层还要保存官方目录查询URL、查询参数、响应哈希、官方结果总数和候选总数,以证明候选集合完整。event manifest必须覆盖管理层、实控人及发行人上市以来全部欺诈、操纵股价、内幕交易、虚假陈述和财务造假正式处罚或生效纪律处分,以及上市以来全部已证实的大股东资金占用、违规关联交易和股东利益输送;另覆盖AS_OF前3年的审计机构变更、审计机构监管调查、年报重大更正重述、实控人刑事立案、年报逾期披露和其他监管事件。每类查询保存官方查询URL、查询参数、响应哈希、结果总数及命中结果或`未检出`。仅列选中版本、manifest缺失或不连续、字段冲突、选中路径不存在或哈希不符时abort。完成Mode B source preflight后进入Step 2
+- **行为**:Mode B始终执行完整事实提取。AS_OF是统一信息截止日。filing manifest必须按交易所官方目录枚举每个财年的全部候选公告,不能仅列选中版本。所有候选必须有官方URL、报告类型、有效状态和替代关系,并包含财年、报告期末日、完整公告时间戳、公告顺序ID、公告ID或官方URL、公告标题和是否选中;只有选中完整年报必须有绝对路径和SHA-256,未选中候选保留官方URL且本地字段可为null。撤销或更正通知的报告期末日写`不适用`。manifest顶层还要保存官方目录查询URL、查询参数、响应哈希、官方结果总数和候选总数,以证明候选集合完整。event manifest必须覆盖管理层、实控人及发行人上市以来全部欺诈、操纵股价、内幕交易、虚假陈述和财务造假正式处罚或生效纪律处分,以及上市以来全部已证实的大股东资金占用、违规关联交易和股东利益输送;另覆盖AS_OF前3年的审计机构变更、审计机构监管调查、年报重大更正重述、实控人刑事立案、年报逾期披露和其他监管事件。每类查询保存官方查询URL、查询参数、响应哈希、结果总数及命中结果或`未检出`。仅列选中版本、manifest缺失或不连续、字段冲突、选中路径不存在或哈希不符时abort。完成Mode B source preflight后进入Step 2,L1至L3命中只写入`screening_flags`,不得缩小目标事实范围
 - **Output**:只返回一个结构化对象,至少包含`"facts"`、`"citations"`、`"warnings"`、`"filing_manifest_sha256"`、`"event_manifest_sha256"`、`"counterpart_filing_manifest_sha256s"`和兼容字段`"source_manifest_sha256"`。目标section由`--target-profile`+`--section`唯一确定,但本skill不得直接替换或写入任何profile section;父skill复核返回对象后决定是否落盘
 - **典型场景**: 主 value-profile 进入 Step 3前先跑一遍本 skill 为各 section 积累基础事实清单
 
@@ -32,6 +32,7 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 
 - 仅ticker或ticker+年份→Mode A;YEAR省略时先查交易所披露目录,取已正式披露的最新完整财年,不得用当前自然年猜测
 - 含`--target-profile <path>`→Mode B;必须同时提供Mode B列出的全部参数,任一缺失即报契约错误
+- `--complete-facts`在Mode B中仅为兼容参数;无论是否传入,Mode B都执行完整目标事实提取
 - Mode A的`--resume`与`--start-fresh`互斥。`--resume`要求绝对scratch路径存在并按Step 3校验身份、步骤和两个manifest哈希;选择start-fresh先把旧scratch重命名为不可变备份再从Step 1开始。已有scratch但两者均未传时abort并返回两种明确命令,不得猜测复用或覆盖;没有scratch时直接新建,不得要求无意义的选择
 - Ticker按交易所验证:沪深A股使用`\d{6}\.(SH|SZ)`,港股使用`\d{1,5}\.HK`。港股代码立即左补零为五位,后续路径、manifest、查询参数和输出只使用canonical ticker
 - 年份正则:`^(19|20)\d{2}$`,不接受`2024H1`等组合。v1仅支持完整年度报告,拒绝`--quarterly`和`--halfyear`;收到中报或季报请求时明确说明当前下载器不支持并停止,不得伪装成年度报告流程
@@ -258,7 +259,7 @@ Mode A共用source preflight只执行官方目录、PDF、事件窗口和哈希�
 3. **L2财务前提**:先用交易所行业、主营和业务分部识别银行。沪深A股非银行用截至`YYYY`的数据分别检查经营现金流/归母净利润、销售收现比、扣非归母净利润/归母净利润;分母和阈值以`thresholds.yaml`为准,各指标分别连续2年低于自身早退阈值才触发。归母净利润≤0时不计算经营现金流/归母净利润或扣非归母净利润/归母净利润;归母净利润≤0的财年打断连续适用财年计数,亏损年前后的低值不得拼接。营业收入≤0时不计算销售收现比,改列符号、金额和连续年数。有效VAT只能形成区间时,仅当连续2年敏感性区间上限仍<0.9才触发;区间跨越0.9时标`需下游复核`,不得早退。港股非银行按§2.1.1替代字段执行。银行不使用销售收现、常规CFO/NI或扣非净利润早退,继续提取银行10行替代bundle所需事实。不得用非正分母触发或豁免早退
 4. **L3监管与重述**:A股检索"处罚/警示函/立案/公开谴责/前期差错更正/追溯调整/重述";港股同时检索`Regulatory Sanctions/Disciplinary Action/Investigation/Restatement/Prior Period Error`,并查SFC/HKEX公告
 
-**任一L1-L3触发**→默认停止Step 2.5及Step 3-5的深读,跳到Step 7写"早退事实报告",但早退与完整报告共用最终finalizer,仍执行Step 6的live revalidation和CAS发布;未执行范围固定写`Step 3-5未执行;Step 6仅执行finalizer`,不得声称Step 6未执行。调用方传`--complete-facts`时禁用该短路:保留早退触发事实,继续Step 2.5及Step 3-6的全部事实提取,最终输出完整事实对象或完整事实报告,仅把非事实判断写入未执行范围;不得同时声称跳过Step 3-6。
+**任一L1-L3触发**→仅Mode A且未传`--complete-facts`时停止Step 2.5及Step 3-5的深读,跳到Step 7写"早退事实报告",但早退与完整报告共用最终finalizer,仍执行Step 6的live revalidation和CAS发布;未执行范围固定写`Step 3-5未执行;Step 6仅执行finalizer`,不得声称Step 6未执行。Mode A调用方传`--complete-facts`则保留触发事实并继续Step 2.5及Step 3-6的全部事实提取。Mode B无条件禁用该短路,把触发事实写入`screening_flags`并继续目标section所需的完整事实提取。完整事实输出只把风险定性交给下游,不得同时声称跳过Step 3-6。
 
 ### Step 2.5 — 完整历史和同业证据准备（未早退或`--complete-facts`时执行）
 
@@ -423,11 +424,11 @@ Missing disclosure → "本年报未披露 (p.N / 应披露章节)".
 <3-5 句客观观察, 不下买卖判断, 指向下一步 (e.g. "触发排雷 §4.5 商誉阈值, 建议接 /redflag-scan")>
 ```
 
-**Mode B输出**:成功返回`{"terminal_status": "success","failure_reason": null,"ticker":"<canonical>","exchange":"<SH/SZ/HK>","target_fiscal_year":YYYY,"AS_OF":"YYYY-MM-DD","target_section":"<part_id/section_id>","filing_manifest_path":"<absolute>","filing_manifest_sha256":"<sha256>","event_manifest_path":"<absolute>","event_manifest_sha256":"<sha256>","counterpart_filing_manifest_sha256s":{},"source_manifest_sha256":"<same-as-filing>","facts":[],"citations":[],"warnings":[],"action_requests":[]}`。失败返回`{"terminal_status": "failure","failure_reason":"<具体原因>"}`,人工终态返回`{"terminal_status":"manual_review","failure_reason":"<证据缺口>"}`;两者facts为空并返回`action_requests`,每项为`request_id/type/reason/citations/execution_status/execution_result`,type只允许`edit/research_more/rebuild_evidence/start_fresh/exit`,初始`execution_status=pending/execution_result=null`,request_id按类型、目标、原因和规范化citation IDs确定性计算,父流程按类型确定性恢复。`citations`严格使用§2.7.4三分支联合类型:`source_type=filing_text`、`source_type=filing_pdf`、`source_type=event_document`;每项含`section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote`,event_document另含`event_manifest_sha256/document_url/content_sha256`,其中`artifact_path=<absolute-final-artifact-path>`。本skill不得直接替换或写入任何profile section;失败对象不得携带可保存事实。
+**Mode B输出**:成功返回`{"terminal_status": "success","failure_reason": null,"ticker":"<canonical>","exchange":"<SH/SZ/HK>","target_fiscal_year":YYYY,"AS_OF":"YYYY-MM-DD","target_section":"<part_id/section_id>","filing_manifest_path":"<absolute>","filing_manifest_sha256":"<sha256>","event_manifest_path":"<absolute>","event_manifest_sha256":"<sha256>","counterpart_filing_manifest_sha256s":{},"source_manifest_sha256":"<same-as-filing>","facts":[{"canonical_evidence_id":"<sha256>"}],"citations":[],"warnings":[],"screening_flags":[],"action_requests":[]}`。失败返回`{"terminal_status": "failure","failure_reason":"<具体原因>"}`,人工终态返回`{"terminal_status":"manual_review","failure_reason":"<证据缺口>"}`;两者facts为空并返回`action_requests`,每项为`request_id/type/reason/citations/execution_status/execution_result`,type只允许`edit/research_more/rebuild_evidence/start_fresh/exit`,初始`execution_status=pending/execution_result=null`,request_id按类型、目标、原因和规范化citation IDs确定性计算,父流程按类型确定性恢复。每条fact和screening flag都必须引用至少一个按共享证据契约生成的`canonical_evidence_id`;该ID不包含下游判断。`screening_flags`只保存L1至L3机械初筛事实、引用和适用口径,不得包含最终风险或投资结论。`citations`严格使用§2.7.4三分支联合类型:`source_type=filing_text`、`source_type=filing_pdf`、`source_type=event_document`;每项含`section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote`,event_document另含`event_manifest_sha256/document_url/content_sha256`,其中`artifact_path=<absolute-final-artifact-path>`。本skill不得直接替换或写入任何profile section;失败对象不得携带可保存事实。
 
 父skill接受Mode B返回对象后先核对`ticker/exchange/target_fiscal_year/AS_OF/target_section`和全部manifest真实路径及哈希,再对annual、event及每个counterpart执行最终live revalidation。只更新调用方指定section:按标题下一行到下一个同级或更高层级标题前整体替换正文,引用列表随正文整体替换,并使用`publish_text_cas.py`、调用前profile SHA-256及`--guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`执行CAS写入;非A+H省略counterpart guard。该写入属于父skill;并发或guard冲突时不得覆盖。
 
-**Mode B早退**:只在返回对象中提供L1-L3触发事实、未执行范围、下游handoff、引用和按固定映射计算的证据置信度;父skill接受后只更新调用方指定section。不得生成完整§1-§14,也不得修改其他section。早退范围与证据置信度分开:早退只缩小分析范围,完整官方证据可为`高`,不得因结论严重或未执行Step 3-6自动降级。
+**Mode B初筛flags**:L1至L3触发事实进入`screening_flags`,同时继续目标section完整事实提取。父skill只更新调用方指定section,不得修改其他section。初筛严重度与证据置信度分开:完整官方证据可为`高`,不得因触发负面事实自动降级。
 
 **证据置信度固定映射**:`高`=完整官方窗口且无代理口径;`中`=官方窗口完整但存在已披露且不影响结论方向的代理口径;`低`=关键结论仅有二级来源或窗口不足;`需人工`=存在待定或证据冲突。取所有关键结论中的最低档,不得凭主观上调。
 
@@ -496,5 +497,4 @@ read-filing   (阅读层, 本 skill)
 - `../management-analysis/SKILL.md` — 管理层诚信度**判断**侧
 
 **外部法规**:证监会《公开发行证券的公司信息披露内容与格式准则第2号——年度报告的内容与格式》;上交所/深交所《上市公司信息披露工作备忘录》。
-
 **外部二手资料**:本skill第一版的原则/规则/反模式部分灵感来自`data/research/`下收录的中文价值投资财报阅读教材。

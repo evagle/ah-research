@@ -48,6 +48,32 @@ def test_skill_frontmatter_is_discoverable_and_safe() -> None:
         assert ">" not in description
 
 
+def test_all_financial_skills_share_one_evidence_contract() -> None:
+    contract_path = SKILLS_ROOT / "read-filing/references/evidence-contract.md"
+    assert contract_path.is_file()
+    contract = read(contract_path)
+    for heading in (
+        "## 1.身份与截止日",
+        "## 2.Manifest绑定",
+        "## 3.Mode B只读与写入权",
+        "## 4.引用",
+        "## 5.终态",
+        "## 6.证据漂移",
+    ):
+        assert heading in contract
+    for skill_path in SKILL_PATHS.values():
+        assert "read-filing/references/evidence-contract.md" in read(skill_path)
+
+
+def test_read_filing_mode_b_never_early_exits() -> None:
+    skill = read(SKILL_PATHS["read-filing"])
+    mode_b = skill.split("### Mode B — As-subroutine", 1)[1].split("### Invocation 解析", 1)[0]
+    assert "Mode B始终执行完整事实提取" in mode_b
+    assert "`--complete-facts`在Mode B中仅为兼容参数" in skill
+    assert '"screening_flags"' in skill.split("**Mode B输出**", 1)[1]
+    assert "Mode B早退" not in skill
+
+
 def test_product_analysis_has_mode_and_parent_ownership_contracts() -> None:
     skill = read(SKILL_PATHS["product-analysis"])
     assert "参数只有ticker" in skill
@@ -117,6 +143,18 @@ def test_value_profile_delegates_product_sections_without_moving_moat_ownership(
     assert "`moat_handoff`" in skill
     assert "最终护城河" in skill
     assert "产品与流程证据" in template
+
+
+def test_value_profile_delegates_contract_details_to_owned_references() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    assert "公共证据规则不在本skill重定义" in skill
+    for schema in (
+        "product-analysis/references/mode-b-response.schema.json",
+        "management-analysis/references/mode-b-response.schema.json",
+        "financial-redflag-scan/references/mode-b-response.schema.json",
+    ):
+        assert schema in skill
+    assert len(skill.splitlines()) < 660
 
 
 def test_a_share_financial_report_routes_to_section_ten() -> None:
@@ -744,13 +782,13 @@ def test_read_filing_references_stay_inside_reading_layer() -> None:
     assert "护城河瓦解" not in statement_reading
 
 
-def test_read_filing_mode_b_early_return_has_deterministic_destination() -> None:
+def test_read_filing_mode_b_complete_facts_have_deterministic_destination() -> None:
     skill = read(SKILL_PATHS["read-filing"])
-    assert "Mode B早退" in skill
+    assert "Mode B始终执行完整事实提取" in skill
     assert "只更新调用方指定section" in skill
-    assert "按固定映射计算的证据置信度" in skill
+    assert "`screening_flags`" in skill
     assert "完整官方证据可为`高`" in skill
-    assert "不得生成完整§1-§14" in skill
+    assert "Mode B无条件禁用该短路" in skill
 
 
 def test_read_filing_mode_b_has_complete_input_and_destination_contract() -> None:
@@ -4938,10 +4976,12 @@ def test_redflag_rows_use_matching_denominators_and_dedicated_rules() -> None:
 
 
 def test_downloader_commands_bind_listing_profile_evidence() -> None:
+    contract = read(SKILLS_ROOT / "read-filing/references/evidence-contract.md")
+    assert "--listing-profile-bundle <actual-official-query-bundle-path>" in contract
+    assert "annual manifest与event manifest的listing profile路径及SHA-256一致" in contract
     for path in SKILL_PATHS.values():
         skill = read(path)
-        assert "--listing-profile-bundle <actual-official-query-bundle-path>" in skill
-        assert "年报manifest与事件manifest的listing_profile路径和SHA-256一致" in skill
+        assert "read-filing/references/evidence-contract.md" in skill
 
 
 def test_read_filing_routes_banks_away_from_generic_cash_early_exits() -> None:
@@ -5333,14 +5373,14 @@ def test_read_filing_ratio_rules_reject_nonpositive_denominators() -> None:
         assert required in combined
 
 
-def test_read_filing_early_exit_does_not_force_low_evidence_confidence() -> None:
+def test_read_filing_screening_does_not_force_low_evidence_confidence() -> None:
     skill = read(SKILL_PATHS["read-filing"])
     early_output = skill.split("早退时只写以下短结构", 1)[1].split("未早退时使用完整骨架", 1)[0]
-    mode_b_early = skill.split("**Mode B早退**", 1)[1].split("**证据置信度固定映射**", 1)[0]
+    mode_b_flags = skill.split("**Mode B初筛flags**", 1)[1].split("**证据置信度固定映射**", 1)[0]
 
-    assert "早退范围与证据置信度分开" in skill
+    assert "初筛严重度与证据置信度分开" in skill
     assert "**置信度:**低" not in early_output
-    assert "**置信度:**低" not in mode_b_early
+    assert "**置信度:**低" not in mode_b_flags
     assert "完整官方证据可为`高`" in skill
 
 
@@ -5540,14 +5580,15 @@ def test_redflag_parent_and_child_share_rebuild_action_enum() -> None:
     assert "rebuild_evidence" in schema
 
 
-def test_redflag_complete_scan_overrides_read_filing_early_return() -> None:
+def test_redflag_complete_scan_consumes_read_filing_screening_flags() -> None:
     skill = read(SKILL_PATHS["financial-redflag-scan"])
     read_filing = read(SKILL_PATHS["read-filing"])
 
     assert "--complete-facts" in skill
-    assert "触发L1-L3也继续完成排雷事实层" in skill
+    assert "L1至L3命中也继续完成排雷事实层" in skill
     assert "--complete-facts" in read_filing
-    assert "只返回早退触发事实并继续完整事实提取" in read_filing
+    assert "Mode B无条件禁用该短路" in read_filing
+    assert "`screening_flags`" in read_filing
 
 
 def test_redflag_distinguishes_missing_evidence_from_inapplicability() -> None:
@@ -5964,6 +6005,7 @@ def management_mode_b_response() -> dict[str, object]:
         "terminal_status": "success",
         "failure_reason": None,
         "stage": "A",
+        "target_sections": ["part1/§4.pre"],
         "draft_sections": {"part1/§4.pre": "<完整section正文,含**机器引用清单:**>"},
         "draft_veto": False,
         "management_veto": False,
@@ -5988,9 +6030,157 @@ def management_mode_b_response() -> dict[str, object]:
                 "quote": "<exact quote>",
             }
         ],
+        "findings": [
+            canonical_finding(
+                "management-analysis",
+                "management_integrity",
+                "management_team",
+                "000001.SZ/management",
+            )
+        ],
         "unresolved_rows": [],
         "action_requests": [],
     }
+
+
+def canonical_finding(
+    owner_skill: str,
+    judgment_domain: str,
+    subject_type: str,
+    subject_id: str,
+) -> dict[str, object]:
+    return {
+        "canonical_finding_id": "d" * 64,
+        "owner_skill": owner_skill,
+        "judgment_domain": judgment_domain,
+        "finding_type": "material_risk",
+        "subject_type": subject_type,
+        "subject_id": subject_id,
+        "occurrence_date": "2025-01-15",
+        "canonical_evidence_ids": ["e" * 64],
+        "severity": "warning",
+        "evidence_grade": "high",
+        "judgment": "基于已核验证据形成的专题判断",
+        "citation_ids": ["f" * 64],
+    }
+
+
+def filing_citation(section_id: str) -> dict[str, object]:
+    return {
+        "section_id": section_id,
+        "jurisdiction": "SZ",
+        "source_type": "filing_text",
+        "artifact_path": "/absolute/evidence/text.md",
+        "source_pdf_sha256": "1" * 64,
+        "artifact_sha256": "2" * 64,
+        "page": 12,
+        "quote": "已核验的年报原文",
+    }
+
+
+def product_mode_b_response() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "terminal_status": "success",
+        "failure_reason": None,
+        "target_sections": ["part1/§1.1"],
+        "draft_sections": {
+            "part1/§1.1": (
+                "## 行业特有产品结构\n\n"
+                "|流程|材料|良率|周期|产能|库存|渠道|售后|反馈|成本|瓶颈|证据|\n"
+                "|---|---|---|---|---|---|---|---|---|---|---|---|\n"
+                "|量产|树脂|需人工|需人工|需人工|需人工|直营|退换|复购|需人工|模具|中|"
+            )
+        },
+        "product_facts": [],
+        "process_facts": [],
+        "competition_facts": [],
+        "moat_handoff": [],
+        "findings": [
+            canonical_finding(
+                "product-analysis",
+                "product_competitiveness",
+                "product_system",
+                "000001.SZ/core-products",
+            )
+        ],
+        "citations": [filing_citation("part1/§1.1")],
+        "warnings": [],
+        "unresolved_items": [],
+        "filing_manifest_sha256": "a" * 64,
+        "event_manifest_sha256": "b" * 64,
+        "counterpart_filing_manifest_sha256s": {},
+    }
+
+
+def redflag_mode_b_response() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "terminal_status": "completed",
+        "failure_reason": None,
+        "target_sections": ["part4/§4.5"],
+        "draft_section": "## 财务排雷\n\n自由Markdown正文\n\n**机器引用清单:**\n- citation",
+        "risk_counts": {"warning": 1, "high_risk": 0, "veto": 0, "pending": 0},
+        "valuation_blocked": False,
+        "manual_review_required": False,
+        "filing_manifest_sha256": "a" * 64,
+        "event_manifest_sha256": "b" * 64,
+        "counterpart_filing_manifest_sha256s": {},
+        "action_requests": [],
+        "confidence": "high",
+        "citations": [filing_citation("part4/§4.5")],
+        "findings": [
+            canonical_finding(
+                "financial-redflag-scan",
+                "company_financials",
+                "listed_company",
+                "000001.SZ",
+            )
+        ],
+        "unresolved_items": [],
+    }
+
+
+def test_judgment_schemas_allow_free_markdown_and_reject_unknown_envelope_fields() -> None:
+    responses = {
+        "product-analysis": product_mode_b_response(),
+        "management-analysis": management_mode_b_response(),
+        "financial-redflag-scan": redflag_mode_b_response(),
+    }
+    for skill_name, response in responses.items():
+        schema_path = SKILLS_ROOT / skill_name / "references/mode-b-response.schema.json"
+        schema = json.loads(read(schema_path))
+        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema)
+        assert not list(validator.iter_errors(response))
+
+        unknown_field = deepcopy(response)
+        unknown_field["unexpected_top_level_field"] = True
+        assert list(validator.iter_errors(unknown_field))
+
+
+def test_financial_and_management_findings_share_evidence_but_not_judgment_identity() -> None:
+    read_filing = read(SKILL_PATHS["read-filing"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    management = read(SKILL_PATHS["management-analysis"])
+    profile = read(SKILL_PATHS["value-profile"])
+    algorithm = (
+        "sha256(judgment_domain|subject_type|subject_id|finding_type|"
+        "occurrence_date|sorted(canonical_evidence_ids))"
+    )
+    for text in (redflag, management, profile):
+        assert algorithm in text
+    assert "canonical_evidence_id" in read_filing
+    assert "judgment_domain=company_financials" in redflag
+    assert "judgment_domain=management_integrity" in management
+    assert "不同判断主体不得合并" in profile
+
+    management_schema = json.loads(
+        read(SKILLS_ROOT / "management-analysis/references/mode-b-response.schema.json")
+    )
+    invalid_management_subject = management_mode_b_response()
+    invalid_management_subject["findings"][0]["subject_type"] = "listed_company"
+    assert list(Draft202012Validator(management_schema).iter_errors(invalid_management_subject))
 
 
 def test_management_mode_b_response_schema_rejects_invalid_semantics() -> None:

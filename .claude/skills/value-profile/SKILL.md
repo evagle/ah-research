@@ -9,7 +9,7 @@ description: Use when a user asks for a complete value-investing profile or full
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。公共证据规则不在本skill重定义;本skill只补充父级编排、CAS和最终结论规则。接收判断型子skill响应时,分别按`.claude/skills/product-analysis/references/mode-b-response.schema.json`、`.claude/skills/management-analysis/references/mode-b-response.schema.json`和`.claude/skills/financial-redflag-scan/references/mode-b-response.schema.json`校验机器信封;Markdown正文保持自由。
 
 ## §0 Skill 运行方式
 
@@ -24,88 +24,49 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 本节12条原则是整个分析流程的信念层。每一条都是长期不变的 meta-principle, 不含具体操作步骤。派任何子 agent 前, **主 agent 先在开场白里把本节通读一遍 internalize**; §2规则、§3流程都是 §1的推论。
 
 ### §1.1股票是生意的凭证, 不是纸片
-
 **持有股票 = 持有"一只会下蛋的母鸡"分成权**。内在价值 = 未来自由现金流折现之和, 与每日市价无关。市场价格不更新内在价值; 牛市是投资者的"风落之财", 长期复利来自企业内生现金流, 不来自"傻子馈赠"。
-
 违反症状: 把 "最近股价涨/跌了 X%" 当信号, 用 K 线/板块轮动/资金流判断买卖, 把市值当锚。
-
 ### §1.2利润三问是估值的承重墙
-
 任何估值动作之前必须先对以下三问给出 "真/假 / 存疑":
-
 ① **利润为真** — 经营现金流净额 ≥ 净利润; 销售收现/营收 ≥ 1+增值税率; 应收/存货/商誉结构干净。
 ② **利润可持续** — 需求10年仍在; 护城河可验证而非声称。
 ③ **维持利润不需大投入** — 自由现金流 = 经营所得 − **维持性** CapEx（不是全部 CapEx）。长安汽车每年65亿维持性 CapEx 是 "泡沫利润", 需去泡沫化。
-
 三问 **必须全部为真**。任一 "假/存疑" → 25PE 合理估值法不适用, 必须打折或放弃。
-
 违反症状: 看报表 PE 不看 CFO/NI 比值; 未拆维持性 vs 扩张性 CapEx 就算自由现金流。
-
 ### §1.3商业模式决定估值方法, 用错方法等于价值陷阱
-
 不同生意的 "3年后净利润可预估度" 差异巨大, PE 不是万能: **强护城河消费/平台互联网适用25PE**; **周期股/资源顶部 PE 低是陷阱, 底部 PE 高是机会, 不适用 PE**; **银行用 PB**; **保险默认回避**; **公用事业用 DCF 简化版**; **高杠杆企业 PE 下调 + 折扣加深到35%**。
-
 违反症状: 给周期股套 PE; 给高成长股40+ PE; 用 PEG 抬 PE 超25; 把高杠杆标的按常规50% 买点算。
-
 ### §1.4三年后的确定性 >> 今天的精确性
-
 估值靠 **三年后可预估**, 不靠 **今天精准**。选3年窗口是因为: 短于1年 = 短期博弈（噪声 > 信号）, 长于5年 = 超出绝大多数行业的可预测半径。§1商业模式 + §2成长空间收尾时必须能回答 "这家公司3年后的净利润中枢大约在哪里, 依据是什么"。答不出 → 不适用25PE 估值法, 必须更深折扣或弃权。
-
 违反症状: 追求精准 DCF 到小数点后两位; 或反过来, 用 "长期看好" 敷衍, 不给3年窗口的量化上下限。
-
 ### §1.5安全边际是"我错了也不亏", 不是"便宜"
-
 50% 折扣的意义不是占市场先生的便宜, 而是 **给自己估算错误留空间**。即使真实价值只有估算的70%, 50% 买入仍能不亏。判错概率越高（认知不深/行业变化快/管理层难评）**应提高折扣**而不是降低门槛买入。高杠杆企业折扣加深到35% 同理。
-
 违反症状: 把折扣当 "市场情绪", 越跌越机械加仓; 不反思判断可能错, 只反思 "市场先生发癫"。
-
 ### §1.6能力圈是硬边界, 写不出具体答案 = 不下注
-
 "看得懂" 的标准是 **能力圈四问** 全能口述具体答案:
-
 ① 公司靠销售什么商品/服务获取利润?
 ② 客户为何从它这里采购, 不选其他机构?
 ③ 资本天性逐利, 为什么别的资本没抢走它的份额或逼它降利?
 ④ 假设同行/巨头挟巨资参与竞争, 它能否保住乃至扩张份额?
-
 四问任一答 "抽象空话/品牌复读/结论标签无场景" = 能力圈外, **不下注**, 错过是价值投资的标配。"跨出能力圈下注, 是注定要被别人收割的——早晚而已。"
-
 违反症状: "行业龙头/品牌强大/成长空间巨大/护城河宽广" 这类空话撑起的 §1, 没有产品级拆分、客户场景、挑战者名单、假想敌推演。
-
 ### §1.7市场波动 ≠ 信息, 价格不改变价值
-
 格雷厄姆的 "市场先生" 寓言: 市场报价每天变, 企业内在价值几年才变一次。默认动作是 **呆坐不动**。股价上涨不是卖出理由, 估值超区间才是; 股价下跌不是买入理由, 估值进入买点才是。
-
 违反症状: 用 K 线/量价/资金流做决策; 用 "最近表现" 修订研究结论。
-
 ### §1.8耐心是资产, 空仓等待不是机会成本
-
 不主动留现金等机会; 但也不为保持仓位而急于投出去。所有持仓都超合理估值 + 没有新标的进入买点 → 自然产生现金, 等下一个买点即可。"单纯持有类现金资产等待股价下跌的所谓仓位管理"是明确反对的。
-
 违反症状: FOMO 驱动的仓位管理; 把 "子弹池" 当择时工具。
-
 ### §1.9认错 > 坚持: 下注行为正确 ≠ 下注结果正确
-
 估值判断本身动摇时, 纪律化加仓会从 "遵从体系" 滑向 "赌气/摊低成本执念"。跌破买点第二档/第三档遇新信息（季报/行业变化/三大前提由 "真" 松动到 "存疑"）动摇3年后净利润预估 → **立即停止加仓**, 不再机械摊低成本。正确顺序: ① 回头重审3年后净利润下限; ② 重算合理估值 + 新买点; ③ 再决定新行动（继续加/持有观望/止损重估）。**承认 "我看错了" 是完全合法的结论**。
-
 违反症状: "原计划每跌 X% 加仓" 的机械执行; 用 "市场先生发癫" 掩盖判断已动摇。
-
 ### §1.10集中于高确定性 > 分散于平庸
-
 从分散入手（起步 = 指数）→ 看懂一家转一家 → 成熟持有 **4-6家**。超过8家 → 必然有几家没看懂, 回指数。单一持仓上限40%（极端可到50%, 茅台2017-2020）, 下限约10%（不敢重仓 = 没看懂 = 干脆不持）。同行业同时持仓不超2家。
-
 违反症状: 20+ 只股组合, 每只都是 "浅水位"; 或单一仓位 > 50% 而四问/三前提未全过。
-
 ### §1.11年报是写给全体利益相关方的文档, 真相在附注
-
 年报读者 = 监管 + 党组织 + 员工 + 地方政府 + 股东 + 供应商 + 经销商 + 投资者 + 媒体 + 竞争对手。价值投资者不是首要读者。因此读年报要 **读出弦外之音**: 哪些段落是合规话术/员工福利信号/地方政绩信号, 哪些才是实质经营信息。**正文可略读, 附注必须逐行读**——应交税费、关联交易、对外担保、其他应收款明细、存货构成、商誉减值测试假设、金融资产4分类是否发生过跨档切换, 实质信息都在附注。
-
 违反症状: 只读正文 "经营情况讨论与分析" 就下结论; 把管理层口径当事实。
-
 ### §1.12好生意优先级高于好管理层
-
 三好标准的顺序不可换: **好生意 → 好公司 → 好价格**。一流生意 + 三流管理层通常优于三流生意 + 一流管理层, 因为一流生意的经济商誉能让平庸管理层也挣到钱 (粤高速、长江电力), 而三流生意 + 一流管理层 = 管理层被迫不断重组/转型/跨界, 成功稀少且不可复制。§1 (好生意) 判定 "否" 不要指望 §4 (管理层) 救回; §1判定 "是" 时, §4平庸可接受, 只要不存在 §4风险 (道德/大股东占款/系统性画大饼)。
-
 违反症状: 用 "管理层优秀" 对冲 "商业模式平庸"; 期待明星 CEO 能把垃圾生意做成金矿。
 
 ---
@@ -434,24 +395,17 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - **禁用8条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5必填。
 - **5步护城河分析** (§3必需):非银行按a分类（大/准/强/省/专）+b可证伪检验+c跨年定量追溯+d悲观情景+e宽/中/窄/弱标签执行。非银行必须完成资本消耗测试,并从提价、对手、切换成本、ROE路标中任选1项。**银行分支**只运行`industry-overlays.md`定义的银行quality bundle并据此完成同样的定性、可证伪、跨年、压力情景和标签步骤,不要求毛利率、CFO/NI或资本开支。具体数字准绳见`.claude/skills/value-profile/references/moat-framework.md`和template §3。
-- **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析出`part1/§1.1`或`part1/§1.3`后,先调用该skill的Mode B,不得派普通worker重复分析。调用参数为`--target-profile <path> --section <resolved-section> --ticker <ticker> --year <YYYY> --as-of <AS_OF> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`,并在`--filing`和`--extracted-text`中恰选一个。A+H逐法域传入全部counterpart。全流程分别定向调用两个section;显式定向调用只允许返回该目标。Mode B不得直接修改profile,父skill复核后才通过Step 3e原子写入。
-- **产品分析接收门槛**:只接受`terminal_status=success`、`target_sections`和`draft_sections`键集合都恰好等于当前目标、annual和event哈希以及`counterpart_filing_manifest_sha256s`与Part 0及当前文件三方一致、每条citation的`section_id`属于当前目标的响应。父skill把`moat_handoff`中的`claim/evidence/counterevidence/citation_ids/evidence_grade`持久化为目标section的`**产品与流程证据:**`,供§3在resume后重建输入;不得只保存在内存中。`moat_handoff`出现`宽/中/窄/弱`等最终护城河标签时拒绝响应;最终护城河仍由父skill按`moat-framework.md`计算。
-- **产品分析pending和失败**:`pending`先保存已复核草稿、`unresolved_items`和真实`需人工`状态,加入人工处理清单并阻断依赖该section的§1.8和§3;`failure`不得保存草稿;`dependency_failure`按返回原因重建证据或补前置section后重试。Auto最多按明确缺口重派2次;Interactive确认仍由父skill Step 3d处理,子skill不显示第二套菜单。
+- **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析`part1/§1.1`或`part1/§1.3`,按其SKILL.md调用Mode B并用product Schema验收;不得派普通worker重复分析。A+H逐法域传入全部counterpart,显式定向只接受当前目标。Mode B不得修改profile,父skill复核后通过Step 3e原子写入。
+- **产品分析接收门槛**:除Schema外,要求目标键集合精确匹配、annual/event/counterpart哈希三方一致且citation属于当前section。持久化`moat_handoff`的`claim/evidence/counterevidence/citation_ids/evidence_grade`为`**产品与流程证据:**`;出现最终护城河标签则拒绝,最终护城河仍由父skill计算。`pending`保存真实未决并阻断§1.8和§3;`failure`不保存草稿;`dependency_failure`按返回动作修复后重试,最多2次。
 - **§4管理层分析**→**delegate到`management-analysis`子skill**。全流程进入管理层block时传`--section part1/§4`;显式定向某个管理层subsection时必须传`--section <resolved-part1/§4.x>`,不得扩大目标。其余参数为`--target-profile <path> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path>`并继承当前`--auto`或`--interactive`;AS_OF从Part 0读取,两个manifest都传持久化后的真实绝对路径,不得省略。Mode B子skill无论模式都只返回`draft_sections`和结构化flags,父skill是Mode B唯一写入者;父skill复核后把section正文、管理层状态、人工清单和阻断原因在同一次原子写入中保存。详细流程见`.claude/skills/management-analysis/SKILL.md`§2-§3。Fallback:5个完整`N→N+1`比较需6份年报,每行来源写入该section`**引用:**`;连续未达标记guidance不可信风险,证据置信度不因管理层未兑现而降低,目标突然消失必须指出,言行一致检验≥2事件。
-
 **管理层否决handoff**:Mode B子skill无论auto或interactive都只返回`draft_veto`和`management_veto=false`;父skill只对用户或auto已接受的内存草稿执行事务,interactive以accept或edit后的已接受正文为准。系统性画大饼唯一引用`management-analysis§2.7.2`:只在同一指标ID、连续3个可比财年、单位口径和目标方向一致时累计;不同指标不得拼接。父skill先预先计算完整事务:命中时同步写`**管理层:**一票否决触发`和`**管理层否决:**是—<reason>`,未命中时清除旧`管理层否决`阻断原因。随后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <profile-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`完成一次CAS原子写入;非A+H省略counterpart guard。正文、Part 0状态和阻断原因集合一次保存,不存在“先保存正文再补Part 0”的中间状态,冲突时全部保持原状态。
-
 **证据闭合否决finalizer**:管理层否决已确认,或财报排雷命中高风险、`剔除`时,先完成最终live revalidation并用全部annual、event、counterpart及已建立的market manifest作为CAS guard,再写终态`已否决`。该终态不输出数字估值,保留全部已完成证据,并使resume确定性复现同一结果。
-
 **子skill证据比较交换**:management-analysis和financial-redflag-scan返回对象都必须包含`filing_manifest_sha256`和`event_manifest_sha256`。父skill接受任何management响应前、保存草稿前重新计算两个manifest文件SHA-256,要求与子skill返回哈希及Part 0字段三方一致。另对`counterpart_filing_manifest_sha256s`逐个counterpart哈希执行子返回值/Part 0/文件三方一致:子返回的jurisdiction键集合必须与Part 0`counterpart_filing_manifests路径及SHA-256映射`完全相等,每个jurisdiction及其SHA-256必须逐项精确匹配,不得接受缺键、多键或跨法域代用。比较与原子替换之间任一manifest变化时abort并使受影响section失效,不得保存基于旧证据的草稿。
-
+**finding聚合**:三个判断型子skill都按`sha256(judgment_domain|subject_type|subject_id|finding_type|occurrence_date|sorted(canonical_evidence_ids))`生成`canonical_finding_id`。父skill只在相同判断域、相同主体和相同ID内去重并取最高严重度;不同判断主体不得合并。`company_financials`保留公司财务判断,`management_integrity`保留管理层判断,`product_competitiveness`保留产品判断。最终报告按`canonical_evidence_id`并列展示不同主体的解释,同一底层事件事实只叙述一次;估值阻断原因写稳定集合,不得因多个skill引用同一证据而重复追加相同原因。
 **管理层pending解除handoff**:任意management pending解决后,父skill重新校验本次目标section并从所有管理层section重建`unresolved_rows`。非gate section和必做gate使用同一解除路径:只移除已解决行对应的人工处理清单项;全局未决行清零才写`management_pending=false`;三个gate均无未决时写`pending_gate=false`,否则保持true。随后重新计算管理层否决和重新计算阻断原因集合。正文、两个pending字段、未决行、人工清单、否决字段和阻断集合在同一次原子写入中保存,失败时全部保持原状态。
-
-**子skill失败handoff**:financial-redflag-scan重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段。management-analysis返回`terminal_status=failure`时直接执行其`rebuild_evidence`动作,不设置management pending;只有真实未决的dependency_failure或pending草稿才设置pending并保存真实unresolved_rows。pending响应中的`draft_veto=true`或profile已有持久化否决必须保留并从已接受正文重算,未决证据不得擦除否决。management-analysis返回`rebuild_evidence`时先重建年报、事件及`counterpart_filing_manifests`,重新绑定并失效旧管理层section后再调用一次,不得把漂移降级为普通pending;返回`terminal_status=vetoed`时保留已证实否决、写`管理层否决=是—原因`,未另有真实未决行则不得改成`需人工—待完成管理层gate`。所有正文、状态、人工清单和阻断原因单次原子保存。
-
+**子skill失败handoff**:financial-redflag-scan重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段。management-analysis返回`terminal_status=failure`时直接执行其`rebuild_evidence`动作,不设置management pending;只有真实未决的`terminal_status=dependency_failure`或`terminal_status=pending`才设置pending并保存真实unresolved_rows。pending响应中的`draft_veto=true`或profile已有持久化否决必须保留并从已接受正文重算,未决证据不得擦除否决。management-analysis返回`rebuild_evidence`时先重建年报、事件及`counterpart_filing_manifests`,重新绑定并失效旧管理层section后再调用一次,不得把漂移降级为普通pending;返回`terminal_status=vetoed`时保留已证实否决、写`管理层否决=是—原因`,未另有真实未决行则不得改成`需人工—待完成管理层gate`。所有正文、状态、人工清单和阻断原因单次原子保存。
+financial-redflag-scan重试耗尽或management-analysis重试耗尽后,对应section写`需人工`,阻断估值并返回父流程;存在人工排雷缺口时写`**财报排雷:**证据需人工`。
 **阻断原因合并**:维护`财报高风险/管理层否决/证据需人工`阻断原因集合,去重后按固定顺序写入`**估值阻断:**是—<原因1;原因2>`;任何handoff不得覆盖已有原因。只有原因集合为空才写`否`。Step 1迁移、Step 5保存和Step 6每次gate变化后都调用同一个阻断原因合并器。
-
-**失败与阻断兼容合同**:financial-redflag-scan重试耗尽或management-analysis重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段,阻断估值并返回父流程。management-analysis的failure只走证据重建;真实未决的`terminal_status=pending`或`terminal_status=dependency_failure`才设置`management_pending=true`并保存真实unresolved_rows。存在人工排雷缺口时可见状态写`**财报排雷:**证据需人工`。
 
 #### 3c. Main-agent review
 
