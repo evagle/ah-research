@@ -354,6 +354,7 @@ def search_research(
     code: str,
     *,
     years: int,
+    as_of: date,
     depth_only: bool,
     max_results: int,
     raw_responses: list[bytes] | None = None,
@@ -362,9 +363,8 @@ def search_research(
 
     Paginates through the list API until max_results is reached or data runs
     out. `raw_responses` is injectable for tests (one bytes blob per page)."""
-    today = date.today()
-    begin = (today - timedelta(days=years * 365 + 30)).isoformat()
-    end = today.isoformat()
+    begin = (as_of - timedelta(days=years * 365 + 30)).isoformat()
+    end = as_of.isoformat()
 
     collected: list[ResearchReport] = []
     page = 1
@@ -382,6 +382,8 @@ def search_research(
         for rec in records:
             rep = _to_report(rec)
             if rep is None:
+                continue
+            if rep.publish_date > as_of:
                 continue
             if depth_only and not is_depth_report(rep):
                 continue
@@ -467,6 +469,12 @@ def main(argv: list[str] | None = None) -> int:
         help="How many years back to fetch (default 3).",
     )
     parser.add_argument(
+        "--as-of",
+        required=True,
+        type=date.fromisoformat,
+        help="Evidence cutoff date (YYYY-MM-DD); reports after this date are excluded.",
+    )
+    parser.add_argument(
         "--depth-only",
         action="store_true",
         help="Filter to 深度/首次/覆盖/重大 reports (exclude 点评/跟踪/策略/每日).",
@@ -500,6 +508,7 @@ def main(argv: list[str] | None = None) -> int:
         reports = search_research(
             code,
             years=args.years,
+            as_of=args.as_of,
             depth_only=args.depth_only,
             max_results=args.max_results,
         )

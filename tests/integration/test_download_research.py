@@ -8,12 +8,13 @@ import importlib.util
 import json
 import sys
 import urllib.error
+from datetime import date
 from pathlib import Path
 from unittest import mock
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[2]
 SCRIPT_PATH = REPO_ROOT / "scripts" / "download_research.py"
 
 
@@ -164,7 +165,12 @@ def test_depth_filter_applied_in_search():
     ]
     payload = json.dumps({"size": 3, "data": records}).encode("utf-8")
     results = dr.search_research(
-        "600519", years=3, depth_only=True, max_results=50, raw_responses=[payload]
+        "600519",
+        years=3,
+        as_of=date(2024, 12, 31),
+        depth_only=True,
+        max_results=50,
+        raw_responses=[payload],
     )
     titles = [r.title for r in results]
     assert "深度研究" in titles
@@ -287,7 +293,12 @@ def test_max_cap_stops_at_limit():
     ]
     payload = json.dumps({"size": 100, "data": records}).encode("utf-8")
     results = dr.search_research(
-        "600519", years=3, depth_only=False, max_results=10, raw_responses=[payload]
+        "600519",
+        years=3,
+        as_of=date(2024, 12, 31),
+        depth_only=False,
+        max_results=10,
+        raw_responses=[payload],
     )
     assert len(results) == 10
 
@@ -412,7 +423,18 @@ def test_main_writes_expected_files(tmp_path):
 
     out_dir = tmp_path / "research"
     with mock.patch("urllib.request.urlopen", side_effect=fake_urlopen):
-        rc = dr.main(["600519.SH", "--years", "3", "--depth-only", "--out", str(out_dir)])
+        rc = dr.main(
+            [
+                "600519.SH",
+                "--years",
+                "3",
+                "--as-of",
+                "2024-12-31",
+                "--depth-only",
+                "--out",
+                str(out_dir),
+            ]
+        )
 
     assert rc == 0
     names = sorted(p.name for p in out_dir.iterdir())
@@ -423,8 +445,48 @@ def test_main_writes_expected_files(tmp_path):
 
 
 def test_main_bad_ticker_returns_nonzero(tmp_path):
-    rc = dr.main(["BAD_TICKER", "--out", str(tmp_path)])
+    rc = dr.main(["BAD_TICKER", "--as-of", "2024-12-31", "--out", str(tmp_path)])
     assert rc == 2
+
+
+def test_search_research_excludes_reports_after_as_of():
+    payload = json.dumps(
+        {
+            "data": [
+                {
+                    "infoCode": "BEFORE",
+                    "title": "截止日前深度",
+                    "orgSName": "中金公司",
+                    "publishDate": "2024-06-30 12:00:00",
+                    "attachType": "深度报告",
+                },
+                {
+                    "infoCode": "AFTER",
+                    "title": "截止日后深度",
+                    "orgSName": "中金公司",
+                    "publishDate": "2024-07-01 00:00:00",
+                    "attachType": "深度报告",
+                },
+            ]
+        }
+    ).encode()
+
+    reports = dr.search_research(
+        "600519",
+        years=3,
+        as_of=date(2024, 6, 30),
+        depth_only=False,
+        max_results=10,
+        raw_responses=[payload],
+    )
+
+    assert [report.info_code for report in reports] == ["BEFORE"]
+
+
+def test_main_requires_as_of(tmp_path):
+    with pytest.raises(SystemExit) as exc:
+        dr.main(["600519.SH", "--out", str(tmp_path)])
+    assert exc.value.code == 2
 
 
 def test_module_no_side_effects_on_import():

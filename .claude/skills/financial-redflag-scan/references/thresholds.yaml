@@ -1,0 +1,681 @@
+version: 1
+purpose: Canonical cross-skill screening thresholds and market baselines.
+
+markets:
+  CN:
+    standard_corporate_tax_rate: 0.25
+    note: Use the issuer's tax reconciliation when preferential rates apply.
+  HK:
+    standard_corporate_tax_rate: 0.165
+    lower_tier_rate: 0.0825
+    lower_tier_profit_hkd: 2000000
+    note: Check domicile,offshore exemptions,and the issuer's tax reconciliation.
+
+checks:
+  qualitative_evidence_standard:
+    required_fields: event_subject_date_document_and_citation
+    peer_cohort: same_exchange_same_business_model
+    missing_evidence: pending
+  goodwill_to_net_assets:
+    warning: 0.20
+    warning_comparator: greater_than_or_equal
+    high_risk: 0.30
+    high_risk_comparator: greater_than
+    denominator: net_assets_attributable_to_parent
+    nonpositive_denominator: high_risk_report_absolute_values
+    action: Review acquisition quality and impairment assumptions.
+  other_receivables_to_current_assets:
+    warning: 0.10
+    denominator: current_assets
+    action: Inspect counterparties,related parties,ageing,and recoverability.
+  cfo_to_net_income:
+    warning: 0.50
+    consecutive_years: 2
+    denominator: net_income_attributable_to_parent
+    applicability: positive_net_income_only
+    nonpositive_denominator: report_signs_amounts_and_loss_duration
+    action: Reconcile receivables,inventory,payables,and non-cash items.
+  adjusted_net_income_to_net_income:
+    warning: 0.50
+    consecutive_years: 2
+    numerator: adjusted_net_income_attributable_to_parent
+    denominator: net_income_attributable_to_parent
+    applicability: positive_net_income_only
+    nonpositive_denominator: report_signs_amounts_and_loss_duration
+    action: Identify recurring non-operating gains and restate core earnings.
+  cfo_bridge:
+    reconciliation_tolerance: 0.05
+    reconciliation_error_denominator: max_absolute_cfo_or_net_income
+    action: Complete non-cash and working-capital bridge items before escalation.
+  sales_cash_collection:
+    healthy_min: 1.0
+    deep_review_below: 1.0
+    early_return_below: 0.9
+    consecutive_years: 2
+    reconciliation_tolerance: 0.05
+    denominator: revenue_times_one_plus_effective_vat_rate
+    reconciliation_error_denominator: absolute_expected_sales_cash_receipts
+    action: Reconcile bills,non-cash settlement,write-offs,and contract liabilities.
+  growth_multiple:
+    applicability: positive_revenue_and_compared_item_growth_only
+    affected_checklist_rows: [9, 10, 18]
+  cash_yield_peer_deviation:
+    warning: 0.50
+    direction: company_below_peer
+    formula: max_peer_median_minus_company_yield_zero_divided_by_absolute_peer_median
+    denominator: absolute_peer_median
+    peer_median_nonpositive: manual_review
+    peer_cohort: same_exchange_same_currency_same_deposit_term
+    company_yield_numerator: interest_income
+    company_yield_denominator: average_unrestricted_interest_bearing_cash_and_deposits
+    average_basis: opening_and_closing_average
+    peer_basis: same_numerator_denominator_and_average_basis
+  borrow_dividend_refinance:
+    window_years: 5
+    comparison: trigger_when_positive_net_borrowing_and_dividend_to_prior_net_income_gte_1_in_same_fiscal_year_and_equity_refinancing_occurs_within_next_2_fiscal_years
+    minimum_periods: 3
+    not_applicable_when: prior_net_income_nonpositive_or_no_cash_dividend
+    dividend_to_prior_net_income: 1.0
+    required_sequence: positive_net_borrowing_then_dividend_then_equity_refinancing
+  gross_margin_deterioration:
+    window_years: 5
+    comparison: trigger_when_gross_margin_declines_at_least_3_percentage_points_year_over_year_for_2_consecutive_comparable_fiscal_years
+    minimum_periods: 3
+    not_applicable_when: gross_margin_basis_or_segment_mix_cannot_be_reconciled
+  goodwill_impairment_assumption:
+    window_years: 5
+    comparison: trigger_when_forecast_revenue_growth_exceeds_both_issuer_3y_cagr_and_peer_median_by_at_least_10_percentage_points_or_discount_rate_is_below_peer_median_by_at_least_2_percentage_points
+    minimum_periods: 3
+    not_applicable_when: no_goodwill_or_no_impairment_test_required
+  soft_intangible_impairment_assumption:
+    window_years: 5
+    comparison: trigger_when_soft_intangibles_to_attributable_net_assets_gt_10_percent_and_forecast_growth_or_discount_rate_meets_goodwill_impairment_aggressiveness_rule
+    minimum_periods: 3
+    not_applicable_when: no_soft_intangibles_or_no_impairment_test_required
+    missing_evidence: pending
+  construction_in_progress_persistence:
+    window_years: 5
+    comparison: trigger_when_same_project_remains_in_construction_for_at_least_3_years_or_construction_in_progress_to_fixed_assets_gt_30_percent_for_3_consecutive_comparable_fiscal_years
+    minimum_periods: 3
+    not_applicable_when: no_construction_in_progress_or_no_transfer_required
+    missing_evidence: pending
+  overdue_receivables_persistence:
+    window_years: 5
+    comparison: trigger_when_receivables_over_1_year_ratio_rises_for_2_consecutive_comparable_fiscal_years_and_receivable_days_increase_at_least_30_days_from_window_start
+    minimum_periods: 3
+    not_applicable_when: no_or_immaterial_receivables
+    missing_evidence: pending
+  impairment_assumption:
+    forecast_growth_warning: 0.10
+    action: Compare forecast growth with historical and industry growth.
+  construction_in_progress_age_years:
+    warning: 3
+    comparator: greater_than_or_equal
+    action: Review project progress,capitalization,and delayed depreciation.
+  bank_bundle_severity:
+    regulatory_breach: high_risk
+    adverse_vs_prior_and_peer: warning
+    missing_evidence: pending
+    otherwise: none
+  bank_bundle:
+    comparison_window_years: 3
+    peer_cohort: same_exchange_and_bank_subtype
+    peer_statistic: median
+    adverse_definition: current_worse_than_prior_3y_median_and_peer_median
+    regulatory_minima:
+      CN:
+        liquidity_coverage_ratio: 1.0
+        net_stable_funding_ratio: 1.0
+        provision_coverage_ratio: null
+      HK:
+        liquidity_coverage_ratio: 1.0
+        net_stable_funding_ratio: 1.0
+        provision_coverage_ratio: null
+    regulatory_maxima:
+      CN:
+        large_exposure_ratio:
+          non_interbank_single_customer: 0.15
+          non_interbank_connected_group: 0.20
+          interbank_single_or_connected_group: 0.25
+      HK:
+        large_exposure_ratio: 0.25
+    regulatory_ranges:
+      CN:
+        provision_coverage_ratio:
+          lower_bound: 1.2
+          upper_bound: 1.5
+          institution_specific: true
+    directions:
+      npl_ratio: lower_is_better
+      special_mention_migration: lower_is_better
+      overdue_90d_ratio: lower_is_better
+      provision_coverage_ratio: higher_is_better
+      loan_loss_reserve_ratio: higher_is_better
+      credit_cost: context_dependent
+      net_interest_margin: higher_is_better
+      cet1_ratio: higher_is_better
+      risk_weighted_assets_growth: context_dependent
+      liquidity_coverage_ratio: higher_is_better
+      net_stable_funding_ratio: higher_is_better
+      deposit_concentration: lower_is_better
+      interbank_funding_dependency: lower_is_better
+      related_party_exposure: lower_is_better
+      large_exposure_ratio: lower_is_better
+    metric_definitions:
+      npl_ratio: nonperforming_loans_divided_by_gross_customer_loans
+      special_mention_migration: loans_migrated_from_special_mention_to_npl_divided_by_opening_special_mention_loans
+      overdue_90d_ratio: loans_overdue_more_than_90_days_divided_by_gross_customer_loans
+      provision_coverage_ratio: loan_loss_allowance_divided_by_nonperforming_loans
+      loan_loss_reserve_ratio: loan_loss_allowance_divided_by_gross_customer_loans
+      credit_cost: current_period_loan_impairment_charge_divided_by_average_gross_customer_loans
+      net_interest_margin: net_interest_income_divided_by_average_interest_earning_assets
+      cet1_ratio: common_equity_tier1_capital_divided_by_risk_weighted_assets
+      risk_weighted_assets_growth: current_rwa_divided_by_prior_comparable_rwa_minus_one
+      liquidity_coverage_ratio: high_quality_liquid_assets_divided_by_30_day_net_cash_outflows
+      net_stable_funding_ratio: available_stable_funding_divided_by_required_stable_funding
+      interbank_funding_dependency: interbank_liabilities_divided_by_total_interest_bearing_liabilities
+      deposit_concentration: largest_depositor_or_top_depositor_balance_divided_by_total_deposits
+      related_party_exposure: related_party_credit_exposure_divided_by_tier1_capital
+      large_exposure_ratio: exposure_to_single_or_connected_counterparty_divided_by_tier1_capital
+      cet1_buffer_pp: cet1_ratio_minus_applicable_regulatory_minimum
+    comparison_basis_required:
+      deposit_concentration: identical_numerator_scope_and_denominator
+    provision_coverage_matrix:
+      applicable_institution_minimum_required: compare_actual_with_disclosed_or_supervisory_minimum
+      below_regulatory_minimum: high_risk
+      no_uniform_market_minimum: compare_prior_and_peer
+      between_minimum_and_500pct: compare_prior_and_peer
+      above_500pct: warning
+      rationale_above_500pct: investigate_profit_smoothing_or_delayed_loss_recognition
+    cet1_matrix:
+      institution_specific_minimum_required: true
+      applicable_institution_minimum_required: compare_actual_with_disclosed_or_supervisory_minimum
+      below_regulatory_minimum: high_risk
+      minimum_unavailable: pending_no_regulatory_breach
+      generic_market_baseline_role: fallback_comparison_only
+    peer_evidence_required_fields:
+      - ticker
+      - bank_subtype
+      - metric
+      - period
+      - publication_date
+      - source
+      - sha256
+      - value
+      - unit
+      - numerator
+      - denominator
+      - calculation_basis
+    credit_cost_matrix:
+      trend_comparison: current_vs_immediately_prior_comparable_fiscal_year
+      trend_tolerance_percentage_points: 0.01
+      rising: delta_greater_than_or_equal_to_positive_tolerance
+      falling: delta_less_than_or_equal_to_negative_tolerance
+      stable: absolute_delta_less_than_tolerance
+      rising_credit_cost_and_npl: high_risk
+      rising_credit_cost_with_stable_or_falling_npl: warning
+      stable_credit_cost_and_rising_npl: warning
+      stable_credit_cost_with_stable_or_falling_npl: none
+      falling_credit_cost_and_rising_npl: high_risk
+      falling_credit_cost_with_stable_or_falling_npl: none
+      missing_npl_or_credit_cost: pending
+    rwa_growth_matrix:
+      cet1_growth_measure: cet1_capital_amount_growth
+      rwa_growth_le_cet1_growth: none
+      rwa_growth_gt_cet1_growth_with_buffer_ge_1_5pp: warning
+      rwa_growth_gt_cet1_growth_with_buffer_lt_1_5pp: high_risk
+      cet1_below_regulatory_minimum: high_risk
+      missing_rwa_growth_or_cet1_growth: pending
+  insurer_bundle:
+    comparison_window_years: 3
+    peer_cohort: same_exchange_same_insurance_subtype
+    severity:
+      below_applicable_regulatory_minimum: high_risk
+      adverse_vs_prior_and_peer: warning
+      material_reserve_or_related_party_breach: high_risk
+      missing_evidence: pending
+      otherwise: none
+    metrics:
+      solvency_regime_status:
+        definition: applicable_regulatory_solvency_tier_and_supervisory_action
+        comparison: no_active_breach_or_supervisory_action
+        direction: categorical
+        comparison_algorithm: high_risk_on_active_breach_or_supervisory_action
+        nullable_fields: [value, unit, numerator, denominator, prior_3y_median, peer_median]
+      comprehensive_solvency_ratio:
+        definition: actual_total_capital_divided_by_minimum_total_capital
+        comparison: applicable_institution_specific_regulatory_minimum
+        direction: higher_is_better
+        comparison_algorithm: high_risk_below_regulatory_minimum_else_warning_when_below_both_prior_3y_and_peer
+        nullable_fields: []
+      core_solvency_ratio:
+        definition: actual_core_capital_divided_by_minimum_core_capital
+        comparison: applicable_institution_specific_regulatory_minimum
+        direction: higher_is_better
+        comparison_algorithm: high_risk_below_regulatory_minimum_else_warning_when_below_both_prior_3y_and_peer
+        nullable_fields: []
+      underwriting_profit_or_combined_ratio:
+        definition: underwriting_profit_or_incurred_claims_plus_expenses_divided_by_earned_premiums
+        comparison: current_vs_prior_3y_and_same_subtype_peer_median
+        direction: categorical
+        comparison_algorithm: select_exactly_one_variant_then_apply_its_direction
+        variants:
+          underwriting_profit_margin:
+            direction: higher_is_better
+            formula: underwriting_profit_divided_by_earned_premiums
+          combined_ratio:
+            direction: lower_is_better
+            formula: incurred_claims_plus_expenses_divided_by_earned_premiums
+        nullable_fields: [applicable_regulatory_requirement]
+      reserve_adequacy:
+        definition: booked_insurance_contract_liabilities_vs_actuarial_best_estimate_and_adverse_development
+        comparison: actuarial_opinion_and_prior_year_development
+        direction: higher_is_better
+        comparison_algorithm: high_risk_on_material_actuarial_shortfall_or_adverse_development
+        nullable_fields: [peer_median, numerator, denominator]
+      surrender_ratio:
+        definition: surrender_payments_divided_by_opening_and_closing_average_policy_reserves
+        comparison: current_vs_prior_3y_and_same_subtype_peer_median
+        direction: lower_is_better
+        comparison_algorithm: warning_when_above_both_prior_3y_and_peer
+        nullable_fields: [applicable_regulatory_requirement]
+      investment_asset_credit_risk:
+        definition: below_investment_grade_and_impaired_investments_divided_by_total_investments
+        comparison: current_vs_prior_3y_and_same_subtype_peer_median
+        direction: lower_is_better
+        comparison_algorithm: warning_when_above_both_prior_3y_and_peer
+        nullable_fields: [applicable_regulatory_requirement]
+      asset_liability_duration_mismatch:
+        definition: asset_duration_minus_liability_duration_in_years
+        comparison: absolute_mismatch_and_interest_rate_stress_disclosure
+        direction: absolute_lower_is_better
+        comparison_algorithm: warning_when_absolute_mismatch_exceeds_both_prior_3y_and_peer
+        nullable_fields: [applicable_regulatory_requirement, numerator, denominator]
+      reinsurance_dependency:
+        definition: ceded_premiums_divided_by_gross_written_premiums
+        comparison: current_vs_prior_3y_and_same_subtype_peer_median
+        direction: lower_is_better
+        comparison_algorithm: warning_when_above_both_prior_3y_and_peer
+        nullable_fields: [applicable_regulatory_requirement]
+      related_party_transactions:
+        definition: related_party_assets_liabilities_premiums_and_claims_by_counterparty
+        comparison: regulatory_limit_fair_pricing_and_collectability
+        direction: lower_is_better
+        comparison_algorithm: high_risk_on_limit_breach_unfair_pricing_or_uncollectability
+        nullable_fields: [prior_3y_median, peer_median, numerator, denominator]
+    required_output_fields:
+      - metric
+      - status
+      - period
+      - value
+      - unit
+      - numerator
+      - denominator
+      - calculation_basis
+      - applicable_regulatory_requirement
+      - prior_3y_median
+      - peer_median
+      - source
+      - page_or_url
+      - severity
+      - action
+  biological_asset_auditability:
+    warning_when: material_biological_assets_require_quantity_ownership_and_mortality_evidence
+    high_risk_when: material_balance_and_quantity_or_ownership_cannot_be_independently_verified
+    missing_evidence: pending
+  canonical_check_registry:
+    ids:
+      checklist:
+        [checklist/1, checklist/2, checklist/3, checklist/4, checklist/5,
+         checklist/6, checklist/7, checklist/8, checklist/9, checklist/10,
+         checklist/11, checklist/12, checklist/13, checklist/14, checklist/15,
+         checklist/16, checklist/17, checklist/18, checklist/19, checklist/20,
+         checklist/21, checklist/22, checklist/23, checklist/24, checklist/25,
+         checklist/26, checklist/27, checklist/28, checklist/29]
+      high-risk:
+        [high-risk/goodwill, high-risk/other-receivables,
+         high-risk/construction-in-progress, high-risk/cfo-net-income,
+         high-risk/biological-assets, high-risk/management-integrity]
+      reconciliation:
+        [reconciliation/1, reconciliation/2, reconciliation/3, reconciliation/4]
+      supplemental:
+        [supplemental/1, supplemental/2, supplemental/3, supplemental/4,
+         supplemental/5, supplemental/6, supplemental/7, supplemental/8]
+      dimension:
+        [dimension/revenue, dimension/cost, dimension/cash,
+         dimension/profit, dimension/structure]
+      bank:
+        [bank/nonperforming-migration, bank/overdue-90d,
+         bank/provisioning, bank/credit-cost, bank/net-interest-margin,
+         bank/cet1, bank/rwa-growth, bank/liquidity,
+         bank/deposit-funding, bank/related-large-exposure]
+      insurer:
+        [insurer/solvency-regime, insurer/comprehensive-solvency,
+         insurer/core-solvency, insurer/underwriting,
+         insurer/reserve-adequacy, insurer/surrender,
+         insurer/investment-credit-risk, insurer/duration-mismatch,
+         insurer/reinsurance, insurer/related-party]
+    deduplication_aliases:
+      high-risk/goodwill: checklist/16
+      high-risk/other-receivables: checklist/15
+      high-risk/construction-in-progress: checklist/21
+      high-risk/cfo-net-income: checklist/12
+      high-risk/management-integrity: checklist/2
+    counting_precedence:
+      [checklist, bank, insurer, high-risk, reconciliation, supplemental, dimension]
+  checklist_thresholds:
+    row_1:
+      check_id: checklist/1
+      trigger: non_standard_audit_opinion
+      operands: [audit_opinion_type, emphasis_underlying_matter]
+      comparator: audit_opinion_in_disqualifying_set
+      threshold: [qualified, disclaimer, adverse]
+      duration: selected_annual_report
+      applicability: all_issuers
+      severity: {disqualifying_opinion: veto, emphasis_only: evaluate_underlying_matter}
+      canonical_rule: audit_opinion_veto
+    row_2:
+      check_id: checklist/2
+      trigger: confirmed_financial_fraud_history
+      operands: [official_financial_fraud_enforcement_count]
+      comparator: greater_than
+      threshold: 0
+      duration: listing_history_through_as_of
+      applicability: all_issuers
+      severity: {triggered: veto, otherwise: none, missing_evidence: pending}
+      canonical_rule: historical_fraud_veto
+    row_3:
+      check_id: checklist/3
+      trigger: cash_debt_dual_high
+      operands: [unrestricted_cash, interest_bearing_debt, attributable_net_assets]
+      comparator: cash_gt_debt_multiple_and_each_gt_net_assets_ratio
+      threshold: {cash_to_debt: 0.80, cash_to_net_assets: 0.30, debt_to_net_assets: 0.30}
+      duration: current_fiscal_year
+      applicability: positive_attributable_net_assets
+      severity: {triggered: warning, otherwise: none, nonpositive_denominator: pending}
+      numerator: unrestricted_cash_and_interest_bearing_debt
+      denominator: attributable_net_assets
+    row_4:
+      check_id: checklist/4
+      trigger: cash_yield_peer_deviation
+      operands: [company_cash_yield, comparable_peer_median_cash_yield]
+      comparator: max_peer_minus_company_zero_divided_by_absolute_peer_gte
+      threshold: 0.50
+      duration: current_fiscal_year_and_matched_peer_period
+      applicability: positive_peer_median_with_comparable_currency_and_deposit_term
+      severity: {triggered: warning, otherwise: none, nonpositive_peer_median: pending}
+      canonical_rule: cash_yield_peer_deviation
+    row_5:
+      check_id: checklist/5
+      trigger: cash_change_or_yield_anomaly
+      operands: [cash_year_over_year_change, unexplained_change, company_cash_yield, comparable_peer_median_cash_yield]
+      comparator: absolute_cash_change_gt_and_unexplained_change_true_or_cash_yield_deviation_gte
+      threshold: {cash_change: 0.30, cash_yield_deviation: 0.50}
+      duration: rolling_3_fiscal_years
+      applicability: cash_change_branch_all_issuers_yield_branch_positive_peer_median
+      severity: {triggered: warning, otherwise: none, missing_explanation_or_peer_basis: pending}
+      canonical_rule: cash_yield_peer_deviation
+    row_6:
+      check_id: checklist/6
+      trigger: restricted_cash_ratio
+      operands: [restricted_or_non_cash_equivalent_deposits, deduplicated_cash_and_bank_balances, purpose_explanation_present]
+      comparator: ratio_gt_and_explanation_absent
+      threshold: 0.30
+      duration: current_fiscal_year
+      applicability: all_issuers_with_economic_substance_mapping
+      severity: {triggered: warning, otherwise: none, missing_fields: pending}
+      numerator: restricted_or_non_cash_equivalent_deposits
+      denominator: deduplicated_cash_and_bank_balances
+    row_7:
+      check_id: checklist/7
+      trigger: borrow_dividend_refinance
+      operands: [net_borrowing, cash_dividend, prior_net_income, subsequent_equity_refinancing]
+      comparator: ordered_sequence_matches_canonical_rule
+      threshold: {dividend_to_prior_net_income: 1.0, refinancing_within_fiscal_years: 2}
+      duration: rolling_5_fiscal_years
+      applicability: positive_prior_net_income_and_positive_cash_dividend
+      severity: {triggered: warning, otherwise: none, missing_sequence_evidence: pending}
+      canonical_rule: borrow_dividend_refinance
+    row_8:
+      check_id: checklist/8
+      trigger: term_deposit_liquidity_mismatch
+      operands: [term_deposits, cash_and_bank_balances, current_assets, current_liabilities]
+      comparator: term_deposit_ratio_gt_and_current_ratio_lt
+      threshold: {term_deposit_ratio: 0.70, current_ratio: 1.0}
+      duration: current_fiscal_year
+      applicability: positive_cash_and_bank_balances_and_current_liabilities
+      severity: {triggered: warning, otherwise: none, nonpositive_denominator: pending}
+      canonical_rule: term_deposit_to_cash_and_current_ratio
+    row_9:
+      check_id: checklist/9
+      trigger: receivables_growth_above_revenue_with_confirming_signals
+      operands: [receivables_growth, revenue_growth, sales_cash_collection_ratio, hk_confirming_signals]
+      comparator: growth_multiple_gt_and_confirmation_triggered
+      threshold: {growth_multiple: 1.50, sales_cash_collection_ratio: 1.0}
+      duration: 2_consecutive_comparable_fiscal_years
+      applicability: positive_revenue_and_receivables_growth_with_exchange_specific_confirmation
+      severity: {triggered: warning, otherwise: none, missing_confirmation: pending}
+      canonical_rule: growth_multiple
+    row_10:
+      check_id: checklist/10
+      trigger: inventory_growth_above_revenue_growth
+      operands: [inventory_growth, revenue_growth]
+      comparator: inventory_growth_divided_by_revenue_growth_gt
+      threshold: 1.50
+      duration: 2_consecutive_comparable_fiscal_years
+      applicability: positive_revenue_and_inventory_growth_excluding_justified_aging_inventory
+      severity: {triggered: warning, otherwise: none, missing_comparable_basis: pending}
+      canonical_rule: growth_multiple
+    row_11:
+      check_id: checklist/11
+      trigger: controller_share_pledge_ratio_above_market_threshold
+      operands: [pledged_controller_shares, controller_total_shareholding, exchange]
+      comparator: ratio_greater_than_exchange_threshold
+      threshold: {CN: 0.80, HK: 0.50}
+      duration: as_of_date
+      applicability: issuer_has_controller_with_positive_total_shareholding
+      severity: {triggered: high_risk, otherwise: none, missing_evidence: pending}
+      numerator: pledged_controller_shares
+      denominator: controller_total_shareholding
+    row_12:
+      check_id: checklist/12
+      trigger: sales_cash_reconciliation_or_cfo_to_positive_net_income_below_threshold
+      operands: [expected_sales_cash_receipts, actual_sales_cash_receipts, cfo, attributable_net_income]
+      comparator: reconciliation_error_gt_or_cfo_to_net_income_lt
+      threshold: {sales_cash_reconciliation_error: 0.05, cfo_to_net_income: 0.50}
+      duration: reconciliation_current_year_or_ratio_2_consecutive_fiscal_years
+      applicability: sales_cash_branch_when_disclosed_cfo_branch_positive_attributable_net_income
+      severity: {triggered: warning, otherwise: none, unavailable_inputs: pending}
+      canonical_rules: [sales_cash_collection, cfo_to_net_income]
+    row_13:
+      check_id: checklist/13
+      trigger: overdue_receivables_persistence
+      operands: [receivables_over_one_year_ratio, receivable_days]
+      comparator: ratio_rises_and_days_increase_gte
+      threshold: {receivable_days_increase: 30}
+      duration: rolling_5_fiscal_years_with_2_consecutive_increases
+      applicability: material_receivables_with_comparable_ageing
+      severity: {triggered: warning, otherwise: none, missing_ageing: pending}
+      canonical_rule: overdue_receivables_persistence
+    row_14:
+      check_id: checklist/14
+      trigger: inventory_concentration_or_underprovision
+      operands: [inventory, total_assets, inventory_ratio_trend, write_down_rate, comparable_peer_median_write_down_rate]
+      comparator: inventory_ratio_gt_and_rising_or_write_down_rate_peer_shortfall_gt
+      threshold: {inventory_to_assets: 0.20, peer_write_down_rate_shortfall: 0.30}
+      duration: inventory_ratio_2_consecutive_fiscal_years_peer_comparison_current_period
+      applicability: material_inventory_and_comparable_peer_business_model
+      severity: {inventory_branch: warning, underprovision_branch: high_risk, otherwise: none, missing_evidence: pending}
+      denominator: total_assets
+    row_15:
+      check_id: checklist/15
+      trigger: other_receivables_ratio_or_related_balance_age
+      operands: [other_receivables, current_assets, single_related_party_balance_age_years, confirmed_nonoperating_occupation]
+      comparator: ratio_gte_or_related_age_gte
+      threshold: {other_receivables_to_current_assets: 0.10, related_balance_age_years: 2}
+      duration: current_fiscal_year_and_balance_age_history
+      applicability: positive_current_assets_or_identified_related_balance
+      severity: {triggered: warning, confirmed_nonoperating_occupation: high_risk, otherwise: none, missing_evidence: pending}
+      canonical_rule: other_receivables_to_current_assets
+    row_16:
+      check_id: checklist/16
+      trigger: goodwill_ratio_or_aggressive_impairment
+      operands: [goodwill, attributable_net_assets, forecast_growth, issuer_historical_growth, peer_growth, discount_rate, peer_discount_rate]
+      comparator: ratio_gte_warning_or_gt_high_risk_or_assumption_rule_triggered
+      threshold: {warning: 0.20, high_risk: 0.30}
+      duration: current_fiscal_year_and_impairment_forecast_horizon
+      applicability: goodwill_present
+      severity: {warning_threshold: warning, high_risk_threshold: high_risk, nonpositive_net_assets: high_risk, missing_assumptions: pending}
+      canonical_rules: [goodwill_to_net_assets, goodwill_impairment_assumption]
+    row_17:
+      check_id: checklist/17
+      trigger: prepayments_growth_or_related_balance_age
+      operands: [prepayments_year_over_year_growth, related_party_prepayment_age_years]
+      comparator: growth_gt_or_related_age_gte
+      threshold: {year_over_year_growth: 1.00, related_balance_age_years: 1}
+      duration: current_fiscal_year_or_balance_age_history
+      applicability: prepayments_present
+      severity: {triggered: warning, otherwise: none, missing_counterparty_or_ageing: pending}
+    row_18:
+      check_id: checklist/18
+      trigger: prepayment_growth_above_revenue_growth
+      operands: [prepayment_growth, revenue_growth]
+      comparator: prepayment_growth_divided_by_revenue_growth_gt
+      threshold: 2.0
+      duration: 2_consecutive_comparable_fiscal_years
+      applicability: positive_revenue_and_prepayment_growth
+      severity: {triggered: warning, otherwise: none, missing_comparable_basis: pending}
+      canonical_rule: growth_multiple
+    row_19:
+      check_id: checklist/19
+      trigger: soft_intangible_impairment_assumption
+      operands: [soft_intangibles, attributable_net_assets, forecast_growth, historical_growth, peer_growth, discount_rate, peer_discount_rate]
+      denominator: attributable_net_assets
+      nonpositive_denominator: pending_report_absolute_values
+      comparator: canonical_soft_intangible_rule_triggered
+      threshold: {soft_intangibles_to_net_assets: 0.10, forecast_growth_excess_pp: 0.10, discount_rate_shortfall_pp: 0.02}
+      duration: rolling_5_fiscal_years_and_impairment_forecast_horizon
+      applicability: soft_intangibles_present_and_impairment_test_required
+      severity: {triggered: warning, otherwise: none, missing_assumptions: pending}
+      canonical_rule: soft_intangible_impairment_assumption
+    row_20:
+      check_id: checklist/20
+      trigger: production_assets_concentration_or_cip_increment
+      operands: [fixed_assets, construction_in_progress, total_assets, cip_annual_increment, attributable_net_income]
+      comparator: production_assets_ratio_gt_and_rising_or_cip_increment_gt_positive_net_income
+      threshold: {production_assets_to_total_assets: 0.40, cip_increment_to_positive_net_income: 1.0}
+      duration: production_assets_2_consecutive_fiscal_years_cip_branch_current_year
+      applicability: positive_total_assets_cip_branch_positive_attributable_net_income
+      severity: {triggered: warning, otherwise: none, unavailable_inputs: pending}
+    row_21:
+      check_id: checklist/21
+      trigger: construction_persistence_or_margin_deterioration
+      operands: [project_construction_age_years, construction_in_progress, fixed_assets, comparable_gross_margin]
+      comparator: either_canonical_rule_triggered
+      threshold: {project_age_years: 3, cip_to_fixed_assets: 0.30, gross_margin_decline_pp: 0.03}
+      duration: construction_3_fiscal_years_or_margin_2_consecutive_fiscal_years
+      applicability: construction_or_comparable_gross_margin_branch_present
+      severity: {triggered: warning, otherwise: none, missing_progress_or_comparable_basis: pending}
+      canonical_rules: [construction_in_progress_persistence, gross_margin_deterioration]
+    row_22:
+      check_id: checklist/22
+      trigger: fixed_asset_turnover_deterioration
+      operands: [fixed_asset_turnover, comparable_peer_median_fixed_asset_turnover, fixed_asset_turnover_history]
+      comparator: peer_shortfall_gt_or_cumulative_decline_gte
+      threshold: {peer_shortfall: 0.30, cumulative_decline: 0.30}
+      duration: current_peer_period_or_3_consecutive_fiscal_years
+      applicability: positive_average_fixed_assets_and_comparable_peer_basis
+      severity: {triggered: warning, otherwise: none, nonpositive_denominator_or_missing_peer: pending}
+    row_23:
+      check_id: checklist/23
+      trigger: interest_coverage_below_threshold
+      operands: [ebit, cfo, interest_expense]
+      comparator: ebit_to_interest_lt_or_cfo_to_interest_lt
+      threshold: {ebit_interest_coverage: 2.0, cfo_interest_coverage: 3.0}
+      duration: current_fiscal_year
+      applicability: positive_interest_expense
+      severity: {triggered: warning, otherwise: none, missing_interest_disclosure: pending}
+    row_24:
+      check_id: checklist/24
+      trigger: customer_or_supplier_concentration
+      operands: [top_five_customer_ratio, single_customer_ratio, top_five_supplier_ratio, single_supplier_ratio]
+      comparator: any_ratio_greater_than
+      threshold: {top_five: 0.50, single: 0.30}
+      duration: current_fiscal_year
+      applicability: customer_or_supplier_concentration_disclosed
+      severity: {triggered: warning, otherwise: none, missing_required_disclosure: pending}
+    row_25:
+      check_id: checklist/25
+      trigger: capitalized_research_and_development
+      operands: [capitalized_rd, total_rd, attributable_net_income]
+      comparator: capitalization_ratio_gt_or_amount_to_positive_net_income_gt
+      threshold: {capitalization_ratio: 0.30, amount_to_net_income: 0.10}
+      duration: current_fiscal_year
+      applicability: rd_present_amount_branch_positive_attributable_net_income
+      severity: {triggered: warning, otherwise: none, missing_rd_split: pending}
+    row_26:
+      check_id: checklist/26
+      trigger: voluntary_depreciation_or_amortization_policy_change
+      operands: [useful_life_change, residual_value_change, mandatory_standard_change]
+      comparator: voluntary_change_true_and_mandatory_change_false
+      threshold: true
+      duration: current_fiscal_year
+      applicability: depreciable_or_amortizable_assets_present
+      severity: {triggered: warning, otherwise: none, missing_policy_change_evidence: pending}
+    row_27:
+      check_id: checklist/27
+      trigger: receivables_provision_change_or_factoring
+      operands: [ageing_bucket_provision_rate_change, factoring_amount, receivables]
+      comparator: provision_rate_cut_gte_or_factoring_ratio_gt
+      threshold: {provision_rate_cut: 0.50, factoring_to_receivables: 0.30}
+      duration: current_fiscal_year_vs_prior_policy
+      applicability: receivables_present
+      severity: {triggered: warning, otherwise: none, missing_policy_or_factoring_evidence: pending}
+    row_28:
+      check_id: checklist/28
+      trigger: return_on_equity_below_quality_threshold
+      operands: [five_year_average_roe, annual_roe_values]
+      comparator: average_lt_or_any_annual_lt
+      threshold: {five_year_average: 0.15, any_annual: 0.10}
+      duration: 5_fiscal_years
+      applicability: positive_roe_denominators_with_comparable_basis
+      severity: {triggered: warning, otherwise: none, nonpositive_or_missing_denominator: pending}
+    row_29:
+      check_id: checklist/29
+      trigger: related_transactions_or_opaque_controller
+      operands: [related_sales, revenue, related_purchases, operating_cost, controller_entity_type, ultimate_controller_identified]
+      comparator: related_ratio_gt_or_controller_opaque
+      threshold: {related_sales_to_revenue: 0.10, related_purchases_to_operating_cost: 0.15}
+      duration: current_fiscal_year_and_as_of_ownership_structure
+      applicability: all_issuers
+      severity: {triggered: warning, confirmed_unfair_or_tunneling: high_risk, otherwise: none, missing_evidence: pending}
+  checklist_rows:
+    row_3:
+      applicability: positive_net_assets_only
+      nonpositive_denominator: manual_review_report_absolute_values
+      severity_when_nonpositive: pending
+    row_4:
+      nonpositive_denominator: manual_review_report_absolute_values
+      severity_when_nonpositive: pending
+    row_5:
+      nonpositive_denominator: branch_not_applicable_report_absolute_values
+      severity_when_nonpositive: none_for_this_branch
+    row_8:
+      nonpositive_denominator: manual_review_report_absolute_values
+      severity_when_nonpositive: pending
+    row_20:
+      cip_increment_branch_applicability: positive_net_income_only
+      nonpositive_denominator: branch_not_applicable_report_absolute_values
+      severity_when_nonpositive: none_for_this_branch
+    row_22:
+      nonpositive_denominator: manual_review_report_absolute_values
+      severity_when_nonpositive: pending
+    row_23:
+      nonpositive_denominator: branch_not_applicable_report_absolute_values
+      severity_when_nonpositive: none_for_this_branch
+    row_25:
+      nonpositive_denominator: branch_not_applicable_report_absolute_values
+      severity_when_nonpositive: none_for_this_branch
+    row_28:
+      nonpositive_denominator: manual_review_report_absolute_values
+      severity_when_nonpositive: pending

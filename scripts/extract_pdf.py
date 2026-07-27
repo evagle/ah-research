@@ -30,12 +30,14 @@ from __future__ import annotations
 
 import argparse
 import base64
+import hashlib
 import json
 import os
 import re
 import shutil
 import subprocess
 import sys
+import tempfile
 from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
@@ -55,7 +57,7 @@ IMAGE_PROMPT_ZH = """这是一张从年报 PDF 中提取的图片 (第 {page} �
 - 图/表的类型 (折线图 / 柱状图 / 饼图 / 表格 / 照片 / 示意图)
 - 坐标轴标签 + 数值范围 (如果是图表)
 - 核心数据点 (3-5 个关键数字或趋势)
-- 图的业务含义 (e.g. "2020-2024 营收增速趋势 / 主营业务分产品 收入占比")
+- 图的业务含义 (e.g. "2020-2024营收增速趋势/主营业务分产品收入占比")
 如果是纯装饰图 (logo / 署名章 / 分页符 / 二维码), 回答 "装饰性图片, 无分析价值"。"""
 
 
@@ -90,12 +92,14 @@ class Metadata:
     cache_version: str
     extracted_at: str  # ISO 8601 UTC
     source_pdf: str  # absolute path at extraction time
+    source_sha256: str
     page_count: int
     image_count: int  # count of images kept after filtering
     model: str  # anthropic model used (or "" if --skip-images)
     skipped_images: bool = False
     descriptions_skipped: bool = False  # true if API call failed
     errors: list[str] = field(default_factory=list)
+    artifact_sha256: dict[str, str] = field(default_factory=dict)
 
 
 # ---------------------------------------------------------------------------
@@ -117,16 +121,131 @@ def cache_dir_for(pdf_path: Path) -> Path:
     return pdf_path.parent / "_extracted" / pdf_path.stem
 
 
-def is_cache_valid(cache_dir: Path) -> bool:
-    """True if ``metadata.json`` exists with a matching ``cache_version``."""
+def _swap_journal_path(cache_dir: Path) -> Path:
+    return cache_dir.parent / f".{cache_dir.name}-swap.json"
+
+
+def _recover_interrupted_cache_swap(cache_dir: Path) -> None:
+    journal_path = _swap_journal_path(cache_dir)
+    if not journal_path.exists():
+        return
+    try:
+        journal = json.loads(journal_path.read_text(encoding="utf-8"))
+        backup_dir = Path(journal["backup_dir"])
+        staging_dir = Path(journal["staging_dir"])
+    except (KeyError, OSError, json.JSONDecodeError, TypeError) as exc:
+        raise ExtractError(f"invalid cache swap journal: {journal_path}") from exc
+
+    expected_parent = cache_dir.parent.resolve()
+    for path in (backup_dir, staging_dir):
+        if path.parent.resolve() != expected_parent:
+            raise ExtractError(f"cache swap journal escapes cache parent: {journal_path}")
+
+    if not cache_dir.exists() and backup_dir.exists():
+        backup_dir.replace(cache_dir)
+    elif cache_dir.exists() and backup_dir.exists():
+        shutil.rmtree(backup_dir)
+    if staging_dir.exists():
+        shutil.rmtree(staging_dir)
+    journal_path.unlink()
+
+
+def _write_swap_journal(
+    cache_dir: Path,
+    staging_dir: Path,
+    backup_dir: Path,
+) -> Path:
+    journal_path = _swap_journal_path(cache_dir)
+    temporary_path = journal_path.with_suffix(".tmp")
+    temporary_path.write_text(
+        json.dumps(
+            {
+                "cache_dir": str(cache_dir.resolve()),
+                "staging_dir": str(staging_dir.resolve()),
+                "backup_dir": str(backup_dir.resolve()),
+            },
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    temporary_path.replace(journal_path)
+    return journal_path
+
+
+def _sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def _artifact_hashes(cache_dir: Path) -> dict[str, str]:
+    return {
+        path.relative_to(cache_dir).as_posix(): _sha256_file(path)
+        for path in sorted(cache_dir.rglob("*"))
+        if path.is_file() and path.name != "metadata.json"
+    }
+
+
+def is_cache_valid(
+    cache_dir: Path,
+    pdf_path: Path,
+    *,
+    skip_images: bool = False,
+    model: str | None = None,
+) -> bool:
+    """True when the cache matches the source and requested extraction mode."""
     meta_path = cache_dir / "metadata.json"
-    if not meta_path.exists():
+    text_path = cache_dir / "text.md"
+    if not meta_path.exists() or not text_path.exists():
         return False
     try:
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
+        text = text_path.read_text(encoding="utf-8")
     except (OSError, json.JSONDecodeError):
         return False
-    return meta.get("cache_version") == CACHE_VERSION
+    page_count = meta.get("page_count")
+    markers = [int(value) for value in re.findall(r"<!-- page (\d+) -->", text)]
+    text_body = re.sub(r"<!-- page \d+ -->", "", text).strip()
+    base_valid = (
+        meta.get("cache_version") == CACHE_VERSION
+        and isinstance(meta.get("extracted_at"), str)
+        and bool(meta.get("extracted_at"))
+        and meta.get("source_pdf") == str(pdf_path.resolve())
+        and meta.get("source_sha256") == _sha256_file(pdf_path)
+        and isinstance(page_count, int)
+        and page_count > 0
+        and isinstance(meta.get("image_count"), int)
+        and isinstance(meta.get("model"), str)
+        and isinstance(meta.get("skipped_images"), bool)
+        and isinstance(meta.get("descriptions_skipped"), bool)
+        and isinstance(meta.get("errors"), list)
+        and isinstance(meta.get("artifact_sha256"), dict)
+        and markers == list(range(1, page_count + 1))
+        and bool(text_body)
+    )
+    if not base_valid:
+        return False
+    if meta["artifact_sha256"] != _artifact_hashes(cache_dir):
+        return False
+    if skip_images:
+        return True
+    if model is not None and meta.get("model") != model:
+        return False
+    if meta.get("descriptions_skipped") is not False or meta.get("errors") != []:
+        return False
+    image_count = meta.get("image_count")
+    if meta.get("skipped_images") is not False or not isinstance(image_count, int):
+        return False
+    if image_count < 0:
+        return False
+    images_dir = cache_dir / "images"
+    image_paths = sorted(images_dir.glob("*.png")) if images_dir.is_dir() else []
+    if len(image_paths) != image_count:
+        return False
+    return all(image_path.with_suffix(".md").is_file() for image_path in image_paths)
 
 
 # ---------------------------------------------------------------------------
@@ -152,6 +271,10 @@ def extract_text(pdf_path: Path, out_md: Path) -> int:
     # Trim the empty trailing page pdftotext appends after the last form-feed.
     if pages and pages[-1].strip() == "":
         pages = pages[:-1]
+    if not pages:
+        raise ExtractError("pdftotext returned zero pages")
+    if not any(page.strip() for page in pages):
+        raise ExtractError("pdftotext returned no usable text")
 
     out_md.parent.mkdir(parents=True, exist_ok=True)
     with out_md.open("w", encoding="utf-8") as fh:
@@ -437,50 +560,95 @@ def extract_pdf(
         raise ExtractError(f"pdf not found: {pdf_path}")
 
     cache_dir = cache_dir_for(pdf_path)
+    _recover_interrupted_cache_swap(cache_dir)
+    source_sha256_at_start = _sha256_file(pdf_path)
 
     # Idempotent skip.
-    if not force and is_cache_valid(cache_dir):
+    cache_valid = not force and is_cache_valid(
+        cache_dir,
+        pdf_path,
+        skip_images=skip_images,
+        model=model,
+    )
+    if cache_valid:
+        if _sha256_file(pdf_path) != source_sha256_at_start:
+            raise ExtractError("source PDF changed during cache validation")
         meta = json.loads((cache_dir / "metadata.json").read_text(encoding="utf-8"))
         return Metadata(**meta)
 
-    # Wipe any partial/stale cache on --force.
-    if cache_dir.exists() and force:
-        shutil.rmtree(cache_dir)
-    cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_parent = cache_dir.parent
+    cache_parent.mkdir(parents=True, exist_ok=True)
+    staging_dir = Path(tempfile.mkdtemp(prefix=f".{cache_dir.name}-staging-", dir=cache_parent))
+    try:
+        text_md = staging_dir / "text.md"
+        images_dir = staging_dir / "images"
+        source_snapshot = staging_dir / ".source.pdf"
+        shutil.copyfile(pdf_path, source_snapshot)
+        if _sha256_file(source_snapshot) != source_sha256_at_start:
+            raise ExtractError("source PDF changed while creating extraction snapshot")
 
-    text_md = cache_dir / "text.md"
-    images_dir = cache_dir / "images"
+        page_count = extract_text(source_snapshot, text_md)
 
-    # 1) Text.
-    page_count = extract_text(pdf_path, text_md)
+        images: list[ExtractedImage] = []
+        descriptions_skipped = False
+        errors: list[str] = []
+        if not skip_images:
+            images = extract_images(source_snapshot, images_dir)
+            _, desc_errors = describe_all_images(images, model)
+            if desc_errors:
+                descriptions_skipped = True
+                errors.extend(desc_errors)
+                raise ExtractError(
+                    "image descriptions are incomplete; rerun with --force "
+                    "after restoring the image-description service, or use "
+                    "--skip-images for an explicit text-only artifact"
+                )
+        source_snapshot.unlink()
+        if _sha256_file(pdf_path) != source_sha256_at_start:
+            raise ExtractError("source PDF changed during extraction")
 
-    # 2) Images (optional).
-    images: list[ExtractedImage] = []
-    descriptions_skipped = False
-    errors: list[str] = []
-    if not skip_images:
-        images = extract_images(pdf_path, images_dir)
-        _, desc_errors = describe_all_images(images, model)
-        if desc_errors:
-            descriptions_skipped = True
-            errors.extend(desc_errors)
+        meta = Metadata(
+            cache_version=CACHE_VERSION,
+            extracted_at=datetime.now(UTC).isoformat(),
+            source_pdf=str(pdf_path.resolve()),
+            source_sha256=source_sha256_at_start,
+            page_count=page_count,
+            image_count=len(images),
+            model="" if skip_images else model,
+            skipped_images=skip_images,
+            descriptions_skipped=descriptions_skipped,
+            errors=errors,
+            artifact_sha256=_artifact_hashes(staging_dir),
+        )
+        (staging_dir / "metadata.json").write_text(
+            json.dumps(asdict(meta), indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
 
-    # 3) Metadata.
-    meta = Metadata(
-        cache_version=CACHE_VERSION,
-        extracted_at=datetime.now(UTC).isoformat(),
-        source_pdf=str(pdf_path.resolve()),
-        page_count=page_count,
-        image_count=len(images),
-        model="" if skip_images else model,
-        skipped_images=skip_images,
-        descriptions_skipped=descriptions_skipped,
-        errors=errors,
-    )
-    (cache_dir / "metadata.json").write_text(
-        json.dumps(asdict(meta), indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
+        backup_dir: Path | None = None
+        journal_path: Path | None = None
+        if cache_dir.exists():
+            backup_dir = Path(
+                tempfile.mkdtemp(prefix=f".{cache_dir.name}-backup-", dir=cache_parent)
+            )
+            backup_dir.rmdir()
+            journal_path = _write_swap_journal(cache_dir, staging_dir, backup_dir)
+            cache_dir.replace(backup_dir)
+        try:
+            staging_dir.replace(cache_dir)
+        except Exception:
+            if backup_dir is not None and backup_dir.exists() and not cache_dir.exists():
+                backup_dir.replace(cache_dir)
+            if journal_path is not None:
+                journal_path.unlink(missing_ok=True)
+            raise
+        if backup_dir is not None:
+            shutil.rmtree(backup_dir)
+        if journal_path is not None:
+            journal_path.unlink()
+    finally:
+        if staging_dir.exists():
+            shutil.rmtree(staging_dir)
     return meta
 
 
@@ -543,6 +711,8 @@ def main(argv: list[str] | None = None) -> int:
             _print(f"  - {e}")
         if len(meta.errors) > 5:
             _print(f"  … and {len(meta.errors) - 5} more")
+    if meta.descriptions_skipped or meta.errors:
+        return 2
     return 0
 
 

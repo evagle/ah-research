@@ -60,6 +60,8 @@ select = ["E", "F", "I", "N", "UP", "B", "C4", "SIM", "RUF"]
 ignore = [
     "E501",   # line length handled by formatter
     "N818",   # exception names intentionally omit "Error" suffix (e.g. SourceRateLimit, LeakageDetected) for raise-site readability
+    "RUF001", # Chinese financial text intentionally uses full-width punctuation
+    "RUF100", # keep explicit suppression markers stable across localized text
 ]
 
 [tool.mypy]
@@ -78,4 +80,3 @@ markers = [
     "live: integration tests that hit real APIs (set AH_RESEARCH_LIVE=1)",
     "slow: tests that take >1s",
 ]
-
