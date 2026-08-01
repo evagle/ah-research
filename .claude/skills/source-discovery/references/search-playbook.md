@@ -33,10 +33,21 @@ Every route below assumes:
 
 - Prefer the highest-authority applicable original first.
 - Keep `source_authority`, `practical_utility`, `current_reachability`, and
-  `conclusion_evidence` separate.
+  `conclusion_evidence` as explicit `High`/`Medium`/`Low` fields on each
+  access attempt and final ledger row.
+- Use `source_authority` for the publisher's authority for the claim type,
+  `practical_utility` for fitness to the requested geography/date/granularity,
+  `current_reachability` for current permitted access and URL stability, and
+  `conclusion_evidence` for how strongly the source supports the specific
+  research conclusion.
+- Keep `evidence_level` separate: it is the `High`/`Medium`/`Low` confidence
+  in the row's access/provenance conclusion, not a substitute for source
+  authority, practical utility, current reachability, or claim support.
 - Use uncataloged sources when needed, but validate provenance, access, and
   fitness for the requested claim before relying on them.
 - Carry forward `access_conclusion` and `evidence_level` on each attempt.
+- Carry forward `source_authority`, `practical_utility`,
+  `current_reachability`, and `conclusion_evidence` on each attempt.
 
 ## company/filings
 
@@ -49,6 +60,14 @@ broker or consultant reports; credible media used only to locate the original.
 Use this route for issuer facts, management quotations, disclosed business
 scope, product mix, pricing disclosures, operational footprint, and filing
 history.
+
+Issuer/company sites are first-party only for the issuer's own statements,
+disclosures, actions, products, policies, prices, filings, and quotations.
+Customer, supplier, competitor, and association sites are first-party only for
+that publisher's own claims, actions, membership lists, transactions, policies,
+product facts, and attributable statements. Treat those ecosystem sites as
+independent checks only when the publisher is genuinely independent of the
+issuer and independent of the claim being checked.
 
 ## announcements/regulatory correspondence
 

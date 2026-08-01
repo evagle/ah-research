@@ -27,10 +27,24 @@ Then route through known high-authority sources before expanding outward.
 
 Keep separate ratings for:
 
-- `source_authority`
-- `practical_utility`
-- `current_reachability`
-- `conclusion_evidence`
+- `source_authority`: source-property rating for how authoritative the
+  publisher is for this claim type. Use `High` for originals or official
+  first-party statements about the publisher's own actions, `Medium` for
+  credible secondary sources with transparent sourcing, and `Low` for weak,
+  indirect, conflicted, or unclear provenance.
+- `practical_utility`: source-property rating for whether the source can
+  actually answer the requested fact type at the needed geography, industry,
+  date, and granularity. Use `High`, `Medium`, or `Low`.
+- `current_reachability`: source-property rating for whether the source is
+  reachable now through permitted access, with stable URLs or documented access
+  limits. Use `High`, `Medium`, or `Low`.
+- `conclusion_evidence`: claim-support rating for how strongly the source
+  supports the specific conclusion being made. Use `High`, `Medium`, or `Low`.
+
+Keep `evidence_level` separate from those fields. `evidence_level` records
+confidence in the access/provenance conclusion for this ledger row, not the
+source's authority, practical usefulness, reachability, or support for the
+research claim.
 
 Evaluate each newly discovered candidate on:
 
@@ -51,10 +65,16 @@ Record uncataloged sources with the same fields, access status, provenance, fall
 
 ## Evidence And Access Rules
 
-Treat company websites as first-party subject evidence. Use issuer/company IR,
-newsrooms, product and pricing pages, ESG pages, and customer, supplier,
-competitor, and association websites for subject facts, quotations, disclosed
-policies, product specs, and attributable statements.
+Treat issuer/company websites as first-party evidence only for that issuer's
+own statements, disclosures, actions, products, policies, prices, filings, and
+quotations. Use issuer/company IR, newsrooms, product and pricing pages, and
+ESG pages for subject facts and attributable issuer statements.
+
+Treat customer, supplier, competitor, and association websites as first-party
+evidence only for that publisher's own claims, actions, membership lists,
+transactions, policies, product facts, or attributable statements. They count
+as independent checks only when the publisher is genuinely independent of the
+issuer and independent of the claim being checked.
 
 Do not treat a company's claims about market leadership, customer outcomes, product superiority, or competitive advantage as independent proof. Any evaluative claim from a company page needs independent support.
 
@@ -89,6 +109,10 @@ Each access attempt and each final handoff row must include at least:
 - `result`
 - `access_limitation`
 - `access_conclusion`
+- `source_authority`
+- `practical_utility`
+- `current_reachability`
+- `conclusion_evidence`
 - `evidence_level`
 - `next_fallback`
 
