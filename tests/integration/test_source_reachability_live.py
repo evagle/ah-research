@@ -40,9 +40,6 @@ PUBLIC_DYNAMIC_STATUSES = frozenset(
         *TRANSIENT_OR_UNVERIFIED_STATUSES,
     }
 )
-LOGIN_OR_PAYWALL_STATUSES = frozenset(
-    {"login-required", "paywalled", *TRANSIENT_OR_UNVERIFIED_STATUSES}
-)
 ANTI_BOT_STATUSES = frozenset({"anti-bot", *TRANSIENT_OR_UNVERIFIED_STATUSES})
 LIVE_CASES = (
     pytest.param("sse", PUBLIC_DYNAMIC_STATUSES, id="sse"),
@@ -53,7 +50,7 @@ LIVE_CASES = (
         PUBLIC_DYNAMIC_STATUSES,
         id="national-bureau-statistics",
     ),
-    pytest.param("dydata", LOGIN_OR_PAYWALL_STATUSES, id="dydata-login-paywall"),
+    pytest.param("analysys", PUBLIC_DYNAMIC_STATUSES, id="analysys"),
     pytest.param("36kr", ANTI_BOT_STATUSES, id="36kr-anti-bot"),
 )
 CLASSIFICATION_REASONS = {
@@ -62,7 +59,6 @@ CLASSIFICATION_REASONS = {
     "login-required": "login prompt detected",
     "paywalled": "subscription prompt detected",
     "anti-bot": "anti-bot challenge detected",
-    "unverified": "insufficient first-party evidence",
 }
 
 
@@ -91,15 +87,17 @@ def test_live_source_reachability_returns_semantic_classification(
     profiles = probe._load_profile_records(PROFILES_ROOT)
     profile = profiles[source_id]
     assert isinstance(profile, Mapping)
+    target = probe._profile_probe_targets(profile)[0]
 
     observation = probe.probe_url(
-        probe._profile_probe_url(profile),
+        target.direct_url,
         timeout=probe.DEFAULT_TIMEOUT,
         user_agent=probe.DEFAULT_USER_AGENT,
     )
     result = probe.classify_observation(
         observation,
         probe._profile_fingerprints(profile),
+        function_fingerprints=target.function_fingerprints,
     )
 
     assert result.status in allowed_statuses
