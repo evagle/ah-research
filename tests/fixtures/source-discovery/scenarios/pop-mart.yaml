@@ -1,0 +1,73 @@
+id: pop-mart
+issuer: Pop Mart
+security:
+  code: "09992"
+  exchange: HKEX
+as_of: "2026-08-02T08:00:00+00:00"
+forbidden_discovery_only_final_citations:
+  - eastmoney-announcement-index
+  - aastocks
+required_functions:
+  - name: HKEXnews filings and title search
+    function_id: company-disclosures
+    candidate_source_ids: [hkexnews]
+    expected_first_choice:
+      source_id: hkexnews
+      publisher_type: official-exchange
+      skip_reason: null
+    expects_final_citation: true
+    temporary_unavailability:
+      source_id: hkexnews
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids: [hkexnews]
+      expected_first_choice:
+        source_id: hkexnews
+        publisher_type: official-exchange
+        skip_reason: fresh temporarily-unreachable
+      forbidden_substitutes:
+        - eastmoney-announcement-index
+        - aastocks
+  - name: Issuer company materials with IR limitation recorded
+    function_id: company-product-statements
+    candidate_source_ids: [pop-mart]
+    expected_first_choice:
+      source_id: pop-mart
+      publisher_type: issuer-company
+      skip_reason: null
+    expects_final_citation: true
+  - name: Statutory ownership through HKEX Disclosure of Interests
+    function_id: statutory-ownership
+    candidate_source_ids: [hkex-di]
+    expected_first_choice:
+      source_id: hkex-di
+      publisher_type: official-exchange
+      skip_reason: fresh temporarily-unreachable
+    expects_final_citation: false
+    temporary_unavailability:
+      source_id: hkex-di
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids: [hkex-di]
+      expected_first_choice:
+        source_id: hkex-di
+        publisher_type: official-exchange
+        skip_reason: fresh temporarily-unreachable
+      forbidden_substitutes:
+        - hkex-ccass
+        - eastmoney-announcement-index
+        - aastocks
+  - name: Independent consumer evidence
+    function_id: consumer-research
+    candidate_source_ids: [hong-kong-consumer-council]
+    expected_first_choice:
+      source_id: hong-kong-consumer-council
+      publisher_type: official-government
+      skip_reason: null
+    expects_final_citation: true
+  - name: Independent consumer-industry context
+    function_id: trade-and-market-research
+    candidate_source_ids: [hktdc-research]
+    expected_first_choice:
+      source_id: hktdc-research
+      publisher_type: original-research
+      skip_reason: null
+    expects_final_citation: true

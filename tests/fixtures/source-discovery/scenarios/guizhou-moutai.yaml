@@ -1,0 +1,47 @@
+id: guizhou-moutai
+issuer: Guizhou Moutai
+security:
+  code: "600519"
+  exchange: SSE
+as_of: "2026-08-02T08:00:00+00:00"
+forbidden_discovery_only_final_citations:
+  - eastmoney-announcement-index
+  - eastmoney-quotes-f10
+  - xueqiu
+required_functions:
+  - name: SSE issuer disclosures and announcement search
+    function_id: company-disclosures
+    candidate_source_ids: [sse]
+    expected_first_choice:
+      source_id: sse
+      publisher_type: official-exchange
+      skip_reason: null
+    expects_final_citation: true
+    temporary_unavailability:
+      source_id: sse
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids: [sse, cninfo]
+      expected_first_choice:
+        source_id: cninfo
+        publisher_type: official-market-infrastructure
+        skip_reason: null
+      forbidden_substitutes:
+        - eastmoney-announcement-index
+        - eastmoney-quotes-f10
+        - xueqiu
+  - name: SSE regulatory inquiry correspondence
+    function_id: regulatory-materials
+    candidate_source_ids: [sse]
+    expected_first_choice:
+      source_id: sse
+      publisher_type: official-exchange
+      skip_reason: null
+    expects_final_citation: true
+  - name: Independent China consumer-industry context
+    function_id: research-reports
+    candidate_source_ids: [iresearch]
+    expected_first_choice:
+      source_id: iresearch
+      publisher_type: commercial-data-provider
+      skip_reason: null
+    expects_final_citation: true

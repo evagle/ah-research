@@ -21,6 +21,7 @@ SCHEMA_PATH = (
     / "source-profile.schema.json"
 )
 FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "profiles"
+SCENARIOS_ROOT = REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "scenarios"
 SCRIPT_PATH = (
     REPO_ROOT / ".claude" / "skills" / "source-discovery" / "scripts" / "source_profiles.py"
 )
@@ -193,6 +194,14 @@ def load_schema() -> dict[str, object]:
 def load_profile(name: str) -> dict[str, object]:
     path = FIXTURES_ROOT / name
     assert path.is_file(), f"missing fixture: {path}"
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
+
+def load_scenario(name: str) -> dict[str, object]:
+    path = SCENARIOS_ROOT / name
+    assert path.is_file(), f"missing scenario fixture: {path}"
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert isinstance(payload, dict)
     return payload
@@ -539,6 +548,83 @@ def test_approved_status_ttls_match_global_constraints() -> None:
     assert source_profiles.ttl_for_status("moved") == timedelta(days=7)
     assert source_profiles.ttl_for_status("broken-link") == timedelta(days=7)
     assert source_profiles.ttl_for_status("unverified") == timedelta(hours=24)
+
+
+@pytest.mark.parametrize(
+    "scenario_name",
+    ["guizhou-moutai.yaml", "pop-mart.yaml"],
+)
+def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
+    scenario_name: str,
+) -> None:
+    source_profiles = load_source_profiles_module()
+    scenario = load_scenario(scenario_name)
+    profiles = load_maintained_profiles()
+    profiles_by_id = {profile["id"]: profile for profile in profiles}
+    snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
+    now = datetime.fromisoformat(scenario["as_of"])
+    assert now.tzinfo is not None
+    assert now.utcoffset() is not None
+
+    forbidden_final_citations = set(scenario["forbidden_discovery_only_final_citations"])
+    for requirement in scenario["required_functions"]:
+        function_id = requirement["function_id"]
+        expected_first_choice = requirement["expected_first_choice"]
+        candidate_profiles = [
+            profiles_by_id[source_id] for source_id in requirement["candidate_source_ids"]
+        ]
+        routes = source_profiles.select_routes(
+            profiles=candidate_profiles,
+            function_id=function_id,
+            now=now,
+            snapshot=snapshot,
+        )
+
+        assert routes, f"{scenario['id']}: no route for {function_id}"
+        assert routes[0].source_id == expected_first_choice["source_id"]
+        assert (
+            profiles_by_id[routes[0].source_id]["publisher_type"]
+            == expected_first_choice["publisher_type"]
+        )
+        assert routes[0].skip_reason == expected_first_choice["skip_reason"]
+
+        if requirement["expects_final_citation"]:
+            assert routes[0].skip_reason is None
+            assert routes[0].source_id not in forbidden_final_citations
+
+        temporary_unavailability = requirement.get("temporary_unavailability")
+        if temporary_unavailability is None:
+            continue
+
+        outage_snapshot = dict(snapshot)
+        outage_snapshot[temporary_unavailability["source_id"]] = {
+            "status": "temporarily-unreachable",
+            "last_checked": temporary_unavailability["last_checked"],
+        }
+        outage_candidate_profiles = [
+            profiles_by_id[source_id]
+            for source_id in temporary_unavailability["candidate_source_ids"]
+        ]
+        outage_routes = source_profiles.select_routes(
+            profiles=outage_candidate_profiles,
+            function_id=function_id,
+            now=now,
+            snapshot=outage_snapshot,
+        )
+        expected_outage_route = temporary_unavailability["expected_first_choice"]
+
+        assert outage_routes, f"{scenario['id']}: no outage route for {function_id}"
+        assert outage_routes[0].source_id == expected_outage_route["source_id"]
+        assert (
+            profiles_by_id[outage_routes[0].source_id]["publisher_type"]
+            == expected_outage_route["publisher_type"]
+        )
+        assert outage_routes[0].skip_reason == expected_outage_route["skip_reason"]
+        if expected_outage_route["skip_reason"] is None:
+            assert outage_routes[0].source_id not in forbidden_final_citations
+        assert {route.source_id for route in outage_routes}.isdisjoint(
+            temporary_unavailability["forbidden_substitutes"]
+        )
 
 
 def test_maintained_catalog_has_one_profile_per_actual_website() -> None:
