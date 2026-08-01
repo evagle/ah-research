@@ -22,6 +22,10 @@ The catalog is the single source of truth. `product-analysis`, `value-profile`,
 and `read-filing` link to the shared skill where external industry or market
 evidence is needed; they do not copy the catalog.
 
+Source routing is many-to-many, not a fixed category-to-site mapping. Each
+research question may use several independent sources, and each source may
+support several research needs.
+
 ## Source Record
 
 Each numbered entry records:
@@ -59,6 +63,21 @@ One failed request never proves permanent closure. Runtime research must
 re-check high-value sources and record the final error before declaring an
 access limitation.
 
+For each material claim, build a source portfolio:
+
+1. Search the highest-authority applicable sources.
+2. Cross-check with an independent source when the claim affects valuation,
+   risk, market size, or competitive position.
+3. When a source has no result, requires unavailable membership, or fails
+   technically, continue through other applicable sources in the same category
+   and then adjacent categories.
+4. Report a source gap only after recording every compliant route attempted,
+   its query, access result, and final error.
+
+No source is mandatory merely because it appears first in the catalog. A
+working lower-tier source can discover a document, but conclusions must cite
+the original publisher whenever the original can be identified.
+
 ## Integration
 
 - `product-analysis`: use the shared skill for industry structure, product
@@ -78,6 +97,7 @@ Add contract tests that require:
 - discoverable frontmatter and all 63 numbered entries;
 - required source-record fields and evidence-level vocabulary;
 - category and access-status coverage;
+- multi-source portfolios, independent cross-checking, and fallback exhaustion;
 - references from the three consuming skills;
 - explicit primary-source precedence and aggregator restrictions.
 
