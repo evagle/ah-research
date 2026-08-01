@@ -29,5 +29,8 @@ access:
   status: reachable
   last_checked: "2026-08-01T00:00:00+08:00"
   final_url: https://data.eastmoney.com/notices/
-  limitation: none observed
+  observed_error:
+    state: none
+    category: none
+    message: none observed
   evidence_level: High

@@ -48,6 +48,15 @@ def test_example_profiles_validate() -> None:
         assert not list(profile_validator.iter_errors(load_profile(fixture_name)))
 
 
+def test_profile_requires_observed_error() -> None:
+    invalid = deepcopy(load_profile("official-example.yaml"))
+    del invalid["access"]["observed_error"]
+
+    errors = list(validator().iter_errors(invalid))
+
+    assert errors
+
+
 def test_profile_requires_direct_urls() -> None:
     invalid = deepcopy(load_profile("official-example.yaml"))
     del invalid["functions"][0]["direct_urls"]
@@ -73,3 +82,17 @@ def test_profile_rejects_invalid_evidence_level() -> None:
     errors = list(validator().iter_errors(invalid))
 
     assert errors
+
+
+def test_profile_accepts_explicit_observed_error_state() -> None:
+    profile = deepcopy(load_profile("official-example.yaml"))
+    profile["access"]["status"] = "temporarily-unreachable"
+    profile["access"]["observed_error"] = {
+        "state": "error",
+        "category": "http",
+        "message": "HTTP 503 from origin",
+    }
+
+    errors = list(validator().iter_errors(profile))
+
+    assert not errors

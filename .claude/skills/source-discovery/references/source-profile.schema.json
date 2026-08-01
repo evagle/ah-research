@@ -94,6 +94,23 @@
         "unverified"
       ]
     },
+    "observedErrorState": {
+      "type": "string",
+      "enum": ["none", "error"]
+    },
+    "observedErrorCategory": {
+      "type": "string",
+      "enum": [
+        "none",
+        "http",
+        "dns",
+        "tls",
+        "timeout",
+        "network",
+        "anti-bot",
+        "other"
+      ]
+    },
     "authority": {
       "type": "object",
       "additionalProperties": false,
@@ -173,6 +190,67 @@
         }
       }
     },
+    "observedError": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "category", "message"],
+      "properties": {
+        "state": {
+          "$ref": "#/$defs/observedErrorState"
+        },
+        "category": {
+          "$ref": "#/$defs/observedErrorCategory"
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "none"
+              }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "category": {
+                "const": "none"
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "state": {
+                "const": "error"
+              }
+            },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "category": {
+                "enum": [
+                  "http",
+                  "dns",
+                  "tls",
+                  "timeout",
+                  "network",
+                  "anti-bot",
+                  "other"
+                ]
+              }
+            }
+          }
+        }
+      ]
+    },
     "function": {
       "type": "object",
       "additionalProperties": false,
@@ -226,7 +304,7 @@
         "status",
         "last_checked",
         "final_url",
-        "limitation",
+        "observed_error",
         "evidence_level"
       ],
       "properties": {
@@ -241,9 +319,8 @@
           "type": "string",
           "format": "uri"
         },
-        "limitation": {
-          "type": "string",
-          "minLength": 1
+        "observed_error": {
+          "$ref": "#/$defs/observedError"
         },
         "evidence_level": {
           "$ref": "#/$defs/rating"
