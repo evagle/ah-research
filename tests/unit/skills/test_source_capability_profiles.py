@@ -57,6 +57,15 @@ def test_profile_requires_observed_error() -> None:
     assert errors
 
 
+def test_profile_requires_limitation() -> None:
+    invalid = deepcopy(load_profile("official-example.yaml"))
+    del invalid["access"]["limitation"]
+
+    errors = list(validator().iter_errors(invalid))
+
+    assert errors
+
+
 def test_profile_requires_direct_urls() -> None:
     invalid = deepcopy(load_profile("official-example.yaml"))
     del invalid["functions"][0]["direct_urls"]

@@ -304,6 +304,7 @@
         "status",
         "last_checked",
         "final_url",
+        "limitation",
         "observed_error",
         "evidence_level"
       ],
@@ -318,6 +319,10 @@
         "final_url": {
           "type": "string",
           "format": "uri"
+        },
+        "limitation": {
+          "type": "string",
+          "minLength": 1
         },
         "observed_error": {
           "$ref": "#/$defs/observedError"
