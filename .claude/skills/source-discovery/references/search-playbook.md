@@ -49,6 +49,11 @@ Every route below assumes:
 - Carry forward `source_authority`, `practical_utility`,
   `current_reachability`, and `conclusion_evidence` on each attempt.
 
+Read the applicable site guide before a direct route: `site-guides/sse.md`,
+`site-guides/cninfo.md`, `site-guides/hkexnews.md`,
+`site-guides/hong-kong-regulatory.md`, or
+`site-guides/official-statistics.md`.
+
 ## company/filings
 
 Primary portfolio: issuer IR, annual/interim filings, official exchange filing
@@ -226,3 +231,23 @@ requested claim before using the source.
 Do not stop on the first unavailable source. Move through same-category peers,
 adjacent-category peers, and original-document tracing paths until the route is
 exhausted and the ledger captures the final error and next fallback decision.
+
+## Uncataloged Hong Kong Official Sources
+
+For a Hong Kong policy, regulatory, or statistics claim, treat the catalog as a
+starting point and discover an uncataloged official source when the catalog
+does not contain the producing agency. Search official government or official statistics publisher directories, cited source tables, and official link directories before considering a finance portal.
+
+Order same-function candidates trust-first: use the highest-authority
+applicable original, then a same-function official peer, then adjacent evidence.
+When multiple uncataloged official candidates remain tied, prefer the producer
+that directly owns the requested record, then the source with the exact
+geography, period, definition, and result identity; record the tie-break in
+the ledger. A reachable finance portal is a discovery aid, not a substantive citation, unless it meets the verified-mirror exception.
+
+For a portal, app, or index result, capture the original title, publisher, date,
+identifier, and canonical URL, then retrieve and cite the official original.
+Validate the selected uncataloged source for provenance, access, and fitness
+before relying on it. Record its official domain, publisher identity,
+direct-result fields, access observation, same-function peers, and evidence
+level alongside the standard ledger fields.

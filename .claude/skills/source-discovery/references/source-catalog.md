@@ -559,7 +559,7 @@ route before reporting a source gap.
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Anonymous POST and exact hosted PDF worked. The query endpoint is implementation-facing and rate-sensitive; prefer the relevant listing exchange where the original is available.
 - Access observation evidence: `High`
-- Site guide: None
+- Site guide: [`cninfo` guide](site-guides/cninfo.md)
 
 ## `cnnic` - CNNIC
 
@@ -1255,7 +1255,7 @@ route before reporting a source gap.
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public JSF search requires session and view-state handling. Preserve the final PDF identity; a current direct URL is not a permanent-URL guarantee.
 - Access observation evidence: `High`
-- Site guide: None
+- Site guide: [`hkexnews` guide](site-guides/hkexnews.md)
 
 ## `hkma` - Hong Kong Monetary Authority
 
@@ -2107,7 +2107,7 @@ route before reporting a source gap.
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public JavaScript-driven registers. Preserve issuer and document identity for announcements, and do not substitute an issuer reply for the SSE inquiry letter.
 - Access observation evidence: `High`
-- Site guide: None
+- Site guide: [`sse` guide](site-guides/sse.md)
 
 ## `state-council` - State Council portal root replacing stale data path
 

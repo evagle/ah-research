@@ -16,6 +16,7 @@ PROFILES_ROOT = SKILL_ROOT / "references" / "sources"
 SNAPSHOT_PATH = SKILL_ROOT / "references" / "reachability-snapshot.json"
 CATALOG_PATH = SKILL_ROOT / "references" / "source-catalog.md"
 CATALOG_BUILDER_PATH = SKILL_ROOT / "scripts" / "build_source_catalog.py"
+SITE_GUIDES_ROOT = SKILL_ROOT / "references" / "site-guides"
 
 
 def read(path: Path) -> str:
@@ -141,6 +142,115 @@ def test_runtime_loads_catalog_before_known_source_routing() -> None:
     assert catalog_instruction in skill
     assert skill.index(catalog_instruction) < skill.index(
         "`question decomposition -> known-source routing"
+    )
+
+
+def test_runtime_defines_cache_snapshot_profile_precedence_and_ttls() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert_contains_all(
+        skill,
+        (
+            "valid local cache observation -> reviewed snapshot -> profile access record",
+            "never authority, citation scope, publisher identity, workflow evidence, or field/API evidence",
+            "Use `source_profiles.ttl_for_status`",
+            "`reachable` and `reachable-limited`: 30 days",
+            "`login-required`, `paywalled`, and `anti-bot`: 14 days",
+            "`temporarily-unreachable` and `unverified`: 24 hours",
+            "`moved` and `broken-link`: 7 days",
+            "fresh `temporarily-unreachable` route is skipped for same-function fallbacks",
+            "stale route must be rechecked",
+            "One failed request never proves permanent closure.",
+        ),
+    )
+
+
+def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert_contains_all(
+        skill,
+        (
+            "noninteractive `urllib` or `curl`",
+            "headless Chromium only for JS/session flows",
+            "Never use repeated user Allow prompts",
+        ),
+    )
+
+
+def test_site_guides_define_direct_use_contracts() -> None:
+    required_sections = (
+        "Direct URLs",
+        "Query fields",
+        "Query example",
+        "Result identity",
+        "Citation fields",
+        "Access limitations",
+        "Same-function fallbacks",
+        "Provenance boundaries",
+    )
+    guide_requirements = {
+        "sse.md": (
+            "https://www.sse.com.cn/disclosure/listedinfo/announcement/",
+            "https://www.sse.com.cn/regulation/supervision/inquiries/",
+            "600519",
+            "贵州茅台",
+            "inquiry letter",
+        ),
+        "cninfo.md": (
+            "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+            "column=sse",
+            "tabName=fulltext",
+            "searchkey=",
+            "announcementId",
+            "adjunctUrl",
+        ),
+        "hkexnews.md": (
+            "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en",
+            "stockCode",
+            "selectedDocType",
+            "09992",
+            "Pop Mart",
+            "JSF",
+        ),
+        "hong-kong-regulatory.md": (
+            "https://di.hkex.com.hk/di/NSForm1.aspx?lang=en",
+            "https://www3.hkexnews.hk/sdw/search/searchsdw.aspx",
+            "txtShareholdingDate",
+            "txtStockCode",
+            "DI is not interchangeable with CCASS, annual reports, or monthly returns.",
+            "no function-equivalent fallback",
+        ),
+        "official-statistics.md": (
+            "https://www.censtatd.gov.hk/en/web_table.html",
+            "https://data.gov.hk/en/",
+            "table ID",
+            "classification",
+            "period",
+            "official statistics",
+        ),
+    }
+
+    for filename, phrases in guide_requirements.items():
+        guide = require_text(SITE_GUIDES_ROOT / filename)
+        assert_contains_all(guide, required_sections + phrases)
+
+
+def test_search_playbook_makes_uncataloged_hong_kong_discovery_trust_first() -> None:
+    playbook = require_text(SKILL_ROOT / "references" / "search-playbook.md")
+
+    assert_contains_all(
+        playbook,
+        (
+            "Uncataloged Hong Kong Official Sources",
+            "highest-authority applicable original",
+            "same-function",
+            "official government or official statistics publisher",
+            "finance portal",
+            "provenance, access, and fitness",
+            "original title, publisher, date, identifier, and canonical URL",
+            "not a substantive citation",
+        ),
     )
 
 

@@ -17,6 +17,14 @@ The catalog supplies seed routes and audited access facts, not an allowlist or
 runtime claim grades. Then read the detailed route guidance in
 `references/search-playbook.md`.
 
+For a direct site workflow, read the matching guide before retrieving:
+
+- `references/site-guides/sse.md`
+- `references/site-guides/cninfo.md`
+- `references/site-guides/hkexnews.md`
+- `references/site-guides/hong-kong-regulatory.md`
+- `references/site-guides/official-statistics.md`
+
 ## Workflow
 
 Follow this sequence exactly:
@@ -67,6 +75,32 @@ Do not reject a source solely because it is absent from the catalog.
 Use uncataloged sources when the question requires them and they pass validation.
 
 Record uncataloged sources with the same fields, access status, provenance, fallback peers, and evidence level.
+
+## Runtime Reachability
+
+Read the local reachability cache at `tmp/source-discovery/reachability.json`
+when present. For reachability only, apply this exact precedence:
+
+`valid local cache observation -> reviewed snapshot -> profile access record`
+
+The reviewed snapshot is the audit-backed route prior surfaced in the generated
+catalog. Cache affects reachability only, never authority, citation scope, publisher identity, workflow evidence, or field/API evidence.
+
+Use `source_profiles.ttl_for_status` when deciding whether a cache observation
+is valid; do not create a separate TTL policy:
+
+- `reachable` and `reachable-limited`: 30 days
+- `login-required`, `paywalled`, and `anti-bot`: 14 days
+- `temporarily-unreachable` and `unverified`: 24 hours
+- `moved` and `broken-link`: 7 days
+
+For each same-function candidate set, use the existing
+`source_profiles.select_routes` interface with the local cache. A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority. A stale route must be rechecked before treating its status as current. One failed request never proves permanent closure.
+
+Use noninteractive `urllib` or `curl` for default retrieval and probing.
+Use headless Chromium only for JS/session flows, such as a rendered JSF form,
+when noninteractive retrieval cannot complete the applicable official workflow.
+Never use repeated user Allow prompts.
 
 ## Evidence And Access Rules
 
