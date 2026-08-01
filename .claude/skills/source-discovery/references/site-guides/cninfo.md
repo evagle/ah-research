@@ -1,8 +1,9 @@
 # CNINFO A-Share Disclosures
 
-Use CNINFO to find and open statutory A-share disclosures. It is a
-same-function peer for SSE company announcements, not a substitute for a
-specific SSE supervisory inquiry letter.
+Use CNINFO to find and open statutory A-share disclosures. CNINFO is the
+default retrieval route for A-share issuer-announcement bodies and issuer
+response bodies. Cross-check listing-exchange metadata when available. CNINFO
+is not a substitute for a specific SSE supervisory inquiry letter.
 
 ## Direct URLs
 
@@ -37,7 +38,10 @@ is the citation target.
 For the opened PDF, preserve publisher, title, announcement time or date,
 announcementId or other document ID, status, URL, and replacement relationship.
 State that CNINFO distributes the issuer document; do not cite a search JSON
-row as the document body.
+row as the document body. For a response to exchange correspondence, preserve
+the response title, issuer, publication time, announcement ID, referenced
+exchange letter, management explanation, commitments, remediation, and any
+replacement or correction relationship.
 
 ## Access limitations
 
@@ -48,10 +52,12 @@ failure is not a permanent closure.
 
 ## Same-function fallbacks
 
-For SSE issuer announcements, use the SSE listed-company announcement register
-as the same-function peer. For an exchange inquiry letter, move to the SSE
-inquiry register; CNINFO issuer responses are adjacent issuer-disclosure
-evidence, not equivalent exchange correspondence.
+For SSE issuer announcements, use SSE register metadata to cross-check issuer,
+title, date, document type, and identity. If the CNINFO PDF is missing or does
+not match, retrieve the SSE-hosted PDF through an isolated Playwright headless
+session. For an exchange inquiry letter, move to the SSE inquiry register;
+CNINFO issuer responses are important issuer evidence but not equivalent
+exchange correspondence.
 
 ## Provenance boundaries
 

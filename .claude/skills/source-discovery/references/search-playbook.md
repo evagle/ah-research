@@ -76,6 +76,12 @@ issuer and independent of the claim being checked.
 
 ## announcements/regulatory correspondence
 
+For A-share issuer-announcement bodies, retrieve the opened CNINFO PDF first,
+then cross-check listing-exchange metadata. Use an isolated Playwright headless
+session for an SSE-hosted PDF only when CNINFO is missing, identity fields do
+not match, or the exact SSE artifact is required. This retrieval preference
+does not lower SSE authority for its own exchange actions.
+
 Primary portfolio: CNINFO, SSE, SZSE, HKEXnews, and regulator originals.
 
 Discovery aids: app indexes, exchange search apps, aggregator notice feeds, and
@@ -88,7 +94,9 @@ Use this route for inquiry/concern letters, issuer responses, supervisory
 measures, disciplinary actions, penalty decisions, corrections/restatements,
 trading suspensions, and material-event notices. Final citations must preserve
 announcement time, document/announcement ID, status, URL, and replacement
-relationship.
+relationship. Treat the exchange letter and issuer response as separate
+documents: use SSE for its inquiry letter and CNINFO for the issuer response
+body, including management explanation, commitments, and remediation.
 
 ## valuation/market
 

@@ -178,6 +178,35 @@ def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
     )
 
 
+def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    sse_guide = require_text(SKILL_ROOT / "references/site-guides/sse.md")
+    cninfo_guide = require_text(SKILL_ROOT / "references/site-guides/cninfo.md")
+    combined = "\n".join((skill, sse_guide, cninfo_guide))
+    normalized = " ".join(combined.split())
+
+    assert_contains_all(
+        normalized,
+        (
+            "CNINFO opened PDF -> SSE register metadata cross-check -> "
+            "Playwright headless SSE PDF fallback",
+            "CNINFO is the default retrieval route for A-share issuer-announcement bodies",
+            "SSE-issued inquiry letters and other exchange actions remain SSE-first",
+            "Use CNINFO as the default retrieval route for the issuer response body",
+            "CNINFO issuer responses do not replace an SSE inquiry letter",
+            "management explanation, commitments, and remediation",
+            "`x-tengine-error: denied by bot`",
+            "`Content-Type: application/pdf` or a `%PDF-` file signature",
+            "does not change source authority",
+            "does not use a personal Chrome profile or repeated user Allow prompts",
+        ),
+    )
+
+    assert normalized.index("CNINFO opened PDF") < normalized.index(
+        "Playwright headless SSE PDF fallback"
+    )
+
+
 def test_site_guides_define_direct_use_contracts() -> None:
     required_sections = (
         "Direct URLs",

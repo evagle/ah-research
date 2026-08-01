@@ -113,6 +113,24 @@ Use headless Chromium only for JS/session flows, such as a rendered JSF form,
 when noninteractive retrieval cannot complete the applicable official workflow.
 Never use repeated user Allow prompts.
 
+For A-share issuer disclosures, use this default document-body retrieval order:
+
+`CNINFO opened PDF -> SSE register metadata cross-check -> Playwright headless SSE PDF fallback`
+
+CNINFO is the default retrieval route for A-share issuer-announcement bodies
+and issuer response bodies because its static PDFs are usually available
+without a rendered browser session. Cross-check the listing exchange's register
+metadata when available. Use Playwright headless SSE PDF fallback only when the
+CNINFO document is missing, its identity fields do not match, or the exact
+SSE-hosted artifact is required. This practical retrieval order does not
+change source authority.
+
+SSE-issued inquiry letters and other exchange actions remain SSE-first. Use
+CNINFO as the default retrieval route for the issuer response body so the
+research can preserve management explanation, commitments, and remediation.
+CNINFO issuer responses do not replace an SSE inquiry letter; retain and cite
+the exchange letter and issuer response as separate evidence.
+
 ## Evidence And Access Rules
 
 Treat issuer/company websites as first-party evidence only for that issuer's

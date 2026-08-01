@@ -1,8 +1,14 @@
 # Shanghai Stock Exchange (SSE)
 
-Use SSE for SSE-listed issuer announcements and for SSE-issued supervisory
-inquiry materials. For Guizhou Moutai, start with `600519` and `贵州茅台`;
-do not infer that a company reply is the exchange's inquiry letter.
+Use SSE register metadata to cross-check SSE-listed issuer announcements and
+use SSE as the primary source for SSE-issued supervisory inquiry materials.
+For announcement bodies, use:
+
+`CNINFO opened PDF -> SSE register metadata cross-check -> Playwright headless SSE PDF fallback`
+
+This retrieval order does not change source authority. For Guizhou Moutai,
+start with `600519` and `贵州茅台`; do not infer that a company reply is the
+exchange's inquiry letter.
 
 ## Direct URLs
 
@@ -31,25 +37,37 @@ inquiry register for `问询函` or `监管工作函`; apply the requested date 
 
 ## Citation fields
 
-For an announcement, cite the opened SSE-hosted issuer PDF and preserve
-publisher, title, announcement time or date, document or announcement ID when
-present, status, URL, and replacement relationship. For an inquiry, cite the
-SSE letter as the exchange action; cite an issuer response separately.
+For an announcement, cite the opened issuer PDF and preserve publisher, title,
+announcement time or date, document or announcement ID when present, status,
+URL, and replacement relationship. CNINFO is the default retrieval route for
+A-share issuer-announcement bodies; retain SSE metadata as the exchange
+cross-check. For an inquiry, cite the SSE letter as the exchange action. Use
+CNINFO as the default retrieval route for the issuer response body and cite it
+separately for management explanation, commitments, and remediation.
 
 ## Access limitations
 
 The public registers are JavaScript-driven and date-scoped. Begin with
-noninteractive `urllib` or `curl`; use headless Chromium only when a rendered
-register is necessary. A row is discovery metadata, so open and preserve the
-final PDF or letter identity.
+noninteractive `urllib` or `curl`. The SSE static PDF host may first return an
+HTML challenge with `x-tengine-error: denied by bot`. If CNINFO is missing,
+identity fields do not match, or the exact SSE artifact is required, launch an
+isolated Playwright headless SSE PDF fallback: open the announcement page,
+navigate to the PDF in the same browser context, allow the JavaScript challenge
+to reload, and accept the result only with `Content-Type: application/pdf` or a
+`%PDF-` file signature. This fallback does not use a personal Chrome profile or
+repeated user Allow prompts. Close the browser after the bounded download.
+
+A register row is discovery metadata, so open and preserve the final PDF or
+letter identity.
 
 ## Same-function fallbacks
 
-- Company disclosures: `CNINFO` is the same-function peer. Cross-check title,
-  issuer, date, and document identity there.
+- Company disclosures: `CNINFO` is the default body-retrieval route. Cross-check
+  title, issuer, date, and document identity against SSE metadata.
 - SSE inquiry letters: no same-function fallback is established. CNINFO or an
-  issuer IR reply may supply adjacent issuer-disclosure evidence, but neither
-  replaces the SSE inquiry letter.
+  issuer IR reply may supply the issuer response body and adjacent
+  issuer-disclosure evidence, but CNINFO issuer responses do not replace an
+  SSE inquiry letter.
 
 ## Provenance boundaries
 
