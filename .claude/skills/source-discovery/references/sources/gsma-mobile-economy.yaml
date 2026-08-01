@@ -16,7 +16,7 @@ authority:
   scope: Telecom adoption, subscribers, connectivity, regional mobile-economy baselines. High for GSMA-published
     telecom synthesis; not national statistical original
 functions:
-- id: research-reports
+- id: telecom-industry-reports
   authority: High
   utility: High
   direct_urls:
@@ -28,7 +28,7 @@ functions:
     fields:
     - official_domain
     - query
-    example_query: site:gsma.com industry report
+    example_query: site:gsma.com mobile economy report
     result_identity: original publisher, title, author, date, methodology, URL
   citation:
     use: attributable research with methodology and conflicts noted
@@ -37,9 +37,7 @@ functions:
     - title
     - date
     - url
-  fallbacks:
-  - caict-research-reports
-  - idc-research-reports
+  fallbacks: []
 access:
   status: anti-bot
   last_checked: '2026-08-01T00:00:00+08:00'

@@ -47,7 +47,6 @@ functions:
     - url
   fallbacks:
   - sse-company-disclosures
-  - szse-company-disclosures
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'

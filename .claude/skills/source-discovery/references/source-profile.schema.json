@@ -79,7 +79,6 @@
     },
     "functions": {
       "type": "array",
-      "minItems": 1,
       "items": {
         "$ref": "#/$defs/function"
       }
@@ -302,7 +301,6 @@
         },
         "fallbacks": {
           "type": "array",
-          "minItems": 1,
           "items": {
             "type": "string",
             "minLength": 1

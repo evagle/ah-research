@@ -16,7 +16,7 @@ authority:
   scope: Discovering housing-price tools and downstream portals. Low-to-medium authority as directory
     only
 functions:
-- id: official-statistics
+- id: housing-data-directory
   authority: Low
   utility: Medium
   direct_urls:
@@ -37,9 +37,7 @@ functions:
     - title
     - date
     - url
-  fallbacks:
-  - national-bureau-statistics-official-statistics
-  - beijing-statistics-official-statistics
+  fallbacks: []
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'

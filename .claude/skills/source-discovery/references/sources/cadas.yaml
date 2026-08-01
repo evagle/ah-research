@@ -16,7 +16,7 @@ authority:
   scope: China civil aviation monitoring, airport/airline commentary, route analysis. Medium niche commercial
     authority
 functions:
-- id: research-reports
+- id: aviation-analysis
   authority: Medium
   utility: Medium
   direct_urls:
@@ -28,7 +28,7 @@ functions:
     fields:
     - official_domain
     - query
-    example_query: site:cadas.com.cn industry report
+    example_query: site:cadas.com.cn aviation analysis
     result_identity: original publisher, title, author, date, methodology, URL
   citation:
     use: attributable measurement with methodology and coverage noted
@@ -37,8 +37,7 @@ functions:
     - title
     - date
     - url
-  fallbacks:
-  - wef-china-research-reports
+  fallbacks: []
 access:
   status: reachable-limited
   last_checked: '2026-08-01T00:00:00+08:00'

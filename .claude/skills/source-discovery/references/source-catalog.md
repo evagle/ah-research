@@ -80,12 +80,12 @@ route before reporting a source gap.
 - Publisher type: `aggregator`
 - Official domains: `hao.199it.com`
 - Authority scope: `Low` - Discovering housing-price tools and downstream portals. Low-to-medium authority as directory only
-- Function: `official-statistics`
+- Function: `housing-data-directory`
   - Authority: `Low`
   - Utility: `Medium`
   - Direct links: [primary route](<http://hao.199it.com/fang.html>)
   - Search example: `site:hao.199it.com housing statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`, `beijing-statistics-official-statistics`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Directory quality and outbound link rot; not citable for underlying housing data Audited fallback peers: Fang.com, 国家统计局 housing series, local statistics bureaus.
@@ -98,12 +98,12 @@ route before reporting a source gap.
 - Publisher type: `issuer-company`
 - Official domains: `zt.360.cn`
 - Authority scope: `Low` - Historically vendor security and threat reports if a current official route is found. Unverified authority from current audit; historically High for 360-produced reports
-- Function: `research-reports`
+- Function: `security-threat-reports`
   - Authority: `Low`
   - Utility: `Low`
   - Direct links: [primary route](<https://zt.360.cn/report/>)
-  - Search example: `site:zt.360.cn industry report`
-  - Same-function fallbacks: `tencent-big-data-research-reports`
+  - Search example: `site:zt.360.cn security report`
+  - Same-function fallbacks: None
 - Current status: `unverified`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; DNS failure observed on listed host. Current canonical URL not established; point-in-time DNS failure is not permanent closure proof Audited fallback peers: U05, official vendor/security disclosures, other primary security publishers.
@@ -139,7 +139,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.afrc.org.hk/>)
   - Search example: `site:afrc.org.hk official notice`
-  - Same-function fallbacks: `sfc-regulatory-materials`, `hkex-regulatory-materials`
+  - Same-function fallbacks: `sfc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than SFC/HKEX for issuer news Audited fallback peers: SFC, HKEX, company annual reports.
@@ -314,12 +314,12 @@ route before reporting a source gap.
 - Publisher type: `commercial-data-provider`
 - Official domains: `cadas.com.cn`
 - Authority scope: `Medium` - China civil aviation monitoring, airport/airline commentary, route analysis. Medium niche commercial authority
-- Function: `research-reports`
+- Function: `aviation-analysis`
   - Authority: `Medium`
   - Utility: `Medium`
   - Direct links: [primary route](<https://www.cadas.com.cn/>)
-  - Search example: `site:cadas.com.cn industry report`
-  - Same-function fallbacks: `wef-china-research-reports`
+  - Search example: `site:cadas.com.cn aviation analysis`
+  - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; richer data products likely commercial. Narrow subject area; methodology less transparent than official stats Audited fallback peers: CAAC, VariFlight, transport research outlets.
@@ -338,12 +338,6 @@ route before reporting a source gap.
   - Direct links: [primary route](<https://www.caict.ac.cn/kxyj/qwfb/qwsj/>)
   - Search example: `site:caict.ac.cn official statistics`
   - Same-function fallbacks: `cnnic-official-statistics`
-- Function: `research-reports`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.caict.ac.cn/kxyj/qwfb/qwsj/>)
-  - Search example: `site:caict.ac.cn ICT white paper`
-  - Same-function fallbacks: `idc-research-reports`, `iresearch-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.
@@ -361,7 +355,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.chinamoney.com.cn/chinese/index.html>)
   - Search example: `site:chinamoney.com.cn market data`
-  - Same-function fallbacks: `pbc-market-data`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. For legal authority, trace to regulator, exchange, issuer, or filing PDF Audited fallback peers: PBOC, NAFMII, issuer docs, exchange filings.
@@ -415,7 +409,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.cninfo.com.cn/>), [direct route](<https://www.cninfo.com.cn/new/hisAnnouncement/query>), [direct route](<https://static.cninfo.com.cn/>)
   - Search example: `site:cninfo.com.cn annual report`
-  - Same-function fallbacks: `sse-company-disclosures`, `szse-company-disclosures`
+  - Same-function fallbacks: `sse-company-disclosures`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. JS-heavy search can be brittle; company/exchange confirmation still useful Audited fallback peers: SSE, SZSE, issuer IR pages.
@@ -451,7 +445,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<http://www.csrc.gov.cn/>)
   - Search example: `site:csrc.gov.cn official notice`
-  - Same-function fallbacks: `pbc-regulatory-materials`, `nfra-regulatory-materials`
+  - Same-function fallbacks: `nfra-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a company filing repository Audited fallback peers: Exchanges, CNINFO, PBOC, NFRA.
@@ -644,12 +638,12 @@ route before reporting a source gap.
 - Publisher type: `original-research`
 - Official domains: `gsma.com`
 - Authority scope: `High` - Telecom adoption, subscribers, connectivity, regional mobile-economy baselines. High for GSMA-published telecom synthesis; not national statistical original
-- Function: `research-reports`
+- Function: `telecom-industry-reports`
   - Authority: `High`
   - Utility: `High`
   - Direct links: [primary route](<https://www.gsma.com/mobileeconomy/>)
-  - Search example: `site:gsma.com industry report`
-  - Same-function fallbacks: `caict-research-reports`, `idc-research-reports`
+  - Search example: `site:gsma.com mobile economy report`
+  - Same-function fallbacks: None
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public report model but Cloudflare challenge from scripted access. Industry-association perspective; forecasts/models; local regulators better for country edge cases Audited fallback peers: ITU, World Bank, national telecom regulators, OECD.
@@ -739,7 +733,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.ia.org.hk/>)
   - Search example: `site:ia.org.hk official notice`
-  - Same-function fallbacks: `hkma-regulatory-materials`, `sfc-regulatory-materials`
+  - Same-function fallbacks: `sfc-regulatory-materials`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.
@@ -788,24 +782,6 @@ route before reporting a source gap.
 - Publisher type: `official-exchange`
 - Official domains: `hkex.com.hk`
 - Authority scope: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
-- Function: `company-disclosures`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.hkex.com.hk/>)
-  - Search example: `site:hkex.com.hk listed company announcement`
-  - Same-function fallbacks: `hkexnews-company-disclosures`
-- Function: `regulatory-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.hkex.com.hk/>)
-  - Search example: `site:hkex.com.hk official notice`
-  - Same-function fallbacks: `sfc-regulatory-materials`
-- Function: `market-data`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.hkex.com.hk/>)
-  - Search example: `site:hkex.com.hk market data`
-  - Same-function fallbacks: `hkma-market-data`, `pbc-market-data`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited fallback peers: Issuer IR, SFC, company annual reports.
@@ -823,7 +799,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh>), [direct route](<https://www1.hkexnews.hk/search/titleSearchServlet.do>)
   - Search example: `site:hkexnews.hk annual report`
-  - Same-function fallbacks: `hkex-company-disclosures`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited fallback peers: Issuer IR, SFC, company annual reports.
@@ -836,18 +812,6 @@ route before reporting a source gap.
 - Publisher type: `official-regulator`
 - Official domains: `hkma.gov.hk`
 - Authority scope: `High` - Banking circulars, regulatory guidance, monetary/FX statements. High authority for HKMA-published materials
-- Function: `regulatory-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.hkma.gov.hk/eng>)
-  - Search example: `site:hkma.gov.hk official notice`
-  - Same-function fallbacks: `sfc-regulatory-materials`, `hk-insurance-authority-regulatory-materials`
-- Function: `market-data`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.hkma.gov.hk/eng>)
-  - Search example: `site:hkma.gov.hk market data`
-  - Same-function fallbacks: `pbc-market-data`, `sse-market-data`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; region/network-limited. HTTP/2 handling was flaky in CLI; use browser or HTTP/1.1 if automation fails Audited fallback peers: SFC, IA, banks' own disclosures.
@@ -1063,7 +1027,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<http://www.mof.gov.cn/>)
   - Search example: `site:mof.gov.cn official notice`
-  - Same-function fallbacks: `pbc-regulatory-materials`, `state-council-regulatory-materials`
+  - Same-function fallbacks: `state-council-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Downstream implementation may live on SAT or other ministry sites Audited fallback peers: PBOC, State Council, SAT, local finance bureaus.
@@ -1117,7 +1081,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.nfra.gov.cn/>)
   - Search example: `site:nfra.gov.cn official notice`
-  - Same-function fallbacks: `pbc-regulatory-materials`, `csrc-regulatory-materials`
+  - Same-function fallbacks: `csrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Older CBIRC-era materials may need historical path work Audited fallback peers: PBOC, CSRC, State Council, institutions' own sites.
@@ -1148,18 +1112,6 @@ route before reporting a source gap.
 - Publisher type: `official-regulator`
 - Official domains: `pbc.gov.cn`
 - Authority scope: `High` - Monetary policy notices, official announcements, statistics landing pages. High authority for PBOC-published policy and central-bank data
-- Function: `regulatory-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.pbc.gov.cn/>)
-  - Search example: `site:pbc.gov.cn official notice`
-  - Same-function fallbacks: `nfra-regulatory-materials`
-- Function: `market-data`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.pbc.gov.cn/>)
-  - Search example: `site:pbc.gov.cn market data`
-  - Same-function fallbacks: `china-money-market-data`, `sse-market-data`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public. Interbank market notices/reference data may be more operational on ChinaMoney Audited fallback peers: Chinamoney, NFRA, CSRC, MOF.
@@ -1247,15 +1199,9 @@ route before reporting a source gap.
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
-  - Direct links: [primary route](<https://www.sec.gov/>), [direct route](<https://www.sec.gov/edgar/search/>)
+  - Direct links: [direct route](<https://www.sec.gov/edgar/search/>), [primary route](<https://www.sec.gov/>)
   - Search example: `site:sec.gov annual report`
-  - Same-function fallbacks: `sse-company-disclosures`, `szse-company-disclosures`
-- Function: `regulatory-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.sec.gov/>), [direct route](<https://www.sec.gov/edgar/search/>)
-  - Search example: `site:sec.gov official notice`
-  - Same-function fallbacks: `us-commerce-regulatory-materials`
+  - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public with rate limits and user-agent expectations. Generic scraping can trigger rate/risk pages; careful request hygiene required Audited fallback peers: Company IR, exchange notices, press releases.
@@ -1273,7 +1219,7 @@ route before reporting a source gap.
   - Utility: `High`
   - Direct links: [primary route](<https://www.sfc.hk/en/>)
   - Search example: `site:sfc.hk official notice`
-  - Same-function fallbacks: `afrc-regulatory-materials`, `hkma-regulatory-materials`
+  - Same-function fallbacks: `afrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a listed-company filing database Audited fallback peers: HKEXnews, issuer IR, AFRC, HKMA.
@@ -1343,21 +1289,15 @@ route before reporting a source gap.
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
-  - Direct links: [primary route](<https://www.sse.com.cn/>), [direct route](<https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/>), [direct route](<https://www.sse.com.cn/home/search/?webswd=贵州茅台>)
+  - Direct links: [direct route](<https://www.sse.com.cn/home/search/?webswd=贵州茅台>), [primary route](<https://www.sse.com.cn/>)
   - Search example: `site:sse.com.cn annual report`
-  - Same-function fallbacks: `szse-company-disclosures`, `cninfo-company-disclosures`
+  - Same-function fallbacks: `cninfo-company-disclosures`
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Direct links: [primary route](<https://www.sse.com.cn/>), [direct route](<https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/>), [direct route](<https://www.sse.com.cn/home/search/?webswd=贵州茅台>)
+  - Direct links: [direct route](<https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/>), [primary route](<https://www.sse.com.cn/>)
   - Search example: `site:sse.com.cn official notice`
-  - Same-function fallbacks: `szse-regulatory-materials`
-- Function: `market-data`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<https://www.sse.com.cn/>), [direct route](<https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/>), [direct route](<https://www.sse.com.cn/home/search/?webswd=贵州茅台>)
-  - Search example: `site:sse.com.cn market data`
-  - Same-function fallbacks: `szse-market-data`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a synthesis/research portal; use search-result summaries only to route back to official announcements, inquiry letters, issuer replies, or regulator originals Audited fallback peers: U11, C01, U01, U03.
@@ -1388,24 +1328,6 @@ route before reporting a source gap.
 - Publisher type: `official-exchange`
 - Official domains: `szse.cn`
 - Authority scope: `High` - SZSE disclosures, rulebooks, notices, REIT/bond/equity information, official stats. High authority for SZSE-published official materials
-- Function: `company-disclosures`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<http://www.szse.cn/>)
-  - Search example: `site:szse.cn annual report`
-  - Same-function fallbacks: `sse-company-disclosures`, `cninfo-company-disclosures`
-- Function: `regulatory-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<http://www.szse.cn/>)
-  - Search example: `site:szse.cn official notice`
-  - Same-function fallbacks: `sse-regulatory-materials`
-- Function: `market-data`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [primary route](<http://www.szse.cn/>)
-  - Search example: `site:szse.cn market data`
-  - Same-function fallbacks: `sse-market-data`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a research synthesis layer; pair with secondary interpretation where needed Audited fallback peers: U10, U01, U03, C01.
@@ -1513,7 +1435,7 @@ route before reporting a source gap.
   - Utility: `Medium`
   - Direct links: [primary route](<https://www.commerce.gov/>)
   - Search example: `site:commerce.gov official notice`
-  - Same-function fallbacks: `sec-edgar-regulatory-materials`
+  - Same-function fallbacks: None
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies directly, SEC for filings, agency newsrooms.

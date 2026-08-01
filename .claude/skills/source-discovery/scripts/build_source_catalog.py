@@ -145,6 +145,8 @@ def _require_search_example(function: Mapping[str, object]) -> str:
 
 def _render_fallbacks(function: Mapping[str, object]) -> str:
     fallbacks = _require_str_list(function, "fallbacks")
+    if not fallbacks:
+        return "None"
     return ", ".join(f"`{fallback}`" for fallback in fallbacks)
 
 

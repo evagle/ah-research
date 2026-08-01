@@ -16,7 +16,7 @@ authority:
   scope: Historically vendor security and threat reports if a current official route is found. Unverified
     authority from current audit; historically High for 360-produced reports
 functions:
-- id: research-reports
+- id: security-threat-reports
   authority: Low
   utility: Low
   direct_urls:
@@ -28,7 +28,7 @@ functions:
     fields:
     - official_domain
     - query
-    example_query: site:zt.360.cn industry report
+    example_query: site:zt.360.cn security report
     result_identity: original publisher, title, author, date, methodology, URL
   citation:
     use: attributable first-party only; independently verify evaluative claims
@@ -37,8 +37,7 @@ functions:
     - title
     - date
     - url
-  fallbacks:
-  - tencent-big-data-research-reports
+  fallbacks: []
 access:
   status: unverified
   last_checked: '2026-08-01T00:00:00+08:00'

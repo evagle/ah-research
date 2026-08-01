@@ -223,13 +223,22 @@ def test_profile_requires_direct_urls() -> None:
     assert errors
 
 
-def test_profile_requires_same_function_fallback() -> None:
-    invalid = deepcopy(load_profile("official-example.yaml"))
-    invalid["functions"][0]["fallbacks"] = []
+def test_profile_accepts_explicit_no_same_function_fallback() -> None:
+    profile = deepcopy(load_profile("official-example.yaml"))
+    profile["functions"][0]["fallbacks"] = []
 
-    errors = list(validator().iter_errors(invalid))
+    errors = list(validator().iter_errors(profile))
 
-    assert errors
+    assert not errors
+
+
+def test_profile_accepts_explicit_no_supported_functions() -> None:
+    profile = deepcopy(load_profile("official-example.yaml"))
+    profile["functions"] = []
+
+    errors = list(validator().iter_errors(profile))
+
+    assert not errors
 
 
 def test_profile_rejects_invalid_evidence_level() -> None:
@@ -471,22 +480,94 @@ def test_seed_fallbacks_use_audited_same_topic_routes() -> None:
         for function in profile["functions"]
     }
     expected_fallbacks = {
-        "199it-housing-tools-official-statistics": {
-            "national-bureau-statistics-official-statistics"
-        },
         "36kr-research-reports": {"it-juzi-research-reports"},
         "flurry-research-reports": {"analysys-research-reports"},
-        "gsma-mobile-economy-research-reports": {"caict-research-reports"},
-        "hkexnews-company-disclosures": {"hkex-company-disclosures"},
-        "pbc-market-data": {"china-money-market-data"},
         "state-council-regulatory-materials": {"ministry-of-finance-regulatory-materials"},
-        "us-commerce-regulatory-materials": {"sec-edgar-regulatory-materials"},
         "xueqiu-research-reports": {"eastmoney-research-research-reports"},
     }
 
     for exported_function, expected in expected_fallbacks.items():
         assert exported_function in functions
         assert expected <= set(functions[exported_function]["fallbacks"])
+
+
+def test_conservative_seed_profiles_preserve_discoverability_without_overclaiming_functions() -> (
+    None
+):
+    source_profiles = load_source_profiles_module()
+    profiles = load_maintained_profiles()
+    by_id = {profile["id"]: profile for profile in profiles}
+
+    housing_tools = by_id["199it-housing-tools"]
+    assert "U42" in housing_tools["aliases"]
+    assert [function["id"] for function in housing_tools["functions"]] == ["housing-data-directory"]
+    official_statistics_routes = source_profiles.select_routes(
+        profiles=profiles,
+        function_id="official-statistics",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+    )
+    assert "199it-housing-tools" not in {route.source_id for route in official_statistics_routes}
+
+    assert [function["id"] for function in by_id["360-security-reports"]["functions"]] == [
+        "security-threat-reports"
+    ]
+    assert [function["id"] for function in by_id["cadas"]["functions"]] == ["aviation-analysis"]
+    assert [function["id"] for function in by_id["gsma-mobile-economy"]["functions"]] == [
+        "telecom-industry-reports"
+    ]
+
+
+def test_core_seed_profiles_only_export_functions_with_audited_direct_entrypoints() -> None:
+    profiles = load_maintained_profiles()
+    functions = {
+        f"{profile['id']}-{function['id']}": function
+        for profile in profiles
+        for function in profile["functions"]
+    }
+
+    expected_first_direct_urls = {
+        "hkexnews-company-disclosures": "https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh",
+        "sse-company-disclosures": "https://www.sse.com.cn/home/search/?webswd=贵州茅台",
+        "sse-regulatory-materials": "https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/",
+        "sec-edgar-company-disclosures": "https://www.sec.gov/edgar/search/",
+        "caict-official-statistics": "https://www.caict.ac.cn/kxyj/qwfb/qwsj/",
+    }
+    removed_without_direct_entry = {
+        "hkex-company-disclosures",
+        "hkex-regulatory-materials",
+        "hkex-market-data",
+        "sse-market-data",
+        "szse-company-disclosures",
+        "szse-regulatory-materials",
+        "szse-market-data",
+        "pbc-regulatory-materials",
+        "pbc-market-data",
+        "hkma-regulatory-materials",
+        "hkma-market-data",
+        "sec-edgar-regulatory-materials",
+        "caict-research-reports",
+    }
+
+    for exported_function, expected_url in expected_first_direct_urls.items():
+        assert exported_function in functions
+        assert functions[exported_function]["direct_urls"][0]["url"] == expected_url
+
+    for exported_function in removed_without_direct_entry:
+        assert exported_function not in functions
+
+
+def test_specialist_seed_functions_do_not_claim_generic_research_equivalence() -> None:
+    profiles = load_maintained_profiles()
+    functions = {
+        f"{profile['id']}-{function['id']}": function
+        for profile in profiles
+        for function in profile["functions"]
+    }
+
+    assert functions["199it-housing-tools-housing-data-directory"]["fallbacks"] == []
+    assert functions["360-security-reports-security-threat-reports"]["fallbacks"] == []
+    assert functions["cadas-aviation-analysis"]["fallbacks"] == []
+    assert functions["gsma-mobile-economy-telecom-industry-reports"]["fallbacks"] == []
 
 
 def test_publisher_semantics_are_closed_and_explicit_for_every_profile_type() -> None:

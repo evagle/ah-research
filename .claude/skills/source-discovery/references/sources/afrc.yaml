@@ -39,7 +39,6 @@ functions:
     - url
   fallbacks:
   - sfc-regulatory-materials
-  - hkex-regulatory-materials
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'

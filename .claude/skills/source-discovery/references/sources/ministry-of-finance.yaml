@@ -39,7 +39,6 @@ functions:
     - date
     - url
   fallbacks:
-  - pbc-regulatory-materials
   - state-council-regulatory-materials
 access:
   status: reachable

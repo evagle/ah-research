@@ -16,77 +16,7 @@ authority:
   level: High
   scope: Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports,
     trading halts. High authority for HKEX-published/listed-company documents
-functions:
-- id: company-disclosures
-  authority: High
-  utility: High
-  direct_urls:
-  - url: https://www.hkex.com.hk/
-    kind: primary route
-    stability: reviewed seed
-  search:
-    method: publisher-bound web search
-    fields:
-    - official_domain
-    - query
-    example_query: site:hkex.com.hk listed company announcement
-    result_identity: publisher, issuer, title, date, document ID, URL
-  citation:
-    use: direct within the function authority scope
-    required_fields:
-    - publisher
-    - title
-    - date
-    - url
-  fallbacks:
-  - hkexnews-company-disclosures
-- id: regulatory-materials
-  authority: High
-  utility: High
-  direct_urls:
-  - url: https://www.hkex.com.hk/
-    kind: primary route
-    stability: reviewed seed
-  search:
-    method: publisher-bound web search
-    fields:
-    - official_domain
-    - query
-    example_query: site:hkex.com.hk official notice
-    result_identity: publisher, title, date, notice or case ID, URL
-  citation:
-    use: direct within the function authority scope
-    required_fields:
-    - publisher
-    - title
-    - date
-    - url
-  fallbacks:
-  - sfc-regulatory-materials
-- id: market-data
-  authority: High
-  utility: High
-  direct_urls:
-  - url: https://www.hkex.com.hk/
-    kind: primary route
-    stability: reviewed seed
-  search:
-    method: publisher-bound web search
-    fields:
-    - official_domain
-    - query
-    example_query: site:hkex.com.hk market data
-    result_identity: publisher, series or instrument, date, units, URL
-  citation:
-    use: direct within the function authority scope
-    required_fields:
-    - publisher
-    - title
-    - date
-    - url
-  fallbacks:
-  - hkma-market-data
-  - pbc-market-data
+functions: []
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'
