@@ -408,7 +408,7 @@ def test_catalog_does_not_overclaim_directory_or_generic_homepage_functions() ->
     assert "## `pbc` - People's Bank of China" in catalog
     assert "## `hkma` - Hong Kong Monetary Authority" in catalog
     assert "## `caict` - CAICT" in catalog
-    assert "## `360-security-reports` - 360 report portal unresolved" in catalog
+    assert "## `360-security-reports` - 360 security reports" in catalog
     assert "## `cadas` - CADAS" in catalog
     assert "## `gsma-mobile-economy` - GSMA Mobile Economy" in catalog
     assert "- Function: `security-threat-reports`" in catalog
@@ -417,8 +417,8 @@ def test_catalog_does_not_overclaim_directory_or_generic_homepage_functions() ->
 
     assert "199it-housing-tools-official-statistics" not in catalog
     assert "hkex-company-disclosures" not in catalog
-    assert "hkex-market-data" not in catalog
-    assert "szse-company-disclosures" not in catalog
+    assert "## `hkex-market-data` - HKEX market data" in catalog
+    assert "- Function: `szse-company-disclosures`" not in catalog
     assert "pbc-market-data" not in catalog
     assert "hkma-market-data" not in catalog
     assert "sec-edgar-regulatory-materials" not in catalog

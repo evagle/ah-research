@@ -1,0 +1,57 @@
+id: aastocks
+name: AAStocks
+aliases:
+- AAStocks Financial News
+publisher_type: aggregator
+official_domains:
+- aastocks.com
+geographies:
+- HK
+industries:
+- financial-services
+authority:
+  level: Low
+  scope: AAStocks quote, news, and company-data display; source links and financial facts require tracing to
+    the named original.
+functions:
+- id: market-news-discovery
+  authority: Low
+  utility: Medium
+  direct_urls:
+  - url: https://www.aastocks.com/en/stocks/quote/detail-quote.aspx?symbol=09992
+    kind: quote detail
+    stability: observed current route
+  search:
+    method: stock-code route or rendered header symbol search
+    fields:
+    - symbol
+    - security name
+    example_query: symbol=09992
+    result_identity: symbol, issuer name, quote timestamp or delay, headline source, date, and outbound URL
+  citation:
+    use: direct only for AAStocks' own editorial reporting or displayed metadata; discovery only for filings,
+      ownership, regulator actions, price, and research.
+    required_fields:
+    - symbol
+    - page section
+    - timestamp
+    - outbound source
+  fallbacks:
+  - hkex-market-data-official-market-data
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.aastocks.com/en/stocks/quote/detail-quote.aspx?symbol=09992
+  limitation: Public pages include account upsell. Quote fields may be delayed or third-party sourced and do
+    not establish upstream provenance.
+  observed_error:
+    state: none
+    category: none
+    message: Tested quote route loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Quote detail route returned public page content.
+    recognizable_content: Symbol search, quote detail, and news navigation.
+    access_indications: Login and registration affordances were visible.
+    technical_restriction: Trace material claims to HKEX, issuer, or regulator records.

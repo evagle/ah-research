@@ -1,0 +1,57 @@
+id: business-group-health
+name: Business Group on Health
+aliases:
+- Business Group on Health survey
+publisher_type: original-research
+official_domains:
+- businessgrouphealth.org
+geographies:
+- US
+industries:
+- hr
+- health
+authority:
+  level: High
+  scope: Employer association surveys, resources, and practice findings, especially for large employers.
+functions:
+- id: employer-health-research
+  authority: High
+  utility: Medium
+  direct_urls:
+  - url: https://www.businessgrouphealth.org/resources/2026-employer-well-being-strategy-survey
+    kind: public survey page
+    stability: observed current route
+  search:
+    method: topic and resources navigation
+    fields:
+    - topic
+    - survey title
+    example_query: open Data%20Insights then 2026 Employer Well-being Strategy Survey
+    result_identity: title, date, suggested citation, fieldwork, population, method, resource type, and URL
+  citation:
+    use: preserve the publisher's suggested citation and permission requirement. Cite only in a manner
+      permitted by the publisher's terms.
+    required_fields:
+    - title
+    - date
+    - fieldwork
+    - population
+    - permission condition
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:47:00+08:00'
+  final_url: https://www.businessgrouphealth.org/resources/2026-employer-well-being-strategy-survey
+  limitation: Public report page stated methodology and a permission requirement for referring to or using
+    the survey. Member and login surfaces exist; a public PDF was not verified.
+  observed_error:
+    state: none
+    category: none
+    message: Public survey route loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public survey page returned.
+    recognizable_content: Survey title, suggested citation, fieldwork, and employer population.
+    access_indications: Login and membership routes were visible.
+    technical_restriction: Permission requirement is material even though the page is public.

@@ -15,21 +15,48 @@ authority:
   level: High
   scope: SZSE disclosures, rulebooks, notices, REIT/bond/equity information, official stats. High authority
     for SZSE-published official materials
-functions: []
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.szse.cn/disclosure/listed/notice/index.html
+    kind: listed-company announcement register
+    stability: observed current route
+  search:
+    method: rendered disclosure register
+    fields:
+    - code or abbreviation
+    - board
+    - category
+    - start date
+    - end date
+    example_query: search 600519 with an explicit date range to confirm it yields no SZSE result
+    result_identity: security code, issuer, title, publication date, file identifier, and document URL
+  citation:
+    use: cite the opened SZSE filing document; a result row is only index metadata.
+    required_fields:
+    - security code
+    - issuer
+    - title
+    - publication date
+    - document URL
+  fallbacks:
+  - cninfo-company-disclosures
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: http://www.szse.cn/
-  limitation: 'public. Not a research synthesis layer; pair with secondary interpretation where needed
-    Audited fallback peers: U10, U01, U03, C01.'
+  final_url: https://www.szse.cn/disclosure/listed/notice/index.html
+  limitation: Public JS-driven register with a narrow default date range. It covers SZSE issuers only; a
+    zero result for 600519 confirms venue scope, not absence of an issuer filing.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: No redirect recorded
-    response_status: '`200 OK` on full GET; one HEAD-style attempt reset connection'
-    recognizable_content: Exchange content; public HTML/PDF document references
-    access_indications: Member zones clearly labeled separately
-    technical_restriction: HEAD-style connection reset observed; body fetch succeeded
+    redirect_chain: No material redirect recorded.
+    response_status: Public disclosure register and dated result rows loaded.
+    recognizable_content: Code, issuer, title, date, file size, and document controls.
+    access_indications: No login or CAPTCHA observed.
+    technical_restriction: Set explicit dates and use the issuer's listing venue.

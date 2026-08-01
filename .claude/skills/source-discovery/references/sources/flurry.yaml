@@ -13,25 +13,26 @@ industries:
 - cross-industry
 authority:
   level: Medium
-  scope: App engagement framing, category trend references, vendor methodology discovery. Strong for Flurry
-    SDK telemetry; weaker as universal market proxy
+  scope: Historical Flurry telemetry and sunset documentation. Flurry Mobile Analytics SDK and UI sunset on
+    2024-03-15 and are not a current measurement route.
 functions:
 - id: research-reports
   authority: Medium
-  utility: Medium
+  utility: Low
   direct_urls:
   - url: https://www.flurry.com/
     kind: primary route
     stability: reviewed seed
   search:
-    method: publisher-bound web search
+    method: inspect the first-party sunset notice and historical documentation only
     fields:
     - official_domain
     - query
-    example_query: site:flurry.com industry report
-    result_identity: original publisher, title, author, date, methodology, URL
+    example_query: open the Flurry Mobile Analytics sunset notice on the current homepage
+    result_identity: product name, sunset date, historical feature, documentation route, and URL
   citation:
-    use: attributable measurement with methodology and coverage noted
+    use: direct only for historical Flurry material and the product sunset notice; do not initiate new
+      analytics or API work from this profile.
     required_fields:
     - publisher
     - title
@@ -40,12 +41,11 @@ functions:
   fallbacks:
   - analysys-research-reports
 access:
-  status: reachable-limited
-  last_checked: '2026-08-01T00:00:00+08:00'
+  status: moved
+  last_checked: '2026-08-01T17:34:00+08:00'
   final_url: https://www.flurry.com/
-  limitation: 'public-limited; marketing/docs public, analytics data requires account/instrumented apps.
-    Sample bias; limited transparency into panel composition; product-led framing Audited fallback peers:
-    data.ai, Sensor Tower, Statcounter, official app-store analytics.'
+  limitation: First-party page states Flurry Mobile Analytics, including SDK and Analytics UI, sunset on
+    2024-03-15. Old Yahoo developer documentation routes returned 404.
   observed_error:
     state: none
     category: none
@@ -53,7 +53,7 @@ access:
   evidence_level: High
   reviewed_probe:
     redirect_chain: Canonical tag matches supplied URL
-    response_status: '`200`'
-    recognizable_content: Title `Flurry \| Mobile App Analytics Platform for Android & iOS`
-    access_indications: Actual analytics data requires product account/instrumented apps
-    technical_restriction: None recorded
+    response_status: Current homepage returned 200; legacy developer documentation returned 404.
+    recognizable_content: First-party product-sunset notice and historical analytics description.
+    access_indications: No retained-account behavior was tested.
+    technical_restriction: Treat former analytics product as historical; acquire a current replacement separately.

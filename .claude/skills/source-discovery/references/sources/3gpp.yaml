@@ -1,0 +1,58 @@
+id: 3gpp
+name: 3GPP
+aliases:
+- 3rd Generation Partnership Project
+publisher_type: original-research
+official_domains:
+- 3gpp.org
+geographies:
+- Global
+industries:
+- telecom
+- technology
+authority:
+  level: High
+  scope: Published 3GPP specifications, releases, work-plan information, and official document versions.
+functions:
+- id: telecom-standards
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.3gpp.org/specifications-technologies/releases/release-18
+    kind: Release 18 navigation
+    stability: moving document editions require revalidation
+  search:
+    method: 3GPP rendered specification navigation or OpenSearch
+    fields:
+    - document number
+    - release
+    - version
+    example_query: search exact document TS%2023.501 through the published OpenSearch descriptor
+    result_identity: TS or TR number, title, release, version, status, date, group, clause, and official URL
+  citation:
+    use: direct for the opened official specification version and clause. A vendor implementation statement is
+      not proof of 3GPP text or compliance.
+    required_fields:
+    - document number
+    - release
+    - version
+    - clause
+    - publication date
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:54:00+08:00'
+  final_url: https://www.3gpp.org/specifications-technologies/releases/release-18
+  limitation: Public specification navigation was verified. No specific specification PDF transaction was
+    completed; revalidate editions and URLs before use.
+  observed_error:
+    state: none
+    category: none
+    message: Public documentation and release routes loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public specification and release pages returned.
+    recognizable_content: Specification, release, and OpenSearch navigation.
+    access_indications: No login or paywall observed for the checked entry routes.
+    technical_restriction: Specific document retrieval and changing editions must be checked at use time.

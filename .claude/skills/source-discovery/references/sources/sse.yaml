@@ -22,21 +22,20 @@ functions:
   authority: High
   utility: High
   direct_urls:
-  - url: https://www.sse.com.cn/home/search/?webswd=贵州茅台
-    kind: direct route
-    stability: reviewed seed
-  - url: https://www.sse.com.cn/
-    kind: primary route
-    stability: reviewed seed
+  - url: https://www.sse.com.cn/disclosure/listedinfo/announcement/
+    kind: listed-company announcement register
+    stability: observed current route
   search:
-    method: publisher-bound web search
+    method: rendered announcement register
     fields:
-    - official_domain
-    - query
-    example_query: site:sse.com.cn annual report
-    result_identity: publisher, issuer, title, date, document ID, URL
+    - security code or abbreviation
+    - board
+    - title
+    - date range
+    example_query: search security code 600519 in the listed-company announcement register
+    result_identity: security code, issuer, title, publication date, document URL, and issuer-authored PDF
   citation:
-    use: direct within the function authority scope
+    use: cite the opened SSE-hosted PDF. SSE distributes issuer-supplied content; the table row is discovery metadata.
     required_fields:
     - publisher
     - title
@@ -48,21 +47,20 @@ functions:
   authority: High
   utility: High
   direct_urls:
-  - url: https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/
-    kind: direct route
-    stability: reviewed seed
-  - url: https://www.sse.com.cn/
-    kind: primary route
-    stability: reviewed seed
+  - url: https://www.sse.com.cn/regulation/supervision/inquiries/
+    kind: supervisory inquiry register
+    stability: observed current route
   search:
-    method: publisher-bound web search
+    method: rendered inquiry register
     fields:
-    - official_domain
-    - query
-    example_query: site:sse.com.cn official notice
-    result_identity: publisher, title, date, notice or case ID, URL
+    - security code or abbreviation
+    - inquiry type
+    - date range
+    example_query: search 600519 with the required date interval in the supervisory inquiry register
+    result_identity: security code, issuer, letter date, inquiry type, title, and letter URL
   citation:
-    use: direct within the function authority scope
+    use: cite the SSE inquiry letter as the exchange action and separately cite an issuer reply from the
+      disclosure register or CNINFO.
     required_fields:
     - publisher
     - title
@@ -72,20 +70,17 @@ functions:
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.sse.com.cn/
-  limitation: 'public. Not a synthesis/research portal; use search-result summaries only to route back
-    to official announcements, inquiry letters, issuer replies, or regulator originals Audited fallback
-    peers: U11, C01, U01, U03.'
+  final_url: https://www.sse.com.cn/disclosure/listedinfo/announcement/
+  limitation: Public JavaScript-driven registers. Preserve issuer and document identity for announcements, and
+    do not substitute an issuer reply for the SSE inquiry letter.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: No redirect observed for audited root; core routes also checked
-    response_status: '`200 OK`; inquiries `200`; SSE search for `贵州茅台` `200`'
-    recognizable_content: Official SSE branding, investor/member sections, disclosure/rule content; inquiries
-      title `监管问询`
-    access_indications: Member areas exist but are separate
-    technical_restriction: None recorded; search route is routing aid only, not final evidence above original
-      announcement
+    redirect_chain: No material redirect recorded for the checked registers.
+    response_status: Announcement and inquiry registers returned public content.
+    recognizable_content: Announcement fields and supervisory inquiry filters, rows, and pagination.
+    access_indications: No login or CAPTCHA observed for tested interactive routes.
+    technical_restriction: JavaScript and date scoping apply; cite the final PDF or letter rather than a row.

@@ -1,0 +1,58 @@
+id: data-gov-hk
+name: DATA.GOV.HK
+aliases:
+- Hong Kong open data catalog
+publisher_type: official-government
+official_domains:
+- data.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Government dataset catalog, resource links, and catalog metadata; authority for underlying data follows
+    the named producing department.
+functions:
+- id: dataset-catalog
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://data.gov.hk/en/
+    kind: dataset catalog
+    stability: observed current route
+  search:
+    method: catalog search and publisher filter
+    fields:
+    - keyword
+    - organization
+    - format
+    example_query: search retail sales, filter Census and Statistics Department, then open the resource URL
+    result_identity: dataset title, slug, publisher, update time, license, resource format, and resource URL
+  citation:
+    use: direct for DATA.GOV.HK catalog metadata or a dataset it names itself as publisher; otherwise follow
+      the named producer resource.
+    required_fields:
+    - dataset ID
+    - publisher
+    - resource URL
+    - update timestamp
+  fallbacks:
+  - hong-kong-statistics-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://data.gov.hk/en/
+  limitation: Public catalog access does not establish that a linked departmental dataset is authored or
+    maintained by the catalog.
+  observed_error:
+    state: none
+    category: none
+    message: Search, resource, download, and API-discovery controls were observed.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public catalog loaded.
+    recognizable_content: Dataset search, filters, publisher metadata, and resource controls.
+    access_indications: No login observed.
+    technical_restriction: Treat the catalog as a discovery layer unless it is the named producer.

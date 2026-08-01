@@ -1,0 +1,56 @@
+id: hong-kong-consumer-council
+name: Hong Kong Consumer Council
+aliases:
+- Consumer Council HK
+publisher_type: official-government
+official_domains:
+- consumer.org.hk
+geographies:
+- HK
+industries:
+- consumer
+authority:
+  level: High
+  scope: Consumer Council-authored tests, studies, alerts, complaint figures, and price-comparison outputs.
+functions:
+- id: consumer-research
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.consumer.org.hk/en/search?q=Pop%20Mart
+    kind: site search
+    stability: observed current route
+  search:
+    method: Consumer Council search
+    fields:
+    - q
+    - category
+    - sort
+    - page
+    example_query: q=collectibles&category=testing_report
+    result_identity: title, category, date, report or issue ID, methodology, named subject, and canonical URL
+  citation:
+    use: direct for Council tests, studies, alerts, and reported complaints with method, date, and coverage.
+    required_fields:
+    - title
+    - category
+    - date
+    - methodology or sample
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.consumer.org.hk/en/search?q=Pop%20Mart
+  limitation: Public search and content controls were observed. A single test or complaint is not a market-share,
+    issuer-wide, or safety conclusion beyond its stated scope.
+  observed_error:
+    state: none
+    category: none
+    message: Tested search page loaded without a paywall.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public search route loaded.
+    recognizable_content: Search, study, complaint, and price-tool controls.
+    access_indications: No login or paywall observed.
+    technical_restriction: Record methodology and coverage before using a result.

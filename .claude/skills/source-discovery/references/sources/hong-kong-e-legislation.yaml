@@ -1,0 +1,57 @@
+id: hong-kong-e-legislation
+name: Hong Kong e-Legislation
+aliases:
+- HKSAR e-Legislation
+- Cap. 622
+publisher_type: official-government
+official_domains:
+- elegislation.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Current and historical consolidated Hong Kong legislation, sections, versions, and amendment history.
+functions:
+- id: consolidated-legislation
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.elegislation.gov.hk/hk/cap622
+    kind: Companies Ordinance route
+    stability: current direct statute route
+  search:
+    method: permitted browser after client configuration check
+    fields:
+    - chapter number
+    - title
+    - version
+    example_query: search Cap. 622 or Companies Ordinance, then select current or historical version
+    result_identity: chapter, title, section, version or effective date, amendment history, and official URL
+  citation:
+    use: direct for opened consolidated text with chapter, section, and effective version. Use the Gazette when
+      the original enactment notice is required.
+    required_fields:
+    - chapter
+    - section
+    - version or effective date
+    - URL
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.elegislation.gov.hk/hk/cap622
+  limitation: The site redirected to a client-configuration check in the probe. This is not evidence of a
+    paywall or missing law text; the completed search fields were not inspected.
+  observed_error:
+    state: error
+    category: other
+    message: Client configuration and cookie gate prevented completion of the rendered search.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Statute route reached the e-Legislation client-configuration gate.
+    response_status: First-party checkClientConfig route returned.
+    recognizable_content: Client checks for JavaScript, cookies, and network configuration.
+    access_indications: No paywall was observed.
+    technical_restriction: Use a permitted browser and retain the selected legal version.

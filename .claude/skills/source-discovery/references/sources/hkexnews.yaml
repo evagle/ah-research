@@ -22,21 +22,21 @@ functions:
   authority: High
   utility: High
   direct_urls:
-  - url: https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh
-    kind: primary route
-    stability: reviewed seed
-  - url: https://www1.hkexnews.hk/search/titleSearchServlet.do
-    kind: direct route
-    stability: reviewed seed
+  - url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en
+    kind: listed-company title search
+    stability: JSF route; submit rendered form
   search:
-    method: publisher-bound web search
+    method: rendered HKEXnews title search
     fields:
-    - official_domain
-    - query
-    example_query: site:hkexnews.hk annual report
-    result_identity: publisher, issuer, title, date, document ID, URL
+    - stockCode
+    - startDate
+    - endDate
+    - selectedDocType
+    example_query: stockCode=09992, startDate=2025-01-01, endDate=2026-08-01, Financial Statements or ESG
+    result_identity: security code, issuer, title, publication time, category, document type, PDF URL, and correction relation
   citation:
-    use: direct within the function authority scope
+    use: cite the opened original PDF; result rows are discovery metadata. An exact issuer IR repost can only
+      be a matching convenience copy.
     required_fields:
     - publisher
     - title
@@ -46,17 +46,17 @@ functions:
 access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh
-  limitation: 'public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited
-    fallback peers: Issuer IR, SFC, company annual reports.'
+  final_url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en
+  limitation: Public JSF search requires session and view-state handling. Preserve the final PDF identity;
+    a current direct URL is not a permanent-URL guarantee.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: Not recorded in audit
-    response_status: HKEX and HKEXnews routes returned `200`
-    recognizable_content: HKEXnews title observed
-    access_indications: Not recorded in audit
-    technical_restriction: Not recorded in audit
+    redirect_chain: No material redirect recorded for the title-search entry.
+    response_status: Public title search and listed-company index loaded.
+    recognizable_content: Stock, date, category, document-type, and security-type form fields.
+    access_indications: No login or paywall observed.
+    technical_restriction: Submit the rendered JSF form and open the final PDF rather than crafting a permanent result URL.

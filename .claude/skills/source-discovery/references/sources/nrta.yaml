@@ -1,0 +1,56 @@
+id: nrta
+name: National Radio and Television Administration
+aliases:
+- NRTA
+- China audiovisual regulator
+publisher_type: official-regulator
+official_domains:
+- nrta.gov.cn
+geographies:
+- CN
+industries:
+- media
+authority:
+  level: High
+  scope: NRTA notices, permits, and policy within radio, television, and network-audiovisual regulation.
+functions:
+- id: audiovisual-regulation
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.nrta.gov.cn/col/col110/index.html
+    kind: network audiovisual notices
+    stability: observed current route
+  search:
+    method: rendered NRTA notice browsing
+    fields:
+    - category
+    - keyword
+    - date
+    example_query: browse network audiovisual notices for %E7%BD%91%E7%BB%9C%E5%BE%AE%E7%9F%AD%E5%89%A7
+    result_identity: issuing office, title, notice or permit number, dates, category, attachment, and URL
+  citation:
+    use: direct for an opened NRTA notice or permit with issuing office and effective date.
+    required_fields:
+    - issuing office
+    - notice or permit number
+    - publication date
+    - effective date
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:39:00+08:00'
+  final_url: https://www.nrta.gov.cn/col/col110/index.html
+  limitation: Public notice routes were observed, but the sampled list included older entries. Confirm recency
+    and open the individual notice before use.
+  observed_error:
+    state: none
+    category: none
+    message: Notice list loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: First-party notice list returned.
+    recognizable_content: Network audiovisual notice and licensing items.
+    access_indications: No login observed.
+    technical_restriction: List items are not a substitute for the opened notice.

@@ -15,21 +15,68 @@ authority:
   level: High
   scope: Monetary policy notices, official announcements, statistics landing pages. High authority for
     PBOC-published policy and central-bank data
-functions: []
+functions:
+- id: central-bank-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.pbc.gov.cn/diaochatongjisi/116219/116225/index.html
+    kind: Statistics and Survey Department report list
+    stability: observed current route
+  search:
+    method: chronological PBOC statistics list and period-specific detail
+    fields:
+    - report period
+    - title
+    example_query: open https://www.pbc.gov.cn/diaochatongjisi/116219/116225/2026071515025183948/index.html
+    result_identity: title, report period, publication date, metric, unit, stock or flow, method note, and URL
+  citation:
+    use: direct for the opened PBOC report. Preserve source-agency attribution and do not use it as a substitute
+      for other regulators' own datasets.
+    required_fields:
+    - title
+    - report period
+    - publication date
+    - metric and unit
+    - method note
+  fallbacks: []
+- id: central-bank-policy-search
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://wzdig.pbc.gov.cn/search/pcRender?sr=score%20desc&pageId=c177a85bd02b4114bebebd210809f691&ext=&pNo=1&q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
+    kind: PBOC site search
+    stability: browser-oriented current route
+  search:
+    method: PBOC rendered search followed by opened destination
+    fields:
+    - q
+    - pNo
+    - sorting
+    example_query: q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pNo=1
+    result_identity: title, publication date, publishing PBOC unit, canonical URL, and document or statistic identifier
+  citation:
+    use: use search results only to discover a PBOC or PBOC-branch destination, then cite the opened document.
+    required_fields:
+    - publishing unit
+    - title
+    - date
+    - canonical URL
+  fallbacks: []
 access:
-  status: moved
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.pbc.gov.cn/
-  limitation: 'moved/redirected; public. Interbank market notices/reference data may be more operational
-    on ChinaMoney Audited fallback peers: Chinamoney, NFRA, CSRC, MOF.'
+  status: reachable
+  last_checked: '2026-08-01T17:09:00+08:00'
+  final_url: https://www.pbc.gov.cn/diaochatongjisi/116219/116225/index.html
+  limitation: Public statistics and browser search routes were verified. Search results include branches and
+    broad text matches, and unattended same-page retrieval was less reliable.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: '`http://www.pbc.gov.cn` -> `https://www.pbc.gov.cn/`'
-    response_status: '`200`'
-    recognizable_content: Official PBOC site
-    access_indications: None recorded
-    technical_restriction: None recorded
+    redirect_chain: http root redirected to HTTPS; checked statistics and search routes were direct.
+    response_status: Statistics list and detail loaded; browser search completed.
+    recognizable_content: Data interpretation reports and dated PBOC search results.
+    access_indications: No login or paywall observed.
+    technical_restriction: Open the destination page; do not cite a broad search snippet or infer an issuer filing.

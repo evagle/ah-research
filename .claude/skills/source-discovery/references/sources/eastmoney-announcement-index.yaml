@@ -1,0 +1,65 @@
+id: eastmoney-announcement-index
+name: Eastmoney announcement index
+aliases:
+- Eastmoney notices
+- data.eastmoney.com notices
+publisher_type: aggregator
+official_domains:
+- data.eastmoney.com
+- np-anotice-stock.eastmoney.com
+geographies:
+- CN
+- HK
+industries:
+- financial-services
+authority:
+  level: Low
+  scope: Eastmoney's displayed announcement metadata, routing, and dissemination timestamps; not the issuer's
+    statutory filing record.
+functions:
+- id: company-announcement-index
+  authority: Low
+  utility: High
+  direct_urls:
+  - url: https://data.eastmoney.com/notices/stock/600519.html
+    kind: current company index
+    stability: observed current route
+  - url: https://np-anotice-stock.eastmoney.com/api/security/ann
+    kind: observed UI list endpoint
+    stability: implementation detail; not a public API contract
+  search:
+    method: company notice UI or observed JSONP list route
+    fields:
+    - stock_list
+    - page_index
+    - ann_type
+    example_query: stock_list=600519&ann_type=A&page_size=5&page_index=1
+    result_identity: Eastmoney art_code, title, notice_date, columns, display_time, and detail URL
+  citation:
+    use: discovery only for issuer filings; direct only for Eastmoney's displayed metadata and routing.
+    required_fields:
+    - art_code
+    - title
+    - notice_date
+    - retrieval time
+  fallbacks:
+  - sse-company-disclosures
+  - szse-company-disclosures
+  - hkexnews-company-disclosures
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:12:00+08:00'
+  final_url: https://data.eastmoney.com/notices/stock/600519.html
+  limitation: Public for the tested A-share and HK pages. The technical endpoint establishes Eastmoney display
+    fields only, not legal publisher identity or a stable API.
+  observed_error:
+    state: none
+    category: none
+    message: Tested notice pages and list query completed without login.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded for tested notice pages.
+    response_status: Company notice pages and observed list query returned usable content.
+    recognizable_content: Notice title, art_code, notice_date, columns, and display_time.
+    access_indications: No login or paywall on the tested company indexes.
+    technical_restriction: Use issuer and listing-venue records for the substantive filing.

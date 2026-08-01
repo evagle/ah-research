@@ -1,0 +1,55 @@
+id: hksar-policy-address
+name: HKSAR Policy Address
+aliases:
+- Hong Kong Policy Address
+publisher_type: official-government
+official_domains:
+- policyaddress.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: HKSAR annual Policy Address documents and the government's stated policy commitments.
+functions:
+- id: policy-documents
+  authority: High
+  utility: Medium
+  direct_urls:
+  - url: https://www.policyaddress.gov.hk/2025/en/
+    kind: annual archive entry
+    stability: current-year route; verify the selected year
+  search:
+    method: annual archive navigation or official government search
+    fields:
+    - policy year
+    - chapter
+    - keyword
+    example_query: open the 2025 archive and search its rendered document for retail
+    result_identity: document title, policy year, chapter, paragraph or page, delivery date, and official URL
+  citation:
+    use: direct only for an opened annual policy document, not a press summary.
+    required_fields:
+    - policy year
+    - chapter
+    - page or paragraph
+    - publication date
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.policyaddress.gov.hk/2025/en/
+  limitation: The government domain and annual-document role are established, but the checked archive returned
+    an empty scripted reply. This is a point-in-time technical limit, not evidence that the documents are unavailable.
+  observed_error:
+    state: error
+    category: network
+    message: Checked annual archive returned an empty scripted response.
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No completed document redirect chain recorded.
+    response_status: Direct archive request returned an empty reply in the probe environment.
+    recognizable_content: Government annual Policy Address route.
+    access_indications: No paywall indicated.
+    technical_restriction: Inspect chapters and PDFs in a permitted browser before citing.

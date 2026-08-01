@@ -32,14 +32,18 @@ functions:
     kind: direct route
     stability: reviewed seed
   search:
-    method: publisher-bound web search
+    method: statutory disclosure search and exact hosted PDF retrieval
     fields:
-    - official_domain
-    - query
-    example_query: site:cninfo.com.cn annual report
-    result_identity: publisher, issuer, title, date, document ID, URL
+    - column
+    - searchkey
+    - tabName
+    - pageNum
+    - pageSize
+    example_query: POST column=sse&tabName=fulltext&searchkey=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pageNum=1&pageSize=30
+    result_identity: announcementId, security code, issuer, title, date, adjunctUrl, and hosted PDF URL
   citation:
-    use: direct within the hosted function scope
+    use: cite the exact static.cninfo.com.cn PDF as an issuer document distributed by the statutory platform;
+      JSON search metadata is discovery only.
     required_fields:
     - publisher
     - title
@@ -51,16 +55,16 @@ access:
   status: reachable
   last_checked: '2026-08-01T00:00:00+08:00'
   final_url: https://www.cninfo.com.cn/
-  limitation: 'public. JS-heavy search can be brittle; company/exchange confirmation still useful Audited
-    fallback peers: SSE, SZSE, issuer IR pages.'
+  limitation: Anonymous POST and exact hosted PDF worked. The query endpoint is implementation-facing and
+    rate-sensitive; prefer the relevant listing exchange where the original is available.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: Not recorded in audit
-    response_status: '`200`'
-    recognizable_content: Title `巨潮资讯网`
-    access_indications: Not recorded in audit
-    technical_restriction: Not recorded in audit
+    redirect_chain: No material redirect recorded.
+    response_status: Query POST and sampled static PDF completed.
+    recognizable_content: Announcement ID, security, issuer, title, date, and adjunct URL fields.
+    access_indications: No login or CAPTCHA observed for the tested browser workflow.
+    technical_restriction: Do not treat implementation JSON as a documented public API.

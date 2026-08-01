@@ -1,37 +1,42 @@
 id: 360-security-reports
-name: 360 report portal unresolved
+name: 360 security reports
 aliases:
 - U06
 - 360互联网安全中心
 - supplied U06
 publisher_type: issuer-company
 official_domains:
-- zt.360.cn
+- 360.cn
+- pop.shouji.360.cn
 geographies:
 - CN
 industries:
 - cross-industry
 authority:
-  level: Low
-  scope: Historically vendor security and threat reports if a current official route is found. Unverified
-    authority from current audit; historically High for 360-produced reports
+  level: High
+  scope: 360-authored security reports and observed telemetry. It is a vendor source for its own measurement,
+    not independent confirmation of 360 product or threat claims.
 functions:
 - id: security-threat-reports
-  authority: Low
-  utility: Low
+  authority: High
+  utility: High
   direct_urls:
-  - url: https://zt.360.cn/report/
-    kind: primary route
-    stability: reviewed seed
+  - url: https://www.360.cn/news.html
+    kind: current security news and report route
+    stability: observed current route
+  - url: https://www.360.cn/n/12394.html
+    kind: original report page example
+    stability: observed current route
   search:
-    method: publisher-bound web search
+    method: 360 security-news navigation or rendered 360 search
     fields:
-    - official_domain
-    - query
-    example_query: site:zt.360.cn security report
-    result_identity: original publisher, title, author, date, methodology, URL
+    - report title
+    - topic
+    example_query: open 2023 H1 China Mobile Security Report from 360 security news, then its official PDF
+    result_identity: title, publication date, data period, version, methodology, sample scope, page, and PDF URL
   citation:
-    use: attributable first-party only; independently verify evaluative claims
+    use: direct for 360's stated methodology and observations; independently corroborate security facts with
+      the affected vendor, CERT, regulator, or vulnerability record where appropriate.
     required_fields:
     - publisher
     - title
@@ -39,22 +44,19 @@ functions:
     - url
   fallbacks: []
 access:
-  status: unverified
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://zt.360.cn/report/
-  limitation: 'unverified; DNS failure observed on listed host. Current canonical URL not established;
-    point-in-time DNS failure is not permanent closure proof Audited fallback peers: U05, official vendor/security
-    disclosures, other primary security publishers.'
+  status: reachable
+  last_checked: '2026-08-01T17:50:00+08:00'
+  final_url: https://www.360.cn/news.html
+  limitation: Legacy zt.360.cn/report DNS failed, but current 360 news, report page, and sampled PDF were public.
+    Do not treat vendor telemetry as a universal threat census.
   observed_error:
-    state: error
-    category: dns
-    message: 'unverified; DNS failure observed on listed host. Current canonical URL not established;
-      point-in-time DNS failure is not permanent closure proof Audited fallback peers: U05, official vendor/security
-      disclosures, other primary security publishers.'
-  evidence_level: Low
+    state: none
+    category: none
+    message: Current 360 news, report page, and sampled PDF loaded.
+  evidence_level: High
   reviewed_probe:
-    redirect_chain: No redirect target obtained
-    response_status: DNS resolution failure for `https` and `http` listed host
-    recognizable_content: None verified
-    access_indications: Not recorded in audit
-    technical_restriction: DNS failure
+    redirect_chain: Legacy zt.360.cn/report did not resolve; current routes were reached directly.
+    response_status: Current news, report page, and PDF were public.
+    recognizable_content: 360 report and vulnerability materials plus direct mobile-security PDF.
+    access_indications: 360SRC notices were public; report submission is account or workflow bound.
+    technical_restriction: Threat-intelligence product endpoints were not established as public data APIs.

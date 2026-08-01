@@ -1,0 +1,63 @@
+id: un-comtrade
+name: UN Comtrade API
+aliases:
+- UN Comtrade
+- UNSD trade API
+publisher_type: official-statistics
+official_domains:
+- comtradeapi.un.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: UNSD Comtrade commodity-trade records and their reported, estimated, aggregation, and valuation fields.
+functions:
+- id: official-trade-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5
+    kind: public preview API query
+    stability: observed query contract; bulk entitlement not tested
+  search:
+    method: documented public preview query
+    fields:
+    - period
+    - reporterCode
+    - flowCode
+    - partnerCode
+    - cmdCode
+    example_query: period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5
+    result_identity: frequency, classification, reporter, partner, flow, commodity, period, value, and reported or
+      estimation flags
+  citation:
+    use: direct for the returned UNSD release with all classification and estimate fields; use national customs
+      when the claim requires the original national report.
+    required_fields:
+    - classification
+    - reporter
+    - partner
+    - flow
+    - commodity
+    - period
+    - reported or estimation flags
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:20:00+08:00'
+  final_url: https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5
+  limitation: Public preview JSON was verified. Non-preview bulk entitlement and download conditions were not
+    tested; compiled series can include estimates and flags.
+  observed_error:
+    state: none
+    category: none
+    message: Public preview query returned a trade record.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Direct API query.
+    response_status: Public JSON response returned.
+    recognizable_content: Commodity trade fields including primaryValue, fobvalue, isReported, and legacy estimation flag.
+    access_indications: No login or paywall on the preview query.
+    technical_restriction: Do not omit classification, aggregation, valuation, or estimation flags.

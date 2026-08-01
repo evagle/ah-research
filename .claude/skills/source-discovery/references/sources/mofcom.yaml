@@ -1,0 +1,56 @@
+id: mofcom
+name: Ministry of Commerce of China
+aliases:
+- MOFCOM
+- China commerce ministry
+publisher_type: official-government
+official_domains:
+- mofcom.gov.cn
+geographies:
+- CN
+industries:
+- commerce
+authority:
+  level: High
+  scope: Ministry-published commerce policy, trade releases, and statistics within MOFCOM's mandate.
+functions:
+- id: commerce-policy-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.mofcom.gov.cn/
+    kind: ministry entry
+    stability: current root; specific legacy search routes unverified
+  search:
+    method: current ministry navigation to a specific release or document
+    fields:
+    - subject
+    - date
+    example_query: browse current MOFCOM releases for the required commerce or trade subject
+    result_identity: issuing office, title, date, document number, period, attachment, and URL
+  citation:
+    use: direct for an opened MOFCOM item. Do not cite a guessed ecommerce subdomain or unavailable search
+      path as source evidence.
+    required_fields:
+    - issuing office
+    - title
+    - date
+    - document number or period
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:39:00+08:00'
+  final_url: https://www.mofcom.gov.cn/
+  limitation: Root was public; guessed search and ecommerce routes were unavailable in the probe, so no
+    reproducible query contract is asserted.
+  observed_error:
+    state: none
+    category: none
+    message: Current root loaded; tested guessed subsidiary routes were unavailable.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Current root used.
+    response_status: Root 200; guessed routes returned 404 or connection failures.
+    recognizable_content: Ministry root content.
+    access_indications: No login observed on root.
+    technical_restriction: Follow current navigation to the target item instead of hard-coding guessed routes.

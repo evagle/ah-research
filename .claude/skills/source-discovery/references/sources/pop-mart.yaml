@@ -1,0 +1,58 @@
+id: pop-mart
+name: Pop Mart official website
+aliases:
+- POP MART
+- popmart.com
+publisher_type: issuer-company
+official_domains:
+- popmart.com
+geographies:
+- HK
+- Global
+industries:
+- consumer
+authority:
+  level: High
+  scope: Pop Mart's own product, brand, location, policy, and first-party statements; not a verified investor
+    filing archive or independent commercial evidence.
+functions:
+- id: company-product-statements
+  authority: High
+  utility: Medium
+  direct_urls:
+  - url: https://www.popmart.com/
+    kind: official storefront
+    stability: region-dependent rendered route
+  search:
+    method: rendered storefront search and company-domain navigation
+    fields:
+    - product or collection
+    - locale
+    example_query: search the rendered storefront for LABUBU or THE%20MONSTERS
+    result_identity: product or collection, locale, price or availability timestamp, and canonical URL
+  citation:
+    use: direct only for what Pop Mart states or offers at the recorded time. Start HKEXnews for filings and
+      independently corroborate material market, demand, price, or leadership claims.
+    required_fields:
+    - product or statement
+    - locale
+    - timestamp
+    - canonical URL
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.popmart.com/
+  limitation: Public storefront was JS-heavy and region dependent. No stable IR archive or investor link was
+    verified from the storefront; CDN hosting alone does not establish issuer provenance.
+  observed_error:
+    state: none
+    category: none
+    message: Official storefront loaded in the probe.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Regional storefront routing was observed.
+    response_status: Official storefront loaded.
+    recognizable_content: Pop Mart product and brand presentation.
+    access_indications: No login required for the observed storefront.
+    technical_restriction: Use HKEXnews for listed-company filings and retain region or locale context.
