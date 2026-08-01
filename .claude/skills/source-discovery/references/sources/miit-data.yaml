@@ -1,0 +1,59 @@
+id: miit-data
+name: MIIT Data
+aliases:
+- U49
+- MIIT
+- supplied U49
+publisher_type: official-statistics
+official_domains:
+- miit.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Industrial output, telecom, manufacturing, sector stats, ministry data discovery. High authority
+    for MIIT-published industry statistics
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.miit.gov.cn/gxsj/index.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:miit.gov.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - national-bureau-statistics-official-statistics
+  - caict-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.miit.gov.cn/gxsj/index.html
+  limitation: 'public. Mostly aggregate stats; not filings or company document source Audited fallback
+    peers: NBS, ministry sub-pages, State Council releases.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Title `工信数据`
+    access_indications: None recorded
+    technical_restriction: None recorded

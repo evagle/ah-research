@@ -1,0 +1,69 @@
+id: state-council
+name: State Council portal root replacing stale data path
+aliases:
+- U46
+- 中国政府网数据
+- U52
+- supplied U46
+- supplied U52
+publisher_type: official-government
+official_domains:
+- gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Top-level government portal and ministry/page discovery. High authority for official releases
+    when using specific pages; exact supplied data path no longer reliable
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: Low
+  direct_urls:
+  - url: https://www.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.gov.cn/gwyzzjg/zuzhi/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:gov.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct for the publisher's own materials
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - ministry-of-finance-regulatory-materials
+  - beijing-government-regulatory-materials
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.gov.cn/
+  limitation: 'moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility;
+    Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局,
+    ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn
+    homepage, State Council Gazette.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: 'U46: Supplied path redirects to `https://www.gov.cn/` homepage; U52: Root reached;
+      org-directory family separately checked'
+    response_status: 'U46: Root `200`; U52: `https://www.gov.cn/` `200`; `https://www.gov.cn/gwyzzjg/zuzhi/`
+      `403`'
+    recognizable_content: 'U46: Government portal homepage; U52: State Council portal root'
+    access_indications: 'U46: None recorded; U52: None recorded'
+    technical_restriction: 'U46: Old data-hub path is stale/unspecific; U52: Org-directory path bot-gated
+      to CLI; family is router'

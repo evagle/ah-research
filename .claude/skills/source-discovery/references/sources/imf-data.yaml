@@ -1,0 +1,66 @@
+id: imf-data
+name: IMF Data
+aliases:
+- U54
+- IMF Data
+- supplied U54
+publisher_type: official-statistics
+official_domains:
+- imf.org
+- data.imf.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Balance of payments, fiscal, debt, macro surveillance context. High authority for IMF-published
+    data
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.imf.org/en/Data
+    kind: primary route
+    stability: reviewed seed
+  - url: https://data.imf.org/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:imf.org official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - world-bank-data-official-statistics
+  - undata-official-statistics
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.imf.org/en/Data
+  limitation: 'anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for
+    strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats
+    offices.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for
+      strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats
+      offices.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`403` for `https://www.imf.org/en/Data` and `https://data.imf.org/`'
+    recognizable_content: WAF/blocked response from IMF data family
+    access_indications: Not recorded in audit
+    technical_restriction: Bot/WAF-gated to CLI

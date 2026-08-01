@@ -32,15 +32,19 @@ STATUS_TTLS = {
     "broken-link": timedelta(days=7),
     "unverified": timedelta(hours=24),
 }
-ORIGINALITY_BY_PUBLISHER = {
-    "aggregator": "Low",
-    "media": "Low",
-    "mirror": "Low",
-}
-INDEPENDENCE_BY_PUBLISHER = {
-    "aggregator": "Low",
-    "media": "Medium",
-    "mirror": "Low",
+PUBLISHER_SEMANTICS = {
+    "official-exchange": ("High", "High"),
+    "official-regulator": ("High", "High"),
+    "official-statistics": ("High", "High"),
+    "official-government": ("High", "High"),
+    "official-market-infrastructure": ("High", "High"),
+    "issuer-company": ("High", "Low"),
+    "original-research": ("High", "Medium"),
+    "consulting-research": ("High", "Medium"),
+    "commercial-data-provider": ("High", "Medium"),
+    "aggregator": ("Low", "Low"),
+    "media": ("Low", "Medium"),
+    "mirror": ("Low", "Low"),
 }
 
 
@@ -120,8 +124,7 @@ def select_routes(
         authority = _require_str(function, "authority")
         utility = _require_str(function, "utility")
         publisher_type = _require_str(profile, "publisher_type")
-        originality = _originality_for_publisher(publisher_type)
-        independence = _independence_for_publisher(publisher_type)
+        originality, independence = _publisher_semantics(publisher_type)
         direct_url = _first_direct_url(function)
         reachability, last_checked = _resolve_reachability(profile, source_id, cache)
         stale = now - last_checked > ttl_for_status(reachability)
@@ -206,20 +209,11 @@ def _resolve_reachability(
     return status, last_checked
 
 
-def _originality_for_publisher(publisher_type: str) -> str:
-    if publisher_type in ORIGINALITY_BY_PUBLISHER:
-        return ORIGINALITY_BY_PUBLISHER[publisher_type]
-    if publisher_type.startswith("official"):
-        return "High"
-    return "Medium"
-
-
-def _independence_for_publisher(publisher_type: str) -> str:
-    if publisher_type in INDEPENDENCE_BY_PUBLISHER:
-        return INDEPENDENCE_BY_PUBLISHER[publisher_type]
-    if publisher_type.startswith("official"):
-        return "High"
-    return "Medium"
+def _publisher_semantics(publisher_type: str) -> tuple[str, str]:
+    try:
+        return PUBLISHER_SEMANTICS[publisher_type]
+    except KeyError as exc:
+        raise ValueError(f"unsupported publisher type: {publisher_type}") from exc
 
 
 def _parse_aware_datetime(value: str) -> datetime:

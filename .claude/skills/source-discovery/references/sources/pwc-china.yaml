@@ -1,0 +1,60 @@
+id: pwc-china
+name: PwC China
+aliases:
+- U24-PwC
+- PwC China
+- U24
+- supplied U24d PwC China
+publisher_type: consulting-research
+official_domains:
+- pwccn.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: White-paper discovery, research landing pages, China-market insight summaries, surveys, regional
+    market analysis. Medium-to-high authority for PwC-attributable advisory analysis; not official statistics
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.pwccn.com/zh
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:pwccn.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - deloitte-china-research-reports
+  - ey-china-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.pwccn.com/zh
+  limitation: 'public-limited. Branded perspective; uneven access depth across downloadable assets Audited
+    fallback peers: U24-Deloitte, U24-EY, U24-KPMG, U20.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: PwC China homepage links to `research-and-insights`
+    access_indications: Some reports/newsletter/download flows may be form-gated
+    technical_restriction: None recorded

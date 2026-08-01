@@ -1,0 +1,59 @@
+id: tencent-big-data
+name: Tencent Big Data WeChat route
+aliases:
+- U05
+- 腾讯大数据
+- supplied U05
+publisher_type: issuer-company
+official_domains:
+- mp.weixin.qq.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Tencent-published reports when accessed from proper WeChat context. High authority for Tencent's
+    own output
+functions:
+- id: research-reports
+  authority: High
+  utility: Low
+  direct_urls:
+  - url: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MDQ4MzQzMg==&scene=124#wechat_redirect
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:mp.weixin.qq.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable first-party only; independently verify evaluative claims
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+  - iimedia-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MDQ4MzQzMg==&scene=124#wechat_redirect
+  limitation: 'moved/redirected; public-limited. Supplied URL redirects to a WeChat-client surface with
+    verification/open-in-WeChat message Audited fallback peers: U07, U09, U02.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`https://data.qq.com/reports` -> WeChat profile URL'
+    response_status: Destination returned a verification/permission page; numeric status not recorded
+    recognizable_content: WeChat destination tied to Tencent account
+    access_indications: Asked to open in WeChat; verification/permission message
+    technical_restriction: WeChat-client context required for practical use

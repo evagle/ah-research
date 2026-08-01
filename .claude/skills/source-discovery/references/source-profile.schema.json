@@ -35,7 +35,20 @@
     },
     "publisher_type": {
       "type": "string",
-      "minLength": 1
+      "enum": [
+        "official-exchange",
+        "official-regulator",
+        "official-statistics",
+        "official-government",
+        "official-market-infrastructure",
+        "issuer-company",
+        "original-research",
+        "consulting-research",
+        "commercial-data-provider",
+        "aggregator",
+        "media",
+        "mirror"
+      ]
     },
     "official_domains": {
       "type": "array",
@@ -327,8 +340,44 @@
         "observed_error": {
           "$ref": "#/$defs/observedError"
         },
+        "reviewed_probe": {
+          "$ref": "#/$defs/reviewedProbe"
+        },
         "evidence_level": {
           "$ref": "#/$defs/rating"
+        }
+      }
+    },
+    "reviewedProbe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "redirect_chain",
+        "response_status",
+        "recognizable_content",
+        "access_indications",
+        "technical_restriction"
+      ],
+      "properties": {
+        "redirect_chain": {
+          "type": "string",
+          "minLength": 1
+        },
+        "response_status": {
+          "type": "string",
+          "minLength": 1
+        },
+        "recognizable_content": {
+          "type": "string",
+          "minLength": 1
+        },
+        "access_indications": {
+          "type": "string",
+          "minLength": 1
+        },
+        "technical_restriction": {
+          "type": "string",
+          "minLength": 1
         }
       }
     }

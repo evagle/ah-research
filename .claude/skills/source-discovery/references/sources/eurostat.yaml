@@ -1,0 +1,58 @@
+id: eurostat
+name: Eurostat Database
+aliases:
+- U61
+- Eurostat Database
+- supplied U61
+publisher_type: official-statistics
+official_domains:
+- ec.europa.eu
+geographies:
+- EU
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: EU macro, labor, trade, regional, demographic series. High authority for EU harmonized statistics
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://ec.europa.eu/eurostat/data/database
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:ec.europa.eu official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - world-bank-data-official-statistics
+  - undata-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://ec.europa.eu/eurostat/data/database
+  limitation: 'public. Not company-document or announcement source Audited fallback peers: ECB, national
+    statistical offices, World Bank, UNdata.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Eurostat database page
+    access_indications: None recorded
+    technical_restriction: None recorded

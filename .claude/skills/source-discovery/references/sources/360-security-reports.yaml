@@ -1,0 +1,61 @@
+id: 360-security-reports
+name: 360 report portal unresolved
+aliases:
+- U06
+- 360互联网安全中心
+- supplied U06
+publisher_type: issuer-company
+official_domains:
+- zt.360.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Historically vendor security and threat reports if a current official route is found. Unverified
+    authority from current audit; historically High for 360-produced reports
+functions:
+- id: research-reports
+  authority: Low
+  utility: Low
+  direct_urls:
+  - url: https://zt.360.cn/report/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:zt.360.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable first-party only; independently verify evaluative claims
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - tencent-big-data-research-reports
+access:
+  status: unverified
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://zt.360.cn/report/
+  limitation: 'unverified; DNS failure observed on listed host. Current canonical URL not established;
+    point-in-time DNS failure is not permanent closure proof Audited fallback peers: U05, official vendor/security
+    disclosures, other primary security publishers.'
+  observed_error:
+    state: error
+    category: dns
+    message: 'unverified; DNS failure observed on listed host. Current canonical URL not established;
+      point-in-time DNS failure is not permanent closure proof Audited fallback peers: U05, official vendor/security
+      disclosures, other primary security publishers.'
+  evidence_level: Low
+  reviewed_probe:
+    redirect_chain: No redirect target obtained
+    response_status: DNS resolution failure for `https` and `http` listed host
+    recognizable_content: None verified
+    access_indications: Not recorded in audit
+    technical_restriction: DNS failure

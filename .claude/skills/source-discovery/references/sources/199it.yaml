@@ -1,0 +1,59 @@
+id: 199it
+name: 199IT
+aliases:
+- U17
+- 199IT
+- supplied U17
+publisher_type: aggregator
+official_domains:
+- 199it.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Discovering report titles, Chinese summaries, outbound citations to originals. Low-to-medium
+    authority; secondary aggregator/repost outlet
+functions:
+- id: research-reports
+  authority: Low
+  utility: High
+  direct_urls:
+  - url: https://www.199it.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:199it.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+  - idc-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.199it.com/
+  limitation: 'public. Secondary source quality varies; edge reliability inconsistent Audited fallback
+    peers: iResearch, CNNIC, CAICT, IDC, original publisher sites.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`http://199it.com/` and `https://199it.com/` -> `https://www.199it.com/`'
+    response_status: Homepage HTML returned; exact `www` host timed out once
+    recognizable_content: Homepage HTML
+    access_indications: No login required for homepage/article access
+    technical_restriction: Uneven edge behavior; one direct `www` timeout

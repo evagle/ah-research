@@ -1,0 +1,60 @@
+id: jpmorgan
+name: JPMorgan
+aliases:
+- U23
+- JPMorgan
+- supplied U23
+publisher_type: original-research
+official_domains:
+- jpmorgan.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Public outlooks, finance explainers, banking/payments insights, research-theme discovery. High
+    for sell-side finance and macro commentary with house-view bias
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.jpmorgan.com/global
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:jpmorgan.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and conflicts noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - wef-china-research-reports
+  - deloitte-china-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.jpmorgan.com/global
+  limitation: 'public-limited; meaningful public insights, institutional research client/login gated.
+    Not neutral public statistics; not China-specific by default; best research may be client-only Audited
+    fallback peers: WEF China, Deloitte, EY, official central-bank/regulator sources.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Links to `/insights`, `/markets`, `/insights/research`
+    access_indications: Institutional/premium research and some market products client/login gated
+    technical_restriction: None recorded

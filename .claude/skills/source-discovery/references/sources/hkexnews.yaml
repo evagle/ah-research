@@ -1,0 +1,63 @@
+id: hkexnews
+name: HKEXnews
+aliases:
+- C02
+- HKEXnews listed-company search
+- hkex
+- build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL,
+  HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk
+publisher_type: official-exchange
+official_domains:
+- hkexnews.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports,
+    trading halts. High authority for HKEX-published/listed-company documents
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www1.hkexnews.hk/search/titleSearchServlet.do
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:hkexnews.hk annual report
+    result_identity: publisher, issuer, title, date, document ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - hkex-company-disclosures
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www1.hkexnews.hk/listedco/listconews/index/lci.html?lang=zh
+  limitation: 'public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited
+    fallback peers: Issuer IR, SFC, company annual reports.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: HKEX and HKEXnews routes returned `200`
+    recognizable_content: HKEXnews title observed
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit

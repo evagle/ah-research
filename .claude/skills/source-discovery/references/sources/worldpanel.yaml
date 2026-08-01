@@ -1,0 +1,60 @@
+id: worldpanel
+name: Worldpanel by Numerator
+aliases:
+- U32
+- Kantar Worldpanel
+- supplied U32
+publisher_type: commercial-data-provider
+official_domains:
+- market.worldpanelbynumerator.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Consumer-panel methodology, FMCG/retail/shopper trend summaries. High within proprietary consumer-panel
+    measurement
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://market.worldpanelbynumerator.com/global
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:market.worldpanelbynumerator.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+  - mckinsey-china-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://market.worldpanelbynumerator.com/global
+  limitation: 'moved/redirected; public-limited; panel data and commercial deliverables paid. Brand/domain
+    transition; public site lighter than product layer Audited fallback peers: Numerator, NielsenIQ, iResearch,
+    McKinsey.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`https://www.kantarworldpanel.com/global` -> `https://market.worldpanelbynumerator.com/global`'
+    response_status: '`200`'
+    recognizable_content: Worldpanel by Numerator public marketing/insight site
+    access_indications: Full panel datasets and deeper reports paid/commercial
+    technical_restriction: Brand/domain transition

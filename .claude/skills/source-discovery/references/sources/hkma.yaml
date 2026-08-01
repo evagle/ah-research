@@ -1,0 +1,83 @@
+id: hkma
+name: Hong Kong Monetary Authority
+aliases:
+- C09
+- HKMA
+- build_event_manifest hkma; build_market_manifest hkma; domain hkma.gov.hk
+publisher_type: official-regulator
+official_domains:
+- hkma.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Banking circulars, regulatory guidance, monetary/FX statements. High authority for HKMA-published
+    materials
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.hkma.gov.hk/eng
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:hkma.gov.hk official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sfc-regulatory-materials
+  - hk-insurance-authority-regulatory-materials
+- id: market-data
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.hkma.gov.hk/eng
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:hkma.gov.hk market data
+    result_identity: publisher, series or instrument, date, units, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - pbc-market-data
+  - sse-market-data
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.hkma.gov.hk/eng
+  limitation: 'public; region/network-limited. HTTP/2 handling was flaky in CLI; use browser or HTTP/1.1
+    if automation fails Audited fallback peers: SFC, IA, banks'' own disclosures.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Root reached final `https://www.hkma.gov.hk/eng`; intermediate chain not recorded
+    response_status: '`200` when forced to HTTP/1.1'
+    recognizable_content: Not recorded in audit
+    access_indications: Not recorded in audit
+    technical_restriction: HTTP/2 handling was flaky in CLI

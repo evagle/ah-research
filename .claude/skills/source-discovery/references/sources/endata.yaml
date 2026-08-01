@@ -1,0 +1,60 @@
+id: endata
+name: Endata
+aliases:
+- U12
+- 艺恩
+- supplied U12
+publisher_type: commercial-data-provider
+official_domains:
+- endata.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Current AI vertical-data infrastructure and data-product discovery. Medium authority for current
+    vendor-published products; Low for legacy entertainment-report expectation
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Low
+  direct_urls:
+  - url: https://www.endata.com.cn/index.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:endata.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - dydata-research-reports
+  - analysys-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.endata.com.cn/index.html
+  limitation: 'public-limited; sample/download flow requires NDA and subscription-style contact. Source
+    drift from older entertainment/box-office role; NDA and formal contact for samples Audited fallback
+    peers: U02, U07, U09.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK`'
+    recognizable_content: '`AI 垂类数据基础设施` current site content'
+    access_indications: Sample/download flow requires NDA/subscription-style contact
+    technical_restriction: Source drift from legacy entertainment role

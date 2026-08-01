@@ -1,0 +1,59 @@
+id: 199it-housing-tools
+name: 199IT Data Navigation Housing Tools
+aliases:
+- U42
+- 199IT 房价查询
+- supplied U42
+publisher_type: aggregator
+official_domains:
+- hao.199it.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Discovering housing-price tools and downstream portals. Low-to-medium authority as directory
+    only
+functions:
+- id: official-statistics
+  authority: Low
+  utility: Medium
+  direct_urls:
+  - url: http://hao.199it.com/fang.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:hao.199it.com housing statistics
+    result_identity: original publisher, indicator, period, geography, units, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - national-bureau-statistics-official-statistics
+  - beijing-statistics-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://hao.199it.com/fang.html
+  limitation: 'public. Directory quality and outbound link rot; not citable for underlying housing data
+    Audited fallback peers: Fang.com, 国家统计局 housing series, local statistics bureaus.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Title `房价查询工具-199IT数据导航网站--Hao.199it.com`; links out to tools
+    access_indications: None recorded
+    technical_restriction: Directory/link-rot risk

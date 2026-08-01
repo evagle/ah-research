@@ -1,0 +1,59 @@
+id: toobigdata
+name: TooBigData Douyin tag route
+aliases:
+- U38
+- ToBigData
+- supplied U38
+publisher_type: media
+official_domains:
+- toobigdata.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Practitioner commentary, growth/ops context, adjacent Douyin articles. Low-to-medium authority;
+    not official Douyin data owner
+functions:
+- id: research-reports
+  authority: Low
+  utility: Medium
+  direct_urls:
+  - url: https://toobigdata.com/tag/douyin/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:toobigdata.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - newrank-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://toobigdata.com/tag/douyin/
+  limitation: 'moved/redirected; supplied path 404 but domain and Douyin tag route live. Broken supplied
+    path; informal methodology; not final citation Audited fallback peers: 新榜, 巨量引擎, 巨量算数, QuestMobile,
+    platform originals.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Supplied path returned canonical same path; root/tag route live
+    response_status: Supplied path `404`; root `200`; tag route discoverable
+    recognizable_content: Root title `TooBigData - 广告运营、增长、AI 与数据手记`
+    access_indications: None recorded
+    technical_restriction: Supplied path broken

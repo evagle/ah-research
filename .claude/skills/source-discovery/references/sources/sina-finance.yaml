@@ -1,0 +1,59 @@
+id: sina-finance
+name: Sina Finance
+aliases:
+- C14
+- 新浪财经
+- evaluated candidate from audit core recommendations
+publisher_type: media
+official_domains:
+- finance.sina.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Fast company/news/topic discovery, quote and announcement navigation, app/portal leads. Medium
+    as major media/aggregator; not official
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://finance.sina.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:finance.sina.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - eastmoney-research-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://finance.sina.com.cn/
+  limitation: 'public. Not primary evidence; every material fact must trace to exchange, company, regulator,
+    court, or original report source Audited fallback peers: Eastmoney portal, issuer IR, official exchanges,
+    official regulators.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: '`200`'
+    recognizable_content: Stock portal title observed; exact title not recorded
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit

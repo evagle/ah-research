@@ -1,0 +1,89 @@
+id: sec-edgar
+name: SEC and EDGAR
+aliases:
+- U60
+- SEC
+- supplied U60
+publisher_type: official-regulator
+official_domains:
+- sec.gov
+geographies:
+- US
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Original US filings, enforcement, prospectuses, no-action letters. High authority for SEC-published
+    filings and enforcement material
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.sec.gov/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.sec.gov/edgar/search/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:sec.gov annual report
+    result_identity: publisher, issuer, title, date, document ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sse-company-disclosures
+  - szse-company-disclosures
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.sec.gov/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.sec.gov/edgar/search/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:sec.gov official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - us-commerce-regulatory-materials
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.sec.gov/
+  limitation: 'public-limited; public with rate limits and user-agent expectations. Generic scraping can
+    trigger rate/risk pages; careful request hygiene required Audited fallback peers: Company IR, exchange
+    notices, press releases.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200` for SEC root with descriptive user-agent and EDGAR search'
+    recognizable_content: SEC root and EDGAR search
+    access_indications: None recorded
+    technical_restriction: Generic scraping can trigger rate/risk pages; careful user-agent/rate needed

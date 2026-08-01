@@ -1,0 +1,59 @@
+id: dydata
+name: DYData
+aliases:
+- U02
+- 镝数聚
+- supplied U02
+publisher_type: aggregator
+official_domains:
+- dydata.io
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Broad discovery of industry reports, datasets, charts, and supplier ecosystems. Medium authority;
+    multi-supplier aggregator
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.dydata.io/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:dydata.io industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+  - iimedia-research-reports
+access:
+  status: paywalled
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.dydata.io/
+  limitation: 'membership/paywalled; public previews with VIP/member prompts. Source quality varies by
+    upstream shop; many downloads are gated Audited fallback peers: U07, U09, U15, U16.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK`'
+    recognizable_content: Homepage, previews, listing pages
+    access_indications: '`会员特惠`, `注册/登录`, `buy vip`, member dialogs, report/download language'
+    technical_restriction: None recorded

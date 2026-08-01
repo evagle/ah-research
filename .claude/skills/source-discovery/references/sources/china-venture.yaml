@@ -1,0 +1,59 @@
+id: china-venture
+name: ChinaVenture
+aliases:
+- U16
+- 投中网
+- supplied U16
+publisher_type: media
+official_domains:
+- chinaventure.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: VC/PE trend tracking, financing environment, industry commentary, research reports. Medium-high
+    commercial/media authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.chinaventure.com.cn/index.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:chinaventure.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - it-juzi-research-reports
+  - dydata-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.chinaventure.com.cn/index.html
+  limitation: 'public-limited; public research lists plus login/register controls. Some premium or personalized
+    features may require login; not a primary registry Audited fallback peers: U15, U02, U09.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK`; report list page reachable'
+    recognizable_content: Homepage and research-list pages
+    access_indications: Login/register controls
+    technical_restriction: None recorded

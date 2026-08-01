@@ -1,0 +1,61 @@
+id: kpmg-china
+name: KPMG China
+aliases:
+- U24-KPMG
+- KPMG China
+- U24
+- supplied U24c KPMG China
+publisher_type: consulting-research
+official_domains:
+- kpmg.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Insight archive browsing, China tax alerts, economic monitors, M&A, regulatory, and enterprise
+    trend reports. Medium-to-high authority for KPMG-attributable advisory analysis; not official statistics
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://kpmg.com/cn/zh.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:kpmg.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - deloitte-china-research-reports
+  - ey-china-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://kpmg.com/cn/zh.html
+  limitation: 'moved/redirected; public-limited. Consulting/accounting-house perspective; variable methodological
+    transparency; some premium assets may sit behind forms Audited fallback peers: U24-Deloitte, U24-EY,
+    U24-PwC, U29.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`https://home.kpmg/cn/zh/home.html` -> `https://kpmg.com/cn/zh.html`'
+    response_status: '`200`'
+    recognizable_content: KPMG China live insights archive
+    access_indications: Some PDFs/downloadables may be gated/contact-driven
+    technical_restriction: None recorded

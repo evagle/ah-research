@@ -1,0 +1,60 @@
+id: roland-berger
+name: Roland Berger China context
+aliases:
+- U25
+- Roland Berger China
+- supplied U25
+publisher_type: consulting-research
+official_domains:
+- rolandberger.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Operations, manufacturing, automotive, energy transition, industry strategy topics relevant to
+    China. Medium-to-high consulting authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  direct_urls:
+  - url: https://www.rolandberger.com/en/?country=CN
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:rolandberger.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - mckinsey-china-research-reports
+  - bcg-china-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.rolandberger.com/en/?country=CN
+  limitation: 'moved/redirected; public. Chinese-local guessed path returned 404; public experience mostly
+    English/global with China context Audited fallback peers: McKinsey, BCG, Bain, PwC.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Supplied URL redirected to `https://www.rolandberger.com/en/?country=CN`; guessed
+      `zh-cn` path returned `404`
+    response_status: '`200` for canonical; `404` for guessed Chinese path'
+    recognizable_content: Roland Berger global English site with China country context
+    access_indications: Some downloads/lead-generation flows may be gated
+    technical_restriction: Locale/path drift

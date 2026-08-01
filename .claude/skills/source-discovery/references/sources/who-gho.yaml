@@ -1,0 +1,59 @@
+id: who-gho
+name: WHO Global Health Observatory
+aliases:
+- U55
+- WHO World Health Data Platform
+- supplied U55
+publisher_type: official-statistics
+official_domains:
+- who.int
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Health indicators, disease burden, mortality, public-health context. High authority for WHO-published
+    health indicators
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.who.int/data/gho
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:who.int official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - undata-official-statistics
+  - world-bank-data-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.who.int/data/gho
+  limitation: 'public. Not relevant for filings or regulatory letters Audited fallback peers: UNdata,
+    World Bank, national health ministries.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200` for `https://www.who.int/data/gho` and `https://www.who.int/data`'
+    recognizable_content: WHO data pages
+    access_indications: None recorded
+    technical_restriction: None recorded

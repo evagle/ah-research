@@ -1,0 +1,82 @@
+id: pbc
+name: People's Bank of China
+aliases:
+- U50
+- PBOC
+- supplied U50; code ID pbc in build_event_manifest and build_market_manifest
+publisher_type: official-regulator
+official_domains:
+- pbc.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Monetary policy notices, official announcements, statistics landing pages. High authority for
+    PBOC-published policy and central-bank data
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.pbc.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:pbc.gov.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - nfra-regulatory-materials
+- id: market-data
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.pbc.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:pbc.gov.cn market data
+    result_identity: publisher, series or instrument, date, units, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - china-money-market-data
+  - sse-market-data
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.pbc.gov.cn/
+  limitation: 'moved/redirected; public. Interbank market notices/reference data may be more operational
+    on ChinaMoney Audited fallback peers: Chinamoney, NFRA, CSRC, MOF.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`http://www.pbc.gov.cn` -> `https://www.pbc.gov.cn/`'
+    response_status: '`200`'
+    recognizable_content: Official PBOC site
+    access_indications: None recorded
+    technical_restriction: None recorded

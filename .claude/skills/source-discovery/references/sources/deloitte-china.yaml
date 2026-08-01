@@ -1,0 +1,60 @@
+id: deloitte-china
+name: Deloitte China
+aliases:
+- U24-Deloitte
+- Deloitte China
+- U24
+- supplied U24a Deloitte China
+publisher_type: consulting-research
+official_domains:
+- deloitte.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Survey-based insights, issue briefs, China market/business policy commentary, research landing
+    pages. Medium-to-high authority for Deloitte-attributable advisory analysis; not official statistics
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.deloitte.com/cn/zh.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:deloitte.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - ey-china-research-reports
+  - kpmg-china-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.deloitte.com/cn/zh.html
+  limitation: 'moved/redirected; public-limited. Branded perspective; variable methodological depth; some
+    deeper downloads may ask for contact details Audited fallback peers: U24-EY, U24-KPMG, U24-PwC, U20.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`https://www2.deloitte.com/cn/zh.html` -> `https://www.deloitte.com/cn/zh.html`'
+    response_status: '`200`'
+    recognizable_content: Deloitte China public site and research pages
+    access_indications: Some PDFs/download assets may be form-gated
+    technical_restriction: None recorded

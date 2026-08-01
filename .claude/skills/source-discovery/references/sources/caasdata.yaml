@@ -1,0 +1,62 @@
+id: caasdata
+name: CaaSData
+aliases:
+- U13
+- 卡思数据
+- supplied U13
+publisher_type: commercial-data-provider
+official_domains:
+- caasdata.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Unconfirmed; historically creator and content-marketing data. Current authority unverified from
+    first-party web responses
+functions:
+- id: research-reports
+  authority: Low
+  utility: Low
+  direct_urls:
+  - url: https://www.caasdata.com/index/index/index.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:caasdata.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - dydata-research-reports
+  - iimedia-research-reports
+access:
+  status: unverified
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.caasdata.com/index/index/index.html
+  limitation: 'unverified; region/network-limited possible; DNS resolved but web connections failed. May
+    be down, network-limited, or moved; no permanent closure inference Audited fallback peers: U02, U09,
+    U07.'
+  observed_error:
+    state: error
+    category: network
+    message: 'unverified; region/network-limited possible; DNS resolved but web connections failed. May
+      be down, network-limited, or moved; no permanent closure inference Audited fallback peers: U02,
+      U09, U07.'
+  evidence_level: Low
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: DNS resolved to `103.86.45.203`; HTTP/S web connections failed
+    recognizable_content: None verified
+    access_indications: Not recorded in audit
+    technical_restriction: Web connections failed from audit network

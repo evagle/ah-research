@@ -1,0 +1,61 @@
+id: aladdin-index
+name: Aladdin Index
+aliases:
+- U37
+- 阿拉丁指数
+- supplied U37
+publisher_type: commercial-data-provider
+official_domains:
+- aldzs.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Use only after fresh browser/manual verification for mini-program trend discovery. Historical
+    vendor authority possible; current live service not confirmed
+functions:
+- id: research-reports
+  authority: Low
+  utility: Low
+  direct_urls:
+  - url: https://www.aldzs.com/bg
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:aldzs.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - newrank-research-reports
+access:
+  status: unverified
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.aldzs.com/bg
+  limitation: 'unverified; region/network-limited possible; HTTP/S timed out from audit vantage. No content/freshness/access
+    policy verified; not permanent closure proof Audited fallback peers: QuestMobile, 新榜, platform reports,
+    微信公开课.'
+  observed_error:
+    state: error
+    category: timeout
+    message: 'unverified; region/network-limited possible; HTTP/S timed out from audit vantage. No content/freshness/access
+      policy verified; not permanent closure proof Audited fallback peers: QuestMobile, 新榜, platform reports,
+      微信公开课.'
+  evidence_level: Low
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: DNS resolved, but HTTP/S timed out
+    recognizable_content: None verified
+    access_indications: Not recorded in audit
+    technical_restriction: HTTP/S timeout from audit vantage

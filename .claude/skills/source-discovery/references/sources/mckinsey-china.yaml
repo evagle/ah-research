@@ -1,0 +1,60 @@
+id: mckinsey-china
+name: McKinsey Greater China
+aliases:
+- U20
+- 麦肯锡中国
+- supplied U20
+publisher_type: consulting-research
+official_domains:
+- mckinsey.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Executive sector synthesis, strategic themes, China business context. Medium-to-high authority
+    for consulting analysis; not raw official data
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.mckinsey.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:mckinsey.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - bcg-china-research-reports
+  - bain-china-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.mckinsey.com.cn/
+  limitation: 'public-limited; public insights with possible registration/contact gating. Lighter on raw
+    tables; consulting framing; client work unavailable Audited fallback peers: BCG, Bain, Roland Berger,
+    Deloitte, EY, PwC, KPMG.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: McKinsey China site; `/insights/` section exposed
+    access_indications: Some downloads/campaign assets may ask registration/contact info
+    technical_restriction: None recorded

@@ -1,0 +1,59 @@
+id: nfra
+name: National Financial Regulatory Administration
+aliases:
+- C05
+- NFRA
+- build_event_manifest nfra; domain nfra.gov.cn
+publisher_type: official-regulator
+official_domains:
+- nfra.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Banking/insurance supervision notices, measures, enforcement, official announcements. High authority
+    for NFRA-published materials
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.nfra.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:nfra.gov.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - pbc-regulatory-materials
+  - csrc-regulatory-materials
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.nfra.gov.cn/
+  limitation: 'public. Older CBIRC-era materials may need historical path work Audited fallback peers:
+    PBOC, CSRC, State Council, institutions'' own sites.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: '`200`'
+    recognizable_content: Title `国家金融监督管理总局`
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit

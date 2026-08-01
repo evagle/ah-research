@@ -1,0 +1,62 @@
+id: wto-stats
+name: WTO Stats
+aliases:
+- U57
+- WTO Statistics
+- supplied U57
+publisher_type: official-statistics
+official_domains:
+- stats.wto.org
+- timeseries.wto.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Trade flows, tariff indicators, country trade profiles. High authority for WTO-published trade
+    data
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://stats.wto.org/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://timeseries.wto.org/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:stats.wto.org official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - world-bank-data-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://stats.wto.org/
+  limitation: 'public. Not primary for company/regulator documents Audited fallback peers: UN Comtrade,
+    World Bank, national customs/trade agencies.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200` for `https://stats.wto.org/` and `https://timeseries.wto.org/`'
+    recognizable_content: Title `WTO Stats`
+    access_indications: None recorded
+    technical_restriction: None recorded

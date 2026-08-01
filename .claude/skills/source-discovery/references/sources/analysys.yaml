@@ -1,0 +1,59 @@
+id: analysys
+name: Analysys
+aliases:
+- U07
+- 易观分析
+- supplied U07
+publisher_type: commercial-data-provider
+official_domains:
+- analysys.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Mobile internet, app rankings, digital user behavior, market trend explainers. Medium-high commercial
+    authority; proprietary methodology
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.analysys.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:analysys.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - dydata-research-reports
+  - iimedia-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.analysys.cn/
+  limitation: 'public-limited; public articles with subscription products. Vendor-owned metrics; not primary
+    transaction, filing, or official data Audited fallback peers: U02, U09, U12.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` for homepage and article detail'
+    recognizable_content: Public article content; Analysys marketing pages
+    access_indications: Login/register controls and subscription products `易观千帆`, `博阅`
+    technical_restriction: None recorded

@@ -1,0 +1,71 @@
+id: eastmoney-research
+name: Eastmoney Research Center
+aliases:
+- U36
+- 东方财富研报
+- download_research
+- supplied U36; core downloader origin download_research RESEARCH_LIST_URL and PDF_URL_TEMPLATE; domains
+  reportapi.eastmoney.com, pdf.dfcfw.com, eastmoney.com
+publisher_type: aggregator
+official_domains:
+- data.eastmoney.com
+- reportapi.eastmoney.com
+- pdf.dfcfw.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Broker report discovery, analyst coverage scans, topic/company report aggregation, and report-download
+    route discovery. Medium; aggregator index, original brokers hold authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://data.eastmoney.com/report/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://reportapi.eastmoney.com/report/list
+    kind: direct route
+    stability: reviewed seed
+  - url: https://pdf.dfcfw.com/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:data.eastmoney.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - cicc-research-research-reports
+  - fenghuo-research-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://data.eastmoney.com/report/
+  limitation: 'public-limited. Secondary host; API is undocumented/brittle; broker methods/conflicts vary;
+    always trace material facts to original broker, issuer, exchange, or regulator source Audited fallback
+    peers: CICC Research, broker portals, Wind, Choice, U63, C01, U10, U11.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`http://data.eastmoney.com/report/` -> `https://data.eastmoney.com/report/`; API
+      base and sample checked in core audit'
+    response_status: Portal `200`; API base `404`; sample API list request `500`
+    recognizable_content: Portal title `研报中心`; public report index/metadata
+    access_indications: Deeper report access depends on source/clickthrough
+    technical_restriction: Undocumented API brittle

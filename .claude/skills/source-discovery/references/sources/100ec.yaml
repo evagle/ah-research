@@ -1,0 +1,61 @@
+id: 100ec
+name: 100EC
+aliases:
+- U39
+- 网经社 / 100EC
+- supplied U39
+publisher_type: media
+official_domains:
+- 100ec.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Ecommerce sector landscape, chronology, report discovery. Medium for curated secondary context;
+    weaker than official/platform filings for hard numbers
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  direct_urls:
+  - url: http://www.100ec.cn/zt/wmds/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:100ec.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - 36kr-research-reports
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://www.100ec.cn/zt/wmds/
+  limitation: 'anti-bot/technical-limited; public browser likely, JS cookie security check observed. Media/consultancy
+    framing, unclear methodology for some claims, secondary-source risk Audited fallback peers: 国家统计局,
+    商务部, company disclosures, 36Kr.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public browser likely, JS cookie security check observed. Media/consultancy
+      framing, unclear methodology for some claims, secondary-source risk Audited fallback peers: 国家统计局,
+      商务部, company disclosures, 36Kr.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: Server returned `200`
+    recognizable_content: JS cookie security check `正在进行安全检查，请稍候...`
+    access_indications: Not recorded in audit
+    technical_restriction: JS cookie security challenge

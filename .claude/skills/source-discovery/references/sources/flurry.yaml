@@ -1,0 +1,59 @@
+id: flurry
+name: Flurry
+aliases:
+- U33
+- Flurry
+- supplied U33
+publisher_type: commercial-data-provider
+official_domains:
+- flurry.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: App engagement framing, category trend references, vendor methodology discovery. Strong for Flurry
+    SDK telemetry; weaker as universal market proxy
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  direct_urls:
+  - url: https://www.flurry.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:flurry.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.flurry.com/
+  limitation: 'public-limited; marketing/docs public, analytics data requires account/instrumented apps.
+    Sample bias; limited transparency into panel composition; product-led framing Audited fallback peers:
+    data.ai, Sensor Tower, Statcounter, official app-store analytics.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Canonical tag matches supplied URL
+    response_status: '`200`'
+    recognizable_content: Title `Flurry \| Mobile App Analytics Platform for Android & iOS`
+    access_indications: Actual analytics data requires product account/instrumented apps
+    technical_restriction: None recorded

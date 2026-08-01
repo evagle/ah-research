@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import ast
 import re
+import subprocess
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -10,8 +12,10 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_ROOT = REPO_ROOT / ".claude" / "skills"
 SKILL_ROOT = SKILLS_ROOT / "source-discovery"
-SOURCE_RECORD_START_PATTERN = re.compile(r"(?m)^(?:\|\s*)?`?(U\d{2})`?(?:\s*\||\b).*$")
-EVIDENCE_LEVEL_PATTERN = re.compile(r"(?:`(?:High|Medium|Low)`|\b(?:High|Medium|Low)\b)")
+PROFILES_ROOT = SKILL_ROOT / "references" / "sources"
+SNAPSHOT_PATH = SKILL_ROOT / "references" / "reachability-snapshot.json"
+CATALOG_PATH = SKILL_ROOT / "references" / "source-catalog.md"
+CATALOG_BUILDER_PATH = SKILL_ROOT / "scripts" / "build_source_catalog.py"
 
 
 def read(path: Path) -> str:
@@ -83,64 +87,6 @@ def provider_domains_from_urls(path: Path, *names: str) -> set[str]:
     return normalized
 
 
-def source_record_blocks(catalog: str) -> dict[str, str]:
-    matches = list(SOURCE_RECORD_START_PATTERN.finditer(catalog))
-    records: dict[str, str] = {}
-    for index, match in enumerate(matches):
-        source_id = match.group(1)
-        end = matches[index + 1].start() if index + 1 < len(matches) else len(catalog)
-        records.setdefault(source_id, catalog[match.start() : end])
-    return records
-
-
-def markdown_table(catalog: str, marker: str) -> list[list[str]]:
-    lines = catalog.splitlines()
-    marker_index = next(index for index, line in enumerate(lines) if line.strip() == marker)
-    table_lines: list[str] = []
-    for line in lines[marker_index + 1 :]:
-        stripped = line.strip()
-        if not table_lines:
-            if stripped.startswith("ID |") or stripped.startswith("| ID |"):
-                table_lines.append(stripped)
-            continue
-        if "|" not in stripped:
-            break
-        table_lines.append(stripped)
-
-    assert len(table_lines) >= 2, f"missing table after {marker}"
-    return [markdown_table_cells(line) for line in table_lines]
-
-
-def markdown_table_cells(line: str) -> list[str]:
-    stripped = line.strip()
-    if stripped.startswith("|"):
-        stripped = stripped[1:]
-    if stripped.endswith("|") and not stripped.endswith(r"\|"):
-        stripped = stripped[:-1]
-
-    cells: list[str] = []
-    current: list[str] = []
-    escaped = False
-    for character in stripped:
-        if escaped:
-            current.append(character)
-            escaped = False
-        elif character == "\\":
-            current.append(character)
-            escaped = True
-        elif character == "|":
-            cells.append("".join(current).strip())
-            current = []
-        else:
-            current.append(character)
-    cells.append("".join(current).strip())
-    return cells
-
-
-def table_data_rows(table: list[list[str]]) -> list[list[str]]:
-    return table[2:]
-
-
 def assert_contains_all(text: str, phrases: tuple[str, ...]) -> None:
     for phrase in phrases:
         assert phrase in text
@@ -199,93 +145,89 @@ def test_runtime_loads_catalog_before_known_source_routing() -> None:
 
 
 def test_source_catalog_preserves_every_supplied_entry() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
+    catalog = require_text(CATALOG_PATH)
     for number in range(1, 64):
         assert f"U{number:02d}" in catalog
 
 
-def test_catalog_tables_have_consistent_and_expected_structure() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
-    tables = {
-        "Record fields:": 14,
-        "## Reliability Ratings": 6,
-        "## Probe Facts": 7,
-        "## Existing-Core Sources": 14,
-        "### Existing-Core Reliability Ratings": 6,
-        "### Existing-Core Probe Facts": 7,
-    }
+def test_generated_source_catalog_matches_committed_content(tmp_path: Path) -> None:
+    assert CATALOG_BUILDER_PATH.is_file()
+    generated = tmp_path / "source-catalog.md"
 
-    for marker, expected_columns in tables.items():
-        table = markdown_table(catalog, marker)
-        header_columns = len(table[0])
-        for row_number, row in enumerate(table[1:], start=2):
-            assert len(row) == header_columns, (
-                f"{marker} row {row_number} has {len(row)} columns; "
-                f"expected {header_columns}: {row}"
-            )
-        assert header_columns == expected_columns, (
-            f"{marker} has {header_columns} columns; expected {expected_columns}"
-        )
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CATALOG_BUILDER_PATH),
+            "--profiles",
+            str(PROFILES_ROOT),
+            "--snapshot",
+            str(SNAPSHOT_PATH),
+            "--output",
+            str(generated),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert generated.read_bytes() == CATALOG_PATH.read_bytes()
 
 
-def test_catalog_preserves_required_special_records_and_subrecords() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
-    routing_rows = table_data_rows(markdown_table(catalog, "Record fields:"))
-    rating_rows = table_data_rows(markdown_table(catalog, "## Reliability Ratings"))
-    probe_rows = table_data_rows(markdown_table(catalog, "## Probe Facts"))
-    core_rows = table_data_rows(markdown_table(catalog, "## Existing-Core Sources"))
-    rows_by_id = {row[0]: row for row in routing_rows + core_rows}
+def test_catalog_check_reports_drift_without_overwriting_output(tmp_path: Path) -> None:
+    output = tmp_path / "source-catalog.md"
+    output.write_text("stale catalog\n", encoding="utf-8")
 
-    required_supplied_ids = {
-        *(f"U{number:02d}" for number in range(1, 64)),
-        "U24",
-        "U24-Deloitte",
-        "U24-EY",
-        "U24-KPMG",
-        "U24-PwC",
-        "U43",
-        "U43-PwC",
-        "U43-Pew",
-        "U48",
-        "U52",
-        "U53",
-    }
-    for rows in (routing_rows, rating_rows, probe_rows):
-        assert required_supplied_ids <= {row[0] for row in rows}
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CATALOG_BUILDER_PATH),
+            "--profiles",
+            str(PROFILES_ROOT),
+            "--snapshot",
+            str(SNAPSHOT_PATH),
+            "--output",
+            str(output),
+            "--check",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
 
-    assert "Shanghai Stock Exchange" in rows_by_id["U10"][1]
-    assert "HKEXnews" in rows_by_id["C02"][1]
-    assert "Sina Finance" in rows_by_id["C14"][1]
+    assert result.returncode == 1
+    assert "out of date" in result.stderr
+    assert output.read_text(encoding="utf-8") == "stale catalog\n"
 
 
 def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
+    catalog = require_text(CATALOG_PATH)
     for field in (
-        "ID",
-        "canonical source",
-        "supplied alias",
-        "origin/code ID",
-        "category",
-        "canonical URL",
-        "best uses",
-        "accuracy",
-        "utility",
-        "access status/access model",
-        "limitations",
-        "recommended fallback peers",
-        "last checked",
-        "evidence level",
+        "Publisher type",
+        "Official domains",
+        "Function",
+        "Direct links",
+        "Authority",
+        "Utility",
+        "Current status",
+        "Last checked",
+        "Access limitations",
+        "Same-function fallbacks",
+        "Evidence level",
+        "Site guide",
     ):
         assert field in catalog
     for access_status in (
-        "public",
-        "public-limited",
+        "reachable",
+        "reachable-limited",
         "login-required",
-        "membership/paywalled",
-        "anti-bot/technical-limited",
-        "region/network-limited",
-        "moved/redirected",
-        "unavailable",
+        "paywalled",
+        "anti-bot",
+        "temporarily-unreachable",
+        "moved",
+        "broken-link",
         "unverified",
     ):
         assert access_status in catalog
@@ -294,7 +236,7 @@ def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
 
 
 def test_catalog_ratings_are_best_use_route_priors_not_claim_grades() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
+    catalog = require_text(CATALOG_PATH)
     skill = require_text(SKILL_ROOT / "SKILL.md")
     normalized_skill = " ".join(skill.split())
     assert_contains_all(
@@ -306,36 +248,13 @@ def test_catalog_ratings_are_best_use_route_priors_not_claim_grades() -> None:
     )
     assert "Calculate `conclusion_evidence` at runtime for the actual claim" in (normalized_skill)
 
-    for marker in (
-        "## Reliability Ratings",
-        "### Existing-Core Reliability Ratings",
-    ):
-        table = markdown_table(catalog, marker)
-        assert table[0] == [
-            "ID",
-            "source authority route prior",
-            "practical utility route prior",
-            "current reachability",
-            "runtime conclusion evidence",
-            "rating evidence level",
-        ]
-        for row in table_data_rows(table):
-            assert row[4] == "Calculate per claim"
-
 
 def test_every_source_record_and_access_conclusion_has_explicit_evidence_level() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
-    records = source_record_blocks(catalog)
-    for number in range(1, 64):
-        source_id = f"U{number:02d}"
-        assert source_id in records
-        assert EVIDENCE_LEVEL_PATTERN.search(records[source_id])
-
-    for row in table_data_rows(markdown_table(catalog, "## Reliability Ratings")):
-        assert all(value in {"High", "Medium", "Low"} for value in row[1:4])
-        assert EVIDENCE_LEVEL_PATTERN.fullmatch(row[5])
-    for row in table_data_rows(markdown_table(catalog, "## Probe Facts")):
-        assert EVIDENCE_LEVEL_PATTERN.fullmatch(row[6])
+    catalog = require_text(CATALOG_PATH)
+    source_sections = re.split(r"(?m)^## ", catalog)[1:]
+    assert source_sections
+    for section in source_sections:
+        assert re.search(r"(?m)^- Evidence level: `(High|Medium|Low)`$", section)
 
     combined = "\n".join(
         (
@@ -375,20 +294,10 @@ def test_verified_mirror_exception_is_narrow_and_downgraded() -> None:
 
 
 def test_existing_core_sources_have_ratings_and_durable_probe_facts() -> None:
-    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
-    expected_ids = {f"C{number:02d}" for number in range(1, 15)}
-    rating_rows = table_data_rows(markdown_table(catalog, "### Existing-Core Reliability Ratings"))
-    probe_rows = table_data_rows(markdown_table(catalog, "### Existing-Core Probe Facts"))
-
-    assert {row[0] for row in rating_rows} == expected_ids
-    assert {row[0] for row in probe_rows} == expected_ids
-    for row in rating_rows:
-        assert all(value in {"High", "Medium", "Low"} for value in row[1:4])
-        assert row[4] == "Calculate per claim"
-        assert EVIDENCE_LEVEL_PATTERN.fullmatch(row[5])
-    for row in probe_rows:
-        assert "Not recorded in audit" in row
-        assert EVIDENCE_LEVEL_PATTERN.fullmatch(row[6])
+    catalog = require_text(CATALOG_PATH)
+    for number in range(1, 15):
+        assert f"C{number:02d}" in catalog
+    assert "Not recorded in audit" in catalog
 
 
 def test_source_catalog_is_seed_registry_not_closed_allowlist() -> None:

@@ -1,0 +1,59 @@
+id: bain-china
+name: Bain China
+aliases:
+- U22
+- 贝恩中国 / Bain China
+- supplied U22
+publisher_type: consulting-research
+official_domains:
+- bain.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Local Bain viewpoints, press releases, high-level China business commentary. Medium-to-high consulting
+    authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  direct_urls:
+  - url: https://www.bain.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:bain.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - mckinsey-china-research-reports
+  - bcg-china-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.bain.cn/
+  limitation: 'public. China site can be shallower than global research archives; full studies may be
+    gated elsewhere Audited fallback peers: McKinsey, BCG, Roland Berger, PwC.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Bain China homepage and linked news/info pages
+    access_indications: Deeper thought leadership may be gated elsewhere; no homepage login required
+    technical_restriction: None recorded

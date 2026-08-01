@@ -1,0 +1,105 @@
+id: szse
+name: Shenzhen Stock Exchange
+aliases:
+- U11
+- 深圳证券交易所
+- supplied U11; code IDs szse in build_event_manifest and build_market_manifest
+publisher_type: official-exchange
+official_domains:
+- szse.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: SZSE disclosures, rulebooks, notices, REIT/bond/equity information, official stats. High authority
+    for SZSE-published official materials
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  direct_urls:
+  - url: http://www.szse.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:szse.cn annual report
+    result_identity: publisher, issuer, title, date, document ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sse-company-disclosures
+  - cninfo-company-disclosures
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: http://www.szse.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:szse.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sse-regulatory-materials
+- id: market-data
+  authority: High
+  utility: High
+  direct_urls:
+  - url: http://www.szse.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:szse.cn market data
+    result_identity: publisher, series or instrument, date, units, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sse-market-data
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://www.szse.cn/
+  limitation: 'public. Not a research synthesis layer; pair with secondary interpretation where needed
+    Audited fallback peers: U10, U01, U03, C01.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` on full GET; one HEAD-style attempt reset connection'
+    recognizable_content: Exchange content; public HTML/PDF document references
+    access_indications: Member zones clearly labeled separately
+    technical_restriction: HEAD-style connection reset observed; body fetch succeeded

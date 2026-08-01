@@ -1,0 +1,62 @@
+id: 36kr
+name: 36Kr
+aliases:
+- U44
+- 36氪
+- supplied U44
+publisher_type: media
+official_domains:
+- 36kr.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Startup/business news discovery, company/event tracking, report/interview leads. Medium media
+    authority; not primary for most underlying facts
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://36kr.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:36kr.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - it-juzi-research-reports
+  - china-venture-research-reports
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://36kr.com/
+  limitation: 'anti-bot/technical-limited; public browser likely but scripted body security-check page.
+    Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press
+    releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public browser likely but scripted body security-check page.
+      Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company
+      press releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: Canonical root used
+    response_status: '`200` but body is security-check page'
+    recognizable_content: Volcano Engine security-check page `正在进行安全检测...`
+    access_indications: Not recorded in audit
+    technical_restriction: Security gate blocks scripted body access

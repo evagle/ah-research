@@ -1,0 +1,128 @@
+id: sse
+name: Shanghai Stock Exchange
+aliases:
+- U10
+- 上海证券交易所
+- supplied U10; core code IDs sse in build_event_manifest.SOURCE_DOMAINS and build_market_manifest.SOURCE_DOMAINS;
+  domain sse.com.cn
+publisher_type: official-exchange
+official_domains:
+- sse.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: SSE listed-company disclosures, rules, notices, IPO/bond/REIT information, inquiry letters, official
+    market data, and official site search routing. High authority for SSE-published filings, notices,
+    rules, inquiry letters, and market data
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.sse.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/
+    kind: direct route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/home/search/?webswd=贵州茅台
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:sse.com.cn annual report
+    result_identity: publisher, issuer, title, date, document ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - szse-company-disclosures
+  - cninfo-company-disclosures
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.sse.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/
+    kind: direct route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/home/search/?webswd=贵州茅台
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:sse.com.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - szse-regulatory-materials
+- id: market-data
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.sse.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/disclosure/credibility/supervision/inquiries/
+    kind: direct route
+    stability: reviewed seed
+  - url: https://www.sse.com.cn/home/search/?webswd=贵州茅台
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:sse.com.cn market data
+    result_identity: publisher, series or instrument, date, units, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - szse-market-data
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.sse.com.cn/
+  limitation: 'public. Not a synthesis/research portal; use search-result summaries only to route back
+    to official announcements, inquiry letters, issuer replies, or regulator originals Audited fallback
+    peers: U11, C01, U01, U03.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect observed for audited root; core routes also checked
+    response_status: '`200 OK`; inquiries `200`; SSE search for `贵州茅台` `200`'
+    recognizable_content: Official SSE branding, investor/member sections, disclosure/rule content; inquiries
+      title `监管问询`
+    access_indications: Member areas exist but are separate
+    technical_restriction: None recorded; search route is routing aid only, not final evidence above original
+      announcement

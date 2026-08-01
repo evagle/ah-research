@@ -1,0 +1,62 @@
+id: xueqiu
+name: Xueqiu
+aliases:
+- U35
+- 雪球
+- supplied U35
+publisher_type: aggregator
+official_domains:
+- xueqiu.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: China-market sentiment, ticker/topic discovery, investor narrative tracking. Mixed authority;
+    platform/UGC, not primary securities facts
+functions:
+- id: research-reports
+  authority: Low
+  utility: Medium
+  direct_urls:
+  - url: https://xueqiu.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:xueqiu.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - eastmoney-research-research-reports
+  - sina-finance-research-reports
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://xueqiu.com/
+  limitation: 'anti-bot/technical-limited; partial open browsing plus account needs. UGC noise, promotional/manipulated
+    content risk, edits/deletions Audited fallback peers: SSE, SZSE, HKEX, company IR, Eastmoney, Wind,
+    Choice.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; partial open browsing plus account needs. UGC noise, promotional/manipulated
+      content risk, edits/deletions Audited fallback peers: SSE, SZSE, HKEX, company IR, Eastmoney, Wind,
+      Choice.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: Canonical root used
+    response_status: '`200` but body is Aliyun WAF bootstrap/challenge'
+    recognizable_content: Aliyun WAF bootstrap/challenge, not readable content
+    access_indications: Login/account needed for deeper features/interactions
+    technical_restriction: WAF challenge gates scripted browsing

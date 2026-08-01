@@ -1,0 +1,59 @@
+id: aon-china
+name: Aon China
+aliases:
+- U26
+- Aon Hewitt China
+- supplied U26
+publisher_type: consulting-research
+official_domains:
+- aon.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: HR, benefits, retirement, health, risk trend discovery and white papers. Medium-to-high commercial
+    authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  direct_urls:
+  - url: https://www.aon.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:aon.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - mercer-china-research-reports
+  - deloitte-china-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.aon.com.cn/
+  limitation: 'moved/redirected; public-limited. Old Aon Hewitt hostname stale; proprietary benchmarks
+    and client analytics gated Audited fallback peers: Mercer, Deloitte, EY.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Old `aonhewitt.com.cn` host failed DNS; replacement `https://www.aon.com.cn/` reached
+    response_status: Replacement returned `200`
+    recognizable_content: '`怡安企业服务` branded current site with `/insights`'
+    access_indications: Proprietary benchmarks/client analytics gated
+    technical_restriction: Old hostname invalid by DNS

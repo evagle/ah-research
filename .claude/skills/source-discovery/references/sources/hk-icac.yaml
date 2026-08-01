@@ -1,0 +1,60 @@
+id: hk-icac
+name: Independent Commission Against Corruption
+aliases:
+- C12
+- ICAC
+- icac
+- build_event_manifest icac; domain icac.org.hk
+publisher_type: official-government
+official_domains:
+- icac.org.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Arrest/case announcements, corruption investigations, press releases. High authority for ICAC-published
+    materials
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  direct_urls:
+  - url: https://www.icac.org.hk/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:icac.org.hk official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct for the publisher's own materials
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - hk-judiciary-regulatory-materials
+  - hk-police-regulatory-materials
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.icac.org.hk/
+  limitation: 'public. Not securities filing or court-judgment database Audited fallback peers: Judiciary,
+    Police, SFC, company announcements.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Final locale page observed; exact chain not recorded
+    response_status: '`200`'
+    recognizable_content: Not recorded in audit
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit
