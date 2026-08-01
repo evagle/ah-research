@@ -180,9 +180,10 @@ def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
 
 def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> None:
     skill = require_text(SKILL_ROOT / "SKILL.md")
+    search_playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
     sse_guide = require_text(SKILL_ROOT / "references/site-guides/sse.md")
     cninfo_guide = require_text(SKILL_ROOT / "references/site-guides/cninfo.md")
-    combined = "\n".join((skill, sse_guide, cninfo_guide))
+    combined = "\n".join((skill, search_playbook, sse_guide, cninfo_guide))
     normalized = " ".join(combined.split())
 
     assert_contains_all(
@@ -191,12 +192,19 @@ def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> 
             "CNINFO opened PDF -> SSE register metadata cross-check -> "
             "Playwright headless SSE PDF fallback",
             "CNINFO is the default retrieval route for A-share issuer-announcement bodies",
+            "retrieve the opened CNINFO PDF first, then cross-check listing-exchange metadata",
             "SSE-issued inquiry letters and other exchange actions remain SSE-first",
+            "use SSE for its inquiry letter and CNINFO for the issuer response body",
             "Use CNINFO as the default retrieval route for the issuer response body",
             "CNINFO issuer responses do not replace an SSE inquiry letter",
             "management explanation, commitments, and remediation",
+            "only when CNINFO is missing, identity fields do not match, or the exact SSE artifact is required",
+            "isolated Playwright headless SSE PDF fallback",
+            "navigate to the PDF in the same browser context",
+            "Close the browser after the bounded download",
             "`x-tengine-error: denied by bot`",
             "`Content-Type: application/pdf` or a `%PDF-` file signature",
+            "does not lower SSE authority for its own exchange actions",
             "does not change source authority",
             "does not use a personal Chrome profile or repeated user Allow prompts",
         ),
@@ -205,6 +213,9 @@ def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> 
     assert normalized.index("CNINFO opened PDF") < normalized.index(
         "Playwright headless SSE PDF fallback"
     )
+    assert normalized.index(
+        "CNINFO is the default retrieval route for A-share issuer-announcement bodies"
+    ) < normalized.index("SSE-issued inquiry letters and other exchange actions remain SSE-first")
 
 
 def test_site_guides_define_direct_use_contracts() -> None:
