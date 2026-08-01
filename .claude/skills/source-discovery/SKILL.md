@@ -83,8 +83,9 @@ when present. For reachability only, apply this exact precedence:
 
 `valid local cache observation -> reviewed snapshot -> profile access record`
 
-The reviewed snapshot is the audit-backed route prior surfaced in the generated
-catalog. Cache affects reachability only, never authority, citation scope, publisher identity, workflow evidence, or field/API evidence.
+Load the reviewed snapshot mapping from
+`references/reachability-snapshot.json`; it is the audit-backed route prior
+surfaced in the generated catalog. Cache affects reachability only, never authority, citation scope, publisher identity, workflow evidence, or field/API evidence.
 
 Use `source_profiles.ttl_for_status` when deciding whether a cache observation
 is valid; do not create a separate TTL policy:
@@ -94,8 +95,10 @@ is valid; do not create a separate TTL policy:
 - `temporarily-unreachable` and `unverified`: 24 hours
 - `moved` and `broken-link`: 7 days
 
-For each same-function candidate set, use the existing
-`source_profiles.select_routes` interface with the local cache. A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority. A stale route must be rechecked before treating its status as current. One failed request never proves permanent closure.
+For each same-function candidate set, call
+`source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot)`.
+The resolver ignores a stale cache observation before it consults the reviewed
+snapshot, then falls back to the profile access record. A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority. A stale route must be rechecked before treating its status as current. One failed request never proves permanent closure.
 
 Use noninteractive `urllib` or `curl` for default retrieval and probing.
 Use headless Chromium only for JS/session flows, such as a rendered JSF form,

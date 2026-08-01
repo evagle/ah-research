@@ -105,11 +105,13 @@ def select_routes(
     function_id: str,
     now: datetime,
     cache: Mapping[str, object] | None = None,
+    snapshot: Mapping[str, object] | None = None,
 ) -> list[RouteCandidate]:
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("now must be timezone-aware")
 
     cache = cache or {}
+    snapshot = snapshot or {}
     candidates: list[RouteCandidate] = []
 
     for profile in profiles:
@@ -126,7 +128,13 @@ def select_routes(
         publisher_type = _require_str(profile, "publisher_type")
         originality, independence = _publisher_semantics(publisher_type)
         direct_url = _first_direct_url(function)
-        reachability, last_checked = _resolve_reachability(profile, source_id, cache)
+        reachability, last_checked = _resolve_reachability(
+            profile,
+            source_id,
+            now,
+            cache,
+            snapshot,
+        )
         stale = now - last_checked > ttl_for_status(reachability)
         skip_reason = None
         if reachability == "temporarily-unreachable" and not stale:
@@ -186,7 +194,9 @@ def _first_direct_url(function: dict[str, object]) -> str:
 def _resolve_reachability(
     profile: Mapping[str, object],
     source_id: str,
+    now: datetime,
     cache: Mapping[str, object],
+    snapshot: Mapping[str, object],
 ) -> tuple[str, datetime]:
     access = profile.get("access")
     if not isinstance(access, dict):
@@ -195,18 +205,35 @@ def _resolve_reachability(
     status = _require_str(access, "status")
     last_checked = _parse_aware_datetime(_require_str(access, "last_checked"))
 
-    override = cache.get(source_id)
-    if not isinstance(override, dict):
-        return status, last_checked
+    cached = _optional_observation(cache.get(source_id))
+    if cached is not None and not _is_stale(*cached, now):
+        return cached
 
-    override_status = override.get("status")
-    if isinstance(override_status, str):
-        status = override_status
-    override_last_checked = override.get("last_checked")
-    if isinstance(override_last_checked, str):
-        last_checked = _parse_aware_datetime(override_last_checked)
+    reviewed = _optional_observation(snapshot.get(source_id))
+    if reviewed is not None:
+        return reviewed
 
     return status, last_checked
+
+
+def _optional_observation(value: object) -> tuple[str, datetime] | None:
+    if not isinstance(value, Mapping):
+        return None
+
+    status = value.get("status")
+    last_checked = value.get("last_checked")
+    if not isinstance(status, str) or not isinstance(last_checked, str):
+        return None
+
+    try:
+        ttl_for_status(status)
+        return status, _parse_aware_datetime(last_checked)
+    except ValueError:
+        return None
+
+
+def _is_stale(status: str, last_checked: datetime, now: datetime) -> bool:
+    return now - last_checked > ttl_for_status(status)
 
 
 def _publisher_semantics(publisher_type: str) -> tuple[str, str]:

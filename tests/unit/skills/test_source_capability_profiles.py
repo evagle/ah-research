@@ -407,6 +407,126 @@ def test_reachability_override_does_not_change_authority() -> None:
     assert routes[0].skip_reason == "fresh temporarily-unreachable"
 
 
+def test_fresh_cache_observation_wins_over_reviewed_snapshot() -> None:
+    source_profiles = load_source_profiles_module()
+    routes = source_profiles.select_routes(
+        profiles=[load_profile("official-example.yaml")],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        cache={
+            "sse": {
+                "status": "temporarily-unreachable",
+                "last_checked": "2026-08-02T11:30:00+00:00",
+            }
+        },
+        snapshot={
+            "sse": {
+                "status": "reachable-limited",
+                "last_checked": "2026-08-02T10:00:00+00:00",
+            }
+        },
+    )
+
+    assert routes[0].reachability == "temporarily-unreachable"
+    assert routes[0].skip_reason == "fresh temporarily-unreachable"
+    assert routes[0].stale is False
+
+
+def test_stale_cache_observation_falls_through_to_reviewed_snapshot() -> None:
+    source_profiles = load_source_profiles_module()
+    routes = source_profiles.select_routes(
+        profiles=[load_profile("official-example.yaml")],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        cache={
+            "sse": {
+                "status": "anti-bot",
+                "last_checked": "2026-07-01T00:00:00+00:00",
+            }
+        },
+        snapshot={
+            "sse": {
+                "status": "temporarily-unreachable",
+                "last_checked": "2026-08-02T11:30:00+00:00",
+            }
+        },
+    )
+
+    assert routes[0].reachability == "temporarily-unreachable"
+    assert routes[0].skip_reason == "fresh temporarily-unreachable"
+    assert routes[0].stale is False
+
+
+def test_reviewed_snapshot_wins_over_conflicting_profile_access() -> None:
+    source_profiles = load_source_profiles_module()
+    routes = source_profiles.select_routes(
+        profiles=[load_profile("official-example.yaml")],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        snapshot={
+            "sse": {
+                "status": "paywalled",
+                "last_checked": "2026-08-02T11:30:00+00:00",
+            }
+        },
+    )
+
+    assert routes[0].reachability == "paywalled"
+    assert routes[0].stale is False
+    assert routes[0].skip_reason is None
+
+
+def test_profile_access_is_used_when_cache_and_snapshot_are_absent() -> None:
+    source_profiles = load_source_profiles_module()
+    profile = deepcopy(load_profile("official-example.yaml"))
+    profile["access"]["status"] = "reachable-limited"
+    profile["access"]["last_checked"] = "2026-08-02T11:30:00+00:00"
+    routes = source_profiles.select_routes(
+        profiles=[profile],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+    )
+
+    assert routes[0].reachability == "reachable-limited"
+    assert routes[0].stale is False
+    assert routes[0].skip_reason is None
+
+
+def test_reachability_resolution_never_mutates_profile_metadata() -> None:
+    source_profiles = load_source_profiles_module()
+    profile = load_profile("official-example.yaml")
+    original = deepcopy(profile)
+    routes = source_profiles.select_routes(
+        profiles=[profile],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        cache={
+            "sse": {
+                "status": "temporarily-unreachable",
+                "last_checked": "2026-08-02T11:30:00+00:00",
+            }
+        },
+        snapshot={
+            "sse": {
+                "status": "paywalled",
+                "last_checked": "2026-08-02T11:00:00+00:00",
+            }
+        },
+    )
+
+    function = profile["functions"][0]
+    assert routes[0].authority == "High"
+    assert routes[0].reachability == "temporarily-unreachable"
+    assert profile == original
+    assert profile["publisher_type"] == "official-exchange"
+    assert function["citation"] == {
+        "use": "direct",
+        "required_fields": ["publisher", "title", "date", "document_id", "url"],
+    }
+    assert function["workflow_evidence"] == "High"
+    assert function["field_contract_evidence"] == "Medium"
+
+
 def test_approved_status_ttls_match_global_constraints() -> None:
     source_profiles = load_source_profiles_module()
 
