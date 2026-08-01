@@ -33,9 +33,12 @@ Approved reviewed reachability statuses: `reachable`, `reachable-limited`,
 `login-required`, `paywalled`, `anti-bot`, `temporarily-unreachable`, `moved`,
 `broken-link`, and `unverified`.
 
-Evidence levels: `High`, `Medium`, and `Low`. An evidence level records
-confidence in the access/provenance conclusion, not source authority,
-reachability, utility, or support for a runtime claim.
+Evidence dimensions are separate: provenance authority identifies the
+publisher's claim scope; access observation evidence records confidence in the
+observed access state; completed-workflow evidence records support for the
+specific route producing a record or document; and stable field/API evidence
+records support for a repeatable field or API contract. Do not promote one
+dimension into another.
 
 Treat company websites as first-party subject evidence only for the publisher's
 own statements, actions, products, policies, prices, filings, and quotations.
@@ -102,7 +105,7 @@ def _render_profile(
         f"- Aliases/origins: {', '.join(f'`{alias}`' for alias in aliases)}",
         f"- Publisher type: `{publisher_type}`",
         f"- Official domains: {', '.join(f'`{domain}`' for domain in official_domains)}",
-        f"- Authority scope: `{_require_str(authority, 'level')}` - "
+        f"- Provenance authority: `{_require_str(authority, 'level')}` - "
         f"{_require_str(authority, 'scope')}",
     ]
 
@@ -113,6 +116,9 @@ def _render_profile(
                 f"- Function: `{function_id}`",
                 f"  - Authority: `{_require_str(function, 'authority')}`",
                 f"  - Utility: `{_require_str(function, 'utility')}`",
+                f"  - Completed workflow evidence: `{_require_str(function, 'workflow_evidence')}`",
+                f"  - Stable field/API evidence: "
+                f"`{_require_str(function, 'field_contract_evidence')}`",
                 f"  - Direct links: {_render_direct_links(function)}",
                 f"  - Search example: `{_require_search_example(function)}`",
                 f"  - Same-function fallbacks: {_render_fallbacks(function)}",
@@ -124,7 +130,7 @@ def _render_profile(
             f"- Current status: `{_require_str(reviewed_access, 'status')}`",
             f"- Last checked: `{_require_str(reviewed_access, 'last_checked')}`",
             f"- Access limitations: {_require_str(reviewed_access, 'limitation')}",
-            f"- Evidence level: `{_require_str(reviewed_access, 'evidence_level')}`",
+            f"- Access observation evidence: `{_require_str(reviewed_access, 'evidence_level')}`",
             f"- Site guide: {_render_site_guide(source_id, site_guides_dir)}",
         )
     )

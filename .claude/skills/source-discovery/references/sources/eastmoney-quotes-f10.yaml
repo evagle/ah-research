@@ -18,36 +18,107 @@ authority:
   scope: Eastmoney's own quote, valuation, F10, and company-page presentation; not a primary issuer, exchange,
     or ownership record.
 functions:
-- id: market-data-display
+- id: a-share-quote-display
   authority: Low
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
   direct_urls:
   - url: https://quote.eastmoney.com/sh600519.html
     kind: A-share quote page
     stability: observed current route
+  search:
+    method: A-share security-code quote routing
+    fields:
+    - market prefix
+    - security code
+    example_query: open sh600519 for the audited Moutai A-share quote page
+    result_identity: security code, displayed issuer, quote timestamp, displayed field, and URL
+  citation:
+    use: direct only for Eastmoney's displayed A-share quote data and disclaimer; use SSE, SZSE, CNINFO,
+      or issuer records for filings, ownership, and primary corporate facts.
+    required_fields:
+    - security code
+    - quote timestamp
+    - displayed field
+    - retrieval time
+  fallbacks: []
+- id: a-share-company-information-display
+  authority: Low
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
   - url: https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code=SH600519&color=b#/gsgk
     kind: A-share F10 company view
     stability: UI fragment may change
+  search:
+    method: A-share F10 security-code routing
+    fields:
+    - market prefix
+    - security code
+    - section
+    example_query: open the SH600519 F10 company-overview route for the audited Moutai page
+    result_identity: security code, displayed issuer, F10 section, displayed field, and URL
+  citation:
+    use: direct only for Eastmoney's displayed F10 metadata and disclaimer; trace issuer, ownership, and
+      filing facts to the listing venue or issuer record.
+    required_fields:
+    - security code
+    - F10 section
+    - displayed field
+    - retrieval time
+  fallbacks: []
+- id: hong-kong-quote-display
+  authority: Low
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
   - url: https://quote.eastmoney.com/hk/09992.html
     kind: HK quote page
     stability: observed current route
   search:
-    method: security-code page routing
+    method: Hong Kong security-code quote routing
     fields:
-    - market prefix
     - security code
-    example_query: SH600519 for A shares; 09992 for HK quote and F10 pages
-    result_identity: security code, displayed issuer, page section, valuation or quote timestamp, and URL
+    example_query: open 09992 for the audited Pop Mart Hong Kong quote page
+    result_identity: security code, displayed issuer, quote timestamp, displayed field, and URL
   citation:
-    use: direct only for Eastmoney's displayed data and disclaimer; use official exchange or issuer records for
-      filings, ownership, and primary market facts.
+    use: direct only for Eastmoney's displayed Hong Kong quote data and disclaimer; use HKEX or issuer
+      records for filings, ownership, and primary corporate facts.
     required_fields:
     - security code
-    - timestamp or period
+    - quote timestamp
     - displayed field
     - retrieval time
   fallbacks:
   - hkex-market-data-official-market-data
+- id: hong-kong-company-information-display
+  authority: Low
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?code=09992&type=web&color=w#/CompanyProfile
+    kind: HK F10 company view
+    stability: UI fragment may change
+  search:
+    method: Hong Kong F10 security-code routing
+    fields:
+    - security code
+    - section
+    example_query: open the 09992 HKF10 company-profile route for the audited Pop Mart page
+    result_identity: security code, displayed issuer, F10 section, displayed field, and URL
+  citation:
+    use: direct only for Eastmoney's displayed HKF10 metadata and disclaimer; trace issuer, ownership, and
+      filing facts to HKEXnews or issuer records.
+    required_fields:
+    - security code
+    - F10 section
+    - displayed field
+    - retrieval time
+  fallbacks: []
 access:
   status: reachable
   last_checked: '2026-08-01T17:11:00+08:00'

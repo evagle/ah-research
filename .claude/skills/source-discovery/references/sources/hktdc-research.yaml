@@ -16,6 +16,8 @@ functions:
 - id: trade-and-market-research
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://research.hktdc.com/en/search?query=Pop%20Mart
     kind: research search

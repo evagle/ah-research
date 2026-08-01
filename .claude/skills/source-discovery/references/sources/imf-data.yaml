@@ -20,6 +20,8 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.imf.org/en/Data
     kind: primary route

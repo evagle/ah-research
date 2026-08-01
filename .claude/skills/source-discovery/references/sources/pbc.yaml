@@ -19,6 +19,8 @@ functions:
 - id: central-bank-statistics
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.pbc.gov.cn/diaochatongjisi/116219/116225/index.html
     kind: Statistics and Survey Department report list
@@ -43,6 +45,8 @@ functions:
 - id: central-bank-policy-search
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://wzdig.pbc.gov.cn/search/pcRender?sr=score%20desc&pageId=c177a85bd02b4114bebebd210809f691&ext=&pNo=1&q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
     kind: PBOC site search

@@ -19,6 +19,8 @@ functions:
 - id: company-product-statements
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.popmart.com/
     kind: official storefront

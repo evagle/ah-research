@@ -17,6 +17,8 @@ functions:
 - id: official-gazette
   authority: High
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://egazette.gld.gov.hk/en/search-gazette
     kind: Gazette search

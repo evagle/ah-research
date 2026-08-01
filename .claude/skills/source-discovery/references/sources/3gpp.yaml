@@ -17,6 +17,8 @@ functions:
 - id: telecom-standards
   authority: High
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.3gpp.org/specifications-technologies/releases/release-18
     kind: Release 18 navigation

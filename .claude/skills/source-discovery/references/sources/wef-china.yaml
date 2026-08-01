@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Medium
   utility: Medium
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://cn.weforum.org/
     kind: primary route

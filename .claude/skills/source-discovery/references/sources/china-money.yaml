@@ -20,6 +20,8 @@ functions:
 - id: market-data
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.chinamoney.com.cn/chinese/index.html
     kind: primary route

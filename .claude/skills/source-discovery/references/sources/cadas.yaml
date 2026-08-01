@@ -19,6 +19,8 @@ functions:
 - id: aviation-analysis
   authority: Medium
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.cadas.com.cn/
     kind: primary route

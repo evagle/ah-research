@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Low
   utility: Low
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.aldzs.com/bg
     kind: primary route

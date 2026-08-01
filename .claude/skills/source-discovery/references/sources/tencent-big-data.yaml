@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: High
   utility: Low
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MDQ4MzQzMg==&scene=124#wechat_redirect
     kind: primary route

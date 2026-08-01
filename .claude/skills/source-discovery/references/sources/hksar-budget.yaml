@@ -16,6 +16,8 @@ functions:
 - id: fiscal-policy-documents
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.budget.gov.hk/2025/eng/
     kind: annual budget archive entry

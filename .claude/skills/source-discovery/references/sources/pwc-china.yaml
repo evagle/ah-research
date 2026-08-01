@@ -20,6 +20,8 @@ functions:
 - id: research-reports
   authority: Medium
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.pwccn.com/zh
     kind: primary route

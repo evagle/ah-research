@@ -19,6 +19,8 @@ functions:
 - id: government-press-releases
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.info.gov.hk/gia/general/today.htm
     kind: daily release archive

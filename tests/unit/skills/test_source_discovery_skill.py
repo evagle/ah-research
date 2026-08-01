@@ -209,13 +209,15 @@ def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
         "Official domains",
         "Function",
         "Direct links",
-        "Authority",
+        "Provenance authority",
         "Utility",
         "Current status",
         "Last checked",
         "Access limitations",
         "Same-function fallbacks",
-        "Evidence level",
+        "Access observation evidence",
+        "Completed workflow evidence",
+        "Stable field/API evidence",
         "Site guide",
     ):
         assert field in catalog
@@ -254,7 +256,7 @@ def test_every_source_record_and_access_conclusion_has_explicit_evidence_level()
     source_sections = re.split(r"(?m)^## ", catalog)[1:]
     assert source_sections
     for section in source_sections:
-        assert re.search(r"(?m)^- Evidence level: `(High|Medium|Low)`$", section)
+        assert re.search(r"(?m)^- Access observation evidence: `(High|Medium|Low)`$", section)
 
     combined = "\n".join(
         (
@@ -272,6 +274,20 @@ def test_every_source_record_and_access_conclusion_has_explicit_evidence_level()
             "evidence_level",
         ),
     )
+
+
+def test_catalog_separates_provenance_access_workflow_and_field_evidence() -> None:
+    catalog = require_text(CATALOG_PATH)
+    di_section = re.search(
+        r"(?ms)^## `hkex-di`.*?(?=^## |\Z)",
+        catalog,
+    )
+
+    assert di_section is not None
+    assert "- Provenance authority: `High`" in di_section.group()
+    assert "- Access observation evidence: `High`" in di_section.group()
+    assert "- Completed workflow evidence: `Low`" in di_section.group()
+    assert "- Stable field/API evidence: `Low`" in di_section.group()
 
 
 def test_verified_mirror_exception_is_narrow_and_downgraded() -> None:

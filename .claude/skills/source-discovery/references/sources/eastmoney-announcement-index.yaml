@@ -17,9 +17,11 @@ authority:
   scope: Eastmoney's displayed announcement metadata, routing, and dissemination timestamps; not the issuer's
     statutory filing record.
 functions:
-- id: company-announcement-index
+- id: a-share-announcement-index
   authority: Low
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://data.eastmoney.com/notices/stock/600519.html
     kind: current company index
@@ -36,7 +38,7 @@ functions:
     example_query: stock_list=600519&ann_type=A&page_size=5&page_index=1
     result_identity: Eastmoney art_code, title, notice_date, columns, display_time, and detail URL
   citation:
-    use: discovery only for issuer filings; direct only for Eastmoney's displayed metadata and routing.
+    use: discovery only for A-share issuer filings; direct only for Eastmoney's displayed metadata and routing.
     required_fields:
     - art_code
     - title
@@ -45,6 +47,32 @@ functions:
   fallbacks:
   - sse-company-disclosures
   - szse-company-disclosures
+  - cninfo-company-disclosures
+- id: hong-kong-announcement-index
+  authority: Low
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://data.eastmoney.com/notices/stock/09992.html
+    kind: Hong Kong company notice index
+    stability: observed current route
+  search:
+    method: Hong Kong company notice page routing
+    fields:
+    - stock code
+    - page index
+    - announcement type
+    example_query: open the 09992 notice page and retain displayed notice metadata before opening the HKEXnews record
+    result_identity: security code, Eastmoney art_code, title, notice_date, display_time, and detail URL
+  citation:
+    use: discovery only for Hong Kong issuer filings; direct only for Eastmoney's displayed metadata and routing.
+    required_fields:
+    - art_code
+    - title
+    - notice_date
+    - retrieval time
+  fallbacks:
   - hkexnews-company-disclosures
 access:
   status: reachable

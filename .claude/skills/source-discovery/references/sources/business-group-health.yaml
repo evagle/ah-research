@@ -17,6 +17,8 @@ functions:
 - id: employer-health-research
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.businessgrouphealth.org/resources/2026-employer-well-being-strategy-survey
     kind: public survey page

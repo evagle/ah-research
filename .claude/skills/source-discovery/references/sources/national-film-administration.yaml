@@ -13,30 +13,7 @@ industries:
 authority:
   level: High
   scope: National Film Administration-published film-regulation material within the administration's mandate.
-functions:
-- id: film-regulation
-  authority: High
-  utility: Medium
-  direct_urls:
-  - url: https://www.chinafilm.gov.cn/
-    kind: administration entry
-    stability: current root; guessed search route unverified
-  search:
-    method: current administration navigation to a specific publication
-    fields:
-    - topic
-    - date
-    example_query: browse current administration publications for the required film-regulation topic
-    result_identity: issuing office, title, date, document number, attachment, and URL
-  citation:
-    use: direct for an opened National Film Administration item. Do not treat a guessed search path as a
-      supported discovery interface.
-    required_fields:
-    - issuing office
-    - title
-    - date
-    - document number
-  fallbacks: []
+functions: []
 access:
   status: reachable-limited
   last_checked: '2026-08-01T17:39:00+08:00'

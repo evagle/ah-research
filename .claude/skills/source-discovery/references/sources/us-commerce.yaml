@@ -19,6 +19,8 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: Medium
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.commerce.gov/
     kind: primary route

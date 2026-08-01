@@ -21,6 +21,8 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: Low
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.gov.cn/
     kind: primary route

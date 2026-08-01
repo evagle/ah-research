@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Medium
   utility: Medium
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: http://www.100ec.cn/zt/wmds/
     kind: primary route

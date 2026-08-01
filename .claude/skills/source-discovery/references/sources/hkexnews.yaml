@@ -21,6 +21,8 @@ functions:
 - id: company-disclosures
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en
     kind: listed-company title search

@@ -19,6 +19,8 @@ functions:
 - id: company-disclosures
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.szse.cn/disclosure/listed/notice/index.html
     kind: listed-company announcement register

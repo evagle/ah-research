@@ -18,6 +18,8 @@ functions:
 - id: statutory-ownership
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://di.hkex.com.hk/di/NSForm1.aspx?lang=en
     kind: current DI search entry

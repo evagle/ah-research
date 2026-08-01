@@ -17,6 +17,8 @@ functions:
 - id: market-news-discovery
   authority: Low
   utility: Medium
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.aastocks.com/en/stocks/quote/detail-quote.aspx?symbol=09992
     kind: quote detail
@@ -36,8 +38,7 @@ functions:
     - page section
     - timestamp
     - outbound source
-  fallbacks:
-  - hkex-market-data-official-market-data
+  fallbacks: []
 access:
   status: reachable
   last_checked: '2026-08-01T17:13:00+08:00'

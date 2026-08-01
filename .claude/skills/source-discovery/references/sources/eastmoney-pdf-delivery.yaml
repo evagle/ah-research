@@ -18,6 +18,8 @@ functions:
 - id: report-pdf-delivery
   authority: Low
   utility: Medium
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://pdf.dfcfw.com/pdf/H3_AP202506111688924171_1.pdf?1771032445000.pdf
     kind: exact retrieved file

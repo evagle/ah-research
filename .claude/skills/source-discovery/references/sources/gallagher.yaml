@@ -17,6 +17,8 @@ functions:
 - id: hr-benefits-research
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.ajg.com/news-and-insights/
     kind: insights library

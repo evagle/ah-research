@@ -14,30 +14,7 @@ industries:
 authority:
   level: High
   scope: Ministry-published culture and tourism releases, statistics, and policy documents.
-functions:
-- id: culture-tourism-materials
-  authority: High
-  utility: High
-  direct_urls:
-  - url: https://www.mct.gov.cn/
-    kind: ministry entry
-    stability: current root; search subdomain was not usable
-  search:
-    method: current root navigation to a specific release or statistic
-    fields:
-    - topic
-    - period
-    example_query: browse the current ministry site for a tourism-statistics or release item
-    result_identity: issuing office, title, date, period, document or report number, attachment, and URL
-  citation:
-    use: direct for an opened MCT release, statistic, or document. Do not treat the failed historical search
-      host as a permanent closure finding.
-    required_fields:
-    - issuing office
-    - title
-    - date
-    - period or document number
-  fallbacks: []
+functions: []
 access:
   status: reachable-limited
   last_checked: '2026-08-01T17:39:00+08:00'

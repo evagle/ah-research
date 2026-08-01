@@ -12,34 +12,9 @@ industries:
 - financial-services
 authority:
   level: High
-  scope: Eastmoney Securities' own published statements and explicitly attributed research; the portal, search
-    label, and PDF delivery domain do not prove broker authorship.
-functions:
-- id: broker-research
-  authority: High
-  utility: Low
-  direct_urls:
-  - url: https://www.18.cn/
-    kind: official site entry
-    stability: observed current route
-  search:
-    method: official-site navigation and report identity match
-    fields:
-    - report title
-    - authoring institution
-    - report ID
-    example_query: verify a matching report PDF that names Eastmoney Securities before treating it as authored
-    result_identity: report title, institution, disclaimer or copyright, analyst, date, and matching official URL
-  citation:
-    use: direct only for 18.cn statements or a PDF that expressly names Eastmoney Securities; an Eastmoney
-      aggregator institution field remains discovery metadata.
-    required_fields:
-    - report title
-    - named institution
-    - date
-    - explicit attribution
-  fallbacks:
-  - cicc-research-research-reports
+  scope: Eastmoney Securities identity and its own statements. No public research-report or analyst workflow
+    was verified; the portal, search label, and PDF delivery domain do not prove broker authorship.
+functions: []
 access:
   status: reachable
   last_checked: '2026-08-01T17:14:00+08:00'

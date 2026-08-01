@@ -18,6 +18,8 @@ functions:
 - id: internet-regulation
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://search.cac.gov.cn/cms/cmsadmin/infopub/gjjs.jsp
     kind: advanced search entry

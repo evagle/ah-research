@@ -23,9 +23,12 @@ Approved reviewed reachability statuses: `reachable`, `reachable-limited`,
 `login-required`, `paywalled`, `anti-bot`, `temporarily-unreachable`, `moved`,
 `broken-link`, and `unverified`.
 
-Evidence levels: `High`, `Medium`, and `Low`. An evidence level records
-confidence in the access/provenance conclusion, not source authority,
-reachability, utility, or support for a runtime claim.
+Evidence dimensions are separate: provenance authority identifies the
+publisher's claim scope; access observation evidence records confidence in the
+observed access state; completed-workflow evidence records support for the
+specific route producing a record or document; and stable field/API evidence
+records support for a repeatable field or API contract. Do not promote one
+dimension into another.
 
 Treat company websites as first-party subject evidence only for the publisher's
 own statements, actions, products, policies, prices, filings, and quotations.
@@ -43,17 +46,19 @@ route before reporting a source gap.
 - Aliases/origins: `U39`, `网经社 / 100EC`, `supplied U39`
 - Publisher type: `media`
 - Official domains: `100ec.cn`
-- Authority scope: `Medium` - Ecommerce sector landscape, chronology, report discovery. Medium for curated secondary context; weaker than official/platform filings for hard numbers
+- Provenance authority: `Medium` - Ecommerce sector landscape, chronology, report discovery. Medium for curated secondary context; weaker than official/platform filings for hard numbers
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.100ec.cn/zt/wmds/>)
   - Search example: `site:100ec.cn industry report`
   - Same-function fallbacks: `36kr-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public browser likely, JS cookie security check observed. Media/consultancy framing, unclear methodology for some claims, secondary-source risk Audited fallback peers: 国家统计局, 商务部, company disclosures, 36Kr.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `199it` - 199IT
@@ -61,17 +66,19 @@ route before reporting a source gap.
 - Aliases/origins: `U17`, `199IT`, `supplied U17`
 - Publisher type: `aggregator`
 - Official domains: `199it.com`
-- Authority scope: `Low` - Discovering report titles, Chinese summaries, outbound citations to originals. Low-to-medium authority; secondary aggregator/repost outlet
+- Provenance authority: `Low` - Discovering report titles, Chinese summaries, outbound citations to originals. Low-to-medium authority; secondary aggregator/repost outlet
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.199it.com/>)
   - Search example: `site:199it.com industry report`
   - Same-function fallbacks: `iresearch-research-reports`, `idc-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Secondary source quality varies; edge reliability inconsistent Audited fallback peers: iResearch, CNNIC, CAICT, IDC, original publisher sites.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `199it-housing-tools` - 199IT Data Navigation Housing Tools
@@ -79,17 +86,19 @@ route before reporting a source gap.
 - Aliases/origins: `U42`, `199IT 房价查询`, `supplied U42`
 - Publisher type: `aggregator`
 - Official domains: `hao.199it.com`
-- Authority scope: `Low` - Discovering housing-price tools and downstream portals. Low-to-medium authority as directory only
+- Provenance authority: `Low` - Discovering housing-price tools and downstream portals. Low-to-medium authority as directory only
 - Function: `housing-data-directory`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<http://hao.199it.com/fang.html>)
   - Search example: `site:hao.199it.com housing statistics`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Directory quality and outbound link rot; not citable for underlying housing data Audited fallback peers: Fang.com, 国家统计局 housing series, local statistics bureaus.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `360-security-reports` - 360 security reports
@@ -97,17 +106,19 @@ route before reporting a source gap.
 - Aliases/origins: `U06`, `360互联网安全中心`, `supplied U06`
 - Publisher type: `issuer-company`
 - Official domains: `360.cn`, `pop.shouji.360.cn`
-- Authority scope: `High` - 360-authored security reports and observed telemetry. It is a vendor source for its own measurement, not independent confirmation of 360 product or threat claims.
+- Provenance authority: `High` - 360-authored security reports and observed telemetry. It is a vendor source for its own measurement, not independent confirmation of 360 product or threat claims.
 - Function: `security-threat-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [current security news and report route](<https://www.360.cn/news.html>), [original report page example](<https://www.360.cn/n/12394.html>)
   - Search example: `open 2023 H1 China Mobile Security Report from 360 security news, then its official PDF`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:50:00+08:00`
 - Access limitations: Legacy zt.360.cn/report DNS failed, but current 360 news, report page, and sampled PDF were public. Do not treat vendor telemetry as a universal threat census.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `36kr` - 36Kr
@@ -115,17 +126,19 @@ route before reporting a source gap.
 - Aliases/origins: `U44`, `36氪`, `supplied U44`
 - Publisher type: `media`
 - Official domains: `36kr.com`
-- Authority scope: `Medium` - Startup/business news discovery, company/event tracking, report/interview leads. Medium media authority; not primary for most underlying facts
+- Provenance authority: `Medium` - Startup/business news discovery, company/event tracking, report/interview leads. Medium media authority; not primary for most underlying facts
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://36kr.com/>)
   - Search example: `site:36kr.com industry report`
   - Same-function fallbacks: `it-juzi-research-reports`, `china-venture-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public browser likely but scripted body security-check page. Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `3gpp` - 3GPP
@@ -133,17 +146,19 @@ route before reporting a source gap.
 - Aliases/origins: `3rd Generation Partnership Project`
 - Publisher type: `original-research`
 - Official domains: `3gpp.org`
-- Authority scope: `High` - Published 3GPP specifications, releases, work-plan information, and official document versions.
+- Provenance authority: `High` - Published 3GPP specifications, releases, work-plan information, and official document versions.
 - Function: `telecom-standards`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [Release 18 navigation](<https://www.3gpp.org/specifications-technologies/releases/release-18>)
   - Search example: `search exact document TS%2023.501 through the published OpenSearch descriptor`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:54:00+08:00`
 - Access limitations: Public specification navigation was verified. No specific specification PDF transaction was completed; revalidate editions and URLs before use.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `aastocks` - AAStocks
@@ -151,17 +166,19 @@ route before reporting a source gap.
 - Aliases/origins: `AAStocks Financial News`
 - Publisher type: `aggregator`
 - Official domains: `aastocks.com`
-- Authority scope: `Low` - AAStocks quote, news, and company-data display; source links and financial facts require tracing to the named original.
+- Provenance authority: `Low` - AAStocks quote, news, and company-data display; source links and financial facts require tracing to the named original.
 - Function: `market-news-discovery`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [quote detail](<https://www.aastocks.com/en/stocks/quote/detail-quote.aspx?symbol=09992>)
   - Search example: `symbol=09992`
-  - Same-function fallbacks: `hkex-market-data-official-market-data`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public pages include account upsell. Quote fields may be delayed or third-party sourced and do not establish upstream provenance.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `afrc` - Accounting and Financial Reporting Council
@@ -169,17 +186,19 @@ route before reporting a source gap.
 - Aliases/origins: `C08`, `AFRC`, `build_event_manifest afrc; domain afrc.org.hk`
 - Publisher type: `official-regulator`
 - Official domains: `afrc.org.hk`
-- Authority scope: `High` - Audit oversight, investigations, accounting-sector regulation, announcements. High authority within audit/accounting-regulation scope
+- Provenance authority: `High` - Audit oversight, investigations, accounting-sector regulation, announcements. High authority within audit/accounting-regulation scope
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.afrc.org.hk/>)
   - Search example: `site:afrc.org.hk official notice`
   - Same-function fallbacks: `sfc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than SFC/HKEX for issuer news Audited fallback peers: SFC, HKEX, company annual reports.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `aladdin-index` - Aladdin Index
@@ -187,17 +206,19 @@ route before reporting a source gap.
 - Aliases/origins: `U37`, `阿拉丁指数`, `supplied U37`
 - Publisher type: `commercial-data-provider`
 - Official domains: `aldzs.com`
-- Authority scope: `Low` - Use only after fresh browser/manual verification for mini-program trend discovery. Historical vendor authority possible; current live service not confirmed
+- Provenance authority: `Low` - Use only after fresh browser/manual verification for mini-program trend discovery. Historical vendor authority possible; current live service not confirmed
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.aldzs.com/bg>)
   - Search example: `site:aldzs.com industry report`
   - Same-function fallbacks: `newrank-research-reports`
 - Current status: `unverified`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; region/network-limited possible; HTTP/S timed out from audit vantage. No content/freshness/access policy verified; not permanent closure proof Audited fallback peers: QuestMobile, 新榜, platform reports, 微信公开课.
-- Evidence level: `Low`
+- Access observation evidence: `Low`
 - Site guide: None
 
 ## `aliresearch` - AliResearch
@@ -205,17 +226,19 @@ route before reporting a source gap.
 - Aliases/origins: `U04`, `阿里研究院`, `supplied U04`
 - Publisher type: `issuer-company`
 - Official domains: `aliresearch.com`
-- Authority scope: `High` - Alibaba ecosystem, e-commerce, platform economy, digital trade, SME trend narratives. High authority for Alibaba-published views; Medium for neutral market claims
+- Provenance authority: `High` - Alibaba ecosystem, e-commerce, platform economy, digital trade, SME trend narratives. High authority for Alibaba-published views; Medium for neutral market claims
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<http://www.aliresearch.com/cn/index>)
   - Search example: `site:aliresearch.com industry report`
   - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; public shell reachable. Institutional bias; not a regulator or raw primary-data source Audited fallback peers: U07, U09, U02.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `analysys` - Analysys
@@ -223,17 +246,19 @@ route before reporting a source gap.
 - Aliases/origins: `U07`, `易观分析`, `supplied U07`
 - Publisher type: `commercial-data-provider`
 - Official domains: `analysys.cn`
-- Authority scope: `Medium` - Mobile internet, app rankings, digital user behavior, market trend explainers. Medium-high commercial authority; proprietary methodology
+- Provenance authority: `Medium` - Mobile internet, app rankings, digital user behavior, market trend explainers. Medium-high commercial authority; proprietary methodology
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.analysys.cn/>)
   - Search example: `site:analysys.cn industry report`
   - Same-function fallbacks: `dydata-research-reports`, `iimedia-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public articles with subscription products. Vendor-owned metrics; not primary transaction, filing, or official data Audited fallback peers: U02, U09, U12.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `aon-china` - Aon China
@@ -241,17 +266,19 @@ route before reporting a source gap.
 - Aliases/origins: `U26`, `Aon Hewitt China`, `supplied U26`
 - Publisher type: `consulting-research`
 - Official domains: `aon.com.cn`
-- Authority scope: `Medium` - HR, benefits, retirement, health, risk trend discovery and white papers. Medium-to-high commercial authority
+- Provenance authority: `Medium` - HR, benefits, retirement, health, risk trend discovery and white papers. Medium-to-high commercial authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.aon.com.cn/>)
   - Search example: `site:aon.com.cn industry report`
   - Same-function fallbacks: `mercer-china-research-reports`, `deloitte-china-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited. Old Aon Hewitt hostname stale; proprietary benchmarks and client analytics gated Audited fallback peers: Mercer, Deloitte, EY.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `bain-china` - Bain China
@@ -259,17 +286,19 @@ route before reporting a source gap.
 - Aliases/origins: `U22`, `贝恩中国 / Bain China`, `supplied U22`
 - Publisher type: `consulting-research`
 - Official domains: `bain.cn`
-- Authority scope: `Medium` - Local Bain viewpoints, press releases, high-level China business commentary. Medium-to-high consulting authority
+- Provenance authority: `Medium` - Local Bain viewpoints, press releases, high-level China business commentary. Medium-to-high consulting authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.bain.cn/>)
   - Search example: `site:bain.cn industry report`
   - Same-function fallbacks: `mckinsey-china-research-reports`, `bcg-china-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. China site can be shallower than global research archives; full studies may be gated elsewhere Audited fallback peers: McKinsey, BCG, Roland Berger, PwC.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `bcg-china` - BCG China
@@ -277,17 +306,19 @@ route before reporting a source gap.
 - Aliases/origins: `U21`, `BCG 中国`, `supplied U21`
 - Publisher type: `consulting-research`
 - Official domains: `bcg.com`
-- Authority scope: `Medium` - Strategic framing, industry themes, executive summaries. Medium-to-high consulting authority
+- Provenance authority: `Medium` - Strategic framing, industry themes, executive summaries. Medium-to-high consulting authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.bcg.com/zh-cn/>)
   - Search example: `site:bcg.com industry report`
   - Same-function fallbacks: `mckinsey-china-research-reports`, `bain-china-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; Akamai 403 from CLI. Scripted access blocked; not a primary dataset source; proprietary client work private Audited fallback peers: McKinsey, Bain, Roland Berger, Deloitte, PwC.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `beijing-government` - Beijing Municipal Government
@@ -295,17 +326,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Beijing Municipal Government`, `supplied U48`
 - Publisher type: `official-government`
 - Official domains: `beijing.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.beijing.gov.cn/>)
   - Search example: `site:beijing.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `beijing-statistics` - Beijing Municipal Bureau of Statistics
@@ -313,17 +346,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Beijing Municipal Bureau of Statistics`, `supplied U48`
 - Publisher type: `official-statistics`
 - Official domains: `tjj.beijing.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://tjj.beijing.gov.cn/>)
   - Search example: `site:tjj.beijing.gov.cn official statistics`
   - Same-function fallbacks: `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `business-group-health` - Business Group on Health
@@ -331,17 +366,19 @@ route before reporting a source gap.
 - Aliases/origins: `Business Group on Health survey`
 - Publisher type: `original-research`
 - Official domains: `businessgrouphealth.org`
-- Authority scope: `High` - Employer association surveys, resources, and practice findings, especially for large employers.
+- Provenance authority: `High` - Employer association surveys, resources, and practice findings, especially for large employers.
 - Function: `employer-health-research`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [public survey page](<https://www.businessgrouphealth.org/resources/2026-employer-well-being-strategy-survey>)
   - Search example: `open Data%20Insights then 2026 Employer Well-being Strategy Survey`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:47:00+08:00`
 - Access limitations: Public report page stated methodology and a permission requirement for referring to or using the survey. Member and login surfaces exist; a public PDF was not verified.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `caac` - Civil Aviation Administration of China
@@ -349,17 +386,19 @@ route before reporting a source gap.
 - Aliases/origins: `CAAC`, `China civil aviation statistics`
 - Publisher type: `official-statistics`
 - Official domains: `caac.gov.cn`
-- Authority scope: `High` - CAAC-published aviation statistics, reports, and official aviation regulatory material.
+- Provenance authority: `High` - CAAC-published aviation statistics, reports, and official aviation regulatory material.
 - Function: `official-aviation-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [statistics index](<https://www.caac.gov.cn/XXGK/XXGK/TJSJ/index_1215.html>), [official site search](<https://www.caac.gov.cn/so/s?tab=all&siteCode=bm70000001&qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1>)
   - Search example: `qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1&tab=all&siteCode=bm70000001`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Public statistics and search routes were verified. CAAC is the official China operational source; IATA is only attributable association analysis.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `caasdata` - CaaSData
@@ -367,17 +406,19 @@ route before reporting a source gap.
 - Aliases/origins: `U13`, `卡思数据`, `supplied U13`
 - Publisher type: `commercial-data-provider`
 - Official domains: `caasdata.com`
-- Authority scope: `Low` - Unconfirmed; historically creator and content-marketing data. Current authority unverified from first-party web responses
+- Provenance authority: `Low` - Unconfirmed; historically creator and content-marketing data. Current authority unverified from first-party web responses
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.caasdata.com/index/index/index.html>)
   - Search example: `site:caasdata.com industry report`
   - Same-function fallbacks: `dydata-research-reports`, `iimedia-research-reports`
 - Current status: `unverified`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; region/network-limited possible; DNS resolved but web connections failed. May be down, network-limited, or moved; no permanent closure inference Audited fallback peers: U02, U09, U07.
-- Evidence level: `Low`
+- Access observation evidence: `Low`
 - Site guide: None
 
 ## `cac` - Cyberspace Administration of China
@@ -385,17 +426,19 @@ route before reporting a source gap.
 - Aliases/origins: `CAC`, `China internet governance regulator`
 - Publisher type: `official-regulator`
 - Official domains: `cac.gov.cn`
-- Authority scope: `High` - CAC-published internet-governance rules, notices, data, and online-service regulation.
+- Provenance authority: `High` - CAC-published internet-governance rules, notices, data, and online-service regulation.
 - Function: `internet-regulation`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [advanced search entry](<https://search.cac.gov.cn/cms/cmsadmin/infopub/gjjs.jsp>)
   - Search example: `huopro=%E7%9B%B4%E6%92%AD&pubtype=S&webappcode=A09&searchdir=A09`
   - Same-function fallbacks: None
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: CAC root and rendered form established the search fields, but the advanced-search endpoint returned 403. This does not establish a result set or permanent result URL.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `cadas` - CADAS
@@ -403,17 +446,19 @@ route before reporting a source gap.
 - Aliases/origins: `U30`, `CADAS`, `supplied U30`
 - Publisher type: `commercial-data-provider`
 - Official domains: `cadas.com.cn`
-- Authority scope: `Medium` - China civil aviation monitoring, airport/airline commentary, route analysis. Medium niche commercial authority
+- Provenance authority: `Medium` - China civil aviation monitoring, airport/airline commentary, route analysis. Medium niche commercial authority
 - Function: `aviation-analysis`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.cadas.com.cn/>)
   - Search example: `site:cadas.com.cn aviation analysis`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; richer data products likely commercial. Narrow subject area; methodology less transparent than official stats Audited fallback peers: CAAC, VariFlight, transport research outlets.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `caict` - CAICT
@@ -421,17 +466,19 @@ route before reporting a source gap.
 - Aliases/origins: `U28`, `CAICT`, `supplied U28`
 - Publisher type: `official-statistics`
 - Official domains: `caict.ac.cn`
-- Authority scope: `High` - Official ICT, telecom, digital economy, AI, industrial internet white papers. High authority for CAICT-published official research
+- Provenance authority: `High` - Official ICT, telecom, digital economy, AI, industrial internet white papers. High authority for CAICT-published official research
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.caict.ac.cn/kxyj/qwfb/qwsj/>)
   - Search example: `site:caict.ac.cn official statistics`
   - Same-function fallbacks: `cnnic-official-statistics`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `china-money` - ChinaMoney
@@ -439,17 +486,19 @@ route before reporting a source gap.
 - Aliases/origins: `C06`, `中国货币网`, `chinamoney`, `build_market_manifest chinamoney; domain chinamoney.com.cn`
 - Publisher type: `official-market-infrastructure`
 - Official domains: `chinamoney.com.cn`
-- Authority scope: `High` - Interbank market notices, bond reference data, issuance calendars, market discovery. High for market-infrastructure/reference data; legal origin may be regulator/issuer
+- Provenance authority: `High` - Interbank market notices, bond reference data, issuance calendars, market discovery. High for market-infrastructure/reference data; legal origin may be regulator/issuer
 - Function: `market-data`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.chinamoney.com.cn/chinese/index.html>)
   - Search example: `site:chinamoney.com.cn market data`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. For legal authority, trace to regulator, exchange, issuer, or filing PDF Audited fallback peers: PBOC, NAFMII, issuer docs, exchange filings.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `china-venture` - ChinaVenture
@@ -457,17 +506,19 @@ route before reporting a source gap.
 - Aliases/origins: `U16`, `投中网`, `supplied U16`
 - Publisher type: `media`
 - Official domains: `chinaventure.com.cn`
-- Authority scope: `Medium` - VC/PE trend tracking, financing environment, industry commentary, research reports. Medium-high commercial/media authority
+- Provenance authority: `Medium` - VC/PE trend tracking, financing environment, industry commentary, research reports. Medium-high commercial/media authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.chinaventure.com.cn/index.html>)
   - Search example: `site:chinaventure.com.cn industry report`
   - Same-function fallbacks: `it-juzi-research-reports`, `dydata-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public research lists plus login/register controls. Some premium or personalized features may require login; not a primary registry Audited fallback peers: U15, U02, U09.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `cicc-research` - CICC Research
@@ -475,17 +526,19 @@ route before reporting a source gap.
 - Aliases/origins: `U41`, `中金研究`, `supplied U41`
 - Publisher type: `original-research`
 - Official domains: `research.cicc.com`
-- Authority scope: `High` - Sector theses, China macro framing, broker analyst views, research leads. High for sell-side China analysis within domain; not neutral official data
+- Provenance authority: `High` - Sector theses, China macro framing, broker analyst views, research leads. High for sell-side China analysis within domain; not neutral official data
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://research.cicc.com/index>)
   - Search example: `site:research.cicc.com industry report`
   - Same-function fallbacks: `eastmoney-research-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; 403 security check from scripted access; some research likely account/licensed. Access restrictions, conflicts of interest, house-view bias Audited fallback peers: U36, broker portals, Wind, Choice, official statistics.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `cninfo` - CNINFO
@@ -493,17 +546,19 @@ route before reporting a source gap.
 - Aliases/origins: `C01`, `巨潮资讯网`, `download_filings`, `download_filings STOCK_LIST_URL, ANNOUNCEMENT_QUERY_URL, PDF_BASE_URL; domains cninfo.com.cn and static.cninfo.com.cn`
 - Publisher type: `official-market-infrastructure`
 - Official domains: `cninfo.com.cn`, `static.cninfo.com.cn`
-- Authority scope: `High` - Primary original-document tracing for A-share announcements, annual reports, prospectuses, ad hoc filings. High authority for exchange-listed company disclosures hosted there
+- Provenance authority: `High` - Primary original-document tracing for A-share announcements, annual reports, prospectuses, ad hoc filings. High authority for exchange-listed company disclosures hosted there
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.cninfo.com.cn/>), [direct route](<https://www.cninfo.com.cn/new/hisAnnouncement/query>), [direct route](<https://static.cninfo.com.cn/>)
   - Search example: `POST column=sse&tabName=fulltext&searchkey=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pageNum=1&pageSize=30`
   - Same-function fallbacks: `sse-company-disclosures`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Anonymous POST and exact hosted PDF worked. The query endpoint is implementation-facing and rate-sensitive; prefer the relevant listing exchange where the original is available.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `cnnic` - CNNIC
@@ -511,17 +566,19 @@ route before reporting a source gap.
 - Aliases/origins: `U18`, `CNNIC`, `supplied U18`
 - Publisher type: `official-statistics`
 - Official domains: `cnnic.cn`
-- Authority scope: `High` - China internet baseline figures, domain statistics, official reports. High authority for China internet/domain statistics
+- Provenance authority: `High` - China internet baseline figures, domain statistics, official reports. High authority for China internet/domain statistics
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.cnnic.cn/>)
   - Search example: `site:cnnic.cn official statistics`
   - Same-function fallbacks: `caict-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than broad market research; institutional framing Audited fallback peers: CAICT, MIIT, iResearch.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `companies-registry-hk` - Hong Kong Companies Registry e-Services
@@ -529,17 +586,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong Companies Registry`, `ICRIS`
 - Publisher type: `official-government`
 - Official domains: `e-services.cr.gov.hk`
-- Authority scope: `High` - Hong Kong Companies Registry portal and registry-issued extracts or certified copies; a portal hit is not itself a confirmed corporate record.
+- Provenance authority: `High` - Hong Kong Companies Registry portal and registry-issued extracts or certified copies; a portal hit is not itself a confirmed corporate record.
 - Function: `company-registry-records`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [e-Services entry](<https://www.e-services.cr.gov.hk/ICRIS3EP/>)
   - Search example: `Search then Company Search for POP MART; disambiguate company number and jurisdiction`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:12:00+08:00`
 - Access limitations: Portal identity and service functions were public. A material search, ordered document, account, payment, or client-control workflow was not completed.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `csrc` - China Securities Regulatory Commission
@@ -547,17 +606,19 @@ route before reporting a source gap.
 - Aliases/origins: `C03`, `CSRC`, `build_event_manifest csrc; domain csrc.gov.cn`
 - Publisher type: `official-regulator`
 - Official domains: `csrc.gov.cn`
-- Authority scope: `High` - Rules, enforcement, policy notices, press releases, official interpretations. High authority for CSRC-published securities regulation
+- Provenance authority: `High` - Rules, enforcement, policy notices, press releases, official interpretations. High authority for CSRC-published securities regulation
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<http://www.csrc.gov.cn/>)
   - Search example: `site:csrc.gov.cn official notice`
   - Same-function fallbacks: `nfra-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a company filing repository Audited fallback peers: Exchanges, CNINFO, PBOC, NFRA.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `data-gov-hk` - DATA.GOV.HK
@@ -565,17 +626,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong open data catalog`
 - Publisher type: `official-government`
 - Official domains: `data.gov.hk`
-- Authority scope: `High` - Government dataset catalog, resource links, and catalog metadata; authority for underlying data follows the named producing department.
+- Provenance authority: `High` - Government dataset catalog, resource links, and catalog metadata; authority for underlying data follows the named producing department.
 - Function: `dataset-catalog`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [dataset catalog](<https://data.gov.hk/en/>)
   - Search example: `search retail sales, filter Census and Statistics Department, then open the resource URL`
-  - Same-function fallbacks: `hong-kong-statistics-official-statistics`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public catalog access does not establish that a linked departmental dataset is authored or maintained by the catalog.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `datayes-robo-research` - Datayes Robo Research
@@ -583,17 +646,19 @@ route before reporting a source gap.
 - Aliases/origins: `U01`, `萝卜投研`, `supplied U01`
 - Publisher type: `aggregator`
 - Official domains: `robo.datayes.com`
-- Authority scope: `Medium` - Stock screening and cross-searching broker reports, filings, financials, and data. Medium authority; commercial secondary platform
+- Provenance authority: `Medium` - Stock screening and cross-searching broker reports, filings, financials, and data. Medium authority; commercial secondary platform
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://robo.datayes.com/>)
   - Search example: `site:robo.datayes.com industry report`
   - Same-function fallbacks: `hibor-research-research-reports`, `nxny-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public SPA shell; login route exposed. Proprietary methods; deeper workflows likely account-bound; use as discovery, not primary filing evidence Audited fallback peers: U03, U08, U10, U11.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `deloitte-china` - Deloitte China
@@ -601,17 +666,19 @@ route before reporting a source gap.
 - Aliases/origins: `U24-Deloitte`, `Deloitte China`, `U24`, `supplied U24a Deloitte China`
 - Publisher type: `consulting-research`
 - Official domains: `deloitte.com`
-- Authority scope: `Medium` - Survey-based insights, issue briefs, China market/business policy commentary, research landing pages. Medium-to-high authority for Deloitte-attributable advisory analysis; not official statistics
+- Provenance authority: `Medium` - Survey-based insights, issue briefs, China market/business policy commentary, research landing pages. Medium-to-high authority for Deloitte-attributable advisory analysis; not official statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.deloitte.com/cn/zh.html>)
   - Search example: `site:deloitte.com industry report`
   - Same-function fallbacks: `ey-china-research-reports`, `kpmg-china-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited. Branded perspective; variable methodological depth; some deeper downloads may ask for contact details Audited fallback peers: U24-EY, U24-KPMG, U24-PwC, U20.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `dotour` - Dotour
@@ -619,17 +686,19 @@ route before reporting a source gap.
 - Aliases/origins: `U14`, `旅游圈`, `supplied U14`
 - Publisher type: `media`
 - Official domains: `dotour.cn`
-- Authority scope: `Low` - Unconfirmed tourism-industry media/report route. Current authority unverified
+- Provenance authority: `Low` - Unconfirmed tourism-industry media/report route. Current authority unverified
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.dotour.cn/>)
   - Search example: `site:dotour.cn industry report`
   - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
 - Current status: `unverified`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; DNS failure on listed and bare-domain variants. No redirect target discovered; one audit is not proof of shutdown Audited fallback peers: U07, U09, U02.
-- Evidence level: `Low`
+- Access observation evidence: `Low`
 - Site guide: None
 
 ## `dydata` - DYData
@@ -637,17 +706,19 @@ route before reporting a source gap.
 - Aliases/origins: `U02`, `镝数聚`, `supplied U02`
 - Publisher type: `aggregator`
 - Official domains: `dydata.io`
-- Authority scope: `Medium` - Broad discovery of industry reports, datasets, charts, and supplier ecosystems. Medium authority; multi-supplier aggregator
+- Provenance authority: `Medium` - Broad discovery of industry reports, datasets, charts, and supplier ecosystems. Medium authority; multi-supplier aggregator
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.dydata.io/>)
   - Search example: `site:dydata.io industry report`
   - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
 - Current status: `paywalled`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: membership/paywalled; public previews with VIP/member prompts. Source quality varies by upstream shop; many downloads are gated Audited fallback peers: U07, U09, U15, U16.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-announcement-index` - Eastmoney announcement index
@@ -655,17 +726,27 @@ route before reporting a source gap.
 - Aliases/origins: `Eastmoney notices`, `data.eastmoney.com notices`
 - Publisher type: `aggregator`
 - Official domains: `data.eastmoney.com`, `np-anotice-stock.eastmoney.com`
-- Authority scope: `Low` - Eastmoney's displayed announcement metadata, routing, and dissemination timestamps; not the issuer's statutory filing record.
-- Function: `company-announcement-index`
+- Provenance authority: `Low` - Eastmoney's displayed announcement metadata, routing, and dissemination timestamps; not the issuer's statutory filing record.
+- Function: `a-share-announcement-index`
   - Authority: `Low`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [current company index](<https://data.eastmoney.com/notices/stock/600519.html>), [observed UI list endpoint](<https://np-anotice-stock.eastmoney.com/api/security/ann>)
   - Search example: `stock_list=600519&ann_type=A&page_size=5&page_index=1`
-  - Same-function fallbacks: `sse-company-disclosures`, `szse-company-disclosures`, `hkexnews-company-disclosures`
+  - Same-function fallbacks: `sse-company-disclosures`, `szse-company-disclosures`, `cninfo-company-disclosures`
+- Function: `hong-kong-announcement-index`
+  - Authority: `Low`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [Hong Kong company notice index](<https://data.eastmoney.com/notices/stock/09992.html>)
+  - Search example: `open the 09992 notice page and retain displayed notice metadata before opening the HKEXnews record`
+  - Same-function fallbacks: `hkexnews-company-disclosures`
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:12:00+08:00`
 - Access limitations: Public for the tested A-share and HK pages. The technical endpoint establishes Eastmoney display fields only, not legal publisher identity or a stable API.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-pdf-delivery` - Eastmoney PDF delivery host
@@ -673,17 +754,19 @@ route before reporting a source gap.
 - Aliases/origins: `pdf.dfcfw.com`, `Eastmoney delivered report PDF`
 - Publisher type: `aggregator`
 - Official domains: `pdf.dfcfw.com`
-- Authority scope: `Low` - Delivery of the retrieved file only; the hostname does not establish report authorship, broker authority, or original publication.
+- Provenance authority: `Low` - Delivery of the retrieved file only; the hostname does not establish report authorship, broker authority, or original publication.
 - Function: `report-pdf-delivery`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [exact retrieved file](<https://pdf.dfcfw.com/pdf/H3_AP202506111688924171_1.pdf?1771032445000.pdf>)
   - Search example: `AP202506111688924171 via https://data.eastmoney.com/report/info/AP202506111688924171.html`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: One 32-page sampled PDF was public and range-readable. This does not prove that the host authored the report, that all files are public, or that the displayed URL is permanent.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-quotes-f10` - Eastmoney quotes and F10
@@ -691,17 +774,43 @@ route before reporting a source gap.
 - Aliases/origins: `Eastmoney quote pages`, `Eastmoney F10`
 - Publisher type: `aggregator`
 - Official domains: `quote.eastmoney.com`, `emweb.securities.eastmoney.com`, `data.eastmoney.com`
-- Authority scope: `Low` - Eastmoney's own quote, valuation, F10, and company-page presentation; not a primary issuer, exchange, or ownership record.
-- Function: `market-data-display`
+- Provenance authority: `Low` - Eastmoney's own quote, valuation, F10, and company-page presentation; not a primary issuer, exchange, or ownership record.
+- Function: `a-share-quote-display`
   - Authority: `Low`
   - Utility: `High`
-  - Direct links: [A-share quote page](<https://quote.eastmoney.com/sh600519.html>), [A-share F10 company view](<https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code=SH600519&color=b#/gsgk>), [HK quote page](<https://quote.eastmoney.com/hk/09992.html>)
-  - Search example: `SH600519 for A shares; 09992 for HK quote and F10 pages`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [A-share quote page](<https://quote.eastmoney.com/sh600519.html>)
+  - Search example: `open sh600519 for the audited Moutai A-share quote page`
+  - Same-function fallbacks: None
+- Function: `a-share-company-information-display`
+  - Authority: `Low`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [A-share F10 company view](<https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html?type=web&code=SH600519&color=b#/gsgk>)
+  - Search example: `open the SH600519 F10 company-overview route for the audited Moutai page`
+  - Same-function fallbacks: None
+- Function: `hong-kong-quote-display`
+  - Authority: `Low`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [HK quote page](<https://quote.eastmoney.com/hk/09992.html>)
+  - Search example: `open 09992 for the audited Pop Mart Hong Kong quote page`
   - Same-function fallbacks: `hkex-market-data-official-market-data`
+- Function: `hong-kong-company-information-display`
+  - Authority: `Low`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [HK F10 company view](<https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html?code=09992&type=web&color=w#/CompanyProfile>)
+  - Search example: `open the 09992 HKF10 company-profile route for the audited Pop Mart page`
+  - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:11:00+08:00`
 - Access limitations: Tested A-share and HK quote/F10 pages were public. F10 disclaims completeness, timeliness, originality, and investment-advice status; the A-share stockdata template returned 404 for HK 09992.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-research` - Eastmoney A-share research discovery
@@ -709,17 +818,19 @@ route before reporting a source gap.
 - Aliases/origins: `U36`, `东方财富研报`, `download_research`, `supplied U36; core downloader origin download_research RESEARCH_LIST_URL and PDF_URL_TEMPLATE; domains reportapi.eastmoney.com, pdf.dfcfw.com, eastmoney.com`
 - Publisher type: `aggregator`
 - Official domains: `data.eastmoney.com`
-- Authority scope: `Low` - Eastmoney A-share report-search metadata and dissemination routes. The named broker or copyright holder remains the substantive source; the portal and delivered PDF hostname do not prove authorship.
+- Provenance authority: `Low` - Eastmoney A-share report-search metadata and dissemination routes. The named broker or copyright holder remains the substantive source; the portal and delivered PDF hostname do not prove authorship.
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [visible report search](<https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0>), [report detail example](<https://data.eastmoney.com/report/zw_stock.jshtml?infocode=AP202511021773734683>)
   - Search example: `search %E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0, select the research tab, and retain the AP report ID`
   - Same-function fallbacks: `cicc-research-research-reports`, `fenghuo-research-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: The verified company-report workflow is A-share oriented. On 2026-08-01, searches for Pop Mart and 09992 returned zero company reports; this does not establish that Eastmoney has no Hong Kong reports. Legacy or implementation endpoints are not supported public APIs.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-securities` - Eastmoney Securities official site
@@ -727,17 +838,11 @@ route before reporting a source gap.
 - Aliases/origins: `Eastmoney Securities`, `18.cn`
 - Publisher type: `issuer-company`
 - Official domains: `18.cn`
-- Authority scope: `High` - Eastmoney Securities' own published statements and explicitly attributed research; the portal, search label, and PDF delivery domain do not prove broker authorship.
-- Function: `broker-research`
-  - Authority: `High`
-  - Utility: `Low`
-  - Direct links: [official site entry](<https://www.18.cn/>)
-  - Search example: `verify a matching report PDF that names Eastmoney Securities before treating it as authored`
-  - Same-function fallbacks: `cicc-research-research-reports`
+- Provenance authority: `High` - Eastmoney Securities identity and its own statements. No public research-report or analyst workflow was verified; the portal, search label, and PDF delivery domain do not prove broker authorship.
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:14:00+08:00`
 - Access limitations: Homepage was public. No public analyst or report index was established in the bounded review; emsec.eastmoney.com redirected elsewhere and is not a current source.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `endata` - Endata
@@ -745,17 +850,19 @@ route before reporting a source gap.
 - Aliases/origins: `U12`, `艺恩`, `supplied U12`
 - Publisher type: `commercial-data-provider`
 - Official domains: `endata.com.cn`
-- Authority scope: `Medium` - Current AI vertical-data infrastructure and data-product discovery. Medium authority for current vendor-published products; Low for legacy entertainment-report expectation
+- Provenance authority: `Medium` - Current AI vertical-data infrastructure and data-product discovery. Medium authority for current vendor-published products; Low for legacy entertainment-report expectation
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Low`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.endata.com.cn/index.html>)
   - Search example: `site:endata.com.cn industry report`
   - Same-function fallbacks: `dydata-research-reports`, `analysys-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; sample/download flow requires NDA and subscription-style contact. Source drift from older entertainment/box-office role; NDA and formal contact for samples Audited fallback peers: U02, U07, U09.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `etsi` - ETSI
@@ -763,17 +870,19 @@ route before reporting a source gap.
 - Aliases/origins: `European Telecommunications Standards Institute`
 - Publisher type: `original-research`
 - Official domains: `etsi.org`
-- Authority scope: `High` - ETSI-authored standards, specifications, and standards-process information.
+- Provenance authority: `High` - ETSI-authored standards, specifications, and standards-process information.
 - Function: `telecom-standards`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [standards library](<https://www.etsi.org/standards/>)
   - Search example: `search EN%20303%20645 and open the rendered document version`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:54:00+08:00`
 - Access limitations: Standards library entry was public, but the dynamic result and PDF-download transaction were not completed. E-learning login is a separate service.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `eurostat` - Eurostat Database
@@ -781,17 +890,19 @@ route before reporting a source gap.
 - Aliases/origins: `U61`, `Eurostat Database`, `supplied U61`
 - Publisher type: `official-statistics`
 - Official domains: `ec.europa.eu`
-- Authority scope: `High` - EU macro, labor, trade, regional, demographic series. High authority for EU harmonized statistics
+- Provenance authority: `High` - EU macro, labor, trade, regional, demographic series. High authority for EU harmonized statistics
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://ec.europa.eu/eurostat/data/database>)
   - Search example: `site:ec.europa.eu official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`, `undata-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not company-document or announcement source Audited fallback peers: ECB, national statistical offices, World Bank, UNdata.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `ey-china` - EY China
@@ -799,17 +910,19 @@ route before reporting a source gap.
 - Aliases/origins: `U24-EY`, `EY China`, `U24`, `supplied U24b EY China`
 - Publisher type: `consulting-research`
 - Official domains: `ey.com`
-- Authority scope: `Medium` - Topic-specific insight pages, transactions, tax, infrastructure, financial-services, and policy-relevant business insights. Medium-to-high authority for EY-attributable advisory analysis; not official statistics
+- Provenance authority: `Medium` - Topic-specific insight pages, transactions, tax, infrastructure, financial-services, and policy-relevant business insights. Medium-to-high authority for EY-attributable advisory analysis; not official statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.ey.com/zh_cn>)
   - Search example: `site:ey.com industry report`
   - Same-function fallbacks: `deloitte-china-research-reports`, `kpmg-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited. Advisory framing; uneven primary-data depth; some downloads may shift into lead-generation flows Audited fallback peers: U24-Deloitte, U24-KPMG, U24-PwC, U20.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `fenghuo-research` - Fenghuo Research Reports
@@ -817,17 +930,19 @@ route before reporting a source gap.
 - Aliases/origins: `U63`, `烽火研报`, `supplied U63`
 - Publisher type: `mirror`
 - Official domains: `fhyanbao.com`
-- Authority scope: `Low` - Discovery of sell-side and industry reports when browser/TLS route is acceptable. Low authority for final claims; commercial aggregator, not official
+- Provenance authority: `Low` - Discovery of sell-side and industry reports when browser/TLS route is acceptable. Low authority for final claims; commercial aggregator, not official
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.fhyanbao.com/>)
   - Search example: `site:fhyanbao.com industry report`
   - Same-function fallbacks: `eastmoney-research-research-reports`, `sina-finance-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public web but expired certificate; insecure fetch reached final host. Poor certificate hygiene; trace every material fact to original broker, issuer, exchange, or regulator Audited fallback peers: Eastmoney report portal, Sina Finance, broker sites, company IR, exchange filings.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `flurry` - Flurry
@@ -835,17 +950,19 @@ route before reporting a source gap.
 - Aliases/origins: `U33`, `Flurry`, `supplied U33`
 - Publisher type: `commercial-data-provider`
 - Official domains: `flurry.com`
-- Authority scope: `Medium` - Historical Flurry telemetry and sunset documentation. Flurry Mobile Analytics SDK and UI sunset on 2024-03-15 and are not a current measurement route.
+- Provenance authority: `Medium` - Historical Flurry telemetry and sunset documentation. Flurry Mobile Analytics SDK and UI sunset on 2024-03-15 and are not a current measurement route.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.flurry.com/>)
   - Search example: `open the Flurry Mobile Analytics sunset notice on the current homepage`
   - Same-function fallbacks: `analysys-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T17:34:00+08:00`
 - Access limitations: First-party page states Flurry Mobile Analytics, including SDK and Analytics UI, sunset on 2024-03-15. Old Yahoo developer documentation routes returned 404.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `gallagher` - Arthur J. Gallagher & Co. insights
@@ -853,17 +970,19 @@ route before reporting a source gap.
 - Aliases/origins: `Gallagher Benefits and HR`
 - Publisher type: `consulting-research`
 - Official domains: `ajg.com`
-- Authority scope: `High` - Gallagher-authored benefits, workforce, compensation, wellbeing, and risk research and practice analysis.
+- Provenance authority: `High` - Gallagher-authored benefits, workforce, compensation, wellbeing, and risk research and practice analysis.
 - Function: `hr-benefits-research`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [insights library](<https://www.ajg.com/news-and-insights/>)
   - Search example: `select Benefits%20and%20HR, Reports, and Newest`
   - Same-function fallbacks: `aon-china-research-reports`, `mercer-china-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:47:00+08:00`
 - Access limitations: Public library and sampled PDF were open. Survey methodology remains report specific, and general advisory content carries its own disclaimer.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `gsma-mobile-economy` - GSMA Mobile Economy
@@ -871,17 +990,19 @@ route before reporting a source gap.
 - Aliases/origins: `U34`, `GSMA Mobile Economy`, `supplied U34`
 - Publisher type: `original-research`
 - Official domains: `gsma.com`
-- Authority scope: `High` - Telecom adoption, subscribers, connectivity, regional mobile-economy baselines. High for GSMA-published telecom synthesis; not national statistical original
+- Provenance authority: `High` - Telecom adoption, subscribers, connectivity, regional mobile-economy baselines. High for GSMA-published telecom synthesis; not national statistical original
 - Function: `telecom-industry-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.gsma.com/mobileeconomy/>)
   - Search example: `site:gsma.com mobile economy report`
   - Same-function fallbacks: None
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public report model but Cloudflare challenge from scripted access. Industry-association perspective; forecasts/models; local regulators better for country edge cases Audited fallback peers: ITU, World Bank, national telecom regulators, OECD.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `guangdong-government` - Guangdong Provincial Government
@@ -889,17 +1010,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Guangdong Provincial Government`, `supplied U48`
 - Publisher type: `official-government`
 - Official domains: `gd.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.gd.gov.cn/>)
   - Search example: `site:gd.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `guangdong-statistics` - Guangdong Provincial Bureau of Statistics
@@ -907,17 +1030,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Guangdong Provincial Bureau of Statistics`, `supplied U48`
 - Publisher type: `official-statistics`
 - Official domains: `stats.gd.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://stats.gd.gov.cn/>)
   - Search example: `site:stats.gd.gov.cn official statistics`
   - Same-function fallbacks: `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `hang-seng-indexes` - Hang Seng Indexes
@@ -925,17 +1050,19 @@ route before reporting a source gap.
 - Aliases/origins: `HSI`, `Hang Seng Indexes Company`
 - Publisher type: `commercial-data-provider`
 - Official domains: `hsi.com.hk`
-- Authority scope: `High` - Hang Seng Indexes' own methodology, constituent lists, factsheets, index outputs, and index data.
+- Provenance authority: `High` - Hang Seng Indexes' own methodology, constituent lists, factsheets, index outputs, and index data.
 - Function: `index-methodology-and-data`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [Hang Seng Index entry](<https://www.hsi.com.hk/eng/indexes/all-indexes/hang-seng-index>)
   - Search example: `select HSI and inspect the constituent table for 09992 at the required as-of date`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: First-party SPA shell was public, but data controls were not semantically rendered in the static probe. Some real-time or licensed data may have commercial terms.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `hibor-research` - Hibor Research
@@ -943,17 +1070,19 @@ route before reporting a source gap.
 - Aliases/origins: `U03`, `慧博投研资讯`, `supplied U03`
 - Publisher type: `aggregator`
 - Official domains: `hibor.com.cn`
-- Authority scope: `Medium` - Broker and industry report discovery, older report retrieval, topic scans. Medium authority as secondary distribution; broker originals hold authority
+- Provenance authority: `Medium` - Broker and industry report discovery, older report retrieval, topic scans. Medium authority as secondary distribution; broker originals hold authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.hibor.com.cn/>)
   - Search example: `site:hibor.com.cn industry report`
   - Same-function fallbacks: `datayes-robo-research-research-reports`, `nxny-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public pages plus PC client/login prompts. Provenance is secondary; full functionality funnels to client/app Audited fallback peers: U01, U08, U10, U11.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hk-icac` - Independent Commission Against Corruption
@@ -961,17 +1090,19 @@ route before reporting a source gap.
 - Aliases/origins: `C12`, `ICAC`, `icac`, `build_event_manifest icac; domain icac.org.hk`
 - Publisher type: `official-government`
 - Official domains: `icac.org.hk`
-- Authority scope: `High` - Arrest/case announcements, corruption investigations, press releases. High authority for ICAC-published materials
+- Provenance authority: `High` - Arrest/case announcements, corruption investigations, press releases. High authority for ICAC-published materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.icac.org.hk/>)
   - Search example: `site:icac.org.hk official notice`
   - Same-function fallbacks: `hk-judiciary-regulatory-materials`, `hk-police-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not securities filing or court-judgment database Audited fallback peers: Judiciary, Police, SFC, company announcements.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hk-insurance-authority` - Insurance Authority of Hong Kong
@@ -979,17 +1110,19 @@ route before reporting a source gap.
 - Aliases/origins: `C10`, `IA`, `ia`, `build_event_manifest ia; domain ia.org.hk`
 - Publisher type: `official-regulator`
 - Official domains: `ia.org.hk`
-- Authority scope: `High` - Insurance regulation, circulars, licensing notices. High authority for IA-published materials
+- Provenance authority: `High` - Insurance regulation, circulars, licensing notices. High authority for IA-published materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.ia.org.hk/>)
   - Search example: `site:ia.org.hk official notice`
   - Same-function fallbacks: `sfc-regulatory-materials`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `hk-judiciary` - Hong Kong Judiciary
@@ -997,17 +1130,19 @@ route before reporting a source gap.
 - Aliases/origins: `C13`, `HK Judiciary`, `hkjd`, `build_event_manifest hkjd; domain judiciary.hk`
 - Publisher type: `official-government`
 - Official domains: `judiciary.hk`
-- Authority scope: `High` - Judgments, cause lists, court announcements, legal source tracing. High authority for official court materials
+- Provenance authority: `High` - Judgments, cause lists, court announcements, legal source tracing. High authority for official court materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.judiciary.hk/>)
   - Search example: `site:judiciary.hk official notice`
   - Same-function fallbacks: `hk-police-regulatory-materials`, `hk-icac-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Discovery can be slower than news; requires case context Audited fallback peers: e-Legal resources, press releases, HKEX issuer announcements.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hk-police` - Hong Kong Police Force
@@ -1015,17 +1150,19 @@ route before reporting a source gap.
 - Aliases/origins: `C11`, `HKPF`, `hkpf`, `build_event_manifest hkpf; domain police.gov.hk`
 - Publisher type: `official-government`
 - Official domains: `police.gov.hk`
-- Authority scope: `High` - Scam alerts, enforcement/news context, public advisories. High authority for HKPF-published statements
+- Provenance authority: `High` - Scam alerts, enforcement/news context, public advisories. High authority for HKPF-published statements
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.police.gov.hk/>)
   - Search example: `site:police.gov.hk official notice`
   - Same-function fallbacks: `hk-icac-regulatory-materials`, `hk-judiciary-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Contextual source, not corporate filing source Audited fallback peers: ICAC, Judiciary, SFC, company statements.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkex` - Hong Kong Exchanges and Clearing
@@ -1033,11 +1170,11 @@ route before reporting a source gap.
 - Aliases/origins: `C02`, `HKEX`, `build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk`
 - Publisher type: `official-exchange`
 - Official domains: `hkex.com.hk`
-- Authority scope: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
+- Provenance authority: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited fallback peers: Issuer IR, SFC, company annual reports.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkex-ccass` - HKEX CCASS shareholding search
@@ -1045,17 +1182,19 @@ route before reporting a source gap.
 - Aliases/origins: `HKEX CCASS`, `CCASS participant holdings`
 - Publisher type: `official-market-infrastructure`
 - Official domains: `www3.hkexnews.hk`
-- Authority scope: `High` - CCASS participant holdings at a stated date; not statutory beneficial ownership and not a DI substitute.
+- Provenance authority: `High` - CCASS participant holdings at a stated date; not statutory beneficial ownership and not a DI substitute.
 - Function: `ccass-participant-holdings`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [current participant-holdings search](<https://www3.hkexnews.hk/sdw/search/searchsdw.aspx>)
   - Search example: `txtShareholdingDate=2026/07/31 and txtStockCode=09992`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:12:00+08:00`
 - Access limitations: Public for the tested search surface. It does not cover ultimate owners, off-system holdings, or statutory DI filings.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkex-di` - HKEX Disclosure of Interests
@@ -1063,17 +1202,19 @@ route before reporting a source gap.
 - Aliases/origins: `HKEX DI`, `statutory substantial shareholding notices`
 - Publisher type: `official-exchange`
 - Official domains: `di.hkex.com.hk`
-- Authority scope: `High` - Filed statutory Disclosure of Interests notices for substantial shareholders and directors; not an ownership estimate or CCASS participant-holdings source.
+- Provenance authority: `High` - Filed statutory Disclosure of Interests notices for substantial shareholders and directors; not an ownership estimate or CCASS participant-holdings source.
 - Function: `statutory-ownership`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [current DI search entry](<https://di.hkex.com.hk/di/NSForm1.aspx?lang=en>)
   - Search example: `search 09992 or POP MART and open the filed notice after the service resumes`
   - Same-function fallbacks: None
 - Current status: `temporarily-unreachable`
 - Last checked: `2026-08-01T17:11:00+08:00`
 - Access limitations: All tested DI endpoints reported that the page was temporarily unavailable. The access observation does not establish field names or show that DI records ceased to exist; no function-equivalent fallback exists.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkex-market-data` - HKEX market data
@@ -1081,17 +1222,19 @@ route before reporting a source gap.
 - Aliases/origins: `HKEX official quotes`, `HKEX daily quotations`
 - Publisher type: `official-exchange`
 - Official domains: `hkex.com.hk`
-- Authority scope: `High` - HKEX official security quotations, day-close short-selling reports, and exchange market statistics.
+- Provenance authority: `High` - HKEX official security quotations, day-close short-selling reports, and exchange market statistics.
 - Function: `official-market-data`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [equity lookup](<https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=en>), [dated daily quotation route](<https://www.hkex.com.hk/Market-Data/Statistics/Securities-Market/Daily-Quotations-(Main-Board)?sc_lang=en>)
   - Search example: `enter 09992 in the equity lookup and retain the market timestamp or dated report`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:12:00+08:00`
 - Access limitations: Public pages were observed. Real-time and wholesale redistribution can require a vendor agreement; day-close reports must retain their report date and market-session context.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkexnews` - HKEXnews
@@ -1099,17 +1242,19 @@ route before reporting a source gap.
 - Aliases/origins: `C02`, `HKEXnews listed-company search`, `hkex`, `build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk`
 - Publisher type: `official-exchange`
 - Official domains: `hkexnews.hk`
-- Authority scope: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
+- Provenance authority: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [listed-company title search](<https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en>)
   - Search example: `stockCode=09992, startDate=2025-01-01, endDate=2026-08-01, Financial Statements or ESG`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public JSF search requires session and view-state handling. Preserve the final PDF identity; a current direct URL is not a permanent-URL guarantee.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hkma` - Hong Kong Monetary Authority
@@ -1117,17 +1262,19 @@ route before reporting a source gap.
 - Aliases/origins: `C09`, `HKMA`, `build_event_manifest hkma; build_market_manifest hkma; domain hkma.gov.hk`
 - Publisher type: `official-regulator`
 - Official domains: `hkma.gov.hk`
-- Authority scope: `High` - Banking circulars, regulatory guidance, monetary/FX statements. High authority for HKMA-published materials
+- Provenance authority: `High` - Banking circulars, regulatory guidance, monetary/FX statements. High authority for HKMA-published materials
 - Function: `banking-and-monetary-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [data and statistics entry](<https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/>), [authorized institution register](<https://vpr.hkma.gov.hk/statics/en/regulatory-resources/registers/register-of-ais-and-lros/>)
   - Search example: `select search-data-and-statistics and search the required series or legal bank name`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public under HTTP/1.1 in the probe. HKMA is not a general listed-company enforcement archive; scope bank searches by legal bank name rather than issuer ticker.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hksar-budget` - HKSAR Budget
@@ -1135,17 +1282,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong Budget`
 - Publisher type: `official-government`
 - Official domains: `budget.gov.hk`
-- Authority scope: `High` - HKSAR annual Budget documents and official fiscal measures.
+- Provenance authority: `High` - HKSAR annual Budget documents and official fiscal measures.
 - Function: `fiscal-policy-documents`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [annual budget archive entry](<https://www.budget.gov.hk/2025/eng/>)
   - Search example: `open the 2025 budget archive and search the rendered document for retail`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: The official annual budget route is established, but the checked archive returned an empty scripted reply. Do not convert that transport result into a missing-document claim.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `hksar-policy-address` - HKSAR Policy Address
@@ -1153,17 +1302,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong Policy Address`
 - Publisher type: `official-government`
 - Official domains: `policyaddress.gov.hk`
-- Authority scope: `High` - HKSAR annual Policy Address documents and the government's stated policy commitments.
+- Provenance authority: `High` - HKSAR annual Policy Address documents and the government's stated policy commitments.
 - Function: `policy-documents`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [annual archive entry](<https://www.policyaddress.gov.hk/2025/en/>)
   - Search example: `open the 2025 archive and search its rendered document for retail`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: The government domain and annual-document role are established, but the checked archive returned an empty scripted reply. This is a point-in-time technical limit, not evidence that the documents are unavailable.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `hksar-press-releases` - HKSAR Government press releases
@@ -1171,17 +1322,19 @@ route before reporting a source gap.
 - Aliases/origins: `Information Services Department press releases`, `info.gov.hk GIA`
 - Publisher type: `official-government`
 - Official domains: `info.gov.hk`, `search.gov.hk`
-- Authority scope: `High` - Issuing department press releases and the HKSAR daily release archive; not a substitute for legal text, statutory filings, or producing-agency statistics.
+- Provenance authority: `High` - Issuing department press releases and the HKSAR daily release archive; not a substitute for legal text, statutory filings, or producing-agency statistics.
 - Function: `government-press-releases`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [daily release archive](<https://www.info.gov.hk/gia/general/today.htm>), [government search](<https://www.search.gov.hk/search.html?query=Pop%20Mart&ui_lang=en&ui_charset=utf-8>)
   - Search example: `query=POP%20MART&ui_lang=en&ui_charset=utf-8`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public archive. It is a departmental announcement source, not a legal-record or listed-company disclosure database.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hktdc-research` - HKTDC Research
@@ -1189,17 +1342,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong Trade Development Council research`
 - Publisher type: `original-research`
 - Official domains: `research.hktdc.com`
-- Authority scope: `High` - HKTDC-authored trade, sector, and market research; not official statistical-agency or issuer-filing evidence.
+- Provenance authority: `High` - HKTDC-authored trade, sector, and market research; not official statistical-agency or issuer-filing evidence.
 - Function: `trade-and-market-research`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [research search](<https://research.hktdc.com/en/search?query=Pop%20Mart>)
   - Search example: `query=toys then inspect the opened HKTDC research article or report`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public SPA route and search entry loaded, but static retrieval did not render result cards or complete filter-field evidence.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hong-kong-consumer-council` - Hong Kong Consumer Council
@@ -1207,17 +1362,19 @@ route before reporting a source gap.
 - Aliases/origins: `Consumer Council HK`
 - Publisher type: `official-government`
 - Official domains: `consumer.org.hk`
-- Authority scope: `High` - Consumer Council-authored tests, studies, alerts, complaint figures, and price-comparison outputs.
+- Provenance authority: `High` - Consumer Council-authored tests, studies, alerts, complaint figures, and price-comparison outputs.
 - Function: `consumer-research`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [site search](<https://www.consumer.org.hk/en/search?q=Pop%20Mart>)
   - Search example: `q=collectibles&category=testing_report`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public search and content controls were observed. A single test or complaint is not a market-share, issuer-wide, or safety conclusion beyond its stated scope.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hong-kong-e-gazette` - HKSAR e-Gazette
@@ -1225,17 +1382,19 @@ route before reporting a source gap.
 - Aliases/origins: `Hong Kong e-Gazette`, `Gazette notices`
 - Publisher type: `official-government`
 - Official domains: `egazette.gld.gov.hk`
-- Authority scope: `High` - Official Hong Kong Gazette issues, government notices, legal notices, and legal supplements.
+- Provenance authority: `High` - Official Hong Kong Gazette issues, government notices, legal notices, and legal supplements.
 - Function: `official-gazette`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [Gazette search](<https://egazette.gld.gov.hk/en/search-gazette>)
   - Search example: `search POP%20MART under Legal Notices and retain category and issue date`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Home and coverage routes were public, while search required terms acceptance and Cloudflare Turnstile. Online coverage dates vary by Gazette part.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hong-kong-e-legislation` - Hong Kong e-Legislation
@@ -1243,17 +1402,19 @@ route before reporting a source gap.
 - Aliases/origins: `HKSAR e-Legislation`, `Cap. 622`
 - Publisher type: `official-government`
 - Official domains: `elegislation.gov.hk`
-- Authority scope: `High` - Current and historical consolidated Hong Kong legislation, sections, versions, and amendment history.
+- Provenance authority: `High` - Current and historical consolidated Hong Kong legislation, sections, versions, and amendment history.
 - Function: `consolidated-legislation`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [Companies Ordinance route](<https://www.elegislation.gov.hk/hk/cap622>)
   - Search example: `search Cap. 622 or Companies Ordinance, then select current or historical version`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: The site redirected to a client-configuration check in the probe. This is not evidence of a paywall or missing law text; the completed search fields were not inspected.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hong-kong-statistics` - Hong Kong Census and Statistics Department
@@ -1261,17 +1422,19 @@ route before reporting a source gap.
 - Aliases/origins: `C&SD`, `censtatd`
 - Publisher type: `official-statistics`
 - Official domains: `censtatd.gov.hk`
-- Authority scope: `High` - C&SD-produced Hong Kong Web Tables, CSV exports, API examples, releases, definitions, and series.
+- Provenance authority: `High` - C&SD-produced Hong Kong Web Tables, CSV exports, API examples, releases, definitions, and series.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [Web Table entry](<https://www.censtatd.gov.hk/en/web_table.html>)
   - Search example: `select a retail-sales table, all-items retail value, and a monthly period before CSV or API export`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public dynamic Web Tables require recording the selected dimensions. A catalog or copied chart does not replace the producing C&SD table.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `idc` - IDC
@@ -1279,17 +1442,19 @@ route before reporting a source gap.
 - Aliases/origins: `U29`, `IDC`, `supplied U29`
 - Publisher type: `commercial-data-provider`
 - Official domains: `idc.com`
-- Authority scope: `High` - Tech market sizing, forecasts, vendor share, enterprise IT/telecom trend discovery. High commercial technology market-intelligence authority
+- Provenance authority: `High` - Tech market sizing, forecasts, vendor share, enterprise IT/telecom trend discovery. High commercial technology market-intelligence authority
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.idc.com/>)
   - Search example: `site:idc.com industry report`
   - Same-function fallbacks: `iresearch-research-reports`, `kpmg-china-research-reports`
 - Current status: `paywalled`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: membership/paywalled; public landing pages/PRs, full reports behind subscription/login. Full reports usually paid; proprietary methodology; public claims often abstracts or press releases Audited fallback peers: CAICT, iResearch, KPMG, Deloitte.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `iimedia` - iiMedia
@@ -1297,17 +1462,19 @@ route before reporting a source gap.
 - Aliases/origins: `U09`, `艾媒网`, `supplied U09`
 - Publisher type: `media`
 - Official domains: `iimedia.cn`
-- Authority scope: `Medium` - Industry background, consumer trend decks, emerging-sector overview pieces. Medium authority; commercial research and media framing
+- Provenance authority: `Medium` - Industry background, consumer trend decks, emerging-sector overview pieces. Medium authority; commercial research and media framing
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.iimedia.cn/>)
   - Search example: `site:iimedia.cn industry report`
   - Same-function fallbacks: `analysys-research-reports`, `dydata-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; excerpts public, report/download flows route to member assets. Marketing tone; complete PDFs may be member-gated; cross-check hard claims Audited fallback peers: U07, U02, U16.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `imf-data` - IMF Data
@@ -1315,17 +1482,19 @@ route before reporting a source gap.
 - Aliases/origins: `U54`, `IMF Data`, `supplied U54`
 - Publisher type: `official-statistics`
 - Official domains: `imf.org`, `data.imf.org`
-- Authority scope: `High` - Balance of payments, fiscal, debt, macro surveillance context. High authority for IMF-published data
+- Provenance authority: `High` - Balance of payments, fiscal, debt, macro surveillance context. High authority for IMF-published data
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.imf.org/en/Data>), [direct route](<https://data.imf.org/>)
   - Search example: `site:imf.org official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`, `undata-official-statistics`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats offices.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `iresearch` - iResearch
@@ -1333,17 +1502,19 @@ route before reporting a source gap.
 - Aliases/origins: `U19`, `艾瑞网 / iResearch`, `supplied U19`
 - Publisher type: `commercial-data-provider`
 - Official domains: `iresearch.cn`
-- Authority scope: `Medium` - China internet, advertising, ecommerce, mobile, consumer-industry reports. Medium-to-high commercial authority
+- Provenance authority: `Medium` - China internet, advertising, ecommerce, mobile, consumer-industry reports. Medium-to-high commercial authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.iresearch.cn/>)
   - Search example: `site:iresearch.cn industry report`
   - Same-function fallbacks: `199it-research-reports`, `idc-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; articles/report pages public, premium products commercial. Vendor-produced perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC, CAICT.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `it-juzi` - IT Juzi
@@ -1351,17 +1522,19 @@ route before reporting a source gap.
 - Aliases/origins: `U15`, `IT桔子`, `supplied U15`
 - Publisher type: `commercial-data-provider`
 - Official domains: `itjuzi.com`
-- Authority scope: `Medium` - Venture financing lookup, company/investor timelines, sector deal flow. Medium-high authority for China startup/financing tracking when accessible
+- Provenance authority: `Medium` - Venture financing lookup, company/investor timelines, sector deal flow. Medium-high authority for China startup/financing tracking when accessible
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.itjuzi.com/>)
   - Search example: `site:itjuzi.com industry report`
   - Same-function fallbacks: `china-venture-research-reports`, `dydata-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; HTTP 412 JavaScript challenge observed. Straight programmatic access blocked; trace financing facts to primary announcements where possible Audited fallback peers: U16, U02, company registry/news originals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `itu-statistics` - ITU Statistics
@@ -1369,17 +1542,19 @@ route before reporting a source gap.
 - Aliases/origins: `International Telecommunication Union Statistics`, `ITU DataHub`
 - Publisher type: `official-statistics`
 - Official domains: `itu.int`, `datahub.itu.int`
-- Authority scope: `High` - ITU-published ICT indicator definitions and internationally compiled series.
+- Provenance authority: `High` - ITU-published ICT indicator definitions and internationally compiled series.
 - Function: `ict-statistics`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [Statistics entry](<https://www.itu.int/itu-d/sites/statistics/>), [DataHub entry](<https://datahub.itu.int/>)
   - Search example: `select Mobile cellular subscriptions, China, and the required year in DataHub`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:34:00+08:00`
 - Access limitations: Statistics entry was public; DataHub returned 403 in the checked client, so no completed indicator workflow, export, or access entitlement is asserted.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `jpmorgan` - JPMorgan
@@ -1387,17 +1562,19 @@ route before reporting a source gap.
 - Aliases/origins: `U23`, `JPMorgan`, `supplied U23`
 - Publisher type: `original-research`
 - Official domains: `jpmorgan.com`
-- Authority scope: `High` - Public outlooks, finance explainers, banking/payments insights, research-theme discovery. High for sell-side finance and macro commentary with house-view bias
+- Provenance authority: `High` - Public outlooks, finance explainers, banking/payments insights, research-theme discovery. High for sell-side finance and macro commentary with house-view bias
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.jpmorgan.com/global>)
   - Search example: `site:jpmorgan.com industry report`
   - Same-function fallbacks: `wef-china-research-reports`, `deloitte-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; meaningful public insights, institutional research client/login gated. Not neutral public statistics; not China-specific by default; best research may be client-only Audited fallback peers: WEF China, Deloitte, EY, official central-bank/regulator sources.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `kpmg-china` - KPMG China
@@ -1405,17 +1582,19 @@ route before reporting a source gap.
 - Aliases/origins: `U24-KPMG`, `KPMG China`, `U24`, `supplied U24c KPMG China`
 - Publisher type: `consulting-research`
 - Official domains: `kpmg.com`
-- Authority scope: `Medium` - Insight archive browsing, China tax alerts, economic monitors, M&A, regulatory, and enterprise trend reports. Medium-to-high authority for KPMG-attributable advisory analysis; not official statistics
+- Provenance authority: `Medium` - Insight archive browsing, China tax alerts, economic monitors, M&A, regulatory, and enterprise trend reports. Medium-to-high authority for KPMG-attributable advisory analysis; not official statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://kpmg.com/cn/zh.html>)
   - Search example: `site:kpmg.com industry report`
   - Same-function fallbacks: `deloitte-china-research-reports`, `ey-china-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited. Consulting/accounting-house perspective; variable methodological transparency; some premium assets may sit behind forms Audited fallback peers: U24-Deloitte, U24-EY, U24-PwC, U29.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `mckinsey-china` - McKinsey Greater China
@@ -1423,17 +1602,19 @@ route before reporting a source gap.
 - Aliases/origins: `U20`, `麦肯锡中国`, `supplied U20`
 - Publisher type: `consulting-research`
 - Official domains: `mckinsey.com.cn`
-- Authority scope: `Medium` - Executive sector synthesis, strategic themes, China business context. Medium-to-high authority for consulting analysis; not raw official data
+- Provenance authority: `Medium` - Executive sector synthesis, strategic themes, China business context. Medium-to-high authority for consulting analysis; not raw official data
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.mckinsey.com.cn/>)
   - Search example: `site:mckinsey.com.cn industry report`
   - Same-function fallbacks: `bcg-china-research-reports`, `bain-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public insights with possible registration/contact gating. Lighter on raw tables; consulting framing; client work unavailable Audited fallback peers: BCG, Bain, Roland Berger, Deloitte, EY, PwC, KPMG.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `mercer-china` - Mercer China
@@ -1441,17 +1622,19 @@ route before reporting a source gap.
 - Aliases/origins: `U27`, `Mercer China`, `supplied U27`
 - Publisher type: `commercial-data-provider`
 - Official domains: `mercer.com.cn`
-- Authority scope: `High` - HR benchmarks, white papers, benefits trends, workplace health/rewards. High within HR, compensation, mobility, benefits benchmarking as commercial provider
+- Provenance authority: `High` - HR benchmarks, white papers, benefits trends, workplace health/rewards. High within HR, compensation, mobility, benefits benchmarking as commercial provider
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.mercer.com.cn/>)
   - Search example: `site:mercer.com.cn industry report`
   - Same-function fallbacks: `aon-china-research-reports`, `deloitte-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; commercial survey products and databases gated. Valuable benchmark cuts are paid; public pages often market commercial products Audited fallback peers: Aon, Deloitte, EY, official labor/statistics sources.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `miit-data` - MIIT Data
@@ -1459,17 +1642,19 @@ route before reporting a source gap.
 - Aliases/origins: `U49`, `MIIT`, `supplied U49`
 - Publisher type: `official-statistics`
 - Official domains: `miit.gov.cn`
-- Authority scope: `High` - Industrial output, telecom, manufacturing, sector stats, ministry data discovery. High authority for MIIT-published industry statistics
+- Provenance authority: `High` - Industrial output, telecom, manufacturing, sector stats, ministry data discovery. High authority for MIIT-published industry statistics
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.miit.gov.cn/gxsj/index.html>)
   - Search example: `site:miit.gov.cn official statistics`
   - Same-function fallbacks: `national-bureau-statistics-official-statistics`, `caict-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Mostly aggregate stats; not filings or company document source Audited fallback peers: NBS, ministry sub-pages, State Council releases.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `ministry-culture-tourism` - Ministry of Culture and Tourism of China
@@ -1477,17 +1662,11 @@ route before reporting a source gap.
 - Aliases/origins: `MCT China`, `China culture and tourism ministry`
 - Publisher type: `official-government`
 - Official domains: `mct.gov.cn`
-- Authority scope: `High` - Ministry-published culture and tourism releases, statistics, and policy documents.
-- Function: `culture-tourism-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [ministry entry](<https://www.mct.gov.cn/>)
-  - Search example: `browse the current ministry site for a tourism-statistics or release item`
-  - Same-function fallbacks: None
+- Provenance authority: `High` - Ministry-published culture and tourism releases, statistics, and policy documents.
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Root was public. The root's so.mct.gov.cn search construction failed DNS in this probe, so no current stable search route or API is asserted.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `ministry-of-education` - Ministry of Education statistics family
@@ -1495,17 +1674,19 @@ route before reporting a source gap.
 - Aliases/origins: `U51`, `Ministry of Education supplied URL`, `supplied U51`
 - Publisher type: `official-statistics`
 - Official domains: `moe.gov.cn`
-- Authority scope: `High` - Official education statistics and annual national education stats. High authority for MOE-published education statistics
+- Provenance authority: `High` - Official education statistics and annual national education stats. High authority for MOE-published education statistics
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.moe.gov.cn/jyb_sjzl/moe_560/2024/>)
   - Search example: `site:moe.gov.cn official statistics`
   - Same-function fallbacks: `national-bureau-statistics-official-statistics`, `shanghai-statistics-official-statistics`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public; supplied historical leaf returned 404. Supplied URL stale; year folders change; use stats family not hard-coded leaf Audited fallback peers: MOE stats family, NBS, provincial education bureaus.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `ministry-of-finance` - Ministry of Finance
@@ -1513,17 +1694,19 @@ route before reporting a source gap.
 - Aliases/origins: `C04`, `MOF`, `mof`, `build_event_manifest mof; domain mof.gov.cn`
 - Publisher type: `official-government`
 - Official domains: `mof.gov.cn`
-- Authority scope: `High` - Budget, fiscal/tax circulars, accounting policy notices, official announcements. High authority for MOF-published materials
+- Provenance authority: `High` - Budget, fiscal/tax circulars, accounting policy notices, official announcements. High authority for MOF-published materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<http://www.mof.gov.cn/>)
   - Search example: `site:mof.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Downstream implementation may live on SAT or other ministry sites Audited fallback peers: PBOC, State Council, SAT, local finance bureaus.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `mofcom` - Ministry of Commerce of China
@@ -1531,17 +1714,11 @@ route before reporting a source gap.
 - Aliases/origins: `MOFCOM`, `China commerce ministry`
 - Publisher type: `official-government`
 - Official domains: `mofcom.gov.cn`
-- Authority scope: `High` - Ministry-published commerce policy, trade releases, and statistics within MOFCOM's mandate.
-- Function: `commerce-policy-materials`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [ministry entry](<https://www.mofcom.gov.cn/>)
-  - Search example: `browse current MOFCOM releases for the required commerce or trade subject`
-  - Same-function fallbacks: None
+- Provenance authority: `High` - Ministry-published commerce policy, trade releases, and statistics within MOFCOM's mandate.
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Root was public; guessed search and ecommerce routes were unavailable in the probe, so no reproducible query contract is asserted.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `national-bureau-statistics` - National Bureau of Statistics of China
@@ -1549,17 +1726,19 @@ route before reporting a source gap.
 - Aliases/origins: `U45`, `国家统计局`, `supplied U45`
 - Publisher type: `official-statistics`
 - Official domains: `stats.gov.cn`
-- Authority scope: `High` - Citation-grade official China macro, demographic, industrial, labor, price, housing data. Very high authority for PRC official statistics and methodology
+- Provenance authority: `High` - Citation-grade official China macro, demographic, industrial, labor, price, housing data. Very high authority for PRC official statistics and methodology
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.stats.gov.cn/>)
   - Search example: `site:stats.gov.cn official statistics`
   - Same-function fallbacks: `beijing-statistics-official-statistics`, `shanghai-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Release lag, revisions, definitional changes, official scope limits Audited fallback peers: Provincial/city statistical bureaus, 中国政府网 ministries, World Bank.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `national-film-administration` - National Film Administration of China
@@ -1567,17 +1746,11 @@ route before reporting a source gap.
 - Aliases/origins: `National Film Administration`, `China film regulator`
 - Publisher type: `official-regulator`
 - Official domains: `chinafilm.gov.cn`
-- Authority scope: `High` - National Film Administration-published film-regulation material within the administration's mandate.
-- Function: `film-regulation`
-  - Authority: `High`
-  - Utility: `Medium`
-  - Direct links: [administration entry](<https://www.chinafilm.gov.cn/>)
-  - Search example: `browse current administration publications for the required film-regulation topic`
-  - Same-function fallbacks: None
+- Provenance authority: `High` - National Film Administration-published film-regulation material within the administration's mandate.
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Root was public, while a guessed box-office search route was unavailable. No public query contract was established.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `newrank` - Newrank Reports
@@ -1585,17 +1758,19 @@ route before reporting a source gap.
 - Aliases/origins: `U40`, `新榜报告`, `supplied U40`
 - Publisher type: `commercial-data-provider`
 - Official domains: `newrank.cn`
-- Authority scope: `Medium` - WeChat/Weibo/short-video ecosystem reports, rankings, report discovery. Medium-to-high for Newrank-tracked ecosystems
+- Provenance authority: `Medium` - WeChat/Weibo/short-video ecosystem reports, rankings, report discovery. Medium-to-high for Newrank-tracked ecosystems
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://newrank.cn/report?bindType=report>)
   - Search example: `site:newrank.cn industry report`
   - Same-function fallbacks: `36kr-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited; deeper products paid/commercial. Vendor-methodology limits; commissioned reports may be sponsor-shaped Audited fallback peers: QuestMobile, platform disclosures, 36Kr, 巨量算数.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `nfra` - National Financial Regulatory Administration
@@ -1603,17 +1778,19 @@ route before reporting a source gap.
 - Aliases/origins: `C05`, `NFRA`, `build_event_manifest nfra; domain nfra.gov.cn`
 - Publisher type: `official-regulator`
 - Official domains: `nfra.gov.cn`
-- Authority scope: `High` - Banking/insurance supervision notices, measures, enforcement, official announcements. High authority for NFRA-published materials
+- Provenance authority: `High` - Banking/insurance supervision notices, measures, enforcement, official announcements. High authority for NFRA-published materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.nfra.gov.cn/>)
   - Search example: `site:nfra.gov.cn official notice`
   - Same-function fallbacks: `csrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Older CBIRC-era materials may need historical path work Audited fallback peers: PBOC, CSRC, State Council, institutions' own sites.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `nrta` - National Radio and Television Administration
@@ -1621,17 +1798,19 @@ route before reporting a source gap.
 - Aliases/origins: `NRTA`, `China audiovisual regulator`
 - Publisher type: `official-regulator`
 - Official domains: `nrta.gov.cn`
-- Authority scope: `High` - NRTA notices, permits, and policy within radio, television, and network-audiovisual regulation.
+- Provenance authority: `High` - NRTA notices, permits, and policy within radio, television, and network-audiovisual regulation.
 - Function: `audiovisual-regulation`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [network audiovisual notices](<https://www.nrta.gov.cn/col/col110/index.html>)
   - Search example: `browse network audiovisual notices for %E7%BD%91%E7%BB%9C%E5%BE%AE%E7%9F%AD%E5%89%A7`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Public notice routes were observed, but the sampled list included older entries. Confirm recency and open the individual notice before use.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `nxny` - NXNY Stock Report Network
@@ -1639,17 +1818,19 @@ route before reporting a source gap.
 - Aliases/origins: `U08`, `股票报告网`, `supplied U08`
 - Publisher type: `mirror`
 - Official domains: `nxny.com`
-- Authority scope: `Low` - Scanning industry-report titles, recent uploads, and download popularity. Low-medium authority; distribution site, not original publisher
+- Provenance authority: `Low` - Scanning industry-report titles, recent uploads, and download popularity. Low-medium authority; distribution site, not original publisher
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.nxny.com/stype_hy/>)
   - Search example: `site:nxny.com industry report`
   - Same-function fallbacks: `hibor-research-research-reports`, `datayes-robo-research-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; login/register/VIP/download affordances visible. Upstream provenance varies; VIP gating visible Audited fallback peers: U03, U01, U10, U11.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `pbc` - People's Bank of China
@@ -1657,23 +1838,27 @@ route before reporting a source gap.
 - Aliases/origins: `U50`, `PBOC`, `supplied U50; code ID pbc in build_event_manifest and build_market_manifest`
 - Publisher type: `official-regulator`
 - Official domains: `pbc.gov.cn`
-- Authority scope: `High` - Monetary policy notices, official announcements, statistics landing pages. High authority for PBOC-published policy and central-bank data
+- Provenance authority: `High` - Monetary policy notices, official announcements, statistics landing pages. High authority for PBOC-published policy and central-bank data
 - Function: `central-bank-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [Statistics and Survey Department report list](<https://www.pbc.gov.cn/diaochatongjisi/116219/116225/index.html>)
   - Search example: `open https://www.pbc.gov.cn/diaochatongjisi/116219/116225/2026071515025183948/index.html`
   - Same-function fallbacks: None
 - Function: `central-bank-policy-search`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [PBOC site search](<https://wzdig.pbc.gov.cn/search/pcRender?sr=score%20desc&pageId=c177a85bd02b4114bebebd210809f691&ext=&pNo=1&q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0>)
   - Search example: `q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pNo=1`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:09:00+08:00`
 - Access limitations: Public statistics and browser search routes were verified. Search results include branches and broad text matches, and unattended same-page retrieval was less reliable.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `pew-research` - Pew Research Center
@@ -1681,17 +1866,19 @@ route before reporting a source gap.
 - Aliases/origins: `U43-Pew`, `Intended 皮尤网 label from supplied U43`, `U43`, `supplied U43 intended-label subrecord`
 - Publisher type: `original-research`
 - Official domains: `pewresearch.org`
-- Authority scope: `High` - Pew public-opinion, demographic, social, internet, and technology survey research. High route prior for Pew's own transparent survey research
+- Provenance authority: `High` - Pew public-opinion, demographic, social, internet, and technology survey research. High route prior for Pew's own transparent survey research
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.pewresearch.org/>)
   - Search example: `site:pewresearch.org industry report`
   - Same-function fallbacks: `wef-china-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not PwC; survey scope, sample, geography, wording, and field dates bound every claim Audited fallback peers: Gallup, Ipsos, World Bank, OECD.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `pop-mart` - Pop Mart official website
@@ -1699,17 +1886,19 @@ route before reporting a source gap.
 - Aliases/origins: `POP MART`, `popmart.com`
 - Publisher type: `issuer-company`
 - Official domains: `popmart.com`
-- Authority scope: `High` - Pop Mart's own product, brand, location, policy, and first-party statements; not a verified investor filing archive or independent commercial evidence.
+- Provenance authority: `High` - Pop Mart's own product, brand, location, policy, and first-party statements; not a verified investor filing archive or independent commercial evidence.
 - Function: `company-product-statements`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [official storefront](<https://www.popmart.com/>)
   - Search example: `search the rendered storefront for LABUBU or THE%20MONSTERS`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:13:00+08:00`
 - Access limitations: Public storefront was JS-heavy and region dependent. No stable IR archive or investor link was verified from the storefront; CDN hosting alone does not establish issuer provenance.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `pwc-china` - PwC China
@@ -1717,17 +1906,19 @@ route before reporting a source gap.
 - Aliases/origins: `U24-PwC`, `PwC China`, `U24`, `supplied U24d PwC China`
 - Publisher type: `consulting-research`
 - Official domains: `pwccn.com`
-- Authority scope: `Medium` - White-paper discovery, research landing pages, China-market insight summaries, surveys, regional market analysis. Medium-to-high authority for PwC-attributable advisory analysis; not official statistics
+- Provenance authority: `Medium` - White-paper discovery, research landing pages, China-market insight summaries, surveys, regional market analysis. Medium-to-high authority for PwC-attributable advisory analysis; not official statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.pwccn.com/zh>)
   - Search example: `site:pwccn.com industry report`
   - Same-function fallbacks: `deloitte-china-research-reports`, `ey-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited. Branded perspective; uneven access depth across downloadable assets Audited fallback peers: U24-Deloitte, U24-EY, U24-KPMG, U20.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `pwc-us-library` - PwC Library
@@ -1735,17 +1926,19 @@ route before reporting a source gap.
 - Aliases/origins: `U43-PwC`, `PwC URL from supplied U43`, `U43`, `supplied U43 URL subrecord`
 - Publisher type: `consulting-research`
 - Official domains: `pwc.com`
-- Authority scope: `Medium` - PwC-attributable industry outlooks, consulting reports, enterprise topics, and surveys. Medium route prior for PwC-attributable consulting analysis
+- Provenance authority: `Medium` - PwC-attributable industry outlooks, consulting reports, enterprise topics, and surveys. Medium route prior for PwC-attributable consulting analysis
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.pwc.com/us/en/library.html>)
   - Search example: `site:pwc.com industry report`
   - Same-function fallbacks: `pwc-china-research-reports`, `deloitte-china-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; downloads/forms may be gated. Not Pew Research Center; branded consulting perspective and uneven methodological depth Audited fallback peers: U24-PwC, Deloitte, McKinsey, KPMG.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `questmobile` - QuestMobile
@@ -1753,17 +1946,19 @@ route before reporting a source gap.
 - Aliases/origins: `QuestMobile research`, `QuestMobile reports`
 - Publisher type: `commercial-data-provider`
 - Official domains: `questmobile.com.cn`
-- Authority scope: `High` - QuestMobile-authored mobile-internet reports and products, subject to its disclosed measurement scope and licensing.
+- Provenance authority: `High` - QuestMobile-authored mobile-internet reports and products, subject to its disclosed measurement scope and licensing.
 - Function: `mobile-intelligence-research`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [research report entry](<https://www.questmobile.com.cn/research/report-new>)
   - Search example: `query mobile internet in the rendered report area, then open the specific report page`
   - Same-function fallbacks: `analysys-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:48:00+08:00`
 - Access limitations: Public SPA shell advertised reports and mobile-big-data analysis. Rendered search, account, export, licensing, and result-level access were not completed.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `roland-berger` - Roland Berger China context
@@ -1771,17 +1966,19 @@ route before reporting a source gap.
 - Aliases/origins: `U25`, `Roland Berger China`, `supplied U25`
 - Publisher type: `consulting-research`
 - Official domains: `rolandberger.com`
-- Authority scope: `Medium` - Operations, manufacturing, automotive, energy transition, industry strategy topics relevant to China. Medium-to-high consulting authority
+- Provenance authority: `Medium` - Operations, manufacturing, automotive, energy transition, industry strategy topics relevant to China. Medium-to-high consulting authority
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.rolandberger.com/en/?country=CN>)
   - Search example: `site:rolandberger.com industry report`
   - Same-function fallbacks: `mckinsey-china-research-reports`, `bcg-china-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public. Chinese-local guessed path returned 404; public experience mostly English/global with China context Audited fallback peers: McKinsey, BCG, Bain, PwC.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `sec-edgar` - SEC and EDGAR
@@ -1789,17 +1986,19 @@ route before reporting a source gap.
 - Aliases/origins: `U60`, `SEC`, `supplied U60`
 - Publisher type: `official-regulator`
 - Official domains: `sec.gov`
-- Authority scope: `High` - Original US filings, enforcement, prospectuses, no-action letters. High authority for SEC-published filings and enforcement material
+- Provenance authority: `High` - Original US filings, enforcement, prospectuses, no-action letters. High authority for SEC-published filings and enforcement material
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [direct route](<https://www.sec.gov/edgar/search/>), [primary route](<https://www.sec.gov/>)
   - Search example: `site:sec.gov annual report`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public with rate limits and user-agent expectations. Generic scraping can trigger rate/risk pages; careful request hygiene required Audited fallback peers: Company IR, exchange notices, press releases.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `sfc` - Securities and Futures Commission of Hong Kong
@@ -1807,17 +2006,19 @@ route before reporting a source gap.
 - Aliases/origins: `C07`, `SFC`, `build_event_manifest sfc; domain sfc.hk`
 - Publisher type: `official-regulator`
 - Official domains: `sfc.hk`
-- Authority scope: `High` - Enforcement, public statements, regulatory circulars, licensed-entity checks. High authority for SFC-published materials
+- Provenance authority: `High` - Enforcement, public statements, regulatory circulars, licensed-entity checks. High authority for SFC-published materials
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.sfc.hk/en/>)
   - Search example: `site:sfc.hk official notice`
   - Same-function fallbacks: `afrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a listed-company filing database Audited fallback peers: HKEXnews, issuer IR, AFRC, HKMA.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `shanghai-government` - Shanghai Municipal Government
@@ -1825,17 +2026,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Shanghai Municipal Government`, `supplied U48`
 - Publisher type: `official-government`
 - Official domains: `shanghai.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.shanghai.gov.cn/>)
   - Search example: `site:shanghai.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `beijing-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `shanghai-statistics` - Shanghai Municipal Bureau of Statistics
@@ -1843,17 +2046,19 @@ route before reporting a source gap.
 - Aliases/origins: `U48`, `Shanghai Municipal Bureau of Statistics`, `supplied U48`
 - Publisher type: `official-statistics`
 - Official domains: `tjj.sh.gov.cn`
-- Authority scope: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
+- Provenance authority: `High` - Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority when using the actual local official publisher
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://tjj.sh.gov.cn/>)
   - Search example: `site:tjj.sh.gov.cn official statistics`
   - Same-function fallbacks: `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `sina-finance` - Sina Finance
@@ -1861,17 +2066,19 @@ route before reporting a source gap.
 - Aliases/origins: `C14`, `新浪财经`, `evaluated candidate from audit core recommendations`
 - Publisher type: `media`
 - Official domains: `finance.sina.com.cn`
-- Authority scope: `Medium` - Fast company/news/topic discovery, quote and announcement navigation, app/portal leads. Medium as major media/aggregator; not official
+- Provenance authority: `Medium` - Fast company/news/topic discovery, quote and announcement navigation, app/portal leads. Medium as major media/aggregator; not official
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://finance.sina.com.cn/>)
   - Search example: `site:finance.sina.com.cn industry report`
   - Same-function fallbacks: `eastmoney-research-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not primary evidence; every material fact must trace to exchange, company, regulator, court, or original report source Audited fallback peers: Eastmoney portal, issuer IR, official exchanges, official regulators.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `sse` - Shanghai Stock Exchange
@@ -1879,23 +2086,27 @@ route before reporting a source gap.
 - Aliases/origins: `U10`, `上海证券交易所`, `supplied U10; core code IDs sse in build_event_manifest.SOURCE_DOMAINS and build_market_manifest.SOURCE_DOMAINS; domain sse.com.cn`
 - Publisher type: `official-exchange`
 - Official domains: `sse.com.cn`
-- Authority scope: `High` - SSE listed-company disclosures, rules, notices, IPO/bond/REIT information, inquiry letters, official market data, and official site search routing. High authority for SSE-published filings, notices, rules, inquiry letters, and market data
+- Provenance authority: `High` - SSE listed-company disclosures, rules, notices, IPO/bond/REIT information, inquiry letters, official market data, and official site search routing. High authority for SSE-published filings, notices, rules, inquiry letters, and market data
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [listed-company announcement register](<https://www.sse.com.cn/disclosure/listedinfo/announcement/>)
   - Search example: `search security code 600519 in the listed-company announcement register`
   - Same-function fallbacks: `cninfo-company-disclosures`
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [supervisory inquiry register](<https://www.sse.com.cn/regulation/supervision/inquiries/>)
   - Search example: `search 600519 with the required date interval in the supervisory inquiry register`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public JavaScript-driven registers. Preserve issuer and document identity for announcements, and do not substitute an issuer reply for the SSE inquiry letter.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `state-council` - State Council portal root replacing stale data path
@@ -1903,17 +2114,19 @@ route before reporting a source gap.
 - Aliases/origins: `U46`, `中国政府网数据`, `U52`, `supplied U46`, `supplied U52`
 - Publisher type: `official-government`
 - Official domains: `gov.cn`
-- Authority scope: `High` - Top-level government portal and ministry/page discovery. High authority for official releases when using specific pages; exact supplied data path no longer reliable
+- Provenance authority: `High` - Top-level government portal and ministry/page discovery. High authority for official releases when using specific pages; exact supplied data path no longer reliable
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.gov.cn/>), [direct route](<https://www.gov.cn/gwyzzjg/zuzhi/>)
   - Search example: `site:gov.cn official notice`
   - Same-function fallbacks: `ministry-of-finance-regulatory-materials`, `beijing-government-regulatory-materials`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility; Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局, ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn homepage, State Council Gazette.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `state-post-bureau` - State Post Bureau of China
@@ -1921,17 +2134,11 @@ route before reporting a source gap.
 - Aliases/origins: `State Post Bureau`, `China postal regulator`
 - Publisher type: `official-regulator`
 - Official domains: `spb.gov.cn`
-- Authority scope: `High` - State Post Bureau regulatory material and postal or express-delivery publications within its mandate.
-- Function: `postal-regulation`
-  - Authority: `High`
-  - Utility: `High`
-  - Direct links: [bureau entry](<https://www.spb.gov.cn/>)
-  - Search example: `browse current State Post Bureau publications for the required express-delivery topic`
-  - Same-function fallbacks: None
+- Provenance authority: `High` - State Post Bureau regulatory material and postal or express-delivery publications within its mandate.
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:39:00+08:00`
 - Access limitations: Root was public, but guessed search paths were unavailable. No stable search or API contract was verified.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `szse` - Shenzhen Stock Exchange
@@ -1939,17 +2146,19 @@ route before reporting a source gap.
 - Aliases/origins: `U11`, `深圳证券交易所`, `supplied U11; code IDs szse in build_event_manifest and build_market_manifest`
 - Publisher type: `official-exchange`
 - Official domains: `szse.cn`
-- Authority scope: `High` - SZSE disclosures, rulebooks, notices, REIT/bond/equity information, official stats. High authority for SZSE-published official materials
+- Provenance authority: `High` - SZSE disclosures, rulebooks, notices, REIT/bond/equity information, official stats. High authority for SZSE-published official materials
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [listed-company announcement register](<https://www.szse.cn/disclosure/listed/notice/index.html>)
   - Search example: `search 600519 with an explicit date range to confirm it yields no SZSE result`
   - Same-function fallbacks: `cninfo-company-disclosures`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: Public JS-driven register with a narrow default date range. It covers SZSE issuers only; a zero result for 600519 confirms venue scope, not absence of an issuer filing.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `tencent-big-data` - Tencent Big Data WeChat route
@@ -1957,17 +2166,19 @@ route before reporting a source gap.
 - Aliases/origins: `U05`, `腾讯大数据`, `supplied U05`
 - Publisher type: `issuer-company`
 - Official domains: `mp.weixin.qq.com`
-- Authority scope: `High` - Tencent-published reports when accessed from proper WeChat context. High authority for Tencent's own output
+- Provenance authority: `High` - Tencent-published reports when accessed from proper WeChat context. High authority for Tencent's own output
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `Low`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzA3MDQ4MzQzMg==&scene=124#wechat_redirect>)
   - Search example: `site:mp.weixin.qq.com industry report`
   - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited. Supplied URL redirects to a WeChat-client surface with verification/open-in-WeChat message Audited fallback peers: U07, U09, U02.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `tencent-research` - Tencent Research Institute
@@ -1975,17 +2186,19 @@ route before reporting a source gap.
 - Aliases/origins: `Tencent Research Institute`, `tisi.org`
 - Publisher type: `issuer-company`
 - Official domains: `tisi.org`
-- Authority scope: `High` - Tencent Research Institute's own articles, report summaries, and explicitly co-authored research; not independent evidence of Tencent market claims.
+- Provenance authority: `High` - Tencent Research Institute's own articles, report summaries, and explicitly co-authored research; not independent evidence of Tencent market claims.
 - Function: `corporate-research`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [research archive](<https://tisi.org/research-achievements/>), [report summary example](<https://tisi.org/33246/>)
   - Search example: `https://tisi.org/?s=AI%E6%B2%BB%E7%90%86 then open the report article`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:47:00+08:00`
 - Access limitations: Public summaries were readable, but sampled full reports directed users to a WeChat account. Corporate research is first-party and not independent corroboration.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `toobigdata` - TooBigData Douyin tag route
@@ -1993,17 +2206,19 @@ route before reporting a source gap.
 - Aliases/origins: `U38`, `ToBigData`, `supplied U38`
 - Publisher type: `media`
 - Official domains: `toobigdata.com`
-- Authority scope: `Low` - Practitioner commentary, growth/ops context, adjacent Douyin articles. Low-to-medium authority; not official Douyin data owner
+- Provenance authority: `Low` - Practitioner commentary, growth/ops context, adjacent Douyin articles. Low-to-medium authority; not official Douyin data owner
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://toobigdata.com/tag/douyin/>)
   - Search example: `site:toobigdata.com industry report`
   - Same-function fallbacks: `newrank-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; supplied path 404 but domain and Douyin tag route live. Broken supplied path; informal methodology; not final citation Audited fallback peers: 新榜, 巨量引擎, 巨量算数, QuestMobile, platform originals.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `un-comtrade` - UN Comtrade API
@@ -2011,17 +2226,19 @@ route before reporting a source gap.
 - Aliases/origins: `UN Comtrade`, `UNSD trade API`
 - Publisher type: `official-statistics`
 - Official domains: `comtradeapi.un.org`
-- Authority scope: `High` - UNSD Comtrade commodity-trade records and their reported, estimated, aggregation, and valuation fields.
+- Provenance authority: `High` - UNSD Comtrade commodity-trade records and their reported, estimated, aggregation, and valuation fields.
 - Function: `official-trade-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [public preview API query](<https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5>)
   - Search example: `period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5`
   - Same-function fallbacks: None
 - Current status: `reachable`
 - Last checked: `2026-08-01T17:20:00+08:00`
 - Access limitations: Public preview JSON was verified. Non-preview bulk entitlement and download conditions were not tested; compiled series can include estimates and flags.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `un-sdg-data` - UN SDG Data Portal
@@ -2029,17 +2246,19 @@ route before reporting a source gap.
 - Aliases/origins: `U58`, `UN SDG Indicators`, `supplied U58`
 - Publisher type: `official-statistics`
 - Official domains: `unstats.un.org`
-- Authority scope: `High` - SDG trend checks and internationally normalized indicator lookups. High authority for UNSD SDG indicator series
+- Provenance authority: `High` - SDG trend checks and internationally normalized indicator lookups. High authority for UNSD SDG indicator series
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://unstats.un.org/sdgs/dataportal>)
   - Search example: `site:unstats.un.org official statistics`
   - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than national stats for local questions; not document source Audited fallback peers: UNdata, World Bank, national statistical offices.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `undata` - UNdata
@@ -2047,17 +2266,19 @@ route before reporting a source gap.
 - Aliases/origins: `U56`, `UNdata`, `supplied U56`
 - Publisher type: `official-statistics`
 - Official domains: `data.un.org`
-- Authority scope: `High` - Cross-country demographic, economic, trade, and social indicators. High authority as UN statistical aggregator
+- Provenance authority: `High` - Cross-country demographic, economic, trade, and social indicators. High authority as UN statistical aggregator
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://data.un.org/>)
   - Search example: `site:data.un.org official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`, `imf-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Update cadence can lag specialized agency portals; not document source Audited fallback peers: UNSD portals, World Bank, IMF, Eurostat.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `unsd-demographic-social` - UNSD Demographic and Social Statistics
@@ -2065,17 +2286,19 @@ route before reporting a source gap.
 - Aliases/origins: `U59`, `UN Demographic and Social Statistics`, `supplied U59`
 - Publisher type: `official-statistics`
 - Official domains: `unstats.un.org`
-- Authority scope: `High` - Population, civil registration, social-stat methodology, portal discovery. High authority for UNSD demographic/social programs
+- Provenance authority: `High` - Population, civil registration, social-stat methodology, portal discovery. High authority for UNSD demographic/social programs
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://unstats.un.org/unsd/demographic-social/>)
   - Search example: `site:unstats.un.org official statistics`
   - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Family/landing orientation rather than all-in-one dataset Audited fallback peers: UNdata, national census/stat offices, World Bank.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `us-bea` - U.S. Bureau of Economic Analysis API
@@ -2083,17 +2306,19 @@ route before reporting a source gap.
 - Aliases/origins: `BEA API`, `Bureau of Economic Analysis`
 - Publisher type: `official-statistics`
 - Official domains: `apps.bea.gov`
-- Authority scope: `High` - BEA national, international, regional, and industry economic accounts and release metadata.
+- Provenance authority: `High` - BEA national, international, regional, and industry economic accounts and release metadata.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [API key-validation entry](<https://apps.bea.gov/api/data/?UserID=samplekey&method=GETDATASETLIST&ResultFormat=JSON>)
   - Search example: `method=GETDATASETLIST with a registered UserID`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:22:00+08:00`
 - Access limitations: API endpoint was live but the sampled UserID was invalid. No current bulk-download route was verified; use documented release tables when a key is unavailable.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `us-census` - U.S. Census Bureau API
@@ -2101,17 +2326,19 @@ route before reporting a source gap.
 - Aliases/origins: `Census API`, `ACS API`
 - Publisher type: `official-statistics`
 - Official domains: `api.census.gov`
-- Authority scope: `High` - Census-published datasets, metadata, variables, and keyed Census API observations.
+- Provenance authority: `High` - Census-published datasets, metadata, variables, and keyed Census API observations.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [ACS variable metadata](<https://api.census.gov/data/2024/acs/acs5/variables.json>)
   - Search example: `get=NAME,B01001_001E&for=us:1 after obtaining a registered key`
   - Same-function fallbacks: None
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T17:22:00+08:00`
 - Access limitations: Metadata was public, while the tested ACS data query required a valid key. A guessed bulk path was stale and must be rediscovered from current Census documentation.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `us-commerce` - US Department of Commerce
@@ -2119,17 +2346,19 @@ route before reporting a source gap.
 - Aliases/origins: `U62`, `US Commerce`, `supplied U62`
 - Publisher type: `official-government`
 - Official domains: `commerce.gov`
-- Authority scope: `High` - Portal discovery for Commerce sub-agencies and department announcements. High authority for department releases when reached
+- Provenance authority: `High` - Portal discovery for Commerce sub-agencies and department announcements. High authority for department releases when reached
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.commerce.gov/>)
   - Search example: `site:commerce.gov official notice`
   - Same-function fallbacks: None
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies directly, SEC for filings, agency newsrooms.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `wef-china` - World Economic Forum China
@@ -2137,17 +2366,19 @@ route before reporting a source gap.
 - Aliases/origins: `U31`, `World Economic Forum China`, `supplied U31`
 - Publisher type: `original-research`
 - Official domains: `cn.weforum.org`
-- Authority scope: `Medium` - Comparative framing, public publications, sustainability, competitiveness, industrial transformation. Medium-to-high institutional authority; not primary China statistics
+- Provenance authority: `Medium` - Comparative framing, public publications, sustainability, competitiveness, industrial transformation. Medium-to-high institutional authority; not primary China statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://cn.weforum.org/>)
   - Search example: `site:cn.weforum.org industry report`
   - Same-function fallbacks: `mckinsey-china-research-reports`, `deloitte-china-research-reports`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not China-exclusive; often synthesis; forum priorities/sponsors can shape framing Audited fallback peers: McKinsey, Deloitte, PwC, OECD, World Bank.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `who-gho` - WHO Global Health Observatory
@@ -2155,17 +2386,19 @@ route before reporting a source gap.
 - Aliases/origins: `U55`, `WHO World Health Data Platform`, `supplied U55`
 - Publisher type: `official-statistics`
 - Official domains: `who.int`
-- Authority scope: `High` - Health indicators, disease burden, mortality, public-health context. High authority for WHO-published health indicators
+- Provenance authority: `High` - Health indicators, disease burden, mortality, public-health context. High authority for WHO-published health indicators
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.who.int/data/gho>)
   - Search example: `site:who.int official statistics`
   - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not relevant for filings or regulatory letters Audited fallback peers: UNdata, World Bank, national health ministries.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `world-bank-data` - World Bank Chinese Data
@@ -2173,17 +2406,19 @@ route before reporting a source gap.
 - Aliases/origins: `U47`, `世界银行中文数据`, `U53`, `supplied U47`, `supplied U53 duplicate of World Bank family also covered by U47`
 - Publisher type: `official-statistics`
 - Official domains: `data.worldbank.org.cn`, `data.worldbank.org`
-- Authority scope: `High` - Cross-country indicators, time series downloads, metadata lookup. High authority for World Bank harmonized indicators
+- Provenance authority: `High` - Cross-country indicators, time series downloads, metadata lookup. High authority for World Bank harmonized indicators
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://data.worldbank.org.cn/>), [direct route](<https://data.worldbank.org/>)
   - Search example: `site:data.worldbank.org.cn official statistics`
   - Same-function fallbacks: `imf-data-official-statistics`, `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not original origin for every country's raw data; lag vs source agencies; Duplicate coverage with U47 Chinese World Bank data; not announcements or filings source Audited fallback peers: IMF, OECD, UNData, 国家统计局.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `worldpanel` - Worldpanel by Numerator
@@ -2191,17 +2426,19 @@ route before reporting a source gap.
 - Aliases/origins: `U32`, `Kantar Worldpanel`, `supplied U32`
 - Publisher type: `commercial-data-provider`
 - Official domains: `market.worldpanelbynumerator.com`
-- Authority scope: `High` - Consumer-panel methodology, FMCG/retail/shopper trend summaries. High within proprietary consumer-panel measurement
+- Provenance authority: `High` - Consumer-panel methodology, FMCG/retail/shopper trend summaries. High within proprietary consumer-panel measurement
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://market.worldpanelbynumerator.com/global>)
   - Search example: `site:market.worldpanelbynumerator.com industry report`
   - Same-function fallbacks: `iresearch-research-reports`, `mckinsey-china-research-reports`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public-limited; panel data and commercial deliverables paid. Brand/domain transition; public site lighter than product layer Audited fallback peers: Numerator, NielsenIQ, iResearch, McKinsey.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `wto-stats` - WTO Stats
@@ -2209,17 +2446,19 @@ route before reporting a source gap.
 - Aliases/origins: `U57`, `WTO Statistics`, `supplied U57`
 - Publisher type: `official-statistics`
 - Official domains: `stats.wto.org`, `timeseries.wto.org`
-- Authority scope: `High` - Trade flows, tariff indicators, country trade profiles. High authority for WTO-published trade data
+- Provenance authority: `High` - Trade flows, tariff indicators, country trade profiles. High authority for WTO-published trade data
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://stats.wto.org/>), [direct route](<https://timeseries.wto.org/>)
   - Search example: `site:stats.wto.org official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not primary for company/regulator documents Audited fallback peers: UN Comtrade, World Bank, national customs/trade agencies.
-- Evidence level: `High`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `wtw` - WTW insights
@@ -2227,11 +2466,11 @@ route before reporting a source gap.
 - Aliases/origins: `Willis Towers Watson`
 - Publisher type: `consulting-research`
 - Official domains: `wtwco.com`
-- Authority scope: `High` - WTW-authored research if an accessible original report or article is obtained; no report workflow was established in this probe.
+- Provenance authority: `High` - WTW-authored research if an accessible original report or article is obtained; no report workflow was established in this probe.
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T17:47:00+08:00`
 - Access limitations: Tested insights route returned a Vercel security checkpoint. No search, report, download, newsletter, or methodology capability is asserted.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `xueqiu` - Xueqiu
@@ -2239,15 +2478,17 @@ route before reporting a source gap.
 - Aliases/origins: `U35`, `雪球`, `supplied U35`
 - Publisher type: `aggregator`
 - Official domains: `xueqiu.com`
-- Authority scope: `Low` - China-market sentiment, ticker/topic discovery, investor narrative tracking. Mixed authority; platform/UGC, not primary securities facts
+- Provenance authority: `Low` - China-market sentiment, ticker/topic discovery, investor narrative tracking. Mixed authority; platform/UGC, not primary securities facts
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://xueqiu.com/>)
   - Search example: `site:xueqiu.com industry report`
   - Same-function fallbacks: `eastmoney-research-research-reports`, `sina-finance-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; partial open browsing plus account needs. UGC noise, promotional/manipulated content risk, edits/deletions Audited fallback peers: SSE, SZSE, HKEX, company IR, Eastmoney, Wind, Choice.
-- Evidence level: `Medium`
+- Access observation evidence: `Medium`
 - Site guide: None

@@ -17,6 +17,8 @@ functions:
 - id: audiovisual-regulation
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.nrta.gov.cn/col/col110/index.html
     kind: network audiovisual notices

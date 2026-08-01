@@ -19,6 +19,8 @@ functions:
 - id: telecom-industry-reports
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.gsma.com/mobileeconomy/
     kind: primary route

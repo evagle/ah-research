@@ -19,6 +19,8 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.who.int/data/gho
     kind: primary route

@@ -270,6 +270,8 @@
         "id",
         "authority",
         "utility",
+        "workflow_evidence",
+        "field_contract_evidence",
         "direct_urls",
         "search",
         "citation",
@@ -284,6 +286,12 @@
           "$ref": "#/$defs/rating"
         },
         "utility": {
+          "$ref": "#/$defs/rating"
+        },
+        "workflow_evidence": {
+          "$ref": "#/$defs/rating"
+        },
+        "field_contract_evidence": {
           "$ref": "#/$defs/rating"
         },
         "direct_urls": {

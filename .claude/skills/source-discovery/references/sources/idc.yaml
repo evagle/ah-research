@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.idc.com/
     kind: primary route

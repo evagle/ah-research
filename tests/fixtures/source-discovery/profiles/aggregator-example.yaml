@@ -12,6 +12,8 @@ functions:
   - id: company-announcements
     authority: Low
     utility: Medium
+    workflow_evidence: High
+    field_contract_evidence: Medium
     direct_urls:
       - url: https://data.eastmoney.com/notices/
         kind: index

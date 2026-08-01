@@ -21,6 +21,8 @@ functions:
 - id: research-reports
   authority: Low
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
     kind: visible report search

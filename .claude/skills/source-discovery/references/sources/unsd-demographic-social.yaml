@@ -19,6 +19,8 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://unstats.un.org/unsd/demographic-social/
     kind: primary route

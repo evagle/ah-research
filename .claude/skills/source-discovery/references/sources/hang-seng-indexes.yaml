@@ -17,6 +17,8 @@ functions:
 - id: index-methodology-and-data
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.hsi.com.hk/eng/indexes/all-indexes/hang-seng-index
     kind: Hang Seng Index entry

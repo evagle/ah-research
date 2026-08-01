@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: High
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.mercer.com.cn/
     kind: primary route

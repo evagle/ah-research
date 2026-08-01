@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Medium
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.itjuzi.com/
     kind: primary route

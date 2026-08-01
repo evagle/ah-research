@@ -21,6 +21,8 @@ functions:
 - id: company-disclosures
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.sse.com.cn/disclosure/listedinfo/announcement/
     kind: listed-company announcement register
@@ -46,6 +48,8 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.sse.com.cn/regulation/supervision/inquiries/
     kind: supervisory inquiry register

@@ -14,30 +14,7 @@ industries:
 authority:
   level: High
   scope: State Post Bureau regulatory material and postal or express-delivery publications within its mandate.
-functions:
-- id: postal-regulation
-  authority: High
-  utility: High
-  direct_urls:
-  - url: https://www.spb.gov.cn/
-    kind: bureau entry
-    stability: current root; search route unverified
-  search:
-    method: current bureau navigation to the specific notice or publication
-    fields:
-    - topic
-    - date
-    example_query: browse current State Post Bureau publications for the required express-delivery topic
-    result_identity: issuing office, title, date, document number, period, attachment, and URL
-  citation:
-    use: direct for an opened State Post Bureau item. A root page is not a substitute for the target rule
-      or statistic.
-    required_fields:
-    - issuing office
-    - title
-    - date
-    - document number or period
-  fallbacks: []
+functions: []
 access:
   status: reachable-limited
   last_checked: '2026-08-01T17:39:00+08:00'

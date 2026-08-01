@@ -605,6 +605,85 @@ def test_specialist_seed_functions_do_not_claim_generic_research_equivalence() -
     assert functions["gsma-mobile-economy-telecom-industry-reports"]["fallbacks"] == []
 
 
+def test_task_5_round_1_keeps_homepage_only_sources_identity_only() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+
+    for source_id in (
+        "ministry-culture-tourism",
+        "mofcom",
+        "national-film-administration",
+        "state-post-bureau",
+        "eastmoney-securities",
+    ):
+        assert profiles[source_id]["functions"] == []
+
+
+def test_task_5_round_1_preserves_market_specific_eastmoney_routes_and_fallbacks() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    quote_functions = {
+        function["id"]: function for function in profiles["eastmoney-quotes-f10"]["functions"]
+    }
+    announcement_functions = {
+        function["id"]: function
+        for function in profiles["eastmoney-announcement-index"]["functions"]
+    }
+
+    assert quote_functions["a-share-quote-display"]["direct_urls"][0]["url"] == (
+        "https://quote.eastmoney.com/sh600519.html"
+    )
+    assert quote_functions["a-share-company-information-display"]["direct_urls"][0]["url"] == (
+        "https://emweb.securities.eastmoney.com/pc_hsf10/pages/index.html"
+        "?type=web&code=SH600519&color=b#/gsgk"
+    )
+    assert quote_functions["hong-kong-quote-display"]["direct_urls"][0]["url"] == (
+        "https://quote.eastmoney.com/hk/09992.html"
+    )
+    assert quote_functions["hong-kong-quote-display"]["fallbacks"] == [
+        "hkex-market-data-official-market-data"
+    ]
+    assert quote_functions["hong-kong-company-information-display"]["direct_urls"][0]["url"] == (
+        "https://emweb.securities.eastmoney.com/PC_HKF10/pages/home/index.html"
+        "?code=09992&type=web&color=w#/CompanyProfile"
+    )
+    assert quote_functions["a-share-quote-display"]["fallbacks"] == []
+    assert quote_functions["a-share-company-information-display"]["fallbacks"] == []
+    assert quote_functions["hong-kong-company-information-display"]["fallbacks"] == []
+
+    assert announcement_functions["a-share-announcement-index"]["direct_urls"][0]["url"] == (
+        "https://data.eastmoney.com/notices/stock/600519.html"
+    )
+    assert announcement_functions["a-share-announcement-index"]["fallbacks"] == [
+        "sse-company-disclosures",
+        "szse-company-disclosures",
+        "cninfo-company-disclosures",
+    ]
+    assert announcement_functions["hong-kong-announcement-index"]["direct_urls"][0]["url"] == (
+        "https://data.eastmoney.com/notices/stock/09992.html"
+    )
+    assert announcement_functions["hong-kong-announcement-index"]["fallbacks"] == [
+        "hkexnews-company-disclosures"
+    ]
+
+    assert profiles["data-gov-hk"]["functions"][0]["fallbacks"] == []
+    assert profiles["aastocks"]["functions"][0]["fallbacks"] == []
+
+
+def test_task_5_round_1_separates_authority_access_workflow_and_field_evidence() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    di = profiles["hkex-di"]
+    di_function = di["functions"][0]
+
+    assert di["authority"]["level"] == "High"
+    assert di["access"]["evidence_level"] == "High"
+    assert di_function["workflow_evidence"] == "Low"
+    assert di_function["field_contract_evidence"] == "Low"
+
+    for profile in profiles.values():
+        for function in profile["functions"]:
+            assert function["workflow_evidence"] in {"High", "Medium", "Low"}
+            assert function["field_contract_evidence"] in {"High", "Medium", "Low"}
+
+
 def test_publisher_semantics_are_closed_and_explicit_for_every_profile_type() -> None:
     source_profiles = load_source_profiles_module()
     schema_types = set(load_schema()["properties"]["publisher_type"]["enum"])

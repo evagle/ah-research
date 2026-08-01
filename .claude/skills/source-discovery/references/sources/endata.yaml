@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Medium
   utility: Low
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.endata.com.cn/index.html
     kind: primary route

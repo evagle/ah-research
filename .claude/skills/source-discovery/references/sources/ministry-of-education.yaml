@@ -19,6 +19,8 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.moe.gov.cn/jyb_sjzl/moe_560/2024/
     kind: primary route

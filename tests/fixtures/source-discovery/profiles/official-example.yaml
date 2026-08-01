@@ -12,6 +12,8 @@ functions:
   - id: company-announcements
     authority: High
     utility: High
+    workflow_evidence: High
+    field_contract_evidence: Medium
     direct_urls:
       - url: https://www.sse.com.cn/home/search/
         kind: search

@@ -17,6 +17,8 @@ functions:
 - id: dataset-catalog
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://data.gov.hk/en/
     kind: dataset catalog
@@ -37,8 +39,7 @@ functions:
     - publisher
     - resource URL
     - update timestamp
-  fallbacks:
-  - hong-kong-statistics-official-statistics
+  fallbacks: []
 access:
   status: reachable
   last_checked: '2026-08-01T17:13:00+08:00'

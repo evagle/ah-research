@@ -18,6 +18,8 @@ functions:
 - id: company-registry-records
   authority: High
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.e-services.cr.gov.hk/ICRIS3EP/
     kind: e-Services entry

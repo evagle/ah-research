@@ -17,6 +17,8 @@ functions:
 - id: consolidated-legislation
   authority: High
   utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.elegislation.gov.hk/hk/cap622
     kind: Companies Ordinance route

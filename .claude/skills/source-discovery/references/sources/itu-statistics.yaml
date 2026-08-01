@@ -19,6 +19,8 @@ functions:
 - id: ict-statistics
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.itu.int/itu-d/sites/statistics/
     kind: Statistics entry

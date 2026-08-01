@@ -16,6 +16,8 @@ functions:
 - id: policy-documents
   authority: High
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.policyaddress.gov.hk/2025/en/
     kind: annual archive entry

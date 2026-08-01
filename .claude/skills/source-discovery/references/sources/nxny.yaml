@@ -19,6 +19,8 @@ functions:
 - id: research-reports
   authority: Low
   utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.nxny.com/stype_hy/
     kind: primary route

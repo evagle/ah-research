@@ -17,6 +17,8 @@ functions:
 - id: official-trade-statistics
   authority: High
   utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://comtradeapi.un.org/public/v1/preview/C/A/HS?period=2023&reporterCode=156&flowCode=X&partnerCode=0&cmdCode=TOTAL&maxRecords=5
     kind: public preview API query
