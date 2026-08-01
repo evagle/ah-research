@@ -1,0 +1,65 @@
+id: pwc-us-library
+name: PwC Library
+aliases:
+- U43-PwC
+- PwC URL from supplied U43
+- U43
+- supplied U43 URL subrecord
+publisher_type: consulting-research
+official_domains:
+- pwc.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: PwC-attributable industry outlooks, consulting reports, enterprise topics, and surveys. Medium
+    route prior for PwC-attributable consulting analysis
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.pwc.com/us/en/library.html
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.pwc.com/us/en/library/2026-market-volatility-survey.html
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:pwc.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - pwc-china-research-reports
+  - deloitte-china-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.pwc.com/us/en/library/2026-market-volatility-survey.html
+  limitation: Public library, sampled report detail, methodology, findings, and its 18-page PDF loaded
+    anonymously. Other campaigns may use forms. This is PwC, not Pew Research Center.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` for library, report detail, and sampled PDF'
+    recognizable_content: Survey title, sample description, findings, methodology, and valid PDF
+    access_indications: Optional sign-in/register navigation did not block the tested report or PDF
+    technical_restriction: Recheck the target report because access can vary by campaign

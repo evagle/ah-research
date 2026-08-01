@@ -1,0 +1,62 @@
+id: tencent-research
+name: Tencent Research Institute
+aliases:
+- Tencent Research Institute
+- tisi.org
+publisher_type: issuer-company
+official_domains:
+- tisi.org
+geographies:
+- CN
+industries:
+- technology
+authority:
+  level: High
+  scope: Tencent Research Institute's own articles, report summaries, and explicitly co-authored research; not
+    independent evidence of Tencent market claims.
+functions:
+- id: corporate-research
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://tisi.org/research-achievements/
+    kind: research archive
+    stability: observed current route
+  - url: https://tisi.org/33246/
+    kind: report summary example
+    stability: observed current route
+  search:
+    method: site search or rendered article navigation
+    fields:
+    - query
+    - report title
+    example_query: https://tisi.org/?s=AI%E6%B2%BB%E7%90%86 then open the report article
+    result_identity: title, authoring institutions, publication date, version, collaborators, method, and article URL
+  citation:
+    use: direct for the public Tencent Research article or summary. Treat WeChat-requested full reports as
+      unavailable until obtained through the permitted client workflow.
+    required_fields:
+    - title
+    - authoring institution
+    - date
+    - public-summary or full-report status
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:47:00+08:00'
+  final_url: https://tisi.org/research-achievements/
+  limitation: Public summaries were readable, but sampled full reports directed users to a WeChat account.
+    Corporate research is first-party and not independent corroboration.
+  observed_error:
+    state: none
+    category: none
+    message: Public research pages and report summaries loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public articles returned readable content.
+    recognizable_content: Tencent Research Institute report summaries and WeChat full-report instructions.
+    access_indications: Full report access was WeChat-gated for sampled items.
+    technical_restriction: Do not quote or claim full-text access from the public summary.

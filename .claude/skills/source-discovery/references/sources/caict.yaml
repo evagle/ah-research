@@ -1,0 +1,64 @@
+id: caict
+name: CAICT
+aliases:
+- U28
+- CAICT
+- supplied U28
+publisher_type: official-statistics
+official_domains:
+- caict.ac.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Official ICT, telecom, digital economy, AI, industrial internet white papers. High authority
+    for CAICT-published official research
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.caict.ac.cn/kxyj/qwfb/qwsj/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:caict.ac.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - cnnic-official-statistics
+access:
+  status: anti-bot
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.caict.ac.cn/kxyj/qwfb/qwsj/
+  limitation: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
+    navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
+    IDC, iResearch.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
+      navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
+      IDC, iResearch.'
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`412 Precondition Failed` in curl and headless Chrome'
+    recognizable_content: Official protection page states the request triggered access-protection rules
+    access_indications: Not directly validated due WAF
+    technical_restriction: WAF blocks both direct CLI and fresh headless-browser retrieval from this environment

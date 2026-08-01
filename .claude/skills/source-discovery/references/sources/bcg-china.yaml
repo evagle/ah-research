@@ -1,0 +1,63 @@
+id: bcg-china
+name: BCG China
+aliases:
+- U21
+- BCG 中国
+- supplied U21
+publisher_type: consulting-research
+official_domains:
+- bcg.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Strategic framing, industry themes, executive summaries. Medium-to-high consulting authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.bcg.com/zh-cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:bcg.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - mckinsey-china-research-reports
+  - bain-china-research-reports
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.bcg.com/zh-cn/
+  limitation: 'anti-bot/technical-limited; Akamai 403 from CLI. Scripted access blocked; not a primary
+    dataset source; proprietary client work private Audited fallback peers: McKinsey, Bain, Roland Berger,
+    Deloitte, PwC.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; Akamai 403 from CLI. Scripted access blocked; not a primary
+      dataset source; proprietary client work private Audited fallback peers: McKinsey, Bain, Roland Berger,
+      Deloitte, PwC.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`403 Access Denied` from Akamai'
+    recognizable_content: Explicit Akamai denial text; public property not closed
+    access_indications: Some assets may be gated, but report pages not directly validated
+    technical_restriction: CDN/WAF scripted-access block

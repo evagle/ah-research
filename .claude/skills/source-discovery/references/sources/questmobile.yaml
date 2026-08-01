@@ -1,0 +1,67 @@
+id: questmobile
+name: QuestMobile
+aliases:
+- QuestMobile research
+- QuestMobile reports
+publisher_type: commercial-data-provider
+official_domains:
+- questmobile.com.cn
+geographies:
+- CN
+industries:
+- technology
+- media
+authority:
+  level: High
+  scope: QuestMobile-authored mobile-internet reports and products, subject to its disclosed measurement scope
+    and licensing.
+functions:
+- id: mobile-intelligence-research
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.questmobile.com.cn/research/report-new
+    kind: research report entry
+    stability: SPA route; completed results not verified
+  - url: https://www.questmobile.com.cn/research/report/2082318300587618305
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
+  search:
+    method: rendered QuestMobile research navigation
+    fields:
+    - topic
+    - report period
+    example_query: query mobile internet in the rendered report area, then open the specific report page
+    result_identity: report title, publisher, report and data period, covered app or device population, method, and URL
+  citation:
+    use: direct only for an opened QuestMobile report or authorized export with method and scope. SPA shell
+      metadata does not establish a report result or API contract.
+    required_fields:
+    - report title
+    - report date
+    - data period
+    - methodology
+    - access level
+  fallbacks:
+  - analysys-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.questmobile.com.cn/research/report/2082318300587618305
+  limitation: Public report detail pages expose the report title, date, publisher, industry, keywords,
+    narrative, metrics, and related-report links without login. Login belongs to the separate QuestMobile
+    data product. No direct PDF or data export was observed on the tested public report page.
+  observed_error:
+    state: none
+    category: none
+    message: A report detail page and its rendered report content loaded anonymously.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: '`200 OK` for the supplied report detail page in curl and headless Chrome.'
+    recognizable_content: Report title, date, publisher, industry, keywords, narrative sections, metrics,
+      and related reports.
+    access_indications: Public report content required no login; separate data-product login remains.
+    technical_restriction: No public PDF or export contract was established.

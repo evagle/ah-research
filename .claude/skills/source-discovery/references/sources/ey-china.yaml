@@ -1,0 +1,62 @@
+id: ey-china
+name: EY China
+aliases:
+- U24-EY
+- EY China
+- U24
+- supplied U24b EY China
+publisher_type: consulting-research
+official_domains:
+- ey.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Topic-specific insight pages, transactions, tax, infrastructure, financial-services, and policy-relevant
+    business insights. Medium-to-high authority for EY-attributable advisory analysis; not official statistics
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.ey.com/zh_cn
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:ey.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and commercial framing noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - deloitte-china-research-reports
+  - kpmg-china-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.ey.com/zh_cn
+  limitation: 'public-limited. Advisory framing; uneven primary-data depth; some downloads may shift into
+    lead-generation flows Audited fallback peers: U24-Deloitte, U24-KPMG, U24-PwC, U20.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: EY China `/zh_cn/insights` and newsroom pages
+    access_indications: Some full reports/PDFs/campaign assets may be contact-gated
+    technical_restriction: None recorded

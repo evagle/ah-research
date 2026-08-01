@@ -1,0 +1,63 @@
+id: national-bureau-statistics
+name: National Bureau of Statistics of China
+aliases:
+- U45
+- 国家统计局
+- supplied U45
+publisher_type: official-statistics
+official_domains:
+- stats.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Citation-grade official China macro, demographic, industrial, labor, price, housing data. Very
+    high authority for PRC official statistics and methodology
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.stats.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:stats.gov.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: cite the opened official release with series and methodology context; search results are discovery
+      metadata.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - beijing-statistics-official-statistics
+  - shanghai-statistics-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.stats.gov.cn/
+  limitation: 'public. Release lag, revisions, definitional changes, official scope limits Audited fallback
+    peers: Provincial/city statistical bureaus, 中国政府网 ministries, World Bank.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`http://www.stats.gov.cn` -> `https://www.stats.gov.cn/`'
+    response_status: '`200`'
+    recognizable_content: Title `国家统计局`
+    access_indications: None recorded
+    technical_restriction: None recorded

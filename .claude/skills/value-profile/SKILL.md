@@ -9,7 +9,9 @@ description: Use when a user asks for a complete value-investing profile or full
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。公共证据规则不在本skill重定义;本skill只补充父级编排、CAS和最终结论规则。接收判断型子skill响应时,分别按`.claude/skills/product-analysis/references/mode-b-response.schema.json`、`.claude/skills/management-analysis/references/mode-b-response.schema.json`和`.claude/skills/financial-redflag-scan/references/mode-b-response.schema.json`校验机器信封;Markdown正文保持自由。
+
+**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。正常入口、共享artifact、run隔离和无感resolver只以该文件为准；本skill仍是最终profile的唯一写入者。`source-discovery` must be invoked for macro, industry, valuation context, announcement/regulatory-letter discovery outside existing manifests, specialist vertical research, and current external evidence gaps. `source-discovery` may supply source candidates, access/provenance validation, fallback exhaustion logs, and source ledger handoffs only; `value-profile` remains the orchestrator and only writer of the profile. Annual, event, counterpart, and market manifests remain authoritative for bound financial, regulatory, filing, and market data; `source-discovery` cannot override, replace, or backfill those manifests.
 
 ## §0 Skill 运行方式
 
@@ -24,88 +26,49 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 本节12条原则是整个分析流程的信念层。每一条都是长期不变的 meta-principle, 不含具体操作步骤。派任何子 agent 前, **主 agent 先在开场白里把本节通读一遍 internalize**; §2规则、§3流程都是 §1的推论。
 
 ### §1.1股票是生意的凭证, 不是纸片
-
 **持有股票 = 持有"一只会下蛋的母鸡"分成权**。内在价值 = 未来自由现金流折现之和, 与每日市价无关。市场价格不更新内在价值; 牛市是投资者的"风落之财", 长期复利来自企业内生现金流, 不来自"傻子馈赠"。
-
 违反症状: 把 "最近股价涨/跌了 X%" 当信号, 用 K 线/板块轮动/资金流判断买卖, 把市值当锚。
-
 ### §1.2利润三问是估值的承重墙
-
 任何估值动作之前必须先对以下三问给出 "真/假 / 存疑":
-
 ① **利润为真** — 经营现金流净额 ≥ 净利润; 销售收现/营收 ≥ 1+增值税率; 应收/存货/商誉结构干净。
 ② **利润可持续** — 需求10年仍在; 护城河可验证而非声称。
 ③ **维持利润不需大投入** — 自由现金流 = 经营所得 − **维持性** CapEx（不是全部 CapEx）。长安汽车每年65亿维持性 CapEx 是 "泡沫利润", 需去泡沫化。
-
 三问 **必须全部为真**。任一 "假/存疑" → 25PE 合理估值法不适用, 必须打折或放弃。
-
 违反症状: 看报表 PE 不看 CFO/NI 比值; 未拆维持性 vs 扩张性 CapEx 就算自由现金流。
-
 ### §1.3商业模式决定估值方法, 用错方法等于价值陷阱
-
 不同生意的 "3年后净利润可预估度" 差异巨大, PE 不是万能: **强护城河消费/平台互联网适用25PE**; **周期股/资源顶部 PE 低是陷阱, 底部 PE 高是机会, 不适用 PE**; **银行用 PB**; **保险默认回避**; **公用事业用 DCF 简化版**; **高杠杆企业 PE 下调 + 折扣加深到35%**。
-
 违反症状: 给周期股套 PE; 给高成长股40+ PE; 用 PEG 抬 PE 超25; 把高杠杆标的按常规50% 买点算。
-
 ### §1.4三年后的确定性 >> 今天的精确性
-
 估值靠 **三年后可预估**, 不靠 **今天精准**。选3年窗口是因为: 短于1年 = 短期博弈（噪声 > 信号）, 长于5年 = 超出绝大多数行业的可预测半径。§1商业模式 + §2成长空间收尾时必须能回答 "这家公司3年后的净利润中枢大约在哪里, 依据是什么"。答不出 → 不适用25PE 估值法, 必须更深折扣或弃权。
-
 违反症状: 追求精准 DCF 到小数点后两位; 或反过来, 用 "长期看好" 敷衍, 不给3年窗口的量化上下限。
-
 ### §1.5安全边际是"我错了也不亏", 不是"便宜"
-
 50% 折扣的意义不是占市场先生的便宜, 而是 **给自己估算错误留空间**。即使真实价值只有估算的70%, 50% 买入仍能不亏。判错概率越高（认知不深/行业变化快/管理层难评）**应提高折扣**而不是降低门槛买入。高杠杆企业折扣加深到35% 同理。
-
 违反症状: 把折扣当 "市场情绪", 越跌越机械加仓; 不反思判断可能错, 只反思 "市场先生发癫"。
-
 ### §1.6能力圈是硬边界, 写不出具体答案 = 不下注
-
 "看得懂" 的标准是 **能力圈四问** 全能口述具体答案:
-
 ① 公司靠销售什么商品/服务获取利润?
 ② 客户为何从它这里采购, 不选其他机构?
 ③ 资本天性逐利, 为什么别的资本没抢走它的份额或逼它降利?
 ④ 假设同行/巨头挟巨资参与竞争, 它能否保住乃至扩张份额?
-
 四问任一答 "抽象空话/品牌复读/结论标签无场景" = 能力圈外, **不下注**, 错过是价值投资的标配。"跨出能力圈下注, 是注定要被别人收割的——早晚而已。"
-
 违反症状: "行业龙头/品牌强大/成长空间巨大/护城河宽广" 这类空话撑起的 §1, 没有产品级拆分、客户场景、挑战者名单、假想敌推演。
-
 ### §1.7市场波动 ≠ 信息, 价格不改变价值
-
 格雷厄姆的 "市场先生" 寓言: 市场报价每天变, 企业内在价值几年才变一次。默认动作是 **呆坐不动**。股价上涨不是卖出理由, 估值超区间才是; 股价下跌不是买入理由, 估值进入买点才是。
-
 违反症状: 用 K 线/量价/资金流做决策; 用 "最近表现" 修订研究结论。
-
 ### §1.8耐心是资产, 空仓等待不是机会成本
-
 不主动留现金等机会; 但也不为保持仓位而急于投出去。所有持仓都超合理估值 + 没有新标的进入买点 → 自然产生现金, 等下一个买点即可。"单纯持有类现金资产等待股价下跌的所谓仓位管理"是明确反对的。
-
 违反症状: FOMO 驱动的仓位管理; 把 "子弹池" 当择时工具。
-
 ### §1.9认错 > 坚持: 下注行为正确 ≠ 下注结果正确
-
 估值判断本身动摇时, 纪律化加仓会从 "遵从体系" 滑向 "赌气/摊低成本执念"。跌破买点第二档/第三档遇新信息（季报/行业变化/三大前提由 "真" 松动到 "存疑"）动摇3年后净利润预估 → **立即停止加仓**, 不再机械摊低成本。正确顺序: ① 回头重审3年后净利润下限; ② 重算合理估值 + 新买点; ③ 再决定新行动（继续加/持有观望/止损重估）。**承认 "我看错了" 是完全合法的结论**。
-
 违反症状: "原计划每跌 X% 加仓" 的机械执行; 用 "市场先生发癫" 掩盖判断已动摇。
-
 ### §1.10集中于高确定性 > 分散于平庸
-
 从分散入手（起步 = 指数）→ 看懂一家转一家 → 成熟持有 **4-6家**。超过8家 → 必然有几家没看懂, 回指数。单一持仓上限40%（极端可到50%, 茅台2017-2020）, 下限约10%（不敢重仓 = 没看懂 = 干脆不持）。同行业同时持仓不超2家。
-
 违反症状: 20+ 只股组合, 每只都是 "浅水位"; 或单一仓位 > 50% 而四问/三前提未全过。
-
 ### §1.11年报是写给全体利益相关方的文档, 真相在附注
-
 年报读者 = 监管 + 党组织 + 员工 + 地方政府 + 股东 + 供应商 + 经销商 + 投资者 + 媒体 + 竞争对手。价值投资者不是首要读者。因此读年报要 **读出弦外之音**: 哪些段落是合规话术/员工福利信号/地方政绩信号, 哪些才是实质经营信息。**正文可略读, 附注必须逐行读**——应交税费、关联交易、对外担保、其他应收款明细、存货构成、商誉减值测试假设、金融资产4分类是否发生过跨档切换, 实质信息都在附注。
-
 违反症状: 只读正文 "经营情况讨论与分析" 就下结论; 把管理层口径当事实。
-
 ### §1.12好生意优先级高于好管理层
-
 三好标准的顺序不可换: **好生意 → 好公司 → 好价格**。一流生意 + 三流管理层通常优于三流生意 + 一流管理层, 因为一流生意的经济商誉能让平庸管理层也挣到钱 (粤高速、长江电力), 而三流生意 + 一流管理层 = 管理层被迫不断重组/转型/跨界, 成功稀少且不可复制。§1 (好生意) 判定 "否" 不要指望 §4 (管理层) 救回; §1判定 "是" 时, §4平庸可接受, 只要不存在 §4风险 (道德/大股东占款/系统性画大饼)。
-
 违反症状: 用 "管理层优秀" 对冲 "商业模式平庸"; 期待明星 CEO 能把垃圾生意做成金矿。
 
 ---
@@ -262,15 +225,13 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - **`--interactive`** — 切到 interactive mode, 每个 section 完成后停下来与用户交互。默认为 auto。
 - **`--auto`** — 显式 auto mode（与 default 等价）。
 - **`--section ID`**—跳到指定section。规范ID使用`part_id/section_id`,例如`part1/§1.3`或`part4/§4.5`;裸`§1.3`仅在模板中唯一时允许。跳过Step 2进度摘要,进入统一section resolver,再按Part路由到Step 3、Step 4或Step 5。
-- **`--resume`** — 强制加载最近一个 `profiles/<ticker>-*.md`, 不询问日期。
-- **`--start-fresh`**—强制保留全部旧profile并新建同日版本;与`--resume`互斥。
+- 用户明确要求“完全重新分析”时，内部resolver使用`--clean`；正常入口不暴露resume、新run或run ID。
 
 #### 两种运行模式
 
 **Auto mode (default)**:一次性跑完公司研究必填section、§Q、§4.5和估值;缺少年报时自动执行下载,不显示下载菜单。个人偏好、组合与自我反思章节按Step 2标为待用户补充,中途不停。只在以下genuine故障时才停下来问用户或abort:
 
 - Step 1 invalid ticker / 缺年报 PDF 且 fetcher 失败。
-- Step 1.4 resume-vs-start-fresh（同一 ticker 旧日期文件存在时的 fork, 语义选择不是进度 checkpoint）。
 - §3.pre 三大前提判为假 → 强制降级为 "仅定性研究", 通告用户并暂停 Step 6; 子 agent 的 Step 1-5 继续跑但估值部分不输出。
 - §2.12.2 §4风险一票否决（道德/占款/画大饼/处罚）触发 → 整份 profile 终止, 通告用户。
 - 管理层子skill返回`management_pending=true`或`pending_gate=true`→原子保存现有gate正文、两个pending字段、未决行和阻断原因,持久化人工处理清单并退出auto循环;不得继续派下游section或反复选择同一gate。
@@ -287,9 +248,9 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 1. **Validate ticker**:SH/SZ使用`\d{6}\.(SH|SZ)`,HK使用`\d{1,5}\.HK`,与`download_filings.py`一致。港股代码立即左补零为五位。失败双语报错并abort:
    > `❌ 无效 ticker: <input>. 期望格式 <code>.<exchange>（例 600519.SH, 0700.HK）. / Invalid ticker.`
 
-1.5. **先解析研究身份和截止日**:在构造任何manifest前扫描该ticker现有profile。候选只匹配`profiles/<ticker>-<YYYY-MM-DD>[-vN].md`;显式排除含`-mgmt-`、`-redflags-`、`-reading-`的子报告和其他文件,不得用宽泛pattern加载。候选按报告日期降序,同日报告存在多个版本时按`-vN`中的N降序,base文件按v1处理。`--resume`与`--start-fresh`同时出现时abort;显式start-fresh即使今日文件存在也选择start-fresh并保留旧文件。今日文件优先于旧日期文件,今日文件存在时直接continuation且不询问;仅存在旧日期文件且未传`--resume`时才询问`[resume/start-fresh]`;resume直接选排序首项;无文件则start-fresh。resume始终原地更新已锁定路径,跨日也不得派生新版本;只有start-fresh分配新的排他路径。resume和continuation先读取现有Part 0 AS_OF及目标财年;显式`--as-of`与Part 0 AS_OF不一致则abort,显式`--end-year`冲突时也abort。start-fresh未传`--end-year`时先从交易所官方目录确定最新完整目标财年,再用其首次有效披露日固定AS_OF;resume和continuation读取Part 0目标财年。缺少目标财年字段时,在Step 1.5内先执行最小身份迁移,仅可从原绑定且哈希匹配的年报manifest唯一确定AS_OF前最新完整年报期末日;候选不唯一即abort。按目标财年确定后确定性实例化模板年份:历史列从end_year至end_year-9,预测列为end_year+3;迁移旧profile时同步重标年份列。覆盖canonical manifest之前,start-fresh也扫描所有旧profile引用的canonical manifest,先把每个旧profile原子改绑到各自不可变snapshot并回读;比较完成前不得覆盖canonical文件。**路径必须先于checkpoint确定**:start-fresh从base扫描最小可用`-vN`,用同目录临时占位源执行排他hard-link占位;竞争失败重新扫描。resume/continuation锁定既有绝对路径。占位成功或既有路径已锁定后才进入Step 1.55,不得先创建共享base骨架再分配版本。
+1.5. **无感解析研究身份、截止日和run**:先确定canonical ticker、目标财年和AS_OF。未显式提供目标财年或AS_OF时，只读交易所官方目录，使用最新有效完整年报的报告期和首次有效披露日，不用当前自然年猜测。随后先运行`read-filing` Mode A准备或复用annual、event及全部counterpart manifest；取得真实路径、SHA-256和artifact ID后，按报告日期计算但暂不创建候选profile路径，再运行`scripts/financial_run_store.py resolve ... --result-path <candidate-profile-path>`，把这些artifact ID、skill版本、模板版本及业务参数全部纳入输入指纹，不得使用`待建立`占位值。正常调用只处理`created/resumed/reused`：`resumed`恢复最新兼容未完成run并使用checkpoint已绑定profile路径，`reused`直接复用完全相同输入的完成结果且不创建run，`created`绑定候选路径并在首次CAS时排他创建profile。只有用户明确要求“完全重新分析”时传`--clean`。整个过程不得询问resume、新run或run ID。
 
-	   **身份与截止日兼容契约**:存在旧profile且未传`--resume`时立即询问仅指“没有今日continuation且存在旧日期profile”的分支;`--resume`存在时不显示`[resume/start-fresh]`。start-fresh优先使用显式`--as-of`;未传`--as-of`时才按目标报告首次有效披露日初始化,但必须先按上文只读discovery确定目标财年。start-fresh未传`--end-year`时先确定该目标财年并持久化。resume和continuation读取Part 0目标财年,显式`--end-year`冲突时abort。resume时显式`--as-of`与Part 0 AS_OF不一致则abort;continuation时显式`--as-of`冲突也abort。Step 3.5只执行已确定的选择,不再次询问。
+   **最终profile路径**:resolver只管理执行状态和共享artifact，最终档案仍只匹配`profiles/<ticker>-<YYYY-MM-DD>[-vN].md`。`resumed`锁定checkpoint记录的既有profile绝对路径；`reused`直接返回完成档案；`created`按报告日期和最小可用`-vN`排他预留路径。显式AS_OF或目标财年与既有run不一致时创建增量子run，不修改旧run或旧profile。模板年份按目标财年确定性实例化，历史列从end_year至end_year-9，预测列为end_year+3。
 
 1.55. **先创建standalone恢复骨架和证据阶段checkpoint**:完成Step 1.5的排他路径预留后,在该唯一目标创建或加载最小Part 0,至少持久化ticker、查询发行人代码映射、目标财年、AS_OF、证据阶段、`**运行状态:**进行中`和`**失败原因:**无`;三个manifest尚未生成时写`待建立`。manifest为`待建立`时先恢复采集,不得在manifest校验前拒绝该合法恢复状态。采集失败时在同一骨架原子写入原因和人工清单。
 
@@ -308,7 +269,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
    - 否则列出:`Found N年报（<years>）.招股说明书:present/missing.research/:K files.`
    - 仅SH/SZ检查`data/filings/<ticker>/research/`,空则非阻塞offer`uv run python scripts/download_research.py <ticker> --years 3 --as-of AS_OF --depth-only --max 15`;港股不显示download_research.py,改用HKEX公告和已提供研究资料。任何研究资料发布日期晚于AS_OF都不得进入证据集
 
-**刷新前证据保护**:resume和continuation必须在覆盖canonical manifest或运行下载器之前完成旧证据snapshot及profile改绑;覆盖canonical manifest之前记录旧SHA-256,比较完成前不得覆盖canonical文件。完成保护后才查询交易所官方目录并构造新manifest。
+**刷新前证据保护**:恢复run时必须在查询或下载前读取checkpoint绑定的共享artifact。共享canonical manifest只新增内容寻址版本，不覆盖旧版本；输入变化由resolver创建增量子run并失效下游artifact。
 
 2.5. **构造并持久化source manifests**:确定研究截止日后,年报查询一律通过`--manifest-out <temporary-annual-manifest-path>`输出临时manifest,与不可变snapshot逐字段比较后才发布。年报manifest实际发布路径允许`annual-reports-<AS_OF>.json`或内容变化时的`annual-reports-<AS_OF>-<content-sha256>.json`内容寻址版本;年报和事件manifest都以Part 0持久化路径及SHA-256为唯一绑定依据。年报manifest保存官方目录查询URL、查询参数、响应哈希、官方结果总数和公告顺序ID;全部候选逐条保存财年、报告期末日、完整披露时间、公告标题、报告类型、有效状态、替代关系、公告ID或官方URL、是否选中、绝对路径和SHA-256。事件证据必须先采集后构建:query plan遵守`../read-filing/references/event-query-plan.schema.json`,并按`../read-filing/references/event-source-discovery.md`从实际官方请求发现来源,不得猜测接口;A+H发行人按两地官方代码和官方上市日期覆盖两地监管源,并从逐法域官方年报目录构造`counterpart_filing_manifests`,把`counterpart_filing_manifests路径及SHA-256映射`按法域持久化到Part 0,另保存目录请求及选中PDF哈希。运行采集器后读取采集器stdout返回的真实bundle路径,后续下载器和构建器只使用该真实路径,再运行`uv run python scripts/build_event_manifest.py --bundle <actual-official-query-bundle-path> --out <canonical-event-manifest-path>`,读取构建器stdout返回的真实发布路径;同一AS_OF变化时旧manifest保持不可变,并通过CAS原子改绑。annual manifest标量`查询发行人代码`必须等于`Part 0查询发行人代码映射[exchange]`;event manifest的`查询发行人代码映射完整相等`,不得把标量和映射直接比较。两个manifest顶层都保存ticker、exchange、AS_OF和查询发行人代码,并保存官方查询溯源和完整候选或事件集合;每类事件覆盖全部适用官方来源,事件manifest逐source保存HTTP方法、请求编码和响应schema,另保存请求头、查询参数、响应和文书、`source_count`和`sources`,事件逐条保存类别、标题、日期、状态、文书URL和内容哈希。主体名册覆盖发行人、管理层、实控人和审计机构,保存主体名册的官方URL和查询参数;构建器复核实时响应哈希、结果总数和完整主体列表。事件范围必须覆盖管理层、实控人及发行人上市以来全部欺诈、操纵股价、内幕交易、虚假陈述和财务造假正式处罚或生效纪律处分,以及上市以来全部已证实的大股东资金占用、违规关联交易和股东利益输送。构建器执行官方域名白名单、解析全部分页响应、分别校验`occurrence_date`和`publication_time`,要求`offense_type`、`legal_effect`、`subject_role_at_occurrence`、`issuer_connection`、主体覆盖和状态枚举;构建器逐类在线重取全部事件分页,本地路径单独放在`document_files`,不得混入官方响应,重新下载每个官方文书URL并与本地文书逐字节哈希一致。`live_revalidation_required`必须为`true`;形成任何否定性结论前重新请求全部官方来源。分别计算两个manifest文件的SHA-256并写入Part 0对应SHA-256字段;`<sha256>`仍存在时abort。manifest变化时按明确集合处理:年报manifest失效集合为全部公司证据驱动的canonical section及全部下游估值section;事件manifest失效集合至少含`part1/§4.pre-§4.8`、`part4/§4.5`、`part1/§5`及全部下游估值section。生成完整profile draft后,再用`uv run python scripts/publish_text_cas.py`一次写入section失效、Part 0路径和SHA-256;并发冲突时不得覆盖。后续调用子skill时把两个文件解析为真实绝对路径,只传Part 0绑定版本。
 
@@ -317,11 +278,11 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
    **事件段落规范化**:上段“逐类查询并写8类证据包”是`collect_event_evidence.py`内部职责,主skill不得绕过采集器直接构造bundle。`events-<AS_OF>.json`仅为首选输出基名;构建器返回内容寻址版本时Part 0必须绑定真实路径。滚动窗口计划对窗口前已发生但AS_OF仍未结案的调查设置`include_open_before_start=true`,主体名册包含审计机构。
 3. **PDF预抽取cache**:每次读取任何`_extracted/<pdf-stem>/text.md`前,都验证同目录metadata.json中的`source_sha256`与年报manifest的PDF SHA-256一致、metadata中的`artifact_sha256`等于`text.md`当前字节哈希,且page marker从第一页开始并按页连续。任一不符都必须重抽取,不得读取或派发旧cache。cache缺失或失效时双语offer`for pdf in data/filings/<ticker>/年报-*.pdf;do uv run python scripts/extract_pdf.py "$pdf";done`;拒绝持久cache时子agent可读raw PDF,但不得声称存在page markers。
 
-3.5. **Derive output path** `profiles/<ticker>-<YYYY-MM-DD>.md`:
-   - 今日文件已存在→直接加载（continuation session）。
-   - Step 1.5已选择resume→使用已锁定路径并原地更新,跨日不得创建新版本。
-   - Step 1.5已选择start-fresh→只使用Step 1.5已按最小可用`-vN`和排他hard-link预留的路径,不得rename覆盖,也不得重新选择base或`-vN`。
-   - 无文件或目标仅为Step 1.55预留的最小骨架→把reserved scaffold扩展为完整template:在内存中实例化`.claude/skills/value-profile/template-zh.md`,把已锁定Part 0字段合并回完整模板后通过CAS写入同一路径,然后做**强制3项 cleanup**（template含meta文档,必须在开跑前剥离,否则最终profile会残留不属于ticker-specific内容的模板说明）:
+3.5. **Derive output path** `profiles/<ticker>-<YYYY-MM-DD>[-vN].md`:
+   - `reused`→直接返回resolver绑定的完成profile，不创建文件。
+   - `resumed`→使用checkpoint锁定的绝对profile路径并原地CAS更新。
+   - `created`→只使用Step 1.5按最小可用`-vN`排他预留的路径，不得覆盖旧profile。
+   - 新路径或目标仅为Step 1.55预留的最小骨架→把reserved scaffold扩展为完整template:在内存中实例化`.claude/skills/value-profile/template-zh.md`,把已锁定Part 0字段合并回完整模板后通过CAS写入同一路径,然后做**强制3项 cleanup**（template含meta文档,必须在开跑前剥离,否则最终profile会残留不属于ticker-specific内容的模板说明）:
      1. **Title**: 第一行 `# 价值投资个股研究 Profile — Template` → `# 价值投资个股研究 Profile — <中文公司名> (<ticker>) <report_date>`（例: `# 价值投资个股研究 Profile — 贵州茅台 (600519.SH) 2026-05-01`）。
      2. **删除整个模板说明区**:从`<!-- ⚠️ TEMPLATE-ONLY区域开始`到`<!-- ⚠️ TEMPLATE-ONLY区域结束`的两个marker及其间全部内容一次删除,不得只删内部注释而留下marker。
      4. **删 heading 里的 template-instruction parenthetical**: 扫 `^#+` 所有 heading, 删除尾部给填写者的指令性括号 annotation。典型要删的 pattern: `（本节最后填写）` / `（PRIMARY — 先填）` / `（OPTIONAL — 后填）` / `（填入...）` / `（待填）` / `（SECONDARY — 定量补充）`等。heading 本身 title 留下, 只剥离尾部给 filler 的 meta 指示。Ticker-specific 的 title 修饰（如"§3护城河分析"后面的结论性标签）不动。
@@ -332,16 +293,16 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
      ```
      grep -nE "TEMPLATE-ONLY|Profile — Template|## 阅读姿态/分析框架|本模板是 \*\*输出结构|（PRIMARY|（SECONDARY|（OPTIONAL|（本节最后填写|（待填|（填入" profiles/<ticker>-<date>.md
      ```
-     若任一match→cleanup未做完,必须重做。Resume/continuation session启动时也要跑此gate。
+     若任一match→cleanup未做完,必须重做。恢复run时也要跑此gate。
 
 4. **阅读层事实调用**:目标profile已经由Step 3.5创建或加载并完成Part 0绑定后,在dispatch任何业务分析子agent前调用`read-filing` Mode B并强制追加`--complete-facts`。显式传`--target-profile <path> --section <part_id/section_id> --ticker <ticker> --year <YYYY> --as-of <AS_OF> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`,并在`--filing`与`--extracted-text`中恰选一个。A+H逐法域传全部counterpart;只有返回success且身份、目标、全部manifest路径和哈希与Part 0一致时才能继续;failure或manual_review不得保存事实草稿。
 
    **Mode B接收门槛**:只有`terminal_status=success`且身份、目标、两个manifest路径和哈希与Part 0一致时才能继续;failure时不得保存事实草稿,manual_review也不得保存事实草稿。
 
-   **read-filing恢复路由**:read-filing返回的`action_requests`逐项持久化`request_id/type/reason/citations/execution_status/execution_result`后,使用Step 5同一两阶段action ledger确定性处理:`edit`仅修改调用参数并重新校验,`research_more`携带hint最多追加一次定向调查,`rebuild_evidence`由父skill扩窗或重建年报/事件证据并原子改绑后重试,`start_fresh`保留当前profile并进入新路径,`exit`保留失败原因和人工清单后终止。未知类型报schema错误;未执行动作阻止目标section完成。
+   **read-filing恢复路由**:read-filing返回的`action_requests`逐项持久化`request_id/type/reason/citations/execution_status/execution_result`后,使用Step 5同一两阶段action ledger确定性处理:`edit`仅修改调用参数并重新校验,`research_more`携带hint最多追加一次定向调查,`rebuild_evidence`由父skill扩窗或重建年报/事件证据并原子改绑后重试,`exit`保留失败原因和人工清单后终止。未知类型报schema错误;未执行动作阻止目标section完成。只有用户明确要求“完全重新分析”时才由入口resolver创建clean run，不得由action request触发。
 
 5. **Resume schema migration**:加载已有profile后,在解析进度前按template的复合键集合和顺序执行schema migration:
-   - dispatch任何子skill之前检查持久化终态。`manual_review`和`output_quality_failure`都必须先显示`[edit/research more/start-fresh/exit]`;未显式解除前不得重新调用financial-redflag-scan,也不得进入普通next-undone循环。两种人工终态即使缺行也不得自动重派;edit只修改并复核现有草稿,research more显式开启一次新调查,start-fresh保留旧profile,exit保持终态。
+   - dispatch任何子skill之前检查持久化终态。`manual_review`和`output_quality_failure`在正常调用中保留原run并显示`[edit/research more/exit]`；未显式解除前不得重新调用financial-redflag-scan，也不得进入普通next-undone循环。两种人工终态即使缺行也不得自动重派；edit只修改并复核现有草稿，research more显式开启一次新调查，exit保持终态。只有用户明确要求“完全重新分析”才由resolver创建clean run。
    - 先迁移Part 0结构字段和估值gate:补齐`估值三大前提`、`估值阻断`和`管理层否决`;再补齐§1.8`好生意结论`,最后才解析section进度
    - 比较template与profile的`part_id/section_id`;缺失section按template边界插入正确Part并保留占位字段,不得静默忽略
    - 旧profile多出的未知section原样保留但标记为非canonical并报告,不得覆盖用户内容
@@ -434,24 +395,17 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - **禁用8条空话** (§2.11.3)。
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5必填。
 - **5步护城河分析** (§3必需):非银行按a分类（大/准/强/省/专）+b可证伪检验+c跨年定量追溯+d悲观情景+e宽/中/窄/弱标签执行。非银行必须完成资本消耗测试,并从提价、对手、切换成本、ROE路标中任选1项。**银行分支**只运行`industry-overlays.md`定义的银行quality bundle并据此完成同样的定性、可证伪、跨年、压力情景和标签步骤,不要求毛利率、CFO/NI或资本开支。具体数字准绳见`.claude/skills/value-profile/references/moat-framework.md`和template §3。
-- **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析出`part1/§1.1`或`part1/§1.3`后,先调用该skill的Mode B,不得派普通worker重复分析。调用参数为`--target-profile <path> --section <resolved-section> --ticker <ticker> --year <YYYY> --as-of <AS_OF> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`,并在`--filing`和`--extracted-text`中恰选一个。A+H逐法域传入全部counterpart。全流程分别定向调用两个section;显式定向调用只允许返回该目标。Mode B不得直接修改profile,父skill复核后才通过Step 3e原子写入。
-- **产品分析接收门槛**:只接受`terminal_status=success`、`target_sections`和`draft_sections`键集合都恰好等于当前目标、annual和event哈希以及`counterpart_filing_manifest_sha256s`与Part 0及当前文件三方一致、每条citation的`section_id`属于当前目标的响应。父skill把`moat_handoff`中的`claim/evidence/counterevidence/citation_ids/evidence_grade`持久化为目标section的`**产品与流程证据:**`,供§3在resume后重建输入;不得只保存在内存中。`moat_handoff`出现`宽/中/窄/弱`等最终护城河标签时拒绝响应;最终护城河仍由父skill按`moat-framework.md`计算。
-- **产品分析pending和失败**:`pending`先保存已复核草稿、`unresolved_items`和真实`需人工`状态,加入人工处理清单并阻断依赖该section的§1.8和§3;`failure`不得保存草稿;`dependency_failure`按返回原因重建证据或补前置section后重试。Auto最多按明确缺口重派2次;Interactive确认仍由父skill Step 3d处理,子skill不显示第二套菜单。
+- **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析`part1/§1.1`或`part1/§1.3`,按其SKILL.md调用Mode B并用product Schema验收;不得派普通worker重复分析。A+H逐法域传入全部counterpart,显式定向只接受当前目标。Mode B不得修改profile,父skill复核后通过Step 3e原子写入。
+- **产品分析接收门槛**:除Schema外,要求目标键集合精确匹配、annual/event/counterpart哈希三方一致且citation属于当前section。持久化`moat_handoff`的`claim/evidence/counterevidence/citation_ids/evidence_grade`为`**产品与流程证据:**`;出现最终护城河标签则拒绝,最终护城河仍由父skill计算。`pending`保存真实未决并阻断§1.8和§3;`failure`不保存草稿;`dependency_failure`按返回动作修复后重试,最多2次。
 - **§4管理层分析**→**delegate到`management-analysis`子skill**。全流程进入管理层block时传`--section part1/§4`;显式定向某个管理层subsection时必须传`--section <resolved-part1/§4.x>`,不得扩大目标。其余参数为`--target-profile <path> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path>`并继承当前`--auto`或`--interactive`;AS_OF从Part 0读取,两个manifest都传持久化后的真实绝对路径,不得省略。Mode B子skill无论模式都只返回`draft_sections`和结构化flags,父skill是Mode B唯一写入者;父skill复核后把section正文、管理层状态、人工清单和阻断原因在同一次原子写入中保存。详细流程见`.claude/skills/management-analysis/SKILL.md`§2-§3。Fallback:5个完整`N→N+1`比较需6份年报,每行来源写入该section`**引用:**`;连续未达标记guidance不可信风险,证据置信度不因管理层未兑现而降低,目标突然消失必须指出,言行一致检验≥2事件。
-
 **管理层否决handoff**:Mode B子skill无论auto或interactive都只返回`draft_veto`和`management_veto=false`;父skill只对用户或auto已接受的内存草稿执行事务,interactive以accept或edit后的已接受正文为准。系统性画大饼唯一引用`management-analysis§2.7.2`:只在同一指标ID、连续3个可比财年、单位口径和目标方向一致时累计;不同指标不得拼接。父skill先预先计算完整事务:命中时同步写`**管理层:**一票否决触发`和`**管理层否决:**是—<reason>`,未命中时清除旧`管理层否决`阻断原因。随后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <profile-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`完成一次CAS原子写入;非A+H省略counterpart guard。正文、Part 0状态和阻断原因集合一次保存,不存在“先保存正文再补Part 0”的中间状态,冲突时全部保持原状态。
-
 **证据闭合否决finalizer**:管理层否决已确认,或财报排雷命中高风险、`剔除`时,先完成最终live revalidation并用全部annual、event、counterpart及已建立的market manifest作为CAS guard,再写终态`已否决`。该终态不输出数字估值,保留全部已完成证据,并使resume确定性复现同一结果。
-
 **子skill证据比较交换**:management-analysis和financial-redflag-scan返回对象都必须包含`filing_manifest_sha256`和`event_manifest_sha256`。父skill接受任何management响应前、保存草稿前重新计算两个manifest文件SHA-256,要求与子skill返回哈希及Part 0字段三方一致。另对`counterpart_filing_manifest_sha256s`逐个counterpart哈希执行子返回值/Part 0/文件三方一致:子返回的jurisdiction键集合必须与Part 0`counterpart_filing_manifests路径及SHA-256映射`完全相等,每个jurisdiction及其SHA-256必须逐项精确匹配,不得接受缺键、多键或跨法域代用。比较与原子替换之间任一manifest变化时abort并使受影响section失效,不得保存基于旧证据的草稿。
-
+**finding聚合**:三个判断型子skill都按`sha256(judgment_domain|subject_type|subject_id|finding_type|occurrence_date|sorted(canonical_evidence_ids))`生成`canonical_finding_id`。父skill只在相同判断域、相同主体和相同ID内去重并取最高严重度;不同判断主体不得合并。`company_financials`保留公司财务判断,`management_integrity`保留管理层判断,`product_competitiveness`保留产品判断。最终报告按`canonical_evidence_id`并列展示不同主体的解释,同一底层事件事实只叙述一次;估值阻断原因写稳定集合,不得因多个skill引用同一证据而重复追加相同原因。
 **管理层pending解除handoff**:任意management pending解决后,父skill重新校验本次目标section并从所有管理层section重建`unresolved_rows`。非gate section和必做gate使用同一解除路径:只移除已解决行对应的人工处理清单项;全局未决行清零才写`management_pending=false`;三个gate均无未决时写`pending_gate=false`,否则保持true。随后重新计算管理层否决和重新计算阻断原因集合。正文、两个pending字段、未决行、人工清单、否决字段和阻断集合在同一次原子写入中保存,失败时全部保持原状态。
-
-**子skill失败handoff**:financial-redflag-scan重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段。management-analysis返回`terminal_status=failure`时直接执行其`rebuild_evidence`动作,不设置management pending;只有真实未决的dependency_failure或pending草稿才设置pending并保存真实unresolved_rows。pending响应中的`draft_veto=true`或profile已有持久化否决必须保留并从已接受正文重算,未决证据不得擦除否决。management-analysis返回`rebuild_evidence`时先重建年报、事件及`counterpart_filing_manifests`,重新绑定并失效旧管理层section后再调用一次,不得把漂移降级为普通pending;返回`terminal_status=vetoed`时保留已证实否决、写`管理层否决=是—原因`,未另有真实未决行则不得改成`需人工—待完成管理层gate`。所有正文、状态、人工清单和阻断原因单次原子保存。
-
+**子skill失败handoff**:financial-redflag-scan重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段。management-analysis返回`terminal_status=failure`时直接执行其`rebuild_evidence`动作,不设置management pending;只有真实未决的`terminal_status=dependency_failure`或`terminal_status=pending`才设置pending并保存真实unresolved_rows。pending响应中的`draft_veto=true`或profile已有持久化否决必须保留并从已接受正文重算,未决证据不得擦除否决。management-analysis返回`rebuild_evidence`时先重建年报、事件及`counterpart_filing_manifests`,重新绑定并失效旧管理层section后再调用一次,不得把漂移降级为普通pending;返回`terminal_status=vetoed`时保留已证实否决、写`管理层否决=是—原因`,未另有真实未决行则不得改成`需人工—待完成管理层gate`。所有正文、状态、人工清单和阻断原因单次原子保存。
+financial-redflag-scan重试耗尽或management-analysis重试耗尽后,对应section写`需人工`,阻断估值并返回父流程;存在人工排雷缺口时写`**财报排雷:**证据需人工`。
 **阻断原因合并**:维护`财报高风险/管理层否决/证据需人工`阻断原因集合,去重后按固定顺序写入`**估值阻断:**是—<原因1;原因2>`;任何handoff不得覆盖已有原因。只有原因集合为空才写`否`。Step 1迁移、Step 5保存和Step 6每次gate变化后都调用同一个阻断原因合并器。
-
-**失败与阻断兼容合同**:financial-redflag-scan重试耗尽或management-analysis重试耗尽时,对应section写`需人工`,记录最后错误、已尝试来源和缺失字段,阻断估值并返回父流程。management-analysis的failure只走证据重建;真实未决的`terminal_status=pending`或`terminal_status=dependency_failure`才设置`management_pending=true`并保存真实unresolved_rows。存在人工排雷缺口时可见状态写`**财报排雷:**证据需人工`。
 
 #### 3c. Main-agent review
 
@@ -563,6 +517,8 @@ Acceptable后写中文终稿,填`**引用:**`、`**机器引用清单:**`、`**�
 
 - **Auto mode**:门槛通过且7项估值内容完整、数字源头可追溯时save并终止。控制台摘要使用动态值:`Profile完成.completed_sections/total_sections节已完成,估值Part 0已合成.路径:profiles/TICKER-DATE.md`。
 - **Interactive mode**: 印摘要 + 双语菜单 `[accept / edit / research more]`, 等用户确认 → save。
+
+最终profile发布并通过全部guard后，先提升已接受的分析artifact，再调用`financial_run_store.py complete --root data/filings --ticker <ticker> --run-id <run-id> --result-artifact-id <artifact-id> --result-path <profile-path>`。只有complete成功才把run视为完成；后续`reused.report_path`必须直接指向该profile。
 
 ---
 

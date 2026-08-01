@@ -1,0 +1,102 @@
+id: pop-mart
+name: Pop Mart official website
+aliases:
+- POP MART
+- popmart.com
+publisher_type: issuer-company
+official_domains:
+- popmart.com
+geographies:
+- HK
+- Global
+industries:
+- consumer
+authority:
+  level: High
+  scope: Pop Mart's own product, brand, location, policy, investor-relations context, and first-party
+    statements; not a primary investor filing archive or independent commercial evidence.
+functions:
+- id: company-product-statements
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.popmart.com/
+    kind: official storefront
+    stability: region-dependent rendered route
+  search:
+    method: rendered storefront search and company-domain navigation
+    fields:
+    - product or collection
+    - locale
+    example_query: search the rendered storefront for LABUBU or THE%20MONSTERS
+    result_identity: product or collection, locale, price or availability timestamp, and canonical URL
+  citation:
+    use: direct only for what Pop Mart states or offers at the recorded time. Start HKEXnews for filings and
+      independently corroborate material market, demand, price, or leadership claims.
+    required_fields:
+    - product or statement
+    - locale
+    - timestamp
+    - canonical URL
+  fallbacks: []
+- id: issuer-investor-relations
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.popmart.com/us/investor-relations
+    kind: issuer investor-relations entry
+    stability: observed direct route; JS-rendered filing index not verified
+  search:
+    method: open the issuer IR entry, then match a known document title and period to the HKEXnews original
+    fields:
+    - document title
+    - reporting period
+    - HKEXnews document ID
+    example_query: open the issuer IR entry, then match a Pop Mart report title and period to its HKEXnews
+      original before using an issuer-hosted copy
+    result_identity: issuer IR page path, issuer asset URL, document title, reporting period, and matched
+      HKEXnews document ID
+  citation:
+    use: direct for Pop Mart's own IR-page statements. Treat an issuer-hosted filing copy as a convenience
+      copy only after exact identity matching; cite the readable HKEXnews original for filing claims.
+    required_fields:
+    - issuer
+    - document title
+    - reporting period
+    - HKEXnews document ID
+    - issuer asset URL
+  issuer_copy_evidence:
+    hkex_document_id: '2026032500285'
+    hkex_primary_url: https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0325/2026032500285.pdf
+    issuer_copy_url: https://prod-out-res.popmart.com/cms/ANNUAL_RESULTS_ANNOUNCEMENT_FOR_THE_YEAR_ENDED_31_DECEMBER_2025_AND_CHANGE_IN_USE_OF_PROCEEDS_af8bc550f1.pdf
+    sha256: 5e3552e3a46c7ca5998e822692dded7c8d97bccfd28406aad5f68be4887bdd87
+    mirror_identity_requirements:
+    - issuer and security identifier
+    - normalized title
+    - reporting period
+    - HKEXnews document ID or official path
+    - SHA-256 byte-for-byte equality
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T20:21:41+08:00'
+  final_url: https://www.popmart.com/us/investor-relations
+  limitation: Public storefront remains JS-heavy and region dependent. The issuer IR entry is reachable but
+    renders no reproducible noninteractive filing index. An exact issuer-hosted FY2025 copy matched HKEXnews;
+    use it only as a convenience copy while the HKEXnews original is readable.
+  observed_error:
+    state: none
+    category: none
+    message: Issuer IR entry and a matched issuer-hosted PDF loaded in the forward probe.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: m.popmart.com redirected to the www.popmart.com issuer IR entry.
+    response_status: Issuer IR page shell and one matched issuer-hosted PDF loaded.
+    recognizable_content: Next.js investor-relations page route and issuer asset host.
+    access_indications: No login was required for the observed IR entry or matched PDF.
+    technical_restriction: The IR page exposes no reproducible noninteractive filing index; use HKEXnews for
+      filing discovery and the primary filing body.

@@ -1,0 +1,62 @@
+id: cac
+name: Cyberspace Administration of China
+aliases:
+- CAC
+- China internet governance regulator
+publisher_type: official-regulator
+official_domains:
+- cac.gov.cn
+geographies:
+- CN
+industries:
+- technology
+- media
+authority:
+  level: High
+  scope: CAC-published internet-governance rules, notices, data, and online-service regulation.
+functions:
+- id: internet-regulation
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://search.cac.gov.cn/cms/cmsadmin/infopub/gjjs.jsp
+    kind: advanced search entry
+    stability: observed form route; result workflow blocked
+  search:
+    method: CAC rendered search form or opened rule detail
+    fields:
+    - huopro
+    - pubtype
+    - webappcode
+    - searchdir
+    example_query: huopro=%E7%9B%B4%E6%92%AD&pubtype=S&webappcode=A09&searchdir=A09
+    result_identity: issuing unit, title, document number, publication and effective dates, attachment, and URL
+  citation:
+    use: direct for an opened CAC rule or detail page. A search form or blocked result route is discovery
+      information only.
+    required_fields:
+    - issuing unit
+    - document number
+    - publication date
+    - effective date
+    - URL
+  fallbacks: []
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T17:39:00+08:00'
+  final_url: https://search.cac.gov.cn/cms/cmsadmin/infopub/gjjs.jsp
+  limitation: CAC root and rendered form established the search fields, but the advanced-search endpoint returned
+    403. This does not establish a result set or permanent result URL.
+  observed_error:
+    state: error
+    category: anti-bot
+    message: Advanced-search endpoint returned 403 in the non-interactive probe.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Direct search endpoint request.
+    response_status: Search endpoint returned 403.
+    recognizable_content: CAC form fields and root-site identity.
+    access_indications: No completed search workflow.
+    technical_restriction: Use an opened rule detail or permitted browser; do not replay blocked search requests.

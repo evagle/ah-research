@@ -1,0 +1,65 @@
+id: shanghai-government
+name: Shanghai Municipal Government
+aliases:
+- U48
+- Shanghai Municipal Government
+- supplied U48
+publisher_type: official-government
+official_domains:
+- shanghai.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority
+    when using the actual local official publisher
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.shanghai.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.shanghai.gov.cn/nw12344/index.html
+    kind: recent information disclosure
+    stability: observed current route
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:shanghai.gov.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct for the publisher's own materials
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - state-council-regulatory-materials
+  - beijing-government-regulatory-materials
+access:
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.shanghai.gov.cn/nw12344/index.html
+  limitation: Public recent-disclosure list and sampled policy detail loaded anonymously. The wider source
+    family remains fragmented across departments and formats.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect on the tested list or detail
+    response_status: '`200 OK` for recent-disclosure list and sampled policy detail'
+    recognizable_content: Issuer, title, date, document text, and official Shanghai government identity
+    access_indications: Optional login/register navigation did not block public documents
+    technical_restriction: Departmental pages and attachments may use different formats

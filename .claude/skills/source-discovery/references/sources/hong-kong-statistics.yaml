@@ -1,0 +1,60 @@
+id: hong-kong-statistics
+name: Hong Kong Census and Statistics Department
+aliases:
+- C&SD
+- censtatd
+publisher_type: official-statistics
+official_domains:
+- censtatd.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: C&SD-produced Hong Kong Web Tables, CSV exports, API examples, releases, definitions, and series.
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.censtatd.gov.hk/en/web_table.html
+    kind: Web Table entry
+    stability: selected table and dimensions are required
+  search:
+    method: subject index then rendered Web Table customization
+    fields:
+    - table ID
+    - statistic
+    - classification
+    - period
+    example_query: select a retail-sales table, all-items retail value, and a monthly period before CSV or API export
+    result_identity: table ID, table title, selected dimensions, period, value, unit, release date, and API or CSV URL
+  citation:
+    use: direct for C&SD table observations with the selected series, definition, and release date.
+    required_fields:
+    - table ID
+    - series
+    - period
+    - unit
+    - release date
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.censtatd.gov.hk/en/web_table.html
+  limitation: Public dynamic Web Tables require recording the selected dimensions. A catalog or copied chart does
+    not replace the producing C&SD table.
+  observed_error:
+    state: none
+    category: none
+    message: Subject, Web Table, CSV, and displayed API controls were observed.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public table and subject pages loaded.
+    recognizable_content: Customization, chart, CSV, and API example controls.
+    access_indications: No login or purchase gate observed.
+    technical_restriction: Table shell alone does not establish a selected observation.

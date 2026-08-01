@@ -1,0 +1,70 @@
+id: imf-data
+name: IMF Data
+aliases:
+- U54
+- IMF Data
+- supplied U54
+publisher_type: official-statistics
+official_domains:
+- imf.org
+- data.imf.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Balance of payments, fiscal, debt, macro surveillance context. High authority for IMF-published
+    data
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.imf.org/en/Data
+    kind: primary route
+    stability: reviewed seed
+  - url: https://data.imf.org/
+    kind: direct route
+    stability: reviewed seed
+  - url: https://data.imf.org/en/Resource-Pages/IMF-API
+    kind: SDMX API documentation
+    stability: observed current route
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:imf.org official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - world-bank-data-official-statistics
+  - undata-official-statistics
+access:
+  status: reachable-limited
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://data.imf.org/en
+  limitation: Public data home, datasets navigation, release calendar, and SDMX 2.1/3.0 API documentation
+    loaded in headless Chrome. Direct CLI requests received 403, and the Swagger explorer states that a
+    beta portal account is needed. No dataset query was completed in this audit.
+  observed_error:
+    state: error
+    category: anti-bot
+    message: Direct CLI access was blocked, while headless Chrome loaded the public data and API pages.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: Direct CLI `403`; headless Chrome `200` for data home and API documentation
+    recognizable_content: Data Explorer, datasets, release calendar, WEO, IMF data resources, and SDMX API documentation
+    access_indications: Data pages were public; sign-in is present and Swagger exploration requires a beta account
+    technical_restriction: Use headless rendering or a documented data client; do not claim an API query until completed

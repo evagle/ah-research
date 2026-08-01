@@ -1,0 +1,60 @@
+id: cadas
+name: CADAS
+aliases:
+- U30
+- CADAS
+- supplied U30
+publisher_type: commercial-data-provider
+official_domains:
+- cadas.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: China civil aviation monitoring, airport/airline commentary, route analysis. Medium niche commercial
+    authority
+functions:
+- id: aviation-analysis
+  authority: Medium
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.cadas.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:cadas.com.cn aviation analysis
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.cadas.com.cn/
+  limitation: 'public-limited; richer data products likely commercial. Narrow subject area; methodology
+    less transparent than official stats Audited fallback peers: CAAC, VariFlight, transport research
+    outlets.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`http://www.cadas.com.cn/` -> `https://www.cadas.com.cn/`'
+    response_status: '`200`'
+    recognizable_content: CADAS public articles/summaries
+    access_indications: Richer aviation data likely in commercial ecosystems
+    technical_restriction: None recorded

@@ -1,0 +1,225 @@
+id: pop-mart
+issuer: Pop Mart
+security:
+  code: "09992"
+  exchange: HKEX
+scope:
+  geography: HK and CN
+  claim_scope: HKEX filings, issuer IR context, statutory ownership, SFC regulatory context, and China consumer context
+as_of: "2026-08-02T08:00:00+00:00"
+required_functions:
+  - name: HKEXnews filings and title search
+    function_id: company-disclosures
+    geographies: [HK]
+    candidate_source_ids:
+      - hkexnews
+      - sse
+      - eastmoney-announcement-index
+      - aastocks
+      - hkex-ccass
+    expected_route_order: [hkexnews]
+    expected_excluded_source_ids: [sse, eastmoney-announcement-index, aastocks, hkex-ccass]
+    forbidden_final_citation_source_ids: [eastmoney-announcement-index, aastocks]
+    expected_first_choice:
+      source_id: hkexnews
+      publisher_type: official-exchange
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened original PDF
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [stockCode, startDate, endDate, selectedDocType]
+      result_identity_contains: [security code, issuer, publication time, PDF URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened original PDF
+    temporary_unavailability:
+      source_id: hkexnews
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids:
+        - hkexnews
+        - sse
+        - eastmoney-announcement-index
+        - aastocks
+        - hkex-ccass
+      expected_route_order: [hkexnews]
+      expected_excluded_source_ids: [sse, eastmoney-announcement-index, aastocks, hkex-ccass]
+      forbidden_final_citation_source_ids: [eastmoney-announcement-index, aastocks]
+      expected_first_choice:
+        source_id: hkexnews
+        publisher_type: official-exchange
+        skip_reason: fresh temporarily-unreachable
+      citation_readiness:
+        citation_use_contains: opened original PDF
+        required_identity_fields: [publisher, title, date, url]
+        search_fields: [stockCode, startDate, endDate, selectedDocType]
+        result_identity_contains: [security code, issuer, publication time, PDF URL]
+        search_result_is_final_citation: false
+        opening_final_document_required: true
+        final_document_instruction_contains: opened original PDF
+      forbidden_substitutes: [eastmoney-announcement-index, aastocks, hkex-ccass]
+  - name: Issuer investor-relations entry and exact-copy control
+    function_id: issuer-investor-relations
+    geographies: [HK]
+    candidate_source_ids: [pop-mart, hkexnews, eastmoney-announcement-index, aastocks]
+    expected_route_order: [pop-mart]
+    expected_excluded_source_ids: [hkexnews, eastmoney-announcement-index, aastocks]
+    forbidden_final_citation_source_ids: [eastmoney-announcement-index, aastocks]
+    expected_first_choice:
+      source_id: pop-mart
+      publisher_type: issuer-company
+      skip_reason: null
+      direct_url: https://www.popmart.com/us/investor-relations
+    citation_readiness:
+      citation_use_contains: direct for Pop Mart's own IR-page statements
+      required_identity_fields:
+        - issuer
+        - document title
+        - reporting period
+        - HKEXnews document ID
+        - issuer asset URL
+      search_fields: [document title, reporting period, HKEXnews document ID]
+      result_identity_contains: [issuer IR page path, issuer asset URL, HKEXnews document ID]
+      search_result_is_final_citation: false
+      opening_final_document_required: false
+  - name: Statutory ownership through HKEX Disclosure of Interests
+    function_id: statutory-ownership
+    geographies: [HK]
+    candidate_source_ids:
+      - hkex-di
+      - hkex-ccass
+      - hkexnews
+      - eastmoney-announcement-index
+      - aastocks
+    expected_route_order: [hkex-di]
+    expected_excluded_source_ids:
+      - hkex-ccass
+      - hkexnews
+      - eastmoney-announcement-index
+      - aastocks
+    forbidden_final_citation_source_ids: [hkex-ccass, eastmoney-announcement-index, aastocks]
+    expected_first_choice:
+      source_id: hkex-di
+      publisher_type: official-exchange
+      skip_reason: fresh temporarily-unreachable
+    citation_readiness:
+      citation_use_contains: opened filed DI notice
+      required_identity_fields: [form or notice number, filer, event date, filing date, source URL]
+      search_fields: [listed corporation, stock code, filing or event date]
+      result_identity_contains: [form or notice number, event and filing dates, source URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened filed DI notice
+    temporary_unavailability:
+      source_id: hkex-di
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids:
+        - hkex-di
+        - hkex-ccass
+        - hkexnews
+        - eastmoney-announcement-index
+        - aastocks
+      expected_route_order: [hkex-di]
+      expected_excluded_source_ids:
+        - hkex-ccass
+        - hkexnews
+        - eastmoney-announcement-index
+        - aastocks
+      forbidden_final_citation_source_ids: [hkex-ccass, eastmoney-announcement-index, aastocks]
+      expected_first_choice:
+        source_id: hkex-di
+        publisher_type: official-exchange
+        skip_reason: fresh temporarily-unreachable
+      citation_readiness:
+        citation_use_contains: opened filed DI notice
+        required_identity_fields: [form or notice number, filer, event date, filing date, source URL]
+        search_fields: [listed corporation, stock code, filing or event date]
+        result_identity_contains: [form or notice number, event and filing dates, source URL]
+        search_result_is_final_citation: false
+        opening_final_document_required: true
+        final_document_instruction_contains: opened filed DI notice
+      forbidden_substitutes: [hkex-ccass, eastmoney-announcement-index, aastocks]
+  - name: SFC statutory ownership regulatory context
+    function_id: regulatory-materials
+    geographies: [HK]
+    candidate_source_ids: [sfc, csrc, hkex-di, hkex-ccass, hkexnews, aastocks]
+    expected_route_order: [sfc]
+    expected_excluded_source_ids: [csrc, hkex-di, hkex-ccass, hkexnews, aastocks]
+    forbidden_final_citation_source_ids: [hkex-ccass, hkexnews, aastocks]
+    expected_first_choice:
+      source_id: sfc
+      publisher_type: official-regulator
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened official regulatory page
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [official_domain, query]
+      result_identity_contains: [publisher, notice or case ID, URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened official regulatory page
+  - name: Independent China consumer macro context
+    function_id: official-statistics
+    geographies: [CN]
+    candidate_source_ids:
+      - national-bureau-statistics
+      - hong-kong-statistics
+      - hong-kong-consumer-council
+      - eastmoney-research
+      - aastocks
+    expected_route_order: [national-bureau-statistics]
+    expected_excluded_source_ids:
+      [hong-kong-statistics, hong-kong-consumer-council, eastmoney-research, aastocks]
+    forbidden_final_citation_source_ids:
+      - hong-kong-consumer-council
+      - eastmoney-research
+      - aastocks
+    expected_first_choice:
+      source_id: national-bureau-statistics
+      publisher_type: official-statistics
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened official release
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [official_domain, query]
+      result_identity_contains: [indicator, period, geography, units]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened official release
+  - name: Independent consumer-panel context
+    function_id: research-reports
+    geographies: [CN]
+    candidate_source_ids: [worldpanel, bain-china, eastmoney-research, aastocks]
+    expected_route_order: [worldpanel, bain-china, eastmoney-research]
+    expected_excluded_source_ids: [aastocks]
+    forbidden_final_citation_source_ids: [eastmoney-research, aastocks]
+    expected_first_choice:
+      source_id: worldpanel
+      publisher_type: commercial-data-provider
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened publisher report or page
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [official_domain, query]
+      result_identity_contains: [original publisher, methodology, URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened publisher report or page
+  - name: Independent consumer consulting context
+    function_id: research-reports
+    geographies: [CN]
+    candidate_source_ids: [bain-china, eastmoney-research, aastocks]
+    expected_route_order: [bain-china, eastmoney-research]
+    expected_excluded_source_ids: [aastocks]
+    forbidden_final_citation_source_ids: [eastmoney-research, aastocks]
+    expected_first_choice:
+      source_id: bain-china
+      publisher_type: consulting-research
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened publisher report or page
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [official_domain, query]
+      result_identity_contains: [original publisher, methodology, URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened publisher report or page

@@ -1,0 +1,60 @@
+id: china-money
+name: ChinaMoney
+aliases:
+- C06
+- 中国货币网
+- chinamoney
+- build_market_manifest chinamoney; domain chinamoney.com.cn
+publisher_type: official-market-infrastructure
+official_domains:
+- chinamoney.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Interbank market notices, bond reference data, issuance calendars, market discovery. High for
+    market-infrastructure/reference data; legal origin may be regulator/issuer
+functions:
+- id: market-data
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.chinamoney.com.cn/chinese/index.html
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:chinamoney.com.cn market data
+    result_identity: publisher, series or instrument, date, units, URL
+  citation:
+    use: direct within the hosted function scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.chinamoney.com.cn/chinese/index.html
+  limitation: 'public. For legal authority, trace to regulator, exchange, issuer, or filing PDF Audited
+    fallback peers: PBOC, NAFMII, issuer docs, exchange filings.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: '`200`'
+    recognizable_content: Title `中国货币网-中国外汇交易中心主办`
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit

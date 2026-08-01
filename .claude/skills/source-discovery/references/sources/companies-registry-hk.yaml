@@ -1,0 +1,61 @@
+id: companies-registry-hk
+name: Hong Kong Companies Registry e-Services
+aliases:
+- Hong Kong Companies Registry
+- ICRIS
+publisher_type: official-government
+official_domains:
+- e-services.cr.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Hong Kong Companies Registry portal and registry-issued extracts or certified copies; a portal hit
+    is not itself a confirmed corporate record.
+functions:
+- id: company-registry-records
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.e-services.cr.gov.hk/ICRIS3EP/
+    kind: e-Services entry
+    stability: observed current route
+  search:
+    method: rendered e-Search company search
+    fields:
+    - company name
+    - company number
+    - status
+    example_query: Search then Company Search for POP MART; disambiguate company number and jurisdiction
+    result_identity: legal name, number, type, status, incorporation date, document type, filing date, and extract
+      or order identifier
+  citation:
+    use: direct for a Registry-issued extract or certified copy. A search result is discovery metadata until the
+      entity and record are confirmed.
+    required_fields:
+    - exact legal name
+    - company number
+    - record type
+    - issue or filing date
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:12:00+08:00'
+  final_url: https://www.e-services.cr.gov.hk/ICRIS3EP/
+  limitation: Portal identity and service functions were public. A material search, ordered document, account,
+    payment, or client-control workflow was not completed.
+  observed_error:
+    state: none
+    category: none
+    message: Portal loaded and exposed e-Search services.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Legacy ICRIS route redirected to the current e-Services portal.
+    response_status: Public portal loaded.
+    recognizable_content: e-Filing, e-Search, record-ordering, and account controls.
+    access_indications: Login, registration, and possible paid document workflow.
+    technical_restriction: No static public company-search endpoint was verified.

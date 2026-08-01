@@ -1,0 +1,61 @@
+id: wef-china
+name: World Economic Forum China
+aliases:
+- U31
+- World Economic Forum China
+- supplied U31
+publisher_type: original-research
+official_domains:
+- cn.weforum.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Comparative framing, public publications, sustainability, competitiveness, industrial transformation.
+    Medium-to-high institutional authority; not primary China statistics
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://cn.weforum.org/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:cn.weforum.org industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and conflicts noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - mckinsey-china-research-reports
+  - deloitte-china-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://cn.weforum.org/
+  limitation: 'public. Not China-exclusive; often synthesis; forum priorities/sponsors can shape framing
+    Audited fallback peers: McKinsey, Deloitte, PwC, OECD, World Bank.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: WEF China links to `/publications/` and Chinese articles/stories
+    access_indications: Newsletter-style prompts possible; many reports open
+    technical_restriction: None recorded

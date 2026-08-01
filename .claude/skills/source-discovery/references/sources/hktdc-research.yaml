@@ -1,0 +1,58 @@
+id: hktdc-research
+name: HKTDC Research
+aliases:
+- Hong Kong Trade Development Council research
+publisher_type: original-research
+official_domains:
+- research.hktdc.com
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: HKTDC-authored trade, sector, and market research; not official statistical-agency or issuer-filing evidence.
+functions:
+- id: trade-and-market-research
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://research.hktdc.com/en/search?query=Pop%20Mart
+    kind: research search
+    stability: SPA route; verify rendered result
+  search:
+    method: HKTDC rendered research search
+    fields:
+    - query
+    - geography
+    - date
+    example_query: query=toys then inspect the opened HKTDC research article or report
+    result_identity: title, author or producer, publication date, sector, geography, method notes, and canonical URL
+  citation:
+    use: direct for named HKTDC analysis with its scope and cited underlying data; not as a substitute for C&SD
+      statistics or issuer records.
+    required_fields:
+    - title
+    - author or producer
+    - publication date
+    - scope
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://research.hktdc.com/en/search?query=Pop%20Mart
+  limitation: Public SPA route and search entry loaded, but static retrieval did not render result cards or
+    complete filter-field evidence.
+  observed_error:
+    state: none
+    category: none
+    message: Search route loaded without a login or paywall prompt.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public SPA search route loaded.
+    recognizable_content: HKTDC Research branding and query route.
+    access_indications: No login or paywall observed.
+    technical_restriction: Open the final article or report rather than a search shell.

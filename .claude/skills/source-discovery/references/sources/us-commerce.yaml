@@ -1,0 +1,62 @@
+id: us-commerce
+name: US Department of Commerce
+aliases:
+- U62
+- US Commerce
+- supplied U62
+publisher_type: official-government
+official_domains:
+- commerce.gov
+geographies:
+- US
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Portal discovery for Commerce sub-agencies and department announcements. High authority for department
+    releases when reached
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: Medium
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.commerce.gov/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:commerce.gov official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct for the publisher's own materials
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: anti-bot
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.commerce.gov/
+  limitation: 'anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful
+    work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies
+    directly, SEC for filings, agency newsrooms.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work
+      moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies
+      directly, SEC for filings, agency newsrooms.'
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`403` in curl and headless Chrome'
+    recognizable_content: Cloudflare `Performing security verification` page
+    access_indications: Not recorded in audit
+    technical_restriction: Cloudflare blocked both direct CLI and fresh headless-browser retrieval

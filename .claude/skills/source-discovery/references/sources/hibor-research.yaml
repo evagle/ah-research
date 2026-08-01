@@ -1,0 +1,61 @@
+id: hibor-research
+name: Hibor Research
+aliases:
+- U03
+- 慧博投研资讯
+- supplied U03
+publisher_type: aggregator
+official_domains:
+- hibor.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Broker and industry report discovery, older report retrieval, topic scans. Medium authority as
+    secondary distribution; broker originals hold authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: http://www.hibor.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:hibor.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - datayes-robo-research-research-reports
+  - eastmoney-research-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://www.hibor.com.cn/
+  limitation: 'public-limited; public pages plus PC client/login prompts. Provenance is secondary; full
+    functionality funnels to client/app Audited fallback peers: U01, U08, U10, U11.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` for host and report detail pages'
+    recognizable_content: Homepage and report detail pages
+    access_indications: PC client download/login prompt for full functionality
+    technical_restriction: None recorded

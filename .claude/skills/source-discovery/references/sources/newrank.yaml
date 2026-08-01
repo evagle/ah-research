@@ -1,0 +1,61 @@
+id: newrank
+name: Newrank Reports
+aliases:
+- U40
+- 新榜报告
+- supplied U40
+publisher_type: commercial-data-provider
+official_domains:
+- newrank.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: WeChat/Weibo/short-video ecosystem reports, rankings, report discovery. Medium-to-high for Newrank-tracked
+    ecosystems
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://newrank.cn/report?bindType=report
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:newrank.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - 36kr-research-reports
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://newrank.cn/report?bindType=report
+  limitation: 'moved/redirected; public-limited; deeper products paid/commercial. Vendor-methodology limits;
+    commissioned reports may be sponsor-shaped Audited fallback peers: QuestMobile, platform disclosures,
+    36Kr, 巨量算数.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: '`https://report.newrank.cn/index.html?bindType=report` -> `https://newrank.cn/report?bindType=report`'
+    response_status: '`200`'
+    recognizable_content: Title `报告分析-新榜`
+    access_indications: Deeper datasets/products paid/commercial
+    technical_restriction: Route moved

@@ -9,16 +9,18 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人不在当前下载器与官方目录适配范围内。
 
-**上市资料绑定**:所有带`--listing-date <official-listing-date>`的下载命令必须同时传`--listing-profile-bundle <actual-official-query-bundle-path>`,该路径必须是采集器stdout返回的真实bundle路径。source preflight要求年报manifest与事件manifest的listing_profile路径和SHA-256一致;不一致立即abort。
+**共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充公司财务风险判断特有规则。
+
+**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享数据、run隔离、无感resolver和旧路径兼容只以该文件为准。
 
 ## §0运行模式
 
 ### Mode A — Standalone
 
-- **Invocation**:`/redflag-scan <ticker> [--as-of YYYY-MM-DD] [--resume|--start-fresh] [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... [--auto|--interactive]`/`财报排雷 <ticker>`/`排雷 <ticker>`。Mode A默认`--auto`
+- **Invocation**:`/redflag-scan <ticker> [--as-of YYYY-MM-DD] [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... [--auto|--interactive]`/`财报排雷 <ticker>`/`排雷 <ticker>`。Mode A默认`--auto`；只有用户明确要求“完全重新分析”时内部resolver使用`--clean`
 - **行为**: 子 skill 独立完成 ticker 验证 + filings audit + PDF 抽取 + 派子 agent 扫29项 + 6项高危附加检查 + 主 agent 复核 + 写 standalone 报告
 - **依赖失败**:年报目录、监管事件、上市资料或live revalidation任一失败时,Mode A持久化`dependency_failure`及具体原因,阻断发布完成态;临时年报manifest复核通过后,只允许执行Step 5列出的提升命令,不得手工复制或改写
-- **Output path**:`profiles/<ticker>-redflags-<YYYY-MM-DD>[-vN].md`—self-contained报告,约150-250行
+- **Output path**:`data/filings/<ticker>/runs/<run-id>/report.md`—self-contained报告,约150-250行
 - **典型场景**: 用户对某 ticker 做快速排雷扫描, 发现风险直接剔除, 不需要完整 value-profile
 
 ### Mode B — As-subroutine
@@ -26,6 +28,7 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 - **Invocation**:主value-profile skill在Step 5遇到Part 4 §4.5排雷时delegate,传参`--target-profile PATH --section part4/§4.5 --as-of AS_OF --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> [--counterpart-filing-manifest <exchange>:<absolute-json-path>]... --auto|--interactive`
 - **行为**:读取两个canonical manifest,重新校验选中版本和截止日、文件路径及SHA-256;校验通过后跳过重复下载,从Step 3开始
 - **Output**:仅返回`draft_section`和结构化flags,父skill是唯一写入者;本skill不直接修改`<target-profile>`
+- **运行边界**:Mode B不调用run store，也不创建run
 - **确认归属**:Mode B始终只返回草稿;父skill独占`accept/edit/research more`,本skill不显示菜单、不接受草稿也不落盘。
 - **典型场景**: 用户跑 `/value-profile <ticker>`, 主 skill 推进到 §4.5时自动调用本 skill
 
@@ -34,7 +37,7 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 - 参数只有 ticker → Mode A (Standalone)
 - 参数含`--target-profile PATH`→Mode B（As-subroutine）,必须同时提供`--as-of AS_OF --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path>`并继承调用方的`--auto`或`--interactive`;A+H发行人还必须为每个counterpart重复传`--counterpart-filing-manifest <exchange>:<absolute-json-path>`,任一缺失时报契约错误
 - Mode A可显式传`--as-of YYYY-MM-DD`;未传时按Step 1从目标完整年报首次有效披露日初始化
-- Mode A的`--resume`与`--start-fresh`互斥;显式指定时按原值执行,未指定时按Step 1的持久状态选择
+- Mode A固定目标财年和AS_OF后调用resolver，自动续跑、复用或增量新建，不显示恢复选择
 - Mode A未传模式时按`--auto`;Mode A的`--interactive`才显示确认菜单。Mode B无论继承`--auto`还是`--interactive`都不显示菜单,只返回父skill确认
 - Ticker验证:沪深A股使用`\d{6}\.(SH|SZ)`,HK使用`\d{1,5}\.HK`,与下载器一致。港股代码立即左补零为五位,后续路径、manifest、查询参数和输出只使用canonical ticker
 
@@ -142,14 +145,13 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 Mode B跳过Step 1的1-6项,但必须执行第7项,使用自身调用read-filing Mode B取得并复核`facts/citations/warnings`;不得依赖调用方未传入的内存事实。
 
 1. **Validate ticker**:沪深A股使用`\d{6}\.(SH|SZ)`,港股使用`\d{1,5}\.HK`。港股代码立即左补零为五位。失败abort。
-2. **先选择resume或start-fresh并确定截止日**:查找`profiles/<ticker>-redflags-*.md`,读取`运行状态`、AS_OF和报告路径。显式flag优先;未传时,普通未完成报告默认resume,已完成报告默认start-fresh。`manual_review`不属于可自动resume的未完成状态;`output_quality_failure`不属于可自动resume的未完成状态。最近报告为任一上述终态时必须先显示`[edit/research more/start-fresh/exit]`,未显式选择前不得派发或自动重试,选择exit后保留原终态。多个可resume的未完成报告按报告日期降序、`-vN`中的N降序（base文件按v1处理）和完整路径稳定排序后只选最新一个,不得合并。证据阶段为未建立时允许manifest路径和SHA-256写`待建立`,resume必须回到Step 1.3继续取证;只有证据阶段为已绑定时才验证路径和SHA-256。证据已绑定时resume逐项验证已持久化manifest路径和SHA-256;路径或哈希不一致时不得resume,须保留旧报告并重新构建证据。resume沿用报告内AS_OF,显式`--as-of`冲突时abort;start-fresh优先采用显式`--as-of`,否则先只查询交易所官方目录,以选中目标完整年报首次有效披露日初始化并持久化AS_OF。上市日期必须来自交易所官方发行人资料并记录来源和响应哈希;后续下载命令追加`--listing-date <official-listing-date>`。初始化并持久化AS_OF后立即写入骨架报告。`初始化并持久化AS_OF`和骨架报告必须在任何年报下载命令、PDF下载或事件查询之前完成。必须在构造manifest之前完成选择,不得先下载后询问。
-   **人工终态门槛**:上述菜单未显式选择时退出;不得把`manual_review`或`output_quality_failure`送入普通resume路径。
-3. **保存下载前基线和骨架报告**:resume若已有canonical年报或事件manifest,在运行年报下载器之前分别复制为只读不可变snapshot并记录旧SHA-256;start-fresh若同一AS_OF的canonical文件已被旧报告引用,也执行相同快照并把旧报告改为引用snapshot。下载或live查询不得先覆盖该基线。随后按Step 2的Mode A骨架报告立即原子写入`进行中`状态、AS_OF和当前manifest路径;下载失败、用户选择no/show-command或进程中断都更新同一骨架报告,不得等取证成功后才创建状态。
+2. **准备共享证据并解析standalone状态**:固定目标财年和AS_OF后，先运行`read-filing` Mode A准备或复用annual、event及全部counterpart manifest。取得真实路径、SHA-256和artifact ID后调用`scripts/financial_run_store.py resolve`，不得使用待建立指纹。`resumed`继续返回run的未完成步骤，`reused`直接返回已完成报告，`created`写入新run。`manual_review`和`output_quality_failure`保留在原run，由下一次正常调用确定性恢复；只有明确“完全重新分析”才传`--clean`。不得询问用户resume、新run或run ID。
+3. **保存下载前基线和骨架报告**:共享canonical年报和事件manifest只新增内容寻址版本，不覆盖旧版本。候选manifest、query、checkpoint和日志只写resolver返回的run。随后按Step 2骨架立即原子写入`进行中`状态、AS_OF和当前manifest路径；下载失败或进程中断都更新同一run，不得等取证成功后才创建状态。
 3.5. **先采集官方查询bundle**:在任何`download_filings.py`命令前生成符合`../read-filing/references/event-query-plan.schema.json`的query plan。A+H发行人逐交易所保存`查询发行人代码映射[source_exchange]`,listing profile与subject roster保存完整请求契约,上市代码与日期只从官方响应取得。运行`uv run python scripts/collect_event_evidence.py --plan <absolute-query-plan.json> --bundle-out <absolute-official-query-bundle.json> --evidence-dir <absolute-immutable-evidence-dir>`并验证后,读取采集器stdout返回的真实bundle路径;后续下载器和构建器只使用该真实路径。失败时持久化原因并停止。
 4. **Audit`data/filings/<ticker>/`**:准备最近10个财年年报,用于3/5/10年窗口。公司上市≥10年但文件不足时使用`uv run python scripts/download_filings.py <ticker> --years 10 --end-year <latest-required-fiscal-year> --as-of AS_OF --listing-date <official-listing-date> --listing-profile-bundle <actual-official-query-bundle-path> --manifest-out <temporary-annual-manifest-path>`。`--auto`自动执行下载;下载成功后重新audit,再重建两个manifest并执行完整source preflight;临时manifest与快照比较后才发布canonical路径。下载失败则持久化`需人工`终态并退出。只有`--interactive`显示`yes/no/show-command`;选择yes后执行,选择no或show-command后保留可恢复状态。上市历史不足10年时使用上市以来全部年报和可取得的官方上市文件历史数据,逐项标`上市历史不足,实际窗口N年`,不得把短窗口写成10年结论。
 5. **建立canonical evidence**:只使用Step 2已持久化的AS_OF。Audit和任何下载结束后,按read-filing完整目录和版本规则发布`annual-reports-<AS_OF>.json`或内容变化时的`annual-reports-<AS_OF>-<content-sha256>.json`内容寻址版本;实际发布路径和SHA-256为唯一绑定依据。事件证据必须先采集后构建:query plan按`../read-filing/references/event-source-discovery.md`从实际官方请求发现来源,不得猜测接口;A+H发行人必须按两地官方代码和官方上市日期覆盖两地监管源。使用Step 3.5中采集器stdout返回的真实bundle路径运行`uv run python scripts/build_event_manifest.py --bundle <actual-official-query-bundle-path> --out <canonical-event-manifest-path>`。读取构建器stdout返回的真实发布路径,并把报告正文、失效集合、manifest路径和SHA-256通过CAS原子改绑;同一AS_OF证据变化时旧manifest保持不可变。每类事件覆盖全部适用官方来源,每类保存`source_count`和`sources`,逐source保存HTTP方法、请求编码和响应schema,并保存请求头、查询参数、响应和文书;构建器逐类在线重取全部事件分页,同类内再逐source与保存响应逐页一致。命中文书的本地路径单独放在`document_files`,不得混入官方响应;构建器重新下载每个官方文书URL并与本地文书逐字节哈希一致。临时事件manifest复核必须执行官方域名白名单、解析全部分页响应、分别校验`occurrence_date`和`publication_time`,并要求每个事件具备`offense_type`、`legal_effect`、`subject_role_at_occurrence`和`issuer_connection`,验证发行人/管理层/实控人/审计机构主体覆盖并限制状态枚举。主体名册必须保存官方URL、查询参数、原始响应和结果总数;构建器必须重请求主体名册的官方URL和查询参数,并逐项比较实时响应哈希、结果总数和完整主体列表;任一不一致立即abort。顶层`live_revalidation_required`必须为`true`;形成任何否定性结论前,按每个source保存的请求契约重新请求全部分页并复核响应与内容哈希。与Step 3快照逐字段比较,再执行与Mode B相同的source preflight,且必须覆盖其全部检查。source preflight成功后,把证据阶段从`未建立`原子转换为`已绑定`,同一次写入两个manifest路径和SHA-256;任一字段写入失败则全部保持`未建立`。证据阶段不是`已绑定`时不得进入完成终态或开始扫描。
 6. **PDF预抽取cache**:所有参与窗口计算的PDF都调用`extract_pdf.py`以校验source_sha256;哈希不符自动重抽取。
-7. **建立上游事实层**:主agent读取`references/thresholds.yaml`和`references/fraud-library.md`§1-§5。Mode A调用`read-filing` Mode A并追加`--complete-facts`;Mode B调用`read-filing` Mode B并追加`--complete-facts`,消费`facts/citations/warnings`。该模式触发L1-L3也继续完成排雷事实层。两种模式只有上游成功且manifest哈希一致时才能继续。
+7. **建立上游事实层**:主agent读取`references/thresholds.yaml`和`references/fraud-library.md`§1-§5。Mode A调用`read-filing` Mode B，把当前run的`report.md`作为target并传入Step 2准备的全部manifest；Mode B同样调用`read-filing` Mode B，消费默认完整的`facts/citations/warnings/screening_flags`，`--complete-facts`仅为向后兼容。L1至L3命中也继续完成排雷事实层。两种模式只有上游成功且manifest哈希一致时才能继续。
 
 ### Step 2 — 模式判定 + Output 准备
 
@@ -157,7 +159,7 @@ Mode B跳过Step 1的1-6项,但必须执行第7项,使用自身调用read-filing
    - 无 `--target-profile` → Mode A
    - 有`--target-profile <path> --section part4/§4.5 --auto|--interactive`→Mode B
 
-2. **Mode A 准备**:resume时加载所选报告并迁移缺失的运行字段,存在则加载并迁移,不得覆盖原文;start-fresh才新建`profiles/<ticker>-redflags-<YYYY-MM-DD>.md`,start-fresh遇到同日路径冲突时使用最小可用`-vN`后缀:
+2. **Mode A 准备**:使用resolver返回的`data/filings/<ticker>/runs/<run-id>/report.md`。`created`时写以下骨架，`resumed`时加载同run报告并迁移缺失字段，`reused`不进入本步：
 
    ```markdown
    # <中英文公司名> 财报排雷 — <ticker>
@@ -265,7 +267,7 @@ Acceptable后写中文终稿。
 
 ### Step 5 — 写 summary + Output
 
-Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`。每条列`dependent_check_ids`,每个canonical check ID使用`checklist/1..29`、`high-risk/<id>`、`reconciliation/1..4`、`supplemental/1..8`、`bank/<id>`、`insurer/<id>`或`dimension/<id>`命名空间。联合类型均含最终持久证据的绝对`artifact_path`;`source_type=filing_text/filing_pdf`还含`source_pdf_sha256/artifact_sha256/page/quote`,`source_type=event_document`还含`event_manifest_sha256/document_url/content_sha256/artifact_sha256/page/quote`;HTML文书page可为null。action_requests.citations复用同一联合类型。resume时逐条复核机器引用并失效全部依赖ID。
+Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`。每条列`dependent_check_ids`,每个canonical check ID使用`checklist/1..29`、`high-risk/<id>`、`reconciliation/1..4`、`supplemental/1..8`、`bank/<id>`、`insurer/<id>`或`dimension/<id>`命名空间。联合类型均含最终持久证据的绝对`artifact_path`;`source_type=filing_text/filing_pdf`还含`source_pdf_sha256/artifact_sha256/page/quote`,`source_type=event_document`还含`event_manifest_sha256/document_url/content_sha256/artifact_sha256/page/quote`;HTML文书page可为null。action_requests.citations复用同一联合类型。恢复run时逐条复核机器引用并失效全部依赖ID。
 
 **Mode A**:
 - 最终发布前运行`uv run python scripts/download_filings.py --revalidate <bound-annual-manifest-path>`和`uv run python scripts/build_event_manifest.py --revalidate <bound-event-manifest-path>`,A+H还要逐一重验证全部counterpart manifest;再运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <final-report-path> --expected-sha256 <baseline-report-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`,非A+H省略最后一类guard;任一漂移或冲突不得覆盖
@@ -342,13 +344,14 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 
 子skill返回主skill Step 5时区分两类终态:证据闭合且复核通过时,`--auto`或`--interactive`接受后派生控制台状态`已完成`;自动重试耗尽且仍有未决证据时,置信度写`需人工`,返回`manual_review_required=true`,加入人工处理清单并阻断估值,不得标`已完成`。`--interactive`选择research more时把hint附加后重新派发Step 3子agent。
 
-Mode B只返回以下版本化JSON schema,不得增加并行顶层形态:
+Mode B只返回以下版本化JSON schema,不得增加并行顶层形态。返回前必须通过`references/mode-b-response.schema.json`校验;Schema只固定机器信封,`draft_section`正文保持自由Markdown:
 
 ```json
 {
   "schema_version": "1.0",
   "terminal_status": "completed",
   "failure_reason": null,
+  "target_sections": ["part4/§4.5"],
   "draft_section": "<part4/§4.5完整草稿>",
   "risk_counts": {"warning": 0, "high_risk": 0, "veto": 0, "pending": 0},
   "valuation_blocked": false,
@@ -357,11 +360,16 @@ Mode B只返回以下版本化JSON schema,不得增加并行顶层形态:
   "event_manifest_sha256": "<sha256>",
   "counterpart_filing_manifest_sha256s": {},
   "action_requests": [{"request_id": "<sha256>", "type": "deepen_research", "reason": "...", "target_section_id": "part4/§4.5", "requested_confidence": "medium", "execution_status": "pending", "execution_result": null, "citations": []}],
-  "confidence": "high"
+  "confidence": "high",
+  "citations": [],
+  "findings": [],
+  "unresolved_items": []
 }
 ```
 
 `terminal_status`只允许`completed/manual_review/output_quality_failure/dependency_failure`;只有`completed`时`failure_reason=null`,其余必须给具体原因。preflight或live revalidation漂移时返回`dependency_failure`,令`draft_section=""`、`manual_review_required=true`、`valuation_blocked=true`,并给`action_requests=[{"type":"rebuild_evidence",...}]`请求父skill重建,不得映射为输出质量失败。`action_requests.type`只允许`deepen_research/lower_confidence/block_valuation/management_review/valuation_route_review/rebuild_evidence`;`confidence`只允许`high/medium/low/manual_review`并与§2.6.4映射一致。父skill原子保存前不得把任何草稿字段视为已持久化。
+
+`findings`固定`judgment_domain=company_financials`和`subject_type=listed_company`。每项ID按`sha256(judgment_domain|subject_type|subject_id|finding_type|occurrence_date|sorted(canonical_evidence_ids))`生成。本skill判断公司财务报表、财务行为和财务风险;即使同一证据涉及董事、CFO或实控人,也不得在本数组中替`management-analysis`判断个人诚信。
 
 子skill若发现§2.5管理层道德风险→同步建议主skill写Part 0`**估值阻断:**是—管理层道德风险`,主skill下一步应联动调用management-analysis子skill深查§4。
 
