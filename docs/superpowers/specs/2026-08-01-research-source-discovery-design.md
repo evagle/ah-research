@@ -32,6 +32,12 @@ websites, competitor websites, industry associations, academic sources, and
 search engines. Evaluate new candidates with the same record fields before
 using them.
 
+Candidate selection is fitness-for-claim, not a global website ranking. Score a
+candidate on provenance, primary versus secondary status, methodology
+transparency, coverage, timeliness, reproducibility, correction history, access
+stability, and conflicts of interest. The same publisher may be strong for one
+fact type and weak for another.
+
 Source routing is many-to-many, not a fixed category-to-site mapping. Each
 research question may use several independent sources, and each source may
 support several research needs.
@@ -69,6 +75,12 @@ and consultancies as attributed secondary evidence. Use aggregators, media,
 social platforms, and report indexes for discovery only unless the original
 document and publisher can be verified.
 
+Include useful media and finance portals such as Sina Finance as evaluated
+candidates for news discovery, quote navigation, announcement indexing, and
+company-information lookup. Do not promote portal copies to primary evidence
+when an exchange, regulator, issuer, statistical agency, or original report is
+available.
+
 Treat company websites as first-party subject evidence: use them for product
 specifications, official announcements, management statements, locations,
 pricing, and investor-relations materials. Do not treat a company's claims
@@ -76,6 +88,16 @@ about market leadership, customer outcomes, product superiority, or competitive
 advantage as independent proof; cross-check those claims with customers,
 suppliers, competitors, regulators, industry bodies, or other independent
 sources.
+
+Treat exchange announcements and regulatory correspondence as a dedicated
+high-priority evidence class. Cover inquiry and concern letters, issuer
+responses, supervisory measures, disciplinary actions, penalty decisions,
+corrections and restatements, trading suspensions, and material-event notices.
+Apps and aggregators may discover or mirror these documents, but the source
+portfolio must trace them to CNINFO, SSE, SZSE, HKEXnews, the relevant
+regulator, or another original official publisher. Preserve announcement time,
+document or announcement ID, status, original URL, and any replacement
+relationship.
 
 Evidence levels:
 
@@ -114,7 +136,8 @@ the original publisher whenever the original can be identified.
 - `product-analysis`: use the shared skill for industry structure, product
   benchmarks, consumer data, and specialist vertical research.
 - `value-profile`: use it for macro, industry, valuation-context, and historical
-  market research, while keeping bound official manifests authoritative.
+  market research, announcements, and regulatory-letter discovery, while
+  keeping bound official manifests authoritative.
 - `read-filing`: use it only for external peer and industry context; exchange
   filings and regulatory evidence remain on the existing official-source path.
 
