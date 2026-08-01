@@ -238,6 +238,9 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 
+# Source discovery probe cache
+tmp/source-discovery/
+
 # Editor
 .vscode/
 .idea/

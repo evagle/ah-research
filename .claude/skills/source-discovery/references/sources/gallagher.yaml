@@ -1,0 +1,63 @@
+id: gallagher
+name: Arthur J. Gallagher & Co. insights
+aliases:
+- Gallagher Benefits and HR
+publisher_type: consulting-research
+official_domains:
+- ajg.com
+geographies:
+- US
+industries:
+- hr
+- insurance
+authority:
+  level: High
+  scope: Gallagher-authored benefits, workforce, compensation, wellbeing, and risk research and practice analysis.
+functions:
+- id: hr-benefits-research
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.ajg.com/news-and-insights/
+    kind: insights library
+    stability: observed current route
+  search:
+    method: faceted library search
+    fields:
+    - keyword
+    - category
+    - type
+    - sort
+    example_query: select Benefits%20and%20HR, Reports, and Newest
+    result_identity: title, category, publication date, publisher, population, method, and PDF or article URL
+  citation:
+    use: direct for opened Gallagher research with population and method. Advisory material is not a statutory
+      benefits or labor-law source.
+    required_fields:
+    - title
+    - publication date
+    - population
+    - methodology
+    - report URL
+  fallbacks:
+  - aon-china-research-reports
+  - mercer-china-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:47:00+08:00'
+  final_url: https://www.ajg.com/news-and-insights/
+  limitation: Public library and sampled PDF were open. Survey methodology remains report specific, and general
+    advisory content carries its own disclaimer.
+  observed_error:
+    state: none
+    category: none
+    message: Public library and sampled report PDF loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public library and article route returned.
+    recognizable_content: Benefits and HR categories, reports filter, and report link.
+    access_indications: No login or paywall observed for sampled report.
+    technical_restriction: Do not substitute Gallagher advice for official statutory sources.

@@ -1,0 +1,678 @@
+from __future__ import annotations
+
+import ast
+import re
+import subprocess
+import sys
+from pathlib import Path
+from urllib.parse import urlparse
+
+import yaml
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+SKILLS_ROOT = REPO_ROOT / ".claude" / "skills"
+SKILL_ROOT = SKILLS_ROOT / "source-discovery"
+PROFILES_ROOT = SKILL_ROOT / "references" / "sources"
+SNAPSHOT_PATH = SKILL_ROOT / "references" / "reachability-snapshot.json"
+CATALOG_PATH = SKILL_ROOT / "references" / "source-catalog.md"
+CATALOG_BUILDER_PATH = SKILL_ROOT / "scripts" / "build_source_catalog.py"
+SITE_GUIDES_ROOT = SKILL_ROOT / "references" / "site-guides"
+
+
+def read(path: Path) -> str:
+    return path.read_text(encoding="utf-8")
+
+
+def require_text(path: Path) -> str:
+    assert path.is_file()
+    return read(path)
+
+
+def frontmatter(path: Path) -> dict[str, str]:
+    text = require_text(path)
+    _, raw, _ = text.split("---", 2)
+    parsed = yaml.safe_load(raw)
+    assert isinstance(parsed, dict)
+    return parsed
+
+
+def script_constant(path: Path, name: str) -> object:
+    module = ast.parse(read(path))
+    for node in module.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        for target in node.targets:
+            if isinstance(target, ast.Name) and target.id == name:
+                return ast.literal_eval(node.value)
+    raise AssertionError(f"missing constant {name} in {path}")
+
+
+def canonical_host(host: str) -> str:
+    trimmed = host.lower().strip(".")
+    if trimmed.endswith(".dfcfw.com"):
+        return "eastmoney.com"
+    parts = trimmed.split(".")
+    if len(parts) >= 3 and parts[-2:] in (
+        ["com", "cn"],
+        ["gov", "cn"],
+        ["org", "hk"],
+        ["com", "hk"],
+        ["gov", "hk"],
+    ):
+        return ".".join(parts[-3:])
+    if len(parts) >= 2:
+        return ".".join(parts[-2:])
+    return trimmed
+
+
+def provider_domains_from_dict(path: Path, name: str) -> set[str]:
+    domains = script_constant(path, name)
+    assert isinstance(domains, dict)
+    normalized: set[str] = set()
+    for value in domains.values():
+        assert isinstance(value, tuple)
+        for domain in value:
+            assert isinstance(domain, str)
+            normalized.add(canonical_host(domain))
+    return normalized
+
+
+def provider_domains_from_urls(path: Path, *names: str) -> set[str]:
+    normalized: set[str] = set()
+    for name in names:
+        value = script_constant(path, name)
+        assert isinstance(value, str)
+        host = urlparse(value).hostname
+        assert host
+        normalized.add(canonical_host(host))
+    return normalized
+
+
+def assert_contains_all(text: str, phrases: tuple[str, ...]) -> None:
+    for phrase in phrases:
+        assert phrase in text
+
+
+def test_source_discovery_skill_has_required_resources() -> None:
+    assert (SKILL_ROOT / "SKILL.md").is_file()
+    assert (SKILL_ROOT / "references/source-catalog.md").is_file()
+    assert (SKILL_ROOT / "references/search-playbook.md").is_file()
+
+
+def test_source_discovery_skill_frontmatter_and_workflow_contract() -> None:
+    metadata = frontmatter(SKILL_ROOT / "SKILL.md")
+    assert metadata["name"] == "source-discovery"
+    assert (
+        metadata["description"]
+        == "Use when research needs external reports, industry or macro data, "
+        "company and investor-relations sources, official statistics, market "
+        "evidence, source validation, or fallback searches after a source is "
+        "missing, inaccessible, paywalled, or inconclusive."
+    )
+
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    for step in (
+        "question decomposition",
+        "known-source routing",
+        "dynamic discovery",
+        "access/provenance validation",
+        "independent cross-check",
+        "fallback exhaustion",
+        "source ledger handoff",
+    ):
+        assert step in skill
+    for criterion in (
+        "provenance",
+        "primary/secondary status",
+        "methodology transparency",
+        "coverage",
+        "timeliness",
+        "reproducibility",
+        "correction history",
+        "access stability",
+        "conflicts of interest",
+        "fitness for the requested claim",
+    ):
+        assert criterion in skill
+
+
+def test_runtime_loads_catalog_before_known_source_routing() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    catalog_instruction = "Read `references/source-catalog.md` before known-source routing."
+    assert catalog_instruction in skill
+    assert skill.index(catalog_instruction) < skill.index(
+        "`question decomposition -> known-source routing"
+    )
+
+
+def test_runtime_defines_cache_snapshot_profile_precedence_and_ttls() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert_contains_all(
+        skill,
+        (
+            "valid local cache observation -> reviewed snapshot -> profile access record",
+            "never authority, citation scope, publisher identity, workflow evidence, or field/API evidence",
+            "Use `source_profiles.ttl_for_status`",
+            "`reachable` and `reachable-limited`: 30 days",
+            "`login-required`, `paywalled`, and `anti-bot`: 14 days",
+            "`temporarily-unreachable` and `unverified`: 24 hours",
+            "`moved` and `broken-link`: 7 days",
+            "fresh `temporarily-unreachable` route is skipped for same-function fallbacks",
+            "stale route must be rechecked",
+            "One failed request never proves permanent closure.",
+        ),
+    )
+
+
+def test_runtime_defines_claim_scope_and_unreviewed_probe_promotion_boundary() -> None:
+    skill = " ".join(require_text(SKILL_ROOT / "SKILL.md").split())
+
+    assert_contains_all(
+        skill,
+        (
+            "Function match remains first, then claim-scope eligibility, then authority, originality, independence, reachability, and utility.",
+            "minimum_originality",
+            "minimum_independence",
+            "Each local probe observation is machine-readable and `unreviewed`.",
+            "An `unreviewed` local cache observation never auto-promotes or overwrites the reviewed snapshot.",
+            "Only an explicit reviewer update to `references/reachability-snapshot.json` may mark an observation `reviewed`.",
+            "function-specific cache observation before its legacy source-level summary",
+        ),
+    )
+
+
+def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert_contains_all(
+        skill,
+        (
+            "noninteractive `urllib` or `curl`",
+            "headless Chromium only for JS/session flows",
+            "Never use repeated user Allow prompts",
+        ),
+    )
+
+
+def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    search_playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    sse_guide = require_text(SKILL_ROOT / "references/site-guides/sse.md")
+    cninfo_guide = require_text(SKILL_ROOT / "references/site-guides/cninfo.md")
+    combined = "\n".join((skill, search_playbook, sse_guide, cninfo_guide))
+    normalized = " ".join(combined.split())
+
+    assert_contains_all(
+        normalized,
+        (
+            "CNINFO opened PDF -> SSE register metadata cross-check -> "
+            "Playwright headless SSE PDF fallback",
+            "CNINFO is the default retrieval route for A-share issuer-announcement bodies",
+            "retrieve the opened CNINFO PDF first, then cross-check listing-exchange metadata",
+            "SSE-issued inquiry letters and other exchange actions remain SSE-first",
+            "use SSE for its inquiry letter and CNINFO for the issuer response body",
+            "Use CNINFO as the default retrieval route for the issuer response body",
+            "CNINFO issuer responses do not replace an SSE inquiry letter",
+            "management explanation, commitments, and remediation",
+            "only when CNINFO is missing, identity fields do not match, or the exact SSE artifact is required",
+            "isolated Playwright headless SSE PDF fallback",
+            "navigate to the PDF in the same browser context",
+            "Close the browser after the bounded download",
+            "`x-tengine-error: denied by bot`",
+            "`Content-Type: application/pdf` or a `%PDF-` file signature",
+            "does not lower SSE authority for its own exchange actions",
+            "does not change source authority",
+            "does not use a personal Chrome profile or repeated user Allow prompts",
+        ),
+    )
+
+    assert normalized.index("CNINFO opened PDF") < normalized.index(
+        "Playwright headless SSE PDF fallback"
+    )
+    assert normalized.index(
+        "CNINFO is the default retrieval route for A-share issuer-announcement bodies"
+    ) < normalized.index("SSE-issued inquiry letters and other exchange actions remain SSE-first")
+
+
+def test_site_guides_define_direct_use_contracts() -> None:
+    required_sections = (
+        "Direct URLs",
+        "Query fields",
+        "Query example",
+        "Result identity",
+        "Citation fields",
+        "Access limitations",
+        "Same-function fallbacks",
+        "Provenance boundaries",
+    )
+    guide_requirements = {
+        "sse.md": (
+            "https://www.sse.com.cn/disclosure/listedinfo/announcement/",
+            "https://www.sse.com.cn/regulation/supervision/inquiries/",
+            "600519",
+            "贵州茅台",
+            "inquiry letter",
+        ),
+        "cninfo.md": (
+            "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+            "column=sse",
+            "tabName=fulltext",
+            "searchkey=",
+            "announcementId",
+            "adjunctUrl",
+        ),
+        "hkexnews.md": (
+            "https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en",
+            "stockCode",
+            "selectedDocType",
+            "09992",
+            "Pop Mart",
+            "JSF",
+        ),
+        "hong-kong-regulatory.md": (
+            "https://di.hkex.com.hk/di/NSForm1.aspx?lang=en",
+            "https://www3.hkexnews.hk/sdw/search/searchsdw.aspx",
+            "txtShareholdingDate",
+            "txtStockCode",
+            "DI is not interchangeable with CCASS, annual reports, or monthly returns.",
+            "no function-equivalent fallback",
+        ),
+        "official-statistics.md": (
+            "https://www.censtatd.gov.hk/en/web_table.html",
+            "https://data.gov.hk/en/",
+            "table ID",
+            "classification",
+            "period",
+            "official statistics",
+        ),
+    }
+
+    for filename, phrases in guide_requirements.items():
+        guide = require_text(SITE_GUIDES_ROOT / filename)
+        assert_contains_all(guide, required_sections + phrases)
+
+
+def test_sse_guide_percent_encodes_cjk_query_url() -> None:
+    guide = require_text(SITE_GUIDES_ROOT / "sse.md")
+
+    assert (
+        "https://www.sse.com.cn/home/search/?webswd=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0" in guide
+    )
+    assert "https://www.sse.com.cn/home/search/?webswd=贵州茅台" not in guide
+
+
+def test_search_playbook_makes_uncataloged_hong_kong_discovery_trust_first() -> None:
+    playbook = require_text(SKILL_ROOT / "references" / "search-playbook.md")
+
+    assert_contains_all(
+        playbook,
+        (
+            "Uncataloged Hong Kong Official Sources",
+            "highest-authority applicable original",
+            "same-function",
+            "official government or official statistics publisher",
+            "finance portal",
+            "provenance, access, and fitness",
+            "original title, publisher, date, identifier, and canonical URL",
+            "not a substantive citation",
+        ),
+    )
+
+
+def test_source_catalog_preserves_every_active_supplied_entry() -> None:
+    catalog = require_text(CATALOG_PATH)
+    retired = {2, 8, 15, 63}
+    for number in range(1, 64):
+        if number in retired:
+            continue
+        assert f"U{number:02d}" in catalog
+
+
+def test_generated_source_catalog_matches_committed_content(tmp_path: Path) -> None:
+    assert CATALOG_BUILDER_PATH.is_file()
+    generated = tmp_path / "source-catalog.md"
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CATALOG_BUILDER_PATH),
+            "--profiles",
+            str(PROFILES_ROOT),
+            "--snapshot",
+            str(SNAPSHOT_PATH),
+            "--output",
+            str(generated),
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 0, result.stderr
+    assert generated.read_bytes() == CATALOG_PATH.read_bytes()
+
+
+def test_catalog_check_reports_drift_without_overwriting_output(tmp_path: Path) -> None:
+    output = tmp_path / "source-catalog.md"
+    output.write_text("stale catalog\n", encoding="utf-8")
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            str(CATALOG_BUILDER_PATH),
+            "--profiles",
+            str(PROFILES_ROOT),
+            "--snapshot",
+            str(SNAPSHOT_PATH),
+            "--output",
+            str(output),
+            "--check",
+        ],
+        cwd=REPO_ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+
+    assert result.returncode == 1
+    assert "out of date" in result.stderr
+    assert output.read_text(encoding="utf-8") == "stale catalog\n"
+
+
+def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
+    catalog = require_text(CATALOG_PATH)
+    for field in (
+        "Publisher type",
+        "Official domains",
+        "Function",
+        "Direct links",
+        "Provenance authority",
+        "Utility",
+        "Current status",
+        "Last checked",
+        "Access limitations",
+        "Same-function fallbacks",
+        "Access observation evidence",
+        "Completed workflow evidence",
+        "Stable field/API evidence",
+        "Site guide",
+    ):
+        assert field in catalog
+    for access_status in (
+        "reachable",
+        "reachable-limited",
+        "login-required",
+        "paywalled",
+        "anti-bot",
+        "temporarily-unreachable",
+        "moved",
+        "broken-link",
+        "unverified",
+    ):
+        assert access_status in catalog
+    for evidence_level in ("High", "Medium", "Low"):
+        assert f"`{evidence_level}`" in catalog
+
+
+def test_catalog_renders_low_evidence_for_uncompleted_audit_workflows() -> None:
+    catalog = require_text(CATALOG_PATH)
+
+    for source_id in ("aliresearch", "undata", "wto-stats"):
+        section = catalog.split(f"## `{source_id}`", maxsplit=1)[1].split("\n## ", maxsplit=1)[0]
+        assert "- Completed workflow evidence: `Low`" in section
+        assert "- Stable field/API evidence: `Low`" in section
+
+
+def test_catalog_ratings_are_best_use_route_priors_not_claim_grades() -> None:
+    catalog = require_text(CATALOG_PATH)
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    normalized_skill = " ".join(skill.split())
+    assert_contains_all(
+        catalog,
+        (
+            "Catalog ratings are route priors scoped to each record's stated best uses.",
+            "Do not copy a catalog route prior into a runtime ledger as a claim grade.",
+        ),
+    )
+    assert "Calculate `conclusion_evidence` at runtime for the actual claim" in (normalized_skill)
+
+
+def test_every_source_record_and_access_conclusion_has_explicit_evidence_level() -> None:
+    catalog = require_text(CATALOG_PATH)
+    source_sections = re.split(r"(?m)^## ", catalog)[1:]
+    assert source_sections
+    for section in source_sections:
+        assert re.search(r"(?m)^- Access observation evidence: `(High|Medium|Low)`$", section)
+
+    combined = "\n".join(
+        (
+            require_text(SKILL_ROOT / "SKILL.md"),
+            require_text(SKILL_ROOT / "references/search-playbook.md"),
+        )
+    )
+    assert_contains_all(
+        combined,
+        (
+            "Every source record must include an explicit evidence level: High, Medium, or Low.",
+            "Every access conclusion and source ledger row must include an "
+            "explicit evidence level: High, Medium, or Low.",
+            "access_conclusion",
+            "evidence_level",
+        ),
+    )
+
+
+def test_catalog_separates_provenance_access_workflow_and_field_evidence() -> None:
+    catalog = require_text(CATALOG_PATH)
+    di_section = re.search(
+        r"(?ms)^## `hkex-di`.*?(?=^## |\Z)",
+        catalog,
+    )
+
+    assert di_section is not None
+    assert "- Provenance authority: `High`" in di_section.group()
+    assert "- Access observation evidence: `High`" in di_section.group()
+    assert "- Completed workflow evidence: `Low`" in di_section.group()
+    assert "- Stable field/API evidence: `Low`" in di_section.group()
+
+
+def test_verified_mirror_exception_is_narrow_and_downgraded() -> None:
+    skill = " ".join(require_text(SKILL_ROOT / "SKILL.md").split())
+    assert_contains_all(
+        skill,
+        (
+            "Aggregators remain discovery-only by default.",
+            "verified-mirror exception",
+            "official exchange or regulator metadata identifies the exact document",
+            "official document body is technically unreadable",
+            "identity fields match",
+            "downgraded transcription claim",
+            "non-original",
+            "access caveat",
+            "no authority elevation",
+            "must not support claims absent from the identified official document",
+        ),
+    )
+
+
+def test_existing_core_sources_have_ratings_and_durable_probe_facts() -> None:
+    catalog = require_text(CATALOG_PATH)
+    for number in range(1, 15):
+        assert f"C{number:02d}" in catalog
+    assert "Not recorded in audit" in catalog
+
+
+def test_source_catalog_is_seed_registry_not_closed_allowlist() -> None:
+    combined = "\n".join(
+        (
+            require_text(SKILL_ROOT / "SKILL.md"),
+            require_text(SKILL_ROOT / "references/source-catalog.md"),
+            require_text(SKILL_ROOT / "references/search-playbook.md"),
+        )
+    )
+    assert_contains_all(
+        combined,
+        (
+            "The source catalog is a seed registry, not a closed allowlist.",
+            "Do not reject a source solely because it is absent from the catalog.",
+            "Use uncataloged sources when the question requires them and they pass validation.",
+            "Record uncataloged sources with the same fields, access status, "
+            "provenance, fallback peers, and evidence level.",
+        ),
+    )
+
+
+def test_source_discovery_enforces_company_site_and_fallback_rules() -> None:
+    combined = "\n".join(
+        (
+            require_text(SKILL_ROOT / "SKILL.md"),
+            require_text(SKILL_ROOT / "references/search-playbook.md"),
+            require_text(SKILL_ROOT / "references/source-catalog.md"),
+        )
+    )
+    for phrase in (
+        "Treat company websites as first-party subject evidence",
+        "Do not treat a company's claims about market leadership, customer outcomes, "
+        "product superiority, or competitive advantage as independent proof",
+        "customer, supplier, competitor, and association websites",
+        "Use aggregators, media, social platforms, and report indexes for discovery only",
+        "conclusions must cite the original publisher whenever the original can be identified",
+        "One failed request never proves permanent closure.",
+        "continue through other applicable sources in the same category and then adjacent categories",
+        "Report a source gap only after recording every compliant route attempted, its query, "
+        "access result, and final error.",
+    ):
+        assert phrase in combined
+
+
+def test_search_playbook_covers_required_research_routes() -> None:
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    for route in (
+        "company/filings",
+        "announcements/regulatory correspondence",
+        "valuation/market",
+        "macro/official statistics",
+        "general reports",
+        "consulting",
+        "technology/telecom",
+        "consumer/media",
+        "travel/aviation",
+        "investment/venture capital",
+        "trade/e-commerce",
+        "health/demographics",
+        "HR/labor",
+        "international comparisons",
+    ):
+        assert route in playbook
+
+
+def test_source_catalog_covers_existing_registry_and_downloader_providers() -> None:
+    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
+    scripts_root = REPO_ROOT / "scripts"
+
+    expected_domains = set()
+    expected_domains |= provider_domains_from_dict(
+        scripts_root / "build_event_manifest.py",
+        "SOURCE_DOMAINS",
+    )
+    expected_domains |= provider_domains_from_dict(
+        scripts_root / "build_market_manifest.py",
+        "SOURCE_DOMAINS",
+    )
+    expected_domains |= provider_domains_from_urls(
+        scripts_root / "download_filings.py",
+        "STOCK_LIST_URL",
+        "ANNOUNCEMENT_QUERY_URL",
+        "PDF_BASE_URL",
+        "HKEX_SEARCH_URL",
+        "HKEX_BASE_URL",
+        "HKEX_ACTIVE_STOCK_URL",
+    )
+    expected_domains |= provider_domains_from_urls(
+        scripts_root / "download_research.py",
+        "RESEARCH_LIST_URL",
+        "PDF_URL_TEMPLATE",
+    )
+
+    for provider in sorted(expected_domains):
+        assert provider in catalog
+    assert "cninfo.com.cn" in catalog
+    assert "eastmoney.com" in catalog
+
+
+def test_catalog_does_not_overclaim_directory_or_generic_homepage_functions() -> None:
+    catalog = require_text(CATALOG_PATH)
+
+    assert "## `199it-housing-tools` - 199IT Data Navigation Housing Tools" in catalog
+    assert "- Function: `housing-data-directory`" in catalog
+    assert "## `hkex-market-data` - HKEX market data" in catalog
+    assert "## `szse` - Shenzhen Stock Exchange" in catalog
+    assert "## `pbc` - People's Bank of China" in catalog
+    assert "## `hkma` - Hong Kong Monetary Authority" in catalog
+    assert "## `caict` - CAICT" in catalog
+    assert "## `360-security-reports` - 360 security reports" in catalog
+    assert "## `cadas` - CADAS" in catalog
+    assert "## `gsma-mobile-economy` - GSMA Mobile Economy" in catalog
+    assert "- Function: `security-threat-reports`" in catalog
+    assert "- Function: `aviation-analysis`" in catalog
+    assert "- Function: `telecom-industry-reports`" in catalog
+
+    assert "199it-housing-tools-official-statistics" not in catalog
+    assert "hkex-company-disclosures" not in catalog
+    assert "## `hkex-market-data` - HKEX market data" in catalog
+    assert "- Function: `szse-company-disclosures`" not in catalog
+    assert "pbc-market-data" not in catalog
+    assert "hkma-market-data" not in catalog
+    assert "sec-edgar-regulatory-materials" not in catalog
+    assert "caict-research-reports" not in catalog
+    assert "- Same-function fallbacks: None" in catalog
+
+
+def test_existing_financial_skills_reference_source_discovery() -> None:
+    product = require_text(SKILLS_ROOT / "product-analysis" / "SKILL.md")
+    value = require_text(SKILLS_ROOT / "value-profile" / "SKILL.md")
+    filing = require_text(SKILLS_ROOT / "read-filing" / "SKILL.md")
+
+    assert_contains_all(
+        product,
+        (
+            "`source-discovery` must be invoked when product-analysis needs "
+            "industry structure, product benchmarks, consumer/customer data, "
+            "specialist vertical research, or competitor evidence beyond issuer filings.",
+            "`source-discovery` may supply external context and source ledgers only; "
+            "`product-analysis` remains responsible for product-system judgments, "
+            "`moat_handoff`, and final Mode B schema compliance.",
+            "`source-discovery` cannot replace `read-filing` annual, event, or "
+            "counterpart manifests and cannot be used to bypass parent-bound "
+            "manifest hashes.",
+        ),
+    )
+    assert_contains_all(
+        value,
+        (
+            "`source-discovery` must be invoked for macro, industry, valuation "
+            "context, announcement/regulatory-letter discovery outside existing "
+            "manifests, specialist vertical research, and current external evidence gaps.",
+            "`source-discovery` may supply source candidates, access/provenance "
+            "validation, fallback exhaustion logs, and source ledger handoffs only; "
+            "`value-profile` remains the orchestrator and only writer of the profile.",
+            "Annual, event, counterpart, and market manifests remain authoritative "
+            "for bound financial, regulatory, filing, and market data; "
+            "`source-discovery` cannot override, replace, or backfill those manifests.",
+        ),
+    )
+    assert_contains_all(
+        filing,
+        (
+            "`source-discovery` must be invoked only for peer/industry context "
+            "and source search that is outside the official exchange filing/event "
+            "evidence pipeline.",
+            "`read-filing` remains the authority for exchange filing selection, "
+            "official event source discovery, manifest construction, source preflight, "
+            "and Mode B evidence binding.",
+            "`source-discovery` cannot choose annual reports, replace official "
+            "event sources, weaken live revalidation, or write profile sections.",
+        ),
+    )

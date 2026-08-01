@@ -1,0 +1,62 @@
+id: hkex-di
+name: HKEX Disclosure of Interests
+aliases:
+- HKEX DI
+- statutory substantial shareholding notices
+publisher_type: official-exchange
+official_domains:
+- di.hkex.com.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Filed statutory Disclosure of Interests notices for substantial shareholders and directors; not an
+    ownership estimate or CCASS participant-holdings source.
+functions:
+- id: statutory-ownership
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://di.hkex.com.hk/di/NSForm1.aspx?lang=en
+    kind: current DI search entry
+    stability: current direct route; service was unavailable when checked
+  search:
+    method: rendered DI search after service recovery
+    fields:
+    - listed corporation
+    - stock code
+    - filing or event date
+    example_query: search 09992 or POP MART and open the filed notice after the service resumes
+    result_identity: corporation, filer, form or notice number, event and filing dates, interest, shares, percentage,
+      and source URL
+  citation:
+    use: direct only for an opened filed DI notice. Issuer reports, monthly returns, SFC dealing disclosures,
+      and CCASS data are context with different functions.
+    required_fields:
+    - form or notice number
+    - filer
+    - event date
+    - filing date
+    - source URL
+  fallbacks: []
+access:
+  status: temporarily-unreachable
+  last_checked: '2026-08-01T17:11:00+08:00'
+  final_url: https://di.hkex.com.hk/di/NSForm1.aspx?lang=en
+  limitation: All tested DI endpoints reported that the page was temporarily unavailable. The access observation
+    does not establish field names or show that DI records ceased to exist; no function-equivalent fallback exists.
+  observed_error:
+    state: error
+    category: http
+    message: First-party temporary-unavailable message on all tested DI search pages.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Tested DI endpoints reached the first-party temporary-error page.
+    response_status: Temporarily unavailable message returned for all tested routes.
+    recognizable_content: HKEX DI first-party error wording.
+    access_indications: No completed anonymous search workflow or field contract.
+    technical_restriction: Recheck in a permitted browser session; do not invent query parameters.

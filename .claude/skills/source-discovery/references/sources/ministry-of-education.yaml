@@ -1,0 +1,63 @@
+id: ministry-of-education
+name: Ministry of Education statistics family
+aliases:
+- U51
+- Ministry of Education supplied URL
+- supplied U51
+publisher_type: official-statistics
+official_domains:
+- moe.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Official education statistics and annual national education stats. High authority for MOE-published
+    education statistics
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.moe.gov.cn/jyb_sjzl/moe_560/2024/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:moe.gov.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - national-bureau-statistics-official-statistics
+  - shanghai-statistics-official-statistics
+access:
+  status: moved
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.moe.gov.cn/jyb_sjzl/moe_560/2024/
+  limitation: 'moved/redirected; public; supplied historical leaf returned 404. Supplied URL stale; year
+    folders change; use stats family not hard-coded leaf Audited fallback peers: MOE stats family, NBS,
+    provincial education bureaus.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Supplied historical URL returned `404`; current family reached
+    response_status: Supplied `404`; replacement `200`
+    recognizable_content: Title `2024年教育统计数据`
+    access_indications: None recorded
+    technical_restriction: Stale historical leaf path

@@ -1,0 +1,59 @@
+id: hang-seng-indexes
+name: Hang Seng Indexes
+aliases:
+- HSI
+- Hang Seng Indexes Company
+publisher_type: commercial-data-provider
+official_domains:
+- hsi.com.hk
+geographies:
+- HK
+industries:
+- financial-services
+authority:
+  level: High
+  scope: Hang Seng Indexes' own methodology, constituent lists, factsheets, index outputs, and index data.
+functions:
+- id: index-methodology-and-data
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.hsi.com.hk/eng/indexes/all-indexes/hang-seng-index
+    kind: Hang Seng Index entry
+    stability: SPA route; verify rendered data at use time
+  search:
+    method: rendered index page constituent, methodology, or historical-data controls
+    fields:
+    - index code
+    - observation date
+    - rebalance date
+    example_query: select HSI and inspect the constituent table for 09992 at the required as-of date
+    result_identity: index code, as-of time, level or return type, constituent, weight, methodology version, and URL
+  citation:
+    use: direct for HSI methodology, constituent, and index data with date and version; not for an issuer's
+      operating facts.
+    required_fields:
+    - index code
+    - as-of date
+    - methodology version
+    - selected field
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.hsi.com.hk/eng/indexes/all-indexes/hang-seng-index
+  limitation: First-party SPA shell was public, but data controls were not semantically rendered in the static
+    probe. Some real-time or licensed data may have commercial terms.
+  observed_error:
+    state: none
+    category: none
+    message: Index landing page loaded; no completed constituent or data extraction was recorded.
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: First-party index landing page returned.
+    recognizable_content: Hang Seng Indexes branding and index route.
+    access_indications: Public SPA shell; licensed data conditions not exercised.
+    technical_restriction: Use rendered controls and record the resulting data version.

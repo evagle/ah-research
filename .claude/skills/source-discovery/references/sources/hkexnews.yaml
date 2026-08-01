@@ -1,0 +1,64 @@
+id: hkexnews
+name: HKEXnews
+aliases:
+- C02
+- HKEXnews listed-company search
+- hkex
+- build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL,
+  HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk
+publisher_type: official-exchange
+official_domains:
+- hkexnews.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports,
+    trading halts. High authority for HKEX-published/listed-company documents
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en
+    kind: listed-company title search
+    stability: JSF route; submit rendered form
+  search:
+    method: rendered HKEXnews title search
+    fields:
+    - stockCode
+    - startDate
+    - endDate
+    - selectedDocType
+    example_query: stockCode=09992, startDate=2025-01-01, endDate=2026-08-01, Financial Statements or ESG
+    result_identity: security code, issuer, title, publication time, category, document type, PDF URL, and correction relation
+  citation:
+    use: cite the opened original PDF; result rows are discovery metadata. An exact issuer IR repost can only
+      be a matching convenience copy.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en
+  limitation: Public JSF search requires session and view-state handling. Preserve the final PDF identity;
+    a current direct URL is not a permanent-URL guarantee.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded for the title-search entry.
+    response_status: Public title search and listed-company index loaded.
+    recognizable_content: Stock, date, category, document-type, and security-type form fields.
+    access_indications: No login or paywall observed.
+    technical_restriction: Submit the rendered JSF form and open the final PDF rather than crafting a permanent result URL.

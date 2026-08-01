@@ -1,0 +1,62 @@
+id: un-sdg-data
+name: UN SDG Data Portal
+aliases:
+- U58
+- UN SDG Indicators
+- supplied U58
+publisher_type: official-statistics
+official_domains:
+- unstats.un.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: SDG trend checks and internationally normalized indicator lookups. High authority for UNSD SDG
+    indicator series
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://unstats.un.org/sdgs/dataportal
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:unstats.un.org official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - undata-official-statistics
+  - world-bank-data-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://unstats.un.org/sdgs/dataportal
+  limitation: 'public. Narrower than national stats for local questions; not document source Audited fallback
+    peers: UNdata, World Bank, national statistical offices.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: UNSD SDG data portal
+    access_indications: None recorded
+    technical_restriction: None recorded

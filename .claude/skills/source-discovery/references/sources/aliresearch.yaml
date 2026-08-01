@@ -1,0 +1,61 @@
+id: aliresearch
+name: AliResearch
+aliases:
+- U04
+- 阿里研究院
+- supplied U04
+publisher_type: issuer-company
+official_domains:
+- aliresearch.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Alibaba ecosystem, e-commerce, platform economy, digital trade, SME trend narratives. High authority
+    for Alibaba-published views; Medium for neutral market claims
+functions:
+- id: research-reports
+  authority: High
+  utility: Medium
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: http://www.aliresearch.com/cn/index
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:aliresearch.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable first-party only; independently verify evaluative claims
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+  - iimedia-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://www.aliresearch.com/cn/index
+  limitation: 'public; public shell reachable. Institutional bias; not a regulator or raw primary-data
+    source Audited fallback peers: U07, U09, U02.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect observed
+    response_status: '`200 OK`'
+    recognizable_content: Branded AliResearch landing page shell
+    access_indications: Not recorded in audit
+    technical_restriction: JS-driven rendered content; raw HTML exposes little

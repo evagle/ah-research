@@ -1,0 +1,63 @@
+id: shanghai-statistics
+name: Shanghai Municipal Bureau of Statistics
+aliases:
+- U48
+- Shanghai Municipal Bureau of Statistics
+- supplied U48
+publisher_type: official-statistics
+official_domains:
+- tjj.sh.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Province/city breakdowns, local yearbooks, communiques, policy/statistical bulletins. High authority
+    when using the actual local official publisher
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://tjj.sh.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:tjj.sh.gov.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - national-bureau-statistics-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://tjj.sh.gov.cn/
+  limitation: 'public; source family not single URL. Fragmented IA, inconsistent formats, broken links,
+    PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks,
+    local open-data portals.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: Source family; representative samples checked
+    response_status: Beijing, Shanghai, Guangdong statistics/government samples `200`; Guangdong samples
+      slow
+    recognizable_content: Official local statistics/government portals
+    access_indications: None recorded
+    technical_restriction: Fragmented family; inconsistent formats; slow responses in samples

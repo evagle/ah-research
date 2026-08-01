@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research.local/schemas/product-analysis-mode-b-response-v1.json",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "terminal_status",
+    "failure_reason",
+    "target_sections",
+    "draft_sections",
+    "product_facts",
+    "process_facts",
+    "competition_facts",
+    "moat_handoff",
+    "findings",
+    "citations",
+    "warnings",
+    "unresolved_items",
+    "filing_manifest_sha256",
+    "event_manifest_sha256",
+    "counterpart_filing_manifest_sha256s"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "terminal_status": {
+      "enum": ["success", "pending", "failure", "dependency_failure"]
+    },
+    "failure_reason": {"type": ["string", "null"]},
+    "target_sections": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1,
+      "uniqueItems": true,
+      "items": {"enum": ["part1/§1.1", "part1/§1.3"]}
+    },
+    "draft_sections": {
+      "type": "object",
+      "propertyNames": {"enum": ["part1/§1.1", "part1/§1.3"]},
+      "additionalProperties": {"type": "string", "minLength": 1}
+    },
+    "product_facts": {"type": "array"},
+    "process_facts": {"type": "array"},
+    "competition_facts": {"type": "array"},
+    "moat_handoff": {"type": "array"},
+    "findings": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/finding"}
+    },
+    "citations": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/citation"}
+    },
+    "warnings": {"type": "array", "items": {"type": "string"}},
+    "unresolved_items": {"type": "array", "items": {"type": "string"}},
+    "filing_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "event_manifest_sha256": {"$ref": "#/$defs/sha256"},
+    "counterpart_filing_manifest_sha256s": {
+      "type": "object",
+      "propertyNames": {"enum": ["SH", "SZ", "HK"]},
+      "additionalProperties": {"$ref": "#/$defs/sha256"}
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "finding": {
+      "type": "object",
+      "required": [
+        "canonical_finding_id",
+        "owner_skill",
+        "judgment_domain",
+        "finding_type",
+        "subject_type",
+        "subject_id",
+        "occurrence_date",
+        "canonical_evidence_ids",
+        "severity",
+        "evidence_grade",
+        "judgment",
+        "citation_ids"
+      ],
+      "properties": {
+        "canonical_finding_id": {"$ref": "#/$defs/sha256"},
+        "owner_skill": {"const": "product-analysis"},
+        "judgment_domain": {"const": "product_competitiveness"},
+        "finding_type": {"type": "string", "minLength": 1},
+        "subject_type": {
+          "enum": ["product_system", "product", "service", "business_segment"]
+        },
+        "subject_id": {"type": "string", "minLength": 1},
+        "occurrence_date": {"type": "string", "format": "date"},
+        "canonical_evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sha256"}
+        },
+        "severity": {
+          "enum": ["none", "warning", "high_risk", "pending"]
+        },
+        "evidence_grade": {"enum": ["high", "medium", "low", "manual_review"]},
+        "judgment": {"type": "string", "minLength": 1},
+        "citation_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/sha256"}
+        }
+      },
+      "additionalProperties": false
+    },
+    "commonCitation": {
+      "type": "object",
+      "required": [
+        "section_id",
+        "jurisdiction",
+        "source_type",
+        "artifact_path",
+        "artifact_sha256",
+        "page",
+        "quote"
+      ],
+      "properties": {
+        "section_id": {"enum": ["part1/§1.1", "part1/§1.3"]},
+        "jurisdiction": {"enum": ["SH", "SZ", "HK"]},
+        "source_type": {"enum": ["filing_text", "filing_pdf", "event_document"]},
+        "artifact_path": {"type": "string", "pattern": "^/"},
+        "artifact_sha256": {"$ref": "#/$defs/sha256"},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "quote": {"type": "string", "minLength": 1},
+        "source_pdf_sha256": {"$ref": "#/$defs/sha256"},
+        "event_manifest_sha256": {"$ref": "#/$defs/sha256"},
+        "document_url": {"type": "string", "format": "uri"},
+        "content_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "citation": {
+      "oneOf": [
+        {
+          "allOf": [
+            {"$ref": "#/$defs/commonCitation"},
+            {
+              "required": ["source_pdf_sha256"],
+              "properties": {
+                "source_type": {"enum": ["filing_text", "filing_pdf"]},
+                "page": {"type": "integer", "minimum": 1}
+              }
+            }
+          ]
+        },
+        {
+          "allOf": [
+            {"$ref": "#/$defs/commonCitation"},
+            {
+              "required": [
+                "event_manifest_sha256",
+                "document_url",
+                "content_sha256"
+              ],
+              "properties": {"source_type": {"const": "event_document"}}
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"terminal_status": {"const": "success"}}},
+      "then": {
+        "properties": {
+          "failure_reason": {"const": null},
+          "draft_sections": {"minProperties": 1, "maxProperties": 1},
+          "citations": {"minItems": 1},
+          "unresolved_items": {"maxItems": 0}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"terminal_status": {"const": "pending"}}},
+      "then": {
+        "properties": {
+          "failure_reason": {"type": "string", "minLength": 1},
+          "draft_sections": {"minProperties": 1, "maxProperties": 1},
+          "citations": {"minItems": 1},
+          "unresolved_items": {"minItems": 1}
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "terminal_status": {"enum": ["failure", "dependency_failure"]}
+        }
+      },
+      "then": {
+        "properties": {
+          "failure_reason": {"type": "string", "minLength": 1},
+          "draft_sections": {"maxProperties": 0}
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+id: datayes-robo-research
+name: Datayes Robo Research
+aliases:
+- U01
+- 萝卜投研
+- supplied U01
+publisher_type: aggregator
+official_domains:
+- robo.datayes.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Stock screening and cross-searching broker reports, filings, financials, and data. Medium authority;
+    commercial secondary platform
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://robo.datayes.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:robo.datayes.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only; cite the identified original publisher
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - hibor-research-research-reports
+  - eastmoney-research-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://robo.datayes.com/
+  limitation: 'public-limited; public SPA shell; login route exposed. Proprietary methods; deeper workflows
+    likely account-bound; use as discovery, not primary filing evidence Audited fallback peers: U03, U08,
+    U10, U11.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK`'
+    recognizable_content: Public SPA shell; title/keywords/config fields
+    access_indications: '`login_url=https://app.datayes.com/sign` exposed'
+    technical_restriction: None recorded

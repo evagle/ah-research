@@ -1,0 +1,59 @@
+id: hong-kong-e-gazette
+name: HKSAR e-Gazette
+aliases:
+- Hong Kong e-Gazette
+- Gazette notices
+publisher_type: official-government
+official_domains:
+- egazette.gld.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Official Hong Kong Gazette issues, government notices, legal notices, and legal supplements.
+functions:
+- id: official-gazette
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://egazette.gld.gov.hk/en/search-gazette
+    kind: Gazette search
+    stability: current route; terms and Turnstile session required
+  search:
+    method: Gazette search after accepting terms and completing the permitted session
+    fields:
+    - category
+    - keyword
+    - date
+    example_query: search POP%20MART under Legal Notices and retain category and issue date
+    result_identity: issue, volume, number, date, notice number, title, category, page, and document URL
+  citation:
+    use: direct for an opened Gazette notice with issue and notice numbers. Follow the Gazette's printed-version
+      verification guidance for consequential use.
+    required_fields:
+    - issue number
+    - notice number
+    - publication date
+    - page
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://egazette.gld.gov.hk/en/search-gazette
+  limitation: Home and coverage routes were public, while search required terms acceptance and Cloudflare
+    Turnstile. Online coverage dates vary by Gazette part.
+  observed_error:
+    state: error
+    category: anti-bot
+    message: Search redirected to terms acceptance and Turnstile.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Search routed to the terms and session gate.
+    response_status: Home page was public; search required Turnstile.
+    recognizable_content: Gazette notice categories and coverage information.
+    access_indications: Anonymous permitted session required for search.
+    technical_restriction: Do not fabricate a session request or bypass Turnstile.

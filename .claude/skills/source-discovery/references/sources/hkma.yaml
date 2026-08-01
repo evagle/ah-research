@@ -1,0 +1,63 @@
+id: hkma
+name: Hong Kong Monetary Authority
+aliases:
+- C09
+- HKMA
+- build_event_manifest hkma; build_market_manifest hkma; domain hkma.gov.hk
+publisher_type: official-regulator
+official_domains:
+- hkma.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Banking circulars, regulatory guidance, monetary/FX statements. High authority for HKMA-published
+    materials
+functions:
+- id: banking-and-monetary-materials
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/
+    kind: data and statistics entry
+    stability: observed current route
+  - url: https://vpr.hkma.gov.hk/statics/en/regulatory-resources/registers/register-of-ais-and-lros/
+    kind: authorized institution register
+    stability: observed current route
+  search:
+    method: HKMA collection search or authorized-institution register
+    fields:
+    - query
+    - collection
+    - date
+    example_query: select search-data-and-statistics and search the required series or legal bank name
+    result_identity: title, issuing unit, date, series or register identifier, period, unit, and URL
+  citation:
+    use: direct for HKMA releases, register entries, guidance, and series within the monetary or banking mandate.
+    required_fields:
+    - title or register name
+    - date
+    - issuing unit
+    - series or record identifier
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.hkma.gov.hk/eng/data-publications-and-research/data-and-statistics/
+  limitation: Public under HTTP/1.1 in the probe. HKMA is not a general listed-company enforcement archive;
+    scope bank searches by legal bank name rather than issuer ticker.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Root reached the English HKMA site; function pages were directly inspected.
+    response_status: Public function pages loaded over HTTP/1.1.
+    recognizable_content: Press release, regulatory guide, data, and authorized-institution register routes.
+    access_indications: No login or paywall observed.
+    technical_restriction: HTTP/2 was flaky in the CLI probe; this is not a function or authority limitation.

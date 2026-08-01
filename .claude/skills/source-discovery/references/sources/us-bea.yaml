@@ -1,0 +1,60 @@
+id: us-bea
+name: U.S. Bureau of Economic Analysis API
+aliases:
+- BEA API
+- Bureau of Economic Analysis
+publisher_type: official-statistics
+official_domains:
+- apps.bea.gov
+geographies:
+- US
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: BEA national, international, regional, and industry economic accounts and release metadata.
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://apps.bea.gov/api/data/?UserID=samplekey&method=GETDATASETLIST&ResultFormat=JSON
+    kind: API key-validation entry
+    stability: requires a valid registered key for data
+  search:
+    method: BEA API registration then documented dataset selection
+    fields:
+    - UserID
+    - method
+    - dataset
+    - table or line
+    example_query: method=GETDATASETLIST with a registered UserID
+    result_identity: dataset, table or series, vintage, period, geography, adjustment, value, unit, and URL
+  citation:
+    use: direct for a completed BEA table or API response with its release vintage and adjustment fields.
+    required_fields:
+    - dataset
+    - table or series
+    - period
+    - geography
+    - release vintage
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:22:00+08:00'
+  final_url: https://apps.bea.gov/api/data/?UserID=samplekey&method=GETDATASETLIST&ResultFormat=JSON
+  limitation: API endpoint was live but the sampled UserID was invalid. No current bulk-download route was
+    verified; use documented release tables when a key is unavailable.
+  observed_error:
+    state: none
+    category: none
+    message: API returned an explicit Invalid API UserId JSON response.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Direct API route.
+    response_status: HTTP 200 with Invalid API UserId response.
+    recognizable_content: BEA API validation error and dataset-list method.
+    access_indications: Valid API credentials required for tested method.
+    technical_restriction: Key validation is not a data response.

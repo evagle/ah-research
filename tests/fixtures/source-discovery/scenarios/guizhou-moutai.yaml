@@ -1,0 +1,124 @@
+id: guizhou-moutai
+issuer: Guizhou Moutai
+security:
+  code: "600519"
+  exchange: SSE
+scope:
+  geography: CN
+  claim_scope: issuer disclosures, SSE supervisory correspondence, and China consumer/industry context
+as_of: "2026-08-02T08:00:00+00:00"
+required_functions:
+  - name: SSE issuer disclosures and announcement search
+    function_id: company-disclosures
+    geographies: [CN]
+    candidate_source_ids:
+      - sse
+      - hkexnews
+      - eastmoney-announcement-index
+      - eastmoney-quotes-f10
+      - xueqiu
+    expected_route_order: [sse]
+    expected_excluded_source_ids:
+      - hkexnews
+      - eastmoney-announcement-index
+      - eastmoney-quotes-f10
+      - xueqiu
+    forbidden_final_citation_source_ids:
+      - eastmoney-announcement-index
+      - eastmoney-quotes-f10
+      - xueqiu
+    expected_first_choice:
+      source_id: sse
+      publisher_type: official-exchange
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened SSE-hosted PDF
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [security code or abbreviation, title, date range]
+      result_identity_contains: [security code, issuer, document URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened SSE-hosted PDF
+    temporary_unavailability:
+      source_id: sse
+      last_checked: "2026-08-02T07:00:00+00:00"
+      candidate_source_ids:
+        - sse
+        - cninfo
+        - hkexnews
+        - eastmoney-announcement-index
+        - eastmoney-quotes-f10
+        - xueqiu
+      expected_route_order: [cninfo, sse]
+      expected_excluded_source_ids:
+        - hkexnews
+        - eastmoney-announcement-index
+        - eastmoney-quotes-f10
+        - xueqiu
+      forbidden_final_citation_source_ids:
+        - eastmoney-announcement-index
+        - eastmoney-quotes-f10
+        - xueqiu
+      expected_first_choice:
+        source_id: cninfo
+        publisher_type: official-market-infrastructure
+        skip_reason: null
+      citation_readiness:
+        citation_use_contains: exact static.cninfo.com.cn PDF
+        required_identity_fields: [publisher, title, date, url]
+        search_fields: [column, searchkey, tabName]
+        result_identity_contains: [announcementId, issuer, hosted PDF URL]
+        search_result_is_final_citation: false
+        opening_final_document_required: true
+        final_document_instruction_contains: exact static.cninfo.com.cn PDF
+      forbidden_substitutes:
+        - eastmoney-announcement-index
+        - eastmoney-quotes-f10
+        - xueqiu
+  - name: SSE regulatory inquiry correspondence
+    function_id: regulatory-materials
+    geographies: [CN]
+    candidate_source_ids:
+      - sse
+      - sfc
+      - cninfo
+      - eastmoney-announcement-index
+      - xueqiu
+    expected_route_order: [sse]
+    expected_excluded_source_ids: [sfc, cninfo, eastmoney-announcement-index, xueqiu]
+    forbidden_final_citation_source_ids: [eastmoney-announcement-index, xueqiu]
+    expected_first_choice:
+      source_id: sse
+      publisher_type: official-exchange
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: SSE inquiry letter
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [security code or abbreviation, inquiry type, date range]
+      result_identity_contains: [security code, letter date, letter URL]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened SSE inquiry letter
+  - name: Independent China consumer and industry context
+    function_id: official-statistics
+    geographies: [CN]
+    candidate_source_ids:
+      - national-bureau-statistics
+      - hong-kong-statistics
+      - iimedia
+      - eastmoney-research
+    expected_route_order: [national-bureau-statistics]
+    expected_excluded_source_ids: [hong-kong-statistics, iimedia, eastmoney-research]
+    forbidden_final_citation_source_ids: [iimedia, eastmoney-research]
+    expected_first_choice:
+      source_id: national-bureau-statistics
+      publisher_type: official-statistics
+      skip_reason: null
+    citation_readiness:
+      citation_use_contains: opened official release
+      required_identity_fields: [publisher, title, date, url]
+      search_fields: [official_domain, query]
+      result_identity_contains: [indicator, period, geography, units]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened official release

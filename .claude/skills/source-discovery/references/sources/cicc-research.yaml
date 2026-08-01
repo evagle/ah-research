@@ -1,0 +1,63 @@
+id: cicc-research
+name: CICC Research
+aliases:
+- U41
+- 中金研究
+- supplied U41
+publisher_type: original-research
+official_domains:
+- research.cicc.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Sector theses, China macro framing, broker analyst views, research leads. High for sell-side
+    China analysis within domain; not neutral official data
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://research.cicc.com/index
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:research.cicc.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and conflicts noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - eastmoney-research-research-reports
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://research.cicc.com/index
+  limitation: 'anti-bot/technical-limited; 403 security check from scripted access; some research likely
+    account/licensed. Access restrictions, conflicts of interest, house-view bias Audited fallback peers:
+    U36, broker portals, Wind, Choice, official statistics.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; 403 security check from scripted access; some research likely
+      account/licensed. Access restrictions, conflicts of interest, house-view bias Audited fallback peers:
+      U36, broker portals, Wind, Choice, official statistics.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`403`'
+    recognizable_content: Security check page; origin responds
+    access_indications: Some research likely client/account/licensed or summary-only
+    technical_restriction: Security gate blocks scripted access

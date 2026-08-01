@@ -1,0 +1,68 @@
+id: china-venture
+name: ChinaVenture
+aliases:
+- U16
+- 投中网
+- supplied U16
+publisher_type: media
+official_domains:
+- chinaventure.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: VC/PE trend tracking, financing environment, industry commentary, research reports. Medium-high
+    commercial/media authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.chinaventure.com.cn/index.html
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.chinaventure.com.cn/report/list.html
+    kind: research list
+    stability: observed current route
+  - url: https://www.chinaventure.com.cn/report/1005-20231205-1747.html
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:chinaventure.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research for 投中研究院-authored reports; use financing records as discovery and
+      trace material transactions to company, registry, exchange, or regulatory originals
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iimedia-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.chinaventure.com.cn/report/1005-20231205-1747.html
+  limitation: Public research list, report detail, and a sampled 投中研究院 PDF loaded anonymously. Login
+    controls are optional for the tested workflow. Some CVSource-linked reports use a separate host that
+    was unreachable, and financing records remain secondary to primary announcements.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` for list, detail, and sampled PDF'
+    recognizable_content: Report title, publisher, summary, methodology context, detail page, and PDF
+    access_indications: Optional login/register controls did not block the tested report workflow
+    technical_restriction: Separate `cvsource.com.cn` report links were not reachable in the test environment

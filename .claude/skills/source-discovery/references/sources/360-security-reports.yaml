@@ -1,0 +1,64 @@
+id: 360-security-reports
+name: 360 security reports
+aliases:
+- U06
+- 360互联网安全中心
+- supplied U06
+publisher_type: issuer-company
+official_domains:
+- 360.cn
+- pop.shouji.360.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: 360-authored security reports and observed telemetry. It is a vendor source for its own measurement,
+    not independent confirmation of 360 product or threat claims.
+functions:
+- id: security-threat-reports
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.360.cn/news.html
+    kind: current security news and report route
+    stability: observed current route
+  - url: https://www.360.cn/n/12394.html
+    kind: original report page example
+    stability: observed current route
+  search:
+    method: 360 security-news navigation or rendered 360 search
+    fields:
+    - report title
+    - topic
+    example_query: open 2023 H1 China Mobile Security Report from 360 security news, then its official PDF
+    result_identity: title, publication date, data period, version, methodology, sample scope, page, and PDF URL
+  citation:
+    use: direct for 360's stated methodology and observations; independently corroborate security facts with
+      the affected vendor, CERT, regulator, or vulnerability record where appropriate.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:50:00+08:00'
+  final_url: https://www.360.cn/news.html
+  limitation: Legacy zt.360.cn/report DNS failed, but current 360 news, report page, and sampled PDF were public.
+    Do not treat vendor telemetry as a universal threat census.
+  observed_error:
+    state: none
+    category: none
+    message: Current 360 news, report page, and sampled PDF loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Legacy zt.360.cn/report did not resolve; current routes were reached directly.
+    response_status: Current news, report page, and PDF were public.
+    recognizable_content: 360 report and vulnerability materials plus direct mobile-security PDF.
+    access_indications: 360SRC notices were public; report submission is account or workflow bound.
+    technical_restriction: Threat-intelligence product endpoints were not established as public data APIs.
