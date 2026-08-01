@@ -211,6 +211,20 @@ def test_classify_waf_or_challenge_page_as_anti_bot() -> None:
     assert result.status == "anti-bot"
 
 
+def test_classify_36kr_chinese_security_check_as_anti_bot() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://36kr.com/",
+            body_excerpt=load_probe_fixture("36kr-security-check.html"),
+        ),
+        expected_fingerprints=["36kr.com", "36Kr"],
+    )
+
+    assert result.status == "anti-bot"
+
+
 @pytest.mark.parametrize("error_kind", ["timeout", "dns", "connection-reset"])
 def test_classify_transient_probe_errors_as_temporarily_unreachable(error_kind: str) -> None:
     module = load_probe_module()

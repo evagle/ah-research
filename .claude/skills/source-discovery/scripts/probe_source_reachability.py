@@ -50,6 +50,7 @@ ANTI_BOT_MARKERS = (
     "security check",
     "verify you are human",
     "waf",
+    "正在进行安全检测",
 )
 ERROR_PAGE_MARKERS = (
     "404",

@@ -29,23 +29,33 @@ PROBE_PATH = (
     / "probe_source_reachability.py"
 )
 PROFILES_ROOT = REPO_ROOT / ".claude" / "skills" / "source-discovery" / "references" / "sources"
-LIVE_CASES = (
-    pytest.param("sse", id="sse"),
-    pytest.param("cninfo", id="cninfo"),
-    pytest.param("hkexnews", id="hkexnews"),
-    pytest.param("national-bureau-statistics", id="national-bureau-statistics"),
-    pytest.param("dydata", id="dydata-paywall"),
-    pytest.param("36kr", id="36kr-anti-bot"),
+TRANSIENT_OR_UNVERIFIED_STATUSES = frozenset({"temporarily-unreachable", "unverified"})
+PUBLIC_DYNAMIC_STATUSES = frozenset(
+    {
+        "reachable",
+        "moved",
+        "login-required",
+        "paywalled",
+        "anti-bot",
+        *TRANSIENT_OR_UNVERIFIED_STATUSES,
+    }
 )
-NON_TERMINAL_DYNAMIC_STATUSES = {
-    "reachable",
-    "moved",
-    "login-required",
-    "paywalled",
-    "anti-bot",
-    "temporarily-unreachable",
-    "unverified",
-}
+LOGIN_OR_PAYWALL_STATUSES = frozenset(
+    {"login-required", "paywalled", *TRANSIENT_OR_UNVERIFIED_STATUSES}
+)
+ANTI_BOT_STATUSES = frozenset({"anti-bot", *TRANSIENT_OR_UNVERIFIED_STATUSES})
+LIVE_CASES = (
+    pytest.param("sse", PUBLIC_DYNAMIC_STATUSES, id="sse"),
+    pytest.param("cninfo", PUBLIC_DYNAMIC_STATUSES, id="cninfo"),
+    pytest.param("hkexnews", PUBLIC_DYNAMIC_STATUSES, id="hkexnews"),
+    pytest.param(
+        "national-bureau-statistics",
+        PUBLIC_DYNAMIC_STATUSES,
+        id="national-bureau-statistics",
+    ),
+    pytest.param("dydata", LOGIN_OR_PAYWALL_STATUSES, id="dydata-login-paywall"),
+    pytest.param("36kr", ANTI_BOT_STATUSES, id="36kr-anti-bot"),
+)
 CLASSIFICATION_REASONS = {
     "reachable": "recognizable first-party content",
     "moved": "redirected to recognizable publisher route",
@@ -72,9 +82,10 @@ def test_live_opt_in_is_enabled() -> None:
 
 
 @pytest.mark.live
-@pytest.mark.parametrize("source_id", LIVE_CASES)
+@pytest.mark.parametrize(("source_id", "allowed_statuses"), LIVE_CASES)
 def test_live_source_reachability_returns_semantic_classification(
     source_id: str,
+    allowed_statuses: frozenset[str],
 ) -> None:
     probe = load_probe_module()
     profiles = probe._load_profile_records(PROFILES_ROOT)
@@ -91,7 +102,7 @@ def test_live_source_reachability_returns_semantic_classification(
         probe._profile_fingerprints(profile),
     )
 
-    assert result.status in NON_TERMINAL_DYNAMIC_STATUSES
+    assert result.status in allowed_statuses
     assert result.reason
     assert observation.final_url
     assert observation.status_code is not None or observation.error_kind is not None
