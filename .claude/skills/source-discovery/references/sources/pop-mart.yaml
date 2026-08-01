@@ -69,6 +69,17 @@ functions:
     - reporting period
     - HKEXnews document ID
     - issuer asset URL
+  issuer_copy_evidence:
+    hkex_document_id: '2026032500285'
+    hkex_primary_url: https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0325/2026032500285.pdf
+    issuer_copy_url: https://prod-out-res.popmart.com/cms/ANNUAL_RESULTS_ANNOUNCEMENT_FOR_THE_YEAR_ENDED_31_DECEMBER_2025_AND_CHANGE_IN_USE_OF_PROCEEDS_af8bc550f1.pdf
+    sha256: 5e3552e3a46c7ca5998e822692dded7c8d97bccfd28406aad5f68be4887bdd87
+    mirror_identity_requirements:
+    - issuer and security identifier
+    - normalized title
+    - reporting period
+    - HKEXnews document ID or official path
+    - SHA-256 byte-for-byte equality
   fallbacks: []
 access:
   status: reachable-limited

@@ -41,6 +41,11 @@ One failed request never proves permanent closure. Continue through applicable
 same-function fallbacks, then adjacent categories, and record every attempted
 route before reporting a source gap.
 
+Only a function's declared same-function fallbacks are executable route
+transitions. Adjacent alternatives are guidance-only sources with a related
+topic, producer, jurisdiction, or methodology; they cannot substitute for the
+requested claim without an explicit scope change.
+
 ## `100ec` - 100EC
 
 - Aliases/origins: `U39`, `网经社 / 100EC`, `supplied U39`
@@ -194,7 +199,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.afrc.org.hk/>)
   - Search example: `site:afrc.org.hk official notice`
-  - Same-function fallbacks: `sfc-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `sfc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than SFC/HKEX for issuer news Audited fallback peers: SFC, HKEX, company annual reports.
@@ -334,7 +340,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.beijing.gov.cn/>)
   - Search example: `site:beijing.gov.cn official notice`
-  - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -354,7 +361,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://tjj.beijing.gov.cn/>)
   - Search example: `site:tjj.beijing.gov.cn official statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -474,7 +482,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.caict.ac.cn/kxyj/qwfb/qwsj/>)
   - Search example: `site:caict.ac.cn official statistics`
-  - Same-function fallbacks: `cnnic-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `cnnic-official-statistics`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.
@@ -574,7 +583,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.cnnic.cn/>)
   - Search example: `site:cnnic.cn official statistics`
-  - Same-function fallbacks: `caict-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `caict-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than broad market research; institutional framing Audited fallback peers: CAICT, MIIT, iResearch.
@@ -614,7 +624,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.csrc.gov.cn/>)
   - Search example: `site:csrc.gov.cn official notice`
-  - Same-function fallbacks: `nfra-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `nfra-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a company filing repository Audited fallback peers: Exchanges, CNINFO, PBOC, NFRA.
@@ -898,7 +909,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://ec.europa.eu/eurostat/data/database>)
   - Search example: `site:ec.europa.eu official statistics`
-  - Same-function fallbacks: `world-bank-data-official-statistics`, `undata-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `world-bank-data-official-statistics`, `undata-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not company-document or announcement source Audited fallback peers: ECB, national statistical offices, World Bank, UNdata.
@@ -959,7 +971,7 @@ route before reporting a source gap.
   - Direct links: [primary route](<https://www.flurry.com/>)
   - Search example: `open the Flurry Mobile Analytics sunset notice on the current homepage`
   - Same-function fallbacks: `analysys-research-reports`
-- Current status: `moved`
+- Current status: `reachable`
 - Last checked: `2026-08-01T17:34:00+08:00`
 - Access limitations: First-party page states Flurry Mobile Analytics, including SDK and Analytics UI, sunset on 2024-03-15. Old Yahoo developer documentation routes returned 404.
 - Access observation evidence: `High`
@@ -1018,7 +1030,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.gd.gov.cn/>)
   - Search example: `site:gd.gov.cn official notice`
-  - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -1038,7 +1051,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://stats.gd.gov.cn/>)
   - Search example: `site:stats.gd.gov.cn official statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -1098,7 +1112,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.icac.org.hk/>)
   - Search example: `site:icac.org.hk official notice`
-  - Same-function fallbacks: `hk-judiciary-regulatory-materials`, `hk-police-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `hk-judiciary-regulatory-materials`, `hk-police-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not securities filing or court-judgment database Audited fallback peers: Judiciary, Police, SFC, company announcements.
@@ -1118,7 +1133,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.ia.org.hk/>)
   - Search example: `site:ia.org.hk official notice`
-  - Same-function fallbacks: `sfc-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `sfc-regulatory-materials`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.
@@ -1138,7 +1154,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.judiciary.hk/>)
   - Search example: `site:judiciary.hk official notice`
-  - Same-function fallbacks: `hk-police-regulatory-materials`, `hk-icac-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `hk-police-regulatory-materials`, `hk-icac-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Discovery can be slower than news; requires case context Audited fallback peers: e-Legal resources, press releases, HKEX issuer announcements.
@@ -1158,22 +1175,11 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.police.gov.hk/>)
   - Search example: `site:police.gov.hk official notice`
-  - Same-function fallbacks: `hk-icac-regulatory-materials`, `hk-judiciary-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `hk-icac-regulatory-materials`, `hk-judiciary-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Contextual source, not corporate filing source Audited fallback peers: ICAC, Judiciary, SFC, company statements.
-- Access observation evidence: `High`
-- Site guide: None
-
-## `hkex` - Hong Kong Exchanges and Clearing
-
-- Aliases/origins: `C02`, `HKEX`, `build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk`
-- Publisher type: `official-exchange`
-- Official domains: `hkex.com.hk`
-- Provenance authority: `High` - Primary original-document tracing for HK announcements, circulars, prospectuses, annual reports, trading halts. High authority for HKEX-published/listed-company documents
-- Current status: `reachable`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public. Search/filter UX is portal-centric; issuer IR useful for decks and reposts Audited fallback peers: Issuer IR, SFC, company annual reports.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -1219,7 +1225,7 @@ route before reporting a source gap.
 
 ## `hkex-market-data` - HKEX market data
 
-- Aliases/origins: `HKEX official quotes`, `HKEX daily quotations`
+- Aliases/origins: `hkex`, `C02`, `HKEX`, `HKEX official quotes`, `HKEX daily quotations`, `build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk`
 - Publisher type: `official-exchange`
 - Official domains: `hkex.com.hk`
 - Provenance authority: `High` - HKEX official security quotations, day-close short-selling reports, and exchange market statistics.
@@ -1490,7 +1496,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.imf.org/en/Data>), [direct route](<https://data.imf.org/>)
   - Search example: `site:imf.org official statistics`
-  - Same-function fallbacks: `world-bank-data-official-statistics`, `undata-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `world-bank-data-official-statistics`, `undata-official-statistics`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats offices.
@@ -1650,7 +1657,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.miit.gov.cn/gxsj/index.html>)
   - Search example: `site:miit.gov.cn official statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`, `caict-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `national-bureau-statistics-official-statistics`, `caict-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Mostly aggregate stats; not filings or company document source Audited fallback peers: NBS, ministry sub-pages, State Council releases.
@@ -1682,7 +1690,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.moe.gov.cn/jyb_sjzl/moe_560/2024/>)
   - Search example: `site:moe.gov.cn official statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`, `shanghai-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `national-bureau-statistics-official-statistics`, `shanghai-statistics-official-statistics`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public; supplied historical leaf returned 404. Supplied URL stale; year folders change; use stats family not hard-coded leaf Audited fallback peers: MOE stats family, NBS, provincial education bureaus.
@@ -1702,7 +1711,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.mof.gov.cn/>)
   - Search example: `site:mof.gov.cn official notice`
-  - Same-function fallbacks: `state-council-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `state-council-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Downstream implementation may live on SAT or other ministry sites Audited fallback peers: PBOC, State Council, SAT, local finance bureaus.
@@ -1734,7 +1744,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.stats.gov.cn/>)
   - Search example: `site:stats.gov.cn official statistics`
-  - Same-function fallbacks: `beijing-statistics-official-statistics`, `shanghai-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `beijing-statistics-official-statistics`, `shanghai-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Release lag, revisions, definitional changes, official scope limits Audited fallback peers: Provincial/city statistical bureaus, 中国政府网 ministries, World Bank.
@@ -1786,7 +1797,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.nfra.gov.cn/>)
   - Search example: `site:nfra.gov.cn official notice`
-  - Same-function fallbacks: `csrc-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `csrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Older CBIRC-era materials may need historical path work Audited fallback peers: PBOC, CSRC, State Council, institutions' own sites.
@@ -1903,6 +1915,9 @@ route before reporting a source gap.
   - Direct links: [issuer investor-relations entry](<https://www.popmart.com/us/investor-relations>)
   - Search example: `open the issuer IR entry, then match a Pop Mart report title and period to its HKEXnews original before using an issuer-hosted copy`
   - Same-function fallbacks: None
+  - Verified issuer copy (not primary citation): HKEX document `2026032500285`
+  - Issuer copy URL: <https://prod-out-res.popmart.com/cms/ANNUAL_RESULTS_ANNOUNCEMENT_FOR_THE_YEAR_ENDED_31_DECEMBER_2025_AND_CHANGE_IN_USE_OF_PROCEEDS_af8bc550f1.pdf>
+  - Issuer copy SHA-256: `5e3552e3a46c7ca5998e822692dded7c8d97bccfd28406aad5f68be4887bdd87`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T20:21:41+08:00`
 - Access limitations: Public storefront remains JS-heavy and region dependent. The issuer IR entry is reachable but renders no reproducible noninteractive filing index. An exact issuer-hosted FY2025 copy matched HKEXnews; use it only as a convenience copy while the HKEXnews original is readable.
@@ -2022,7 +2037,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.sfc.hk/en/>)
   - Search example: `site:sfc.hk official notice`
-  - Same-function fallbacks: `afrc-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `afrc-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not a listed-company filing database Audited fallback peers: HKEXnews, issuer IR, AFRC, HKMA.
@@ -2042,7 +2058,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.shanghai.gov.cn/>)
   - Search example: `site:shanghai.gov.cn official notice`
-  - Same-function fallbacks: `state-council-regulatory-materials`, `beijing-government-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `state-council-regulatory-materials`, `beijing-government-regulatory-materials`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -2062,7 +2079,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://tjj.sh.gov.cn/>)
   - Search example: `site:tjj.sh.gov.cn official statistics`
-  - Same-function fallbacks: `national-bureau-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
@@ -2130,7 +2148,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.gov.cn/>), [direct route](<https://www.gov.cn/gwyzzjg/zuzhi/>)
   - Search example: `site:gov.cn official notice`
-  - Same-function fallbacks: `ministry-of-finance-regulatory-materials`, `beijing-government-regulatory-materials`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `ministry-of-finance-regulatory-materials`, `beijing-government-regulatory-materials`
 - Current status: `moved`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility; Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局, ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn homepage, State Council Gazette.
@@ -2262,7 +2281,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://unstats.un.org/sdgs/dataportal>)
   - Search example: `site:unstats.un.org official statistics`
-  - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Narrower than national stats for local questions; not document source Audited fallback peers: UNdata, World Bank, national statistical offices.
@@ -2282,7 +2302,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://data.un.org/>)
   - Search example: `site:data.un.org official statistics`
-  - Same-function fallbacks: `world-bank-data-official-statistics`, `imf-data-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `world-bank-data-official-statistics`, `imf-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Update cadence can lag specialized agency portals; not document source Audited fallback peers: UNSD portals, World Bank, IMF, Eurostat.
@@ -2302,7 +2323,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://unstats.un.org/unsd/demographic-social/>)
   - Search example: `site:unstats.un.org official statistics`
-  - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Family/landing orientation rather than all-in-one dataset Audited fallback peers: UNdata, national census/stat offices, World Bank.
@@ -2402,7 +2424,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.who.int/data/gho>)
   - Search example: `site:who.int official statistics`
-  - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `undata-official-statistics`, `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not relevant for filings or regulatory letters Audited fallback peers: UNdata, World Bank, national health ministries.
@@ -2422,7 +2445,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://data.worldbank.org.cn/>), [direct route](<https://data.worldbank.org/>)
   - Search example: `site:data.worldbank.org.cn official statistics`
-  - Same-function fallbacks: `imf-data-official-statistics`, `national-bureau-statistics-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `imf-data-official-statistics`, `national-bureau-statistics-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not original origin for every country's raw data; lag vs source agencies; Duplicate coverage with U47 Chinese World Bank data; not announcements or filings source Audited fallback peers: IMF, OECD, UNData, 国家统计局.
@@ -2462,7 +2486,8 @@ route before reporting a source gap.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://stats.wto.org/>), [direct route](<https://timeseries.wto.org/>)
   - Search example: `site:stats.wto.org official statistics`
-  - Same-function fallbacks: `world-bank-data-official-statistics`
+  - Same-function fallbacks: None
+  - Adjacent alternatives (not executable fallbacks): `world-bank-data-official-statistics`
 - Current status: `reachable`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public. Not primary for company/regulator documents Audited fallback peers: UN Comtrade, World Bank, national customs/trade agencies.

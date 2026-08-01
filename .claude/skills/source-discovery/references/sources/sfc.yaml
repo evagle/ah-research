@@ -40,7 +40,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - afrc-regulatory-materials
 access:
   status: reachable

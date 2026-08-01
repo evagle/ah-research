@@ -15,7 +15,7 @@ exchange's inquiry letter.
 - Announcements: `https://www.sse.com.cn/disclosure/listedinfo/announcement/`
 - Supervisory inquiries:
   `https://www.sse.com.cn/regulation/supervision/inquiries/`
-- Site search: `https://www.sse.com.cn/home/search/?webswd=贵州茅台`
+- Site search: `https://www.sse.com.cn/home/search/?webswd=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0`
 
 ## Query fields
 

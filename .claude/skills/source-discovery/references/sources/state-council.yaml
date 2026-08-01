@@ -44,7 +44,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - ministry-of-finance-regulatory-materials
   - beijing-government-regulatory-materials
 access:

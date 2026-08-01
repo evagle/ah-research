@@ -9,7 +9,7 @@ from pathlib import Path
 
 import pytest
 import yaml
-from jsonschema import Draft202012Validator
+from jsonschema import Draft202012Validator, FormatChecker
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SCHEMA_PATH = (
@@ -93,7 +93,6 @@ EXPECTED_PROFILE_IDS = {
     "hkex-ccass",
     "hkex-di",
     "hkex-market-data",
-    "hkex",
     "hkexnews",
     "hkma",
     "hksar-budget",
@@ -225,7 +224,7 @@ def write_profile(path: Path, payload: dict[str, object]) -> None:
 def validator() -> Draft202012Validator:
     schema = load_schema()
     Draft202012Validator.check_schema(schema)
-    return Draft202012Validator(schema)
+    return Draft202012Validator(schema, format_checker=FormatChecker())
 
 
 def load_maintained_profiles() -> list[dict[str, object]]:
@@ -333,6 +332,18 @@ def test_load_profiles_rejects_duplicate_source_ids(tmp_path: Path) -> None:
         source_profiles.load_profiles(tmp_path, SCHEMA_PATH)
 
 
+def test_load_profiles_rejects_invalid_uri_formats(tmp_path: Path) -> None:
+    source_profiles = load_source_profiles_module()
+    invalid = deepcopy(load_profile("official-example.yaml"))
+    invalid["functions"][0]["direct_urls"][0]["url"] = "not a URI"
+    invalid_path = tmp_path / "invalid-url.yaml"
+    write_profile(invalid_path, invalid)
+
+    assert list(validator().iter_errors(invalid))
+    with pytest.raises(ValueError, match=r"invalid-url\.yaml"):
+        source_profiles.load_profiles(tmp_path, SCHEMA_PATH)
+
+
 def test_official_route_beats_reachable_aggregator_for_same_function() -> None:
     source_profiles = load_source_profiles_module()
     routes = source_profiles.select_routes(
@@ -420,6 +431,56 @@ def test_geography_scope_keeps_matching_multi_geography_profile() -> None:
     assert [route.source_id for route in routes] == ["multi-geography-route"]
 
 
+def test_industry_scope_keeps_matching_and_cross_industry_routes() -> None:
+    source_profiles = load_source_profiles_module()
+    consumer = deepcopy(load_profile("official-example.yaml"))
+    consumer["id"] = "consumer-route"
+    consumer["geographies"] = ["CN"]
+    consumer["industries"] = ["consumer"]
+    global_route = deepcopy(load_profile("official-example.yaml"))
+    global_route["id"] = "global-route"
+    global_route["geographies"] = ["Global"]
+    global_route["industries"] = ["cross-industry"]
+    health = deepcopy(load_profile("official-example.yaml"))
+    health["id"] = "health-route"
+    health["geographies"] = ["CN"]
+    health["industries"] = ["health"]
+
+    routes = source_profiles.select_routes(
+        profiles=[consumer, global_route, health],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        geographies=["CN"],
+        industries=["consumer", "technology"],
+    )
+
+    assert [route.source_id for route in routes] == ["consumer-route", "global-route"]
+
+
+def test_independent_market_research_excludes_issuer_route() -> None:
+    source_profiles = load_source_profiles_module()
+    profiles_by_id = {profile["id"]: profile for profile in load_maintained_profiles()}
+    snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
+
+    routes = source_profiles.select_routes(
+        profiles=[
+            profiles_by_id["aliresearch"],
+            profiles_by_id["analysys"],
+            profiles_by_id["bain-china"],
+        ],
+        function_id="research-reports",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        snapshot=snapshot,
+        geographies=["CN"],
+        industry="consumer",
+        minimum_originality="High",
+        minimum_independence="Medium",
+    )
+
+    assert [route.source_id for route in routes] == ["bain-china", "analysys"]
+    assert all(route.independence in {"Medium", "High"} for route in routes)
+
+
 @pytest.mark.parametrize("geographies", ["CN", b"CN"])
 def test_select_routes_rejects_bare_geography_strings(geographies: object) -> None:
     source_profiles = load_source_profiles_module()
@@ -467,6 +528,65 @@ def test_fresh_temporarily_unreachable_route_is_skipped_for_fallback() -> None:
     assert routes[1].reachability == "temporarily-unreachable"
     assert routes[1].skip_reason == "fresh temporarily-unreachable"
     assert routes[1].stale is False
+
+
+def test_eastmoney_a_share_outage_traverses_scoped_same_function_fallbacks() -> None:
+    source_profiles = load_source_profiles_module()
+    profiles_by_id = {profile["id"]: profile for profile in load_maintained_profiles()}
+    snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
+    snapshot["eastmoney-announcement-index"] = {
+        "status": "temporarily-unreachable",
+        "last_checked": "2026-08-02T11:30:00+00:00",
+    }
+
+    routes = source_profiles.select_routes(
+        profiles=[
+            profiles_by_id["eastmoney-announcement-index"],
+            profiles_by_id["cninfo"],
+            profiles_by_id["sse"],
+            profiles_by_id["szse"],
+        ],
+        function_id="a-share-announcement-index",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        snapshot=snapshot,
+        geographies=["CN"],
+        industries=["consumer"],
+    )
+
+    assert [(route.source_id, route.function_id) for route in routes] == [
+        ("cninfo", "company-disclosures"),
+        ("sse", "company-disclosures"),
+        ("szse", "company-disclosures"),
+        ("eastmoney-announcement-index", "a-share-announcement-index"),
+    ]
+    assert routes[-1].skip_reason == "fresh temporarily-unreachable"
+
+
+def test_fallback_traversal_deduplicates_cycles() -> None:
+    source_profiles = load_source_profiles_module()
+    primary = deepcopy(load_profile("official-example.yaml"))
+    primary["id"] = "primary"
+    primary["functions"][0]["id"] = "requested-function"
+    primary["functions"][0]["fallbacks"] = [
+        "secondary-company-announcements",
+        "secondary-company-announcements",
+    ]
+    primary["access"]["status"] = "temporarily-unreachable"
+    primary["access"]["last_checked"] = "2026-08-02T11:30:00+00:00"
+    secondary = deepcopy(load_profile("official-example.yaml"))
+    secondary["id"] = "secondary"
+    secondary["functions"][0]["fallbacks"] = ["primary-requested-function"]
+
+    routes = source_profiles.select_routes(
+        profiles=[primary, secondary],
+        function_id="requested-function",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+    )
+
+    assert [(route.source_id, route.function_id) for route in routes] == [
+        ("secondary", "company-announcements"),
+        ("primary", "requested-function"),
+    ]
 
 
 def test_stale_temporarily_unreachable_route_is_returned_for_refresh() -> None:
@@ -535,6 +655,57 @@ def test_fresh_cache_observation_wins_over_reviewed_snapshot() -> None:
     assert routes[0].reachability == "temporarily-unreachable"
     assert routes[0].skip_reason == "fresh temporarily-unreachable"
     assert routes[0].stale is False
+
+
+def test_function_cache_observation_overrides_source_summary_for_that_function() -> None:
+    source_profiles = load_source_profiles_module()
+    routes = source_profiles.select_routes(
+        profiles=[load_profile("official-example.yaml")],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        cache={
+            "sse": {
+                "status": "temporarily-unreachable",
+                "last_checked": "2026-08-02T11:30:00+00:00",
+                "review_state": "unreviewed",
+                "functions": {
+                    "company-announcements": {
+                        "status": "reachable",
+                        "last_checked": "2026-08-02T11:30:00+00:00",
+                        "review_state": "unreviewed",
+                    }
+                },
+            }
+        },
+    )
+
+    assert routes[0].reachability == "reachable"
+    assert routes[0].skip_reason is None
+
+
+def test_future_cache_observation_does_not_override_reviewed_snapshot() -> None:
+    source_profiles = load_source_profiles_module()
+    routes = source_profiles.select_routes(
+        profiles=[load_profile("official-example.yaml")],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, 12, 0, tzinfo=UTC),
+        cache={
+            "sse": {
+                "status": "temporarily-unreachable",
+                "last_checked": "2026-08-03T12:00:00+00:00",
+                "review_state": "unreviewed",
+            }
+        },
+        snapshot={
+            "sse": {
+                "status": "reachable-limited",
+                "last_checked": "2026-08-02T10:00:00+00:00",
+            }
+        },
+    )
+
+    assert routes[0].reachability == "reachable-limited"
+    assert routes[0].skip_reason is None
 
 
 def test_stale_cache_observation_falls_through_to_reviewed_snapshot() -> None:
@@ -881,6 +1052,123 @@ def test_every_material_function_has_routes_search_and_resolved_fallbacks() -> N
             for fallback in function["fallbacks"]:
                 assert fallback in exported_functions
                 assert fallback != f"{profile['id']}-{function['id']}"
+            for adjacent in function.get("adjacent_alternatives", []):
+                assert adjacent in exported_functions
+                assert adjacent not in function["fallbacks"]
+
+
+def test_regulator_and_statistics_adjacent_routes_are_not_executable_fallbacks() -> None:
+    profiles = load_maintained_profiles()
+    functions = {
+        f"{profile['id']}-{function['id']}": function
+        for profile in profiles
+        for function in profile["functions"]
+    }
+    adjacent_only = {
+        "afrc-regulatory-materials": {"sfc-regulatory-materials"},
+        "beijing-government-regulatory-materials": {
+            "state-council-regulatory-materials",
+            "shanghai-government-regulatory-materials",
+        },
+        "beijing-statistics-official-statistics": {
+            "national-bureau-statistics-official-statistics",
+        },
+        "caict-official-statistics": {"cnnic-official-statistics"},
+        "cnnic-official-statistics": {"caict-official-statistics"},
+        "csrc-regulatory-materials": {"nfra-regulatory-materials"},
+        "eurostat-official-statistics": {
+            "world-bank-data-official-statistics",
+            "undata-official-statistics",
+        },
+        "guangdong-government-regulatory-materials": {
+            "state-council-regulatory-materials",
+            "shanghai-government-regulatory-materials",
+        },
+        "guangdong-statistics-official-statistics": {
+            "national-bureau-statistics-official-statistics",
+        },
+        "hk-icac-regulatory-materials": {
+            "hk-judiciary-regulatory-materials",
+            "hk-police-regulatory-materials",
+        },
+        "hk-insurance-authority-regulatory-materials": {"sfc-regulatory-materials"},
+        "hk-judiciary-regulatory-materials": {
+            "hk-icac-regulatory-materials",
+            "hk-police-regulatory-materials",
+        },
+        "hk-police-regulatory-materials": {
+            "hk-icac-regulatory-materials",
+            "hk-judiciary-regulatory-materials",
+        },
+        "imf-data-official-statistics": {
+            "world-bank-data-official-statistics",
+            "undata-official-statistics",
+        },
+        "miit-data-official-statistics": {
+            "national-bureau-statistics-official-statistics",
+            "caict-official-statistics",
+        },
+        "ministry-of-education-official-statistics": {
+            "national-bureau-statistics-official-statistics",
+            "shanghai-statistics-official-statistics",
+        },
+        "ministry-of-finance-regulatory-materials": {"state-council-regulatory-materials"},
+        "national-bureau-statistics-official-statistics": {
+            "beijing-statistics-official-statistics",
+            "shanghai-statistics-official-statistics",
+        },
+        "nfra-regulatory-materials": {"csrc-regulatory-materials"},
+        "sfc-regulatory-materials": {"afrc-regulatory-materials"},
+        "shanghai-government-regulatory-materials": {
+            "beijing-government-regulatory-materials",
+            "state-council-regulatory-materials",
+        },
+        "shanghai-statistics-official-statistics": {
+            "national-bureau-statistics-official-statistics",
+        },
+        "state-council-regulatory-materials": {
+            "beijing-government-regulatory-materials",
+            "ministry-of-finance-regulatory-materials",
+        },
+        "un-sdg-data-official-statistics": {
+            "undata-official-statistics",
+            "world-bank-data-official-statistics",
+        },
+        "undata-official-statistics": {
+            "imf-data-official-statistics",
+            "world-bank-data-official-statistics",
+        },
+        "unsd-demographic-social-official-statistics": {
+            "undata-official-statistics",
+            "world-bank-data-official-statistics",
+        },
+        "who-gho-official-statistics": {
+            "undata-official-statistics",
+            "world-bank-data-official-statistics",
+        },
+        "world-bank-data-official-statistics": {
+            "imf-data-official-statistics",
+            "national-bureau-statistics-official-statistics",
+        },
+        "wto-stats-official-statistics": {"world-bank-data-official-statistics"},
+    }
+
+    for exported_function, expected_adjacent in adjacent_only.items():
+        function = functions[exported_function]
+        assert not set(function["fallbacks"]) & expected_adjacent
+        assert expected_adjacent <= set(function["adjacent_alternatives"])
+
+
+def test_catalog_and_runtime_keep_adjacent_routes_out_of_fallback_execution() -> None:
+    catalog = (
+        REPO_ROOT / ".claude/skills/source-discovery/references/source-catalog.md"
+    ).read_text(encoding="utf-8")
+    skill = (REPO_ROOT / ".claude/skills/source-discovery/SKILL.md").read_text(encoding="utf-8")
+    normalized_skill = " ".join(skill.split())
+
+    assert "Adjacent alternatives (not executable fallbacks)" in catalog
+    assert "Only declared `fallbacks` are executable route transitions." in normalized_skill
+    assert "Adjacent alternatives are guidance only" in normalized_skill
 
 
 def test_seed_fallbacks_use_audited_same_topic_routes() -> None:
@@ -893,7 +1181,6 @@ def test_seed_fallbacks_use_audited_same_topic_routes() -> None:
     expected_fallbacks = {
         "36kr-research-reports": {"it-juzi-research-reports"},
         "flurry-research-reports": {"analysys-research-reports"},
-        "state-council-regulatory-materials": {"ministry-of-finance-regulatory-materials"},
         "xueqiu-research-reports": {"eastmoney-research-research-reports"},
     }
 
@@ -1039,6 +1326,64 @@ def test_task_5_round_1_preserves_market_specific_eastmoney_routes_and_fallbacks
 
     assert profiles["data-gov-hk"]["functions"][0]["fallbacks"] == []
     assert profiles["aastocks"]["functions"][0]["fallbacks"] == []
+    assert profiles["eastmoney-announcement-index"]["industries"] == ["cross-industry"]
+
+
+def test_flurry_is_reachable_but_limited_to_historical_sunset_material() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
+
+    assert profiles["flurry"]["access"]["status"] == "reachable"
+    assert snapshot["flurry"]["status"] == "reachable"
+    assert "sunset" in profiles["flurry"]["access"]["limitation"].lower()
+
+
+def test_hkex_legacy_identity_is_consolidated_into_market_data_profile() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
+    legacy_aliases = {
+        "hkex",
+        "C02",
+        "HKEX",
+        "build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, "
+        "HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk",
+    }
+
+    assert "hkex" not in profiles
+    assert legacy_aliases <= set(profiles["hkex-market-data"]["aliases"])
+    assert "hkex" not in snapshot
+    assert "hkex-market-data" in snapshot
+
+
+def test_pop_mart_profile_preserves_exact_issuer_copy_identity() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    issuer_ir = next(
+        function
+        for function in profiles["pop-mart"]["functions"]
+        if function["id"] == "issuer-investor-relations"
+    )
+    issuer_copy = issuer_ir["issuer_copy_evidence"]
+
+    assert issuer_copy == {
+        "hkex_document_id": "2026032500285",
+        "hkex_primary_url": (
+            "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0325/2026032500285.pdf"
+        ),
+        "issuer_copy_url": (
+            "https://prod-out-res.popmart.com/cms/"
+            "ANNUAL_RESULTS_ANNOUNCEMENT_FOR_THE_YEAR_ENDED_31_DECEMBER_2025_AND_CHANGE_"
+            "IN_USE_OF_PROCEEDS_af8bc550f1.pdf"
+        ),
+        "sha256": "5e3552e3a46c7ca5998e822692dded7c8d97bccfd28406aad5f68be4887bdd87",
+        "mirror_identity_requirements": [
+            "issuer and security identifier",
+            "normalized title",
+            "reporting period",
+            "HKEXnews document ID or official path",
+            "SHA-256 byte-for-byte equality",
+        ],
+    }
+    assert "cite the readable HKEXnews original" in issuer_ir["citation"]["use"]
 
 
 def test_task_5_round_1_separates_authority_access_workflow_and_field_evidence() -> None:

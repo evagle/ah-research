@@ -45,7 +45,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - imf-data-official-statistics
   - national-bureau-statistics-official-statistics
 access:

@@ -40,7 +40,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - hk-police-regulatory-materials
   - hk-icac-regulatory-materials
 access:

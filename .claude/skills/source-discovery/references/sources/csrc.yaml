@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - nfra-regulatory-materials
 access:
   status: reachable

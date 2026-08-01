@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - sfc-regulatory-materials
 access:
   status: anti-bot

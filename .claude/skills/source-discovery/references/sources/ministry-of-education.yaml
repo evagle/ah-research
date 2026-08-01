@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - national-bureau-statistics-official-statistics
   - shanghai-statistics-official-statistics
 access:

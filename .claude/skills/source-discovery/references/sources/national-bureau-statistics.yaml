@@ -40,7 +40,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - beijing-statistics-official-statistics
   - shanghai-statistics-official-statistics
 access:

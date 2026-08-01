@@ -211,6 +211,38 @@ def test_classify_waf_or_challenge_page_as_anti_bot() -> None:
     assert result.status == "anti-bot"
 
 
+def test_classify_waf_markers_before_generic_5xx_temporary_status() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            status_code=503,
+            final_url="https://blocked.example.com",
+            title="Security Check",
+            body_excerpt=load_probe_fixture("waf.html"),
+        ),
+        expected_fingerprints=["blocked.example.com"],
+    )
+
+    assert result.status == "anti-bot"
+
+
+def test_same_domain_shell_does_not_prove_a_function_route() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://www.sse.com.cn/",
+            title="Shanghai Stock Exchange",
+            body_excerpt="Shanghai Stock Exchange homepage",
+        ),
+        expected_fingerprints=["sse.com.cn", "Shanghai Stock Exchange"],
+        function_fingerprints=["announcement ID", "issuer"],
+    )
+
+    assert result.status == "unverified"
+
+
 def test_classify_36kr_chinese_security_check_as_anti_bot() -> None:
     module = load_probe_module()
     result = module.classify_observation(
@@ -422,6 +454,20 @@ def test_cache_writes_atomically_and_round_trips_json(
     assert not list(cache_path.parent.glob("*.tmp"))
 
 
+def test_load_cache_reads_legacy_source_observations(tmp_path: Path) -> None:
+    module = load_probe_module()
+    cache_path = tmp_path / "reachability.json"
+    legacy_payload = {
+        "sse": {
+            "status": "reachable",
+            "last_checked": "2026-08-01T10:00:00+00:00",
+        }
+    }
+    cache_path.write_text(json.dumps(legacy_payload), encoding="utf-8")
+
+    assert module.load_cache(cache_path) == legacy_payload
+
+
 def test_cli_probes_selected_sources_and_updates_cache(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -471,6 +517,159 @@ def test_cli_probes_selected_sources_and_updates_cache(
     assert cache["sse"]["status"] == "reachable"
     assert cache["sse"]["final_url"] == f"{base_url}/reachable"
     assert cache["sse"]["status_code"] == 200
+    assert cache["sse"]["review_state"] == "unreviewed"
+    function_observation = cache["sse"]["functions"]["company-announcements"]
+    assert function_observation["review_state"] == "unreviewed"
+    assert function_observation["route_identity"]["function_id"] == "company-announcements"
+    assert function_observation["route_identity"]["direct_url"] == f"{base_url}/reachable"
+
+
+def test_cli_probes_function_direct_route_not_profile_shell_and_preserves_snapshot(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = load_probe_module()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    monkeypatch.setattr(module, "REPO_ROOT", repo_root, raising=False)
+    shell_html = b"<html><title>Shanghai Stock Exchange</title><body>Homepage</body></html>"
+    function_html = (
+        b"<html><title>Shanghai Stock Exchange announcements</title>"
+        b"<body>Issuer announcement ID and publication date</body></html>"
+    )
+    with serve_routes(
+        {
+            "/shell": (200, {"Content-Type": "text/html; charset=utf-8"}, shell_html),
+            "/announcements": (
+                200,
+                {"Content-Type": "text/html; charset=utf-8"},
+                function_html,
+            ),
+        }
+    ) as base_url:
+        profiles_dir = tmp_path / "profiles"
+        profiles_dir.mkdir()
+        selected = deepcopy(load_profile_fixture("official-example.yaml"))
+        selected["access"]["final_url"] = f"{base_url}/shell"
+        selected["functions"][0]["direct_urls"][0]["url"] = f"{base_url}/announcements"
+        (profiles_dir / "official.yaml").write_text(
+            yaml.safe_dump(selected, sort_keys=False),
+            encoding="utf-8",
+        )
+
+        snapshot_path = (
+            repo_root
+            / ".claude"
+            / "skills"
+            / "source-discovery"
+            / "references"
+            / "reachability-snapshot.json"
+        )
+        snapshot_path.parent.mkdir(parents=True)
+        snapshot_path.write_text('{"sse": {"status": "reachable"}}\n', encoding="utf-8")
+        snapshot_before = snapshot_path.read_text(encoding="utf-8")
+        cache_path = repo_root / "tmp" / "source-discovery" / "reachability.json"
+
+        exit_code = module.main(
+            [
+                "--profiles",
+                str(profiles_dir),
+                "--cache",
+                str(cache_path),
+                "--source",
+                "sse",
+            ]
+        )
+
+    assert exit_code == 0
+    cache = json.loads(cache_path.read_text(encoding="utf-8"))
+    assert cache["sse"]["final_url"] == f"{base_url}/announcements"
+    function_observation = cache["sse"]["functions"]["company-announcements"]
+    assert function_observation["status"] == "reachable"
+    assert function_observation["route_identity"] == {
+        "function_id": "company-announcements",
+        "direct_url": f"{base_url}/announcements",
+        "result_identity": "title, issuer, date, announcement ID",
+    }
+    assert snapshot_path.read_text(encoding="utf-8") == snapshot_before
+
+
+def test_cli_rejects_combined_all_and_source_before_probe(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = load_probe_module()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    monkeypatch.setattr(module, "REPO_ROOT", repo_root, raising=False)
+    profiles_dir = tmp_path / "profiles"
+    profiles_dir.mkdir()
+    (profiles_dir / "official.yaml").write_text(
+        yaml.safe_dump(load_profile_fixture("official-example.yaml"), sort_keys=False),
+        encoding="utf-8",
+    )
+    probe_calls: list[str] = []
+
+    def unexpected_probe(url: str, timeout: float, user_agent: str):
+        probe_calls.append(url)
+        raise AssertionError("network probe must not be called")
+
+    monkeypatch.setattr(module, "probe_url", unexpected_probe)
+
+    with pytest.raises(SystemExit) as exc_info:
+        module.main(
+            [
+                "--profiles",
+                str(profiles_dir),
+                "--cache",
+                str(repo_root / "tmp" / "source-discovery" / "reachability.json"),
+                "--all",
+                "--source",
+                "sse",
+            ]
+        )
+
+    assert exc_info.value.code == 2
+    assert probe_calls == []
+
+
+def test_cli_rejects_duplicate_profile_ids_before_probe(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = load_probe_module()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    monkeypatch.setattr(module, "REPO_ROOT", repo_root, raising=False)
+    profiles_dir = tmp_path / "profiles"
+    profiles_dir.mkdir()
+    profile = load_profile_fixture("official-example.yaml")
+    (profiles_dir / "first.yaml").write_text(
+        yaml.safe_dump(profile, sort_keys=False),
+        encoding="utf-8",
+    )
+    (profiles_dir / "second.yaml").write_text(
+        yaml.safe_dump(profile, sort_keys=False),
+        encoding="utf-8",
+    )
+    probe_calls: list[str] = []
+
+    def unexpected_probe(url: str, timeout: float, user_agent: str):
+        probe_calls.append(url)
+        raise AssertionError("network probe must not be called")
+
+    monkeypatch.setattr(module, "probe_url", unexpected_probe)
+
+    with pytest.raises(SystemExit) as exc_info:
+        module.main(
+            [
+                "--profiles",
+                str(profiles_dir),
+                "--cache",
+                str(repo_root / "tmp" / "source-discovery" / "reachability.json"),
+                "--all",
+            ]
+        )
+
+    assert exc_info.value.code == 2
+    assert probe_calls == []
 
 
 @pytest.mark.parametrize(

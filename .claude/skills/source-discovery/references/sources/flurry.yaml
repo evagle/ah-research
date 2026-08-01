@@ -43,7 +43,7 @@ functions:
   fallbacks:
   - analysys-research-reports
 access:
-  status: moved
+  status: reachable
   last_checked: '2026-08-01T17:34:00+08:00'
   final_url: https://www.flurry.com/
   limitation: First-party page states Flurry Mobile Analytics, including SDK and Analytics UI, sunset on

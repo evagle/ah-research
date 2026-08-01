@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - cnnic-official-statistics
 access:
   status: anti-bot

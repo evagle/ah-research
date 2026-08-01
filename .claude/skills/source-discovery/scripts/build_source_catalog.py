@@ -50,6 +50,11 @@ Use aggregators, media, social platforms, and report indexes for discovery only;
 One failed request never proves permanent closure. Continue through applicable
 same-function fallbacks, then adjacent categories, and record every attempted
 route before reporting a source gap.
+
+Only a function's declared same-function fallbacks are executable route
+transitions. Adjacent alternatives are guidance-only sources with a related
+topic, producer, jurisdiction, or methodology; they cannot substitute for the
+requested claim without an explicit scope change.
 """
 
 
@@ -124,6 +129,22 @@ def _render_profile(
                 f"  - Same-function fallbacks: {_render_fallbacks(function)}",
             )
         )
+        adjacent = _optional_str_list(function, "adjacent_alternatives")
+        if adjacent:
+            lines.append(
+                "  - Adjacent alternatives (not executable fallbacks): "
+                + ", ".join(f"`{alternative}`" for alternative in adjacent)
+            )
+        issuer_copy = function.get("issuer_copy_evidence")
+        if isinstance(issuer_copy, Mapping):
+            lines.extend(
+                (
+                    "  - Verified issuer copy (not primary citation): "
+                    f"HKEX document `{_require_str(issuer_copy, 'hkex_document_id')}`",
+                    f"  - Issuer copy URL: <{_require_str(issuer_copy, 'issuer_copy_url')}>",
+                    f"  - Issuer copy SHA-256: `{_require_str(issuer_copy, 'sha256')}`",
+                )
+            )
 
     lines.extend(
         (
@@ -191,6 +212,15 @@ def _require_str_list(mapping: Mapping[str, object], key: str) -> list[str]:
     value = mapping.get(key)
     if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
         raise ValueError(f"missing string-list field: {key}")
+    return value
+
+
+def _optional_str_list(mapping: Mapping[str, object], key: str) -> list[str]:
+    value = mapping.get(key)
+    if value is None:
+        return []
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise ValueError(f"invalid optional string-list field: {key}")
     return value
 
 

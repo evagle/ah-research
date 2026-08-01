@@ -1,8 +1,13 @@
 id: hkex-market-data
 name: HKEX market data
 aliases:
+- hkex
+- C02
+- HKEX
 - HKEX official quotes
 - HKEX daily quotations
+- build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL,
+  HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk
 publisher_type: official-exchange
 official_domains:
 - hkex.com.hk

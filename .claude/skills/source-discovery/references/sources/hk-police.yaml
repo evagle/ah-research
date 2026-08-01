@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - hk-icac-regulatory-materials
   - hk-judiciary-regulatory-materials
 access:

@@ -86,6 +86,12 @@ when present. For reachability only, apply this exact precedence:
 Load the reviewed snapshot mapping from
 `references/reachability-snapshot.json`; it is the audit-backed route prior
 surfaced in the generated catalog. Cache affects reachability only, never authority, citation scope, publisher identity, workflow evidence, or field/API evidence.
+Each local probe observation is machine-readable and `unreviewed`. For that
+exact function, use a function-specific cache observation before its legacy
+source-level summary. An `unreviewed` local cache observation never
+auto-promotes or overwrites the reviewed snapshot. Only an explicit reviewer
+update to `references/reachability-snapshot.json` may mark an observation
+`reviewed`.
 
 Use `source_profiles.ttl_for_status` when deciding whether a cache observation
 is valid; do not create a separate TTL policy:
@@ -96,15 +102,26 @@ is valid; do not create a separate TTL policy:
 - `moved` and `broken-link`: 7 days
 
 For each same-function candidate set, call
-`source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot, geographies=claim_geographies)`
-when the claim has a geographic scope. With that optional scope, routes are
-eligible only when their profile lists a requested geography or `Global`;
-labels are trimmed and compared case-insensitively, and wrong-market routes are
-excluded before ranking. Pass a list or tuple of nonblank labels; omit
-`geographies` only when the claim has no geographic constraint. The resolver ignores a stale cache
-observation before it consults the reviewed snapshot, then falls back to the
-profile access record.
-A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority.
+`source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot, geographies=claim_geographies, industry=claim_industry, industries=claim_industries, minimum_originality=minimum_originality, minimum_independence=minimum_independence)`
+when the claim has a scope or provenance requirement. Function match remains
+first, then claim-scope eligibility, then authority, originality,
+independence, reachability, and utility. With geographic scope, routes are
+eligible only when their profile lists a requested geography or `Global`.
+With industry scope, routes are eligible only when their profile lists a
+requested industry or `cross-industry`. Labels are trimmed and compared
+case-insensitively; wrong-market and wrong-industry routes are excluded before
+ranking. Pass a list or tuple of nonblank labels; omit `geographies`,
+`industry`, and `industries` only when the claim has no such constraint.
+
+For an independent-market research request, set both
+`minimum_originality` and `minimum_independence` to the lowest acceptable
+rating. This prevents an issuer, portal, aggregator, or other low-independence
+route from winning merely because it is reachable. A source's original
+publication remains attributable evidence, but it is not an independent check
+when its publisher has a material interest in the subject.
+
+The resolver ignores a stale cache observation before it consults the reviewed
+snapshot, then falls back to the profile access record. A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority. Treat fresh `broken-link` and `unverified` routes the same way.
 A stale route must be rechecked before treating its status as current.
 One failed request never proves permanent closure.
 
@@ -173,6 +190,11 @@ document/announcement ID, status, URL, and replacement relationship.
 ## Fallback Exhaustion
 
 One failed request never proves permanent closure.
+
+Only declared `fallbacks` are executable route transitions. Adjacent
+alternatives are guidance only: they may help with a changed or related claim,
+but they cannot stand in for an unavailable same-function route. Record the
+scope change and source boundary before using any adjacent evidence.
 
 If a source returns no result, is paywalled, requires unavailable access, or fails technically, continue through other applicable sources in the same category and then adjacent categories.
 

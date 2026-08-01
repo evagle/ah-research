@@ -165,6 +165,23 @@ def test_runtime_defines_cache_snapshot_profile_precedence_and_ttls() -> None:
     )
 
 
+def test_runtime_defines_claim_scope_and_unreviewed_probe_promotion_boundary() -> None:
+    skill = " ".join(require_text(SKILL_ROOT / "SKILL.md").split())
+
+    assert_contains_all(
+        skill,
+        (
+            "Function match remains first, then claim-scope eligibility, then authority, originality, independence, reachability, and utility.",
+            "minimum_originality",
+            "minimum_independence",
+            "Each local probe observation is machine-readable and `unreviewed`.",
+            "An `unreviewed` local cache observation never auto-promotes or overwrites the reviewed snapshot.",
+            "Only an explicit reviewer update to `references/reachability-snapshot.json` may mark an observation `reviewed`.",
+            "function-specific cache observation before its legacy source-level summary",
+        ),
+    )
+
+
 def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
     skill = require_text(SKILL_ROOT / "SKILL.md")
 
@@ -274,6 +291,15 @@ def test_site_guides_define_direct_use_contracts() -> None:
     for filename, phrases in guide_requirements.items():
         guide = require_text(SITE_GUIDES_ROOT / filename)
         assert_contains_all(guide, required_sections + phrases)
+
+
+def test_sse_guide_percent_encodes_cjk_query_url() -> None:
+    guide = require_text(SITE_GUIDES_ROOT / "sse.md")
+
+    assert (
+        "https://www.sse.com.cn/home/search/?webswd=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0" in guide
+    )
+    assert "https://www.sse.com.cn/home/search/?webswd=贵州茅台" not in guide
 
 
 def test_search_playbook_makes_uncataloged_hong_kong_discovery_trust_first() -> None:
@@ -578,7 +604,7 @@ def test_catalog_does_not_overclaim_directory_or_generic_homepage_functions() ->
 
     assert "## `199it-housing-tools` - 199IT Data Navigation Housing Tools" in catalog
     assert "- Function: `housing-data-directory`" in catalog
-    assert "## `hkex` - Hong Kong Exchanges and Clearing" in catalog
+    assert "## `hkex-market-data` - HKEX market data" in catalog
     assert "## `szse` - Shenzhen Stock Exchange" in catalog
     assert "## `pbc` - People's Bank of China" in catalog
     assert "## `hkma` - Hong Kong Monetary Authority" in catalog

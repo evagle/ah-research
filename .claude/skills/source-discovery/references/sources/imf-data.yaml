@@ -43,7 +43,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - world-bank-data-official-statistics
   - undata-official-statistics
 access:

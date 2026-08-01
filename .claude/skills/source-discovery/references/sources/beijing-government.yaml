@@ -39,7 +39,8 @@ functions:
     - title
     - date
     - url
-  fallbacks:
+  fallbacks: []
+  adjacent_alternatives:
   - state-council-regulatory-materials
   - shanghai-government-regulatory-materials
 access:

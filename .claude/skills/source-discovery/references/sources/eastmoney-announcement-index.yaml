@@ -11,7 +11,7 @@ geographies:
 - CN
 - HK
 industries:
-- financial-services
+- cross-industry
 authority:
   level: Low
   scope: Eastmoney's displayed announcement metadata, routing, and dissemination timestamps; not the issuer's

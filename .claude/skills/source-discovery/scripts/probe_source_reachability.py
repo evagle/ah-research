@@ -93,6 +93,14 @@ class ProbeResult:
     reason: str
 
 
+@dataclass(frozen=True)
+class ProbeTarget:
+    function_id: str | None
+    direct_url: str
+    result_identity: str | None
+    function_fingerprints: tuple[str, ...]
+
+
 class RecordingRedirectHandler(HTTPRedirectHandler):
     def __init__(self) -> None:
         super().__init__()
@@ -116,12 +124,18 @@ class RecordingRedirectHandler(HTTPRedirectHandler):
 def classify_observation(
     observation: ProbeObservation,
     expected_fingerprints: Sequence[str],
+    function_fingerprints: Sequence[str] = (),
 ) -> ProbeResult:
     normalized_fingerprints = _normalize_fingerprints(expected_fingerprints)
+    normalized_function_fingerprints = _normalize_fingerprints(function_fingerprints)
     haystack = _observation_haystack(observation)
     has_publisher_identity = _has_publisher_identity(
         observation,
         normalized_fingerprints,
+    )
+    has_function_identity = not normalized_function_fingerprints or _has_function_identity(
+        observation,
+        normalized_function_fingerprints,
     )
     status_code = observation.status_code
 
@@ -134,6 +148,9 @@ def classify_observation(
     if status_code in {404, 410}:
         return ProbeResult(status="broken-link", reason=f"HTTP {status_code}")
 
+    if status_code == 429 or _contains_marker(haystack, ANTI_BOT_MARKERS):
+        return ProbeResult(status="anti-bot", reason="anti-bot challenge detected")
+
     if status_code is not None and 500 <= status_code < 600:
         return ProbeResult(status="temporarily-unreachable", reason=f"HTTP {status_code}")
 
@@ -143,9 +160,6 @@ def classify_observation(
     if status_code == 402 or _contains_marker(haystack, PAYWALL_MARKERS):
         return ProbeResult(status="paywalled", reason="subscription prompt detected")
 
-    if status_code == 429 or _contains_marker(haystack, ANTI_BOT_MARKERS):
-        return ProbeResult(status="anti-bot", reason="anti-bot challenge detected")
-
     if status_code is not None and 400 <= status_code < 500 and not has_publisher_identity:
         return ProbeResult(status="unverified", reason=f"HTTP {status_code}")
 
@@ -153,11 +167,21 @@ def classify_observation(
         return ProbeResult(status="broken-link", reason="error page markers detected")
 
     if observation.redirect_chain:
-        if has_publisher_identity:
+        if has_publisher_identity and has_function_identity:
             return ProbeResult(status="moved", reason="redirected to recognizable publisher route")
+        if has_publisher_identity:
+            return ProbeResult(
+                status="unverified",
+                reason="redirect target lacks function identity",
+            )
         return ProbeResult(status="unverified", reason="redirect target not fingerprinted")
 
     if status_code is not None and 200 <= status_code < 300 and has_publisher_identity:
+        if not has_function_identity:
+            return ProbeResult(
+                status="unverified",
+                reason="publisher page lacks function identity",
+            )
         return ProbeResult(status="reachable", reason="recognizable first-party content")
 
     return ProbeResult(status="unverified", reason="insufficient first-party evidence")
@@ -259,13 +283,18 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     if not args.probe_all and not args.sources:
         parser.error("pass --all or at least one --source")
+    if args.probe_all and args.sources:
+        parser.error("cannot combine --all with --source")
 
     try:
         cache_path = _validated_cli_cache_path(args.cache)
     except ValueError as exc:
         parser.error(str(exc))
 
-    profiles = _load_profile_records(args.profiles)
+    try:
+        profiles = _load_profile_records(args.profiles)
+    except ValueError as exc:
+        parser.error(str(exc))
     selected_ids = set(args.sources) if not args.probe_all else set(profiles)
     missing = sorted(selected_ids - profiles.keys())
     if missing:
@@ -278,16 +307,12 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     for source_id in source_ids:
         profile = profiles[source_id]
-        target_url = _profile_probe_url(profile)
-        observation = probe_url(target_url, timeout=args.timeout, user_agent=args.user_agent)
-        fingerprints = _profile_fingerprints(profile)
-        result = classify_observation(observation, fingerprints)
-        cache[source_id] = {
-            "status": result.status,
-            "reason": result.reason,
-            "last_checked": now,
-            **_observation_payload(observation),
-        }
+        cache[source_id] = _probe_profile_functions(
+            profile,
+            now,
+            timeout=args.timeout,
+            user_agent=args.user_agent,
+        )
         summary[source_id] = cache[source_id]
 
     write_cache(cache_path, cache)
@@ -299,6 +324,67 @@ def _observation_payload(observation: ProbeObservation) -> dict[str, object]:
     payload = asdict(observation)
     payload["redirect_chain"] = list(observation.redirect_chain)
     return payload
+
+
+def _probe_profile_functions(
+    profile: Mapping[str, object],
+    now: str,
+    *,
+    timeout: float,
+    user_agent: str,
+) -> dict[str, object]:
+    profile_fingerprints = _profile_fingerprints(profile)
+    function_observations: dict[str, dict[str, object]] = {}
+    probe_results: list[tuple[ProbeResult, ProbeObservation]] = []
+
+    for target in _profile_probe_targets(profile):
+        observation = probe_url(target.direct_url, timeout=timeout, user_agent=user_agent)
+        result = classify_observation(
+            observation,
+            profile_fingerprints,
+            function_fingerprints=target.function_fingerprints,
+        )
+        probe_results.append((result, observation))
+        if target.function_id is not None:
+            function_observations[target.function_id] = {
+                "status": result.status,
+                "reason": result.reason,
+                "last_checked": now,
+                "review_state": "unreviewed",
+                "route_identity": {
+                    "function_id": target.function_id,
+                    "direct_url": target.direct_url,
+                    "result_identity": target.result_identity,
+                },
+                **_observation_payload(observation),
+            }
+
+    source_entry = _source_cache_entry(probe_results, now)
+    if function_observations:
+        source_entry["functions"] = function_observations
+    return source_entry
+
+
+def _source_cache_entry(
+    probe_results: Sequence[tuple[ProbeResult, ProbeObservation]],
+    now: str,
+) -> dict[str, object]:
+    if not probe_results:
+        raise ValueError("profile has no probe targets")
+    result, observation = probe_results[0]
+    statuses = {item.status for item, _ in probe_results}
+    if len(statuses) > 1:
+        result = ProbeResult(
+            status="unverified",
+            reason="function probe statuses differ; use the per-function observation",
+        )
+    return {
+        "status": result.status,
+        "reason": result.reason,
+        "last_checked": now,
+        "review_state": "unreviewed",
+        **_observation_payload(observation),
+    }
 
 
 def _normalize_fingerprints(expected_fingerprints: Sequence[str]) -> tuple[str, ...]:
@@ -339,6 +425,18 @@ def _has_publisher_identity(
         if _is_meaningful_semantic_fingerprint(fingerprint)
     )
     return any(fingerprint in page_text for fingerprint in semantic_fingerprints)
+
+
+def _has_function_identity(
+    observation: ProbeObservation,
+    normalized_fingerprints: Sequence[str],
+) -> bool:
+    page_text = " ".join((observation.title or "", observation.body_excerpt)).lower()
+    return any(
+        fingerprint in page_text
+        for fingerprint in normalized_fingerprints
+        if _is_meaningful_semantic_fingerprint(fingerprint)
+    )
 
 
 def _domain_from_fingerprint(fingerprint: str) -> str | None:
@@ -479,6 +577,7 @@ def _validated_cli_cache_path(path: Path) -> Path:
 
 def _load_profile_records(profile_dir: Path) -> dict[str, Mapping[str, object]]:
     records: dict[str, Mapping[str, object]] = {}
+    source_paths: dict[str, Path] = {}
     for pattern in PROFILE_SUFFIXES:
         for path in sorted(profile_dir.glob(pattern)):
             payload = yaml.safe_load(path.read_text(encoding="utf-8"))
@@ -487,34 +586,94 @@ def _load_profile_records(profile_dir: Path) -> dict[str, Mapping[str, object]]:
             source_id = payload.get("id")
             if not isinstance(source_id, str):
                 raise ValueError(f"{path}: missing source id")
+            if source_id in source_paths:
+                raise ValueError(
+                    f"{path}: duplicate source id '{source_id}' already seen in {source_paths[source_id]}"
+                )
+            source_paths[source_id] = path
             records[source_id] = payload
     return records
 
 
-def _profile_probe_url(profile: Mapping[str, object]) -> str:
+def _profile_probe_targets(profile: Mapping[str, object]) -> tuple[ProbeTarget, ...]:
+    source_id = profile.get("id", "<unknown>")
+    if not isinstance(source_id, str):
+        source_id = "<unknown>"
+    functions = profile.get("functions")
+    if isinstance(functions, list) and functions:
+        targets: list[ProbeTarget] = []
+        for function in functions:
+            if not isinstance(function, Mapping):
+                continue
+            function_id = function.get("id")
+            if not isinstance(function_id, str) or not function_id:
+                raise ValueError(f"{source_id}: function missing id")
+            direct_url = _first_function_direct_url(function, source_id, function_id)
+            result_identity = _function_result_identity(function, source_id, function_id)
+            targets.append(
+                ProbeTarget(
+                    function_id=function_id,
+                    direct_url=direct_url,
+                    result_identity=result_identity,
+                    function_fingerprints=_function_fingerprints(function_id, result_identity),
+                )
+            )
+        if targets:
+            return tuple(targets)
+
     access = profile.get("access")
     if isinstance(access, Mapping):
         final_url = access.get("final_url")
         if isinstance(final_url, str) and final_url:
-            return final_url
+            return (
+                ProbeTarget(
+                    function_id=None,
+                    direct_url=final_url,
+                    result_identity=None,
+                    function_fingerprints=(),
+                ),
+            )
 
-    functions = profile.get("functions")
-    if isinstance(functions, list):
-        for function in functions:
-            if not isinstance(function, Mapping):
-                continue
-            direct_urls = function.get("direct_urls")
-            if not isinstance(direct_urls, list):
-                continue
-            for direct_url in direct_urls:
-                if not isinstance(direct_url, Mapping):
-                    continue
-                url = direct_url.get("url")
-                if isinstance(url, str) and url:
-                    return url
-
-    source_id = profile.get("id", "<unknown>")
     raise ValueError(f"{source_id}: missing probe URL")
+
+
+def _first_function_direct_url(
+    function: Mapping[str, object],
+    source_id: str,
+    function_id: str,
+) -> str:
+    direct_urls = function.get("direct_urls")
+    if not isinstance(direct_urls, list):
+        raise ValueError(f"{source_id}: {function_id}: missing direct_urls")
+    for direct_url in direct_urls:
+        if not isinstance(direct_url, Mapping):
+            continue
+        url = direct_url.get("url")
+        if isinstance(url, str) and url:
+            return url
+    raise ValueError(f"{source_id}: {function_id}: missing direct URL")
+
+
+def _function_result_identity(
+    function: Mapping[str, object],
+    source_id: str,
+    function_id: str,
+) -> str:
+    search = function.get("search")
+    if not isinstance(search, Mapping):
+        raise ValueError(f"{source_id}: {function_id}: missing search")
+    result_identity = search.get("result_identity")
+    if not isinstance(result_identity, str) or not result_identity:
+        raise ValueError(f"{source_id}: {function_id}: missing result_identity")
+    return result_identity
+
+
+def _function_fingerprints(function_id: str, result_identity: str) -> tuple[str, ...]:
+    return _normalize_fingerprints(
+        token
+        for token in (*function_id.split("-"), *result_identity.split(","))
+        if _is_meaningful_semantic_fingerprint(token.strip().lower())
+    )
 
 
 def _profile_fingerprints(profile: Mapping[str, object]) -> list[str]:
