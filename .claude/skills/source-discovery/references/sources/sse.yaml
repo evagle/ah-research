@@ -63,8 +63,8 @@ functions:
     example_query: search 600519 with the required date interval in the supervisory inquiry register
     result_identity: security code, issuer, letter date, inquiry type, title, and letter URL
   citation:
-    use: cite the SSE inquiry letter as the exchange action and separately cite an issuer reply from the
-      disclosure register or CNINFO.
+    use: cite the opened SSE inquiry letter as the exchange action and separately cite an issuer reply from
+      the disclosure register or CNINFO.
     required_fields:
     - publisher
     - title

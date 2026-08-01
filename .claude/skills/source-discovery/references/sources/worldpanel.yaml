@@ -33,7 +33,8 @@ functions:
     example_query: site:market.worldpanelbynumerator.com industry report
     result_identity: original publisher, title, author, date, methodology, URL
   citation:
-    use: attributable measurement with methodology and coverage noted
+    use: cite an opened publisher report or page with methodology and coverage noted; search results are
+      discovery metadata.
     required_fields:
     - publisher
     - title

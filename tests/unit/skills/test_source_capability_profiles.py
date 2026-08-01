@@ -566,10 +566,13 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
     assert now.tzinfo is not None
     assert now.utcoffset() is not None
 
-    forbidden_final_citations = set(scenario["forbidden_discovery_only_final_citations"])
     for requirement in scenario["required_functions"]:
         function_id = requirement["function_id"]
         expected_first_choice = requirement["expected_first_choice"]
+        assert "expected_route_order" in requirement
+        assert "expected_excluded_source_ids" in requirement
+        assert "forbidden_final_citation_source_ids" in requirement
+        assert "citation_readiness" in requirement
         candidate_profiles = [
             profiles_by_id[source_id] for source_id in requirement["candidate_source_ids"]
         ]
@@ -581,6 +584,12 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
         )
 
         assert routes, f"{scenario['id']}: no route for {function_id}"
+        assert [route.source_id for route in routes] == requirement["expected_route_order"]
+        assert set(requirement["candidate_source_ids"]) - {
+            route.source_id for route in routes
+        } == set(requirement["expected_excluded_source_ids"])
+        forbidden_final_citations = set(requirement["forbidden_final_citation_source_ids"])
+        assert forbidden_final_citations <= set(requirement["candidate_source_ids"])
         assert routes[0].source_id == expected_first_choice["source_id"]
         assert (
             profiles_by_id[routes[0].source_id]["publisher_type"]
@@ -591,9 +600,29 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
         if expected_direct_url is not None:
             assert routes[0].direct_url == expected_direct_url
 
-        if requirement["expects_final_citation"]:
-            assert routes[0].skip_reason is None
-            assert routes[0].source_id not in forbidden_final_citations
+        selected_function = next(
+            function
+            for function in profiles_by_id[routes[0].source_id]["functions"]
+            if function["id"] == function_id
+        )
+        citation_readiness = requirement["citation_readiness"]
+        citation = selected_function["citation"]
+        search = selected_function["search"]
+        assert citation_readiness["citation_use_contains"].lower() in citation["use"].lower()
+        assert set(citation_readiness["required_identity_fields"]) <= set(
+            citation["required_fields"]
+        )
+        assert set(citation_readiness["search_fields"]) <= set(search["fields"])
+        result_identity = search["result_identity"].lower()
+        for expected_field in citation_readiness["result_identity_contains"]:
+            assert expected_field.lower() in result_identity
+        assert citation_readiness["search_result_is_final_citation"] is False
+        if citation_readiness["opening_final_document_required"]:
+            assert (
+                citation_readiness["final_document_instruction_contains"].lower()
+                in citation["use"].lower()
+            )
+        assert routes[0].source_id not in forbidden_final_citations
 
         temporary_unavailability = requirement.get("temporary_unavailability")
         if temporary_unavailability is None:
@@ -617,14 +646,50 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
         expected_outage_route = temporary_unavailability["expected_first_choice"]
 
         assert outage_routes, f"{scenario['id']}: no outage route for {function_id}"
+        assert [route.source_id for route in outage_routes] == temporary_unavailability[
+            "expected_route_order"
+        ]
+        assert set(temporary_unavailability["candidate_source_ids"]) - {
+            route.source_id for route in outage_routes
+        } == set(temporary_unavailability["expected_excluded_source_ids"])
+        outage_forbidden_final_citations = set(
+            temporary_unavailability["forbidden_final_citation_source_ids"]
+        )
+        assert outage_forbidden_final_citations <= set(
+            temporary_unavailability["candidate_source_ids"]
+        )
         assert outage_routes[0].source_id == expected_outage_route["source_id"]
         assert (
             profiles_by_id[outage_routes[0].source_id]["publisher_type"]
             == expected_outage_route["publisher_type"]
         )
         assert outage_routes[0].skip_reason == expected_outage_route["skip_reason"]
-        if expected_outage_route["skip_reason"] is None:
-            assert outage_routes[0].source_id not in forbidden_final_citations
+        outage_function = next(
+            function
+            for function in profiles_by_id[outage_routes[0].source_id]["functions"]
+            if function["id"] == function_id
+        )
+        outage_citation_readiness = temporary_unavailability["citation_readiness"]
+        outage_citation = outage_function["citation"]
+        outage_search = outage_function["search"]
+        assert (
+            outage_citation_readiness["citation_use_contains"].lower()
+            in outage_citation["use"].lower()
+        )
+        assert set(outage_citation_readiness["required_identity_fields"]) <= set(
+            outage_citation["required_fields"]
+        )
+        assert set(outage_citation_readiness["search_fields"]) <= set(outage_search["fields"])
+        outage_result_identity = outage_search["result_identity"].lower()
+        for expected_field in outage_citation_readiness["result_identity_contains"]:
+            assert expected_field.lower() in outage_result_identity
+        assert outage_citation_readiness["search_result_is_final_citation"] is False
+        if outage_citation_readiness["opening_final_document_required"]:
+            assert (
+                outage_citation_readiness["final_document_instruction_contains"].lower()
+                in outage_citation["use"].lower()
+            )
+        assert outage_routes[0].source_id not in outage_forbidden_final_citations
         assert {route.source_id for route in outage_routes}.isdisjoint(
             temporary_unavailability["forbidden_substitutes"]
         )

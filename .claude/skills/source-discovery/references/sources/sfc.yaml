@@ -33,7 +33,8 @@ functions:
     example_query: site:sfc.hk official notice
     result_identity: publisher, title, date, notice or case ID, URL
   citation:
-    use: direct within the function authority scope
+    use: cite the opened official regulatory page within the function authority scope; search results are
+      discovery metadata.
     required_fields:
     - publisher
     - title

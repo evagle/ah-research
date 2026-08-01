@@ -33,7 +33,8 @@ functions:
     example_query: site:stats.gov.cn official statistics
     result_identity: publisher, indicator, period, geography, units, URL
   citation:
-    use: direct with series and methodology context
+    use: cite the opened official release with series and methodology context; search results are discovery
+      metadata.
     required_fields:
     - publisher
     - title
