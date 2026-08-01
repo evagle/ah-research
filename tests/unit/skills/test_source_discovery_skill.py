@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import re
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -9,6 +10,8 @@ import yaml
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_ROOT = REPO_ROOT / ".claude" / "skills"
 SKILL_ROOT = SKILLS_ROOT / "source-discovery"
+SOURCE_RECORD_START_PATTERN = re.compile(r"(?m)^(?:\|\s*)?`?(U\d{2})`?(?:\s*\||\b).*$")
+EVIDENCE_LEVEL_PATTERN = re.compile(r"(?:`(?:High|Medium|Low)`|\b(?:High|Medium|Low)\b)")
 
 
 def read(path: Path) -> str:
@@ -78,6 +81,21 @@ def provider_domains_from_urls(path: Path, *names: str) -> set[str]:
         assert host
         normalized.add(canonical_host(host))
     return normalized
+
+
+def source_record_blocks(catalog: str) -> dict[str, str]:
+    matches = list(SOURCE_RECORD_START_PATTERN.finditer(catalog))
+    records: dict[str, str] = {}
+    for index, match in enumerate(matches):
+        source_id = match.group(1)
+        end = matches[index + 1].start() if index + 1 < len(matches) else len(catalog)
+        records.setdefault(source_id, catalog[match.start() : end])
+    return records
+
+
+def assert_contains_all(text: str, phrases: tuple[str, ...]) -> None:
+    for phrase in phrases:
+        assert phrase in text
 
 
 def test_source_discovery_skill_has_required_resources() -> None:
@@ -164,6 +182,52 @@ def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
         assert f"`{evidence_level}`" in catalog
 
 
+def test_every_source_record_and_access_conclusion_has_explicit_evidence_level() -> None:
+    catalog = require_text(SKILL_ROOT / "references/source-catalog.md")
+    records = source_record_blocks(catalog)
+    for number in range(1, 64):
+        source_id = f"U{number:02d}"
+        assert source_id in records
+        assert EVIDENCE_LEVEL_PATTERN.search(records[source_id])
+
+    combined = "\n".join(
+        (
+            require_text(SKILL_ROOT / "SKILL.md"),
+            require_text(SKILL_ROOT / "references/search-playbook.md"),
+        )
+    )
+    assert_contains_all(
+        combined,
+        (
+            "Every source record must include an explicit evidence level: High, Medium, or Low.",
+            "Every access conclusion and source ledger row must include an "
+            "explicit evidence level: High, Medium, or Low.",
+            "access_conclusion",
+            "evidence_level",
+        ),
+    )
+
+
+def test_source_catalog_is_seed_registry_not_closed_allowlist() -> None:
+    combined = "\n".join(
+        (
+            require_text(SKILL_ROOT / "SKILL.md"),
+            require_text(SKILL_ROOT / "references/source-catalog.md"),
+            require_text(SKILL_ROOT / "references/search-playbook.md"),
+        )
+    )
+    assert_contains_all(
+        combined,
+        (
+            "The source catalog is a seed registry, not a closed allowlist.",
+            "Do not reject a source solely because it is absent from the catalog.",
+            "Use uncataloged sources when the question requires them and they pass validation.",
+            "Record uncataloged sources with the same fields, access status, "
+            "provenance, fallback peers, and evidence level.",
+        ),
+    )
+
+
 def test_source_discovery_enforces_company_site_and_fallback_rules() -> None:
     combined = "\n".join(
         (
@@ -247,27 +311,44 @@ def test_existing_financial_skills_reference_source_discovery() -> None:
     value = require_text(SKILLS_ROOT / "value-profile" / "SKILL.md")
     filing = require_text(SKILLS_ROOT / "read-filing" / "SKILL.md")
 
-    for phrase in (
-        "source-discovery",
-        "industry structure",
-        "product benchmarks",
-        "consumer data",
-        "specialist vertical research",
-    ):
-        assert phrase in product
-    for phrase in (
-        "source-discovery",
-        "macro",
-        "industry",
-        "valuation context",
-        "announcement/regulatory-letter discovery",
-        "annual/event/counterpart/market manifests remain authoritative",
-    ):
-        assert phrase in value
-    for phrase in (
-        "source-discovery",
-        "peer and industry context",
-        "exchange filing",
-        "official event source",
-    ):
-        assert phrase in filing
+    assert_contains_all(
+        product,
+        (
+            "`source-discovery` must be invoked when product-analysis needs "
+            "industry structure, product benchmarks, consumer/customer data, "
+            "specialist vertical research, or competitor evidence beyond issuer filings.",
+            "`source-discovery` may supply external context and source ledgers only; "
+            "`product-analysis` remains responsible for product-system judgments, "
+            "`moat_handoff`, and final Mode B schema compliance.",
+            "`source-discovery` cannot replace `read-filing` annual, event, or "
+            "counterpart manifests and cannot be used to bypass parent-bound "
+            "manifest hashes.",
+        ),
+    )
+    assert_contains_all(
+        value,
+        (
+            "`source-discovery` must be invoked for macro, industry, valuation "
+            "context, announcement/regulatory-letter discovery outside existing "
+            "manifests, specialist vertical research, and current external evidence gaps.",
+            "`source-discovery` may supply source candidates, access/provenance "
+            "validation, fallback exhaustion logs, and source ledger handoffs only; "
+            "`value-profile` remains the orchestrator and only writer of the profile.",
+            "Annual, event, counterpart, and market manifests remain authoritative "
+            "for bound financial, regulatory, filing, and market data; "
+            "`source-discovery` cannot override, replace, or backfill those manifests.",
+        ),
+    )
+    assert_contains_all(
+        filing,
+        (
+            "`source-discovery` must be invoked only for peer/industry context "
+            "and source search that is outside the official exchange filing/event "
+            "evidence pipeline.",
+            "`read-filing` remains the authority for exchange filing selection, "
+            "official event source discovery, manifest construction, source preflight, "
+            "and Mode B evidence binding.",
+            "`source-discovery` cannot choose annual reports, replace official "
+            "event sources, weaken live revalidation, or write profile sections.",
+        ),
+    )
