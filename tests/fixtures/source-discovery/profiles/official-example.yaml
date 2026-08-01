@@ -1,0 +1,33 @@
+id: sse
+name: Shanghai Stock Exchange
+aliases: [上海证券交易所]
+publisher_type: official-exchange
+official_domains: [sse.com.cn]
+geographies: [CN]
+industries: [all-listed]
+authority:
+  level: High
+  scope: SSE-published disclosures, rules, correspondence, and market data
+functions:
+  - id: company-announcements
+    authority: High
+    utility: High
+    direct_urls:
+      - url: https://www.sse.com.cn/home/search/
+        kind: search
+        stability: stable
+    search:
+      method: site-form
+      fields: [webswd]
+      example_query: 贵州茅台
+      result_identity: title, issuer, date, announcement ID
+    citation:
+      use: direct
+      required_fields: [publisher, title, date, document_id, url]
+    fallbacks: [cninfo-company-announcements]
+access:
+  status: reachable
+  last_checked: "2026-08-01T00:00:00+08:00"
+  final_url: https://www.sse.com.cn/
+  limitation: none observed
+  evidence_level: High

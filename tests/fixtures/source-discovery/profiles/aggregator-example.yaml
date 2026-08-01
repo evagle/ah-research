@@ -1,0 +1,33 @@
+id: eastmoney
+name: Eastmoney
+aliases: [东方财富网]
+publisher_type: aggregator
+official_domains: [eastmoney.com, dfcfw.com]
+geographies: [CN, HK]
+industries: [all-listed]
+authority:
+  level: Medium
+  scope: Discovery routes, portal indexes, and attributable hosted research metadata
+functions:
+  - id: company-announcements
+    authority: Low
+    utility: Medium
+    direct_urls:
+      - url: https://data.eastmoney.com/notices/
+        kind: index
+        stability: stable
+    search:
+      method: site-form
+      fields: [keyword]
+      example_query: 贵州茅台
+      result_identity: title, issuer, date, notice code
+    citation:
+      use: discovery-only
+      required_fields: [publisher, title, date, url]
+    fallbacks: [cninfo-company-announcements]
+access:
+  status: reachable
+  last_checked: "2026-08-01T00:00:00+08:00"
+  final_url: https://data.eastmoney.com/notices/
+  limitation: none observed
+  evidence_level: High
