@@ -372,6 +372,80 @@ def test_geography_scope_excludes_wrong_market_routes_but_keeps_global_routes() 
     assert [route.source_id for route in routes] == ["cn-route", "global-route"]
 
 
+def test_geography_scope_normalizes_lowercase_and_whitespace_labels() -> None:
+    source_profiles = load_source_profiles_module()
+    china = deepcopy(load_profile("official-example.yaml"))
+    china["id"] = "cn-route"
+    china["geographies"] = [" cn "]
+
+    routes = source_profiles.select_routes(
+        profiles=[china],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        geographies=[" cN "],
+    )
+
+    assert [route.source_id for route in routes] == ["cn-route"]
+
+
+def test_geography_scope_keeps_case_insensitive_global_profile() -> None:
+    source_profiles = load_source_profiles_module()
+    global_route = deepcopy(load_profile("official-example.yaml"))
+    global_route["id"] = "global-route"
+    global_route["geographies"] = [" global "]
+
+    routes = source_profiles.select_routes(
+        profiles=[global_route],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        geographies=["cn"],
+    )
+
+    assert [route.source_id for route in routes] == ["global-route"]
+
+
+def test_geography_scope_keeps_matching_multi_geography_profile() -> None:
+    source_profiles = load_source_profiles_module()
+    multi_geography = deepcopy(load_profile("official-example.yaml"))
+    multi_geography["id"] = "multi-geography-route"
+    multi_geography["geographies"] = ["US", " hk "]
+
+    routes = source_profiles.select_routes(
+        profiles=[multi_geography],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        geographies=("HK",),
+    )
+
+    assert [route.source_id for route in routes] == ["multi-geography-route"]
+
+
+@pytest.mark.parametrize("geographies", ["CN", b"CN"])
+def test_select_routes_rejects_bare_geography_strings(geographies: object) -> None:
+    source_profiles = load_source_profiles_module()
+
+    with pytest.raises(TypeError, match="geographies must be a sequence"):
+        source_profiles.select_routes(
+            profiles=[load_profile("official-example.yaml")],
+            function_id="company-announcements",
+            now=datetime(2026, 8, 2, tzinfo=UTC),
+            geographies=geographies,
+        )
+
+
+@pytest.mark.parametrize("geography", ["", " ", "\t"])
+def test_select_routes_rejects_blank_requested_geography_labels(geography: str) -> None:
+    source_profiles = load_source_profiles_module()
+
+    with pytest.raises(ValueError, match="geographies must not contain blank labels"):
+        source_profiles.select_routes(
+            profiles=[load_profile("official-example.yaml")],
+            function_id="company-announcements",
+            now=datetime(2026, 8, 2, tzinfo=UTC),
+            geographies=[geography],
+        )
+
+
 def test_fresh_temporarily_unreachable_route_is_skipped_for_fallback() -> None:
     source_profiles = load_source_profiles_module()
     official = deepcopy(load_profile("official-example.yaml"))

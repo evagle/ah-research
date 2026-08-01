@@ -99,8 +99,9 @@ For each same-function candidate set, call
 `source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot, geographies=claim_geographies)`
 when the claim has a geographic scope. With that optional scope, routes are
 eligible only when their profile lists a requested geography or `Global`;
-wrong-market routes are excluded before ranking. Omit `geographies` only when
-the claim has no geographic constraint. The resolver ignores a stale cache
+labels are trimmed and compared case-insensitively, and wrong-market routes are
+excluded before ranking. Pass a list or tuple of nonblank labels; omit
+`geographies` only when the claim has no geographic constraint. The resolver ignores a stale cache
 observation before it consults the reviewed snapshot, then falls back to the
 profile access record.
 A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority.

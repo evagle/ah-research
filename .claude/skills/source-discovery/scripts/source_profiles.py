@@ -46,7 +46,7 @@ PUBLISHER_SEMANTICS = {
     "media": ("Low", "Medium"),
     "mirror": ("Low", "Low"),
 }
-BROAD_GEOGRAPHIES = frozenset({"Global"})
+BROAD_GEOGRAPHIES = frozenset({"global"})
 
 
 @dataclass(frozen=True)
@@ -113,14 +113,15 @@ def select_routes(
 
     When geography scope is requested, profiles for any requested geography and
     profiles marked ``Global`` remain eligible. Profiles for other markets are
-    excluded after exact function matching and before route ranking.
+    excluded after exact function matching and before route ranking. Geography
+    labels are trimmed and compared case-insensitively.
     """
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("now must be timezone-aware")
 
     cache = cache or {}
     snapshot = snapshot or {}
-    requested_geographies = frozenset(geographies or ())
+    requested_geographies = _normalize_requested_geographies(geographies)
     candidates: list[RouteCandidate] = []
 
     for profile in profiles:
@@ -204,10 +205,41 @@ def _matches_geography_scope(
         return False
 
     return any(
-        isinstance(geography, str)
-        and (geography in requested_geographies or geography in BROAD_GEOGRAPHIES)
+        (normalized_geography := _normalize_profile_geography(geography)) is not None
+        and (
+            normalized_geography in requested_geographies
+            or normalized_geography in BROAD_GEOGRAPHIES
+        )
         for geography in profile_geographies
     )
+
+
+def _normalize_requested_geographies(
+    geographies: Sequence[str] | None,
+) -> frozenset[str]:
+    if geographies is None:
+        return frozenset()
+    if isinstance(geographies, (str, bytes)):
+        raise TypeError("geographies must be a sequence of strings, not str or bytes")
+
+    normalized_geographies: set[str] = set()
+    for geography in geographies:
+        if not isinstance(geography, str):
+            raise TypeError("geographies must contain only strings")
+        normalized_geography = geography.strip().casefold()
+        if not normalized_geography:
+            raise ValueError("geographies must not contain blank labels")
+        normalized_geographies.add(normalized_geography)
+
+    return frozenset(normalized_geographies)
+
+
+def _normalize_profile_geography(geography: object) -> str | None:
+    if not isinstance(geography, str):
+        return None
+
+    normalized_geography = geography.strip().casefold()
+    return normalized_geography or None
 
 
 def _first_direct_url(function: dict[str, object]) -> str:
