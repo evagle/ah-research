@@ -172,6 +172,14 @@ For every assigned website, a subagent must return:
 Homepage-only checks do not satisfy the exploration contract. The coordinating
 agent spot-checks high-value direct links and any changed canonical URL.
 
+Treat Eastmoney as a multi-role source family rather than one undifferentiated
+aggregator. Distinguish the finance portal, company and market-data pages,
+announcement and report indexes, Eastmoney Securities-authored research, and
+the `pdf.dfcfw.com` document host. A broker-authored report may be cited as
+attributable sell-side research after its publisher, analyst, date, title, and
+disclaimer are verified from the document. Portal summaries and document-host
+URLs do not inherit that authority without matching report metadata.
+
 Hong Kong discovery is explicitly open-ended. Start from HKEX/HKEXnews, SFC,
 AFRC, HKMA, Hong Kong government and statistics portals, issuer IR sites, and
 the original publishers linked by those sources. Add other useful Hong Kong

@@ -379,6 +379,15 @@ login/paywall/WAF/download limits, define citation eligibility, identify
 higher-authority same-function peers, timestamp findings, and assign
 `High|Medium|Low` evidence.
 
+The finance-portal agent must give Eastmoney dedicated coverage. Separate the
+portal, company-information pages, market/valuation data, announcement and
+research indexes, Eastmoney Securities-authored reports, and `pdf.dfcfw.com`
+document hosting. Starting from
+`https://pdf.dfcfw.com/pdf/H3_AP202506111688924171_1.pdf?1771032445000.pdf`,
+recover the report title, authoring institution, analyst, publication date,
+disclaimer, upstream search/list entry, company lookup path, and stable citation
+identity. Do not infer broker authority from the host domain alone.
+
 - [ ] **Step 2: Require open-ended Hong Kong discovery**
 
 The Hong Kong agent starts with HKEX/HKEXnews, SFC, AFRC, HKMA, Hong Kong
