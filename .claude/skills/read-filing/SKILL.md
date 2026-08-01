@@ -14,6 +14,15 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 **共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充年报阅读特有规则。
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享目录、run隔离、无感resolver、Mode边界和旧路径兼容只以该文件为准。
+
+### source-discovery handoff
+
+`source-discovery`只补充官方交易所证据链之外的同行与行业背景。
+
+`source-discovery` must be invoked only for peer/industry context and source search that is outside the official exchange filing/event evidence pipeline.
+`read-filing` remains the authority for exchange filing selection, official event source discovery, manifest construction, source preflight, and Mode B evidence binding.
+`source-discovery` cannot choose annual reports, replace official event sources, weaken live revalidation, or write profile sections.
+
 ## §0运行模式
 
 ### Mode A — Standalone

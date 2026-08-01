@@ -11,7 +11,18 @@ from jsonschema import Draft202012Validator
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_ROOT = REPO_ROOT / ".claude" / "skills"
-SKILL_PATHS = {path.parent.name: path for path in sorted(SKILLS_ROOT.glob("*/SKILL.md"))}
+FINANCIAL_SKILL_NAMES = (
+    "financial-redflag-scan",
+    "management-analysis",
+    "product-analysis",
+    "read-filing",
+    "value-profile",
+)
+SKILL_PATHS = {
+    path.parent.name: path
+    for path in sorted(SKILLS_ROOT.glob("*/SKILL.md"))
+    if path.parent.name in FINANCIAL_SKILL_NAMES
+}
 
 
 def read(path: Path) -> str:
@@ -31,13 +42,7 @@ def all_skill_markdown() -> list[Path]:
 
 
 def test_skill_frontmatter_is_discoverable_and_safe() -> None:
-    assert set(SKILL_PATHS) == {
-        "financial-redflag-scan",
-        "management-analysis",
-        "product-analysis",
-        "read-filing",
-        "value-profile",
-    }
+    assert set(SKILL_PATHS) == set(FINANCIAL_SKILL_NAMES)
     for folder, path in SKILL_PATHS.items():
         metadata = frontmatter(path)
         assert metadata["name"] == folder

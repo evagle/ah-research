@@ -11,7 +11,7 @@ description: Use when a user asks for a complete value-investing profile or full
 
 **共享契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。公共证据规则不在本skill重定义;本skill只补充父级编排、CAS和最终结论规则。接收判断型子skill响应时,分别按`.claude/skills/product-analysis/references/mode-b-response.schema.json`、`.claude/skills/management-analysis/references/mode-b-response.schema.json`和`.claude/skills/financial-redflag-scan/references/mode-b-response.schema.json`校验机器信封;Markdown正文保持自由。
 
-**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。正常入口、共享artifact、run隔离和无感resolver只以该文件为准；本skill仍是最终profile的唯一写入者。
+**共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。正常入口、共享artifact、run隔离和无感resolver只以该文件为准；本skill仍是最终profile的唯一写入者。`source-discovery` must be invoked for macro, industry, valuation context, announcement/regulatory-letter discovery outside existing manifests, specialist vertical research, and current external evidence gaps. `source-discovery` may supply source candidates, access/provenance validation, fallback exhaustion logs, and source ledger handoffs only; `value-profile` remains the orchestrator and only writer of the profile. Annual, event, counterpart, and market manifests remain authoritative for bound financial, regulatory, filing, and market data; `source-discovery` cannot override, replace, or backfill those manifests.
 
 ## §0 Skill 运行方式
 

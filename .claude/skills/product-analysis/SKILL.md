@@ -17,6 +17,14 @@ description: Use when a user asks what a company truly sells, how its products a
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。AI自由组织分析正文；共享目录、run隔离和无感resolver只以该文件为准。
 
+### source-discovery handoff
+
+外部行业与竞品补研统一走`source-discovery`,但本skill继续负责最终产品判断。
+
+`source-discovery` must be invoked when product-analysis needs industry structure, product benchmarks, consumer/customer data, specialist vertical research, or competitor evidence beyond issuer filings.
+`source-discovery` may supply external context and source ledgers only; `product-analysis` remains responsible for product-system judgments, `moat_handoff`, and final Mode B schema compliance.
+`source-discovery` cannot replace `read-filing` annual, event, or counterpart manifests and cannot be used to bypass parent-bound manifest hashes.
+
 ### Mode A—Standalone
 
 - **Invocation**:`/product-analysis <ticker> [--as-of YYYY-MM-DD] [--auto|--interactive]`。只有用户明确要求“完全重新分析”时内部resolver使用`--clean`
