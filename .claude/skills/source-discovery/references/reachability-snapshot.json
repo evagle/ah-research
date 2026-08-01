@@ -1749,21 +1749,21 @@
   },
   "pop-mart": {
     "status": "reachable-limited",
-    "last_checked": "2026-08-01T17:13:00+08:00",
-    "final_url": "https://www.popmart.com/",
-    "limitation": "Public storefront was JS-heavy and region dependent. No stable IR archive or investor link was verified from the storefront; CDN hosting alone does not establish issuer provenance.",
+    "last_checked": "2026-08-01T20:21:41+08:00",
+    "final_url": "https://www.popmart.com/us/investor-relations",
+    "limitation": "Public storefront remains JS-heavy and region dependent. The issuer IR entry is reachable but renders no reproducible noninteractive filing index. An exact issuer-hosted FY2025 copy matched HKEXnews; use it only as a convenience copy while the HKEXnews original is readable.",
     "observed_error": {
       "state": "none",
       "category": "none",
-      "message": "Official storefront loaded in the probe."
+      "message": "Issuer IR entry and a matched issuer-hosted PDF loaded in the forward probe."
     },
     "evidence_level": "High",
     "reviewed_probe": {
-      "redirect_chain": "Regional storefront routing was observed.",
-      "response_status": "Official storefront loaded.",
-      "recognizable_content": "Pop Mart product and brand presentation.",
-      "access_indications": "No login required for the observed storefront.",
-      "technical_restriction": "Use HKEXnews for listed-company filings and retain region or locale context."
+      "redirect_chain": "m.popmart.com redirected to the www.popmart.com issuer IR entry.",
+      "response_status": "Issuer IR page shell and one matched issuer-hosted PDF loaded.",
+      "recognizable_content": "Next.js investor-relations page route and issuer asset host.",
+      "access_indications": "No login was required for the observed IR entry or matched PDF.",
+      "technical_restriction": "The IR page exposes no reproducible noninteractive filing index; use HKEXnews for filing discovery and the primary filing body."
     }
   },
   "pwc-china": {

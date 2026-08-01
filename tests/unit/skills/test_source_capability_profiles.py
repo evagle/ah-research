@@ -587,6 +587,9 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
             == expected_first_choice["publisher_type"]
         )
         assert routes[0].skip_reason == expected_first_choice["skip_reason"]
+        expected_direct_url = expected_first_choice.get("direct_url")
+        if expected_direct_url is not None:
+            assert routes[0].direct_url == expected_direct_url
 
         if requirement["expects_final_citation"]:
             assert routes[0].skip_reason is None

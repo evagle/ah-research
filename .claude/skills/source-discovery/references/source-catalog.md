@@ -1886,7 +1886,7 @@ route before reporting a source gap.
 - Aliases/origins: `POP MART`, `popmart.com`
 - Publisher type: `issuer-company`
 - Official domains: `popmart.com`
-- Provenance authority: `High` - Pop Mart's own product, brand, location, policy, and first-party statements; not a verified investor filing archive or independent commercial evidence.
+- Provenance authority: `High` - Pop Mart's own product, brand, location, policy, investor-relations context, and first-party statements; not a primary investor filing archive or independent commercial evidence.
 - Function: `company-product-statements`
   - Authority: `High`
   - Utility: `Medium`
@@ -1895,9 +1895,17 @@ route before reporting a source gap.
   - Direct links: [official storefront](<https://www.popmart.com/>)
   - Search example: `search the rendered storefront for LABUBU or THE%20MONSTERS`
   - Same-function fallbacks: None
+- Function: `issuer-investor-relations`
+  - Authority: `High`
+  - Utility: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
+  - Direct links: [issuer investor-relations entry](<https://www.popmart.com/us/investor-relations>)
+  - Search example: `open the issuer IR entry, then match a Pop Mart report title and period to its HKEXnews original before using an issuer-hosted copy`
+  - Same-function fallbacks: None
 - Current status: `reachable-limited`
-- Last checked: `2026-08-01T17:13:00+08:00`
-- Access limitations: Public storefront was JS-heavy and region dependent. No stable IR archive or investor link was verified from the storefront; CDN hosting alone does not establish issuer provenance.
+- Last checked: `2026-08-01T20:21:41+08:00`
+- Access limitations: Public storefront remains JS-heavy and region dependent. The issuer IR entry is reachable but renders no reproducible noninteractive filing index. An exact issuer-hosted FY2025 copy matched HKEXnews; use it only as a convenience copy while the HKEXnews original is readable.
 - Access observation evidence: `High`
 - Site guide: None
 

@@ -27,13 +27,14 @@ required_functions:
       forbidden_substitutes:
         - eastmoney-announcement-index
         - aastocks
-  - name: Issuer company materials with IR limitation recorded
-    function_id: company-product-statements
+  - name: Issuer investor-relations entry and exact-copy control
+    function_id: issuer-investor-relations
     candidate_source_ids: [pop-mart]
     expected_first_choice:
       source_id: pop-mart
       publisher_type: issuer-company
       skip_reason: null
+      direct_url: https://www.popmart.com/us/investor-relations
     expects_final_citation: true
   - name: Statutory ownership through HKEX Disclosure of Interests
     function_id: statutory-ownership
