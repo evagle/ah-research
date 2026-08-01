@@ -19,8 +19,8 @@ functions:
 - id: housing-data-directory
   authority: Low
   utility: Medium
-  workflow_evidence: High
-  field_contract_evidence: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: http://hao.199it.com/fang.html
     kind: primary route

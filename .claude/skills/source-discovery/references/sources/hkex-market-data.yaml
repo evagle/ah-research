@@ -17,7 +17,7 @@ functions:
 - id: official-market-data
   authority: High
   utility: High
-  workflow_evidence: High
+  workflow_evidence: Medium
   field_contract_evidence: Medium
   direct_urls:
   - url: https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=en

@@ -19,8 +19,8 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: High
-  workflow_evidence: High
-  field_contract_evidence: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.shanghai.gov.cn/
     kind: primary route

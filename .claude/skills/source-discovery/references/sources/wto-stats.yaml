@@ -20,8 +20,8 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
-  workflow_evidence: High
-  field_contract_evidence: Medium
+  workflow_evidence: Low
+  field_contract_evidence: Low
   direct_urls:
   - url: https://stats.wto.org/
     kind: primary route

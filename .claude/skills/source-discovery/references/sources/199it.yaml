@@ -19,8 +19,8 @@ functions:
 - id: research-reports
   authority: Low
   utility: High
-  workflow_evidence: High
-  field_contract_evidence: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.199it.com/
     kind: primary route

@@ -17,7 +17,7 @@ functions:
 - id: ccass-participant-holdings
   authority: High
   utility: High
-  workflow_evidence: High
+  workflow_evidence: Medium
   field_contract_evidence: Medium
   direct_urls:
   - url: https://www3.hkexnews.hk/sdw/search/searchsdw.aspx

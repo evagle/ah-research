@@ -19,8 +19,8 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: Medium
-  workflow_evidence: High
-  field_contract_evidence: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
   direct_urls:
   - url: https://www.police.gov.hk/
     kind: primary route

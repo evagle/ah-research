@@ -17,7 +17,7 @@ functions:
 - id: official-statistics
   authority: High
   utility: High
-  workflow_evidence: High
+  workflow_evidence: Medium
   field_contract_evidence: Medium
   direct_urls:
   - url: https://www.censtatd.gov.hk/en/web_table.html

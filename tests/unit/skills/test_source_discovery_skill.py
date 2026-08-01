@@ -237,6 +237,15 @@ def test_source_catalog_defines_record_fields_and_vocabularies() -> None:
         assert f"`{evidence_level}`" in catalog
 
 
+def test_catalog_renders_low_evidence_for_uncompleted_audit_workflows() -> None:
+    catalog = require_text(CATALOG_PATH)
+
+    for source_id in ("aliresearch", "undata", "wto-stats"):
+        section = catalog.split(f"## `{source_id}`", maxsplit=1)[1].split("\n## ", maxsplit=1)[0]
+        assert "- Completed workflow evidence: `Low`" in section
+        assert "- Stable field/API evidence: `Low`" in section
+
+
 def test_catalog_ratings_are_best_use_route_priors_not_claim_grades() -> None:
     catalog = require_text(CATALOG_PATH)
     skill = require_text(SKILL_ROOT / "SKILL.md")

@@ -684,6 +684,96 @@ def test_task_5_round_1_separates_authority_access_workflow_and_field_evidence()
             assert function["field_contract_evidence"] in {"High", "Medium", "Low"}
 
 
+def test_task_5_round_2_limits_uncompleted_workflow_evidence() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    evidence_by_function = {
+        f"{profile['id']}-{function['id']}": (
+            function["workflow_evidence"],
+            function["field_contract_evidence"],
+        )
+        for profile in profiles.values()
+        for function in profile["functions"]
+    }
+
+    # These routes reached only a WAF, failed export, SPA shell, or uninspected
+    # search surface in the audit; none completed a cited record/data workflow.
+    assert evidence_by_function["aliresearch-research-reports"] == ("Low", "Low")
+    assert evidence_by_function["undata-official-statistics"] == ("Low", "Low")
+    assert evidence_by_function["wto-stats-official-statistics"] == ("Low", "Low")
+
+    # This set is deliberately report-derived rather than inferred from a
+    # reachability status: its members exposed only entry, search-card, or
+    # incomplete-record evidence for the exported function.
+    assert {
+        function_id: evidence_by_function[function_id]
+        for function_id in (
+            "199it-housing-tools-housing-data-directory",
+            "199it-research-reports",
+            "afrc-regulatory-materials",
+            "bain-china-research-reports",
+            "beijing-government-regulatory-materials",
+            "caac-official-aviation-statistics",
+            "china-money-market-data",
+            "csrc-regulatory-materials",
+            "data-gov-hk-dataset-catalog",
+            "guangdong-government-regulatory-materials",
+            "hk-icac-regulatory-materials",
+            "hk-judiciary-regulatory-materials",
+            "hk-police-regulatory-materials",
+            "hkex-ccass-ccass-participant-holdings",
+            "hkex-market-data-official-market-data",
+            "hkexnews-company-disclosures",
+            "hksar-press-releases-government-press-releases",
+            "hong-kong-consumer-council-consumer-research",
+            "hong-kong-statistics-official-statistics",
+            "ministry-of-finance-regulatory-materials",
+            "national-bureau-statistics-official-statistics",
+            "nfra-regulatory-materials",
+            "nrta-audiovisual-regulation",
+            "pbc-central-bank-policy-search",
+            "pew-research-research-reports",
+            "sfc-regulatory-materials",
+            "shanghai-government-regulatory-materials",
+            "sina-finance-research-reports",
+            "unsd-demographic-social-official-statistics",
+            "wef-china-research-reports",
+            "szse-company-disclosures",
+        )
+    } == {
+        "199it-housing-tools-housing-data-directory": ("Medium", "Low"),
+        "199it-research-reports": ("Medium", "Low"),
+        "afrc-regulatory-materials": ("Medium", "Medium"),
+        "bain-china-research-reports": ("Medium", "Medium"),
+        "beijing-government-regulatory-materials": ("Medium", "Low"),
+        "caac-official-aviation-statistics": ("Medium", "Medium"),
+        "china-money-market-data": ("Medium", "Low"),
+        "csrc-regulatory-materials": ("Medium", "Low"),
+        "data-gov-hk-dataset-catalog": ("Medium", "Medium"),
+        "guangdong-government-regulatory-materials": ("Medium", "Low"),
+        "hk-icac-regulatory-materials": ("Medium", "Low"),
+        "hk-judiciary-regulatory-materials": ("Medium", "Low"),
+        "hk-police-regulatory-materials": ("Medium", "Low"),
+        "hkex-ccass-ccass-participant-holdings": ("Medium", "Medium"),
+        "hkex-market-data-official-market-data": ("Medium", "Medium"),
+        "hkexnews-company-disclosures": ("Medium", "Medium"),
+        "hksar-press-releases-government-press-releases": ("Medium", "Medium"),
+        "hong-kong-consumer-council-consumer-research": ("Medium", "Medium"),
+        "hong-kong-statistics-official-statistics": ("Medium", "Medium"),
+        "ministry-of-finance-regulatory-materials": ("Medium", "Low"),
+        "national-bureau-statistics-official-statistics": ("Medium", "Low"),
+        "nfra-regulatory-materials": ("Medium", "Low"),
+        "nrta-audiovisual-regulation": ("Medium", "Medium"),
+        "pbc-central-bank-policy-search": ("Medium", "Medium"),
+        "pew-research-research-reports": ("Medium", "Low"),
+        "sfc-regulatory-materials": ("Medium", "Medium"),
+        "shanghai-government-regulatory-materials": ("Medium", "Low"),
+        "sina-finance-research-reports": ("Medium", "Medium"),
+        "unsd-demographic-social-official-statistics": ("Medium", "Low"),
+        "wef-china-research-reports": ("Medium", "Low"),
+        "szse-company-disclosures": ("Medium", "Medium"),
+    }
+
+
 def test_publisher_semantics_are_closed_and_explicit_for_every_profile_type() -> None:
     source_profiles = load_source_profiles_module()
     schema_types = set(load_schema()["properties"]["publisher_type"]["enum"])

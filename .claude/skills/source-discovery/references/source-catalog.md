@@ -70,8 +70,8 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `Low`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.199it.com/>)
   - Search example: `site:199it.com industry report`
   - Same-function fallbacks: `iresearch-research-reports`, `idc-research-reports`
@@ -90,8 +90,8 @@ route before reporting a source gap.
 - Function: `housing-data-directory`
   - Authority: `Low`
   - Utility: `Medium`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://hao.199it.com/fang.html>)
   - Search example: `site:hao.199it.com housing statistics`
   - Same-function fallbacks: None
@@ -190,7 +190,7 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.afrc.org.hk/>)
   - Search example: `site:afrc.org.hk official notice`
@@ -230,8 +230,8 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `Medium`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.aliresearch.com/cn/index>)
   - Search example: `site:aliresearch.com industry report`
   - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
@@ -290,7 +290,7 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.bain.cn/>)
   - Search example: `site:bain.cn industry report`
@@ -330,8 +330,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.beijing.gov.cn/>)
   - Search example: `site:beijing.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
@@ -390,7 +390,7 @@ route before reporting a source gap.
 - Function: `official-aviation-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [statistics index](<https://www.caac.gov.cn/XXGK/XXGK/TJSJ/index_1215.html>), [official site search](<https://www.caac.gov.cn/so/s?tab=all&siteCode=bm70000001&qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1>)
   - Search example: `qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1&tab=all&siteCode=bm70000001`
@@ -490,8 +490,8 @@ route before reporting a source gap.
 - Function: `market-data`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.chinamoney.com.cn/chinese/index.html>)
   - Search example: `site:chinamoney.com.cn market data`
   - Same-function fallbacks: None
@@ -610,8 +610,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.csrc.gov.cn/>)
   - Search example: `site:csrc.gov.cn official notice`
   - Same-function fallbacks: `nfra-regulatory-materials`
@@ -630,7 +630,7 @@ route before reporting a source gap.
 - Function: `dataset-catalog`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [dataset catalog](<https://data.gov.hk/en/>)
   - Search example: `search retail sales, filter Census and Statistics Department, then open the resource URL`
@@ -1014,8 +1014,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.gd.gov.cn/>)
   - Search example: `site:gd.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `shanghai-government-regulatory-materials`
@@ -1094,8 +1094,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.icac.org.hk/>)
   - Search example: `site:icac.org.hk official notice`
   - Same-function fallbacks: `hk-judiciary-regulatory-materials`, `hk-police-regulatory-materials`
@@ -1134,8 +1134,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.judiciary.hk/>)
   - Search example: `site:judiciary.hk official notice`
   - Same-function fallbacks: `hk-police-regulatory-materials`, `hk-icac-regulatory-materials`
@@ -1154,8 +1154,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `Medium`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.police.gov.hk/>)
   - Search example: `site:police.gov.hk official notice`
   - Same-function fallbacks: `hk-icac-regulatory-materials`, `hk-judiciary-regulatory-materials`
@@ -1186,7 +1186,7 @@ route before reporting a source gap.
 - Function: `ccass-participant-holdings`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [current participant-holdings search](<https://www3.hkexnews.hk/sdw/search/searchsdw.aspx>)
   - Search example: `txtShareholdingDate=2026/07/31 and txtStockCode=09992`
@@ -1226,7 +1226,7 @@ route before reporting a source gap.
 - Function: `official-market-data`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [equity lookup](<https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=en>), [dated daily quotation route](<https://www.hkex.com.hk/Market-Data/Statistics/Securities-Market/Daily-Quotations-(Main-Board)?sc_lang=en>)
   - Search example: `enter 09992 in the equity lookup and retain the market timestamp or dated report`
@@ -1246,7 +1246,7 @@ route before reporting a source gap.
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [listed-company title search](<https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en>)
   - Search example: `stockCode=09992, startDate=2025-01-01, endDate=2026-08-01, Financial Statements or ESG`
@@ -1326,7 +1326,7 @@ route before reporting a source gap.
 - Function: `government-press-releases`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [daily release archive](<https://www.info.gov.hk/gia/general/today.htm>), [government search](<https://www.search.gov.hk/search.html?query=Pop%20Mart&ui_lang=en&ui_charset=utf-8>)
   - Search example: `query=POP%20MART&ui_lang=en&ui_charset=utf-8`
@@ -1366,7 +1366,7 @@ route before reporting a source gap.
 - Function: `consumer-research`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [site search](<https://www.consumer.org.hk/en/search?q=Pop%20Mart>)
   - Search example: `q=collectibles&category=testing_report`
@@ -1426,7 +1426,7 @@ route before reporting a source gap.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [Web Table entry](<https://www.censtatd.gov.hk/en/web_table.html>)
   - Search example: `select a retail-sales table, all-items retail value, and a monthly period before CSV or API export`
@@ -1698,8 +1698,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.mof.gov.cn/>)
   - Search example: `site:mof.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`
@@ -1730,8 +1730,8 @@ route before reporting a source gap.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.stats.gov.cn/>)
   - Search example: `site:stats.gov.cn official statistics`
   - Same-function fallbacks: `beijing-statistics-official-statistics`, `shanghai-statistics-official-statistics`
@@ -1782,8 +1782,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.nfra.gov.cn/>)
   - Search example: `site:nfra.gov.cn official notice`
   - Same-function fallbacks: `csrc-regulatory-materials`
@@ -1802,7 +1802,7 @@ route before reporting a source gap.
 - Function: `audiovisual-regulation`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [network audiovisual notices](<https://www.nrta.gov.cn/col/col110/index.html>)
   - Search example: `browse network audiovisual notices for %E7%BD%91%E7%BB%9C%E5%BE%AE%E7%9F%AD%E5%89%A7`
@@ -1850,7 +1850,7 @@ route before reporting a source gap.
 - Function: `central-bank-policy-search`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [PBOC site search](<https://wzdig.pbc.gov.cn/search/pcRender?sr=score%20desc&pageId=c177a85bd02b4114bebebd210809f691&ext=&pNo=1&q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0>)
   - Search example: `q=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pNo=1`
@@ -1870,8 +1870,8 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.pewresearch.org/>)
   - Search example: `site:pewresearch.org industry report`
   - Same-function fallbacks: `wef-china-research-reports`
@@ -2010,7 +2010,7 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://www.sfc.hk/en/>)
   - Search example: `site:sfc.hk official notice`
@@ -2030,8 +2030,8 @@ route before reporting a source gap.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.shanghai.gov.cn/>)
   - Search example: `site:shanghai.gov.cn official notice`
   - Same-function fallbacks: `state-council-regulatory-materials`, `beijing-government-regulatory-materials`
@@ -2070,7 +2070,7 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [primary route](<https://finance.sina.com.cn/>)
   - Search example: `site:finance.sina.com.cn industry report`
@@ -2150,7 +2150,7 @@ route before reporting a source gap.
 - Function: `company-disclosures`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
+  - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Medium`
   - Direct links: [listed-company announcement register](<https://www.szse.cn/disclosure/listed/notice/index.html>)
   - Search example: `search 600519 with an explicit date range to confirm it yields no SZSE result`
@@ -2270,8 +2270,8 @@ route before reporting a source gap.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://data.un.org/>)
   - Search example: `site:data.un.org official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`, `imf-data-official-statistics`
@@ -2290,8 +2290,8 @@ route before reporting a source gap.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://unstats.un.org/unsd/demographic-social/>)
   - Search example: `site:unstats.un.org official statistics`
   - Same-function fallbacks: `undata-official-statistics`, `world-bank-data-official-statistics`
@@ -2370,8 +2370,8 @@ route before reporting a source gap.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `Medium`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Medium`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://cn.weforum.org/>)
   - Search example: `site:cn.weforum.org industry report`
   - Same-function fallbacks: `mckinsey-china-research-reports`, `deloitte-china-research-reports`
@@ -2450,8 +2450,8 @@ route before reporting a source gap.
 - Function: `official-statistics`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `High`
-  - Stable field/API evidence: `Medium`
+  - Completed workflow evidence: `Low`
+  - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://stats.wto.org/>), [direct route](<https://timeseries.wto.org/>)
   - Search example: `site:stats.wto.org official statistics`
   - Same-function fallbacks: `world-bank-data-official-statistics`

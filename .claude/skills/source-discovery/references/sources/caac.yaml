@@ -17,7 +17,7 @@ functions:
 - id: official-aviation-statistics
   authority: High
   utility: High
-  workflow_evidence: High
+  workflow_evidence: Medium
   field_contract_evidence: Medium
   direct_urls:
   - url: https://www.caac.gov.cn/XXGK/XXGK/TJSJ/index_1215.html
