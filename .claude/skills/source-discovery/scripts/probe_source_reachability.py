@@ -24,22 +24,26 @@ MAX_BODY_BYTES = 32_768
 MIN_SEMANTIC_FINGERPRINT_CHARACTERS = 4
 LOGIN_MARKERS = (
     "login required",
-    "log in",
-    "sign in",
     "please sign in",
     "please log in",
-    "登录",
-    "登入",
+    "sign in to continue",
+    "log in to continue",
+    "请先登录",
+    "登录后查看",
+    "登录后下载",
+    "登录即可",
+    "需要登录",
 )
 PAYWALL_MARKERS = (
-    "subscribe now",
     "subscription required",
     "subscriber access",
-    "become a member",
     "membership required",
-    "vip",
-    "付费",
-    "会员",
+    "subscribe now for full",
+    "members only",
+    "仅限会员",
+    "会员专享",
+    "付费后",
+    "购买后",
 )
 ANTI_BOT_MARKERS = (
     "akamai",

@@ -19,12 +19,15 @@ functions:
 - id: regulatory-materials
   authority: High
   utility: High
-  workflow_evidence: Medium
+  workflow_evidence: High
   field_contract_evidence: Low
   direct_urls:
   - url: https://www.shanghai.gov.cn/
     kind: primary route
     stability: reviewed seed
+  - url: https://www.shanghai.gov.cn/nw12344/index.html
+    kind: recent information disclosure
+    stability: observed current route
   search:
     method: publisher-bound web search
     fields:
@@ -45,20 +48,18 @@ functions:
   - beijing-government-regulatory-materials
 access:
   status: reachable
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.shanghai.gov.cn/
-  limitation: 'public; source family not single URL. Fragmented IA, inconsistent formats, broken links,
-    PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks,
-    local open-data portals.'
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.shanghai.gov.cn/nw12344/index.html
+  limitation: Public recent-disclosure list and sampled policy detail loaded anonymously. The wider source
+    family remains fragmented across departments and formats.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
-  evidence_level: Medium
+  evidence_level: High
   reviewed_probe:
-    redirect_chain: Source family; representative samples checked
-    response_status: Beijing, Shanghai, Guangdong statistics/government samples `200`; Guangdong samples
-      slow
-    recognizable_content: Official local statistics/government portals
-    access_indications: None recorded
-    technical_restriction: Fragmented family; inconsistent formats; slow responses in samples
+    redirect_chain: No material redirect on the tested list or detail
+    response_status: '`200 OK` for recent-disclosure list and sampled policy detail'
+    recognizable_content: Issuer, title, date, document text, and official Shanghai government identity
+    access_indications: Optional login/register navigation did not block public documents
+    technical_restriction: Departmental pages and attachments may use different formats

@@ -14,21 +14,83 @@ industries:
 authority:
   level: High
   scope: State Post Bureau regulatory material and postal or express-delivery publications within its mandate.
-functions: []
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml
+    kind: postal industry statistics
+    stability: observed current route
+  - url: https://www.spb.gov.cn/gjyzj/c100278/common_list.shtml
+    kind: China express delivery development index
+    stability: observed current route
+  - url: https://www.spb.gov.cn/gjyzj/c100015/c100016/202607/a31abbec99be4e0d80188b1a25fe1fe6.shtml
+    kind: statistics release example
+    stability: observed current route; reacquire the current period for runtime research
+  search:
+    method: navigate the official statistics, interpretation, or development-index list and open the
+      exact period
+    fields:
+    - indicator
+    - period
+    - geography
+    example_query: open 统计信息 and select the required monthly, quarterly, or annual postal-industry release
+    result_identity: publisher, release title, period, indicator, units, comparison basis, and URL
+  citation:
+    use: cite the exact official release with period, units, scope exclusions, and revision context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - national-bureau-statistics-official-statistics
+- id: regulatory-materials
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.spb.gov.cn/gjyzj/c100009/c100014/xxgk_index.shtml
+    kind: government information disclosure
+    stability: observed current route
+  search:
+    method: navigate official information disclosure and open the exact policy, standard, notice, or interpretation
+    fields:
+    - title
+    - issuing unit
+    - publication date
+    - document number
+    example_query: navigate 政务公开 for postal regulation or standards
+    result_identity: issuing unit, title, document number, date, attachment, and URL
+  citation:
+    use: direct for State Post Bureau materials within its mandate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - state-council-regulatory-materials
 access:
-  status: reachable-limited
-  last_checked: '2026-08-01T17:39:00+08:00'
-  final_url: https://www.spb.gov.cn/
-  limitation: Root was public, but guessed search paths were unavailable. No stable search or API contract
-    was verified.
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml
+  limitation: Public statistics list, industry-development-index list, government-information-disclosure
+    route, and sampled statistics and policy details loaded anonymously. Some legacy list aliases redirect
+    through JavaScript to the current category.
   observed_error:
     state: none
     category: none
-    message: Current root loaded; guessed search route was unavailable.
+    message: Current official statistics and disclosure workflows completed.
   evidence_level: High
   reviewed_probe:
     redirect_chain: Current root used.
-    response_status: Root 200; guessed search route unavailable.
-    recognizable_content: Bureau root content.
-    access_indications: No login observed on root.
-    technical_restriction: Navigate from current content to the exact source document.
+    response_status: '`200 OK` for root, current statistics list, disclosure index, and sampled details'
+    recognizable_content: Postal business volume, revenue, regional shares, CR8, period, methodology note,
+      policy titles, and regulator identity
+    access_indications: Optional government-service login did not block public statistics or documents
+    technical_restriction: Follow JavaScript redirects from stale list aliases to current category routes

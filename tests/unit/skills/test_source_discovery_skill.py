@@ -320,9 +320,12 @@ def test_search_playbook_makes_uncataloged_hong_kong_discovery_trust_first() -> 
     )
 
 
-def test_source_catalog_preserves_every_supplied_entry() -> None:
+def test_source_catalog_preserves_every_active_supplied_entry() -> None:
     catalog = require_text(CATALOG_PATH)
+    retired = {2, 8, 15, 63}
     for number in range(1, 64):
+        if number in retired:
+            continue
         assert f"U{number:02d}" in catalog
 
 

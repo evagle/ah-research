@@ -18,13 +18,16 @@ authority:
 functions:
 - id: mobile-intelligence-research
   authority: High
-  utility: Medium
-  workflow_evidence: Medium
-  field_contract_evidence: Low
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
   direct_urls:
   - url: https://www.questmobile.com.cn/research/report-new
     kind: research report entry
     stability: SPA route; completed results not verified
+  - url: https://www.questmobile.com.cn/research/report/2082318300587618305
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
   search:
     method: rendered QuestMobile research navigation
     fields:
@@ -44,19 +47,21 @@ functions:
   fallbacks:
   - analysys-research-reports
 access:
-  status: reachable-limited
-  last_checked: '2026-08-01T17:48:00+08:00'
-  final_url: https://www.questmobile.com.cn/research/report-new
-  limitation: Public SPA shell advertised reports and mobile-big-data analysis. Rendered search, account,
-    export, licensing, and result-level access were not completed.
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.questmobile.com.cn/research/report/2082318300587618305
+  limitation: Public report detail pages expose the report title, date, publisher, industry, keywords,
+    narrative, metrics, and related-report links without login. Login belongs to the separate QuestMobile
+    data product. No direct PDF or data export was observed on the tested public report page.
   observed_error:
     state: none
     category: none
-    message: Home and report route returned a live SPA shell.
-  evidence_level: Medium
+    message: A report detail page and its rendered report content loaded anonymously.
+  evidence_level: High
   reviewed_probe:
     redirect_chain: No material redirect recorded.
-    response_status: QuestMobile SPA shell returned.
-    recognizable_content: Mobile-internet business-intelligence and report branding.
-    access_indications: Account, data export, and licensing were not verified.
-    technical_restriction: Do not assert an API, search result count, or full-report access.
+    response_status: '`200 OK` for the supplied report detail page in curl and headless Chrome.'
+    recognizable_content: Report title, date, publisher, industry, keywords, narrative sections, metrics,
+      and related reports.
+    access_indications: Public report content required no login; separate data-product login remains.
+    technical_restriction: No public PDF or export contract was established.

@@ -180,6 +180,41 @@ def test_classify_login_prompt_as_login_required() -> None:
     assert result.status == "login-required"
 
 
+def test_classify_optional_login_navigation_as_reachable() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://www.gov.example/reports/market-data",
+            title="Official market data",
+            body_excerpt=(
+                "首页 登录 注册 Official market data report with public statistics, "
+                "methodology, publication date, and downloadable tables."
+            ),
+        ),
+        expected_fingerprints=["gov.example"],
+        function_fingerprints=["market data", "report"],
+    )
+
+    assert result.status == "reachable"
+
+
+def test_classify_explicit_login_gate_as_login_required() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://reports.example.com/report/123",
+            title="Industry report",
+            body_excerpt="Report preview. 登录即可查看完整内容并下载 PDF。",
+        ),
+        expected_fingerprints=["reports.example.com"],
+        function_fingerprints=["report"],
+    )
+
+    assert result.status == "login-required"
+
+
 def test_classify_subscription_prompt_as_paywalled() -> None:
     module = load_probe_module()
     result = module.classify_observation(
@@ -193,6 +228,25 @@ def test_classify_subscription_prompt_as_paywalled() -> None:
     )
 
     assert result.status == "paywalled"
+
+
+def test_classify_optional_membership_navigation_as_reachable() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://research.example.com/report",
+            title="Public research report",
+            body_excerpt=(
+                "会员中心 Public research report with findings, sample size, "
+                "methodology, and publication date."
+            ),
+        ),
+        expected_fingerprints=["research.example.com"],
+        function_fingerprints=["research report"],
+    )
+
+    assert result.status == "reachable"
 
 
 def test_classify_waf_or_challenge_page_as_anti_bot() -> None:

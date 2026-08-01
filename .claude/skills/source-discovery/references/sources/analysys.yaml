@@ -40,14 +40,15 @@ functions:
     - date
     - url
   fallbacks:
-  - dydata-research-reports
   - iimedia-research-reports
 access:
   status: reachable-limited
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.analysys.cn/
-  limitation: 'public-limited; public articles with subscription products. Vendor-owned metrics; not primary
-    transaction, filing, or official data Audited fallback peers: U02, U09, U12.'
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.analysys.cn/article/detail/20021395
+  limitation: Public report pages expose the title, publisher, date, summary, and related reports without
+    login. A direct report download was not completed; the download control has no public file URL, and
+    separate subscription products are advertised. Vendor-owned metrics are not primary transaction,
+    filing, or official data.
   observed_error:
     state: none
     category: none
@@ -55,7 +56,8 @@ access:
   evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`200 OK` for homepage and article detail'
-    recognizable_content: Public article content; Analysys marketing pages
-    access_indications: Login/register controls and subscription products `易观千帆`, `博阅`
-    technical_restriction: None recorded
+    response_status: '`200 OK` for homepage and report detail'
+    recognizable_content: Public report title, publisher, date, summary, related reports, and licensing notice
+    access_indications: Optional login/register controls; download control exposed no direct file; separate
+      subscription products `易观千帆` and `博阅`
+    technical_restriction: Treat the public report page as usable; do not claim full-PDF access

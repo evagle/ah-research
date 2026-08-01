@@ -48,10 +48,10 @@ functions:
     - url
   fallbacks:
   - cicc-research-research-reports
-  - fenghuo-research-research-reports
+  - sina-finance-research-reports
 access:
   status: reachable-limited
-  last_checked: '2026-08-01T17:13:00+08:00'
+  last_checked: '2026-08-02T00:00:00+08:00'
   final_url: https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
   limitation: The verified company-report workflow is A-share oriented. On 2026-08-01, searches for Pop Mart
     and 09992 returned zero company reports; this does not establish that Eastmoney has no Hong Kong reports.
@@ -59,11 +59,11 @@ access:
   observed_error:
     state: none
     category: none
-    message: Visible search, detail, and sampled PDF workflow completed; raw legacy endpoint was limited.
+    message: Visible search, detail, and two sampled PDF workflows completed; raw legacy endpoint was limited.
   evidence_level: High
   reviewed_probe:
     redirect_chain: Visible search led to the report detail and attached PDF; raw legacy search route returned 403.
-    response_status: Search, detail, and sampled PDF loaded anonymously; direct GET to report/list2 returned 405.
+    response_status: Search, detail, and sampled PDFs loaded anonymously; direct legacy API requests were blocked.
     recognizable_content: AP IDs, displayed organization and analyst labels, dates, detail metadata, and dissemination disclaimer.
     access_indications: No login or paywall on tested A-share search/detail/PDF paths.
     technical_restriction: Do not use undocumented backend endpoints as a stable API or extrapolate the Pop Mart result.

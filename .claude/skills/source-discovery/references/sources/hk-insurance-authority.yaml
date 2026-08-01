@@ -44,7 +44,7 @@ functions:
   - sfc-regulatory-materials
 access:
   status: anti-bot
-  last_checked: '2026-08-01T00:00:00+08:00'
+  last_checked: '2026-08-02T00:00:00+08:00'
   final_url: https://www.ia.org.hk/
   limitation: 'anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally
     brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.'
@@ -53,10 +53,10 @@ access:
     category: anti-bot
     message: 'anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally
       brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.'
-  evidence_level: Medium
+  evidence_level: High
   reviewed_probe:
     redirect_chain: Not recorded in audit
-    response_status: '`403`'
-    recognizable_content: Not recorded in audit
+    response_status: '`403` in curl and headless Chrome'
+    recognizable_content: Cloudflare `Performing security verification` page for `ia.org.hk`
     access_indications: Not recorded in audit
-    technical_restriction: Bot/WAF gate from audit environment
+    technical_restriction: Cloudflare blocked both direct CLI and fresh headless-browser retrieval

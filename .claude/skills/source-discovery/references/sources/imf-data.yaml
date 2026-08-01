@@ -29,6 +29,9 @@ functions:
   - url: https://data.imf.org/
     kind: direct route
     stability: reviewed seed
+  - url: https://data.imf.org/en/Resource-Pages/IMF-API
+    kind: SDMX API documentation
+    stability: observed current route
   search:
     method: publisher-bound web search
     fields:
@@ -48,22 +51,20 @@ functions:
   - world-bank-data-official-statistics
   - undata-official-statistics
 access:
-  status: anti-bot
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.imf.org/en/Data
-  limitation: 'anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for
-    strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats
-    offices.'
+  status: reachable-limited
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://data.imf.org/en
+  limitation: Public data home, datasets navigation, release calendar, and SDMX 2.1/3.0 API documentation
+    loaded in headless Chrome. Direct CLI requests received 403, and the Swagger explorer states that a
+    beta portal account is needed. No dataset query was completed in this audit.
   observed_error:
     state: error
     category: anti-bot
-    message: 'anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for
-      strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats
-      offices.'
-  evidence_level: Medium
+    message: Direct CLI access was blocked, while headless Chrome loaded the public data and API pages.
+  evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`403` for `https://www.imf.org/en/Data` and `https://data.imf.org/`'
-    recognizable_content: WAF/blocked response from IMF data family
-    access_indications: Not recorded in audit
-    technical_restriction: Bot/WAF-gated to CLI
+    response_status: Direct CLI `403`; headless Chrome `200` for data home and API documentation
+    recognizable_content: Data Explorer, datasets, release calendar, WEO, IMF data resources, and SDMX API documentation
+    access_indications: Data pages were public; sign-in is present and Swagger exploration requires a beta account
+    technical_restriction: Use headless rendering or a documented data client; do not claim an API query until completed

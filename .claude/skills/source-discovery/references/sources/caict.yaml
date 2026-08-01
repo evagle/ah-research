@@ -44,7 +44,7 @@ functions:
   - cnnic-official-statistics
 access:
   status: anti-bot
-  last_checked: '2026-08-01T00:00:00+08:00'
+  last_checked: '2026-08-02T00:00:00+08:00'
   final_url: https://www.caict.ac.cn/kxyj/qwfb/qwsj/
   limitation: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
     navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
@@ -55,10 +55,10 @@ access:
     message: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
       navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
       IDC, iResearch.'
-  evidence_level: Medium
+  evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`412 Precondition Failed` for page and root'
-    recognizable_content: WAF cookies/scripts indicate live official site
+    response_status: '`412 Precondition Failed` in curl and headless Chrome'
+    recognizable_content: Official protection page states the request triggered access-protection rules
     access_indications: Not directly validated due WAF
-    technical_restriction: WAF blocks scripted retrieval
+    technical_restriction: WAF blocks both direct CLI and fresh headless-browser retrieval from this environment

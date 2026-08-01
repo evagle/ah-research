@@ -139,10 +139,10 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://36kr.com/>)
   - Search example: `site:36kr.com industry report`
-  - Same-function fallbacks: `it-juzi-research-reports`, `china-venture-research-reports`
+  - Same-function fallbacks: `china-venture-research-reports`
 - Current status: `anti-bot`
 - Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: anti-bot/technical-limited; public browser likely but scripted body security-check page. Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.
+- Access limitations: anti-bot/technical-limited; public browser likely but scripted body security-check page. Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press releases, exchange filings, 国家统计局, 投中研究院, company registries.
 - Access observation evidence: `Medium`
 - Site guide: None
 
@@ -260,10 +260,10 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.analysys.cn/>)
   - Search example: `site:analysys.cn industry report`
-  - Same-function fallbacks: `dydata-research-reports`, `iimedia-research-reports`
+  - Same-function fallbacks: `iimedia-research-reports`
 - Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited; public articles with subscription products. Vendor-owned metrics; not primary transaction, filing, or official data Audited fallback peers: U02, U09, U12.
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public report pages expose the title, publisher, date, summary, and related reports without login. A direct report download was not completed; the download control has no public file URL, and separate subscription products are advertised. Vendor-owned metrics are not primary transaction, filing, or official data.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -422,7 +422,7 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.caasdata.com/index/index/index.html>)
   - Search example: `site:caasdata.com industry report`
-  - Same-function fallbacks: `dydata-research-reports`, `iimedia-research-reports`
+  - Same-function fallbacks: `iimedia-research-reports`
 - Current status: `unverified`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; region/network-limited possible; DNS resolved but web connections failed. May be down, network-limited, or moved; no permanent closure inference Audited fallback peers: U02, U09, U07.
@@ -485,9 +485,9 @@ requested claim without an explicit scope change.
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `cnnic-official-statistics`
 - Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
+- Last checked: `2026-08-02T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.
-- Access observation evidence: `Medium`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `china-money` - ChinaMoney
@@ -519,14 +519,14 @@ requested claim without an explicit scope change.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
-  - Completed workflow evidence: `Medium`
+  - Completed workflow evidence: `High`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.chinaventure.com.cn/index.html>)
+  - Direct links: [primary route](<https://www.chinaventure.com.cn/index.html>), [research list](<https://www.chinaventure.com.cn/report/list.html>), [report detail example](<https://www.chinaventure.com.cn/report/1005-20231205-1747.html>)
   - Search example: `site:chinaventure.com.cn industry report`
-  - Same-function fallbacks: `it-juzi-research-reports`, `dydata-research-reports`
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited; public research lists plus login/register controls. Some premium or personalized features may require login; not a primary registry Audited fallback peers: U15, U02, U09.
+  - Same-function fallbacks: `iimedia-research-reports`
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public research list, report detail, and a sampled 投中研究院 PDF loaded anonymously. Login controls are optional for the tested workflow. Some CVSource-linked reports use a separate host that was unreachable, and financing records remain secondary to primary announcements.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -665,7 +665,7 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://robo.datayes.com/>)
   - Search example: `site:robo.datayes.com industry report`
-  - Same-function fallbacks: `hibor-research-research-reports`, `nxny-research-reports`
+  - Same-function fallbacks: `hibor-research-research-reports`, `eastmoney-research-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public SPA shell; login route exposed. Proprietary methods; deeper workflows likely account-bound; use as discovery, not primary filing evidence Audited fallback peers: U03, U08, U10, U11.
@@ -710,26 +710,6 @@ requested claim without an explicit scope change.
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: unverified; DNS failure on listed and bare-domain variants. No redirect target discovered; one audit is not proof of shutdown Audited fallback peers: U07, U09, U02.
 - Access observation evidence: `Low`
-- Site guide: None
-
-## `dydata` - DYData
-
-- Aliases/origins: `U02`, `镝数聚`, `supplied U02`
-- Publisher type: `aggregator`
-- Official domains: `dydata.io`
-- Provenance authority: `Medium` - Broad discovery of industry reports, datasets, charts, and supplier ecosystems. Medium authority; multi-supplier aggregator
-- Function: `research-reports`
-  - Authority: `Medium`
-  - Utility: `High`
-  - Completed workflow evidence: `Low`
-  - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.dydata.io/>)
-  - Search example: `site:dydata.io industry report`
-  - Same-function fallbacks: `analysys-research-reports`, `iimedia-research-reports`
-- Current status: `paywalled`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: membership/paywalled; public previews with VIP/member prompts. Source quality varies by upstream shop; many downloads are gated Audited fallback peers: U07, U09, U15, U16.
-- Access observation evidence: `High`
 - Site guide: None
 
 ## `eastmoney-announcement-index` - Eastmoney announcement index
@@ -837,9 +817,9 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [visible report search](<https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0>), [report detail example](<https://data.eastmoney.com/report/zw_stock.jshtml?infocode=AP202511021773734683>)
   - Search example: `search %E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0, select the research tab, and retain the AP report ID`
-  - Same-function fallbacks: `cicc-research-research-reports`, `fenghuo-research-research-reports`
+  - Same-function fallbacks: `cicc-research-research-reports`, `sina-finance-research-reports`
 - Current status: `reachable-limited`
-- Last checked: `2026-08-01T17:13:00+08:00`
+- Last checked: `2026-08-02T00:00:00+08:00`
 - Access limitations: The verified company-report workflow is A-share oriented. On 2026-08-01, searches for Pop Mart and 09992 returned zero company reports; this does not establish that Eastmoney has no Hong Kong reports. Legacy or implementation endpoints are not supported public APIs.
 - Access observation evidence: `High`
 - Site guide: None
@@ -869,7 +849,7 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.endata.com.cn/index.html>)
   - Search example: `site:endata.com.cn industry report`
-  - Same-function fallbacks: `dydata-research-reports`, `analysys-research-reports`
+  - Same-function fallbacks: `analysys-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; sample/download flow requires NDA and subscription-style contact. Source drift from older entertainment/box-office role; NDA and formal contact for samples Audited fallback peers: U02, U07, U09.
@@ -934,26 +914,6 @@ requested claim without an explicit scope change.
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited. Advisory framing; uneven primary-data depth; some downloads may shift into lead-generation flows Audited fallback peers: U24-Deloitte, U24-KPMG, U24-PwC, U20.
-- Access observation evidence: `High`
-- Site guide: None
-
-## `fenghuo-research` - Fenghuo Research Reports
-
-- Aliases/origins: `U63`, `烽火研报`, `supplied U63`
-- Publisher type: `mirror`
-- Official domains: `fhyanbao.com`
-- Provenance authority: `Low` - Discovery of sell-side and industry reports when browser/TLS route is acceptable. Low authority for final claims; commercial aggregator, not official
-- Function: `research-reports`
-  - Authority: `Low`
-  - Utility: `Medium`
-  - Completed workflow evidence: `Low`
-  - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.fhyanbao.com/>)
-  - Search example: `site:fhyanbao.com industry report`
-  - Same-function fallbacks: `eastmoney-research-research-reports`, `sina-finance-research-reports`
-- Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: anti-bot/technical-limited; public web but expired certificate; insecure fetch reached final host. Poor certificate hygiene; trace every material fact to original broker, issuer, exchange, or regulator Audited fallback peers: Eastmoney report portal, Sina Finance, broker sites, company IR, exchange filings.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -1092,7 +1052,7 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<http://www.hibor.com.cn/>)
   - Search example: `site:hibor.com.cn industry report`
-  - Same-function fallbacks: `datayes-robo-research-research-reports`, `nxny-research-reports`
+  - Same-function fallbacks: `datayes-robo-research-research-reports`, `eastmoney-research-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; public pages plus PC client/login prompts. Provenance is secondary; full functionality funnels to client/app Audited fallback peers: U01, U08, U10, U11.
@@ -1136,9 +1096,9 @@ requested claim without an explicit scope change.
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `sfc-regulatory-materials`
 - Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
+- Last checked: `2026-08-02T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.
-- Access observation evidence: `Medium`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `hk-judiciary` - Hong Kong Judiciary
@@ -1476,7 +1436,7 @@ requested claim without an explicit scope change.
   - Stable field/API evidence: `Low`
   - Direct links: [primary route](<https://www.iimedia.cn/>)
   - Search example: `site:iimedia.cn industry report`
-  - Same-function fallbacks: `analysys-research-reports`, `dydata-research-reports`
+  - Same-function fallbacks: `analysys-research-reports`
 - Current status: `reachable-limited`
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; excerpts public, report/download flows route to member assets. Marketing tone; complete PDFs may be member-gated; cross-check hard claims Audited fallback peers: U07, U02, U16.
@@ -1494,14 +1454,14 @@ requested claim without an explicit scope change.
   - Utility: `High`
   - Completed workflow evidence: `Low`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.imf.org/en/Data>), [direct route](<https://data.imf.org/>)
+  - Direct links: [primary route](<https://www.imf.org/en/Data>), [direct route](<https://data.imf.org/>), [SDMX API documentation](<https://data.imf.org/en/Resource-Pages/IMF-API>)
   - Search example: `site:imf.org official statistics`
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `world-bank-data-official-statistics`, `undata-official-statistics`
-- Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats offices.
-- Access observation evidence: `Medium`
+- Current status: `reachable-limited`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public data home, datasets navigation, release calendar, and SDMX 2.1/3.0 API documentation loaded in headless Chrome. Direct CLI requests received 403, and the Swagger explorer states that a beta portal account is needed. No dataset query was completed in this audit.
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `iresearch` - iResearch
@@ -1522,26 +1482,6 @@ requested claim without an explicit scope change.
 - Last checked: `2026-08-01T00:00:00+08:00`
 - Access limitations: public-limited; articles/report pages public, premium products commercial. Vendor-produced perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC, CAICT.
 - Access observation evidence: `High`
-- Site guide: None
-
-## `it-juzi` - IT Juzi
-
-- Aliases/origins: `U15`, `IT桔子`, `supplied U15`
-- Publisher type: `commercial-data-provider`
-- Official domains: `itjuzi.com`
-- Provenance authority: `Medium` - Venture financing lookup, company/investor timelines, sector deal flow. Medium-high authority for China startup/financing tracking when accessible
-- Function: `research-reports`
-  - Authority: `Medium`
-  - Utility: `High`
-  - Completed workflow evidence: `Low`
-  - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.itjuzi.com/>)
-  - Search example: `site:itjuzi.com industry report`
-  - Same-function fallbacks: `china-venture-research-reports`, `dydata-research-reports`
-- Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: anti-bot/technical-limited; HTTP 412 JavaScript challenge observed. Straight programmatic access blocked; trace financing facts to primary announcements where possible Audited fallback peers: U16, U02, company registry/news originals.
-- Access observation evidence: `Medium`
 - Site guide: None
 
 ## `itu-statistics` - ITU Statistics
@@ -1825,26 +1765,6 @@ requested claim without an explicit scope change.
 - Access observation evidence: `High`
 - Site guide: None
 
-## `nxny` - NXNY Stock Report Network
-
-- Aliases/origins: `U08`, `股票报告网`, `supplied U08`
-- Publisher type: `mirror`
-- Official domains: `nxny.com`
-- Provenance authority: `Low` - Scanning industry-report titles, recent uploads, and download popularity. Low-medium authority; distribution site, not original publisher
-- Function: `research-reports`
-  - Authority: `Low`
-  - Utility: `Medium`
-  - Completed workflow evidence: `Medium`
-  - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.nxny.com/stype_hy/>)
-  - Search example: `site:nxny.com industry report`
-  - Same-function fallbacks: `hibor-research-research-reports`, `datayes-robo-research-research-reports`
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited; login/register/VIP/download affordances visible. Upstream provenance varies; VIP gating visible Audited fallback peers: U03, U01, U10, U11.
-- Access observation evidence: `High`
-- Site guide: None
-
 ## `pbc` - People's Bank of China
 
 - Aliases/origins: `U50`, `PBOC`, `supplied U50; code ID pbc in build_event_manifest and build_market_manifest`
@@ -1933,14 +1853,14 @@ requested claim without an explicit scope change.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
-  - Completed workflow evidence: `Medium`
+  - Completed workflow evidence: `High`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.pwccn.com/zh>)
+  - Direct links: [primary route](<https://www.pwccn.com/zh>), [research and insights](<https://www.pwccn.com/zh/research-and-insights.html>), [report detail example](<https://www.pwccn.com/zh/research-and-insights/ai-performance-china-report-jun2026.html>)
   - Search example: `site:pwccn.com industry report`
   - Same-function fallbacks: `deloitte-china-research-reports`, `ey-china-research-reports`
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited. Branded perspective; uneven access depth across downloadable assets Audited fallback peers: U24-Deloitte, U24-EY, U24-KPMG, U20.
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public research index, sampled report detail, and its 44-page PDF loaded anonymously. Other campaigns may use forms. Treat PwC analysis as attributable consulting research rather than official statistics.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -1953,14 +1873,14 @@ requested claim without an explicit scope change.
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
-  - Completed workflow evidence: `Medium`
+  - Completed workflow evidence: `High`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.pwc.com/us/en/library.html>)
+  - Direct links: [primary route](<https://www.pwc.com/us/en/library.html>), [report detail example](<https://www.pwc.com/us/en/library/2026-market-volatility-survey.html>)
   - Search example: `site:pwc.com industry report`
   - Same-function fallbacks: `pwc-china-research-reports`, `deloitte-china-research-reports`
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited; downloads/forms may be gated. Not Pew Research Center; branded consulting perspective and uneven methodological depth Audited fallback peers: U24-PwC, Deloitte, McKinsey, KPMG.
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public library, sampled report detail, methodology, findings, and its 18-page PDF loaded anonymously. Other campaigns may use forms. This is PwC, not Pew Research Center.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -1972,16 +1892,16 @@ requested claim without an explicit scope change.
 - Provenance authority: `High` - QuestMobile-authored mobile-internet reports and products, subject to its disclosed measurement scope and licensing.
 - Function: `mobile-intelligence-research`
   - Authority: `High`
-  - Utility: `Medium`
-  - Completed workflow evidence: `Medium`
-  - Stable field/API evidence: `Low`
-  - Direct links: [research report entry](<https://www.questmobile.com.cn/research/report-new>)
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [research report entry](<https://www.questmobile.com.cn/research/report-new>), [report detail example](<https://www.questmobile.com.cn/research/report/2082318300587618305>)
   - Search example: `query mobile internet in the rendered report area, then open the specific report page`
   - Same-function fallbacks: `analysys-research-reports`
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T17:48:00+08:00`
-- Access limitations: Public SPA shell advertised reports and mobile-big-data analysis. Rendered search, account, export, licensing, and result-level access were not completed.
-- Access observation evidence: `Medium`
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public report detail pages expose the report title, date, publisher, industry, keywords, narrative, metrics, and related-report links without login. Login belongs to the separate QuestMobile data product. No direct PDF or data export was observed on the tested public report page.
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `roland-berger` - Roland Berger China context
@@ -2054,16 +1974,16 @@ requested claim without an explicit scope change.
 - Function: `regulatory-materials`
   - Authority: `High`
   - Utility: `High`
-  - Completed workflow evidence: `Medium`
+  - Completed workflow evidence: `High`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.shanghai.gov.cn/>)
+  - Direct links: [primary route](<https://www.shanghai.gov.cn/>), [recent information disclosure](<https://www.shanghai.gov.cn/nw12344/index.html>)
   - Search example: `site:shanghai.gov.cn official notice`
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `state-council-regulatory-materials`, `beijing-government-regulatory-materials`
 - Current status: `reachable`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.
-- Access observation evidence: `Medium`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public recent-disclosure list and sampled policy detail loaded anonymously. The wider source family remains fragmented across departments and formats.
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `shanghai-statistics` - Shanghai Municipal Bureau of Statistics
@@ -2143,16 +2063,16 @@ requested claim without an explicit scope change.
 - Provenance authority: `High` - Top-level government portal and ministry/page discovery. High authority for official releases when using specific pages; exact supplied data path no longer reliable
 - Function: `regulatory-materials`
   - Authority: `High`
-  - Utility: `Low`
-  - Completed workflow evidence: `Low`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.gov.cn/>), [direct route](<https://www.gov.cn/gwyzzjg/zuzhi/>)
-  - Search example: `site:gov.cn official notice`
+  - Direct links: [primary route](<https://www.gov.cn/>), [direct route](<https://www.gov.cn/gwyzzjg/zuzhi/>), [official site search](<https://sousuo.www.gov.cn/sousuo/search.shtml?code=17da70961a7>)
+  - Search example: `append &searchWord=%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E for 数字经济`
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `ministry-of-finance-regulatory-materials`, `beijing-government-regulatory-materials`
-- Current status: `moved`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility; Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局, ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn homepage, State Council Gazette.
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public rendered search returned document titles, excerpts, dates, filters, pagination, and official links without login. The originally supplied `/shuju/` path is stale; cite the opened ministry or State Council document, not the search result.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -2162,9 +2082,25 @@ requested claim without an explicit scope change.
 - Publisher type: `official-regulator`
 - Official domains: `spb.gov.cn`
 - Provenance authority: `High` - State Post Bureau regulatory material and postal or express-delivery publications within its mandate.
-- Current status: `reachable-limited`
-- Last checked: `2026-08-01T17:39:00+08:00`
-- Access limitations: Root was public, but guessed search paths were unavailable. No stable search or API contract was verified.
+- Function: `official-statistics`
+  - Authority: `High`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [postal industry statistics](<https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml>), [China express delivery development index](<https://www.spb.gov.cn/gjyzj/c100278/common_list.shtml>), [statistics release example](<https://www.spb.gov.cn/gjyzj/c100015/c100016/202607/a31abbec99be4e0d80188b1a25fe1fe6.shtml>)
+  - Search example: `open 统计信息 and select the required monthly, quarterly, or annual postal-industry release`
+  - Same-function fallbacks: `national-bureau-statistics-official-statistics`
+- Function: `regulatory-materials`
+  - Authority: `High`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [government information disclosure](<https://www.spb.gov.cn/gjyzj/c100009/c100014/xxgk_index.shtml>)
+  - Search example: `navigate 政务公开 for postal regulation or standards`
+  - Same-function fallbacks: `state-council-regulatory-materials`
+- Current status: `reachable`
+- Last checked: `2026-08-02T00:00:00+08:00`
+- Access limitations: Public statistics list, industry-development-index list, government-information-disclosure route, and sampled statistics and policy details loaded anonymously. Some legacy list aliases redirect through JavaScript to the current category.
 - Access observation evidence: `High`
 - Site guide: None
 
@@ -2386,9 +2322,9 @@ requested claim without an explicit scope change.
   - Search example: `site:commerce.gov official notice`
   - Same-function fallbacks: None
 - Current status: `anti-bot`
-- Last checked: `2026-08-01T00:00:00+08:00`
+- Last checked: `2026-08-02T00:00:00+08:00`
 - Access limitations: anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies directly, SEC for filings, agency newsrooms.
-- Access observation evidence: `Medium`
+- Access observation evidence: `High`
 - Site guide: None
 
 ## `wef-china` - World Economic Forum China

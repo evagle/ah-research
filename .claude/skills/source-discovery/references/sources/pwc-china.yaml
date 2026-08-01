@@ -20,12 +20,18 @@ functions:
 - id: research-reports
   authority: Medium
   utility: High
-  workflow_evidence: Medium
+  workflow_evidence: High
   field_contract_evidence: Low
   direct_urls:
   - url: https://www.pwccn.com/zh
     kind: primary route
     stability: reviewed seed
+  - url: https://www.pwccn.com/zh/research-and-insights.html
+    kind: research and insights
+    stability: observed current route
+  - url: https://www.pwccn.com/zh/research-and-insights/ai-performance-china-report-jun2026.html
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
   search:
     method: publisher-bound web search
     fields:
@@ -44,11 +50,12 @@ functions:
   - deloitte-china-research-reports
   - ey-china-research-reports
 access:
-  status: reachable-limited
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.pwccn.com/zh
-  limitation: 'public-limited. Branded perspective; uneven access depth across downloadable assets Audited
-    fallback peers: U24-Deloitte, U24-EY, U24-KPMG, U20.'
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.pwccn.com/zh/research-and-insights/ai-performance-china-report-jun2026.html
+  limitation: Public research index, sampled report detail, and its 44-page PDF loaded anonymously.
+    Other campaigns may use forms. Treat PwC analysis as attributable consulting research rather than
+    official statistics.
   observed_error:
     state: none
     category: none
@@ -56,7 +63,7 @@ access:
   evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`200`'
-    recognizable_content: PwC China homepage links to `research-and-insights`
-    access_indications: Some reports/newsletter/download flows may be form-gated
-    technical_restriction: None recorded
+    response_status: '`200 OK` for research index, report detail, and sampled PDF'
+    recognizable_content: Report title, summary, publication context, download link, and valid PDF
+    access_indications: Optional sign-in navigation did not block the tested report or PDF
+    technical_restriction: Recheck the target report because access can vary by campaign

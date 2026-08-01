@@ -20,12 +20,15 @@ functions:
 - id: research-reports
   authority: Medium
   utility: High
-  workflow_evidence: Medium
+  workflow_evidence: High
   field_contract_evidence: Low
   direct_urls:
   - url: https://www.pwc.com/us/en/library.html
     kind: primary route
     stability: reviewed seed
+  - url: https://www.pwc.com/us/en/library/2026-market-volatility-survey.html
+    kind: report detail example
+    stability: observed current route; reacquire the current report for runtime research
   search:
     method: publisher-bound web search
     fields:
@@ -44,11 +47,11 @@ functions:
   - pwc-china-research-reports
   - deloitte-china-research-reports
 access:
-  status: reachable-limited
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.pwc.com/us/en/library.html
-  limitation: 'public-limited; downloads/forms may be gated. Not Pew Research Center; branded consulting
-    perspective and uneven methodological depth Audited fallback peers: U24-PwC, Deloitte, McKinsey, KPMG.'
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.pwc.com/us/en/library/2026-market-volatility-survey.html
+  limitation: Public library, sampled report detail, methodology, findings, and its 18-page PDF loaded
+    anonymously. Other campaigns may use forms. This is PwC, not Pew Research Center.
   observed_error:
     state: none
     category: none
@@ -56,7 +59,7 @@ access:
   evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`200`'
-    recognizable_content: PwC canonical tag matches the supplied PwC URL
-    access_indications: Downloads/forms may be gated
-    technical_restriction: None recorded
+    response_status: '`200 OK` for library, report detail, and sampled PDF'
+    recognizable_content: Survey title, sample description, findings, methodology, and valid PDF
+    access_indications: Optional sign-in/register navigation did not block the tested report or PDF
+    technical_restriction: Recheck the target report because access can vary by campaign

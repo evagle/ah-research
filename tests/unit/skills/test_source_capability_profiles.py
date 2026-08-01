@@ -68,7 +68,6 @@ EXPECTED_PROFILE_IDS = {
     "datayes-robo-research",
     "deloitte-china",
     "dotour",
-    "dydata",
     "eastmoney-announcement-index",
     "eastmoney-pdf-delivery",
     "eastmoney-quotes-f10",
@@ -78,7 +77,6 @@ EXPECTED_PROFILE_IDS = {
     "etsi",
     "eurostat",
     "ey-china",
-    "fenghuo-research",
     "flurry",
     "gallagher",
     "gsma-mobile-economy",
@@ -107,7 +105,6 @@ EXPECTED_PROFILE_IDS = {
     "iimedia",
     "imf-data",
     "iresearch",
-    "it-juzi",
     "itu-statistics",
     "jpmorgan",
     "kpmg-china",
@@ -122,7 +119,6 @@ EXPECTED_PROFILE_IDS = {
     "national-film-administration",
     "newrank",
     "nfra",
-    "nxny",
     "nrta",
     "pbc",
     "pew-research",
@@ -234,6 +230,36 @@ def load_maintained_profiles() -> list[dict[str, object]]:
 
 def test_source_profile_schema_is_valid() -> None:
     validator()
+
+
+def test_public_research_routes_separate_reachability_from_gated_features() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    expected_statuses = {
+        "analysys": "reachable-limited",
+        "questmobile": "reachable",
+    }
+
+    for source_id, expected_status in expected_statuses.items():
+        access = profiles[source_id]["access"]
+        limitation = access["limitation"].lower()
+
+        assert access["status"] == expected_status
+        assert "public" in limitation
+        assert any(
+            marker in limitation
+            for marker in ("account", "download", "export", "login", "member", "vip")
+        )
+
+    questmobile_urls = {
+        route["url"] for route in profiles["questmobile"]["functions"][0]["direct_urls"]
+    }
+    assert "https://www.questmobile.com.cn/research/report/2082318300587618305" in questmobile_urls
+
+
+def test_low_value_or_inaccessible_aggregators_are_not_maintained() -> None:
+    maintained_source_ids = {profile["id"] for profile in load_maintained_profiles()}
+
+    assert maintained_source_ids.isdisjoint({"dydata", "fenghuo-research", "it-juzi", "nxny"})
 
 
 def test_example_profiles_validate() -> None:
@@ -978,8 +1004,9 @@ def test_supplied_and_existing_core_ids_remain_discoverable() -> None:
         discoverable.add(profile["id"])
         discoverable.update(profile["aliases"])
 
+    retired_audit_ids = {"U02", "U08", "U15", "U63"}
     expected_audit_ids = {
-        *(f"U{number:02d}" for number in range(1, 64)),
+        *(f"U{number:02d}" for number in range(1, 64) if f"U{number:02d}" not in retired_audit_ids),
         *(f"C{number:02d}" for number in range(1, 15)),
         "U24-Deloitte",
         "U24-EY",
@@ -1179,7 +1206,7 @@ def test_seed_fallbacks_use_audited_same_topic_routes() -> None:
         for function in profile["functions"]
     }
     expected_fallbacks = {
-        "36kr-research-reports": {"it-juzi-research-reports"},
+        "36kr-research-reports": {"china-venture-research-reports"},
         "flurry-research-reports": {"analysys-research-reports"},
         "xueqiu-research-reports": {"eastmoney-research-research-reports"},
     }
@@ -1229,6 +1256,9 @@ def test_core_seed_profiles_only_export_functions_with_audited_direct_entrypoint
         "sse-regulatory-materials": "https://www.sse.com.cn/regulation/supervision/inquiries/",
         "sec-edgar-company-disclosures": "https://www.sec.gov/edgar/search/",
         "caict-official-statistics": "https://www.caict.ac.cn/kxyj/qwfb/qwsj/",
+        "state-post-bureau-official-statistics": (
+            "https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml"
+        ),
     }
     removed_without_direct_entry = {
         "hkex-company-disclosures",
@@ -1272,7 +1302,6 @@ def test_task_5_round_1_keeps_homepage_only_sources_identity_only() -> None:
         "ministry-culture-tourism",
         "mofcom",
         "national-film-administration",
-        "state-post-bureau",
         "eastmoney-securities",
     ):
         assert profiles[source_id]["functions"] == []
@@ -1418,6 +1447,10 @@ def test_task_5_round_2_limits_uncompleted_workflow_evidence() -> None:
     assert evidence_by_function["aliresearch-research-reports"] == ("Low", "Low")
     assert evidence_by_function["undata-official-statistics"] == ("Low", "Low")
     assert evidence_by_function["wto-stats-official-statistics"] == ("Low", "Low")
+    assert evidence_by_function["shanghai-government-regulatory-materials"] == (
+        "High",
+        "Low",
+    )
 
     # This set is deliberately report-derived rather than inferred from a
     # reachability status: its members exposed only entry, search-card, or
@@ -1451,7 +1484,6 @@ def test_task_5_round_2_limits_uncompleted_workflow_evidence() -> None:
             "pbc-central-bank-policy-search",
             "pew-research-research-reports",
             "sfc-regulatory-materials",
-            "shanghai-government-regulatory-materials",
             "sina-finance-research-reports",
             "unsd-demographic-social-official-statistics",
             "wef-china-research-reports",
@@ -1484,7 +1516,6 @@ def test_task_5_round_2_limits_uncompleted_workflow_evidence() -> None:
         "pbc-central-bank-policy-search": ("Medium", "Medium"),
         "pew-research-research-reports": ("Medium", "Low"),
         "sfc-regulatory-materials": ("Medium", "Medium"),
-        "shanghai-government-regulatory-materials": ("Medium", "Low"),
         "sina-finance-research-reports": ("Medium", "Medium"),
         "unsd-demographic-social-official-statistics": ("Medium", "Low"),
         "wef-china-research-reports": ("Medium", "Low"),

@@ -40,7 +40,6 @@ functions:
     - date
     - url
   fallbacks:
-  - dydata-research-reports
   - iimedia-research-reports
 access:
   status: unverified

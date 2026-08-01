@@ -40,7 +40,6 @@ functions:
     - date
     - url
   fallbacks:
-  - dydata-research-reports
   - analysys-research-reports
 access:
   status: reachable-limited

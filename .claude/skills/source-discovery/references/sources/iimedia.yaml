@@ -41,7 +41,6 @@ functions:
     - url
   fallbacks:
   - analysys-research-reports
-  - dydata-research-reports
 access:
   status: reachable-limited
   last_checked: '2026-08-01T00:00:00+08:00'

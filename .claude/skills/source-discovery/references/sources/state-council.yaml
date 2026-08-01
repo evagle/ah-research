@@ -20,8 +20,8 @@ authority:
 functions:
 - id: regulatory-materials
   authority: High
-  utility: Low
-  workflow_evidence: Low
+  utility: High
+  workflow_evidence: High
   field_contract_evidence: Low
   direct_urls:
   - url: https://www.gov.cn/
@@ -30,12 +30,15 @@ functions:
   - url: https://www.gov.cn/gwyzzjg/zuzhi/
     kind: direct route
     stability: reviewed seed
+  - url: https://sousuo.www.gov.cn/sousuo/search.shtml?code=17da70961a7
+    kind: official site search
+    stability: observed current route
   search:
-    method: publisher-bound web search
+    method: rendered official site search, then open the exact government document
     fields:
     - official_domain
     - query
-    example_query: site:gov.cn official notice
+    example_query: append &searchWord=%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E for 数字经济
     result_identity: publisher, title, date, notice or case ID, URL
   citation:
     use: direct for the publisher's own materials
@@ -49,24 +52,20 @@ functions:
   - ministry-of-finance-regulatory-materials
   - beijing-government-regulatory-materials
 access:
-  status: moved
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.gov.cn/
-  limitation: 'moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility;
-    Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局,
-    ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn
-    homepage, State Council Gazette.'
+  status: reachable
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://sousuo.www.gov.cn/sousuo/search.shtml?code=17da70961a7&searchWord=%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E
+  limitation: Public rendered search returned document titles, excerpts, dates, filters, pagination, and
+    official links without login. The originally supplied `/shuju/` path is stale; cite the opened ministry
+    or State Council document, not the search result.
   observed_error:
     state: none
     category: none
     message: No transport error recorded
   evidence_level: High
   reviewed_probe:
-    redirect_chain: 'U46: Supplied path redirects to `https://www.gov.cn/` homepage; U52: Root reached;
-      org-directory family separately checked'
-    response_status: 'U46: Root `200`; U52: `https://www.gov.cn/` `200`; `https://www.gov.cn/gwyzzjg/zuzhi/`
-      `403`'
-    recognizable_content: 'U46: Government portal homepage; U52: State Council portal root'
-    access_indications: 'U46: None recorded; U52: None recorded'
-    technical_restriction: 'U46: Old data-hub path is stale/unspecific; U52: Org-directory path bot-gated
-      to CLI; family is router'
+    redirect_chain: Root and rendered search used; the old supplied data path redirects to the root
+    response_status: '`200 OK` for root, search shell, and search XHR requests'
+    recognizable_content: Search count, titles, excerpts, dates, filters, pagination, and official links
+    access_indications: Optional login navigation did not block search or public documents
+    technical_restriction: Search requires JavaScript rendering; the old `/shuju/` route is stale

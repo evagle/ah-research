@@ -40,7 +40,6 @@ functions:
     - date
     - url
   fallbacks:
-  - it-juzi-research-reports
   - china-venture-research-reports
 access:
   status: anti-bot
@@ -48,7 +47,7 @@ access:
   final_url: https://36kr.com/
   limitation: 'anti-bot/technical-limited; public browser likely but scripted body security-check page.
     Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press
-    releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.'
+    releases, exchange filings, 国家统计局, 投中研究院, company registries.'
   observed_error:
     state: error
     category: anti-bot

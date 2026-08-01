@@ -79,7 +79,7 @@
     "status": "anti-bot",
     "last_checked": "2026-08-01T00:00:00+08:00",
     "final_url": "https://36kr.com/",
-    "limitation": "anti-bot/technical-limited; public browser likely but scripted body security-check page. Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查.",
+    "limitation": "anti-bot/technical-limited; public browser likely but scripted body security-check page. Media incentives, sponsored content risk, secondary-source risk Audited fallback peers: Company press releases, exchange filings, 国家统计局, 投中研究院, company registries.",
     "observed_error": {
       "state": "error",
       "category": "anti-bot",
@@ -191,9 +191,9 @@
   },
   "analysys": {
     "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.analysys.cn/",
-    "limitation": "public-limited; public articles with subscription products. Vendor-owned metrics; not primary transaction, filing, or official data Audited fallback peers: U02, U09, U12.",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.analysys.cn/article/detail/20021395",
+    "limitation": "Public report pages expose the title, publisher, date, summary, and related reports without login. A direct report download was not completed; the download control has no public file URL, and separate subscription products are advertised. Vendor-owned metrics are not primary transaction, filing, or official data.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -202,10 +202,10 @@
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`200 OK` for homepage and article detail",
-      "recognizable_content": "Public article content; Analysys marketing pages",
-      "access_indications": "Login/register controls and subscription products `易观千帆`, `博阅`",
-      "technical_restriction": "None recorded"
+      "response_status": "`200 OK` for homepage and report detail",
+      "recognizable_content": "Public report title, publisher, date, summary, related reports, and licensing notice",
+      "access_indications": "Optional login/register controls; download control exposed no direct file; separate subscription products `易观千帆` and `博阅`",
+      "technical_restriction": "Treat the public report page as usable; do not claim full-PDF access"
     }
   },
   "aon-china": {
@@ -400,7 +400,7 @@
   },
   "caict": {
     "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
+    "last_checked": "2026-08-02T00:00:00+08:00",
     "final_url": "https://www.caict.ac.cn/kxyj/qwfb/qwsj/",
     "limitation": "anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.",
     "observed_error": {
@@ -408,13 +408,13 @@
       "category": "anti-bot",
       "message": "anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch."
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`412 Precondition Failed` for page and root",
-      "recognizable_content": "WAF cookies/scripts indicate live official site",
+      "response_status": "`412 Precondition Failed` in curl and headless Chrome",
+      "recognizable_content": "Official protection page states the request triggered access-protection rules",
       "access_indications": "Not directly validated due WAF",
-      "technical_restriction": "WAF blocks scripted retrieval"
+      "technical_restriction": "WAF blocks both direct CLI and fresh headless-browser retrieval from this environment"
     }
   },
   "china-money": {
@@ -437,10 +437,10 @@
     }
   },
   "china-venture": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.chinaventure.com.cn/index.html",
-    "limitation": "public-limited; public research lists plus login/register controls. Some premium or personalized features may require login; not a primary registry Audited fallback peers: U15, U02, U09.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.chinaventure.com.cn/report/1005-20231205-1747.html",
+    "limitation": "Public research list, report detail, and a sampled 投中研究院 PDF loaded anonymously. Login controls are optional for the tested workflow. Some CVSource-linked reports use a separate host that was unreachable, and financing records remain secondary to primary announcements.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -449,10 +449,10 @@
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`200 OK`; report list page reachable",
-      "recognizable_content": "Homepage and research-list pages",
-      "access_indications": "Login/register controls",
-      "technical_restriction": "None recorded"
+      "response_status": "`200 OK` for list, detail, and sampled PDF",
+      "recognizable_content": "Report title, publisher, summary, methodology context, detail page, and PDF",
+      "access_indications": "Optional login/register controls did not block the tested report workflow",
+      "technical_restriction": "Separate `cvsource.com.cn` report links were not reachable in the test environment"
     }
   },
   "cicc-research": {
@@ -626,25 +626,6 @@
       "technical_restriction": "DNS failure"
     }
   },
-  "dydata": {
-    "status": "paywalled",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.dydata.io/",
-    "limitation": "membership/paywalled; public previews with VIP/member prompts. Source quality varies by upstream shop; many downloads are gated Audited fallback peers: U07, U09, U15, U16.",
-    "observed_error": {
-      "state": "none",
-      "category": "none",
-      "message": "No transport error recorded"
-    },
-    "evidence_level": "High",
-    "reviewed_probe": {
-      "redirect_chain": "No redirect recorded",
-      "response_status": "`200 OK`",
-      "recognizable_content": "Homepage, previews, listing pages",
-      "access_indications": "`会员特惠`, `注册/登录`, `buy vip`, member dialogs, report/download language",
-      "technical_restriction": "None recorded"
-    }
-  },
   "eastmoney-announcement-index": {
     "status": "reachable",
     "last_checked": "2026-08-01T17:12:00+08:00",
@@ -704,18 +685,18 @@
   },
   "eastmoney-research": {
     "status": "reachable-limited",
-    "last_checked": "2026-08-01T17:13:00+08:00",
+    "last_checked": "2026-08-02T00:00:00+08:00",
     "final_url": "https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0",
     "limitation": "The verified company-report workflow is A-share oriented. On 2026-08-01, searches for Pop Mart and 09992 returned zero company reports; this does not establish that Eastmoney has no Hong Kong reports. Legacy or implementation endpoints are not supported public APIs.",
     "observed_error": {
       "state": "none",
       "category": "none",
-      "message": "Visible search, detail, and sampled PDF workflow completed; raw legacy endpoint was limited."
+      "message": "Visible search, detail, and two sampled PDF workflows completed; raw legacy endpoint was limited."
     },
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "Visible search led to the report detail and attached PDF; raw legacy search route returned 403.",
-      "response_status": "Search, detail, and sampled PDF loaded anonymously; direct GET to report/list2 returned 405.",
+      "response_status": "Search, detail, and sampled PDFs loaded anonymously; direct legacy API requests were blocked.",
       "recognizable_content": "AP IDs, displayed organization and analyst labels, dates, detail metadata, and dissemination disclaimer.",
       "access_indications": "No login or paywall on tested A-share search/detail/PDF paths.",
       "technical_restriction": "Do not use undocumented backend endpoints as a stable API or extrapolate the Pop Mart result."
@@ -814,25 +795,6 @@
       "recognizable_content": "EY China `/zh_cn/insights` and newsroom pages",
       "access_indications": "Some full reports/PDFs/campaign assets may be contact-gated",
       "technical_restriction": "None recorded"
-    }
-  },
-  "fenghuo-research": {
-    "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.fhyanbao.com/",
-    "limitation": "anti-bot/technical-limited; public web but expired certificate; insecure fetch reached final host. Poor certificate hygiene; trace every material fact to original broker, issuer, exchange, or regulator Audited fallback peers: Eastmoney report portal, Sina Finance, broker sites, company IR, exchange filings.",
-    "observed_error": {
-      "state": "error",
-      "category": "tls",
-      "message": "anti-bot/technical-limited; public web but expired certificate; insecure fetch reached final host. Poor certificate hygiene; trace every material fact to original broker, issuer, exchange, or regulator Audited fallback peers: Eastmoney report portal, Sina Finance, broker sites, company IR, exchange filings."
-    },
-    "evidence_level": "High",
-    "reviewed_probe": {
-      "redirect_chain": "`https://fhyanbao.com/` TLS failure; insecure route reached `https://www.fhyanbao.com/`",
-      "response_status": "TLS validation failed; insecure fetch reached final page",
-      "recognizable_content": "Title `烽火研报 - 专业研报平台...`",
-      "access_indications": "Not recorded in audit",
-      "technical_restriction": "Expired TLS certificate"
     }
   },
   "flurry": {
@@ -989,7 +951,7 @@
   },
   "hk-insurance-authority": {
     "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
+    "last_checked": "2026-08-02T00:00:00+08:00",
     "final_url": "https://www.ia.org.hk/",
     "limitation": "anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.",
     "observed_error": {
@@ -997,13 +959,13 @@
       "category": "anti-bot",
       "message": "anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes."
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "Not recorded in audit",
-      "response_status": "`403`",
-      "recognizable_content": "Not recorded in audit",
+      "response_status": "`403` in curl and headless Chrome",
+      "recognizable_content": "Cloudflare `Performing security verification` page for `ia.org.hk`",
       "access_indications": "Not recorded in audit",
-      "technical_restriction": "Bot/WAF gate from audit environment"
+      "technical_restriction": "Cloudflare blocked both direct CLI and fresh headless-browser retrieval"
     }
   },
   "hk-judiciary": {
@@ -1330,22 +1292,22 @@
     }
   },
   "imf-data": {
-    "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.imf.org/en/Data",
-    "limitation": "anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats offices.",
+    "status": "reachable-limited",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://data.imf.org/en",
+    "limitation": "Public data home, datasets navigation, release calendar, and SDMX 2.1/3.0 API documentation loaded in headless Chrome. Direct CLI requests received 403, and the Swagger explorer states that a beta portal account is needed. No dataset query was completed in this audit.",
     "observed_error": {
       "state": "error",
       "category": "anti-bot",
-      "message": "anti-bot/technical-limited; public in browser but 403 from CLI. Operationally brittle for strict CLI extraction Audited fallback peers: World Bank, UNdata, WTO, central banks, national stats offices."
+      "message": "Direct CLI access was blocked, while headless Chrome loaded the public data and API pages."
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`403` for `https://www.imf.org/en/Data` and `https://data.imf.org/`",
-      "recognizable_content": "WAF/blocked response from IMF data family",
-      "access_indications": "Not recorded in audit",
-      "technical_restriction": "Bot/WAF-gated to CLI"
+      "response_status": "Direct CLI `403`; headless Chrome `200` for data home and API documentation",
+      "recognizable_content": "Data Explorer, datasets, release calendar, WEO, IMF data resources, and SDMX API documentation",
+      "access_indications": "Data pages were public; sign-in is present and Swagger exploration requires a beta account",
+      "technical_restriction": "Use headless rendering or a documented data client; do not claim an API query until completed"
     }
   },
   "iresearch": {
@@ -1365,25 +1327,6 @@
       "recognizable_content": "iResearch homepage, articles/report pages",
       "access_indications": "Premium products/deeper databases commercial",
       "technical_restriction": "Charset handling needed"
-    }
-  },
-  "it-juzi": {
-    "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.itjuzi.com/",
-    "limitation": "anti-bot/technical-limited; HTTP 412 JavaScript challenge observed. Straight programmatic access blocked; trace financing facts to primary announcements where possible Audited fallback peers: U16, U02, company registry/news originals.",
-    "observed_error": {
-      "state": "error",
-      "category": "anti-bot",
-      "message": "anti-bot/technical-limited; HTTP 412 JavaScript challenge observed. Straight programmatic access blocked; trace financing facts to primary announcements where possible Audited fallback peers: U16, U02, company registry/news originals."
-    },
-    "evidence_level": "Medium",
-    "reviewed_probe": {
-      "redirect_chain": "No redirect recorded",
-      "response_status": "`HTTP 412`",
-      "recognizable_content": "JavaScript challenge / anti-automation page",
-      "access_indications": "Not inspectable from normal content",
-      "technical_restriction": "Anti-bot challenge blocks straightforward programmatic access"
     }
   },
   "itu-statistics": {
@@ -1671,25 +1614,6 @@
       "technical_restriction": "List items are not a substitute for the opened notice."
     }
   },
-  "nxny": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.nxny.com/stype_hy/",
-    "limitation": "public-limited; login/register/VIP/download affordances visible. Upstream provenance varies; VIP gating visible Audited fallback peers: U03, U01, U10, U11.",
-    "observed_error": {
-      "state": "none",
-      "category": "none",
-      "message": "No transport error recorded"
-    },
-    "evidence_level": "High",
-    "reviewed_probe": {
-      "redirect_chain": "`http://www.nxny.com/stype_hy/` -> `https://www.nxny.com/stype_hy/`",
-      "response_status": "`200 OK`",
-      "recognizable_content": "Report lists, PDF icons, download rankings",
-      "access_indications": "`高级会员`, `登录`, `注册`, VIP/download affordances",
-      "technical_restriction": "None recorded"
-    }
-  },
   "pbc": {
     "status": "reachable",
     "last_checked": "2026-08-01T17:09:00+08:00",
@@ -1748,10 +1672,10 @@
     }
   },
   "pwc-china": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.pwccn.com/zh",
-    "limitation": "public-limited. Branded perspective; uneven access depth across downloadable assets Audited fallback peers: U24-Deloitte, U24-EY, U24-KPMG, U20.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.pwccn.com/zh/research-and-insights/ai-performance-china-report-jun2026.html",
+    "limitation": "Public research index, sampled report detail, and its 44-page PDF loaded anonymously. Other campaigns may use forms. Treat PwC analysis as attributable consulting research rather than official statistics.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -1760,17 +1684,17 @@
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`200`",
-      "recognizable_content": "PwC China homepage links to `research-and-insights`",
-      "access_indications": "Some reports/newsletter/download flows may be form-gated",
-      "technical_restriction": "None recorded"
+      "response_status": "`200 OK` for research index, report detail, and sampled PDF",
+      "recognizable_content": "Report title, summary, publication context, download link, and valid PDF",
+      "access_indications": "Optional sign-in navigation did not block the tested report or PDF",
+      "technical_restriction": "Recheck the target report because access can vary by campaign"
     }
   },
   "pwc-us-library": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.pwc.com/us/en/library.html",
-    "limitation": "public-limited; downloads/forms may be gated. Not Pew Research Center; branded consulting perspective and uneven methodological depth Audited fallback peers: U24-PwC, Deloitte, McKinsey, KPMG.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.pwc.com/us/en/library/2026-market-volatility-survey.html",
+    "limitation": "Public library, sampled report detail, methodology, findings, and its 18-page PDF loaded anonymously. Other campaigns may use forms. This is PwC, not Pew Research Center.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -1779,29 +1703,29 @@
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`200`",
-      "recognizable_content": "PwC canonical tag matches the supplied PwC URL",
-      "access_indications": "Downloads/forms may be gated",
-      "technical_restriction": "None recorded"
+      "response_status": "`200 OK` for library, report detail, and sampled PDF",
+      "recognizable_content": "Survey title, sample description, findings, methodology, and valid PDF",
+      "access_indications": "Optional sign-in/register navigation did not block the tested report or PDF",
+      "technical_restriction": "Recheck the target report because access can vary by campaign"
     }
   },
   "questmobile": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T17:48:00+08:00",
-    "final_url": "https://www.questmobile.com.cn/research/report-new",
-    "limitation": "Public SPA shell advertised reports and mobile-big-data analysis. Rendered search, account, export, licensing, and result-level access were not completed.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.questmobile.com.cn/research/report/2082318300587618305",
+    "limitation": "Public report detail pages expose the report title, date, publisher, industry, keywords, narrative, metrics, and related-report links without login. Login belongs to the separate QuestMobile data product. No direct PDF or data export was observed on the tested public report page.",
     "observed_error": {
       "state": "none",
       "category": "none",
-      "message": "Home and report route returned a live SPA shell."
+      "message": "A report detail page and its rendered report content loaded anonymously."
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No material redirect recorded.",
-      "response_status": "QuestMobile SPA shell returned.",
-      "recognizable_content": "Mobile-internet business-intelligence and report branding.",
-      "access_indications": "Account, data export, and licensing were not verified.",
-      "technical_restriction": "Do not assert an API, search result count, or full-report access."
+      "response_status": "`200 OK` for the supplied report detail page in curl and headless Chrome.",
+      "recognizable_content": "Report title, date, publisher, industry, keywords, narrative sections, metrics, and related reports.",
+      "access_indications": "Public report content required no login; separate data-product login remains.",
+      "technical_restriction": "No public PDF or export contract was established."
     }
   },
   "roland-berger": {
@@ -1863,21 +1787,21 @@
   },
   "shanghai-government": {
     "status": "reachable",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.shanghai.gov.cn/",
-    "limitation": "public; source family not single URL. Fragmented IA, inconsistent formats, broken links, PDF-heavy delivery, uneven timeliness Audited fallback peers: 国家统计局, ministry data pages, local yearbooks, local open-data portals.",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.shanghai.gov.cn/nw12344/index.html",
+    "limitation": "Public recent-disclosure list and sampled policy detail loaded anonymously. The wider source family remains fragmented across departments and formats.",
     "observed_error": {
       "state": "none",
       "category": "none",
       "message": "No transport error recorded"
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
-      "redirect_chain": "Source family; representative samples checked",
-      "response_status": "Beijing, Shanghai, Guangdong statistics/government samples `200`; Guangdong samples slow",
-      "recognizable_content": "Official local statistics/government portals",
-      "access_indications": "None recorded",
-      "technical_restriction": "Fragmented family; inconsistent formats; slow responses in samples"
+      "redirect_chain": "No material redirect on the tested list or detail",
+      "response_status": "`200 OK` for recent-disclosure list and sampled policy detail",
+      "recognizable_content": "Issuer, title, date, document text, and official Shanghai government identity",
+      "access_indications": "Optional login/register navigation did not block public documents",
+      "technical_restriction": "Departmental pages and attachments may use different formats"
     }
   },
   "shanghai-statistics": {
@@ -1938,10 +1862,10 @@
     }
   },
   "state-council": {
-    "status": "moved",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.gov.cn/",
-    "limitation": "moved/redirected; public. Supplied path redirects to homepage; poor specificity and reproducibility; Router, not primary evidence source; org directory returned 403 from CLI Audited fallback peers: 国家统计局, ministry sites, provincial/municipal open-data portals, World Bank, Direct ministry domains, gov.cn homepage, State Council Gazette.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://sousuo.www.gov.cn/sousuo/search.shtml?code=17da70961a7&searchWord=%E6%95%B0%E5%AD%97%E7%BB%8F%E6%B5%8E",
+    "limitation": "Public rendered search returned document titles, excerpts, dates, filters, pagination, and official links without login. The originally supplied `/shuju/` path is stale; cite the opened ministry or State Council document, not the search result.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -1949,30 +1873,30 @@
     },
     "evidence_level": "High",
     "reviewed_probe": {
-      "redirect_chain": "U46: Supplied path redirects to `https://www.gov.cn/` homepage; U52: Root reached; org-directory family separately checked",
-      "response_status": "U46: Root `200`; U52: `https://www.gov.cn/` `200`; `https://www.gov.cn/gwyzzjg/zuzhi/` `403`",
-      "recognizable_content": "U46: Government portal homepage; U52: State Council portal root",
-      "access_indications": "U46: None recorded; U52: None recorded",
-      "technical_restriction": "U46: Old data-hub path is stale/unspecific; U52: Org-directory path bot-gated to CLI; family is router"
+      "redirect_chain": "Root and rendered search used; the old supplied data path redirects to the root",
+      "response_status": "`200 OK` for root, search shell, and search XHR requests",
+      "recognizable_content": "Search count, titles, excerpts, dates, filters, pagination, and official links",
+      "access_indications": "Optional login navigation did not block search or public documents",
+      "technical_restriction": "Search requires JavaScript rendering; the old `/shuju/` route is stale"
     }
   },
   "state-post-bureau": {
-    "status": "reachable-limited",
-    "last_checked": "2026-08-01T17:39:00+08:00",
-    "final_url": "https://www.spb.gov.cn/",
-    "limitation": "Root was public, but guessed search paths were unavailable. No stable search or API contract was verified.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T00:00:00+08:00",
+    "final_url": "https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml",
+    "limitation": "Public statistics list, industry-development-index list, government-information-disclosure route, and sampled statistics and policy details loaded anonymously. Some legacy list aliases redirect through JavaScript to the current category.",
     "observed_error": {
       "state": "none",
       "category": "none",
-      "message": "Current root loaded; guessed search route was unavailable."
+      "message": "Current official statistics and disclosure workflows completed."
     },
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "Current root used.",
-      "response_status": "Root 200; guessed search route unavailable.",
-      "recognizable_content": "Bureau root content.",
-      "access_indications": "No login observed on root.",
-      "technical_restriction": "Navigate from current content to the exact source document."
+      "response_status": "`200 OK` for root, current statistics list, disclosure index, and sampled details",
+      "recognizable_content": "Postal business volume, revenue, regional shares, CR8, period, methodology note, policy titles, and regulator identity",
+      "access_indications": "Optional government-service login did not block public statistics or documents",
+      "technical_restriction": "Follow JavaScript redirects from stale list aliases to current category routes"
     }
   },
   "szse": {
@@ -2167,7 +2091,7 @@
   },
   "us-commerce": {
     "status": "anti-bot",
-    "last_checked": "2026-08-01T00:00:00+08:00",
+    "last_checked": "2026-08-02T00:00:00+08:00",
     "final_url": "https://www.commerce.gov/",
     "limitation": "anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies directly, SEC for filings, agency newsrooms.",
     "observed_error": {
@@ -2175,13 +2099,13 @@
       "category": "anti-bot",
       "message": "anti-bot/technical-limited; public in browser but 403 Cloudflare from CLI. Most useful work moves to BEA, Census, ITA, BIS, NOAA, USPTO, NIST Audited fallback peers: Commerce sub-agencies directly, SEC for filings, agency newsrooms."
     },
-    "evidence_level": "Medium",
+    "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`403`; `/news` also `403`",
-      "recognizable_content": "Cloudflare `Just a moment...` page",
+      "response_status": "`403` in curl and headless Chrome",
+      "recognizable_content": "Cloudflare `Performing security verification` page",
       "access_indications": "Not recorded in audit",
-      "technical_restriction": "WAF-gated to CLI"
+      "technical_restriction": "Cloudflare blocked both direct CLI and fresh headless-browser retrieval"
     }
   },
   "wef-china": {
