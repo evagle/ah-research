@@ -2,14 +2,16 @@
 
 ## Goal
 
-Add one shared skill for discovering industry reports, market data, official
-statistics, filings, and specialist research sources. Audit the 63 user-supplied
-entries individually, route useful sources by research need, and distinguish
-content reliability from current access conditions.
+Add one complete shared `source-discovery` skill for discovering industry
+reports, market data, official statistics, filings, and specialist research
+sources. Audit the 63 user-supplied entries individually, route useful sources
+by research need, and distinguish content reliability from current access
+conditions. Also inventory every core source already used by the repository's
+skills and source registries.
 
 ## Architecture
 
-Create `.claude/skills/research-source-discovery/` with:
+Create `.claude/skills/source-discovery/` with:
 
 - `SKILL.md`: source-selection workflow, evidence hierarchy, access-failure
   handling, and output contract.
@@ -22,14 +24,31 @@ The catalog is the single source of truth. `product-analysis`, `value-profile`,
 and `read-filing` link to the shared skill where external industry or market
 evidence is needed; they do not copy the catalog.
 
+The catalog is a maintained seed registry, not a closed allowlist. When the
+known sources do not cover a research need, discover additional candidates from
+official link directories, publisher indexes, citations in original reports,
+issuer and company websites, investor-relations pages, customer and supplier
+websites, competitor websites, industry associations, academic sources, and
+search engines. Evaluate new candidates with the same record fields before
+using them.
+
 Source routing is many-to-many, not a fixed category-to-site mapping. Each
 research question may use several independent sources, and each source may
 support several research needs.
+
+The initial existing-source inventory includes CNINFO, SSE, SZSE, HKEX/HKEXnews,
+CSRC, MOF, NFRA, PBOC, ChinaMoney, SFC, AFRC, HKMA, Hong Kong Insurance
+Authority, Hong Kong Police, ICAC, Hong Kong Judiciary, and the Eastmoney
+research API. Treat code registries and live skill contracts as authoritative
+for inventory membership; this list is descriptive, not a second registry.
+Deduplicate sources already present in the 63 supplied entries by canonical
+publisher while preserving the supplied entry number and aliases.
 
 ## Source Record
 
 Each numbered entry records:
 
+- origin (`user-supplied`, `existing-core`, or both) and existing code ID;
 - canonical name and URL;
 - category and best use;
 - accuracy and practical utility;
@@ -50,6 +69,14 @@ and consultancies as attributed secondary evidence. Use aggregators, media,
 social platforms, and report indexes for discovery only unless the original
 document and publisher can be verified.
 
+Treat company websites as first-party subject evidence: use them for product
+specifications, official announcements, management statements, locations,
+pricing, and investor-relations materials. Do not treat a company's claims
+about market leadership, customer outcomes, product superiority, or competitive
+advantage as independent proof; cross-check those claims with customers,
+suppliers, competitors, regulators, industry bodies, or other independent
+sources.
+
 Evidence levels:
 
 - `High`: current first-party page, response, or published access policy was
@@ -65,13 +92,17 @@ access limitation.
 
 For each material claim, build a source portfolio:
 
-1. Search the highest-authority applicable sources.
-2. Cross-check with an independent source when the claim affects valuation,
+1. Translate the question into needed facts, geography, period, industry, and
+   acceptable evidence types.
+2. Search the highest-authority applicable known sources.
+3. Discover and evaluate new candidates when known sources have no result or
+   incomplete coverage.
+4. Cross-check with an independent source when the claim affects valuation,
    risk, market size, or competitive position.
-3. When a source has no result, requires unavailable membership, or fails
+5. When a source has no result, requires unavailable membership, or fails
    technically, continue through other applicable sources in the same category
    and then adjacent categories.
-4. Report a source gap only after recording every compliant route attempted,
+6. Report a source gap only after recording every compliant route attempted,
    its query, access result, and final error.
 
 No source is mandatory merely because it appears first in the catalog. A
@@ -95,6 +126,8 @@ manifests, or the existing machine-citation contracts.
 Add contract tests that require:
 
 - discoverable frontmatter and all 63 numbered entries;
+- catalog coverage for official domains and core providers already referenced
+  by source registries, download scripts, and consuming skills;
 - required source-record fields and evidence-level vocabulary;
 - category and access-status coverage;
 - multi-source portfolios, independent cross-checking, and fallback exhaustion;
