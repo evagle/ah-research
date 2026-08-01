@@ -1,0 +1,61 @@
+id: iimedia
+name: iiMedia
+aliases:
+- U09
+- 艾媒网
+- supplied U09
+publisher_type: media
+official_domains:
+- iimedia.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: Industry background, consumer trend decks, emerging-sector overview pieces. Medium authority;
+    commercial research and media framing
+functions:
+- id: research-reports
+  authority: Medium
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.iimedia.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:iimedia.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.iimedia.cn/
+  limitation: 'public-limited; excerpts public, report/download flows route to member assets. Marketing
+    tone; complete PDFs may be member-gated; cross-check hard claims Audited fallback peers: U07, U02,
+    U16.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200 OK` for homepage and sample article'
+    recognizable_content: Public excerpt text and sample article
+    access_indications: '`附下载`; member-report asset and report center route'
+    technical_restriction: None recorded

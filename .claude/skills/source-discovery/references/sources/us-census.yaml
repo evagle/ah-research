@@ -1,0 +1,60 @@
+id: us-census
+name: U.S. Census Bureau API
+aliases:
+- Census API
+- ACS API
+publisher_type: official-statistics
+official_domains:
+- api.census.gov
+geographies:
+- US
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Census-published datasets, metadata, variables, and keyed Census API observations.
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://api.census.gov/data/2024/acs/acs5/variables.json
+    kind: ACS variable metadata
+    stability: dataset and vintage specific
+  search:
+    method: inspect dataset metadata, then issue a keyed data query
+    fields:
+    - dataset
+    - vintage
+    - get
+    - geography predicate
+    example_query: get=NAME,B01001_001E&for=us:1 after obtaining a registered key
+    result_identity: dataset, vintage, variable, geography, estimate, annotation, unit, and query URL
+  citation:
+    use: direct for variable definitions; cite a completed keyed data response for observations.
+    required_fields:
+    - dataset and vintage
+    - variable
+    - geography
+    - estimate
+    - query URL
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:22:00+08:00'
+  final_url: https://api.census.gov/data/2024/acs/acs5/variables.json
+  limitation: Metadata was public, while the tested ACS data query required a valid key. A guessed bulk path was
+    stale and must be rediscovered from current Census documentation.
+  observed_error:
+    state: none
+    category: none
+    message: Metadata returned 200; tested data query returned Missing Key.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Direct API routes.
+    response_status: Variables JSON returned 200; data query returned official Missing Key response.
+    recognizable_content: ACS variable definitions and API key guidance.
+    access_indications: Registered API key required for tested data calls.
+    technical_restriction: Metadata is not a data observation; do not reuse stale bulk URLs.

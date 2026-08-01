@@ -1,0 +1,57 @@
+id: hksar-budget
+name: HKSAR Budget
+aliases:
+- Hong Kong Budget
+publisher_type: official-government
+official_domains:
+- budget.gov.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: HKSAR annual Budget documents and official fiscal measures.
+functions:
+- id: fiscal-policy-documents
+  authority: High
+  utility: Medium
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.budget.gov.hk/2025/eng/
+    kind: annual budget archive entry
+    stability: current-year route; verify the selected year
+  search:
+    method: annual archive navigation and rendered document search
+    fields:
+    - budget year
+    - chapter
+    - keyword
+    example_query: open the 2025 budget archive and search the rendered document for retail
+    result_identity: speech or document title, budget year, chapter, page or paragraph, delivery date, and URL
+  citation:
+    use: direct only for an opened official budget document, not a press summary.
+    required_fields:
+    - budget year
+    - chapter
+    - page or paragraph
+    - publication date
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://www.budget.gov.hk/2025/eng/
+  limitation: The official annual budget route is established, but the checked archive returned an empty scripted
+    reply. Do not convert that transport result into a missing-document claim.
+  observed_error:
+    state: error
+    category: network
+    message: Checked annual archive returned an empty scripted response.
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: No completed document redirect chain recorded.
+    response_status: Direct archive request returned an empty reply in the probe environment.
+    recognizable_content: Government annual Budget route.
+    access_indications: No paywall indicated.
+    technical_restriction: Inspect chapters and PDFs in a permitted browser before citing.

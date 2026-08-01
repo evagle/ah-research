@@ -1,0 +1,61 @@
+id: dotour
+name: Dotour
+aliases:
+- U14
+- 旅游圈
+- supplied U14
+publisher_type: media
+official_domains:
+- dotour.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Unconfirmed tourism-industry media/report route. Current authority unverified
+functions:
+- id: research-reports
+  authority: Low
+  utility: Low
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.dotour.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:dotour.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: discovery only unless independently validated and claim-appropriate
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - analysys-research-reports
+  - iimedia-research-reports
+access:
+  status: unverified
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.dotour.cn/
+  limitation: 'unverified; DNS failure on listed and bare-domain variants. No redirect target discovered;
+    one audit is not proof of shutdown Audited fallback peers: U07, U09, U02.'
+  observed_error:
+    state: error
+    category: dns
+    message: 'unverified; DNS failure on listed and bare-domain variants. No redirect target discovered;
+      one audit is not proof of shutdown Audited fallback peers: U07, U09, U02.'
+  evidence_level: Low
+  reviewed_probe:
+    redirect_chain: No redirect target discovered
+    response_status: DNS failure for listed and obvious variants
+    recognizable_content: None verified
+    access_indications: Not recorded in audit
+    technical_restriction: DNS failure

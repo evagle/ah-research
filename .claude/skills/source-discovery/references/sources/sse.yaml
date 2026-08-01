@@ -1,0 +1,90 @@
+id: sse
+name: Shanghai Stock Exchange
+aliases:
+- U10
+- 上海证券交易所
+- supplied U10; core code IDs sse in build_event_manifest.SOURCE_DOMAINS and build_market_manifest.SOURCE_DOMAINS;
+  domain sse.com.cn
+publisher_type: official-exchange
+official_domains:
+- sse.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: SSE listed-company disclosures, rules, notices, IPO/bond/REIT information, inquiry letters, official
+    market data, and official site search routing. High authority for SSE-published filings, notices,
+    rules, inquiry letters, and market data
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.sse.com.cn/disclosure/listedinfo/announcement/
+    kind: listed-company announcement register
+    stability: observed current route
+  search:
+    method: rendered announcement register
+    fields:
+    - security code or abbreviation
+    - board
+    - title
+    - date range
+    example_query: search security code 600519 in the listed-company announcement register
+    result_identity: security code, issuer, title, publication date, document URL, and issuer-authored PDF
+  citation:
+    use: cite the opened SSE-hosted PDF. SSE distributes issuer-supplied content; the table row is discovery metadata.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - cninfo-company-disclosures
+- id: regulatory-materials
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.sse.com.cn/regulation/supervision/inquiries/
+    kind: supervisory inquiry register
+    stability: observed current route
+  search:
+    method: rendered inquiry register
+    fields:
+    - security code or abbreviation
+    - inquiry type
+    - date range
+    example_query: search 600519 with the required date interval in the supervisory inquiry register
+    result_identity: security code, issuer, letter date, inquiry type, title, and letter URL
+  citation:
+    use: cite the opened SSE inquiry letter as the exchange action and separately cite an issuer reply from
+      the disclosure register or CNINFO.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.sse.com.cn/disclosure/listedinfo/announcement/
+  limitation: Public JavaScript-driven registers. Preserve issuer and document identity for announcements, and
+    do not substitute an issuer reply for the SSE inquiry letter.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded for the checked registers.
+    response_status: Announcement and inquiry registers returned public content.
+    recognizable_content: Announcement fields and supervisory inquiry filters, rows, and pagination.
+    access_indications: No login or CAPTCHA observed for tested interactive routes.
+    technical_restriction: JavaScript and date scoping apply; cite the final PDF or letter rather than a row.

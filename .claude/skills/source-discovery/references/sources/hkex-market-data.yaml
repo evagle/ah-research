@@ -1,0 +1,67 @@
+id: hkex-market-data
+name: HKEX market data
+aliases:
+- hkex
+- C02
+- HKEX
+- HKEX official quotes
+- HKEX daily quotations
+- build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL,
+  HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk
+publisher_type: official-exchange
+official_domains:
+- hkex.com.hk
+geographies:
+- HK
+industries:
+- financial-services
+authority:
+  level: High
+  scope: HKEX official security quotations, day-close short-selling reports, and exchange market statistics.
+functions:
+- id: official-market-data
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=en
+    kind: equity lookup
+    stability: observed current route
+  - url: https://www.hkex.com.hk/Market-Data/Statistics/Securities-Market/Daily-Quotations-(Main-Board)?sc_lang=en
+    kind: dated daily quotation route
+    stability: observed current route
+  search:
+    method: rendered equity lookup or dated market-statistics report
+    fields:
+    - stock code
+    - report date
+    - market session
+    example_query: enter 09992 in the equity lookup and retain the market timestamp or dated report
+    result_identity: security code, timestamp or delay, currency, quote fields, report date, and source URL
+  citation:
+    use: direct for HKEX market data with its as-of timestamp or report date. Do not use a quote page for
+      audited issuer metrics or index facts.
+    required_fields:
+    - security code
+    - timestamp or report date
+    - market status
+    - field or table
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:12:00+08:00'
+  final_url: https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities?sc_lang=en
+  limitation: Public pages were observed. Real-time and wholesale redistribution can require a vendor agreement;
+    day-close reports must retain their report date and market-session context.
+  observed_error:
+    state: none
+    category: none
+    message: Tested public market-data pages loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public quote and market-statistics routes returned usable pages.
+    recognizable_content: Equity lookup, Daily Quotations, short-selling, and market-statistics navigation.
+    access_indications: Public pages; licensed real-time and redistribution products are separate.
+    technical_restriction: UI search is not a public price API.

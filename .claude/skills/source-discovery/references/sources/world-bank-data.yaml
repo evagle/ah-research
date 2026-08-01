@@ -1,0 +1,69 @@
+id: world-bank-data
+name: World Bank Chinese Data
+aliases:
+- U47
+- 世界银行中文数据
+- U53
+- supplied U47
+- supplied U53 duplicate of World Bank family also covered by U47
+publisher_type: official-statistics
+official_domains:
+- data.worldbank.org.cn
+- data.worldbank.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Cross-country indicators, time series downloads, metadata lookup. High authority for World Bank
+    harmonized indicators
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://data.worldbank.org.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://data.worldbank.org/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:data.worldbank.org.cn official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - imf-data-official-statistics
+  - national-bureau-statistics-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://data.worldbank.org.cn/
+  limitation: 'public. Not original origin for every country''s raw data; lag vs source agencies; Duplicate
+    coverage with U47 Chinese World Bank data; not announcements or filings source Audited fallback peers:
+    IMF, OECD, UNData, 国家统计局.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: 'U47: Canonical tag matches `https://data.worldbank.org.cn/`; U53: No redirect recorded'
+    response_status: 'U47: `200`; U53: `200`'
+    recognizable_content: 'U47: World Bank Chinese data portal; U53: World Bank Open Data portal'
+    access_indications: 'U47: None recorded; U53: None recorded'
+    technical_restriction: 'U47: None recorded; U53: Duplicate World Bank family coverage with U47'

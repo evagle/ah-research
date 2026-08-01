@@ -1,0 +1,62 @@
+id: unsd-demographic-social
+name: UNSD Demographic and Social Statistics
+aliases:
+- U59
+- UN Demographic and Social Statistics
+- supplied U59
+publisher_type: official-statistics
+official_domains:
+- unstats.un.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Population, civil registration, social-stat methodology, portal discovery. High authority for
+    UNSD demographic/social programs
+functions:
+- id: official-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://unstats.un.org/unsd/demographic-social/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:unstats.un.org official statistics
+    result_identity: publisher, indicator, period, geography, units, URL
+  citation:
+    use: direct with series and methodology context
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - undata-official-statistics
+  - world-bank-data-official-statistics
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://unstats.un.org/unsd/demographic-social/
+  limitation: 'public. Family/landing orientation rather than all-in-one dataset Audited fallback peers:
+    UNdata, national census/stat offices, World Bank.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: UNSD demographic/social statistics family
+    access_indications: None recorded
+    technical_restriction: Family/landing orientation

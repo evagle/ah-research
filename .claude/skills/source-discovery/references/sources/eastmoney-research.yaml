@@ -1,0 +1,69 @@
+id: eastmoney-research
+name: Eastmoney A-share research discovery
+aliases:
+- U36
+- 东方财富研报
+- download_research
+- supplied U36; core downloader origin download_research RESEARCH_LIST_URL and PDF_URL_TEMPLATE; domains
+  reportapi.eastmoney.com, pdf.dfcfw.com, eastmoney.com
+publisher_type: aggregator
+official_domains:
+- data.eastmoney.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Low
+  scope: Eastmoney A-share report-search metadata and dissemination routes. The named broker or copyright holder
+    remains the substantive source; the portal and delivered PDF hostname do not prove authorship.
+functions:
+- id: research-reports
+  authority: Low
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
+    kind: visible report search
+    stability: observed current route
+  - url: https://data.eastmoney.com/report/zw_stock.jshtml?infocode=AP202511021773734683
+    kind: report detail example
+    stability: AP identity is durable; page and PDF URL should be reacquired
+  search:
+    method: visible Eastmoney research search, then detail page and attached PDF
+    fields:
+    - keyword
+    - research tab
+    - AP report ID
+    example_query: search %E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0, select the research tab, and retain the AP report ID
+    result_identity: AP ID, displayed title, organization label, analyst label, date, detail URL, and attached PDF URL
+  citation:
+    use: direct only for Eastmoney displayed metadata and disclaimer. Use the PDF for its stated author or
+      copyright holder, and independently verify broker authorship when it matters.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - cicc-research-research-reports
+  - sina-finance-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://so.eastmoney.com/yanbao/s?keyword=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0
+  limitation: The verified company-report workflow is A-share oriented. On 2026-08-01, searches for Pop Mart
+    and 09992 returned zero company reports; this does not establish that Eastmoney has no Hong Kong reports.
+    Legacy or implementation endpoints are not supported public APIs.
+  observed_error:
+    state: none
+    category: none
+    message: Visible search, detail, and two sampled PDF workflows completed; raw legacy endpoint was limited.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Visible search led to the report detail and attached PDF; raw legacy search route returned 403.
+    response_status: Search, detail, and sampled PDFs loaded anonymously; direct legacy API requests were blocked.
+    recognizable_content: AP IDs, displayed organization and analyst labels, dates, detail metadata, and dissemination disclaimer.
+    access_indications: No login or paywall on tested A-share search/detail/PDF paths.
+    technical_restriction: Do not use undocumented backend endpoints as a stable API or extrapolate the Pop Mart result.

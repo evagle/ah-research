@@ -1,0 +1,60 @@
+id: etsi
+name: ETSI
+aliases:
+- European Telecommunications Standards Institute
+publisher_type: original-research
+official_domains:
+- etsi.org
+geographies:
+- EU
+industries:
+- telecom
+- technology
+authority:
+  level: High
+  scope: ETSI-authored standards, specifications, and standards-process information.
+functions:
+- id: telecom-standards
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.etsi.org/standards/
+    kind: standards library
+    stability: rendered document route must be verified
+  search:
+    method: rendered standards-library search
+    fields:
+    - identifier
+    - version
+    - technical committee
+    example_query: search EN%20303%20645 and open the rendered document version
+    result_identity: identifier, title, version, status, publication date, committee, clause, and document URL
+  citation:
+    use: direct for the opened official document and version. Do not cite a vendor certification claim as
+      proof of the standard text.
+    required_fields:
+    - identifier
+    - version
+    - status
+    - publication date
+    - clause
+  fallbacks: []
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T17:54:00+08:00'
+  final_url: https://www.etsi.org/standards/
+  limitation: Standards library entry was public, but the dynamic result and PDF-download transaction were not
+    completed. E-learning login is a separate service.
+  observed_error:
+    state: none
+    category: none
+    message: Standards library loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Public standards library returned.
+    recognizable_content: Search, browse, and standards-process descriptions.
+    access_indications: Separate e-learning login was visible.
+    technical_restriction: Validate the selected document and version before citation.

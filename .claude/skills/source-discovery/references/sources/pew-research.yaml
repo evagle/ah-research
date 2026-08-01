@@ -1,0 +1,61 @@
+id: pew-research
+name: Pew Research Center
+aliases:
+- U43-Pew
+- Intended 皮尤网 label from supplied U43
+- U43
+- supplied U43 intended-label subrecord
+publisher_type: original-research
+official_domains:
+- pewresearch.org
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Pew public-opinion, demographic, social, internet, and technology survey research. High route
+    prior for Pew's own transparent survey research
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.pewresearch.org/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:pewresearch.org industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and conflicts noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - wef-china-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.pewresearch.org/
+  limitation: 'public. Not PwC; survey scope, sample, geography, wording, and field dates bound every
+    claim Audited fallback peers: Gallup, Ipsos, World Bank, OECD.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Pew canonical tag matches the Pew domain
+    access_indications: Not recorded in audit
+    technical_restriction: None recorded

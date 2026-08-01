@@ -1,0 +1,62 @@
+id: iresearch
+name: iResearch
+aliases:
+- U19
+- 艾瑞网 / iResearch
+- supplied U19
+publisher_type: commercial-data-provider
+official_domains:
+- iresearch.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: China internet, advertising, ecommerce, mobile, consumer-industry reports. Medium-to-high commercial
+    authority
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.iresearch.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:iresearch.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - 199it-research-reports
+  - idc-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.iresearch.cn/
+  limitation: 'public-limited; articles/report pages public, premium products commercial. Vendor-produced
+    perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC,
+    CAICT.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`; `gb2312` homepage rendered after charset handling'
+    recognizable_content: iResearch homepage, articles/report pages
+    access_indications: Premium products/deeper databases commercial
+    technical_restriction: Charset handling needed

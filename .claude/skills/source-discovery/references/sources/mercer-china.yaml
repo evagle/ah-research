@@ -1,0 +1,62 @@
+id: mercer-china
+name: Mercer China
+aliases:
+- U27
+- Mercer China
+- supplied U27
+publisher_type: commercial-data-provider
+official_domains:
+- mercer.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: HR benchmarks, white papers, benefits trends, workplace health/rewards. High within HR, compensation,
+    mobility, benefits benchmarking as commercial provider
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.mercer.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:mercer.com.cn industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - aon-china-research-reports
+  - deloitte-china-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.mercer.com.cn/
+  limitation: 'public-limited; commercial survey products and databases gated. Valuable benchmark cuts
+    are paid; public pages often market commercial products Audited fallback peers: Aon, Deloitte, EY,
+    official labor/statistics sources.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No redirect recorded
+    response_status: '`200`'
+    recognizable_content: Mercer China public site and insight pages
+    access_indications: Survey products and benchmark databases commercial
+    technical_restriction: None recorded

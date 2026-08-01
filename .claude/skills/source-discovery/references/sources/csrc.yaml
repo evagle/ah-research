@@ -1,0 +1,61 @@
+id: csrc
+name: China Securities Regulatory Commission
+aliases:
+- C03
+- CSRC
+- build_event_manifest csrc; domain csrc.gov.cn
+publisher_type: official-regulator
+official_domains:
+- csrc.gov.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Rules, enforcement, policy notices, press releases, official interpretations. High authority
+    for CSRC-published securities regulation
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Low
+  direct_urls:
+  - url: http://www.csrc.gov.cn/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:csrc.gov.cn official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - nfra-regulatory-materials
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: http://www.csrc.gov.cn/
+  limitation: 'public. Not a company filing repository Audited fallback peers: Exchanges, CNINFO, PBOC,
+    NFRA.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: '`200`'
+    recognizable_content: Not recorded in audit
+    access_indications: Not recorded in audit
+    technical_restriction: Not recorded in audit

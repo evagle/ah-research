@@ -1,0 +1,63 @@
+id: idc
+name: IDC
+aliases:
+- U29
+- IDC
+- supplied U29
+publisher_type: commercial-data-provider
+official_domains:
+- idc.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Tech market sizing, forecasts, vendor share, enterprise IT/telecom trend discovery. High commercial
+    technology market-intelligence authority
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.idc.com/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:idc.com industry report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable measurement with methodology and coverage noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+  - kpmg-china-research-reports
+access:
+  status: paywalled
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.idc.com/
+  limitation: 'membership/paywalled; public landing pages/PRs, full reports behind subscription/login.
+    Full reports usually paid; proprietary methodology; public claims often abstracts or press releases
+    Audited fallback peers: CAICT, iResearch, KPMG, Deloitte.'
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Sample report URL redirected to `https://my.idc.com/`; root `https://www.idc.com/`
+      reached
+    response_status: Root `200`; sampled report route ended `403`
+    recognizable_content: IDC public research landing pages and press releases
+    access_indications: Full report path behind `my.idc.com` subscription/login
+    technical_restriction: Account/subscription gate for full reports

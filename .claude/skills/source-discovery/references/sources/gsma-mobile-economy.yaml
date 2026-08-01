@@ -1,0 +1,62 @@
+id: gsma-mobile-economy
+name: GSMA Mobile Economy
+aliases:
+- U34
+- GSMA Mobile Economy
+- supplied U34
+publisher_type: original-research
+official_domains:
+- gsma.com
+geographies:
+- Global
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Telecom adoption, subscribers, connectivity, regional mobile-economy baselines. High for GSMA-published
+    telecom synthesis; not national statistical original
+functions:
+- id: telecom-industry-reports
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.gsma.com/mobileeconomy/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:gsma.com mobile economy report
+    result_identity: original publisher, title, author, date, methodology, URL
+  citation:
+    use: attributable research with methodology and conflicts noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+access:
+  status: anti-bot
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.gsma.com/mobileeconomy/
+  limitation: 'anti-bot/technical-limited; public report model but Cloudflare challenge from scripted
+    access. Industry-association perspective; forecasts/models; local regulators better for country edge
+    cases Audited fallback peers: ITU, World Bank, national telecom regulators, OECD.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited; public report model but Cloudflare challenge from scripted access.
+      Industry-association perspective; forecasts/models; local regulators better for country edge cases
+      Audited fallback peers: ITU, World Bank, national telecom regulators, OECD.'
+  evidence_level: Medium
+  reviewed_probe:
+    redirect_chain: URL resolves to same path
+    response_status: '`403` with Cloudflare `Just a moment...`'
+    recognizable_content: Cloudflare challenge page; origin reachable
+    access_indications: Public report model expected but not validated by script
+    technical_restriction: Cloudflare challenge gates scripted access

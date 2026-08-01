@@ -1,0 +1,62 @@
+id: caac
+name: Civil Aviation Administration of China
+aliases:
+- CAAC
+- China civil aviation statistics
+publisher_type: official-statistics
+official_domains:
+- caac.gov.cn
+geographies:
+- CN
+industries:
+- aviation
+authority:
+  level: High
+  scope: CAAC-published aviation statistics, reports, and official aviation regulatory material.
+functions:
+- id: official-aviation-statistics
+  authority: High
+  utility: High
+  workflow_evidence: Medium
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.caac.gov.cn/XXGK/XXGK/TJSJ/index_1215.html
+    kind: statistics index
+    stability: observed current route
+  - url: https://www.caac.gov.cn/so/s?tab=all&siteCode=bm70000001&qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1
+    kind: official site search
+    stability: observed current route
+  search:
+    method: CAAC statistics category or site search
+    fields:
+    - qt
+    - tab
+    - siteCode
+    example_query: qt=%E6%9C%88%E5%BA%A6%E7%BB%9F%E8%AE%A1&tab=all&siteCode=bm70000001
+    result_identity: title, issuing unit, period, metric, unit, revision note, table, and URL
+  citation:
+    use: direct for an opened CAAC statistic or report with period and measurement definition.
+    required_fields:
+    - title
+    - period
+    - metric definition
+    - unit
+    - issuing unit
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:39:00+08:00'
+  final_url: https://www.caac.gov.cn/XXGK/XXGK/TJSJ/index_1215.html
+  limitation: Public statistics and search routes were verified. CAAC is the official China operational source;
+    IATA is only attributable association analysis.
+  observed_error:
+    state: none
+    category: none
+    message: Statistics index and search surface loaded.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: First-party statistics and search pages returned.
+    recognizable_content: Statistics-data and search-result routes.
+    access_indications: No login observed.
+    technical_restriction: Open the period-specific source, not a search card.

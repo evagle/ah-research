@@ -1,0 +1,72 @@
+id: cninfo
+name: CNINFO
+aliases:
+- C01
+- 巨潮资讯网
+- download_filings
+- download_filings STOCK_LIST_URL, ANNOUNCEMENT_QUERY_URL, PDF_BASE_URL; domains cninfo.com.cn and static.cninfo.com.cn
+publisher_type: official-market-infrastructure
+official_domains:
+- cninfo.com.cn
+- static.cninfo.com.cn
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Primary original-document tracing for A-share announcements, annual reports, prospectuses, ad
+    hoc filings. High authority for exchange-listed company disclosures hosted there
+functions:
+- id: company-disclosures
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.cninfo.com.cn/
+    kind: primary route
+    stability: reviewed seed
+  - url: https://www.cninfo.com.cn/new/hisAnnouncement/query
+    kind: direct route
+    stability: reviewed seed
+  - url: https://static.cninfo.com.cn/
+    kind: direct route
+    stability: reviewed seed
+  search:
+    method: statutory disclosure search and exact hosted PDF retrieval
+    fields:
+    - column
+    - searchkey
+    - tabName
+    - pageNum
+    - pageSize
+    example_query: POST column=sse&tabName=fulltext&searchkey=%E8%B4%B5%E5%B7%9E%E8%8C%85%E5%8F%B0&pageNum=1&pageSize=30
+    result_identity: announcementId, security code, issuer, title, date, adjunctUrl, and hosted PDF URL
+  citation:
+    use: cite the exact static.cninfo.com.cn PDF as an issuer document distributed by the statutory platform;
+      JSON search metadata is discovery only.
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - sse-company-disclosures
+access:
+  status: reachable
+  last_checked: '2026-08-01T00:00:00+08:00'
+  final_url: https://www.cninfo.com.cn/
+  limitation: Anonymous POST and exact hosted PDF worked. The query endpoint is implementation-facing and
+    rate-sensitive; prefer the relevant listing exchange where the original is available.
+  observed_error:
+    state: none
+    category: none
+    message: No transport error recorded
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded.
+    response_status: Query POST and sampled static PDF completed.
+    recognizable_content: Announcement ID, security, issuer, title, date, and adjunct URL fields.
+    access_indications: No login or CAPTCHA observed for the tested browser workflow.
+    technical_restriction: Do not treat implementation JSON as a documented public API.

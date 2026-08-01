@@ -1,0 +1,60 @@
+id: eastmoney-pdf-delivery
+name: Eastmoney PDF delivery host
+aliases:
+- pdf.dfcfw.com
+- Eastmoney delivered report PDF
+publisher_type: aggregator
+official_domains:
+- pdf.dfcfw.com
+geographies:
+- CN
+industries:
+- financial-services
+authority:
+  level: Low
+  scope: Delivery of the retrieved file only; the hostname does not establish report authorship, broker authority,
+    or original publication.
+functions:
+- id: report-pdf-delivery
+  authority: Low
+  utility: Medium
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://pdf.dfcfw.com/pdf/H3_AP202506111688924171_1.pdf?1771032445000.pdf
+    kind: exact retrieved file
+    stability: exact retrieved URL; query parameter may change
+  search:
+    method: recover AP identity from an Eastmoney detail record, then follow attach_url
+    fields:
+    - AP report ID
+    - attach_url
+    example_query: AP202506111688924171 via https://data.eastmoney.com/report/info/AP202506111688924171.html
+    result_identity: AP ID, detail URL, exact file URL, title, copyright holder, date, and page count
+  citation:
+    use: cite file content only with the author or copyright holder stated inside the accessed PDF; cite host only
+      for delivery and retrieval facts.
+    required_fields:
+    - AP report ID
+    - title
+    - copyright holder
+    - exact file URL
+    - retrieval time
+  fallbacks: []
+access:
+  status: reachable
+  last_checked: '2026-08-01T17:13:00+08:00'
+  final_url: https://pdf.dfcfw.com/pdf/H3_AP202506111688924171_1.pdf?1771032445000.pdf
+  limitation: One 32-page sampled PDF was public and range-readable. This does not prove that the host authored
+    the report, that all files are public, or that the displayed URL is permanent.
+  observed_error:
+    state: none
+    category: none
+    message: Sampled PDF returned 200 without authentication.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Direct sampled PDF retrieval.
+    response_status: HTTP 200 application/pdf; 4,021,417 bytes; Accept-Ranges bytes.
+    recognizable_content: Sample PDF named Shanghai Jiashi Marketing Consulting as copyright holder.
+    access_indications: No login or paywall observed for the sampled file.
+    technical_restriction: Do not infer original-publication provenance from delivery hosting.

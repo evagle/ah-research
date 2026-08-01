@@ -1,0 +1,62 @@
+id: hk-insurance-authority
+name: Insurance Authority of Hong Kong
+aliases:
+- C10
+- IA
+- ia
+- build_event_manifest ia; domain ia.org.hk
+publisher_type: official-regulator
+official_domains:
+- ia.org.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: Insurance regulation, circulars, licensing notices. High authority for IA-published materials
+functions:
+- id: regulatory-materials
+  authority: High
+  utility: High
+  workflow_evidence: Low
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://www.ia.org.hk/
+    kind: primary route
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - query
+    example_query: site:ia.org.hk official notice
+    result_identity: publisher, title, date, notice or case ID, URL
+  citation:
+    use: direct within the function authority scope
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks: []
+  adjacent_alternatives:
+  - sfc-regulatory-materials
+access:
+  status: anti-bot
+  last_checked: '2026-08-02T00:00:00+08:00'
+  final_url: https://www.ia.org.hk/
+  limitation: 'anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally
+    brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.'
+  observed_error:
+    state: error
+    category: anti-bot
+    message: 'anti-bot/technical-limited. Public in browser; 403 from audit environment; operationally
+      brittle for CLI extraction Audited fallback peers: HKMA, SFC, insurer sites, gazettes.'
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Not recorded in audit
+    response_status: '`403` in curl and headless Chrome'
+    recognizable_content: Cloudflare `Performing security verification` page for `ia.org.hk`
+    access_indications: Not recorded in audit
+    technical_restriction: Cloudflare blocked both direct CLI and fresh headless-browser retrieval

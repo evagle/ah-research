@@ -11,7 +11,18 @@ from jsonschema import Draft202012Validator
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SKILLS_ROOT = REPO_ROOT / ".claude" / "skills"
-SKILL_PATHS = {path.parent.name: path for path in sorted(SKILLS_ROOT.glob("*/SKILL.md"))}
+FINANCIAL_SKILL_NAMES = (
+    "financial-redflag-scan",
+    "management-analysis",
+    "product-analysis",
+    "read-filing",
+    "value-profile",
+)
+SKILL_PATHS = {
+    path.parent.name: path
+    for path in sorted(SKILLS_ROOT.glob("*/SKILL.md"))
+    if path.parent.name in FINANCIAL_SKILL_NAMES
+}
 
 
 def read(path: Path) -> str:
@@ -31,12 +42,7 @@ def all_skill_markdown() -> list[Path]:
 
 
 def test_skill_frontmatter_is_discoverable_and_safe() -> None:
-    assert set(SKILL_PATHS) == {
-        "financial-redflag-scan",
-        "management-analysis",
-        "read-filing",
-        "value-profile",
-    }
+    assert set(SKILL_PATHS) == set(FINANCIAL_SKILL_NAMES)
     for folder, path in SKILL_PATHS.items():
         metadata = frontmatter(path)
         assert metadata["name"] == folder
@@ -45,6 +51,296 @@ def test_skill_frontmatter_is_discoverable_and_safe() -> None:
         assert len(description) < 500
         assert "<" not in description
         assert ">" not in description
+
+
+def test_all_financial_skills_share_one_evidence_contract() -> None:
+    contract_path = SKILLS_ROOT / "read-filing/references/evidence-contract.md"
+    assert contract_path.is_file()
+    contract = read(contract_path)
+    for heading in (
+        "## 1.身份与截止日",
+        "## 2.Manifest绑定",
+        "## 3.Mode B只读与写入权",
+        "## 4.引用",
+        "## 5.终态",
+        "## 6.证据漂移",
+    ):
+        assert heading in contract
+    for skill_path in SKILL_PATHS.values():
+        assert "read-filing/references/evidence-contract.md" in read(skill_path)
+
+
+def test_all_financial_skills_share_one_run_store_contract() -> None:
+    contract_path = SKILLS_ROOT / "read-filing/references/run-store-contract.md"
+    assert contract_path.is_file()
+    contract = read(contract_path)
+    for heading in (
+        "## 1.无感入口",
+        "## 2.Ticker级共享层",
+        "## 3.Run级隔离层",
+        "## 4.Resolver动作",
+        "## 5.Mode边界",
+        "## 6.兼容读取",
+    ):
+        assert heading in contract
+    for skill_path in SKILL_PATHS.values():
+        assert "read-filing/references/run-store-contract.md" in read(skill_path)
+
+
+def test_standalone_modes_write_reports_under_ticker_runs() -> None:
+    for skill_name in (
+        "read-filing",
+        "product-analysis",
+        "management-analysis",
+        "financial-redflag-scan",
+    ):
+        skill = read(SKILL_PATHS[skill_name])
+        mode_a = skill.split("### Mode A", 1)[1].split("### Mode B", 1)[0]
+        mode_b = skill.split("### Mode B", 1)[1].split("### Invocation", 1)[0]
+        assert "data/filings/<ticker>/runs/<run-id>/report.md" in mode_a
+        assert "--resume" not in mode_a
+        assert "--start-fresh" not in mode_a
+        assert "Mode B不调用run store" in mode_b
+        assert "不创建run" in mode_b
+
+
+def test_value_profile_uses_seamless_resolver_and_keeps_final_profile_path() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    invocation = skill.split("### Invocation", 1)[1].split("#### 两种运行模式", 1)[0]
+    bootstrap = skill.split("### Step 1", 1)[1].split("2. **Audit", 1)[0]
+
+    assert "--resume" not in invocation
+    assert "--start-fresh" not in invocation
+    assert "scripts/financial_run_store.py resolve" in bootstrap
+    assert "created/resumed/reused" in bootstrap
+    assert "完全重新分析" in bootstrap
+    assert "profiles/<ticker>-<YYYY-MM-DD>[-vN].md" in bootstrap
+
+
+def test_run_store_contract_keeps_shared_and_local_data_separate() -> None:
+    contract = read(SKILLS_ROOT / "read-filing/references/run-store-contract.md")
+    for shared in (
+        "manifests/",
+        "evidence/",
+        "_extracted/",
+        "facts/",
+        "metrics/",
+        "citations/",
+        "analyses/",
+        "market/",
+    ):
+        assert shared in contract
+    for local in (
+        "checkpoint.json",
+        "report.md",
+        "drafts/",
+        "query/",
+        "logs/",
+        "tmp/",
+    ):
+        assert local in contract
+    assert "旧standalone文件只读" in contract
+
+
+def test_seamless_resolver_replaces_all_user_selected_resume_paths() -> None:
+    for skill_name in (
+        "read-filing",
+        "product-analysis",
+        "management-analysis",
+        "financial-redflag-scan",
+    ):
+        skill = read(SKILL_PATHS[skill_name])
+        mode_a = skill.split("### Mode A", 1)[1].split("### Mode B", 1)[0]
+        assert "--resume" not in mode_a
+        assert "--start-fresh" not in mode_a
+        assert "完全重新分析" in mode_a
+    profile_invocation = (
+        read(SKILL_PATHS["value-profile"])
+        .split(
+            "### Invocation",
+            1,
+        )[1]
+        .split("#### 两种运行模式", 1)[0]
+    )
+    assert "--resume" not in profile_invocation
+    assert "--start-fresh" not in profile_invocation
+
+
+def test_run_checkpoints_keep_recovery_identity_and_pending_state() -> None:
+    reading = read(SKILL_PATHS["read-filing"])
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+
+    for field in (
+        "ticker",
+        "AS_OF",
+        "target_fiscal_year",
+        "filing_manifest_sha256",
+        "event_manifest_sha256",
+        "completed_steps",
+    ):
+        assert field in reading
+    assert "checkpoint.json" in reading
+    assert "逐步正文SHA-256" in reading
+    for field in ("management_pending", "pending_gate", "unresolved_rows"):
+        assert field in management
+    for field in ("manual_review_required", "failure_reason", "dependency_failure"):
+        assert field in redflag
+
+
+def test_shared_manifest_versions_are_immutable_across_runs() -> None:
+    contract = read(SKILLS_ROOT / "read-filing/references/run-store-contract.md")
+    assert "只新增不覆盖契约" in contract
+    assert "候选`manifests/`" in contract
+    assert "不得跨run共写" in contract
+    for skill_name in (
+        "read-filing",
+        "management-analysis",
+        "financial-redflag-scan",
+        "value-profile",
+    ):
+        assert "旧manifest保持不可变" in read(SKILL_PATHS[skill_name])
+
+
+def test_recovered_reports_revalidate_machine_citations_and_manifest_hashes() -> None:
+    reading = read(SKILL_PATHS["read-filing"])
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+
+    assert "回读并重算每个已完成步骤正文哈希" in reading
+    assert "恢复run时逐条复核机器引用" in redflag
+    assert "恢复run时" in management
+    for skill in (reading, management, redflag):
+        assert "filing_manifest_sha256" in skill
+        assert "event_manifest_sha256" in skill
+
+
+def test_analysis_runs_resolve_after_shared_evidence_is_prepared() -> None:
+    for skill_name in (
+        "product-analysis",
+        "management-analysis",
+        "financial-redflag-scan",
+        "value-profile",
+    ):
+        skill = read(SKILL_PATHS[skill_name])
+        evidence = skill.index("先运行`read-filing` Mode A")
+        resolver = skill.index("scripts/financial_run_store.py resolve")
+        assert evidence < resolver
+    reading = read(SKILL_PATHS["read-filing"])
+    assert "官方目录响应哈希和query plan哈希" in reading
+    assert "候选annual、event及全部counterpart manifest" in reading
+    assert "候选manifest的真实SHA-256作为输入artifact" in reading
+    assert "不得用待建立占位值计算输入指纹" in reading
+
+
+def test_redflag_mode_a_uses_read_filing_mode_b_for_facts() -> None:
+    skill = read(SKILL_PATHS["financial-redflag-scan"])
+    upstream = skill.split("7. **建立上游事实层**", 1)[1].split("### Step 2", 1)[0]
+
+    assert "Mode A调用`read-filing` Mode B" in upstream
+    assert "Mode A调用`read-filing` Mode A" not in upstream
+
+
+def test_run_store_supports_external_profile_results_and_specialized_publishers() -> None:
+    contract = read(SKILLS_ROOT / "read-filing/references/run-store-contract.md")
+    profile = read(SKILL_PATHS["value-profile"])
+
+    assert "--result-path <absolute-profile-path>" in contract
+    assert "专用发布器" in contract
+    assert "--result-path <profile-path>" in profile
+    assert "同日冲突使用最小可用`-vN`" not in read(SKILL_PATHS["read-filing"])
+
+
+def test_read_filing_mode_b_never_early_exits() -> None:
+    skill = read(SKILL_PATHS["read-filing"])
+    mode_b = skill.split("### Mode B — As-subroutine", 1)[1].split("### Invocation 解析", 1)[0]
+    assert "Mode B始终执行完整事实提取" in mode_b
+    assert "`--complete-facts`在Mode B中仅为兼容参数" in skill
+    assert '"screening_flags"' in skill.split("**Mode B输出**", 1)[1]
+    assert "Mode B早退" not in skill
+
+
+def test_product_analysis_has_mode_and_parent_ownership_contracts() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    assert "参数只有ticker" in skill
+    assert "默认进入Mode A" in skill
+    assert "含`--target-profile`" in skill
+    assert "进入Mode B" in skill
+    assert "不得直接修改" in skill
+    assert "父skill" in skill
+    assert "最终护城河" in skill
+    assert "--counterpart-filing-manifest <exchange>:<absolute-json-path>" in skill
+    assert "counterpart_filing_manifest_sha256s" in skill
+
+
+def test_product_analysis_enforces_the_eight_step_chain() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    expected = (
+        "产品边界",
+        "生产或服务流程",
+        "流程经济性",
+        "客户价值",
+        "相对竞争力",
+        "需求侧机制",
+        "财报映射",
+        "失效测试",
+    )
+    positions = [skill.index(item) for item in expected]
+    assert positions == sorted(positions)
+    assert "不机械使用" in skill
+    assert "50%" in skill
+
+
+def test_product_analysis_requires_process_economics_and_cost_discipline() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    process = read(SKILLS_ROOT / "product-analysis/references/process-playbooks.md")
+    for field in ("周期", "产能", "良率", "瓶颈", "单位成本"):
+        assert field in skill
+    for route in ("制造业", "软件与互联网", "零售", "专业服务"):
+        assert route in process
+    assert "潮玩与IP衍生品" in process
+    assert "公式" in skill
+    assert "假设" in skill
+    assert "敏感性" in skill
+    assert "不得伪造" in skill
+    assert "success或pending都必须保留以下10个栏目" in skill
+
+
+def test_product_analysis_requires_relative_competition_and_evidence() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    mechanisms = read(SKILLS_ROOT / "product-analysis/references/value-mechanisms.md")
+    for comparison in ("直接竞品", "替代方案", "适用龙头"):
+        assert comparison in skill
+    assert "2至3项" in skill
+    assert "高毛利" in skill
+    assert "不能单独证明" in skill
+    for grade in ("`高`", "`中`", "`低`", "`需人工`"):
+        assert grade in skill
+    assert "行为证据" in mechanisms
+    assert "财务证据" in mechanisms
+
+
+def test_value_profile_delegates_product_sections_without_moving_moat_ownership() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile/template-zh.md")
+    assert "`product-analysis`" in skill
+    assert "`part1/§1.1`" in skill
+    assert "`part1/§1.3`" in skill
+    assert "`moat_handoff`" in skill
+    assert "最终护城河" in skill
+    assert "产品与流程证据" in template
+
+
+def test_value_profile_delegates_contract_details_to_owned_references() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    assert "公共证据规则不在本skill重定义" in skill
+    for schema in (
+        "product-analysis/references/mode-b-response.schema.json",
+        "management-analysis/references/mode-b-response.schema.json",
+        "financial-redflag-scan/references/mode-b-response.schema.json",
+    ):
+        assert schema in skill
+    assert len(skill.splitlines()) < 660
 
 
 def test_a_share_financial_report_routes_to_section_ten() -> None:
@@ -303,14 +599,6 @@ def test_management_references_existing_sources() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
     assert ".claude/skills/value-profile/references/moat-framework.md" in skill
     assert 'statement-reading.md` §3 "必读附注" — 关联交易/其他应收款/应交税费' not in skill
-
-
-def test_value_profile_resume_migrates_schema_and_honors_resume_flag() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    assert "`--resume`存在时不显示`[resume/start-fresh]`" in skill
-    assert "按template的复合键集合和顺序执行schema migration" in skill
-    assert "中（" in skill
-    assert "缺失section" in skill
 
 
 def test_value_profile_valuation_requires_all_mandatory_gates() -> None:
@@ -672,13 +960,13 @@ def test_read_filing_references_stay_inside_reading_layer() -> None:
     assert "护城河瓦解" not in statement_reading
 
 
-def test_read_filing_mode_b_early_return_has_deterministic_destination() -> None:
+def test_read_filing_mode_b_complete_facts_have_deterministic_destination() -> None:
     skill = read(SKILL_PATHS["read-filing"])
-    assert "Mode B早退" in skill
+    assert "Mode B始终执行完整事实提取" in skill
     assert "只更新调用方指定section" in skill
-    assert "按固定映射计算的证据置信度" in skill
+    assert "`screening_flags`" in skill
     assert "完整官方证据可为`高`" in skill
-    assert "不得生成完整§1-§14" in skill
+    assert "Mode B无条件禁用该短路" in skill
 
 
 def test_read_filing_mode_b_has_complete_input_and_destination_contract() -> None:
@@ -1902,16 +2190,6 @@ def test_redflag_veto_limits_sanctions_to_financial_misconduct() -> None:
     assert "不得据此一票否决" in mapping
 
 
-def test_management_mode_a_builds_the_same_official_evidence_chain() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    mode_a = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-
-    assert "把AS_OF持久化到standalone报告" in skill
-    assert "annual-reports-<AS_OF>.json" in mode_a
-    assert "events-<AS_OF>.json" in mode_a
-    assert "执行与Mode B完全相同的官方目录、候选元数据和PDF哈希复核" in skill
-
-
 def test_management_rebinds_every_regulatory_event_to_official_metadata() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
     mode_b = skill.split("3. **Mode B准备**", 1)[1].split("### Step 3", 1)[0]
@@ -2085,18 +2363,6 @@ def test_parent_event_manifest_carries_rebindable_official_metadata() -> None:
         assert field in manifests
 
 
-def test_management_mode_a_can_resume_persisted_pending_state() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-    scaffold = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-    resolution = skill.split("pending gate解决后", 1)[1].split("Interactive命中否决", 1)[0]
-
-    assert "已有standalone报告时加载而非新建" in bootstrap
-    for field in ("management_pending", "pending_gate", "unresolved_rows"):
-        assert field in scaffold
-    assert "Mode A本地accept或Mode B父skillaccept" in resolution
-
-
 def test_management_shared_review_enforces_missing_evidence_distinction() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
     review = skill.split("### Step 4", 1)[1].split("### Step 5", 1)[0]
@@ -2104,16 +2370,6 @@ def test_management_shared_review_enforces_missing_evidence_distinction() -> Non
     assert "官方明确未提供量化指引" in review
     assert "未取得证据或抽取失败" in review
     assert "必须写`需人工`" in review
-
-
-def test_value_profile_resume_preserves_as_of_and_recomputes_redflag_rows() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-    migration = skill.split("5. **Resume schema migration**", 1)[1].split("### Step 2", 1)[0]
-
-    assert "resume和continuation先读取现有Part 0 AS_OF" in bootstrap
-    assert "显式`--as-of`与Part 0 AS_OF不一致则abort" in bootstrap
-    assert "逐行按当前manifest证据和thresholds.yaml重算状态与严重度" in migration
 
 
 def test_redflag_mode_a_builds_and_persists_canonical_evidence() -> None:
@@ -2208,26 +2464,6 @@ def test_read_filing_manifest_fields_distinguish_selected_files_and_notices() ->
     assert "港股选中全文必须在去重结论生效前完成PDF期末日复核" in skill
 
 
-def test_management_mode_a_preparation_does_not_overwrite_resumed_report() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    mode_a = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-
-    assert "先查找该ticker最近的standalone报告" in mode_a
-    assert "存在则加载并迁移" in mode_a
-    assert "仅不存在时新建" in mode_a
-    assert "Mode A 准备**: 新建" not in skill
-
-
-def test_value_profile_resume_choice_precedes_manifest_construction() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    decision = bootstrap.index("存在旧profile且未传`--resume`时立即询问")
-    manifests = bootstrap.index("2.5. **构造并持久化source manifests**")
-    assert decision < manifests
-    assert "Step 3.5只执行已确定的选择,不再次询问" in bootstrap
-
-
 def test_redflag_recomputation_updates_actions_with_state_and_severity() -> None:
     profile = read(SKILL_PATHS["value-profile"])
     migration = profile.split("5. **Resume schema migration**", 1)[1].split("### Step 2", 1)[0]
@@ -2301,27 +2537,6 @@ def test_management_manifest_drift_invalidates_completed_sections() -> None:
     assert "manifest重建或live revalidation发现内容变化" in preparation
     assert "使旧`§4.pre`和`§4.1-§4.8`全部失效" in preparation
     assert "不得继续复用旧完成状态" in preparation
-
-
-def test_management_mode_a_supports_fresh_run_and_preserves_resume_as_of() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    mode_a = skill.split("### Mode A", 1)[1].split("### Mode B", 1)[0]
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "[--resume|--start-fresh]" in mode_a
-    assert "[--as-of YYYY-MM-DD]" in mode_a
-    assert "未完成报告默认resume,已完成报告默认start-fresh" in bootstrap
-    assert "resume必须沿用报告内持久化的AS_OF" in bootstrap
-    assert "start-fresh才允许初始化新AS_OF" in bootstrap
-
-
-def test_management_gate_completion_rules_apply_to_both_modes() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    preparation = skill.split("### Step 2", 1)[1].split("### Step 3", 1)[0]
-
-    assert "以下三道gate完成条件由Mode A和Mode B共享" in preparation
-    assert "Mode A恢复standalone时也必须逐行执行" in preparation
-    assert "机器字段或section置信度不能替代逐行校验" in preparation
 
 
 def test_event_manifests_cover_all_historical_management_sanctions() -> None:
@@ -2414,15 +2629,6 @@ def test_targeted_management_section_is_not_widened() -> None:
     assert "--section <resolved-part1/§4.x>" in parent
     assert "显式定向§4.x时只生成并返回该section" in child
     assert "不得扩大为整个part1/§4" in child
-
-
-def test_today_profile_precedence_is_unambiguous() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "今日文件优先于旧日期文件" in bootstrap
-    assert "今日文件存在时直接continuation且不询问" in bootstrap
-    assert "仅存在旧日期文件且未传`--resume`时才询问" in bootstrap
 
 
 def test_value_profile_stays_below_guide_word_limit() -> None:
@@ -2537,24 +2743,6 @@ def test_redflag_mode_b_only_returns_draft() -> None:
     assert "用 Edit 工具" not in mode_b
 
 
-def test_redflag_mode_a_resumes_without_overwriting_reports() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    mode_a = skill.split("### Mode A", 1)[1].split("### Mode B", 1)[0]
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-    preparation = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-
-    assert "[--resume|--start-fresh]" in mode_a
-    assert "未完成报告默认resume,已完成报告默认start-fresh" in bootstrap
-    assert "`output_quality_failure`不属于可自动resume的未完成状态" in bootstrap
-    assert "[edit/research more/start-fresh/exit]" in bootstrap
-    assert "未显式选择时退出" in bootstrap
-    assert "resume沿用报告内AS_OF" in bootstrap
-    assert "在构造manifest之前完成选择" in bootstrap
-    assert "存在则加载并迁移" in preparation
-    assert "start-fresh遇到同日路径冲突时使用最小可用`-vN`后缀" in preparation
-    assert "Mode A 准备**: 新建" not in skill
-
-
 def test_redflag_parent_syncs_visible_status_for_every_outcome() -> None:
     parent = read(SKILL_PATHS["value-profile"])
     save = parent.split("### Step 5", 1)[1].split("### Step 6", 1)[0]
@@ -2590,33 +2778,12 @@ def test_cfo_conversion_uses_parent_net_income_everywhere() -> None:
     assert "经营现金流/净利润" not in checklist
 
 
-def test_management_start_fresh_uses_versioned_path() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    mode_a = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-    output = skill.split("**Mode A**:", 1)[1].split("**Mode B**:", 1)[0]
-
-    assert "start-fresh遇到同日路径冲突时使用最小可用`-vN`后缀" in mode_a
-    assert "Step 2选定的standalone路径" in output
-
-
 def test_management_historical_fetch_preserves_cutoff() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
     audit = skill.split("4. **Audit", 1)[1].split("5. **构造canonical manifests**", 1)[0]
 
     assert "--end-year <latest-required-fiscal-year>" in audit
     assert "--as-of AS_OF" in audit
-
-
-def test_value_profile_preserves_manifest_baseline_before_refresh() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    preserve = bootstrap.index("覆盖canonical manifest之前")
-    refresh = bootstrap.index("查询交易所官方目录")
-    assert preserve < refresh
-    assert "不可变snapshot" in bootstrap
-    assert "旧SHA-256" in bootstrap
-    assert "比较完成前不得覆盖canonical文件" in bootstrap
 
 
 def test_management_manifest_identity_matches_profile() -> None:
@@ -2721,16 +2888,6 @@ def test_utility_high_leverage_buy_point_is_deterministic() -> None:
     assert rule in valuation
 
 
-def test_management_mode_a_preserves_manifest_baseline() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "覆盖canonical manifest之前" in bootstrap
-    assert "不可变snapshot" in bootstrap
-    assert "旧SHA-256" in bootstrap
-    assert "比较完成前不得覆盖canonical文件" in bootstrap
-
-
 def test_bank_capital_allocation_has_exactly_four_scored_tests() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
     bank = skill.split("**银行资本分配替代bundle**", 1)[1].split("- `0项不通过`", 1)[0]
@@ -2742,34 +2899,12 @@ def test_bank_capital_allocation_has_exactly_four_scored_tests() -> None:
             assert grade in row
 
 
-def test_management_resume_selects_latest_version_deterministically() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    selection = skill.split("2. **选择standalone状态**", 1)[1].split(
-        "3. **建立统一证据截止日**", 1
-    )[0]
-
-    assert "报告日期降序" in selection
-    assert "`-vN`中的N降序" in selection
-    assert "base文件按v1处理" in selection
-
-
 def test_redflag_mode_b_auto_never_saves_child_output() -> None:
     skill = read(SKILL_PATHS["financial-redflag-scan"])
     confirmation = skill.split("**确认节点**", 1)[1].split("---", 1)[0]
 
     assert "Mode B的`--auto`复核通过后直接返回草稿" in confirmation
     assert "Mode A和Mode B的`--auto`复核通过后直接保存" not in confirmation
-
-
-def test_value_profile_snapshots_continuation_before_any_fetch() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    preserve = bootstrap.index("resume和continuation")
-    audit = bootstrap.index("Audit `data/filings/<ticker>/`")
-    assert preserve < audit
-    assert "覆盖canonical manifest或运行下载器之前" in bootstrap
-    assert "--end-year <latest-required-fiscal-year> --as-of AS_OF" in bootstrap
 
 
 def test_management_fetch_precedes_manifest_construction_and_revalidation() -> None:
@@ -2821,26 +2956,6 @@ def test_redflag_mode_a_download_precedes_final_manifest_preflight() -> None:
     evidence = bootstrap.index("建立canonical evidence")
     assert audit < evidence
     assert "下载成功后重新audit,再重建两个manifest并执行完整source preflight" in bootstrap
-
-
-def test_management_snapshots_all_existing_manifests_before_download() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    snapshot = bootstrap.index("所有模式都在运行下载器之前")
-    audit = bootstrap.index("Audit`data/filings/<ticker>/`")
-    assert snapshot < audit
-    assert "resume和start-fresh" in bootstrap
-    assert "旧报告改为引用不可变snapshot" in bootstrap
-
-
-def test_management_resume_uses_report_bound_snapshot_as_baseline() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "resume先以报告持久化的manifest路径和SHA-256定位不可变snapshot" in bootstrap
-    assert "不得把当前canonical文件作为旧报告基线" in bootstrap
-    assert "报告绑定snapshot与重建manifest逐字段比较" in bootstrap
 
 
 def test_management_pending_mode_b_is_persisted_before_interactive_menu() -> None:
@@ -3022,26 +3137,11 @@ def test_management_mode_b_has_exact_json_schema_and_invariants() -> None:
     assert "draft_sections的键必须是canonical复合section ID" in output
 
 
-def test_management_mode_a_scaffold_enumerates_four_pre_veto_rows() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    scaffold = skill.split("minimal header:", 1)[1].split("3. **Mode B准备**", 1)[0]
-
-    for row in ("道德风险", "大股东占款", "关联输送", "虚假陈述处罚记录"):
-        assert row in scaffold
-
-
 def test_management_visible_grades_are_chinese() -> None:
     skill = read(SKILL_PATHS["management-analysis"])
 
     assert "通过/中间/不通过/证据不足" in skill
     assert "`pass/中间/fail/证据不足`" not in skill
-
-
-def test_redflag_initializes_as_of_before_any_download_command() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert bootstrap.index("初始化并持久化AS_OF") < bootstrap.index("download_filings.py")
 
 
 def test_goodwill_thresholds_define_both_comparators() -> None:
@@ -3140,15 +3240,6 @@ def test_value_profile_general_worker_receives_as_of() -> None:
 
     assert "AS_OF证据截止日" in dispatch
     assert "不得使用AS_OF之后" in dispatch
-
-
-def test_value_profile_resume_excludes_child_reports() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "只匹配`profiles/<ticker>-<YYYY-MM-DD>[-vN].md`" in bootstrap
-    for child in ("-mgmt-", "-redflags-", "-reading-"):
-        assert child in bootstrap
 
 
 def test_no_valuation_route_conditionally_skips_all_price_sections() -> None:
@@ -3306,15 +3397,6 @@ def test_management_mode_b_has_one_versioned_schema() -> None:
     for field in ('"schema_version"', '"stage"', '"draft_veto"'):
         assert field in output
     assert "键集合必须恰好等于当前stage中尚未完成的section" in output
-
-
-def test_management_bootstrap_has_read_only_as_of_discovery() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "只读discovery阶段" in bootstrap
-    assert "不下载PDF、不写manifest" in bootstrap
-    assert "固定AS_OF后才执行正式下载" in bootstrap
 
 
 def test_management_has_deterministic_final_decision_table() -> None:
@@ -3613,15 +3695,6 @@ def test_read_filing_early_exit_preserves_provenance_header() -> None:
         assert field in early_exit
 
 
-def test_value_profile_explicit_as_of_precedes_start_fresh_default() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    identity = skill.split("1.5. **先解析研究身份和截止日**", 1)[1].split("2. **Audit", 1)[0]
-
-    assert "start-fresh优先使用显式`--as-of`" in identity
-    assert "未传`--as-of`时才按目标报告首次有效披露日初始化" in identity
-    assert "resume时显式`--as-of`与Part 0 AS_OF不一致则abort" in identity
-
-
 def test_qualitative_finalizer_never_rewrites_completed_valuation_sections() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     finalizer = skill.split("**仅定性研究finalizer**", 1)[1].split("**估值方法路由**", 1)[0]
@@ -3658,21 +3731,6 @@ def test_targeted_synthesis_sections_require_their_fact_dependencies() -> None:
     assert "`part1/§1.8`依赖`part1/§1.1-§1.7`" in resolver
     assert "`part2/§Q12`依赖`part2/§Q1-§Q11`" in resolver
     assert "依赖未完成时只报告缺失依赖" in resolver
-
-
-def test_value_profile_start_fresh_overrides_same_day_continuation() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    invocation = skill.split("### Invocation", 1)[1].split("#### 两种运行模式", 1)[0]
-    bootstrap = skill.split("1.5. **先解析研究身份和截止日**", 1)[1].split("2. **Audit", 1)[0]
-    output_path = skill.split("3.5. **Derive output path**", 1)[1].split(
-        "4. **阅读层事实调用**", 1
-    )[0]
-
-    assert "`--start-fresh`" in invocation
-    assert "`--resume`与`--start-fresh`同时出现时abort" in bootstrap
-    assert "即使今日文件存在也选择start-fresh" in bootstrap
-    assert "continuation时显式`--as-of`冲突也abort" in bootstrap
-    assert "最小可用`-vN`" in output_path
 
 
 def test_value_profile_manifest_changes_have_explicit_invalidation_sets() -> None:
@@ -3848,44 +3906,6 @@ def test_canonical_event_manifest_publication_preserves_immutable_versions() -> 
         assert "--out <canonical-event-manifest-path>" in skill
         assert "读取构建器stdout返回的真实发布路径" in skill
         assert "旧manifest保持不可变" in skill
-
-
-def test_read_filing_mode_a_has_deterministic_resume_contract() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    mode_a = skill.split("### Mode A", 1)[1].split("### Mode B", 1)[0]
-    invocation = skill.split("### Invocation 解析", 1)[1].split(
-        "### 运行时必读 reference",
-        1,
-    )[0]
-
-    assert "--resume <absolute-scratch-path>" in mode_a
-    assert "--start-fresh" in mode_a
-    assert "`--resume`与`--start-fresh`互斥" in invocation
-    assert "已有scratch但两者均未传时abort" in invocation
-    assert "start-fresh先把旧scratch重命名为不可变备份" in invocation
-
-
-def test_read_filing_uses_progressive_disclosure_for_long_guidance() -> None:
-    skill_path = SKILL_PATHS["read-filing"]
-    skill = read(skill_path)
-
-    assert len(skill.splitlines()) <= 500
-    assert "references/reading-principles.md" in skill
-    for reference in (skill_path.parent / "references").glob("*.md"):
-        content = read(reference)
-        if len(content.splitlines()) > 100:
-            assert "## 目录" in "\n".join(content.splitlines()[:20]), reference
-
-
-def test_redflag_mode_a_creates_recoverable_state_before_download() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    scaffold = bootstrap.index("骨架报告")
-    download = bootstrap.index("download_filings.py")
-    assert scaffold < download
-    assert "下载失败" in bootstrap
-    assert "同一骨架报告" in bootstrap
 
 
 def test_redflag_bootstrap_and_final_confirmation_menus_are_distinct() -> None:
@@ -4092,22 +4112,6 @@ def test_read_filing_mode_b_returns_both_manifest_hashes_without_writing() -> No
     assert "不得直接替换或写入任何profile section" in output
 
 
-def test_read_filing_scratch_checkpoint_binds_identity_and_step_state() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    checkpoint = skill.split("scratch.md", 1)[1].split("### Step 4", 1)[0]
-
-    for field in (
-        "ticker",
-        "exchange",
-        "AS_OF",
-        "filing_manifest_sha256",
-        "event_manifest_sha256",
-        "completed_steps",
-    ):
-        assert field in checkpoint
-    assert "身份或任一manifest哈希变化时不得resume" in checkpoint
-
-
 def test_amortized_cost_assets_describe_real_profit_or_loss_channels() -> None:
     reference = read(SKILLS_ROOT / "read-filing/references/statement-reading.md")
     section = reference.split("### 2.2金融资产新准则", 1)[1].split("### 2.3", 1)[0]
@@ -4246,24 +4250,6 @@ def test_management_pending_save_preserves_confirmed_veto() -> None:
     assert "未决行不得覆盖已证实否决" in pre_gate
 
 
-def test_value_profile_selects_latest_version_deterministically() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    identity = skill.split("1.5. **先解析研究身份和截止日**", 1)[1].split("2. **Audit", 1)[0]
-
-    assert "报告日期降序" in identity
-    assert "`-vN`中的N降序" in identity
-    assert "base文件按v1处理" in identity
-    assert "同日报告存在多个版本时" in identity
-
-
-def test_value_profile_start_fresh_rebinds_old_profiles_to_snapshots() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "start-fresh也扫描所有旧profile引用的canonical manifest" in bootstrap
-    assert "先把每个旧profile原子改绑到各自不可变snapshot" in bootstrap
-
-
 def test_value_profile_computes_and_validates_manifest_hash_fields() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
@@ -4279,20 +4265,6 @@ def test_value_profile_fallback_persists_manual_terminal_mapping() -> None:
 
     assert "`排雷终态=manual_review`" in fallback
     assert "`排雷失败原因=<具体证据缺口>`" in fallback
-
-
-def test_value_profile_persists_and_reuses_target_fiscal_year() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    template = read(SKILLS_ROOT / "value-profile/template-zh.md")
-    identity = skill.split("1.5. **先解析研究身份和截止日**", 1)[1].split("2. **Audit", 1)[0]
-
-    assert "**目标财年（end_year）:**" in template
-    assert "start-fresh未传`--end-year`时" in identity
-    assert "resume和continuation读取Part 0目标财年" in identity
-    assert "显式`--end-year`冲突时abort" in identity
-    assert "缺少目标财年字段时" in identity
-    assert "在Step 1.5内先执行最小身份迁移" in identity
-    assert "AS_OF前最新完整年报期末日" in identity
 
 
 def test_redflag_mode_b_has_one_confirmation_owner_and_one_failure_field() -> None:
@@ -4363,22 +4335,6 @@ def test_value_profile_final_save_revalidates_both_manifest_hashes() -> None:
     assert "不一致时abort" in step6
 
 
-def test_value_profile_template_years_are_rebased_from_end_year() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    template = read(SKILLS_ROOT / "value-profile/template-zh.md")
-
-    for offset in range(10):
-        placeholder = "<end_year>" if offset == 0 else f"<end_year-{offset}>"
-        assert placeholder in template
-    assert "<end_year+3>" in template
-    assert "| 年度 | Avg | 2024 | 2023 | 2022 | 2021 | 2020 |" not in template
-    assert "2028量" not in template
-    assert "按目标财年确定后确定性实例化模板年份" in skill
-    assert "历史列从end_year至end_year-9" in skill
-    assert "预测列为end_year+3" in skill
-    assert "迁移旧profile时同步重标年份列" in skill
-
-
 def test_value_profile_rebased_year_tables_keep_rectangular_markdown() -> None:
     template = read(SKILLS_ROOT / "value-profile/template-zh.md")
     lines = template.splitlines()
@@ -4398,14 +4354,6 @@ def test_rebased_percentage_income_statement_keeps_revenue_at_100_percent() -> N
     row = next(line for line in template.splitlines() if line.startswith("| 营业收入 | 100% |"))
 
     assert row.split("|")[2:-1] == [" 100% "] * 11
-
-
-def test_read_filing_scratch_checkpoint_binds_target_fiscal_year() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    checkpoint = skill.split("scratch.md", 1)[1].split("### Step 4", 1)[0]
-
-    assert "target_fiscal_year" in checkpoint
-    assert "目标财年变化时不得resume" in checkpoint
 
 
 def test_redflag_replays_full_persisted_event_request_contract() -> None:
@@ -4446,17 +4394,6 @@ def test_bank_cet1_uses_institution_specific_regulatory_minimum() -> None:
         assert "通用市场基线只作后备比较" in text
 
 
-def test_redflag_standalone_binds_and_resumes_manifest_hashes() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    mode_a = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-
-    assert "**年报manifest SHA-256:** <sha256>" in mode_a
-    assert "**监管事件manifest SHA-256:** <sha256>" in mode_a
-    assert "resume逐项验证已持久化manifest路径和SHA-256" in bootstrap
-    assert "路径或哈希不一致时不得resume" in bootstrap
-
-
 def test_cash_change_row_delegates_yield_deviation_to_canonical_formula() -> None:
     template = read(SKILLS_ROOT / "value-profile/template-zh.md")
     row = next(
@@ -4492,28 +4429,6 @@ def test_read_filing_mode_b_distinguishes_pdf_from_extracted_text_argument() -> 
     assert "传入`--extracted-text`时" in preflight
 
 
-def test_read_filing_scratch_resume_validates_completed_step_bodies() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    checkpoint = skill.split("scratch.md", 1)[1].split("### Step 4", 1)[0]
-
-    assert "completed_steps只允许已定义步骤ID" in checkpoint
-    assert "逐步正文SHA-256" in checkpoint
-    assert "回读并重算每个已完成步骤正文哈希" in checkpoint
-    assert "scripts/publish_text_cas.py" in checkpoint
-    assert "--expected-sha256 <baseline-profile-sha256>" in checkpoint
-
-
-def test_redflag_pre_evidence_checkpoint_has_a_legal_resume_state() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    bootstrap = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-    mode_a = skill.split("2. **Mode A 准备**", 1)[1].split("3. **Mode B准备**", 1)[0]
-
-    assert "**证据阶段:** [未建立/已绑定]" in mode_a
-    assert "证据阶段为未建立时允许manifest路径和SHA-256写`待建立`" in bootstrap
-    assert "resume必须回到Step 1.3继续取证" in bootstrap
-    assert "只有证据阶段为已绑定时才验证路径和SHA-256" in bootstrap
-
-
 def test_event_manifest_contract_requires_all_applicable_official_sources() -> None:
     for path in (
         SKILL_PATHS["read-filing"],
@@ -4525,18 +4440,6 @@ def test_event_manifest_contract_requires_all_applicable_official_sources() -> N
         assert "每类事件覆盖全部适用官方来源" in text
         assert "source_count" in text
         assert "sources" in text
-
-
-def test_filing_downloader_commands_bind_official_listing_date() -> None:
-    for path in (
-        SKILL_PATHS["read-filing"],
-        SKILL_PATHS["financial-redflag-scan"],
-        SKILL_PATHS["management-analysis"],
-        SKILL_PATHS["value-profile"],
-    ):
-        text = read(path)
-        assert "--listing-date <official-listing-date>" in text
-        assert "上市日期必须来自交易所官方发行人资料" in text
 
 
 def test_all_orchestrators_use_the_event_evidence_collector() -> None:
@@ -4592,13 +4495,6 @@ def test_redflag_evidence_binding_is_an_atomic_state_transition() -> None:
     assert "证据阶段从`未建立`原子转换为`已绑定`" in skill
     assert "两个manifest路径和SHA-256" in skill
     assert "证据阶段不是`已绑定`时不得进入完成终态" in skill
-
-
-def test_redflag_manual_review_requires_explicit_human_action() -> None:
-    skill = read(SKILL_PATHS["financial-redflag-scan"])
-    assert "`manual_review`不属于可自动resume的未完成状态" in skill
-    assert "[edit/research more/start-fresh/exit]" in skill
-    assert "未显式选择前不得派发或自动重试" in skill
 
 
 def test_value_profile_consumes_every_redflag_action_request() -> None:
@@ -4689,28 +4585,13 @@ def test_read_filing_references_do_not_expand_early_exit_or_v1_scope() -> None:
     assert "季报流程不属于v1运行时" in cn_structure
 
 
-def test_read_filing_checkpoint_and_final_report_publish_exclusively() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    assert "步骤正文边界从步骤标题下一行到下一个同级标题前" in skill
-    assert "正文哈希按UTF-8原始字节计算" in skill
-    assert "最终报告使用同目录临时文件和排他hard-link发布" in skill
-    assert "同日冲突使用最小可用`-vN`" in skill
-    assert "不得覆盖既有终稿" in skill
-
-
 def test_value_profile_has_reachable_output_quality_recovery() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     assert "dispatch任何子skill之前检查持久化终态" in skill
     assert "output_quality_failure" in skill
-    assert "[edit/research more/start-fresh/exit]" in skill
+    assert "[edit/research more/exit]" in skill
+    assert "完全重新分析" in skill
     assert "未显式解除前不得重新调用financial-redflag-scan" in skill
-
-
-def test_value_profile_discovers_target_year_before_default_as_of() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    assert "只读discovery" in skill
-    assert "先从交易所官方目录确定最新完整目标财年" in skill
-    assert "再用其首次有效披露日固定AS_OF" in skill
 
 
 def test_hk_scope_is_explicitly_limited_to_currently_listed_issuers() -> None:
@@ -4767,7 +4648,8 @@ def test_value_profile_recovers_both_redflag_human_terminal_states() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     migration = skill.split("5. **Resume schema migration**", 1)[1].split("### Step 2", 1)[0]
     assert "`manual_review`和`output_quality_failure`" in migration
-    assert "[edit/research more/start-fresh/exit]" in migration
+    assert "[edit/research more/exit]" in migration
+    assert "完全重新分析" in migration
     assert "缺行也不得自动重派" in migration
 
 
@@ -4829,8 +4711,9 @@ def test_read_filing_mode_a_uses_exact_citation_contract() -> None:
 def test_redflag_standalone_consumes_read_filing_facts() -> None:
     skill = read(SKILL_PATHS["financial-redflag-scan"])
     mode_a = skill.split("### Step 1", 1)[1].split("### Step 2", 1)[0]
-    assert "Mode A调用`read-filing` Mode A" in mode_a
-    assert "Mode B调用`read-filing` Mode B" in mode_a
+    assert "先运行`read-filing` Mode A" in mode_a
+    assert "Mode A调用`read-filing` Mode B" in mode_a
+    assert "Mode B同样调用`read-filing` Mode B" in mode_a
     assert "上游成功" in mode_a
     assert "facts/citations/warnings" in mode_a
 
@@ -4866,10 +4749,12 @@ def test_redflag_rows_use_matching_denominators_and_dedicated_rules() -> None:
 
 
 def test_downloader_commands_bind_listing_profile_evidence() -> None:
+    contract = read(SKILLS_ROOT / "read-filing/references/evidence-contract.md")
+    assert "--listing-profile-bundle <actual-official-query-bundle-path>" in contract
+    assert "annual manifest与event manifest的listing profile路径及SHA-256一致" in contract
     for path in SKILL_PATHS.values():
         skill = read(path)
-        assert "--listing-profile-bundle <actual-official-query-bundle-path>" in skill
-        assert "年报manifest与事件manifest的listing_profile路径和SHA-256一致" in skill
+        assert "read-filing/references/evidence-contract.md" in skill
 
 
 def test_read_filing_routes_banks_away_from_generic_cash_early_exits() -> None:
@@ -4906,12 +4791,15 @@ def test_bank_credit_cost_matrix_has_deterministic_trend_boundaries() -> None:
 
 def test_every_documented_filing_download_binds_official_listing_profile() -> None:
     for path in SKILL_PATHS.values():
+        skill = read(path)
         command_lines = [
             line
-            for line in read(path).splitlines()
+            for line in skill.splitlines()
             if "download_filings.py" in line and "--years" in line
         ]
-        assert command_lines, path
+        if not command_lines:
+            assert "先运行`read-filing` Mode A" in skill, path
+            continue
         for command_line in command_lines:
             assert "--listing-date <official-listing-date>" in command_line
             assert "--listing-profile-bundle <actual-official-query-bundle-path>" in command_line
@@ -4936,17 +4824,6 @@ def test_event_query_plan_has_evidence_based_source_discovery_contract() -> None
         "abort",
     ):
         assert required in reference
-
-
-def test_parent_bootstrap_fixes_identity_before_event_collection() -> None:
-    markers = {
-        "financial-redflag-scan": "2. **先选择resume或start-fresh并确定截止日**",
-        "management-analysis": "3. **建立统一证据截止日**",
-        "value-profile": "1.5. **先解析研究身份和截止日**",
-    }
-    for skill_name, identity_marker in markers.items():
-        skill = read(SKILL_PATHS[skill_name])
-        assert skill.index(identity_marker) < skill.index("scripts/collect_event_evidence.py")
 
 
 def test_value_profile_creates_target_before_read_filing_mode_b() -> None:
@@ -5034,11 +4911,11 @@ def test_bootstrap_collects_listing_bundle_before_filing_download() -> None:
         )
 
 
-def test_redflag_standalone_uses_read_filing_standalone_contract() -> None:
+def test_redflag_standalone_reuses_evidence_then_reads_facts_in_memory() -> None:
     skill = read(SKILL_PATHS["financial-redflag-scan"])
     facts = skill.split("**建立上游事实层**", 1)[1].split("### Step 2", 1)[0]
-    assert "Mode A调用`read-filing` Mode A" in facts
-    assert "Mode B调用`read-filing` Mode B" in facts
+    assert "Mode A调用`read-filing` Mode B" in facts
+    assert "Mode B同样调用`read-filing` Mode B" in facts
 
 
 def test_redflag_inapplicable_rows_have_executable_completion_rule() -> None:
@@ -5081,7 +4958,7 @@ def test_management_failure_and_recovery_contracts_are_closed() -> None:
         "terminal_status=failure",
         "terminal_status=dependency_failure",
         "management_pending=true",
-        "[edit/research more/start-fresh/exit]",
+        "[edit/research more/exit]",
     ):
         assert required in profile
     section = template.split("### §4.2", 1)[1].split("### §4.3", 1)[0]
@@ -5261,14 +5138,14 @@ def test_read_filing_ratio_rules_reject_nonpositive_denominators() -> None:
         assert required in combined
 
 
-def test_read_filing_early_exit_does_not_force_low_evidence_confidence() -> None:
+def test_read_filing_screening_does_not_force_low_evidence_confidence() -> None:
     skill = read(SKILL_PATHS["read-filing"])
     early_output = skill.split("早退时只写以下短结构", 1)[1].split("未早退时使用完整骨架", 1)[0]
-    mode_b_early = skill.split("**Mode B早退**", 1)[1].split("**证据置信度固定映射**", 1)[0]
+    mode_b_flags = skill.split("**Mode B初筛flags**", 1)[1].split("**证据置信度固定映射**", 1)[0]
 
-    assert "早退范围与证据置信度分开" in skill
+    assert "初筛严重度与证据置信度分开" in skill
     assert "**置信度:**低" not in early_output
-    assert "**置信度:**低" not in mode_b_early
+    assert "**置信度:**低" not in mode_b_flags
     assert "完整官方证据可为`高`" in skill
 
 
@@ -5295,29 +5172,6 @@ def test_management_unreliability_does_not_lower_evidence_confidence() -> None:
         assert "不因管理层未兑现而降低" in text
         assert "置信度降一档" not in text
         assert "**置信度:**低" not in text
-
-
-def test_standalone_resume_can_restart_before_manifests_exist() -> None:
-    for skill_name in ("management-analysis", "value-profile"):
-        skill = read(SKILL_PATHS[skill_name])
-        assert "证据阶段checkpoint" in skill
-        assert "manifest为`待建立`时先恢复采集" in skill
-        assert "不得在manifest校验前拒绝该合法恢复状态" in skill
-
-
-def test_management_and_redflag_outputs_persist_machine_citations() -> None:
-    for skill_name in ("management-analysis", "financial-redflag-scan"):
-        skill = read(SKILL_PATHS[skill_name])
-        output = skill.split("### Step 5", 1)[1].split("## §4 Policy", 1)[0]
-        for token in (
-            "source_pdf_sha256",
-            "artifact_sha256",
-            "page",
-            "quote",
-        ):
-            assert token in output
-        assert "机器引用清单" in output
-        assert "resume时逐条复核机器引用" in output
 
 
 def test_management_standalone_save_guards_bound_manifests() -> None:
@@ -5424,29 +5278,6 @@ def test_read_filing_promise_rows_preserve_directional_identity() -> None:
         assert field in table
 
 
-def test_management_contract_supports_ah_resume_and_typed_citations() -> None:
-    skill = read(SKILL_PATHS["management-analysis"])
-    scaffold = skill.split("minimal header:", 1)[1].split("以下三道gate", 1)[0]
-    output = skill.split("### Step 5 — Output", 1)[1].split("## §4 Policy", 1)[0]
-
-    assert "A+H" in skill and "两套治理" in skill
-    assert "**证据阶段:** <未建立/已绑定>" in scaffold
-    assert "**失败原因:** <无/具体错误>" in scaffold
-    assert "自动模式" in skill and "不得显示菜单" in skill
-    for field in (
-        "section_id",
-        "source_type",
-        "artifact_path",
-        "source_pdf_sha256",
-        "artifact_sha256",
-        "page",
-        "quote",
-    ):
-        assert field in output
-    assert "逐份CAS改绑" in skill
-    assert "全部成功后才允许替换canonical" in skill
-
-
 def test_management_veto_uses_one_canonical_directional_rule() -> None:
     profile = read(SKILL_PATHS["value-profile"])
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
@@ -5468,14 +5299,15 @@ def test_redflag_parent_and_child_share_rebuild_action_enum() -> None:
     assert "rebuild_evidence" in schema
 
 
-def test_redflag_complete_scan_overrides_read_filing_early_return() -> None:
+def test_redflag_complete_scan_consumes_read_filing_screening_flags() -> None:
     skill = read(SKILL_PATHS["financial-redflag-scan"])
     read_filing = read(SKILL_PATHS["read-filing"])
 
     assert "--complete-facts" in skill
-    assert "触发L1-L3也继续完成排雷事实层" in skill
+    assert "L1至L3命中也继续完成排雷事实层" in skill
     assert "--complete-facts" in read_filing
-    assert "只返回早退触发事实并继续完整事实提取" in read_filing
+    assert "Mode B无条件禁用该短路" in read_filing
+    assert "`screening_flags`" in read_filing
 
 
 def test_redflag_distinguishes_missing_evidence_from_inapplicability() -> None:
@@ -5601,15 +5433,6 @@ def test_value_profile_bank_migration_replaces_all_generic_metrics() -> None:
         assert section_id in migration
 
 
-def test_value_profile_resume_publication_is_collision_safe() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    output_path = skill.split("Derive output path", 1)[1].split("强制3项 cleanup", 1)[0]
-
-    assert "不得rename覆盖" in output_path
-    assert "最小可用`-vN`" in output_path
-    assert "排他hard-link" in output_path
-
-
 def test_historical_valuation_uses_an_immutable_market_snapshot_contract() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     valuation = read(SKILLS_ROOT / "value-profile" / "references" / "valuation.md")
@@ -5641,24 +5464,6 @@ def test_read_filing_has_an_executable_hk_listing_document_route() -> None:
     assert "查询URL、查询参数、响应哈希、官方结果总数" in history
     assert "完整上市文件PDF绝对路径和SHA-256" in history
     assert "缺失时标`需人工`" in history
-
-
-def test_read_filing_resume_state_binds_paths_hashes_and_terminal_state() -> None:
-    skill = read(SKILL_PATHS["read-filing"])
-    checkpoint = skill.split("Mode A scratch checkpoint头部", 1)[1].split("### Step 4", 1)[0]
-
-    for field in (
-        "evidence_stage",
-        "run_status",
-        "failure_reason",
-        "filing_manifest_path",
-        "filing_manifest_sha256",
-        "event_manifest_path",
-        "event_manifest_sha256",
-        "completed_steps",
-    ):
-        assert field in checkpoint
-    assert "路径与哈希成对校验" in checkpoint
 
 
 def test_read_filing_full_output_persists_manifest_paths() -> None:
@@ -5780,40 +5585,6 @@ def test_redflag_registry_and_insurer_contracts_are_fully_executable() -> None:
         assert phrase in skill
 
 
-def test_value_profile_binds_identity_output_and_industry_state_before_work() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
-    overlays = read(SKILLS_ROOT / "value-profile" / "references" / "industry-overlays.md")
-    part_zero = template.split("## Part 0", 1)[1].split("### 执行摘要", 1)[0]
-
-    for field in (
-        "查询发行人代码",
-        "市场数据manifest",
-        "市场数据manifest SHA-256",
-    ):
-        assert field in part_zero
-    assert skill.index("排他hard-link占位") < skill.index("先创建standalone恢复骨架")
-    for phrase in (
-        "--complete-facts",
-        "--guard <bound-market-data-manifest-path>:<sha256>",
-        "market-data manifest执行最终live revalidation",
-        "保险schema迁移例外",
-        "保险公司专属schema",
-        "三大前提失败",
-        "定性研究终态",
-    ):
-        assert phrase in skill
-    assert "## 保险公司分析overlay" in overlays
-    for metric in (
-        "新业务价值",
-        "偿付能力",
-        "准备金",
-        "退保率",
-        "资产负债久期",
-    ):
-        assert metric in overlays
-
-
 def test_latest_review_requires_executable_manifest_commands() -> None:
     read_filing = read(SKILL_PATHS["read-filing"])
     redflag = read(SKILL_PATHS["financial-redflag-scan"])
@@ -5854,7 +5625,8 @@ def test_latest_review_read_filing_contract_is_closed() -> None:
     assert "Mode A共用source preflight" in skill
     assert "Mode B Part 0绑定校验" in skill
     assert "action_requests" in output
-    assert "edit/research_more/rebuild_evidence/start_fresh/exit" in output
+    assert "edit/research_more/rebuild_evidence/exit" in output
+    assert "完全重新分析" in output
     for source_type in ("filing_text", "filing_pdf", "event_document"):
         assert source_type in output
     for event_field in (
@@ -5892,6 +5664,7 @@ def management_mode_b_response() -> dict[str, object]:
         "terminal_status": "success",
         "failure_reason": None,
         "stage": "A",
+        "target_sections": ["part1/§4.pre"],
         "draft_sections": {"part1/§4.pre": "<完整section正文,含**机器引用清单:**>"},
         "draft_veto": False,
         "management_veto": False,
@@ -5916,9 +5689,157 @@ def management_mode_b_response() -> dict[str, object]:
                 "quote": "<exact quote>",
             }
         ],
+        "findings": [
+            canonical_finding(
+                "management-analysis",
+                "management_integrity",
+                "management_team",
+                "000001.SZ/management",
+            )
+        ],
         "unresolved_rows": [],
         "action_requests": [],
     }
+
+
+def canonical_finding(
+    owner_skill: str,
+    judgment_domain: str,
+    subject_type: str,
+    subject_id: str,
+) -> dict[str, object]:
+    return {
+        "canonical_finding_id": "d" * 64,
+        "owner_skill": owner_skill,
+        "judgment_domain": judgment_domain,
+        "finding_type": "material_risk",
+        "subject_type": subject_type,
+        "subject_id": subject_id,
+        "occurrence_date": "2025-01-15",
+        "canonical_evidence_ids": ["e" * 64],
+        "severity": "warning",
+        "evidence_grade": "high",
+        "judgment": "基于已核验证据形成的专题判断",
+        "citation_ids": ["f" * 64],
+    }
+
+
+def filing_citation(section_id: str) -> dict[str, object]:
+    return {
+        "section_id": section_id,
+        "jurisdiction": "SZ",
+        "source_type": "filing_text",
+        "artifact_path": "/absolute/evidence/text.md",
+        "source_pdf_sha256": "1" * 64,
+        "artifact_sha256": "2" * 64,
+        "page": 12,
+        "quote": "已核验的年报原文",
+    }
+
+
+def product_mode_b_response() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "terminal_status": "success",
+        "failure_reason": None,
+        "target_sections": ["part1/§1.1"],
+        "draft_sections": {
+            "part1/§1.1": (
+                "## 行业特有产品结构\n\n"
+                "|流程|材料|良率|周期|产能|库存|渠道|售后|反馈|成本|瓶颈|证据|\n"
+                "|---|---|---|---|---|---|---|---|---|---|---|---|\n"
+                "|量产|树脂|需人工|需人工|需人工|需人工|直营|退换|复购|需人工|模具|中|"
+            )
+        },
+        "product_facts": [],
+        "process_facts": [],
+        "competition_facts": [],
+        "moat_handoff": [],
+        "findings": [
+            canonical_finding(
+                "product-analysis",
+                "product_competitiveness",
+                "product_system",
+                "000001.SZ/core-products",
+            )
+        ],
+        "citations": [filing_citation("part1/§1.1")],
+        "warnings": [],
+        "unresolved_items": [],
+        "filing_manifest_sha256": "a" * 64,
+        "event_manifest_sha256": "b" * 64,
+        "counterpart_filing_manifest_sha256s": {},
+    }
+
+
+def redflag_mode_b_response() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "terminal_status": "completed",
+        "failure_reason": None,
+        "target_sections": ["part4/§4.5"],
+        "draft_section": "## 财务排雷\n\n自由Markdown正文\n\n**机器引用清单:**\n- citation",
+        "risk_counts": {"warning": 1, "high_risk": 0, "veto": 0, "pending": 0},
+        "valuation_blocked": False,
+        "manual_review_required": False,
+        "filing_manifest_sha256": "a" * 64,
+        "event_manifest_sha256": "b" * 64,
+        "counterpart_filing_manifest_sha256s": {},
+        "action_requests": [],
+        "confidence": "high",
+        "citations": [filing_citation("part4/§4.5")],
+        "findings": [
+            canonical_finding(
+                "financial-redflag-scan",
+                "company_financials",
+                "listed_company",
+                "000001.SZ",
+            )
+        ],
+        "unresolved_items": [],
+    }
+
+
+def test_judgment_schemas_allow_free_markdown_and_reject_unknown_envelope_fields() -> None:
+    responses = {
+        "product-analysis": product_mode_b_response(),
+        "management-analysis": management_mode_b_response(),
+        "financial-redflag-scan": redflag_mode_b_response(),
+    }
+    for skill_name, response in responses.items():
+        schema_path = SKILLS_ROOT / skill_name / "references/mode-b-response.schema.json"
+        schema = json.loads(read(schema_path))
+        Draft202012Validator.check_schema(schema)
+        validator = Draft202012Validator(schema)
+        assert not list(validator.iter_errors(response))
+
+        unknown_field = deepcopy(response)
+        unknown_field["unexpected_top_level_field"] = True
+        assert list(validator.iter_errors(unknown_field))
+
+
+def test_financial_and_management_findings_share_evidence_but_not_judgment_identity() -> None:
+    read_filing = read(SKILL_PATHS["read-filing"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    management = read(SKILL_PATHS["management-analysis"])
+    profile = read(SKILL_PATHS["value-profile"])
+    algorithm = (
+        "sha256(judgment_domain|subject_type|subject_id|finding_type|"
+        "occurrence_date|sorted(canonical_evidence_ids))"
+    )
+    for text in (redflag, management, profile):
+        assert algorithm in text
+    assert "canonical_evidence_id" in read_filing
+    assert "judgment_domain=company_financials" in redflag
+    assert "judgment_domain=management_integrity" in management
+    assert "不同判断主体不得合并" in profile
+
+    management_schema = json.loads(
+        read(SKILLS_ROOT / "management-analysis/references/mode-b-response.schema.json")
+    )
+    invalid_management_subject = management_mode_b_response()
+    invalid_management_subject["findings"][0]["subject_type"] = "listed_company"
+    assert list(Draft202012Validator(management_schema).iter_errors(invalid_management_subject))
 
 
 def test_management_mode_b_response_schema_rejects_invalid_semantics() -> None:
@@ -6106,19 +6027,6 @@ def test_latest_review_listing_status_is_per_jurisdiction() -> None:
     assert '{"hkpf", "icac", "hkjd"}' in builder
 
 
-def test_latest_review_profile_bootstrap_and_market_manifest_are_executable() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
-    market_script = REPO_ROOT / "scripts" / "build_market_manifest.py"
-    assert market_script.is_file()
-    assert "reserved scaffold扩展为完整template" in skill
-    assert "resume始终原地更新已锁定路径" in skill
-    assert "scripts/build_market_manifest.py --plan" in skill
-    assert (
-        "scripts/build_market_manifest.py --revalidate <bound-market-data-manifest-path>"
-    ) in skill
-    assert "management-analysis返回`rebuild_evidence`" in skill
-
-
 def test_latest_review_citations_and_risk_counts_are_exact() -> None:
     redflag = read(SKILL_PATHS["financial-redflag-scan"])
     management = read(SKILL_PATHS["management-analysis"])
@@ -6166,23 +6074,10 @@ def test_fresh_review_closes_finalization_and_parent_recovery_contracts() -> Non
         "edit",
         "research_more",
         "rebuild_evidence",
-        "start_fresh",
         "exit",
     ):
         assert f"`{action}`" in profile
-
-
-def test_fresh_review_persists_and_guards_counterpart_manifests() -> None:
-    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
-    profile = read(SKILL_PATHS["value-profile"])
-    management = read(SKILL_PATHS["management-analysis"])
-
-    for text in (template, profile, management):
-        assert "counterpart_filing_manifests路径及SHA-256映射" in text
-    for text in (profile, management):
-        assert "--guard <counterpart-filing-manifest-path>:<sha256>" in text
-    assert "证据阶段=未建立" in management
-    assert "不附加manifest guard" in management
+    assert "不得由action request触发" in profile
 
 
 def test_fresh_review_redflag_rows_and_actions_are_machine_consumable() -> None:
@@ -6239,7 +6134,7 @@ def test_final_review_cross_skill_contracts_are_lossless() -> None:
         read(SKILLS_ROOT / "financial-redflag-scan" / "references" / "thresholds.yaml")
     )["checks"]
 
-    checkpoint = reading.split("Mode A在首次下载前建立证据阶段checkpoint", 1)[1]
+    checkpoint = reading.split("Mode A在首次持久化前建立证据阶段checkpoint", 1)[1]
     checkpoint = checkpoint.split("。", 1)[0]
     assert "target_fiscal_year" in checkpoint
     assert "completed_steps" in checkpoint
