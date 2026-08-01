@@ -46,6 +46,7 @@ PUBLISHER_SEMANTICS = {
     "media": ("Low", "Medium"),
     "mirror": ("Low", "Low"),
 }
+BROAD_GEOGRAPHIES = frozenset({"Global"})
 
 
 @dataclass(frozen=True)
@@ -106,12 +107,20 @@ def select_routes(
     now: datetime,
     cache: Mapping[str, object] | None = None,
     snapshot: Mapping[str, object] | None = None,
+    geographies: Sequence[str] | None = None,
 ) -> list[RouteCandidate]:
+    """Select same-function routes, optionally limited to a claim geography.
+
+    When geography scope is requested, profiles for any requested geography and
+    profiles marked ``Global`` remain eligible. Profiles for other markets are
+    excluded after exact function matching and before route ranking.
+    """
     if now.tzinfo is None or now.utcoffset() is None:
         raise ValueError("now must be timezone-aware")
 
     cache = cache or {}
     snapshot = snapshot or {}
+    requested_geographies = frozenset(geographies or ())
     candidates: list[RouteCandidate] = []
 
     for profile in profiles:
@@ -120,6 +129,11 @@ def select_routes(
 
         function = _find_function(profile, function_id)
         if function is None:
+            continue
+        if requested_geographies and not _matches_geography_scope(
+            profile,
+            requested_geographies,
+        ):
             continue
 
         source_id = _require_str(profile, "id")
@@ -179,6 +193,21 @@ def _find_function(profile: Mapping[str, object], function_id: str) -> dict[str,
         if isinstance(function, dict) and function.get("id") == function_id:
             return function
     return None
+
+
+def _matches_geography_scope(
+    profile: Mapping[str, object],
+    requested_geographies: frozenset[str],
+) -> bool:
+    profile_geographies = profile.get("geographies")
+    if not isinstance(profile_geographies, list):
+        return False
+
+    return any(
+        isinstance(geography, str)
+        and (geography in requested_geographies or geography in BROAD_GEOGRAPHIES)
+        for geography in profile_geographies
+    )
 
 
 def _first_direct_url(function: dict[str, object]) -> str:

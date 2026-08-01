@@ -10,13 +10,15 @@ as_of: "2026-08-02T08:00:00+00:00"
 required_functions:
   - name: HKEXnews filings and title search
     function_id: company-disclosures
+    geographies: [HK]
     candidate_source_ids:
       - hkexnews
+      - sse
       - eastmoney-announcement-index
       - aastocks
       - hkex-ccass
     expected_route_order: [hkexnews]
-    expected_excluded_source_ids: [eastmoney-announcement-index, aastocks, hkex-ccass]
+    expected_excluded_source_ids: [sse, eastmoney-announcement-index, aastocks, hkex-ccass]
     forbidden_final_citation_source_ids: [eastmoney-announcement-index, aastocks]
     expected_first_choice:
       source_id: hkexnews
@@ -35,11 +37,12 @@ required_functions:
       last_checked: "2026-08-02T07:00:00+00:00"
       candidate_source_ids:
         - hkexnews
+        - sse
         - eastmoney-announcement-index
         - aastocks
         - hkex-ccass
       expected_route_order: [hkexnews]
-      expected_excluded_source_ids: [eastmoney-announcement-index, aastocks, hkex-ccass]
+      expected_excluded_source_ids: [sse, eastmoney-announcement-index, aastocks, hkex-ccass]
       forbidden_final_citation_source_ids: [eastmoney-announcement-index, aastocks]
       expected_first_choice:
         source_id: hkexnews
@@ -56,6 +59,7 @@ required_functions:
       forbidden_substitutes: [eastmoney-announcement-index, aastocks, hkex-ccass]
   - name: Issuer investor-relations entry and exact-copy control
     function_id: issuer-investor-relations
+    geographies: [HK]
     candidate_source_ids: [pop-mart, hkexnews, eastmoney-announcement-index, aastocks]
     expected_route_order: [pop-mart]
     expected_excluded_source_ids: [hkexnews, eastmoney-announcement-index, aastocks]
@@ -79,6 +83,7 @@ required_functions:
       opening_final_document_required: false
   - name: Statutory ownership through HKEX Disclosure of Interests
     function_id: statutory-ownership
+    geographies: [HK]
     candidate_source_ids:
       - hkex-di
       - hkex-ccass
@@ -135,9 +140,10 @@ required_functions:
       forbidden_substitutes: [hkex-ccass, eastmoney-announcement-index, aastocks]
   - name: SFC statutory ownership regulatory context
     function_id: regulatory-materials
-    candidate_source_ids: [sfc, hkex-di, hkex-ccass, hkexnews, aastocks]
+    geographies: [HK]
+    candidate_source_ids: [sfc, csrc, hkex-di, hkex-ccass, hkexnews, aastocks]
     expected_route_order: [sfc]
-    expected_excluded_source_ids: [hkex-di, hkex-ccass, hkexnews, aastocks]
+    expected_excluded_source_ids: [csrc, hkex-di, hkex-ccass, hkexnews, aastocks]
     forbidden_final_citation_source_ids: [hkex-ccass, hkexnews, aastocks]
     expected_first_choice:
       source_id: sfc
@@ -153,13 +159,16 @@ required_functions:
       final_document_instruction_contains: opened official regulatory page
   - name: Independent China consumer macro context
     function_id: official-statistics
+    geographies: [CN]
     candidate_source_ids:
       - national-bureau-statistics
+      - hong-kong-statistics
       - hong-kong-consumer-council
       - eastmoney-research
       - aastocks
     expected_route_order: [national-bureau-statistics]
-    expected_excluded_source_ids: [hong-kong-consumer-council, eastmoney-research, aastocks]
+    expected_excluded_source_ids:
+      [hong-kong-statistics, hong-kong-consumer-council, eastmoney-research, aastocks]
     forbidden_final_citation_source_ids:
       - hong-kong-consumer-council
       - eastmoney-research
@@ -178,6 +187,7 @@ required_functions:
       final_document_instruction_contains: opened official release
   - name: Independent consumer-panel context
     function_id: research-reports
+    geographies: [CN]
     candidate_source_ids: [worldpanel, bain-china, eastmoney-research, aastocks]
     expected_route_order: [worldpanel, bain-china, eastmoney-research]
     expected_excluded_source_ids: [aastocks]
@@ -196,6 +206,7 @@ required_functions:
       final_document_instruction_contains: opened publisher report or page
   - name: Independent consumer consulting context
     function_id: research-reports
+    geographies: [CN]
     candidate_source_ids: [bain-china, eastmoney-research, aastocks]
     expected_route_order: [bain-china, eastmoney-research]
     expected_excluded_source_ids: [aastocks]

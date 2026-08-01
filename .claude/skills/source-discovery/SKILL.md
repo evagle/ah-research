@@ -96,9 +96,16 @@ is valid; do not create a separate TTL policy:
 - `moved` and `broken-link`: 7 days
 
 For each same-function candidate set, call
-`source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot)`.
-The resolver ignores a stale cache observation before it consults the reviewed
-snapshot, then falls back to the profile access record. A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority. A stale route must be rechecked before treating its status as current. One failed request never proves permanent closure.
+`source_profiles.select_routes(profiles, function_id, now, cache=local_cache, snapshot=reviewed_snapshot, geographies=claim_geographies)`
+when the claim has a geographic scope. With that optional scope, routes are
+eligible only when their profile lists a requested geography or `Global`;
+wrong-market routes are excluded before ranking. Omit `geographies` only when
+the claim has no geographic constraint. The resolver ignores a stale cache
+observation before it consults the reviewed snapshot, then falls back to the
+profile access record.
+A fresh `temporarily-unreachable` route is skipped for same-function fallbacks without changing its authority.
+A stale route must be rechecked before treating its status as current.
+One failed request never proves permanent closure.
 
 Use noninteractive `urllib` or `curl` for default retrieval and probing.
 Use headless Chromium only for JS/session flows, such as a rendered JSF form,

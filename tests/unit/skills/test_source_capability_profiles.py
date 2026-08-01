@@ -350,6 +350,28 @@ def test_official_route_beats_reachable_aggregator_for_same_function() -> None:
     assert routes[0].skip_reason is None
 
 
+def test_geography_scope_excludes_wrong_market_routes_but_keeps_global_routes() -> None:
+    source_profiles = load_source_profiles_module()
+    hong_kong = deepcopy(load_profile("official-example.yaml"))
+    hong_kong["id"] = "aa-hong-kong-route"
+    hong_kong["geographies"] = ["HK"]
+    china = deepcopy(load_profile("official-example.yaml"))
+    china["id"] = "cn-route"
+    china["geographies"] = ["CN"]
+    global_route = deepcopy(load_profile("official-example.yaml"))
+    global_route["id"] = "global-route"
+    global_route["geographies"] = ["Global"]
+
+    routes = source_profiles.select_routes(
+        profiles=[hong_kong, china, global_route],
+        function_id="company-announcements",
+        now=datetime(2026, 8, 2, tzinfo=UTC),
+        geographies=["CN"],
+    )
+
+    assert [route.source_id for route in routes] == ["cn-route", "global-route"]
+
+
 def test_fresh_temporarily_unreachable_route_is_skipped_for_fallback() -> None:
     source_profiles = load_source_profiles_module()
     official = deepcopy(load_profile("official-example.yaml"))
@@ -569,6 +591,7 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
     for requirement in scenario["required_functions"]:
         function_id = requirement["function_id"]
         expected_first_choice = requirement["expected_first_choice"]
+        geographies = requirement["geographies"]
         assert "expected_route_order" in requirement
         assert "expected_excluded_source_ids" in requirement
         assert "forbidden_final_citation_source_ids" in requirement
@@ -581,6 +604,7 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
             function_id=function_id,
             now=now,
             snapshot=snapshot,
+            geographies=geographies,
         )
 
         assert routes, f"{scenario['id']}: no route for {function_id}"
@@ -642,6 +666,7 @@ def test_company_research_scenarios_select_citable_routes_and_safe_fallbacks(
             function_id=function_id,
             now=now,
             snapshot=outage_snapshot,
+            geographies=geographies,
         )
         expected_outage_route = temporary_unavailability["expected_first_choice"]
 

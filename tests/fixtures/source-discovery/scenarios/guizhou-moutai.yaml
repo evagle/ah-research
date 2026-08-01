@@ -10,13 +10,16 @@ as_of: "2026-08-02T08:00:00+00:00"
 required_functions:
   - name: SSE issuer disclosures and announcement search
     function_id: company-disclosures
+    geographies: [CN]
     candidate_source_ids:
       - sse
+      - hkexnews
       - eastmoney-announcement-index
       - eastmoney-quotes-f10
       - xueqiu
     expected_route_order: [sse]
     expected_excluded_source_ids:
+      - hkexnews
       - eastmoney-announcement-index
       - eastmoney-quotes-f10
       - xueqiu
@@ -42,11 +45,13 @@ required_functions:
       candidate_source_ids:
         - sse
         - cninfo
+        - hkexnews
         - eastmoney-announcement-index
         - eastmoney-quotes-f10
         - xueqiu
       expected_route_order: [cninfo, sse]
       expected_excluded_source_ids:
+        - hkexnews
         - eastmoney-announcement-index
         - eastmoney-quotes-f10
         - xueqiu
@@ -72,13 +77,15 @@ required_functions:
         - xueqiu
   - name: SSE regulatory inquiry correspondence
     function_id: regulatory-materials
+    geographies: [CN]
     candidate_source_ids:
       - sse
+      - sfc
       - cninfo
       - eastmoney-announcement-index
       - xueqiu
     expected_route_order: [sse]
-    expected_excluded_source_ids: [cninfo, eastmoney-announcement-index, xueqiu]
+    expected_excluded_source_ids: [sfc, cninfo, eastmoney-announcement-index, xueqiu]
     forbidden_final_citation_source_ids: [eastmoney-announcement-index, xueqiu]
     expected_first_choice:
       source_id: sse
@@ -94,12 +101,14 @@ required_functions:
       final_document_instruction_contains: opened SSE inquiry letter
   - name: Independent China consumer and industry context
     function_id: official-statistics
+    geographies: [CN]
     candidate_source_ids:
       - national-bureau-statistics
+      - hong-kong-statistics
       - iimedia
       - eastmoney-research
     expected_route_order: [national-bureau-statistics]
-    expected_excluded_source_ids: [iimedia, eastmoney-research]
+    expected_excluded_source_ids: [hong-kong-statistics, iimedia, eastmoney-research]
     forbidden_final_citation_source_ids: [iimedia, eastmoney-research]
     expected_first_choice:
       source_id: national-bureau-statistics
