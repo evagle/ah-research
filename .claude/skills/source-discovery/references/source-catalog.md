@@ -9,16 +9,19 @@ This catalog records source-level routing facts checked in the supplied audit re
 
 Keep the concepts separate:
 
-- `accuracy` records source authority for the publisher's own scope, not practical usefulness.
-- `utility` records practical route utility, not truth of a specific claim.
+- `accuracy` records a source-authority route prior scoped to that row's `best uses`, not practical usefulness.
+- `utility` records a practical-utility route prior scoped to that row's `best uses`, not truth of a specific claim.
 - `access status/access model` records current reachability and access policy.
 - `limitations` records claim-support boundaries; aggregators, apps, media, social platforms, and report indexes are discovery routes unless original documents are traced.
 - `evidence level` records confidence in the access/provenance conclusion for this source record, not source authority, route utility, reachability, or claim support.
 
 Detailed ratings and probe facts:
 
-- The routing table keeps the required record fields compact. Its `accuracy` field is the source-authority assessment, and its `utility` field is practical source-routing utility only.
-- `Reliability ratings` gives separate explicit `High`/`Medium`/`Low` values for source authority, practical utility, current reachability, and conclusion evidence. The `rating evidence level` column records confidence in those access/provenance/rating conclusions, not the source-quality score.
+- Catalog ratings are route priors scoped to each record's stated best uses.
+- The routing table keeps the required record fields compact. Its `accuracy` and `utility` fields are best-use route priors, not unconditional global properties.
+- `Reliability ratings` gives separate explicit `High`/`Medium`/`Low` route priors for source authority and practical utility, plus audited current reachability. Each rating row inherits the same-ID routing row's `best uses` scope.
+- Runtime `conclusion_evidence` is not preassigned in this catalog. Calculate it for the actual claim after retrieving evidence. Do not copy a catalog route prior into a runtime ledger as a claim grade.
+- The `rating evidence level` column records confidence in those access/provenance/rating conclusions, not the source-quality score or runtime claim support.
 - `Probe facts` gives the Step 2 facts separately: redirect chain, response status, recognizable first-party content, login/paywall indications, and observed technical restriction. `Not recorded in audit` means the audit evidence did not supply that specific fact; it is not an invented negative finding.
 
 Fallback and company-site rules:
@@ -93,7 +96,9 @@ U39 | 100EC | 网经社 / 100EC | supplied U39 | ecommerce media/research | http
 U40 | Newrank Reports | 新榜报告 | supplied U40 | content-platform analytics/reports | https://newrank.cn/report?bindType=report | WeChat/Weibo/short-video ecosystem reports, rankings, report discovery | Medium-to-high for Newrank-tracked ecosystems | High practical utility | moved/redirected; public-limited; deeper products paid/commercial | Vendor-methodology limits; commissioned reports may be sponsor-shaped | QuestMobile, platform disclosures, 36Kr, 巨量算数 | 2026-08-01 | `High`
 U41 | CICC Research | 中金研究 | supplied U41 | sell-side research | https://research.cicc.com/index | Sector theses, China macro framing, broker analyst views, research leads | High for sell-side China analysis within domain; not neutral official data | High utility if accessible | anti-bot/technical-limited; 403 security check from scripted access; some research likely account/licensed | Access restrictions, conflicts of interest, house-view bias | U36, broker portals, Wind, Choice, official statistics | 2026-08-01 | `Medium`
 U42 | 199IT Data Navigation Housing Tools | 199IT 房价查询 | supplied U42 | directory/aggregator | http://hao.199it.com/fang.html | Discovering housing-price tools and downstream portals | Low-to-medium authority as directory only | Medium discovery utility | public | Directory quality and outbound link rot; not citable for underlying housing data | Fang.com, 国家统计局 housing series, local statistics bureaus | 2026-08-01 | `High`
-U43 | PwC Library URL; intended Pew Research Center mismatch | Supplied as 皮尤网 but URL is PwC | supplied U43 | mismatch: consulting library vs public-opinion research | Supplied PwC URL https://www.pwc.com/us/en/library.html; intended Pew candidate https://www.pewresearch.org/ | Use PwC for industry outlooks and consulting reports; use Pew for public opinion, demographics, social/technology surveys | PwC Medium-high for consulting analysis; Pew High for its survey research; mismatch must be resolved per claim | Utility depends on intended source | public-limited for PwC downloads/forms; public for Pew | Name/URL mismatch contaminates routing; do not treat PwC as Pew or vice versa | For PwC: Deloitte, McKinsey, KPMG; for Pew: Gallup, Ipsos, World Bank, OECD | 2026-08-01 | `High`
+U43 | PwC/Pew supplied mismatch parent | Supplied as 皮尤网 but URL is PwC | supplied U43 parent; see U43-PwC and U43-Pew | mismatch guard | Supplied URL https://www.pwc.com/us/en/library.html; intended-label candidate https://www.pewresearch.org/ | Preserve the supplied mismatch and force callers to choose the claim-appropriate subrecord | Low route authority until the intended publisher is resolved | Low route utility except mismatch detection | public-limited for PwC; public for Pew | This parent is not a publisher and must not support a claim; do not treat PwC as Pew or vice versa | U43-PwC, U43-Pew | 2026-08-01 | `High`
+U43-PwC | PwC Library | PwC URL from supplied U43 | supplied U43 URL subrecord | consulting/accounting research | https://www.pwc.com/us/en/library.html | PwC-attributable industry outlooks, consulting reports, enterprise topics, and surveys | Medium route prior for PwC-attributable consulting analysis | High route utility for the stated best uses | public-limited; downloads/forms may be gated | Not Pew Research Center; branded consulting perspective and uneven methodological depth | U24-PwC, Deloitte, McKinsey, KPMG | 2026-08-01 | `High`
+U43-Pew | Pew Research Center | Intended 皮尤网 label from supplied U43 | supplied U43 intended-label subrecord | public-opinion/social research | https://www.pewresearch.org/ | Pew public-opinion, demographic, social, internet, and technology survey research | High route prior for Pew's own transparent survey research | High route utility for the stated best uses | public | Not PwC; survey scope, sample, geography, wording, and field dates bound every claim | Gallup, Ipsos, World Bank, OECD | 2026-08-01 | `High`
 U44 | 36Kr | 36氪 | supplied U44 | business/startup media | https://36kr.com/ | Startup/business news discovery, company/event tracking, report/interview leads | Medium media authority; not primary for most underlying facts | Good discovery utility | anti-bot/technical-limited; public browser likely but scripted body security-check page | Media incentives, sponsored content risk, secondary-source risk | Company press releases, exchange filings, 国家统计局, IT桔子, 企查查, 天眼查 | 2026-08-01 | `Medium`
 U45 | National Bureau of Statistics of China | 国家统计局 | supplied U45 | official statistics | https://www.stats.gov.cn/ | Citation-grade official China macro, demographic, industrial, labor, price, housing data | Very high authority for PRC official statistics and methodology | Core practical utility | public | Release lag, revisions, definitional changes, official scope limits | Provincial/city statistical bureaus, 中国政府网 ministries, World Bank | 2026-08-01 | `High`
 U46 | State Council portal root replacing stale data path | 中国政府网数据 | supplied U46 | official government portal | https://www.gov.cn/ | Top-level government portal and ministry/page discovery | High authority for official releases when using specific pages; exact supplied data path no longer reliable | Weak as data-hub source | moved/redirected; public | Supplied path redirects to homepage; poor specificity and reproducibility | 国家统计局, ministry sites, provincial/municipal open-data portals, World Bank | 2026-08-01 | `High`
@@ -119,147 +124,151 @@ U63 | Fenghuo Research Reports | 烽火研报 | supplied U63 | research report a
 
 The `rating evidence level` records confidence in the ratings/provenance conclusion, not the rating value itself.
 
-ID | source authority | practical utility | current reachability | conclusion evidence | rating evidence level
+ID | source authority route prior | practical utility route prior | current reachability | runtime conclusion evidence | rating evidence level
 --- | --- | --- | --- | --- | ---
-U01 | Medium | High | High | Low | `High`
-U02 | Medium | High | High | Low | `High`
-U03 | Medium | High | High | Low | `High`
-U04 | High | Medium | Medium | Medium | `Medium`
-U05 | High | Low | Low | Medium | `High`
-U06 | Low | Low | Low | Low | `Low`
-U07 | Medium | High | High | Medium | `High`
-U08 | Low | Medium | High | Low | `High`
-U09 | Medium | Medium | High | Medium | `High`
-U10 | High | High | High | High | `High`
-U11 | High | High | High | High | `High`
-U12 | Medium | Low | High | Low | `High`
-U13 | Low | Low | Low | Low | `Low`
-U14 | Low | Low | Low | Low | `Low`
-U15 | Medium | High | Medium | Medium | `Medium`
-U16 | Medium | High | High | Medium | `High`
-U17 | Low | High | Medium | Low | `High`
-U18 | High | High | High | High | `High`
-U19 | Medium | High | High | Medium | `High`
-U20 | Medium | High | High | Medium | `High`
-U21 | Medium | High | Medium | Medium | `Medium`
-U22 | Medium | Medium | High | Medium | `Medium`
-U23 | High | High | High | Medium | `High`
-U24 | Medium | High | High | Medium | `High`
-U24-Deloitte | Medium | High | High | Medium | `High`
-U24-EY | Medium | High | High | Medium | `High`
-U24-KPMG | Medium | High | High | Medium | `High`
-U24-PwC | Medium | High | High | Medium | `High`
-U25 | Medium | Medium | High | Medium | `High`
-U26 | Medium | High | High | Medium | `High`
-U27 | High | High | High | Medium | `High`
-U28 | High | High | Medium | High | `Medium`
-U29 | High | High | High | Medium | `High`
-U30 | Medium | Medium | High | Medium | `High`
-U31 | Medium | Medium | High | Medium | `High`
-U32 | High | High | High | Medium | `High`
-U33 | Medium | Medium | High | Medium | `High`
-U34 | High | High | Medium | Medium | `Medium`
-U35 | Low | Medium | Medium | Low | `Medium`
-U36 | Medium | High | High | Low | `High`
-U37 | Low | Low | Low | Low | `Low`
-U38 | Low | Medium | High | Low | `High`
-U39 | Medium | Medium | Medium | Low | `Medium`
-U40 | Medium | High | High | Medium | `High`
-U41 | High | High | Medium | Medium | `Medium`
-U42 | Low | Medium | High | Low | `High`
-U43 | High | Medium | High | Low | `High`
-U44 | Medium | High | Medium | Low | `Medium`
-U45 | High | High | High | High | `High`
-U46 | High | Low | High | Medium | `High`
-U47 | High | High | High | High | `High`
-U48 | High | High | Medium | High | `Medium`
-U49 | High | High | High | High | `High`
-U50 | High | High | High | High | `High`
-U51 | High | High | High | High | `High`
-U52 | High | Medium | Medium | Low | `Medium`
-U53 | High | High | High | High | `High`
-U54 | High | High | Medium | High | `Medium`
-U55 | High | High | High | High | `High`
-U56 | High | High | High | Medium | `High`
-U57 | High | High | High | High | `High`
-U58 | High | High | High | High | `High`
-U59 | High | High | High | High | `High`
-U60 | High | High | High | High | `High`
-U61 | High | High | High | High | `High`
-U62 | High | Medium | Medium | High | `Medium`
-U63 | Low | Medium | Medium | Low | `High`
+U01 | Medium | High | High | Calculate per claim | `High`
+U02 | Medium | High | High | Calculate per claim | `High`
+U03 | Medium | High | High | Calculate per claim | `High`
+U04 | High | Medium | Medium | Calculate per claim | `Medium`
+U05 | High | Low | Low | Calculate per claim | `High`
+U06 | Low | Low | Low | Calculate per claim | `Low`
+U07 | Medium | High | High | Calculate per claim | `High`
+U08 | Low | Medium | High | Calculate per claim | `High`
+U09 | Medium | Medium | High | Calculate per claim | `High`
+U10 | High | High | High | Calculate per claim | `High`
+U11 | High | High | High | Calculate per claim | `High`
+U12 | Medium | Low | High | Calculate per claim | `High`
+U13 | Low | Low | Low | Calculate per claim | `Low`
+U14 | Low | Low | Low | Calculate per claim | `Low`
+U15 | Medium | High | Medium | Calculate per claim | `Medium`
+U16 | Medium | High | High | Calculate per claim | `High`
+U17 | Low | High | Medium | Calculate per claim | `High`
+U18 | High | High | High | Calculate per claim | `High`
+U19 | Medium | High | High | Calculate per claim | `High`
+U20 | Medium | High | High | Calculate per claim | `High`
+U21 | Medium | High | Medium | Calculate per claim | `Medium`
+U22 | Medium | Medium | High | Calculate per claim | `Medium`
+U23 | High | High | High | Calculate per claim | `High`
+U24 | Medium | High | High | Calculate per claim | `High`
+U24-Deloitte | Medium | High | High | Calculate per claim | `High`
+U24-EY | Medium | High | High | Calculate per claim | `High`
+U24-KPMG | Medium | High | High | Calculate per claim | `High`
+U24-PwC | Medium | High | High | Calculate per claim | `High`
+U25 | Medium | Medium | High | Calculate per claim | `High`
+U26 | Medium | High | High | Calculate per claim | `High`
+U27 | High | High | High | Calculate per claim | `High`
+U28 | High | High | Medium | Calculate per claim | `Medium`
+U29 | High | High | High | Calculate per claim | `High`
+U30 | Medium | Medium | High | Calculate per claim | `High`
+U31 | Medium | Medium | High | Calculate per claim | `High`
+U32 | High | High | High | Calculate per claim | `High`
+U33 | Medium | Medium | High | Calculate per claim | `High`
+U34 | High | High | Medium | Calculate per claim | `Medium`
+U35 | Low | Medium | Medium | Calculate per claim | `Medium`
+U36 | Medium | High | High | Calculate per claim | `High`
+U37 | Low | Low | Low | Calculate per claim | `Low`
+U38 | Low | Medium | High | Calculate per claim | `High`
+U39 | Medium | Medium | Medium | Calculate per claim | `Medium`
+U40 | Medium | High | High | Calculate per claim | `High`
+U41 | High | High | Medium | Calculate per claim | `Medium`
+U42 | Low | Medium | High | Calculate per claim | `High`
+U43 | Low | Low | High | Calculate per claim | `High`
+U43-PwC | Medium | High | High | Calculate per claim | `High`
+U43-Pew | High | High | High | Calculate per claim | `High`
+U44 | Medium | High | Medium | Calculate per claim | `Medium`
+U45 | High | High | High | Calculate per claim | `High`
+U46 | High | Low | High | Calculate per claim | `High`
+U47 | High | High | High | Calculate per claim | `High`
+U48 | High | High | Medium | Calculate per claim | `Medium`
+U49 | High | High | High | Calculate per claim | `High`
+U50 | High | High | High | Calculate per claim | `High`
+U51 | High | High | High | Calculate per claim | `High`
+U52 | High | Medium | Medium | Calculate per claim | `Medium`
+U53 | High | High | High | Calculate per claim | `High`
+U54 | High | High | Medium | Calculate per claim | `Medium`
+U55 | High | High | High | Calculate per claim | `High`
+U56 | High | High | High | Calculate per claim | `High`
+U57 | High | High | High | Calculate per claim | `High`
+U58 | High | High | High | Calculate per claim | `High`
+U59 | High | High | High | Calculate per claim | `High`
+U60 | High | High | High | Calculate per claim | `High`
+U61 | High | High | High | Calculate per claim | `High`
+U62 | High | Medium | Medium | Calculate per claim | `Medium`
+U63 | Low | Medium | Medium | Calculate per claim | `High`
 
 ## Probe Facts
 
-ID | redirect chain | response status | recognizable first-party content | login/paywall indications | observed technical restriction
---- | --- | --- | --- | --- | ---
-U01 | No redirect recorded | `200 OK` | Public SPA shell; title/keywords/config fields | `login_url=https://app.datayes.com/sign` exposed | None recorded
-U02 | No redirect recorded | `200 OK` | Homepage, previews, listing pages | `会员特惠`, `注册/登录`, `buy vip`, member dialogs, report/download language | None recorded
-U03 | No redirect recorded | `200 OK` for host and report detail pages | Homepage and report detail pages | PC client download/login prompt for full functionality | None recorded
-U04 | No redirect observed | `200 OK` | Branded AliResearch landing page shell | Not recorded in audit | JS-driven rendered content; raw HTML exposes little
-U05 | `https://data.qq.com/reports` -> WeChat profile URL | Destination returned a verification/permission page; numeric status not recorded | WeChat destination tied to Tencent account | Asked to open in WeChat; verification/permission message | WeChat-client context required for practical use
-U06 | No redirect target obtained | DNS resolution failure for `https` and `http` listed host | None verified | Not recorded in audit | DNS failure
-U07 | No redirect recorded | `200 OK` for homepage and article detail | Public article content; Analysys marketing pages | Login/register controls and subscription products `易观千帆`, `博阅` | None recorded
-U08 | `http://www.nxny.com/stype_hy/` -> `https://www.nxny.com/stype_hy/` | `200 OK` | Report lists, PDF icons, download rankings | `高级会员`, `登录`, `注册`, VIP/download affordances | None recorded
-U09 | No redirect recorded | `200 OK` for homepage and sample article | Public excerpt text and sample article | `附下载`; member-report asset and report center route | None recorded
-U10 | No redirect observed for audited root; core routes also checked | `200 OK`; inquiries `200`; SSE search for `贵州茅台` `200` | Official SSE branding, investor/member sections, disclosure/rule content; inquiries title `监管问询` | Member areas exist but are separate | None recorded; search route is routing aid only, not final evidence above original announcement
-U11 | No redirect recorded | `200 OK` on full GET; one HEAD-style attempt reset connection | Exchange content; public HTML/PDF document references | Member zones clearly labeled separately | HEAD-style connection reset observed; body fetch succeeded
-U12 | No redirect recorded | `200 OK` | `AI 垂类数据基础设施` current site content | Sample/download flow requires NDA/subscription-style contact | Source drift from legacy entertainment role
-U13 | No redirect recorded | DNS resolved to `103.86.45.203`; HTTP/S web connections failed | None verified | Not recorded in audit | Web connections failed from audit network
-U14 | No redirect target discovered | DNS failure for listed and obvious variants | None verified | Not recorded in audit | DNS failure
-U15 | No redirect recorded | `HTTP 412` | JavaScript challenge / anti-automation page | Not inspectable from normal content | Anti-bot challenge blocks straightforward programmatic access
-U16 | No redirect recorded | `200 OK`; report list page reachable | Homepage and research-list pages | Login/register controls | None recorded
-U17 | `http://199it.com/` and `https://199it.com/` -> `https://www.199it.com/` | Homepage HTML returned; exact `www` host timed out once | Homepage HTML | No login required for homepage/article access | Uneven edge behavior; one direct `www` timeout
-U18 | Supplied `http://www.cnnic.cn` redirected to `https://www.cnnic.cn/` | `200` | Official CNNIC site and standard report pages | None recorded | None recorded
-U19 | No redirect recorded | `200`; `gb2312` homepage rendered after charset handling | iResearch homepage, articles/report pages | Premium products/deeper databases commercial | Charset handling needed
-U20 | No redirect recorded | `200` | McKinsey China site; `/insights/` section exposed | Some downloads/campaign assets may ask registration/contact info | None recorded
-U21 | No redirect recorded | `403 Access Denied` from Akamai | Explicit Akamai denial text; public property not closed | Some assets may be gated, but report pages not directly validated | CDN/WAF scripted-access block
-U22 | No redirect recorded | `200` | Bain China homepage and linked news/info pages | Deeper thought leadership may be gated elsewhere; no homepage login required | None recorded
-U23 | No redirect recorded | `200` | Links to `/insights`, `/markets`, `/insights/research` | Institutional/premium research and some market products client/login gated | None recorded
-U24 | See U24 subrecords | See U24 subrecords | See U24 subrecords | See U24 subrecords | See U24 subrecords
-U24-Deloitte | `https://www2.deloitte.com/cn/zh.html` -> `https://www.deloitte.com/cn/zh.html` | `200` | Deloitte China public site and research pages | Some PDFs/download assets may be form-gated | None recorded
-U24-EY | No redirect recorded | `200` | EY China `/zh_cn/insights` and newsroom pages | Some full reports/PDFs/campaign assets may be contact-gated | None recorded
-U24-KPMG | `https://home.kpmg/cn/zh/home.html` -> `https://kpmg.com/cn/zh.html` | `200` | KPMG China live insights archive | Some PDFs/downloadables may be gated/contact-driven | None recorded
-U24-PwC | No redirect recorded | `200` | PwC China homepage links to `research-and-insights` | Some reports/newsletter/download flows may be form-gated | None recorded
-U25 | Supplied URL redirected to `https://www.rolandberger.com/en/?country=CN`; guessed `zh-cn` path returned `404` | `200` for canonical; `404` for guessed Chinese path | Roland Berger global English site with China country context | Some downloads/lead-generation flows may be gated | Locale/path drift
-U26 | Old `aonhewitt.com.cn` host failed DNS; replacement `https://www.aon.com.cn/` reached | Replacement returned `200` | `怡安企业服务` branded current site with `/insights` | Proprietary benchmarks/client analytics gated | Old hostname invalid by DNS
-U27 | No redirect recorded | `200` | Mercer China public site and insight pages | Survey products and benchmark databases commercial | None recorded
-U28 | No redirect recorded | `412 Precondition Failed` for page and root | WAF cookies/scripts indicate live official site | Not directly validated due WAF | WAF blocks scripted retrieval
-U29 | Sample report URL redirected to `https://my.idc.com/`; root `https://www.idc.com/` reached | Root `200`; sampled report route ended `403` | IDC public research landing pages and press releases | Full report path behind `my.idc.com` subscription/login | Account/subscription gate for full reports
-U30 | `http://www.cadas.com.cn/` -> `https://www.cadas.com.cn/` | `200` | CADAS public articles/summaries | Richer aviation data likely in commercial ecosystems | None recorded
-U31 | No redirect recorded | `200` | WEF China links to `/publications/` and Chinese articles/stories | Newsletter-style prompts possible; many reports open | None recorded
-U32 | `https://www.kantarworldpanel.com/global` -> `https://market.worldpanelbynumerator.com/global` | `200` | Worldpanel by Numerator public marketing/insight site | Full panel datasets and deeper reports paid/commercial | Brand/domain transition
-U33 | Canonical tag matches supplied URL | `200` | Title `Flurry | Mobile App Analytics Platform for Android & iOS` | Actual analytics data requires product account/instrumented apps | None recorded
-U34 | URL resolves to same path | `403` with Cloudflare `Just a moment...` | Cloudflare challenge page; origin reachable | Public report model expected but not validated by script | Cloudflare challenge gates scripted access
-U35 | Canonical root used | `200` but body is Aliyun WAF bootstrap/challenge | Aliyun WAF bootstrap/challenge, not readable content | Login/account needed for deeper features/interactions | WAF challenge gates scripted browsing
-U36 | `http://data.eastmoney.com/report/` -> `https://data.eastmoney.com/report/`; API base and sample checked in core audit | Portal `200`; API base `404`; sample API list request `500` | Portal title `研报中心`; public report index/metadata | Deeper report access depends on source/clickthrough | Undocumented API brittle
-U37 | No redirect recorded | DNS resolved, but HTTP/S timed out | None verified | Not recorded in audit | HTTP/S timeout from audit vantage
-U38 | Supplied path returned canonical same path; root/tag route live | Supplied path `404`; root `200`; tag route discoverable | Root title `TooBigData - 广告运营、增长、AI 与数据手记` | None recorded | Supplied path broken
-U39 | No redirect recorded | Server returned `200` | JS cookie security check `正在进行安全检查，请稍候...` | Not recorded in audit | JS cookie security challenge
-U40 | `https://report.newrank.cn/index.html?bindType=report` -> `https://newrank.cn/report?bindType=report` | `200` | Title `报告分析-新榜` | Deeper datasets/products paid/commercial | Route moved
-U41 | No redirect recorded | `403` | Security check page; origin responds | Some research likely client/account/licensed or summary-only | Security gate blocks scripted access
-U42 | No redirect recorded | `200` | Title `房价查询工具-199IT数据导航网站--Hao.199it.com`; links out to tools | None recorded | Directory/link-rot risk
-U43 | Supplied PwC URL and intended Pew URL both checked | PwC `200`; Pew `200` | PwC canonical tag matches PwC URL; Pew canonical tag matches Pew domain | PwC downloads/forms may be gated; Pew public | Name/URL mismatch: supplied label says Pew, URL is PwC
-U44 | Canonical root used | `200` but body is security-check page | Volcano Engine security-check page `正在进行安全检测...` | Not recorded in audit | Security gate blocks scripted body access
-U45 | `http://www.stats.gov.cn` -> `https://www.stats.gov.cn/` | `200` | Title `国家统计局` | None recorded | None recorded
-U46 | Supplied path redirects to `https://www.gov.cn/` homepage | Root `200` | Government portal homepage | None recorded | Old data-hub path is stale/unspecific
-U47 | Canonical tag matches `https://data.worldbank.org.cn/` | `200` | World Bank Chinese data portal | None recorded | None recorded
-U48 | Source family; representative samples checked | Beijing, Shanghai, Guangdong statistics/government samples `200`; Guangdong samples slow | Official local statistics/government portals | None recorded | Fragmented family; inconsistent formats; slow responses in samples
-U49 | No redirect recorded | `200` | Title `工信数据` | None recorded | None recorded
-U50 | `http://www.pbc.gov.cn` -> `https://www.pbc.gov.cn/` | `200` | Official PBOC site | None recorded | None recorded
-U51 | Supplied historical URL returned `404`; current family reached | Supplied `404`; replacement `200` | Title `2024年教育统计数据` | None recorded | Stale historical leaf path
-U52 | Root reached; org-directory family separately checked | `https://www.gov.cn/` `200`; `https://www.gov.cn/gwyzzjg/zuzhi/` `403` | State Council portal root | None recorded | Org-directory path bot-gated to CLI; family is router
-U53 | No redirect recorded | `200` | World Bank Open Data portal | None recorded | Duplicate World Bank family coverage with U47
-U54 | No redirect recorded | `403` for `https://www.imf.org/en/Data` and `https://data.imf.org/` | WAF/blocked response from IMF data family | Not recorded in audit | Bot/WAF-gated to CLI
-U55 | No redirect recorded | `200` for `https://www.who.int/data/gho` and `https://www.who.int/data` | WHO data pages | None recorded | None recorded
-U56 | No redirect recorded | `200` | UNdata portal | None recorded | None recorded
-U57 | No redirect recorded | `200` for `https://stats.wto.org/` and `https://timeseries.wto.org/` | Title `WTO Stats` | None recorded | None recorded
-U58 | No redirect recorded | `200` | UNSD SDG data portal | None recorded | None recorded
-U59 | No redirect recorded | `200` | UNSD demographic/social statistics family | None recorded | Family/landing orientation
-U60 | No redirect recorded | `200` for SEC root with descriptive user-agent and EDGAR search | SEC root and EDGAR search | None recorded | Generic scraping can trigger rate/risk pages; careful user-agent/rate needed
-U61 | No redirect recorded | `200` | Eurostat database page | None recorded | None recorded
-U62 | No redirect recorded | `403`; `/news` also `403` | Cloudflare `Just a moment...` page | Not recorded in audit | WAF-gated to CLI
-U63 | `https://fhyanbao.com/` TLS failure; insecure route reached `https://www.fhyanbao.com/` | TLS validation failed; insecure fetch reached final page | Title `烽火研报 - 专业研报平台...` | Not recorded in audit | Expired TLS certificate
+ID | redirect chain | response status | recognizable first-party content | login/paywall indications | observed technical restriction | probe evidence level
+--- | --- | --- | --- | --- | --- | ---
+U01 | No redirect recorded | `200 OK` | Public SPA shell; title/keywords/config fields | `login_url=https://app.datayes.com/sign` exposed | None recorded | `High`
+U02 | No redirect recorded | `200 OK` | Homepage, previews, listing pages | `会员特惠`, `注册/登录`, `buy vip`, member dialogs, report/download language | None recorded | `High`
+U03 | No redirect recorded | `200 OK` for host and report detail pages | Homepage and report detail pages | PC client download/login prompt for full functionality | None recorded | `High`
+U04 | No redirect observed | `200 OK` | Branded AliResearch landing page shell | Not recorded in audit | JS-driven rendered content; raw HTML exposes little | `Medium`
+U05 | `https://data.qq.com/reports` -> WeChat profile URL | Destination returned a verification/permission page; numeric status not recorded | WeChat destination tied to Tencent account | Asked to open in WeChat; verification/permission message | WeChat-client context required for practical use | `High`
+U06 | No redirect target obtained | DNS resolution failure for `https` and `http` listed host | None verified | Not recorded in audit | DNS failure | `Low`
+U07 | No redirect recorded | `200 OK` for homepage and article detail | Public article content; Analysys marketing pages | Login/register controls and subscription products `易观千帆`, `博阅` | None recorded | `High`
+U08 | `http://www.nxny.com/stype_hy/` -> `https://www.nxny.com/stype_hy/` | `200 OK` | Report lists, PDF icons, download rankings | `高级会员`, `登录`, `注册`, VIP/download affordances | None recorded | `High`
+U09 | No redirect recorded | `200 OK` for homepage and sample article | Public excerpt text and sample article | `附下载`; member-report asset and report center route | None recorded | `High`
+U10 | No redirect observed for audited root; core routes also checked | `200 OK`; inquiries `200`; SSE search for `贵州茅台` `200` | Official SSE branding, investor/member sections, disclosure/rule content; inquiries title `监管问询` | Member areas exist but are separate | None recorded; search route is routing aid only, not final evidence above original announcement | `High`
+U11 | No redirect recorded | `200 OK` on full GET; one HEAD-style attempt reset connection | Exchange content; public HTML/PDF document references | Member zones clearly labeled separately | HEAD-style connection reset observed; body fetch succeeded | `High`
+U12 | No redirect recorded | `200 OK` | `AI 垂类数据基础设施` current site content | Sample/download flow requires NDA/subscription-style contact | Source drift from legacy entertainment role | `High`
+U13 | No redirect recorded | DNS resolved to `103.86.45.203`; HTTP/S web connections failed | None verified | Not recorded in audit | Web connections failed from audit network | `Low`
+U14 | No redirect target discovered | DNS failure for listed and obvious variants | None verified | Not recorded in audit | DNS failure | `Low`
+U15 | No redirect recorded | `HTTP 412` | JavaScript challenge / anti-automation page | Not inspectable from normal content | Anti-bot challenge blocks straightforward programmatic access | `Medium`
+U16 | No redirect recorded | `200 OK`; report list page reachable | Homepage and research-list pages | Login/register controls | None recorded | `High`
+U17 | `http://199it.com/` and `https://199it.com/` -> `https://www.199it.com/` | Homepage HTML returned; exact `www` host timed out once | Homepage HTML | No login required for homepage/article access | Uneven edge behavior; one direct `www` timeout | `High`
+U18 | Supplied `http://www.cnnic.cn` redirected to `https://www.cnnic.cn/` | `200` | Official CNNIC site and standard report pages | None recorded | None recorded | `High`
+U19 | No redirect recorded | `200`; `gb2312` homepage rendered after charset handling | iResearch homepage, articles/report pages | Premium products/deeper databases commercial | Charset handling needed | `High`
+U20 | No redirect recorded | `200` | McKinsey China site; `/insights/` section exposed | Some downloads/campaign assets may ask registration/contact info | None recorded | `High`
+U21 | No redirect recorded | `403 Access Denied` from Akamai | Explicit Akamai denial text; public property not closed | Some assets may be gated, but report pages not directly validated | CDN/WAF scripted-access block | `Medium`
+U22 | No redirect recorded | `200` | Bain China homepage and linked news/info pages | Deeper thought leadership may be gated elsewhere; no homepage login required | None recorded | `Medium`
+U23 | No redirect recorded | `200` | Links to `/insights`, `/markets`, `/insights/research` | Institutional/premium research and some market products client/login gated | None recorded | `High`
+U24 | See U24 subrecords | See U24 subrecords | See U24 subrecords | See U24 subrecords | See U24 subrecords | `High`
+U24-Deloitte | `https://www2.deloitte.com/cn/zh.html` -> `https://www.deloitte.com/cn/zh.html` | `200` | Deloitte China public site and research pages | Some PDFs/download assets may be form-gated | None recorded | `High`
+U24-EY | No redirect recorded | `200` | EY China `/zh_cn/insights` and newsroom pages | Some full reports/PDFs/campaign assets may be contact-gated | None recorded | `High`
+U24-KPMG | `https://home.kpmg/cn/zh/home.html` -> `https://kpmg.com/cn/zh.html` | `200` | KPMG China live insights archive | Some PDFs/downloadables may be gated/contact-driven | None recorded | `High`
+U24-PwC | No redirect recorded | `200` | PwC China homepage links to `research-and-insights` | Some reports/newsletter/download flows may be form-gated | None recorded | `High`
+U25 | Supplied URL redirected to `https://www.rolandberger.com/en/?country=CN`; guessed `zh-cn` path returned `404` | `200` for canonical; `404` for guessed Chinese path | Roland Berger global English site with China country context | Some downloads/lead-generation flows may be gated | Locale/path drift | `High`
+U26 | Old `aonhewitt.com.cn` host failed DNS; replacement `https://www.aon.com.cn/` reached | Replacement returned `200` | `怡安企业服务` branded current site with `/insights` | Proprietary benchmarks/client analytics gated | Old hostname invalid by DNS | `High`
+U27 | No redirect recorded | `200` | Mercer China public site and insight pages | Survey products and benchmark databases commercial | None recorded | `High`
+U28 | No redirect recorded | `412 Precondition Failed` for page and root | WAF cookies/scripts indicate live official site | Not directly validated due WAF | WAF blocks scripted retrieval | `Medium`
+U29 | Sample report URL redirected to `https://my.idc.com/`; root `https://www.idc.com/` reached | Root `200`; sampled report route ended `403` | IDC public research landing pages and press releases | Full report path behind `my.idc.com` subscription/login | Account/subscription gate for full reports | `High`
+U30 | `http://www.cadas.com.cn/` -> `https://www.cadas.com.cn/` | `200` | CADAS public articles/summaries | Richer aviation data likely in commercial ecosystems | None recorded | `High`
+U31 | No redirect recorded | `200` | WEF China links to `/publications/` and Chinese articles/stories | Newsletter-style prompts possible; many reports open | None recorded | `High`
+U32 | `https://www.kantarworldpanel.com/global` -> `https://market.worldpanelbynumerator.com/global` | `200` | Worldpanel by Numerator public marketing/insight site | Full panel datasets and deeper reports paid/commercial | Brand/domain transition | `High`
+U33 | Canonical tag matches supplied URL | `200` | Title `Flurry \| Mobile App Analytics Platform for Android & iOS` | Actual analytics data requires product account/instrumented apps | None recorded | `High`
+U34 | URL resolves to same path | `403` with Cloudflare `Just a moment...` | Cloudflare challenge page; origin reachable | Public report model expected but not validated by script | Cloudflare challenge gates scripted access | `Medium`
+U35 | Canonical root used | `200` but body is Aliyun WAF bootstrap/challenge | Aliyun WAF bootstrap/challenge, not readable content | Login/account needed for deeper features/interactions | WAF challenge gates scripted browsing | `Medium`
+U36 | `http://data.eastmoney.com/report/` -> `https://data.eastmoney.com/report/`; API base and sample checked in core audit | Portal `200`; API base `404`; sample API list request `500` | Portal title `研报中心`; public report index/metadata | Deeper report access depends on source/clickthrough | Undocumented API brittle | `High`
+U37 | No redirect recorded | DNS resolved, but HTTP/S timed out | None verified | Not recorded in audit | HTTP/S timeout from audit vantage | `Low`
+U38 | Supplied path returned canonical same path; root/tag route live | Supplied path `404`; root `200`; tag route discoverable | Root title `TooBigData - 广告运营、增长、AI 与数据手记` | None recorded | Supplied path broken | `High`
+U39 | No redirect recorded | Server returned `200` | JS cookie security check `正在进行安全检查，请稍候...` | Not recorded in audit | JS cookie security challenge | `Medium`
+U40 | `https://report.newrank.cn/index.html?bindType=report` -> `https://newrank.cn/report?bindType=report` | `200` | Title `报告分析-新榜` | Deeper datasets/products paid/commercial | Route moved | `High`
+U41 | No redirect recorded | `403` | Security check page; origin responds | Some research likely client/account/licensed or summary-only | Security gate blocks scripted access | `Medium`
+U42 | No redirect recorded | `200` | Title `房价查询工具-199IT数据导航网站--Hao.199it.com`; links out to tools | None recorded | Directory/link-rot risk | `High`
+U43 | Supplied PwC URL and intended Pew URL both checked | PwC `200`; Pew `200` | Name/URL mismatch confirmed across both canonical publishers | PwC downloads/forms may be gated; Pew public | Supplied label says Pew while supplied URL is PwC | `High`
+U43-PwC | No redirect recorded | `200` | PwC canonical tag matches the supplied PwC URL | Downloads/forms may be gated | None recorded | `High`
+U43-Pew | No redirect recorded | `200` | Pew canonical tag matches the Pew domain | Not recorded in audit | None recorded | `High`
+U44 | Canonical root used | `200` but body is security-check page | Volcano Engine security-check page `正在进行安全检测...` | Not recorded in audit | Security gate blocks scripted body access | `Medium`
+U45 | `http://www.stats.gov.cn` -> `https://www.stats.gov.cn/` | `200` | Title `国家统计局` | None recorded | None recorded | `High`
+U46 | Supplied path redirects to `https://www.gov.cn/` homepage | Root `200` | Government portal homepage | None recorded | Old data-hub path is stale/unspecific | `High`
+U47 | Canonical tag matches `https://data.worldbank.org.cn/` | `200` | World Bank Chinese data portal | None recorded | None recorded | `High`
+U48 | Source family; representative samples checked | Beijing, Shanghai, Guangdong statistics/government samples `200`; Guangdong samples slow | Official local statistics/government portals | None recorded | Fragmented family; inconsistent formats; slow responses in samples | `Medium`
+U49 | No redirect recorded | `200` | Title `工信数据` | None recorded | None recorded | `High`
+U50 | `http://www.pbc.gov.cn` -> `https://www.pbc.gov.cn/` | `200` | Official PBOC site | None recorded | None recorded | `High`
+U51 | Supplied historical URL returned `404`; current family reached | Supplied `404`; replacement `200` | Title `2024年教育统计数据` | None recorded | Stale historical leaf path | `High`
+U52 | Root reached; org-directory family separately checked | `https://www.gov.cn/` `200`; `https://www.gov.cn/gwyzzjg/zuzhi/` `403` | State Council portal root | None recorded | Org-directory path bot-gated to CLI; family is router | `Medium`
+U53 | No redirect recorded | `200` | World Bank Open Data portal | None recorded | Duplicate World Bank family coverage with U47 | `High`
+U54 | No redirect recorded | `403` for `https://www.imf.org/en/Data` and `https://data.imf.org/` | WAF/blocked response from IMF data family | Not recorded in audit | Bot/WAF-gated to CLI | `Medium`
+U55 | No redirect recorded | `200` for `https://www.who.int/data/gho` and `https://www.who.int/data` | WHO data pages | None recorded | None recorded | `High`
+U56 | No redirect recorded | `200` | UNdata portal | None recorded | None recorded | `High`
+U57 | No redirect recorded | `200` for `https://stats.wto.org/` and `https://timeseries.wto.org/` | Title `WTO Stats` | None recorded | None recorded | `High`
+U58 | No redirect recorded | `200` | UNSD SDG data portal | None recorded | None recorded | `High`
+U59 | No redirect recorded | `200` | UNSD demographic/social statistics family | None recorded | Family/landing orientation | `High`
+U60 | No redirect recorded | `200` for SEC root with descriptive user-agent and EDGAR search | SEC root and EDGAR search | None recorded | Generic scraping can trigger rate/risk pages; careful user-agent/rate needed | `High`
+U61 | No redirect recorded | `200` | Eurostat database page | None recorded | None recorded | `High`
+U62 | No redirect recorded | `403`; `/news` also `403` | Cloudflare `Just a moment...` page | Not recorded in audit | WAF-gated to CLI | `Medium`
+U63 | `https://fhyanbao.com/` TLS failure; insecure route reached `https://www.fhyanbao.com/` | TLS validation failed; insecure fetch reached final page | Title `烽火研报 - 专业研报平台...` | Not recorded in audit | Expired TLS certificate | `High`
 
 ## Existing-Core Sources
 
@@ -281,3 +290,49 @@ C11 | Hong Kong Police Force | HKPF | build_event_manifest hkpf; domain police.g
 C12 | Independent Commission Against Corruption | ICAC | build_event_manifest icac; domain icac.org.hk | official anti-corruption authority | https://www.icac.org.hk/ | Arrest/case announcements, corruption investigations, press releases | High authority for ICAC-published materials | High utility for integrity events | public | Not securities filing or court-judgment database | Judiciary, Police, SFC, company announcements | 2026-08-01 | `High`
 C13 | Hong Kong Judiciary | HK Judiciary | build_event_manifest hkjd; domain judiciary.hk | official judiciary portal | https://www.judiciary.hk/ | Judgments, cause lists, court announcements, legal source tracing | High authority for official court materials | High utility for legal-event tracing | public | Discovery can be slower than news; requires case context | e-Legal resources, press releases, HKEX issuer announcements | 2026-08-01 | `High`
 C14 | Sina Finance | 新浪财经 | evaluated candidate from audit core recommendations | finance media/aggregator | https://finance.sina.com.cn/ | Fast company/news/topic discovery, quote and announcement navigation, app/portal leads | Medium as major media/aggregator; not official | High discovery utility | public | Not primary evidence; every material fact must trace to exchange, company, regulator, court, or original report source | Eastmoney portal, issuer IR, official exchanges, official regulators | 2026-08-01 | `High`
+
+### Existing-Core Reliability Ratings
+
+These route priors inherit each C record's stated `best uses`. They do not
+promote discovery sources to primary evidence and do not pregrade a runtime
+claim.
+
+ID | source authority route prior | practical utility route prior | current reachability | runtime conclusion evidence | rating evidence level
+--- | --- | --- | --- | --- | ---
+C01 | High | High | High | Calculate per claim | `High`
+C02 | High | High | High | Calculate per claim | `High`
+C03 | High | High | High | Calculate per claim | `High`
+C04 | High | High | High | Calculate per claim | `High`
+C05 | High | High | High | Calculate per claim | `High`
+C06 | High | High | High | Calculate per claim | `High`
+C07 | High | High | High | Calculate per claim | `High`
+C08 | High | High | High | Calculate per claim | `High`
+C09 | High | High | High | Calculate per claim | `High`
+C10 | High | High | Medium | Calculate per claim | `Medium`
+C11 | High | Medium | High | Calculate per claim | `High`
+C12 | High | High | High | Calculate per claim | `High`
+C13 | High | High | High | Calculate per claim | `High`
+C14 | Medium | High | High | Calculate per claim | `High`
+
+### Existing-Core Probe Facts
+
+These rows transcribe only facts present in the existing core audit. `Not
+recorded in audit` marks every missing granular fact; it does not mean that the
+behavior was tested and absent.
+
+ID | redirect chain | response status | recognizable first-party content | login/paywall indications | observed technical restriction | probe evidence level
+--- | --- | --- | --- | --- | --- | ---
+C01 | Not recorded in audit | `200` | Title `巨潮资讯网` | Not recorded in audit | Not recorded in audit | `High`
+C02 | Not recorded in audit | HKEX and HKEXnews routes returned `200` | HKEXnews title observed | Not recorded in audit | Not recorded in audit | `High`
+C03 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C04 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C05 | Not recorded in audit | `200` | Title `国家金融监督管理总局` | Not recorded in audit | Not recorded in audit | `High`
+C06 | Not recorded in audit | `200` | Title `中国货币网-中国外汇交易中心主办` | Not recorded in audit | Not recorded in audit | `High`
+C07 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C08 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C09 | Root reached final `https://www.hkma.gov.hk/eng`; intermediate chain not recorded | `200` when forced to HTTP/1.1 | Not recorded in audit | Not recorded in audit | HTTP/2 handling was flaky in CLI | `High`
+C10 | Not recorded in audit | `403` | Not recorded in audit | Not recorded in audit | Bot/WAF gate from audit environment | `Medium`
+C11 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C12 | Final locale page observed; exact chain not recorded | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C13 | Not recorded in audit | `200` | Not recorded in audit | Not recorded in audit | Not recorded in audit | `High`
+C14 | Not recorded in audit | `200` | Stock portal title observed; exact title not recorded | Not recorded in audit | Not recorded in audit | `High`

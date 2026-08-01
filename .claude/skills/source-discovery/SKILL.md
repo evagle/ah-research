@@ -12,8 +12,10 @@ source constraints. Output is a source portfolio and research ledger with
 candidate source, query, status, result, access limitation, evidence level, and
 next fallback.
 
-Read the detailed route guidance in
-`references/search-playbook.md` after this file.
+Read `references/source-catalog.md` before known-source routing.
+The catalog supplies seed routes and audited access facts, not an allowlist or
+runtime claim grades. Then read the detailed route guidance in
+`references/search-playbook.md`.
 
 ## Workflow
 
@@ -40,6 +42,9 @@ Keep separate ratings for:
   limits. Use `High`, `Medium`, or `Low`.
 - `conclusion_evidence`: claim-support rating for how strongly the source
   supports the specific conclusion being made. Use `High`, `Medium`, or `Low`.
+  Calculate `conclusion_evidence` at runtime for the actual claim after
+  inspecting the retrieved evidence. Never copy a catalog route prior into this
+  field.
 
 Keep `evidence_level` separate from those fields. `evidence_level` records
 confidence in the access/provenance conclusion for this ledger row, not the
@@ -78,7 +83,22 @@ issuer and independent of the claim being checked.
 
 Do not treat a company's claims about market leadership, customer outcomes, product superiority, or competitive advantage as independent proof. Any evaluative claim from a company page needs independent support.
 
-Use aggregators, media, social platforms, and report indexes for discovery only. App mirrors and portal indexes can help locate a document, but conclusions must cite the original publisher whenever the original can be identified.
+Aggregators remain discovery-only by default. Media, social platforms, report
+indexes, app mirrors, and portal indexes can help locate a document, but
+conclusions must cite the original publisher whenever the original can be
+identified and read.
+
+A verified-mirror exception applies only when official exchange or regulator
+metadata identifies the exact document but the official document body is
+technically unreadable. Require that the mirror's identity fields match the
+official metadata: issuer or security identifier, normalized title, disclosure
+date, document or announcement ID or official path, and document type. An
+aligned mirror may support only a downgraded transcription claim. Label it
+`non-original`, record the official-body access caveat, and retain the
+mirror's own authority with no authority elevation. The mirror must not
+support claims absent from the identified official document. Continue seeking
+the official body or another official copy and preserve the official metadata
+as the identity evidence.
 
 For announcements and regulatory correspondence, cover inquiry/concern letters,
 issuer responses, supervisory measures, disciplinary actions, penalty
