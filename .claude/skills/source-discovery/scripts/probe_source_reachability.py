@@ -6,19 +6,22 @@ import os
 import re
 import socket
 import ssl
-from collections.abc import Mapping, Sequence
+from collections.abc import Iterator, Mapping, Sequence
 from dataclasses import asdict, dataclass
 from datetime import UTC, datetime
 from html import unescape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
+from urllib.parse import urlsplit
 from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 import yaml
 
+REPO_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_TIMEOUT = 10.0
 DEFAULT_USER_AGENT = "ah-research-source-discovery/1.0 (non-interactive reachability probe; urllib)"
 MAX_BODY_BYTES = 32_768
+MIN_SEMANTIC_FINGERPRINT_CHARACTERS = 4
 LOGIN_MARKERS = (
     "login required",
     "log in",
@@ -62,6 +65,12 @@ TEMPORARY_ERROR_KINDS = {
     "tls",
     "network",
 }
+DNS_ERROR_MARKERS = (
+    "nodename nor servname",
+    "name or service not known",
+    "temporary failure in name resolution",
+    "getaddrinfo failed",
+)
 PROFILE_SUFFIXES = ("*.yaml", "*.yml")
 
 
@@ -109,7 +118,10 @@ def classify_observation(
 ) -> ProbeResult:
     normalized_fingerprints = _normalize_fingerprints(expected_fingerprints)
     haystack = _observation_haystack(observation)
-    matches_fingerprint = any(fingerprint in haystack for fingerprint in normalized_fingerprints)
+    has_publisher_identity = _has_publisher_identity(
+        observation,
+        normalized_fingerprints,
+    )
     status_code = observation.status_code
 
     if observation.error_kind in TEMPORARY_ERROR_KINDS:
@@ -133,18 +145,18 @@ def classify_observation(
     if status_code == 429 or _contains_marker(haystack, ANTI_BOT_MARKERS):
         return ProbeResult(status="anti-bot", reason="anti-bot challenge detected")
 
-    if status_code is not None and 400 <= status_code < 500 and not matches_fingerprint:
+    if status_code is not None and 400 <= status_code < 500 and not has_publisher_identity:
         return ProbeResult(status="unverified", reason=f"HTTP {status_code}")
 
     if _contains_marker(haystack, ERROR_PAGE_MARKERS):
         return ProbeResult(status="broken-link", reason="error page markers detected")
 
     if observation.redirect_chain:
-        if matches_fingerprint:
+        if has_publisher_identity:
             return ProbeResult(status="moved", reason="redirected to recognizable publisher route")
         return ProbeResult(status="unverified", reason="redirect target not fingerprinted")
 
-    if status_code is not None and 200 <= status_code < 300 and matches_fingerprint:
+    if status_code is not None and 200 <= status_code < 300 and has_publisher_identity:
         return ProbeResult(status="reachable", reason="recognizable first-party content")
 
     return ProbeResult(status="unverified", reason="insufficient first-party evidence")
@@ -247,6 +259,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     if not args.probe_all and not args.sources:
         parser.error("pass --all or at least one --source")
 
+    try:
+        cache_path = _validated_cli_cache_path(args.cache)
+    except ValueError as exc:
+        parser.error(str(exc))
+
     profiles = _load_profile_records(args.profiles)
     selected_ids = set(args.sources) if not args.probe_all else set(profiles)
     missing = sorted(selected_ids - profiles.keys())
@@ -254,7 +271,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         parser.error(f"unknown source id(s): {', '.join(missing)}")
 
     source_ids = sorted(profiles) if args.probe_all else list(dict.fromkeys(args.sources))
-    cache = load_cache(args.cache)
+    cache = load_cache(cache_path)
     now = datetime.now(UTC).isoformat()
     summary: dict[str, object] = {}
 
@@ -272,7 +289,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         }
         summary[source_id] = cache[source_id]
 
-    write_cache(args.cache, cache)
+    write_cache(cache_path, cache)
     print(json.dumps(summary, ensure_ascii=False, indent=2, sort_keys=True))
     return 0
 
@@ -300,6 +317,68 @@ def _observation_haystack(observation: ProbeObservation) -> str:
         " ".join(observation.redirect_chain),
     ]
     return " ".join(parts).lower()
+
+
+def _has_publisher_identity(
+    observation: ProbeObservation,
+    normalized_fingerprints: Sequence[str],
+) -> bool:
+    official_domains = tuple(
+        domain
+        for fingerprint in normalized_fingerprints
+        if (domain := _domain_from_fingerprint(fingerprint)) is not None
+    )
+    if _final_host_matches_official_domain(observation.final_url, official_domains):
+        return True
+
+    page_text = " ".join((observation.title or "", observation.body_excerpt)).lower()
+    semantic_fingerprints = (
+        fingerprint
+        for fingerprint in normalized_fingerprints
+        if _is_meaningful_semantic_fingerprint(fingerprint)
+    )
+    return any(fingerprint in page_text for fingerprint in semantic_fingerprints)
+
+
+def _domain_from_fingerprint(fingerprint: str) -> str | None:
+    candidate = fingerprint.removeprefix("*.").strip(".")
+    if not candidate or "/" in candidate or " " in candidate or "." not in candidate:
+        return None
+    labels = candidate.split(".")
+    if any(
+        not label
+        or len(label) > 63
+        or label.startswith("-")
+        or label.endswith("-")
+        or re.fullmatch(r"[a-z0-9-]+", label) is None
+        for label in labels
+    ):
+        return None
+    return candidate
+
+
+def _final_host_matches_official_domain(
+    final_url: str,
+    official_domains: Sequence[str],
+) -> bool:
+    try:
+        hostname = urlsplit(final_url).hostname
+    except ValueError:
+        return False
+    if hostname is None:
+        return False
+    normalized_host = hostname.rstrip(".").lower()
+    return any(
+        normalized_host == domain or normalized_host.endswith(f".{domain}")
+        for domain in official_domains
+    )
+
+
+def _is_meaningful_semantic_fingerprint(fingerprint: str) -> bool:
+    if _domain_from_fingerprint(fingerprint) is not None:
+        return False
+    semantic_characters = re.sub(r"[\W_]", "", fingerprint)
+    return len(semantic_characters) >= MIN_SEMANTIC_FINGERPRINT_CHARACTERS
 
 
 def _contains_marker(text: str, markers: Sequence[str]) -> bool:
@@ -341,18 +420,60 @@ def _collapse_whitespace(text: str) -> str:
 
 def _classify_url_error(reason: object) -> tuple[str, str]:
     message = str(reason)
-    lowered = message.lower()
-    if isinstance(reason, socket.timeout) or "timed out" in lowered:
+    reasons = tuple(_walk_error_reasons(reason))
+    lowered = " ".join(str(item).lower() for item in reasons)
+    if any(isinstance(item, socket.timeout) for item in reasons) or "timed out" in lowered:
         return "timeout", message
-    if isinstance(reason, socket.gaierror) or "nodename nor servname provided" in lowered:
+    if any(isinstance(item, socket.gaierror) for item in reasons) or _contains_marker(
+        lowered,
+        DNS_ERROR_MARKERS,
+    ):
         return "dns", message
-    if isinstance(reason, ConnectionResetError) or "connection reset" in lowered:
+    if any(isinstance(item, ConnectionResetError) for item in reasons) or (
+        "connection reset" in lowered
+    ):
         return "connection-reset", message
-    if isinstance(reason, ConnectionRefusedError) or "connection refused" in lowered:
+    if any(isinstance(item, ConnectionRefusedError) for item in reasons) or (
+        "connection refused" in lowered
+    ):
         return "connection-refused", message
-    if isinstance(reason, ssl.SSLError):
+    if any(isinstance(item, ssl.SSLError) for item in reasons):
         return "tls", message
     return "network", message
+
+
+def _walk_error_reasons(reason: object) -> Iterator[object]:
+    pending = [reason]
+    seen: set[int] = set()
+    while pending:
+        current = pending.pop()
+        identity = id(current)
+        if identity in seen:
+            continue
+        seen.add(identity)
+        yield current
+
+        if isinstance(current, URLError) and current.reason is not current:
+            pending.append(current.reason)
+        if isinstance(current, BaseException):
+            if current.__cause__ is not None:
+                pending.append(current.__cause__)
+            if current.__context__ is not None:
+                pending.append(current.__context__)
+
+
+def _validated_cli_cache_path(path: Path) -> Path:
+    repo_root = REPO_ROOT.resolve()
+    expected_cache_root = repo_root / "tmp" / "source-discovery"
+    cache_root = expected_cache_root.resolve()
+    resolved_path = path.expanduser().resolve()
+    if (
+        cache_root != expected_cache_root
+        or resolved_path == cache_root
+        or not resolved_path.is_relative_to(cache_root)
+    ):
+        raise ValueError("--cache must be a file within repository tmp/source-discovery")
+    return resolved_path
 
 
 def _load_profile_records(profile_dir: Path) -> dict[str, Mapping[str, object]]:

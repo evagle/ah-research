@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import importlib.util
 import json
+import socket
 import subprocess
 import sys
 import threading
@@ -10,6 +11,7 @@ from copy import deepcopy
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from typing import Any
+from urllib.error import URLError
 
 import pytest
 import yaml
@@ -112,10 +114,40 @@ def test_classify_reachable_first_party_content() -> None:
             title="Shanghai Stock Exchange Search",
             body_excerpt=load_probe_fixture("reachable.html"),
         ),
+        expected_fingerprints=["sse.com.cn"],
+    )
+
+    assert result.status == "reachable"
+
+
+def test_classify_reachable_from_meaningful_body_fingerprint() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://publisher-cdn.example.net/report",
+            title="Market disclosures",
+            body_excerpt="Official Shanghai Stock Exchange announcements and disclosure search.",
+        ),
         expected_fingerprints=["sse.com.cn", "Shanghai Stock Exchange"],
     )
 
     assert result.status == "reachable"
+
+
+def test_classify_url_query_echo_without_page_identity_as_unverified() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://search.example.net/?next=https%3A%2F%2Fwww.sse.com.cn",
+            title="Search results",
+            body_excerpt="No matching publisher content was found.",
+        ),
+        expected_fingerprints=["sse.com.cn", "Shanghai Stock Exchange"],
+    )
+
+    assert result.status == "unverified"
 
 
 def test_classify_error_page_served_with_200_as_broken_link() -> None:
@@ -224,10 +256,46 @@ def test_classify_redirect_to_matching_fingerprint_as_moved() -> None:
             title="Shanghai Stock Exchange Search",
             body_excerpt=load_probe_fixture("reachable.html"),
         ),
+        expected_fingerprints=["sse.com.cn"],
+    )
+
+    assert result.status == "moved"
+
+
+def test_classify_redirect_to_meaningful_body_fingerprint_as_moved() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://publisher-cdn.example.net/new-search",
+            redirect_chain=[
+                "https://www.sse.com.cn/old/search -> https://publisher-cdn.example.net/new-search"
+            ],
+            title="Market disclosures",
+            body_excerpt="Official Shanghai Stock Exchange announcements and disclosure search.",
+        ),
         expected_fingerprints=["sse.com.cn", "Shanghai Stock Exchange"],
     )
 
     assert result.status == "moved"
+
+
+def test_classify_redirect_old_url_echo_without_new_identity_as_unverified() -> None:
+    module = load_probe_module()
+    result = module.classify_observation(
+        observation(
+            module,
+            final_url="https://search.example.net/new-search",
+            redirect_chain=[
+                "https://www.sse.com.cn/old/search -> https://search.example.net/new-search"
+            ],
+            title="Search results",
+            body_excerpt="No matching publisher content was found.",
+        ),
+        expected_fingerprints=["sse.com.cn", "Shanghai Stock Exchange"],
+    )
+
+    assert result.status == "unverified"
 
 
 def test_classify_redirect_without_matching_fingerprint_as_unverified() -> None:
@@ -271,6 +339,47 @@ def test_probe_url_records_redirects_and_extracts_title_and_excerpt() -> None:
     assert observed.error_message is None
 
 
+@pytest.mark.parametrize(
+    "reason",
+    [
+        pytest.param(
+            URLError(socket.gaierror(socket.EAI_NONAME, "resolver lookup failed")),
+            id="nested-gaierror",
+        ),
+        pytest.param(
+            OSError("nodename nor servname provided, or not known"),
+            id="macos",
+        ),
+        pytest.param(OSError("Name or service not known"), id="linux"),
+        pytest.param(
+            OSError("Temporary failure in name resolution"),
+            id="linux-temporary",
+        ),
+        pytest.param(OSError("getaddrinfo failed"), id="windows"),
+    ],
+)
+def test_probe_url_maps_portable_dns_errors(
+    reason: object, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    module = load_probe_module()
+
+    class FailingOpener:
+        def open(self, request, timeout: float):
+            raise URLError(reason)
+
+    monkeypatch.setattr(module, "build_opener", lambda redirect_handler: FailingOpener())
+
+    observed = module.probe_url(
+        "https://unresolvable.example",
+        timeout=1.0,
+        user_agent="task-3-test-agent/1.0",
+    )
+
+    assert observed.status_code is None
+    assert observed.error_kind == "dns"
+    assert observed.error_message
+
+
 def test_cache_writes_atomically_and_round_trips_json(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
@@ -299,8 +408,11 @@ def test_cache_writes_atomically_and_round_trips_json(
     assert not list(cache_path.parent.glob("*.tmp"))
 
 
-def test_cli_probes_selected_sources_and_updates_cache(tmp_path: Path) -> None:
+def test_cli_probes_selected_sources_and_updates_cache(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
     module = load_probe_module()
+    monkeypatch.setattr(module, "REPO_ROOT", tmp_path, raising=False)
     reachable_html = load_probe_fixture("reachable.html").encode("utf-8")
     with serve_routes(
         {
@@ -345,6 +457,73 @@ def test_cli_probes_selected_sources_and_updates_cache(tmp_path: Path) -> None:
     assert cache["sse"]["status"] == "reachable"
     assert cache["sse"]["final_url"] == f"{base_url}/reachable"
     assert cache["sse"]["status_code"] == 200
+
+
+@pytest.mark.parametrize(
+    "cache_path",
+    [
+        Path("outside") / "reachability.json",
+        Path("repo") / "profiles" / "reviewed-reachability.json",
+    ],
+    ids=["outside-repository", "reviewed-repository-path"],
+)
+def test_cli_rejects_cache_outside_repository_tmp_source_discovery_before_write(
+    cache_path: Path,
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = load_probe_module()
+    repo_root = tmp_path / "repo"
+    repo_root.mkdir()
+    monkeypatch.setattr(module, "REPO_ROOT", repo_root, raising=False)
+    target = tmp_path / cache_path
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text('{"sentinel": true}\n', encoding="utf-8")
+
+    with pytest.raises(SystemExit) as exc_info:
+        module.main(
+            [
+                "--profiles",
+                str(tmp_path / "missing-profiles"),
+                "--cache",
+                str(target),
+                "--all",
+            ]
+        )
+
+    assert exc_info.value.code == 2
+    assert target.read_text(encoding="utf-8") == '{"sentinel": true}\n'
+
+
+def test_cli_rejects_symlinked_tmp_source_discovery_outside_repository(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    module = load_probe_module()
+    repo_root = tmp_path / "repo"
+    (repo_root / "tmp").mkdir(parents=True)
+    outside_cache_root = tmp_path / "outside-cache"
+    outside_cache_root.mkdir()
+    (repo_root / "tmp" / "source-discovery").symlink_to(
+        outside_cache_root,
+        target_is_directory=True,
+    )
+    monkeypatch.setattr(module, "REPO_ROOT", repo_root)
+    cache_path = repo_root / "tmp" / "source-discovery" / "reachability.json"
+
+    with pytest.raises(SystemExit) as exc_info:
+        module.main(
+            [
+                "--profiles",
+                str(tmp_path / "missing-profiles"),
+                "--cache",
+                str(cache_path),
+                "--all",
+            ]
+        )
+
+    assert exc_info.value.code == 2
+    assert not (outside_cache_root / "reachability.json").exists()
 
 
 def test_tmp_source_discovery_directory_is_gitignored() -> None:
