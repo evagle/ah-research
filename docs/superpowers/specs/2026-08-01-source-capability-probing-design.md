@@ -148,6 +148,9 @@ proves permanent closure.
 Explore sources in independent groups:
 
 - official disclosures, exchanges, and regulators;
+- Hong Kong listed-company, regulatory, ownership, registry, market,
+  government-statistics, and industry sources discovered beyond the supplied
+  list;
 - macro, government, and official statistics;
 - consulting and commercial research;
 - specialist industry sources;
@@ -168,6 +171,13 @@ For every assigned website, a subagent must return:
 
 Homepage-only checks do not satisfy the exploration contract. The coordinating
 agent spot-checks high-value direct links and any changed canonical URL.
+
+Hong Kong discovery is explicitly open-ended. Start from HKEX/HKEXnews, SFC,
+AFRC, HKMA, Hong Kong government and statistics portals, issuer IR sites, and
+the original publishers linked by those sources. Add other useful Hong Kong
+sources found during exploration when they pass the same provenance,
+capability, access, citation, and fallback checks. Do not limit the resulting
+profiles to websites named in the initial user-supplied catalog.
 
 ## Testing
 
@@ -211,6 +221,8 @@ failures update the local cache and report; they do not block ordinary CI.
 ## Acceptance Criteria
 
 - Every maintained website has a structured capability profile.
+- Common Hong Kong research routes discovered beyond the supplied list are
+  represented with the same profile and evidence standards.
 - Every material function has a direct route, search method, citation rule,
   and same-function fallback.
 - Equivalent-function routing prioritizes the highest-trust applicable source.
