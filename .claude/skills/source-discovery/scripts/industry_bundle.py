@@ -61,7 +61,7 @@ def evaluate_industry_bundle(
     for role_name in REQUIRED_ROLES:
         role = _normalize_role(roles_by_name[role_name], role_name)
         _validate_claim_ids(role_name, role["claim_ids"], claim_ids)
-        _validate_role_state(role_name, role, as_of)
+        _validate_role_state(role_name, role, as_of, primary_market_scope_fingerprint)
         roles.append(role)
 
     if any(role["state"] == "blocked" for role in roles):
@@ -134,7 +134,12 @@ def _validate_claim_ids(role_name: str, claim_ids: Sequence[str], seen_claim_ids
         seen_claim_ids.add(claim_id)
 
 
-def _validate_role_state(role_name: str, role: Mapping[str, object], as_of: date) -> None:
+def _validate_role_state(
+    role_name: str,
+    role: Mapping[str, object],
+    as_of: date,
+    primary_market_scope_fingerprint: str,
+) -> None:
     state = _state(role)
     required_periods = tuple(_strings(role, "required_periods"))
     accepted_periods = tuple(_strings(role, "accepted_periods"))
@@ -144,21 +149,23 @@ def _validate_role_state(role_name: str, role: Mapping[str, object], as_of: date
     gap_reason = role["gap_reason"]
     not_applicable_reason = role["not_applicable_reason"]
 
-    expected_periods = _expected_required_periods(role_name, as_of)
-    if required_periods != expected_periods:
-        raise ValueError(
-            f"{role_name} required_periods must match {expected_periods or 'the empty bundle window'}"
-        )
+    _validate_required_periods(role_name, required_periods, as_of)
 
-    if (
-        role_name in COMPARABLE_SERIES_ROLES
-        and state in {"accepted", "partial"}
-        and len(scope_fingerprints) != 1
-    ):
-        raise ValueError(f"{role_name} accepted series must have one scope fingerprint")
+    if role_name in COMPARABLE_SERIES_ROLES and accepted_periods:
+        if len(scope_fingerprints) != 1:
+            raise ValueError(
+                f"{role_name} accepted series must have one scope fingerprint "
+                "equal to primary_market_scope_fingerprint"
+            )
+        if scope_fingerprints[0] != primary_market_scope_fingerprint:
+            raise ValueError(
+                f"{role_name} accepted series must use the primary_market_scope_fingerprint"
+            )
 
     if state == "accepted":
-        if accepted_periods != required_periods:
+        if role_name == "market-concentration":
+            _validate_accepted_market_concentration(accepted_periods, as_of)
+        elif accepted_periods != required_periods:
             raise ValueError(f"{role_name} accepted_periods must match required_periods")
         if missing_periods:
             raise ValueError(f"{role_name} accepted roles cannot retain missing_periods")
@@ -247,16 +254,56 @@ def _validate_partial_period_coverage(
         raise ValueError(f"{role_name} partial periods must stay within required_periods")
 
 
-def _expected_required_periods(role_name: str, as_of: date) -> tuple[str, ...]:
+def _validate_required_periods(
+    role_name: str, required_periods: Sequence[str], as_of: date
+) -> None:
     if role_name in {
         "historical-market-size",
         "subject-market-share",
         "competitor-market-share",
     }:
-        return completed_annual_periods(as_of)
+        expected_periods = completed_annual_periods(as_of)
+        if tuple(required_periods) != expected_periods:
+            raise ValueError(f"{role_name} required_periods must match {expected_periods}")
+        return
+    if role_name == "market-concentration":
+        expected_periods = (completed_annual_periods(as_of)[-1],)
+        if tuple(required_periods) != expected_periods:
+            raise ValueError(f"{role_name} required_periods must match {expected_periods}")
+        return
     if role_name == "industry-forecast":
-        return forecast_annual_periods(as_of, 5)
-    return ()
+        years = len(required_periods)
+        expected_periods = forecast_annual_periods(as_of, years)
+        if tuple(required_periods) != expected_periods:
+            raise ValueError(
+                f"{role_name} required_periods must match a consecutive forecast window "
+                f"starting at {as_of.year}"
+            )
+        return
+    if required_periods:
+        raise ValueError(f"{role_name} required_periods must match the empty bundle window")
+
+
+def _validate_accepted_market_concentration(
+    accepted_periods: Sequence[str],
+    as_of: date,
+) -> None:
+    if not accepted_periods:
+        raise ValueError(
+            "market-concentration accepted roles require the latest completed annual period"
+        )
+    latest_completed_period = completed_annual_periods(as_of)[-1]
+    allowed_periods = set(completed_annual_periods(as_of))
+    if latest_completed_period not in accepted_periods:
+        raise ValueError(
+            "market-concentration accepted roles require the latest completed annual period"
+        )
+    if len(set(accepted_periods)) != len(accepted_periods):
+        raise ValueError("market-concentration accepted_periods must be unique")
+    if any(period not in allowed_periods for period in accepted_periods):
+        raise ValueError(
+            "market-concentration accepted_periods must stay within the completed annual window"
+        )
 
 
 def _state(role: Mapping[str, object]) -> str:

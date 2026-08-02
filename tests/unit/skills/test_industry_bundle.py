@@ -96,6 +96,8 @@ def role_outcome(
 def default_required_periods(role: str) -> tuple[str, ...]:
     if role in {"historical-market-size", "subject-market-share", "competitor-market-share"}:
         return ("2021", "2022", "2023", "2024", "2025")
+    if role == "market-concentration":
+        return ("2025",)
     if role == "industry-forecast":
         return ("2026", "2027", "2028", "2029", "2030")
     return ()
@@ -267,6 +269,23 @@ def test_exhausted_role_requires_gap_reason_and_ledger_paths() -> None:
         )
 
 
+def test_market_concentration_requires_latest_completed_annual_observation() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes()
+    concentration = next(
+        outcome for outcome in outcomes if outcome["role"] == "market-concentration"
+    )
+    concentration["accepted_periods"] = []
+
+    with pytest.raises(ValueError, match="latest completed annual period"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
 def test_not_applicable_is_limited_to_current_partial_period_and_industry_drivers() -> None:
     bundle = load_bundle_module()
     outcomes = complete_role_outcomes()
@@ -326,6 +345,54 @@ def test_accepted_comparable_roles_require_one_scope_fingerprint(role: str) -> N
             primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
             role_outcomes=outcomes,
         )
+
+
+@pytest.mark.parametrize("role", sorted(COMPARABLE_SERIES_ROLES))
+def test_accepted_comparable_roles_require_primary_scope_fingerprint(role: str) -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes()
+    target = next(outcome for outcome in outcomes if outcome["role"] == role)
+    target["scope_fingerprints"] = [SECONDARY_SCOPE_FINGERPRINT]
+
+    with pytest.raises(ValueError, match="primary_market_scope_fingerprint"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+@pytest.mark.parametrize(
+    ("years", "periods"),
+    (
+        (3, ["2026", "2027", "2028"]),
+        (4, ["2026", "2027", "2028", "2029"]),
+    ),
+)
+def test_industry_forecast_accepts_three_and_four_year_windows(
+    years: int,
+    periods: list[str],
+) -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes()
+    forecast = next(outcome for outcome in outcomes if outcome["role"] == "industry-forecast")
+    forecast["required_periods"] = list(periods)
+    forecast["accepted_periods"] = list(periods)
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    accepted_forecast = next(
+        role for role in payload["roles"] if role["role"] == "industry-forecast"
+    )
+    assert payload["status"] == "complete"
+    assert accepted_forecast["required_periods"] == periods
+    assert accepted_forecast["accepted_periods"] == periods
 
 
 def test_unknown_duplicate_and_missing_roles_fail() -> None:
