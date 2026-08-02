@@ -4,6 +4,31 @@
   "title": "Candidate Claim",
   "type": "object",
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "market_definition_fingerprint",
+          "series_fingerprint"
+        ],
+        "properties": {
+          "scope": {
+            "required": ["channel_scope", "denominator"]
+          },
+          "lineage": {
+            "required": ["provider_table_id"]
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "schema_version",
     "claim_id",
@@ -26,7 +51,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "enum": ["1.0", "1.1"]
     },
     "claim_id": {
       "type": "string",
@@ -76,6 +101,14 @@
     },
     "scope_fingerprint": {
       "$ref": "#/$defs/sha256"
+    },
+    "market_definition_fingerprint": {
+      "$ref": "#/$defs/sha256",
+      "description": "Metric-independent identity for geography, industry, population, product, and channel scope."
+    },
+    "series_fingerprint": {
+      "$ref": "#/$defs/sha256",
+      "description": "Identity for one metric, unit, measurement basis, period semantics, and denominator within a market definition."
     },
     "reconciliations": {
       "type": "array",
@@ -249,11 +282,19 @@
           "type": "string",
           "minLength": 1
         },
+        "channel_scope": {
+          "type": "string",
+          "minLength": 1
+        },
         "population": {
           "type": "string",
           "minLength": 1
         },
         "measurement_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "denominator": {
           "type": "string",
           "minLength": 1
         }
@@ -402,6 +443,11 @@
         },
         "cited_source_ids": {
           "$ref": "#/$defs/identifierList"
+        },
+        "provider_table_id": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "description": "Provider-stable table identity shared by republications; null when the evidence is not a provider table."
         }
       }
     },

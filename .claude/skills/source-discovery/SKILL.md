@@ -88,7 +88,9 @@ Route count is not an acceptance criterion.
 For an absence claim, `technical-failure`, `access-unavailable`, and
 `request-budget-exhausted` are `blocked`, never factual absence.
 
-Return exactly these top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, and `status`.
+Return exactly these seven top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`.
+For a non-industry request, set `industry_bundle` to `null`; do not remove the
+field or change the other six handoff fields.
 An empty result without a terminal ledger is invalid output. `unresolved_claims`
 contains only terminal `blocked`, `conflict`, or `exhausted` claims; do not turn
 an incomplete route into a conclusion.
@@ -172,6 +174,81 @@ measurement basis remain comparable; otherwise report the nominal difference
 and the scope break. Prefer the latest completed-period estimate for historical
 analysis, but keep older forecasts for forecast-error and expectation tracking.
 Never splice forecasts from different vintages into one continuous series.
+
+### Industry Bundle Gate
+
+Contract evolution is additive. Unambiguous `schema_version: 1.0` payloads
+remain valid. New industry requests, candidates, and bundles use
+`schema_version: 1.1`.
+
+For v1.1, `market_definition_fingerprint` is metric-independent and identifies
+geography, industry, population, product scope, and `channel_scope`.
+`series_fingerprint` retains metric, canonical unit, measurement basis,
+frequency, period semantics, and denominator within that market definition.
+`channel_scope` and `denominator` are required machine-visible fields on the
+request and candidate; accepted bundle series repeat them so cross-role
+compatibility can be checked without interpreting prose. A provider table also
+records normalized `provider_table_id`, methodology owner, and data vintage so
+different report titles do not create false lineage independence.
+
+Construct all eight role requests before routing. Use these mandatory roles:
+
+- `market-definition`
+- `historical-market-size`
+- `industry-forecast`
+- `market-concentration`
+- `subject-market-share`
+- `competitor-market-share`
+- `current-partial-period`
+- `industry-drivers`
+
+For annual roles, derive the latest completed five-year window from `AS_OF`;
+extend it only when public evidence permits. The market-definition role
+establishes the primary market scope fingerprint before comparable series are
+accepted.
+Broader, narrower, or adjacent markets cannot fill the primary-market requirement.
+Keep those observations as explicit scope breaks instead.
+
+Search each unresolved role independently.
+Only unresolved roles continue through the planner.
+`claim_states` are independently terminal within each role. Never redispatch an
+accepted claim, including an accepted base or version-chase child. `partial` and
+`blocked` roles retain accepted evidence: preserve partial accepted evidence,
+accepted periods, series metadata, and lineage while separately recording
+missing periods or `missing_coverage`. Keep each role's claim IDs, per-claim
+states, accepted and
+missing coverage, market-definition and series fingerprints, lineage, and
+terminal ledger paths.
+
+After finding any forecast, run a mandatory version chase for the discovered
+table and provider. Search its publication vintage, prior version, and later
+version; preserve revisions and scope breaks rather than choosing one vintage
+silently. Create `<base-forecast-claim-id>:prior-vintage` and
+`<base-forecast-claim-id>:later-vintage` as distinct child claim IDs under the
+`industry-forecast` role. The accepted base forecast claim remains stopped.
+Only unresolved version child claim IDs continue through planner layers.
+Each accepted child stops independently under the ordinary positive-claim
+rule; version chase never reopens or redispatches the accepted base claim.
+The publication date and `data_vintage` are evidence dates, not the forecast
+horizon: both must be on or before `AS_OF`, while forecast values may extend
+through the requested future periods. Never stitch candidates with different
+data vintages. Render one forecast series per `data_vintage`, even when the
+series fingerprint and forecast periods overlap.
+
+After every role is terminal for the current run, call
+`evaluate_industry_bundle` with the subject, `AS_OF`, primary market scope
+fingerprint, all eight role outcomes, and scope breaks.
+Return `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`. The bundle status is
+`complete`, `publishable-with-gaps`, or `blocked`; never infer a different
+status from narrative prose.
+Never convert `exhausted` or `blocked` into absence.
+
+Accepted industry values remain in validated `accepted_candidates`; the
+`industry_bundle` aggregates role state, required and missing periods, scope
+breaks, lineage, and ledger paths. Exclude broker target prices, broker ratings,
+and issuer earnings forecasts from industry candidate acceptance. A broker
+industry table can qualify when its underlying market evidence passes the
+normal gate, but its valuation opinion and issuer profit model cannot.
 
 At the start, translate the request into claim types, time bounds, geography,
 industry vocabulary, acceptable evidence types, and any source restrictions.

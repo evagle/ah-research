@@ -1,0 +1,293 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/industry-analysis-bundle.schema.json",
+  "title": "Industry Analysis Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "roles": {
+            "items": {
+              "required": [
+                "claim_states",
+                "accepted_evidence_count",
+                "missing_coverage",
+                "market_definition_fingerprints",
+                "series"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
+  "required": [
+    "schema_version",
+    "subject",
+    "as_of",
+    "primary_market_scope_fingerprint",
+    "status",
+    "roles",
+    "scope_breaks",
+    "unresolved_claim_ids"
+  ],
+  "properties": {
+    "schema_version": {
+      "enum": ["1.0", "1.1"]
+    },
+    "subject": {
+      "$ref": "#/$defs/nonBlankString"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "primary_market_scope_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "status": {
+      "enum": ["complete", "publishable-with-gaps", "blocked"]
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/role"
+      }
+    },
+    "scope_breaks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scopeBreak"
+      }
+    },
+    "unresolved_claim_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonBlankString"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonBlankString"
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "claim_ids",
+        "state",
+        "required_periods",
+        "accepted_periods",
+        "missing_periods",
+        "scope_fingerprints",
+        "lineage_ids",
+        "ledger_paths",
+        "gap_reason",
+        "not_applicable_reason"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "market-definition",
+            "historical-market-size",
+            "industry-forecast",
+            "market-concentration",
+            "subject-market-share",
+            "competitor-market-share",
+            "current-partial-period",
+            "industry-drivers"
+          ]
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/stringList"
+        },
+        "claim_states": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claimState"
+          }
+        },
+        "state": {
+          "enum": ["accepted", "partial", "exhausted", "blocked", "not-applicable"]
+        },
+        "accepted_evidence_count": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "required_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "accepted_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "missing_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "missing_coverage": {
+          "$ref": "#/$defs/stringList"
+        },
+        "market_definition_fingerprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "scope_fingerprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "lineage_ids": {
+          "$ref": "#/$defs/stringList"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/series"
+          }
+        },
+        "ledger_paths": {
+          "$ref": "#/$defs/stringList"
+        },
+        "gap_reason": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "not_applicable_reason": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "claimState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "state"],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "state": {
+          "enum": ["accepted", "partial", "exhausted", "blocked", "not-applicable"]
+        }
+      }
+    },
+    "series": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "series_id",
+        "market_definition_fingerprint",
+        "series_fingerprint",
+        "metric",
+        "unit",
+        "measurement_basis",
+        "channel_scope",
+        "denominator",
+        "period_semantics",
+        "value_status",
+        "periods",
+        "published_at",
+        "data_vintage",
+        "lineage_id"
+      ],
+      "properties": {
+        "series_id": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "market_definition_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "series_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "metric": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "unit": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "measurement_basis": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "channel_scope": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "denominator": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "period_semantics": {
+          "enum": ["calendar-year", "calendar-quarter", "calendar-month", "event-date"]
+        },
+        "value_status": {
+          "enum": ["observed", "historical-estimate", "forecast"]
+        },
+        "periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "data_vintage": {
+          "type": "string",
+          "format": "date"
+        },
+        "lineage_id": {
+          "$ref": "#/$defs/nonBlankString"
+        }
+      }
+    },
+    "scopeBreak": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_scope_fingerprint",
+        "to_scope_fingerprint",
+        "reason",
+        "comparable"
+      ],
+      "properties": {
+        "from_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "to_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "reason": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "comparable": {
+          "const": false
+        }
+      }
+    }
+  }
+}

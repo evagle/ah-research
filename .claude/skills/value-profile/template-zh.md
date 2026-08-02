@@ -534,30 +534,69 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 ### §2.1行业基本情况 + 竞争格局
 
-**本节目标:** 说清楚行业所处周期, 以及集中度与竞争烈度。
-
-<!-- 指导问题:
-  - 行业处于初创/成长/成熟/衰退哪一阶段?
-  - CR5 / CR10集中度是多少?
-  - 集中度的趋势（提升/分散）?
-  - 竞争烈度（价格战/差异化/寡头默契）?
--->
-
-<!-- 数据源: 年报"行业竞争状况"; 行业研报 -->
+**本节目标:** 只消费已校验的`industry_bundle`,固定呈现主市场定义、历史与预测版本、集中度和竞争对手,不从叙述完成度推断bundle状态。
 
 <!-- 行业专属指标附加检查 — 公司若落在白酒/银行/互联网平台/消费品/资源周期/高杠杆地产/公用事业, §2.1–§2.6填写区必须额外覆盖对应行业的 KPI 附加检查, 详细 KPI 表 + 健康阈值 + 风险 + 估值锚见 `.claude/skills/value-profile/references/industry-overlays.md` §<对应行业>。
 
 缺少分析所需数据时写“缺乏数据，无法分析”，绝不编造或展开检索失败过程。落在 "不做清单" 行业 (见 industry-overlays §8) → 整份 profile 降级为 "观察档案, 不下注"。
 -->
 
-<填写区>
+**industry_bundle状态:** <complete/publishable-with-gaps/blocked>
+
+**契约版本:** 接受无歧义的`schema_version: 1.0`历史bundle；新运行使用
+`schema_version: 1.1`。v1.1逐series显示metric-independent
+`market_definition_fingerprint`、metric/unit/measurement/denominator-specific
+`series_fingerprint`、渠道和分母。预测发布日期与`data_vintage`是证据日期，
+不是预测终点；每个`data_vintage`单独成series，不跨版本拼接。
+
+#### 市场定义矩阵
+
+|市场名称|地域|覆盖人群|产品范围|渠道范围|market definition fingerprint|计量口径|单位|提供方|lineage|
+|---|---|---|---|---|---|---|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
+
+<!-- **机器引用清单:**
+- 市场定义矩阵:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+-->
+
+#### 历史市场规模与逐年增速
+
+|年度|市场规模|单位|同比增速|区间CAGR|值状态|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|提供方|lineage|来源|
+|---|---:|---|---:|---:|---|---|---|---|---|---|---|---|---|
+|[最近完整年度-4至最近完整年度逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[observed/historical-estimate]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+
+#### 行业驱动因素
+
+|驱动因素|影响方向|适用期间|证据|来源|
+|---|---|---|---|---|
+|[仅填写industry-drivers角色的accepted candidate]|[正向/负向/混合]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+
+<!-- **机器引用清单:**
+- 历史市场规模与逐年增速及行业驱动因素:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+-->
+
+#### 预测版本对照
+
+|发布日期|数据版本|预测年度|预测值|单位|方法与来源注释|原始提供方|委托关系|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|lineage|替代/修订关系|
+|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|---|
+|[evidence publication date]|[data vintage；每个版本单独成series]|[未来3至5年逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[prior/later/替代/并行]|
+
+<!-- **机器引用清单:**
+- 预测版本对照:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+-->
+
+#### 集中度与竞争对手
+
+|期间|CR5/CR10|目标公司排名|目标公司份额|完整市场分母|market definition fingerprint|series fingerprint|渠道范围|竞争对手名称|竞争对手排名|竞争对手份额|计量口径|提供方|lineage|来源|
+|---|---:|---:|---:|---:|---|---|---|---|---:|---:|---|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[每个具名对手逐行]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+
+<!-- **机器引用清单:**
+- 集中度与竞争对手:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+-->
 
 **引用:**
 - [待填写]
-
-<!-- **机器引用清单:**
-- [待填写]
--->
 
 **置信度:** 未做
 
@@ -565,26 +604,32 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 ### §2.2市场规模、增速、供需
 
-**本节目标:** 测算行业市场规模和3-5年供需, 以及公司在其中的位置。
+**本节目标:** 单列当期部分期间和全部口径断点。`publishable-with-gaps`继续profile但逐项展示缺口；`blocked`保留已接受值并标记人工跟进,不声称事实不存在。
 
-<!-- 指导问题:
-  - 当前市场规模测算（量 × 价或自上而下）?
-  - 3-5年供需展望?
-  - 公司在行业的地位/市场份额?
-  - 产品生命周期/渗透率处于什么位置?
-  - 国际化/出海的可行性与适合度?
+#### 当期部分期间
+
+|期间标签|指标|数值|单位|市场范围|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|提供方|lineage|来源|
+|---|---|---:|---|---|---|---|---|---|---|---|---|---|
+|[H1/YTD/最新季度/not-applicable]|[规模/份额/排名]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+
+<!-- **机器引用清单:**
+- 当期部分期间:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
-<!-- 数据源: 年报"管理层讨论"; 行业研报（Frost & Sullivan / 头豹） -->
+#### 口径断点与未解决缺口
 
-<填写区>
+|角色|角色状态|独立claim状态|缺失期间|缺失覆盖|from scope fingerprint|to scope fingerprint|口径断点原因|ledger path|终态路由状态|下一步所需证据|
+|---|---|---|---|---|---|---|---|---|---|---|
+|[八个role逐项填写]|[accepted/partial/exhausted/blocked/not-applicable]|[claim_states逐claim填写；accepted不回到unresolved_claims]|[逐年列出/无]|[missing_coverage逐项列出/无]|[scope_breaks映射/无]|[scope_breaks映射/无]|[scope_breaks.reason/无]|[绝对路径]|[attempts[].terminal_reason逐route列出]|[next_escalation/unattempted_routes/new publication/data release required]|
+
+<!-- **机器引用清单:**
+- 口径断点与未解决缺口:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+-->
+
+**行业章节人工跟进:** <否/是—仅blocked时逐route列出>
 
 **引用:**
 - [待填写]
-
-<!-- **机器引用清单:**
-- [待填写]
--->
 
 **置信度:** 未做
 

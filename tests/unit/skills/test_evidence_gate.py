@@ -33,6 +33,14 @@ WHOLESALE_METRIC_SCOPE_FINGERPRINT = (
 EXTRA_POPULATION_SCOPE_FINGERPRINT = (
     "fe07b694898bbc9adddd4a6a9dcb61c46013a137017f88065c8cab39eed0b7de"
 )
+V11_MARKET_DEFINITION_FINGERPRINT = (
+    "28526a331a9894948a6ed310f73382adfcabec9bb84322729f8599a3dcb86d22"
+)
+V11_SERIES_FINGERPRINT = "60dbf4c49f36ccfd7ee9c278ca76a4122e3dacf0901ff3ccb4343dbf5a788e9b"
+V11_GATE_SCOPE_FINGERPRINT = "9704c96e841966b852a08465602397c0d488b18750df8901d3ff5a8b7e1adc8c"
+PROVIDER_TABLE_LINEAGE_ID = (
+    "provider-table:537405f59cec6252093f6856fd976a60a48ae53b6944f13fe8922a45520ee79a"
+)
 EVENT_SCOPE_FINGERPRINT = "7d8fbc9dca3f2e7a5f04c362bef6d4773f35f439be1eb0b65001725e5625dafe"
 EVENT_TEXT = "Counterparty stated the board withdrew the acquisition proposal on 2025-03-01."
 
@@ -341,6 +349,65 @@ def rebind_scope_fingerprint(
         canonical = value["canonical_value"]
         assert isinstance(canonical, dict)
         canonical["definition_scope_fingerprint"] = scope_fingerprint
+
+
+def forecast_request_v11() -> dict[str, object]:
+    payload = request()
+    payload.update(
+        {
+            "schema_version": "1.1",
+            "claim_id": "cn-pop-toy-market-forecast-2026-2030",
+            "period_start": "2026",
+            "period_end": "2030",
+            "required_latest_period": "2030",
+            "value_status_allowed": ["forecast"],
+            "channel_scope": "all retail channels",
+            "denominator": "total in-scope retail value",
+        }
+    )
+    return payload
+
+
+def upgrade_candidate_to_v11(
+    payload: dict[str, object],
+    requested: dict[str, object],
+    gate_module,
+) -> None:
+    payload["schema_version"] = "1.1"
+    candidate_scope = scope(payload)
+    candidate_scope.update(
+        {
+            "channel_scope": "all retail channels",
+            "denominator": "total in-scope retail value",
+        }
+    )
+    payload["market_definition_fingerprint"] = V11_MARKET_DEFINITION_FINGERPRINT
+    payload["series_fingerprint"] = V11_SERIES_FINGERPRINT
+    rebind_scope_fingerprint(payload, requested, gate_module)
+    lineage = payload["lineage"]
+    assert isinstance(lineage, dict)
+    lineage.setdefault("provider_table_id", None)
+
+
+def forecast_candidate_v11(gate_module) -> dict[str, object]:
+    requested = forecast_request_v11()
+    payload = candidate("fitting_official")
+    payload["claim_id"] = requested["claim_id"]
+    payload["data_vintage"] = "2026-06-30"
+    document = payload["document"]
+    assert isinstance(document, dict)
+    document["published_at"] = "2026-07-01"
+    payload["values"] = [
+        canonical_value(period, float(value), status="forecast")
+        for period, value in zip(
+            ("2026", "2027", "2028", "2029", "2030"),
+            (40, 44, 48, 52, 56),
+            strict=True,
+        )
+    ]
+    rebind_identity(payload)
+    upgrade_candidate_to_v11(payload, requested, gate_module)
+    return payload
 
 
 def test_fitting_official_series_passes() -> None:
@@ -652,6 +719,148 @@ def test_new_publication_repeating_old_forecast_fails_freshness() -> None:
 
     assert result.passed is False
     assert result.failures == ("freshness",)
+
+
+def test_market_definition_identity_is_metric_independent_but_channel_sensitive() -> None:
+    gate = load_gate_module()
+    market_size = forecast_request_v11()
+    market_share = deepcopy(market_size)
+    market_share.update(
+        {
+            "metric": "subject market share",
+            "measurement_basis": "share of retail value",
+            "accepted_units": ["percent"],
+        }
+    )
+    online_only = deepcopy(market_size)
+    online_only["channel_scope"] = "online retail only"
+
+    assert gate.request_market_definition_fingerprint(market_size) == (
+        V11_MARKET_DEFINITION_FINGERPRINT
+    )
+    assert gate.request_market_definition_fingerprint(market_share) == (
+        V11_MARKET_DEFINITION_FINGERPRINT
+    )
+    assert gate.request_scope_fingerprint(market_size) == V11_GATE_SCOPE_FINGERPRINT
+    assert gate.request_scope_fingerprint(market_size) != gate.request_scope_fingerprint(
+        market_share
+    )
+    assert gate.request_market_definition_fingerprint(online_only) != (
+        V11_MARKET_DEFINITION_FINGERPRINT
+    )
+
+
+def test_future_forecast_uses_vintage_freshness_not_horizon_year() -> None:
+    gate = load_gate_module()
+    requested = forecast_request_v11()
+
+    result = gate.evaluate_candidate(requested, forecast_candidate_v11(gate))
+
+    assert result.passed is True
+    assert result.failures == ()
+    assert [value.period for value in result.series_values] == [
+        "2026",
+        "2027",
+        "2028",
+        "2029",
+        "2030",
+    ]
+    assert {value.status for value in result.series_values} == {"forecast"}
+
+
+def test_forecast_stitch_rejects_different_data_vintages() -> None:
+    gate = load_gate_module()
+    requested = forecast_request_v11()
+    early = forecast_candidate_v11(gate)
+    early["values"] = values(early)[:3]
+    early["data_vintage"] = "2025-12-31"
+    rebind_lineage(early, "pop-toy-forecast-2025-vintage")
+    upgrade_candidate_to_v11(early, requested, gate)
+
+    late = forecast_candidate_v11(gate)
+    late["values"] = values(late)[2:]
+    late["artifact"] = {
+        "identity": "sha256:4545454545454545454545454545454545454545454545454545454545454545",
+        "sha256": "4545454545454545454545454545454545454545454545454545454545454545",
+    }
+    document = late["document"]
+    assert isinstance(document, dict)
+    document.update(
+        {
+            "document_id": "CCP-POP-TOY-FORECAST-2026-VINTAGE",
+            "canonical_url": "https://statistics.example.org/pop-toys/forecast-2026",
+        }
+    )
+    source = late["source"]
+    assert isinstance(source, dict)
+    source["canonical_url"] = "https://statistics.example.org/pop-toys/forecast-2026"
+    rebind_identity(late)
+    rebind_lineage(late, "pop-toy-forecast-2026-vintage")
+    upgrade_candidate_to_v11(late, requested, gate)
+
+    result = gate.evaluate_stitched_series(requested, (early, late))
+
+    assert result.passed is False
+    assert result.failures == ("vintage",)
+
+
+def test_forecast_stitch_accepts_one_data_vintage_with_different_publications() -> None:
+    gate = load_gate_module()
+    requested = forecast_request_v11()
+    early = forecast_candidate_v11(gate)
+    early["values"] = values(early)[:3]
+    late = forecast_candidate_v11(gate)
+    late["values"] = values(late)[2:]
+    document = late["document"]
+    assert isinstance(document, dict)
+    document["published_at"] = "2026-07-15"
+    rebind_identity(late)
+
+    result = gate.evaluate_stitched_series(requested, (early, late))
+
+    assert result.passed is True
+    assert result.failures == ()
+
+
+def test_validated_republications_of_one_provider_table_are_not_independent() -> None:
+    gate = load_gate_module()
+    requested = forecast_request_v11()
+    requested["independent_cross_check_required"] = True
+    provider = forecast_candidate_v11(gate)
+    provider["data_vintage"] = "2025-12-31"
+    provider["lineage"] = {
+        "methodology_owner": "Frost & Sullivan",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [],
+        "cited_source_ids": [],
+        "provider_table_id": "CN Pop Toy Forecast Table 7",
+    }
+    provider["lineage_id"] = PROVIDER_TABLE_LINEAGE_ID
+
+    republished = deepcopy(provider)
+    republished["source"]["immediate_publisher"] = "Listing Applicant"
+    republished["source"]["original_publisher"] = "Listing Applicant"
+    republished["source"]["canonical_url"] = "https://applicant.example/industry-overview"
+    republished["document"] = {
+        "document_id": "APPLICANT-INDUSTRY-OVERVIEW",
+        "title": "Industry Overview",
+        "published_at": "2026-07-15",
+        "canonical_url": "https://applicant.example/industry-overview",
+    }
+    republished["artifact"] = {
+        "identity": "sha256:5656565656565656565656565656565656565656565656565656565656565656",
+        "sha256": "5656565656565656565656565656565656565656565656565656565656565656",
+    }
+    rebind_identity(republished)
+
+    result = gate.evaluate_candidate(
+        requested,
+        provider,
+        accepted_candidates=(republished,),
+    )
+
+    assert result.passed is False
+    assert result.failures == ("lineage",)
 
 
 @pytest.mark.parametrize(
