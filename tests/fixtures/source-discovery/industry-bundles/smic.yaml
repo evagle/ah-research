@@ -1,0 +1,115 @@
+subject: "SMIC"
+as_of: "2026-08-02"
+primary_market_scope_fingerprint: "6666666666666666666666666666666666666666666666666666666666666666"
+role_outcomes:
+  - role: "market-definition"
+    claim_ids: ["smic-market-definition"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-definition"]
+    ledger_paths: ["research/smic/market-definition.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "historical-market-size"
+    claim_ids: ["smic-historical-market-size"]
+    state: "accepted"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-history"]
+    ledger_paths: ["research/smic/historical-market-size.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "industry-forecast"
+    claim_ids: ["smic-industry-forecast"]
+    state: "accepted"
+    required_periods: ["2026", "2027", "2028", "2029", "2030"]
+    accepted_periods: ["2026", "2027", "2028", "2029", "2030"]
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-forecast"]
+    ledger_paths: ["research/smic/industry-forecast.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "market-concentration"
+    claim_ids: ["smic-market-concentration"]
+    state: "accepted"
+    required_periods: ["2025"]
+    accepted_periods: ["2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-cr5-2025"]
+    ledger_paths: ["research/smic/market-concentration.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "subject-market-share"
+    claim_ids: ["smic-subject-market-share"]
+    state: "accepted"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-subject-share"]
+    ledger_paths: ["research/smic/subject-market-share.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "competitor-market-share"
+    claim_ids: ["smic-competitor-market-share"]
+    state: "partial"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2023", "2024", "2025"]
+    missing_periods: ["2021", "2022"]
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-revenue-competitor-share"]
+    ledger_paths: ["research/smic/competitor-market-share.json"]
+    gap_reason: "Available 2021 and 2022 competitor tables use wafer shipments or installed capacity instead of matched foundry-revenue denominators."
+    not_applicable_reason: null
+  - role: "current-partial-period"
+    claim_ids: ["smic-current-partial-period"]
+    state: "not-applicable"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["smic-publication-cycle"]
+    ledger_paths: ["research/smic/current-partial-period.json"]
+    gap_reason: null
+    not_applicable_reason: "Foundry market datasets publish after annual close, so current partial-period figures remain separate from observed annual history."
+  - role: "industry-drivers"
+    claim_ids: ["smic-industry-drivers"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "6666666666666666666666666666666666666666666666666666666666666666"
+    lineage_ids: ["foundry-industry-drivers-2026"]
+    ledger_paths: ["research/smic/industry-drivers.json"]
+    gap_reason: null
+    not_applicable_reason: null
+scope_breaks:
+  - from_scope_fingerprint: "7777777777777777777777777777777777777777777777777777777777777777"
+    to_scope_fingerprint: "6666666666666666666666666666666666666666666666666666666666666666"
+    reason: "Foundry wafer shipments are a different measurement basis from foundry revenue."
+    comparable: false
+  - from_scope_fingerprint: "8888888888888888888888888888888888888888888888888888888888888888"
+    to_scope_fingerprint: "6666666666666666666666666666666666666666666666666666666666666666"
+    reason: "Installed capacity cannot be stitched into a foundry-revenue market series."
+    comparable: false
+  - from_scope_fingerprint: "9999999999999999999999999999999999999999999999999999999999999999"
+    to_scope_fingerprint: "6666666666666666666666666666666666666666666666666666666666666666"
+    reason: "SMIC company accounting revenue is not an industry denominator and cannot supply foundry-market share."
+    comparable: false
+unresolved_claim_ids:
+  - "smic-competitor-market-share"

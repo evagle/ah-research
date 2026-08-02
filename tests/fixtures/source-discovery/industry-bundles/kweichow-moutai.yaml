@@ -1,0 +1,112 @@
+subject: "Kweichow Moutai"
+as_of: "2026-08-02"
+primary_market_scope_fingerprint: "3333333333333333333333333333333333333333333333333333333333333333"
+role_outcomes:
+  - role: "market-definition"
+    claim_ids: ["kweichow-moutai-market-definition"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-definition"]
+    ledger_paths: ["research/kweichow-moutai/market-definition.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "historical-market-size"
+    claim_ids: ["kweichow-moutai-historical-market-size"]
+    state: "accepted"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-history"]
+    ledger_paths: ["research/kweichow-moutai/historical-market-size.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "industry-forecast"
+    claim_ids: ["kweichow-moutai-industry-forecast"]
+    state: "accepted"
+    required_periods: ["2026", "2027", "2028", "2029", "2030"]
+    accepted_periods: ["2026", "2027", "2028", "2029", "2030"]
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-forecast"]
+    ledger_paths: ["research/kweichow-moutai/industry-forecast.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "market-concentration"
+    claim_ids: ["kweichow-moutai-market-concentration"]
+    state: "accepted"
+    required_periods: ["2025"]
+    accepted_periods: ["2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-cr5-2025"]
+    ledger_paths: ["research/kweichow-moutai/market-concentration.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "subject-market-share"
+    claim_ids: ["kweichow-moutai-subject-market-share"]
+    state: "partial"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2024", "2025"]
+    missing_periods: ["2023"]
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-subject-share"]
+    ledger_paths: ["research/kweichow-moutai/subject-market-share.json"]
+    gap_reason: "No continuous five-year premium baijiu retail-value series confirms Moutai brand share for 2023."
+    not_applicable_reason: null
+  - role: "competitor-market-share"
+    claim_ids: ["kweichow-moutai-competitor-market-share"]
+    state: "partial"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2025"]
+    missing_periods: ["2022", "2023", "2024"]
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-retail-competitor-share"]
+    ledger_paths: ["research/kweichow-moutai/competitor-market-share.json"]
+    gap_reason: "Premium baijiu competitor ranking tables are intermittent and do not provide a continuous 2021 to 2025 retail-value series."
+    not_applicable_reason: null
+  - role: "current-partial-period"
+    claim_ids: ["kweichow-moutai-current-partial-period"]
+    state: "not-applicable"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["kweichow-moutai-publication-cycle"]
+    ledger_paths: ["research/kweichow-moutai/current-partial-period.json"]
+    gap_reason: null
+    not_applicable_reason: "Industry retail-value and brand-share studies close on annual publication cycles, so the current partial period stays separate from annual history."
+  - role: "industry-drivers"
+    claim_ids: ["kweichow-moutai-industry-drivers"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "3333333333333333333333333333333333333333333333333333333333333333"
+    lineage_ids: ["premium-baijiu-industry-drivers-2026"]
+    ledger_paths: ["research/kweichow-moutai/industry-drivers.json"]
+    gap_reason: null
+    not_applicable_reason: null
+scope_breaks:
+  - from_scope_fingerprint: "4444444444444444444444444444444444444444444444444444444444444444"
+    to_scope_fingerprint: "3333333333333333333333333333333333333333333333333333333333333333"
+    reason: "Total baijiu retail value cannot fill the premium baijiu retail-value primary scope."
+    comparable: false
+  - from_scope_fingerprint: "5555555555555555555555555555555555555555555555555555555555555555"
+    to_scope_fingerprint: "3333333333333333333333333333333333333333333333333333333333333333"
+    reason: "Premium baijiu sales volume is a different measurement basis from premium baijiu retail value."
+    comparable: false
+unresolved_claim_ids:
+  - "kweichow-moutai-subject-market-share"
+  - "kweichow-moutai-competitor-market-share"

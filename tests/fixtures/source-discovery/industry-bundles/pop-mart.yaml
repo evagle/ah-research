@@ -1,0 +1,108 @@
+subject: "Pop Mart"
+as_of: "2026-08-02"
+primary_market_scope_fingerprint: "1111111111111111111111111111111111111111111111111111111111111111"
+role_outcomes:
+  - role: "market-definition"
+    claim_ids: ["pop-mart-market-definition"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-definition"]
+    ledger_paths: ["research/pop-mart/market-definition.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "historical-market-size"
+    claim_ids: ["pop-mart-historical-market-size"]
+    state: "accepted"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-history"]
+    ledger_paths: ["research/pop-mart/historical-market-size.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "industry-forecast"
+    claim_ids: ["pop-mart-industry-forecast"]
+    state: "accepted"
+    required_periods: ["2026", "2027", "2028", "2029", "2030"]
+    accepted_periods: ["2026", "2027", "2028", "2029", "2030"]
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-forecast"]
+    ledger_paths: ["research/pop-mart/industry-forecast.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "market-concentration"
+    claim_ids: ["pop-mart-market-concentration"]
+    state: "accepted"
+    required_periods: ["2025"]
+    accepted_periods: ["2025"]
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-cr5-2025"]
+    ledger_paths: ["research/pop-mart/market-concentration.json"]
+    gap_reason: null
+    not_applicable_reason: null
+  - role: "subject-market-share"
+    claim_ids: ["pop-mart-subject-market-share"]
+    state: "partial"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2024", "2025"]
+    missing_periods: ["2023"]
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-subject-share"]
+    ledger_paths: ["research/pop-mart/subject-market-share.json"]
+    gap_reason: "No comparable 2023 Pop Mart GMV share table on the updated market scope"
+    not_applicable_reason: null
+  - role: "competitor-market-share"
+    claim_ids: ["pop-mart-competitor-market-share"]
+    state: "partial"
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2024", "2025"]
+    missing_periods: ["2023"]
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["frost-sullivan-pop-toys-gmv-competitor-share"]
+    ledger_paths: ["research/pop-mart/competitor-market-share.json"]
+    gap_reason: "No comparable 2023 competitor GMV share table on the updated market scope"
+    not_applicable_reason: null
+  - role: "current-partial-period"
+    claim_ids: ["pop-mart-current-partial-period"]
+    state: "not-applicable"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["pop-mart-publication-cycle"]
+    ledger_paths: ["research/pop-mart/current-partial-period.json"]
+    gap_reason: null
+    not_applicable_reason: "Public market studies publish this GMV scope annually, so no standalone 2026 partial-period release is required."
+  - role: "industry-drivers"
+    claim_ids: ["pop-mart-industry-drivers"]
+    state: "accepted"
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    scope_fingerprints:
+      - "1111111111111111111111111111111111111111111111111111111111111111"
+    lineage_ids: ["pop-mart-industry-drivers-2026"]
+    ledger_paths: ["research/pop-mart/industry-drivers.json"]
+    gap_reason: null
+    not_applicable_reason: null
+scope_breaks:
+  - from_scope_fingerprint: "2222222222222222222222222222222222222222222222222222222222222222"
+    to_scope_fingerprint: "1111111111111111111111111111111111111111111111111111111111111111"
+    reason: "The 2024 RSV concentration snapshot and the older KPMG or TOP TOY Frost & Sullivan RSV forecast are not comparable to the 2025 to 2030 GMV primary scope."
+    comparable: false
+unresolved_claim_ids:
+  - "pop-mart-subject-market-share"
+  - "pop-mart-competitor-market-share"
