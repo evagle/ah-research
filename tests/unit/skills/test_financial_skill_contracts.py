@@ -320,6 +320,13 @@ def test_product_analysis_requires_relative_competition_and_evidence() -> None:
         "新对手携巨资进入，公司凭什么守住并扩大市场",
     ):
         assert question in skill
+    for switching_cost_requirement in (
+        "经济成本（合同、迁移和资产重建）",
+        "心理成本（情感依附、收藏连续性和社群身份）",
+        "多品牌共存",
+        "不得把没有经济成本写成毫无切换成本",
+    ):
+        assert switching_cost_requirement in skill
     for grade in ("`高`", "`中`", "`低`", "`需人工`"):
         assert grade in skill
     assert "行为证据" in mechanisms
@@ -350,6 +357,7 @@ def test_value_profile_visibly_invokes_product_analysis_for_every_product_sectio
         "普通worker不得代写或补写",
         "隐藏的`product-analysis`调用回执",
         "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、`产品竞争力三问结论`、财报映射和失效测试",
+        "区分经济成本与心理成本",
     ):
         assert requirement in skill
 
@@ -377,8 +385,10 @@ def test_pop_mart_product_sections_apply_product_analysis_structure() -> None:
         "客户为什么选择并持续选择泡泡玛特的产品",
         "现有对手为什么不能靠降价或更高性价比抢走客户",
         "新对手携巨资进入，泡泡玛特凭什么守住并扩大市场",
+        "心理成本",
+        "多品牌共存",
         "盲盒随机性只是放大器",
-        "每次购买时重新赢得客户",
+        "每次购买时重新赢得预算",
         "收藏者社区",
         "IP命中率",
         "**竞争阶梯与龙头差距:**",
