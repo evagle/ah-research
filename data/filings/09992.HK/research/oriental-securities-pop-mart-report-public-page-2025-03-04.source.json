@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "source_name": "Oriental Securities Pop Mart report public page mirror",
+  "source_url": "https://www.hangyan.co/reports/3580726175950964608",
+  "raw_path": "data/filings/09992.HK/_raw/research/oriental-securities-pop-mart-report-public-page-2025-03-04.html",
+  "sha256": "26e0f5382c1f54ca1a05d033a4a648dac6631e9edc6ccf0f5c6a0daf22097d66",
+  "retrieved_at": "2026-08-01",
+  "http_method": "GET",
+  "media_type": "text/html",
+  "restore_command": "curl --fail --location --retry 3 'https://www.hangyan.co/reports/3580726175950964608' --output 'data/filings/09992.HK/_raw/research/oriental-securities-pop-mart-report-public-page-2025-03-04.html'"
+}

@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "source_name": "HKEX inactive applications registry",
+  "source_url": "https://www1.hkexnews.hk/ncms/json/eds/appinactive_sehk_e.json",
+  "raw_path": "data/filings/09992.HK/_raw/research/hkex-inactive-applications-2026-07-07.json",
+  "sha256": "52438ac80a2fcb86e5007db2f829864a7f138573c55a908ada3ded295540879f",
+  "retrieved_at": "2026-07-29",
+  "http_method": "GET",
+  "media_type": "application/json",
+  "restore_command": "curl --fail --location --retry 3 'https://www1.hkexnews.hk/ncms/json/eds/appinactive_sehk_e.json' --output 'data/filings/09992.HK/_raw/research/hkex-inactive-applications-2026-07-07.json'"
+}

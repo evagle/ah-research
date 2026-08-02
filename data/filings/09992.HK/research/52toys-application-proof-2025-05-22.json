@@ -1,0 +1,20 @@
+{
+  "title": "52TOYS application proof - Chinese draft",
+  "application_id": "107389",
+  "original_url": "https://www1.hkexnews.hk/app/sehk/2025/107389/documents/sehk25052201447_c.pdf",
+  "archive_url": "https://web.archive.org/web/20250531020417id_/https://www1.hkexnews.hk/app/sehk/2025/107389/documents/sehk25052201447_c.pdf",
+  "wayback_timestamp": "20250531020417",
+  "wayback_cdx_query": "https://web.archive.org/cdx/search/cdx?url=www1.hkexnews.hk/app/sehk/2025/107389/documents/sehk25052201447_c.pdf&output=json&filter=statuscode:200&filter=mimetype:application/pdf&fl=timestamp,original,statuscode,mimetype,digest,length&collapse=digest",
+  "wayback_digest": "M2TEESBNVSU3QXVCBYIBIL27CGQK5P62",
+  "wayback_length": 9270078,
+  "local_pdf": "52toys-application-proof-zh-2025-05-22.pdf",
+  "local_pdf_sha256": "0480a3170b8f6d642ba4b928005b4478ebafd3544c771a1bf03e35b9653445bb",
+  "local_text": "52toys-application-proof-zh-2025-05-22.txt",
+  "local_text_sha256": "d93435886ef63bd05b502cd700b4c9763c979d8b033f22afef9c71b27990940f",
+  "evidence_grade": "medium",
+  "limitations": [
+    "The original HKEX application link is no longer live because the application became inactive.",
+    "The archived file is a draft application proof, not a final prospectus or audited annual report.",
+    "CIC was commissioned by 52TOYS; use only disclosed historical market data and ranking, not forecasts."
+  ]
+}

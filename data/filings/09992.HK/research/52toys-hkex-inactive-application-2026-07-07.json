@@ -1,0 +1,19 @@
+{
+  "source_url": "https://www1.hkexnews.hk/ncms/json/eds/appinactive_sehk_e.json",
+  "source_response_path": "data/filings/09992.HK/_raw/research/hkex-inactive-applications-2026-07-07.json",
+  "source_response_sha256": "52438ac80a2fcb86e5007db2f829864a7f138573c55a908ada3ded295540879f",
+  "source_updated_date": "2026-07-07",
+  "record": {
+    "id": 107389,
+    "applicant": "52TOYS Development Co., Ltd.",
+    "status_code": "LP",
+    "first_submission_date": "2025-05-22",
+    "revised_application_date": "2025-05-23",
+    "inactive_posting_date": "2025-06-05",
+    "warning_path": "sehk/2025/107389/documents/warn25052301958.pdf",
+    "application_document_urls": [
+      "#"
+    ]
+  },
+  "scope_note": "The registry proves submission and inactive status only. Application contents are unavailable and must not be quoted."
+}

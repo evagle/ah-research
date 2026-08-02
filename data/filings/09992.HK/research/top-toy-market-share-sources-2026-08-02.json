@@ -1,0 +1,54 @@
+{
+  "retrieved_at": "2026-08-02",
+  "subject": "TOP TOY International Group Limited",
+  "application_id": "108384",
+  "active_application_index": "https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json",
+  "sources": [
+    {
+      "application_id": "108384",
+      "title": "Industry Overview - current application proof section",
+      "publication_date": "2026-03-31",
+      "canonical_url": "https://www1.hkexnews.hk/app/sehk/2026/108384/a131511/sehk26033103632.pdf",
+      "full_application_url": "https://www1.hkexnews.hk/app/sehk/2026/108384/documents/sehk26033103586.pdf",
+      "access_status": "reachable",
+      "http_status_at_retrieval": 200,
+      "local_pdf": "top-toy-industry-overview-2026-03-31.pdf",
+      "local_pdf_sha256": "eb50b5d3ada6e4a271e24c3ba37828cdd2b1dcd2ef11648ed1318dfa6d8b7cdc",
+      "local_text": "top-toy-industry-overview-2026-03-31.txt",
+      "local_text_sha256": "350d11447248030a14e3e159a019eaa50a22271947c52b50055da685b0c3fdd5",
+      "document_status": "draft application proof",
+      "market_period": "2025",
+      "measurement_basis": "GMV",
+      "evidence_grade": "medium-high"
+    },
+    {
+      "application_id": "107712",
+      "title": "Application Proof - first submission",
+      "publication_date": "2025-09-26",
+      "original_url": "https://www1.hkexnews.hk/app/sehk/2025/107712/documents/sehk25092602240_c.pdf",
+      "archive_url": "https://web.archive.org/web/20250929044921id_/https://www1.hkexnews.hk/app/sehk/2025/107712/documents/sehk25092602240_c.pdf",
+      "wayback_timestamp": "20250929044921",
+      "wayback_digest": "ZFZQM6G2RICWQWATVAI2WP7DMGXX7BLR",
+      "access_status": "archived-local-copy; original and archive replay currently unavailable",
+      "local_pdf": "top-toy-application-proof-en-2025-09-26.pdf",
+      "local_pdf_sha256": "fb246484ca0c0cb1f6f7059940e80718d7d4769504145e0c914373eb587e07dc",
+      "local_text": "top-toy-application-proof-en-2025-09-26.txt",
+      "local_text_sha256": "c493a79319e3c8efbe2170acdbadd565332db5907c80c6f7021cfaee22b802a5",
+      "document_status": "archived draft application proof",
+      "market_period": "2024",
+      "measurement_basis": "RSV",
+      "evidence_grade": "medium"
+    }
+  ],
+  "identity_notes": [
+    "Company A is inferred to be Pop Mart from its 2010 founding, Beijing headquarters, listed status, brand retail, IP creation and operation, model figures, and vinyl plush toys.",
+    "Company B is inferred to be LEGO from its 1932 founding, Denmark headquarters, and focus on 3D building blocks.",
+    "The identities are not printed by name in the ranking tables and must remain labelled as high-confidence inferences."
+  ],
+  "limitations": [
+    "Both market reports were commissioned by TOP TOY from Frost & Sullivan and are not fully independent of the applicant. The initial report fee was RMB750,000 and the current report fee was RMB1,000,000.",
+    "The documents are draft application materials, not final prospectuses or audited annual reports.",
+    "The 2024 table uses RSV while the 2025 table uses GMV, so the year-over-year comparison is directionally useful but not a strict same-basis series.",
+    "No company-level 2023 or 2026 H1/YTD market-share table was established."
+  ]
+}
