@@ -315,9 +315,9 @@ def test_product_analysis_requires_relative_competition_and_evidence() -> None:
     assert "高毛利" in skill
     assert "不能单独证明" in skill
     for question in (
-        "客户为什么从它这里购买并持续复购或续约",
-        "为什么其他资本没有提供更高性价比",
-        "假设巨头携巨资进入",
+        "客户为什么选择并持续选择公司的产品或服务",
+        "现有对手为什么不能靠降价或更高性价比抢走客户",
+        "新对手携巨资进入，公司凭什么守住并扩大市场",
     ):
         assert question in skill
     for grade in ("`高`", "`中`", "`低`", "`需人工`"):
