@@ -19,11 +19,13 @@ SCHEMA_FILENAMES = {
     "research-ledger": "research-ledger.schema.json",
     "planner-inventory-receipt": "planner-inventory-receipt.schema.json",
     "route-cache": "route-cache.schema.json",
+    "industry-analysis-bundle": "industry-analysis-bundle.schema.json",
 }
 SCHEMA_ALIASES = {
     "request": "research-request",
     "candidate": "candidate-claim",
     "ledger": "research-ledger",
+    "industry-bundle": "industry-analysis-bundle",
 }
 PERIOD_SEMANTICS = {
     "annual": "calendar-year",

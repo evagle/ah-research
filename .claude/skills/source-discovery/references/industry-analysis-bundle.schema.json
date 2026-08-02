@@ -1,0 +1,162 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/industry-analysis-bundle.schema.json",
+  "title": "Industry Analysis Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "subject",
+    "as_of",
+    "primary_market_scope_fingerprint",
+    "status",
+    "roles",
+    "scope_breaks",
+    "unresolved_claim_ids"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "subject": {
+      "$ref": "#/$defs/nonBlankString"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    },
+    "primary_market_scope_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "status": {
+      "enum": ["complete", "publishable-with-gaps", "blocked"]
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/role"
+      }
+    },
+    "scope_breaks": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/scopeBreak"
+      }
+    },
+    "unresolved_claim_ids": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonBlankString"
+      }
+    }
+  },
+  "$defs": {
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "stringList": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/nonBlankString"
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "claim_ids",
+        "state",
+        "required_periods",
+        "accepted_periods",
+        "missing_periods",
+        "scope_fingerprints",
+        "lineage_ids",
+        "ledger_paths",
+        "gap_reason",
+        "not_applicable_reason"
+      ],
+      "properties": {
+        "role": {
+          "enum": [
+            "market-definition",
+            "historical-market-size",
+            "industry-forecast",
+            "market-concentration",
+            "subject-market-share",
+            "competitor-market-share",
+            "current-partial-period",
+            "industry-drivers"
+          ]
+        },
+        "claim_ids": {
+          "$ref": "#/$defs/stringList"
+        },
+        "state": {
+          "enum": ["accepted", "partial", "exhausted", "blocked", "not-applicable"]
+        },
+        "required_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "accepted_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "missing_periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "scope_fingerprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
+        "lineage_ids": {
+          "$ref": "#/$defs/stringList"
+        },
+        "ledger_paths": {
+          "$ref": "#/$defs/stringList"
+        },
+        "gap_reason": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "pattern": "\\S"
+        },
+        "not_applicable_reason": {
+          "type": ["string", "null"],
+          "minLength": 1,
+          "pattern": "\\S"
+        }
+      }
+    },
+    "scopeBreak": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "from_scope_fingerprint",
+        "to_scope_fingerprint",
+        "reason",
+        "comparable"
+      ],
+      "properties": {
+        "from_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "to_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "reason": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "comparable": {
+          "const": false
+        }
+      }
+    }
+  }
+}

@@ -386,6 +386,68 @@ def route_cache_payload() -> dict[str, object]:
     }
 
 
+def industry_bundle_payload() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "subject": "Pop Mart",
+        "as_of": "2026-08-02",
+        "primary_market_scope_fingerprint": "a" * 64,
+        "status": "publishable-with-gaps",
+        "roles": [
+            {
+                "role": role,
+                "claim_ids": [f"pop-mart-{role}"],
+                "state": "partial" if role == "subject-market-share" else "accepted",
+                "required_periods": (
+                    ["2021", "2022", "2023", "2024", "2025"]
+                    if role
+                    in {
+                        "historical-market-size",
+                        "subject-market-share",
+                        "competitor-market-share",
+                    }
+                    else []
+                ),
+                "accepted_periods": (
+                    ["2021", "2022", "2024", "2025"]
+                    if role == "subject-market-share"
+                    else (
+                        ["2021", "2022", "2023", "2024", "2025"]
+                        if role
+                        in {
+                            "historical-market-size",
+                            "competitor-market-share",
+                        }
+                        else []
+                    )
+                ),
+                "missing_periods": ["2023"] if role == "subject-market-share" else [],
+                "scope_fingerprints": ["a" * 64],
+                "lineage_ids": [f"lineage-{role}"],
+                "ledger_paths": [f"research/{role}.json"],
+                "gap_reason": (
+                    "No comparable 2023 public company-share table"
+                    if role == "subject-market-share"
+                    else None
+                ),
+                "not_applicable_reason": None,
+            }
+            for role in (
+                "market-definition",
+                "historical-market-size",
+                "industry-forecast",
+                "market-concentration",
+                "subject-market-share",
+                "competitor-market-share",
+                "current-partial-period",
+                "industry-drivers",
+            )
+        ],
+        "scope_breaks": [],
+        "unresolved_claim_ids": ["pop-mart-subject-market-share"],
+    }
+
+
 def applicable_route_payload(
     route_id: str = "layer-1-ndri-market-size",
     route_layer: int = 1,
@@ -575,6 +637,25 @@ def test_request_requires_explicit_acceptance_requirements() -> None:
     unknown_requirement["minimum_route_count"] = 3
     with pytest.raises(ValueError, match="minimum_route_count"):
         contracts.validate_payload("research-request", unknown_requirement)
+
+
+def test_industry_analysis_bundle_schema_is_registered() -> None:
+    contracts = load_contracts_module()
+
+    canonical = contracts.load_schema("industry-analysis-bundle")
+    alias = contracts.load_schema("industry-bundle")
+
+    assert canonical["title"] == "Industry Analysis Bundle"
+    assert alias == canonical
+
+
+def test_industry_bundle_schema_rejects_unknown_role_state() -> None:
+    contracts = load_contracts_module()
+    payload = industry_bundle_payload()
+    payload["roles"][0]["state"] = "done"
+
+    with pytest.raises(ValueError, match="industry-analysis-bundle violates schema"):
+        contracts.validate_payload("industry-bundle", payload)
 
 
 def test_request_optionally_accepts_strict_source_classes() -> None:
