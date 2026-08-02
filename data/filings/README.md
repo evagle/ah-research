@@ -16,6 +16,8 @@ Git 只保存轻量、可审计、可重建的材料。原始 PDF、不可变版
         ├── manifests/                 # 下载选择和查询参数，提交
         ├── versions/                  # 不可变本地缓存，已忽略
         ├── _extracted/                # PDF 提取缓存，已忽略
+        ├── _raw/                      # 原始 HTML/API 响应，已忽略
+        ├── runs/                      # 临时运行目录，已忽略
         └── research/
             ├── source-index.md        # 来源、文件名、哈希和使用边界，提交
             └── *.pdf                  # 本地原件，已忽略
@@ -24,7 +26,12 @@ Git 只保存轻量、可审计、可重建的材料。原始 PDF、不可变版
 
 - 提交 `.source.json`、不含机器绝对路径的来源 manifest、`source-index.md`
   和人工整理的研究笔记。
-- 不提交 PDF、`versions/`、`_extracted/`、下载锁和临时文件。
+- 不提交 PDF、`versions/`、`_extracted/`、`_raw/`、`runs/`、下载锁和
+  临时文件。
+- 原始 HTML 和 API 响应统一放入 `_raw/`；可审计的结构化摘要保留在来源
+  manifest 中。
+- `research/*.txt` 视为 PDF 全文提取缓存，不提交；确需保留的内容整理为
+  精简 Markdown，并写明来源和使用边界。
 - 官方披露的提取文本只有在确实需要全文检索、内容经过检查且体积合理时才
   整理成 Markdown 提交。
 - 卖方或付费资料只提交来源元数据和允许引用的研究结论，不提交完整提取文本。
