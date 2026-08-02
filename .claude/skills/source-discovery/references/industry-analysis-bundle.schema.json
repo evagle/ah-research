@@ -4,6 +4,32 @@
   "title": "Industry Analysis Bundle",
   "type": "object",
   "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "schema_version": {
+            "const": "1.1"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "roles": {
+            "items": {
+              "required": [
+                "claim_states",
+                "accepted_evidence_count",
+                "missing_coverage",
+                "market_definition_fingerprints",
+                "series"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ],
   "required": [
     "schema_version",
     "subject",
@@ -16,7 +42,7 @@
   ],
   "properties": {
     "schema_version": {
-      "const": "1.0"
+      "enum": ["1.0", "1.1"]
     },
     "subject": {
       "$ref": "#/$defs/nonBlankString"
@@ -98,8 +124,19 @@
         "claim_ids": {
           "$ref": "#/$defs/stringList"
         },
+        "claim_states": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/claimState"
+          }
+        },
         "state": {
           "enum": ["accepted", "partial", "exhausted", "blocked", "not-applicable"]
+        },
+        "accepted_evidence_count": {
+          "type": "integer",
+          "minimum": 0
         },
         "required_periods": {
           "$ref": "#/$defs/stringList"
@@ -110,6 +147,15 @@
         "missing_periods": {
           "$ref": "#/$defs/stringList"
         },
+        "missing_coverage": {
+          "$ref": "#/$defs/stringList"
+        },
+        "market_definition_fingerprints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sha256"
+          }
+        },
         "scope_fingerprints": {
           "type": "array",
           "items": {
@@ -118,6 +164,12 @@
         },
         "lineage_ids": {
           "$ref": "#/$defs/stringList"
+        },
+        "series": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/series"
+          }
         },
         "ledger_paths": {
           "$ref": "#/$defs/stringList"
@@ -131,6 +183,85 @@
           "type": ["string", "null"],
           "minLength": 1,
           "pattern": "\\S"
+        }
+      }
+    },
+    "claimState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "state"],
+      "properties": {
+        "claim_id": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "state": {
+          "enum": ["accepted", "partial", "exhausted", "blocked", "not-applicable"]
+        }
+      }
+    },
+    "series": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "series_id",
+        "market_definition_fingerprint",
+        "series_fingerprint",
+        "metric",
+        "unit",
+        "measurement_basis",
+        "channel_scope",
+        "denominator",
+        "period_semantics",
+        "value_status",
+        "periods",
+        "published_at",
+        "data_vintage",
+        "lineage_id"
+      ],
+      "properties": {
+        "series_id": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "market_definition_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "series_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "metric": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "unit": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "measurement_basis": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "channel_scope": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "denominator": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "period_semantics": {
+          "enum": ["calendar-year", "calendar-quarter", "calendar-month", "event-date"]
+        },
+        "value_status": {
+          "enum": ["observed", "historical-estimate", "forecast"]
+        },
+        "periods": {
+          "$ref": "#/$defs/stringList"
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "data_vintage": {
+          "type": "string",
+          "format": "date"
+        },
+        "lineage_id": {
+          "$ref": "#/$defs/nonBlankString"
         }
       }
     },

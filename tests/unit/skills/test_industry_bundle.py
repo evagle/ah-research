@@ -32,6 +32,13 @@ COMPARABLE_SERIES_ROLES = {
     "subject-market-share",
     "competitor-market-share",
 }
+SERIES_FINGERPRINTS = {
+    "historical-market-size": "1" * 64,
+    "industry-forecast": "2" * 64,
+    "market-concentration": "3" * 64,
+    "subject-market-share": "4" * 64,
+    "competitor-market-share": "5" * 64,
+}
 
 
 def load_bundle_module():
@@ -105,6 +112,101 @@ def default_required_periods(role: str) -> tuple[str, ...]:
 
 def complete_role_outcomes() -> list[dict[str, object]]:
     return [role_outcome(role) for role in reversed(REQUIRED_ROLES)]
+
+
+def series_descriptor(
+    role: str,
+    periods: list[str],
+    *,
+    data_vintage: str = "2025-12-31",
+    published_at: str = "2026-02-01",
+    channel_scope: str = "all retail channels",
+    denominator: str = "total in-scope retail value",
+) -> dict[str, object]:
+    metric = {
+        "historical-market-size": "annual retail market size",
+        "industry-forecast": "annual retail market size",
+        "market-concentration": "CR5 share",
+        "subject-market-share": "subject market share",
+        "competitor-market-share": "competitor market share",
+    }[role]
+    unit = "CNY billion" if role in {"historical-market-size", "industry-forecast"} else "percent"
+    return {
+        "series_id": f"{role}:{data_vintage}",
+        "market_definition_fingerprint": PRIMARY_SCOPE_FINGERPRINT,
+        "series_fingerprint": SERIES_FINGERPRINTS[role],
+        "metric": metric,
+        "unit": unit,
+        "measurement_basis": "retail value",
+        "channel_scope": channel_scope,
+        "denominator": denominator,
+        "period_semantics": "calendar-year",
+        "value_status": "forecast" if role == "industry-forecast" else "historical-estimate",
+        "periods": periods,
+        "published_at": published_at,
+        "data_vintage": data_vintage,
+        "lineage_id": f"lineage-{role}",
+    }
+
+
+def role_outcome_v11(
+    role: str,
+    *,
+    state: str = "accepted",
+    claim_states: list[dict[str, str]] | None = None,
+    required_periods: list[str] | None = None,
+    accepted_periods: list[str] | None = None,
+    missing_periods: list[str] | None = None,
+    missing_coverage: list[str] | None = None,
+    accepted_evidence_count: int | None = None,
+    series: list[dict[str, object]] | None = None,
+    gap_reason: str | None = None,
+    not_applicable_reason: str | None = None,
+) -> dict[str, object]:
+    claim_ids = (
+        [claim_state["claim_id"] for claim_state in claim_states]
+        if claim_states is not None
+        else [f"pop-mart-{role}"]
+    )
+    outcome = role_outcome(
+        role,
+        state=state,
+        claim_ids=claim_ids,
+        required_periods=required_periods,
+        accepted_periods=accepted_periods,
+        missing_periods=missing_periods,
+        gap_reason=gap_reason,
+        not_applicable_reason=not_applicable_reason,
+    )
+    accepted = outcome["accepted_periods"]
+    assert isinstance(accepted, list)
+    if accepted_evidence_count is None:
+        accepted_evidence_count = (
+            0 if state in {"exhausted", "not-applicable"} else max(1, len(accepted))
+        )
+    if series is None:
+        series = (
+            [series_descriptor(role, accepted)]
+            if role in COMPARABLE_SERIES_ROLES and accepted_evidence_count
+            else []
+        )
+    outcome.update(
+        {
+            "claim_states": claim_states or [{"claim_id": claim_ids[0], "state": state}],
+            "accepted_evidence_count": accepted_evidence_count,
+            "missing_coverage": missing_coverage or [],
+            "market_definition_fingerprints": [PRIMARY_SCOPE_FINGERPRINT],
+            "scope_fingerprints": sorted(
+                {descriptor["series_fingerprint"] for descriptor in series}
+            ),
+            "series": series,
+        }
+    )
+    return outcome
+
+
+def complete_role_outcomes_v11() -> list[dict[str, object]]:
+    return [role_outcome_v11(role) for role in reversed(REQUIRED_ROLES)]
 
 
 def test_period_windows_derive_from_as_of() -> None:
@@ -485,3 +587,261 @@ def test_unresolved_claim_ids_derive_from_partial_exhausted_and_blocked_roles() 
         "pop-mart-subject-market-share",
         "pop-mart-competitor-market-share",
     ]
+
+
+def test_v11_roles_share_market_definition_not_series_fingerprint() -> None:
+    bundle = load_bundle_module()
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=complete_role_outcomes_v11(),
+    )
+
+    assert payload["schema_version"] == "1.1"
+    assert payload["status"] == "complete"
+    comparable_roles = [
+        role for role in payload["roles"] if role["role"] in COMPARABLE_SERIES_ROLES
+    ]
+    assert {role["market_definition_fingerprints"][0] for role in comparable_roles} == {
+        PRIMARY_SCOPE_FINGERPRINT
+    }
+    assert len({role["scope_fingerprints"][0] for role in comparable_roles}) == len(
+        COMPARABLE_SERIES_ROLES
+    )
+
+
+def test_claim_states_keep_accepted_forecast_claims_terminal() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    forecast = next(outcome for outcome in outcomes if outcome["role"] == "industry-forecast")
+    forecast.update(
+        {
+            "claim_ids": [
+                "pop-mart-industry-forecast",
+                "pop-mart-industry-forecast:prior-vintage",
+                "pop-mart-industry-forecast:later-vintage",
+            ],
+            "claim_states": [
+                {"claim_id": "pop-mart-industry-forecast", "state": "accepted"},
+                {
+                    "claim_id": "pop-mart-industry-forecast:prior-vintage",
+                    "state": "accepted",
+                },
+                {
+                    "claim_id": "pop-mart-industry-forecast:later-vintage",
+                    "state": "exhausted",
+                },
+            ],
+            "state": "partial",
+            "missing_coverage": ["later forecast vintage not publicly available"],
+            "gap_reason": "The later-vintage version chase exhausted all routes",
+        }
+    )
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    assert payload["status"] == "publishable-with-gaps"
+    assert payload["unresolved_claim_ids"] == ["pop-mart-industry-forecast:later-vintage"]
+    assert "pop-mart-industry-forecast" not in payload["unresolved_claim_ids"]
+    assert "pop-mart-industry-forecast:prior-vintage" not in payload["unresolved_claim_ids"]
+
+
+@pytest.mark.parametrize("years", (6, 10))
+def test_completed_history_accepts_six_to_ten_year_windows(years: int) -> None:
+    bundle = load_bundle_module()
+    periods = list(bundle.completed_annual_periods(AS_OF, years))
+    outcomes = complete_role_outcomes_v11()
+    for role_name in (
+        "historical-market-size",
+        "subject-market-share",
+        "competitor-market-share",
+    ):
+        role = next(outcome for outcome in outcomes if outcome["role"] == role_name)
+        role["required_periods"] = periods
+        role["accepted_periods"] = periods
+        role["accepted_evidence_count"] = len(periods)
+        role["series"] = [series_descriptor(role_name, periods)]
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    assert payload["status"] == "complete"
+
+
+@pytest.mark.parametrize(
+    "role_name",
+    ("market-definition", "current-partial-period", "industry-drivers"),
+)
+def test_non_period_partial_roles_retain_evidence_and_missing_coverage(
+    role_name: str,
+) -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    role = next(outcome for outcome in outcomes if outcome["role"] == role_name)
+    role.update(
+        {
+            "state": "partial",
+            "claim_states": [{"claim_id": role["claim_ids"][0], "state": "partial"}],
+            "accepted_evidence_count": 1,
+            "missing_coverage": ["one required non-period evidence dimension"],
+            "gap_reason": "Accepted evidence does not cover every required dimension",
+        }
+    )
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    retained = next(item for item in payload["roles"] if item["role"] == role_name)
+    assert payload["status"] == "publishable-with-gaps"
+    assert retained["accepted_evidence_count"] == 1
+    assert retained["missing_coverage"] == ["one required non-period evidence dimension"]
+
+
+def test_blocked_role_retains_accepted_observations_and_missing_coverage() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    historical = next(
+        outcome for outcome in outcomes if outcome["role"] == "historical-market-size"
+    )
+    historical.update(
+        {
+            "state": "blocked",
+            "claim_states": [{"claim_id": historical["claim_ids"][0], "state": "blocked"}],
+            "accepted_periods": ["2021", "2022", "2023", "2024"],
+            "missing_periods": ["2025"],
+            "accepted_evidence_count": 4,
+            "missing_coverage": ["2025 provider table blocked by access controls"],
+            "series": [
+                series_descriptor(
+                    "historical-market-size",
+                    ["2021", "2022", "2023", "2024"],
+                )
+            ],
+            "gap_reason": "The latest provider table could not be accessed",
+        }
+    )
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    retained = next(role for role in payload["roles"] if role["role"] == "historical-market-size")
+    assert payload["status"] == "blocked"
+    assert retained["accepted_periods"] == ["2021", "2022", "2023", "2024"]
+    assert retained["missing_periods"] == ["2025"]
+
+
+def test_forecast_vintages_remain_separate_series() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    forecast = next(outcome for outcome in outcomes if outcome["role"] == "industry-forecast")
+    forecast["series"] = [
+        series_descriptor(
+            "industry-forecast",
+            ["2026", "2027", "2028", "2029", "2030"],
+            data_vintage="2025-06-30",
+            published_at="2025-07-15",
+        ),
+        series_descriptor(
+            "industry-forecast",
+            ["2026", "2027", "2028", "2029", "2030"],
+            data_vintage="2025-12-31",
+            published_at="2026-02-01",
+        ),
+    ]
+
+    payload = bundle.evaluate_industry_bundle(
+        subject="Pop Mart",
+        as_of=AS_OF,
+        primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+        role_outcomes=outcomes,
+    )
+
+    retained = next(role for role in payload["roles"] if role["role"] == "industry-forecast")
+    assert [series["data_vintage"] for series in retained["series"]] == [
+        "2025-06-30",
+        "2025-12-31",
+    ]
+
+
+@pytest.mark.parametrize(
+    ("field", "incompatible_value"),
+    (
+        ("channel_scope", "online retail only"),
+        ("denominator", "issuer accounting revenue"),
+    ),
+)
+def test_share_roles_reject_channel_or_denominator_mismatch(
+    field: str,
+    incompatible_value: str,
+) -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    competitor = next(
+        outcome for outcome in outcomes if outcome["role"] == "competitor-market-share"
+    )
+    competitor_series = competitor["series"][0]
+    assert isinstance(competitor_series, dict)
+    competitor_series[field] = incompatible_value
+
+    with pytest.raises(ValueError, match=field):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+def test_shifted_forecast_window_is_rejected() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    forecast = next(outcome for outcome in outcomes if outcome["role"] == "industry-forecast")
+    shifted = ["2027", "2028", "2029", "2030", "2031"]
+    forecast["required_periods"] = shifted
+    forecast["accepted_periods"] = shifted
+    forecast["series"] = [series_descriptor("industry-forecast", shifted)]
+
+    with pytest.raises(ValueError, match="starting at 2026"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+def test_stale_only_concentration_cannot_be_accepted() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    concentration = next(
+        outcome for outcome in outcomes if outcome["role"] == "market-concentration"
+    )
+    concentration["accepted_periods"] = ["2024"]
+    concentration["series"] = [series_descriptor("market-concentration", ["2024"])]
+
+    with pytest.raises(ValueError, match="latest completed annual period"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )

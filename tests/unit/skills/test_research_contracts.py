@@ -765,6 +765,12 @@ def test_industry_analysis_bundle_schema_is_registered() -> None:
     assert alias == canonical
 
 
+def test_industry_bundle_schema_accepts_valid_payload() -> None:
+    contracts = load_contracts_module()
+
+    contracts.validate_payload("industry-bundle", industry_bundle_payload())
+
+
 def test_industry_bundle_schema_rejects_unknown_role_state() -> None:
     contracts = load_contracts_module()
     payload = industry_bundle_payload()
