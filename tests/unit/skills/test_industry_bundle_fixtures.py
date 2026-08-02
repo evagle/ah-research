@@ -46,3 +46,17 @@ def test_cross_industry_bundle_fixture(
     assert [role["role"] for role in result["roles"]] == list(REQUIRED_ROLES)
     assert result["status"] == expected_status
     assert result["unresolved_claim_ids"] == payload["unresolved_claim_ids"]
+
+
+def test_pop_mart_fixture_records_legacy_forecast_same_lineage() -> None:
+    payload = load_fixture("pop-mart.yaml")
+
+    legacy_forecast_sources = payload["legacy_forecast_sources"]
+    assert len(legacy_forecast_sources) == 2
+    assert [source["source"] for source in legacy_forecast_sources] == [
+        "KPMG old forecast",
+        "TOP TOY old forecast",
+    ]
+    assert {source["lineage_id"] for source in legacy_forecast_sources} == {
+        "frost-sullivan-pop-toys-rsv-forecast"
+    }

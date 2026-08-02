@@ -103,6 +103,11 @@ scope_breaks:
     to_scope_fingerprint: "1111111111111111111111111111111111111111111111111111111111111111"
     reason: "The 2024 RSV concentration snapshot and the older KPMG or TOP TOY Frost & Sullivan RSV forecast are not comparable to the 2025 to 2030 GMV primary scope."
     comparable: false
+legacy_forecast_sources:
+  - source: "KPMG old forecast"
+    lineage_id: "frost-sullivan-pop-toys-rsv-forecast"
+  - source: "TOP TOY old forecast"
+    lineage_id: "frost-sullivan-pop-toys-rsv-forecast"
 unresolved_claim_ids:
   - "pop-mart-subject-market-share"
   - "pop-mart-competitor-market-share"
