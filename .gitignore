@@ -245,6 +245,9 @@ tmp/source-discovery/
 .vscode/
 .idea/
 
+# Local agent worktrees
+.claude/worktrees/
+
 # Third-party copyrighted materials (read-only research cache, do not commit)
 data/research/唐书房/*.pdf
 data/research/唐书房/*.txt
