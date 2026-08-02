@@ -6,6 +6,7 @@ import hashlib
 import importlib.util
 import json
 import re
+import unicodedata
 from collections.abc import Mapping, Sequence
 from datetime import datetime
 from pathlib import Path
@@ -225,6 +226,8 @@ def _validate_candidate(payload: Mapping[str, object]) -> None:
     values = _required_mappings(payload, "values")
     reconciliations = _required_mappings(payload, "reconciliations")
     _validate_candidate_identity(payload)
+    if _required_string(payload, "schema_version") == "1.1":
+        _validate_v11_candidate_fingerprints(payload)
     if _required_string(payload, "lineage_id") != lineage_id(payload):
         raise ValueError("candidate lineage_id does not match normalized provenance")
     _validate_period_semantics(frequency, period_semantics, values)
@@ -298,6 +301,44 @@ def _validate_candidate(payload: Mapping[str, object]) -> None:
         raise ValueError(
             "candidate values with mixed unit or definition require a reproducible reconciliation"
         )
+
+
+def market_definition_fingerprint(payload: Mapping[str, object]) -> str:
+    """Return the metric-independent market-definition identity."""
+    scope = payload.get("scope")
+    dimensions = scope if isinstance(scope, Mapping) else payload
+    identity = {
+        "channel_scope": _normalized_text(dimensions.get("channel_scope")),
+        "geographies": _normalized_labels(dimensions.get("geographies")),
+        "industries": _normalized_labels(dimensions.get("industries")),
+        "population": _normalized_text(dimensions.get("population")),
+        "product_scope": _normalized_text(dimensions.get("product_scope")),
+    }
+    return canonical_sha256(identity)
+
+
+def series_fingerprint(candidate: Mapping[str, object]) -> str:
+    """Return the exact metric/unit/measurement identity for one series."""
+    scope = _required_mapping(candidate, "scope")
+    identity = {
+        "canonical_unit": _normalized_text(candidate.get("canonical_unit")),
+        "denominator": _normalized_text(scope.get("denominator")),
+        "frequency": _normalized_text(candidate.get("frequency")),
+        "market_definition_fingerprint": market_definition_fingerprint(candidate),
+        "measurement_basis": _normalized_text(scope.get("measurement_basis")),
+        "metric": _normalized_text(candidate.get("metric")),
+        "period_semantics": _normalized_text(candidate.get("period_semantics")),
+    }
+    return canonical_sha256(identity)
+
+
+def _validate_v11_candidate_fingerprints(payload: Mapping[str, object]) -> None:
+    if _required_string(payload, "market_definition_fingerprint") != (
+        market_definition_fingerprint(payload)
+    ):
+        raise ValueError("candidate market definition fingerprint does not match its scope")
+    if _required_string(payload, "series_fingerprint") != series_fingerprint(payload):
+        raise ValueError("candidate series fingerprint does not match its series identity")
 
 
 def _validate_candidate_identity(payload: Mapping[str, object]) -> None:
@@ -716,6 +757,18 @@ def canonical_sha256(value: object) -> str:
     except (TypeError, ValueError) as exc:
         raise ValueError(f"value is not canonical JSON: {exc}") from exc
     return hashlib.sha256(canonical).hexdigest()
+
+
+def _normalized_labels(value: object) -> tuple[str, ...]:
+    if not isinstance(value, Sequence) or isinstance(value, (str, bytes)):
+        return ()
+    return tuple(sorted(_normalized_text(item) for item in value if isinstance(item, str)))
+
+
+def _normalized_text(value: object) -> str:
+    if not isinstance(value, str):
+        return ""
+    return " ".join(unicodedata.normalize("NFKC", value).casefold().split())
 
 
 def _route_identity(route: Mapping[str, object]) -> tuple[str, int, str, str]:
