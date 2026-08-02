@@ -19,6 +19,18 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
 
 <!-- **机器引用清单:** `C25-FS`。 -->
 
+**置信度:** 中
+
+**管理层口径校核:** 管理层计划仍需验证。
+
+## 风险
+
+**引用:**
+- 年报第20页
+- 交易所公告第3页
+
+**置信度:** 高
+
 <div class="signal-list">
   <div class="signal-item signal-positive"><span class="signal-dot"></span><span>盈利能力强。</span></div>
   <div class="signal-item signal-negative"><span class="signal-dot"></span><span>集中度较高。</span></div>
@@ -72,7 +84,12 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert ".hierarchy-total" in html
     assert "font-variant-numeric: tabular-nums" in html
     assert "机器引用清单" not in html
-    assert "年报第10页" in html
+    assert "年报第10页" not in html
+    assert "年报第20页" not in html
+    assert "交易所公告第3页" not in html
+    assert "置信度:" not in html
+    assert "管理层口径校核:" not in html
+    assert "管理层计划仍需验证" not in html
     assert "@media (max-width: 900px)" in html
     assert ".signal-positive" in html
     assert ".signal-negative" in html

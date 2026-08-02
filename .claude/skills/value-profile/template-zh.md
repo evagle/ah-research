@@ -27,7 +27,7 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 1. Part 0-5的结构（section总数由skill按置信度字段动态计算）+字段schema:填写区/引用/置信度/管理层口径校核。
 2. 每 section 的 **引导思考问题** (让填写者想清楚, 不是让他抄规则)。
 
-**证据纪律reminder**:表格单元格可直接带页码或URL;叙述段数字在本节`**引用:**`逐条映射来源。找不到写`待补充—年报未披露`,绝不编造（规则权威来源见SKILL §2.1.2）。
+**证据纪律reminder**:表格单元格可直接带页码或URL;叙述段数字在本节`**引用:**`逐条映射来源。缺少分析所需数据时写“缺乏数据，无法分析”，绝不编造或展开检索失败过程（规则权威来源见SKILL §2.1.2）。
 
 每个section自己的`**机器引用清单:**`逐条使用`section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote`字段;事件文书引用另保存event manifest哈希、文书URL和内容哈希。最终profile必须将清单放在HTML注释中,不在渲染后的Markdown中显示;不得把其他section的引用清单当作本节证据。
 
@@ -37,8 +37,6 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 ## Part 0 — 封面 & 执行摘要
 
-<!-- 工作流字段:证据阶段/运行状态/失败原因/人工处理清单。成功终态要求证据阶段已绑定且运行状态已完成。 -->
-
 | 字段 | 值 |
 |---|---|
 | **股票代码（ticker）** | `<code>.<exchange>` — 例: 600519.SH |
@@ -47,6 +45,14 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 | **报告日期（report_date）** | YYYY-MM-DD |
 | **信息截止日（AS_OF）** | YYYY-MM-DD |
 | **目标财年（end_year）:** | YYYY |
+| **研究者** | <name> |
+
+**仍需补充:** <只写会实质影响判断的缺失证据；没有则写“无”>
+
+<!-- 以下为机器工作流字段
+
+| 字段 | 值 |
+|---|---|
 | **查询发行人代码（按上市地）:** | `{"SH":"600000","HK":"01234"}`或单市场映射 |
 | **counterpart_filing_manifests路径及SHA-256映射:** | `{"HK":{"path":"<absolute-content-addressed-json-path>","sha256":"<sha256>"}}`或`{}` |
 | **市场数据日期:** | YYYY-MM-DD（不得晚于AS_OF） |
@@ -60,7 +66,9 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 | **年报manifest SHA-256:** | <sha256> |
 | **监管事件manifest路径:** | <absolute-json-path> |
 | **监管事件manifest SHA-256:** | <sha256> |
-| **研究者** | <name> |
+
+成功终态要求证据阶段已绑定且运行状态已完成。
+-->
 
 ### 执行摘要（本节最后填写）
 
@@ -530,7 +538,7 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 <!-- 行业专属指标附加检查 — 公司若落在白酒/银行/互联网平台/消费品/资源周期/高杠杆地产/公用事业, §2.1–§2.6填写区必须额外覆盖对应行业的 KPI 附加检查, 详细 KPI 表 + 健康阈值 + 风险 + 估值锚见 `.claude/skills/value-profile/references/industry-overlays.md` §<对应行业>。
 
-数据找不到标 "待补充 — 年报未披露", 绝不编造。落在 "不做清单" 行业 (见 industry-overlays §8) → 整份 profile 降级为 "观察档案, 不下注"。
+缺少分析所需数据时写“缺乏数据，无法分析”，绝不编造或展开检索失败过程。落在 "不做清单" 行业 (见 industry-overlays §8) → 整份 profile 降级为 "观察档案, 不下注"。
 -->
 
 **industry_bundle状态:** <complete/publishable-with-gaps/blocked>
@@ -2229,6 +2237,7 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 **建议动作:** <Mode A记录建议;Mode B记录供父skill复核的建议>
 
+<!-- 以下字段供工作流恢复和校验，不在HTML阅读版显示。
 **父级动作请求:** <Mode A写不适用;Mode B填写类型化action_requests>
 
 **动作执行台账:** <每项含request_id/target_section_id/requested_confidence/execution_status/execution_result>
@@ -2236,6 +2245,7 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 **排雷终态:** <completed/manual_review/output_quality_failure>
 
 **排雷失败原因:** <无/具体证据缺口/具体格式或一致性错误>
+-->
 
 **引用:**
 - [待填写;小结中的叙述数字逐条映射到上表页码或独立来源]
