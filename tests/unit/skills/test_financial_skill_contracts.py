@@ -3131,6 +3131,134 @@ def test_user_facing_chinese_explains_sensitivity_analysis_naturally() -> None:
         assert stiff_phrase not in style
 
 
+def test_value_profile_prose_is_written_for_human_readers() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for requirement in (
+        "不强制套用“结论、数据、风险”三段式",
+        "像研究员自己会写的分析笔记",
+        "先回答具体问题，再按需要给数据、表格和解释",
+        "不为了显得正式而补齐过渡句、总结句或方法说明",
+        "事实直接写；推断用“可能”“更可能”“还要看”",
+        "数据 → 问题 → 原因 → 商业含义",
+        "表前用自然的一两句话说明分类维度、报告期或要回答的问题",
+        "允许使用“先看”“更值得注意的是”“接着看”",
+        "不复述表格已经清楚呈现的层级、包含关系、合计或算术校验",
+        "AI操作提醒、处理步骤和防错指令不得进入可见正文",
+        "只有在口径差异会实质改变比较或结论时",
+        "这句话是在帮助读者理解公司，还是只在提醒AI如何处理资料",
+        "同一证据缺口只在最相关章节完整解释一次",
+        "不能陷入无止境的数据瑕疵重复描述",
+        "护城河来源写经济机制",
+        "不写“测试通过”“证据窗口完整”“连续序列未完成”等研究流程状态",
+    ):
+        assert requirement in style
+
+    canonical = "正文可以是一段自然完整的分析，不按固定句数或固定模板切割"
+    assert canonical in profile
+    assert canonical in operations
+
+    metadata_rule = "引用、置信度和管理层口径校核属于证据层"
+    assert metadata_rule in profile
+    assert metadata_rule in operations
+    assert metadata_rule in style
+    assert "HTML阅读版统一隐藏" in style
+
+
+def test_value_profile_states_missing_data_once_without_research_narration() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for source in (profile, operations, style):
+        assert "缺乏数据，无法分析" in source
+        assert "不展开检索失败、来源报错或底层缺项清单" in source
+        assert "不列举缺失字段、已查来源、旧年份样本或接口错误" in source
+        assert "句后不得继续解释缺什么或为什么没找到" in source
+
+    assert "数据不足时停止在简洁结论" in style
+    assert "子问题缺少数据时" in style
+    assert "客户画像缺乏数据，无法分析。" in style
+    assert "内部恢复信息继续留在隐藏字段" in style
+
+
+def test_value_profile_hides_machine_only_workflow_fields() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    workflow_block = template.split("**建议动作:**", 1)[1].split("**引用:**", 1)[0]
+
+    assert "机器流程字段必须保留，但统一放入HTML注释" in profile
+    assert "<!--" in workflow_block
+    assert "-->" in workflow_block
+    for field in ("动作执行台账", "排雷终态", "排雷失败原因"):
+        assert field in workflow_block
+
+
+def test_value_profile_research_is_question_driven_not_template_filling() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for requirement in (
+        "模板是查漏清单，不是文章提纲",
+        "框架提供问题库和分析工具，不提供现成答案",
+        "不能把同一套分析顺序和指标机械套到所有公司",
+        "先形成2-5个公司特有的关键问题",
+        "研究顺序由关键问题和新增证据决定",
+        "完成正文后再用模板反查漏项",
+        "事实、管理层解释、分析者判断和未知项",
+        "类比先帮助理解，再说明两者在哪里不同",
+        "新证据推翻旧判断时，明确更正",
+        "风险按发生机制、发生可能性、影响程度和应对能力",
+    ):
+        assert requirement in style
+
+    canonical = "先问题驱动研究，后模板查漏"
+    assert canonical in profile
+    assert canonical in operations
+
+
+def test_value_profile_hides_part0_workflow_metadata_from_readers() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    part0_header = template.split("## Part 0", 1)[1].split("### 执行摘要", 1)[0]
+    hidden = part0_header.split("<!-- 以下为机器工作流字段", 1)[1].split("-->", 1)[0]
+
+    assert "**仍需补充:**" in part0_header
+    for field in (
+        "查询发行人代码",
+        "manifest路径",
+        "证据阶段",
+        "运行状态",
+        "失败原因",
+        "人工处理清单",
+    ):
+        assert field in hidden
+    assert "Part 0内部工作流字段统一放入HTML注释" in profile
+
+
+def test_pop_mart_moat_discusses_economic_mechanisms_not_research_status() -> None:
+    markdown = read(REPO_ROOT / "profiles" / "09992.HK-2026-07-29.md")
+    html = read(REPO_ROOT / "profiles" / "09992.HK-2026-07-29.html")
+    moat = markdown.split("## §3 护城河分析", 1)[1].split("## §4 管理质量与企业文化", 1)[0]
+
+    for phrase in (
+        "最新年度横截面测试通过",
+        "连续五年测试",
+        "2023年份额仍缺",
+        "对手测试因无同口径份额序列而不能打分",
+    ):
+        assert phrase not in moat
+
+    for mechanism in ("品牌和IP偏好", "多IP开发", "会员和直营渠道", "外包生产"):
+        assert mechanism in moat
+
+    market_share_gap_mentions = re.findall(r"2023年[^。；<]{0,30}(?:缺失|仍缺|未取得)", html)
+    assert len(market_share_gap_mentions) <= 1
+
+
 def test_product_revenue_mix_preserves_hierarchy_and_separates_dimensions() -> None:
     product_skill = read(SKILL_PATHS["product-analysis"])
     profile_skill = read(SKILL_PATHS["value-profile"])

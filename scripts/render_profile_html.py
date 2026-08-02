@@ -14,15 +14,41 @@ from markdown_it.token import Token
 
 COMMENT_PATTERN = re.compile(r"<!--.*?-->", re.DOTALL)
 TABLE_PATTERN = re.compile(r"(<table(?:\s[^>]*)?>.*?</table>)", re.DOTALL | re.IGNORECASE)
+READER_METADATA_PATTERN = re.compile(
+    r"^\*\*(引用|置信度|管理层口径校核)[:：]\*\*(.*)$",
+    re.DOTALL,
+)
 
 
 def _heading_text(token: Token) -> str:
     return "".join(child.content for child in token.children or [] if child.type != "image")
 
 
+def _strip_reader_metadata(source: str) -> str:
+    visible: list[str] = []
+    skip_reference_list = False
+
+    for line in source.splitlines(keepends=True):
+        stripped = line.strip()
+        metadata = READER_METADATA_PATTERN.match(stripped)
+        if metadata is not None:
+            skip_reference_list = metadata.group(1) == "引用" and not metadata.group(2).strip()
+            continue
+
+        if skip_reference_list:
+            if not stripped or re.match(r"^[-*+]\s+", stripped) or line.startswith((" ", "\t")):
+                continue
+            skip_reference_list = False
+
+        visible.append(line)
+
+    return "".join(visible)
+
+
 def _render_markdown(source: str) -> tuple[str, str]:
     markdown = MarkdownIt("commonmark", {"html": True}).enable("table")
-    tokens = markdown.parse(COMMENT_PATTERN.sub("", source))
+    without_comments = COMMENT_PATTERN.sub("", source)
+    tokens = markdown.parse(_strip_reader_metadata(without_comments))
     headings: list[tuple[int, str, str]] = []
 
     for index, token in enumerate(tokens):
