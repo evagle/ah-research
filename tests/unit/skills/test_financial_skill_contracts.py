@@ -314,6 +314,12 @@ def test_product_analysis_requires_relative_competition_and_evidence() -> None:
     assert "2至3项" in skill
     assert "高毛利" in skill
     assert "不能单独证明" in skill
+    for question in (
+        "客户为什么从它这里购买并持续复购或续约",
+        "为什么其他资本没有提供更高性价比",
+        "假设巨头携巨资进入",
+    ):
+        assert question in skill
     for grade in ("`高`", "`中`", "`低`", "`需人工`"):
         assert grade in skill
     assert "行为证据" in mechanisms
@@ -328,6 +334,7 @@ def test_value_profile_delegates_product_sections_without_moving_moat_ownership(
     assert "`part1/§1.3`" in skill
     assert "`moat_handoff`" in skill
     assert "最终护城河" in skill
+    assert "产品竞争力三问结论" in skill
     assert "产品与流程证据" in template
 
 
@@ -366,6 +373,11 @@ def test_pop_mart_product_sections_apply_product_analysis_structure() -> None:
 
     for requirement in (
         "**客户任务与购买标准:**",
+        "**产品竞争力三问结论:**",
+        "盲盒随机性只是放大器",
+        "每次购买时重新赢得客户",
+        "收藏者社区",
+        "IP命中率",
         "**竞争阶梯与龙头差距:**",
         "直接竞品：TOP TOY",
         "替代方案：布鲁可",
@@ -386,7 +398,13 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
         "financial-redflag-scan/references/mode-b-response.schema.json",
     ):
         assert schema in skill
-    max_orchestrator_lines = 700
+    for reference in (
+        "references/operations.md",
+        "references/profile-writing-style.md",
+        "references/reader-rendering.md",
+    ):
+        assert reference in skill
+    max_orchestrator_lines = 625
     assert len(skill.splitlines()) < max_orchestrator_lines
 
 
@@ -3142,7 +3160,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "解决缺口" not in style_without_fixed_industry_heading
     for natural_phrase in ("补齐资料", "完成核验", "处理完这个问题"):
         assert natural_phrase in style
-    assert "Step 3c必须检查并改写“闭合”" in profile
+    assert "profile-writing-style.md" in profile
     for subskill in (redflag, product, management):
         assert "profile-writing-style.md" in subskill
         assert "不得把`close/closed`直译为“闭合”" in subskill
@@ -3156,10 +3174,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
         read(SKILLS_ROOT / "product-analysis" / "references" / "value-mechanisms.md"),
         read(SKILLS_ROOT / "management-analysis" / "references" / "related-party-alignment.md"),
     )
-    allowed_rule_phrases = (
-        "Step 3c必须检查并改写“闭合”",
-        "不得把`close/closed`直译为“闭合”",
-    )
+    allowed_rule_phrases = ("不得把`close/closed`直译为“闭合”",)
     for source in user_facing_sources:
         offending_lines = [
             line
@@ -3208,14 +3223,12 @@ def test_value_profile_prose_is_written_for_human_readers() -> None:
     ):
         assert requirement in style
 
-    canonical = "正文可以是一段自然完整的分析，不按固定句数或固定模板切割"
-    assert canonical in profile
-    assert canonical in operations
-
-    metadata_rule = "引用、置信度和管理层口径校核属于证据层"
-    assert metadata_rule in profile
-    assert metadata_rule in operations
-    assert metadata_rule in style
+    assert "profile-writing-style.md" in profile
+    assert "profile-writing-style.md" in operations
+    assert "reader-rendering.md" in profile
+    assert "reader-rendering.md" in operations
+    assert "正文可以是一段自然完整的分析，不按固定句数或固定模板切割" in style
+    assert "引用、置信度和管理层口径校核属于证据层" in style
     assert "HTML阅读版统一隐藏" in style
 
 
@@ -3224,11 +3237,15 @@ def test_value_profile_states_missing_data_once_without_research_narration() -> 
     operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
     style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
 
-    for source in (profile, operations, style):
-        assert "缺乏数据，无法分析" in source
-        assert "不展开检索失败、来源报错或底层缺项清单" in source
-        assert "不列举缺失字段、已查来源、旧年份样本或接口错误" in source
-        assert "句后不得继续解释缺什么或为什么没找到" in source
+    assert "profile-writing-style.md" in profile
+    assert "profile-writing-style.md" in operations
+    for requirement in (
+        "缺乏数据，无法分析",
+        "不展开检索失败、来源报错或底层缺项清单",
+        "不列举缺失字段、已查来源、旧年份样本或接口错误",
+        "句后不得继续解释缺什么或为什么没找到",
+    ):
+        assert requirement in style
 
     assert "数据不足时停止在简洁结论" in style
     assert "子问题缺少数据时" in style
@@ -3238,10 +3255,13 @@ def test_value_profile_states_missing_data_once_without_research_narration() -> 
 
 def test_value_profile_hides_machine_only_workflow_fields() -> None:
     profile = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
     workflow_block = template.split("**建议动作:**", 1)[1].split("**引用:**", 1)[0]
 
-    assert "机器流程字段必须保留，但统一放入HTML注释" in profile
+    assert "profile-writing-style.md" in profile
+    assert "机器流程字段" in style
+    assert "HTML注释" in style
     assert "<!--" in workflow_block
     assert "-->" in workflow_block
     for field in ("动作执行台账", "排雷终态", "排雷失败原因"):
@@ -3274,6 +3294,7 @@ def test_value_profile_research_is_question_driven_not_template_filling() -> Non
 
 def test_value_profile_hides_part0_workflow_metadata_from_readers() -> None:
     profile = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
     part0_header = template.split("## Part 0", 1)[1].split("### 执行摘要", 1)[0]
     hidden = part0_header.split("<!-- 以下为机器工作流字段", 1)[1].split("-->", 1)[0]
@@ -3288,7 +3309,8 @@ def test_value_profile_hides_part0_workflow_metadata_from_readers() -> None:
         "人工处理清单",
     ):
         assert field in hidden
-    assert "Part 0内部工作流字段统一放入HTML注释" in profile
+    assert "profile-writing-style.md" in profile
+    assert "Part 0内部工作流字段保留在Markdown的HTML注释中" in style
 
 
 def test_pop_mart_moat_discusses_economic_mechanisms_not_research_status() -> None:
@@ -3331,7 +3353,7 @@ def test_product_revenue_mix_preserves_hierarchy_and_separates_dimensions() -> N
     ):
         assert requirement in product_skill
 
-    assert "层级收入表" in profile_skill
+    assert "profile-writing-style.md" in profile_skill
     assert "层级收入表" in writing_style
     assert "层级收入表" in template
 
@@ -3349,7 +3371,7 @@ def test_value_profile_publishes_markdown_and_html_companions() -> None:
 
 
 def test_value_profile_exec_summary_uses_compact_signal_blocks() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
 
     for requirement in (
         "状态标题 + 无前缀结论句 + 三色圆点证据",
@@ -3357,7 +3379,7 @@ def test_value_profile_exec_summary_uses_compact_signal_blocks() -> None:
         "`signal-list`",
         "绿色=正面、红色=负面、黄色=待验证",
     ):
-        assert requirement in skill
+        assert requirement in style
 
 
 def test_value_profile_preserves_confirmed_partial_market_share_trends() -> None:
@@ -4863,10 +4885,12 @@ def test_value_profile_supports_historical_as_of_and_end_year() -> None:
 
 def test_ability_circle_questions_only_run_in_section_18() -> None:
     skill = read(SKILL_PATHS["value-profile"])
-    prompt = skill.split("### §4.7子 agent prompt 模板", 1)[1]
+    dispatch = skill.split("#### 3b. Scoped research dispatch", 1)[1].split(
+        "#### 3c. Main-agent review", 1
+    )[0]
 
-    assert "§1 subsection 必需" not in prompt
-    assert "仅当目标为§1.8" in prompt
+    assert "§1 subsection 必需" not in dispatch
+    assert "仅当目标为§1.8" in dispatch
 
 
 def test_failed_valuation_prerequisite_uses_qualitative_finalizer() -> None:

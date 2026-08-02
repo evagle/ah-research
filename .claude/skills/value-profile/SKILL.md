@@ -15,6 +15,8 @@ description: Use when a user asks for a complete value-investing profile or full
 
 **读者渲染契约**:每次生成HTML前必须完整读取`references/reader-rendering.md`。研究内容和证据在上游section流程中完成；渲染层只执行读者语气编辑、确定性投影、机器字段负向检查和纯HTML转换，不得新增事实、改数字或改变投资判断。详细过滤、控制台报告和失败条件只以该文件为准。
 
+**操作与写作契约**:详细执行只以`references/operations.md`为准；面向读者的正文只以`references/profile-writing-style.md`为准。主skill只保留编排、验收和所有权边界，不复制两份reference的正文。
+
 ## §0 Skill 运行方式
 
 This skill runs as the **main Claude Code session agent** and orchestrates research via `general-purpose` subagents. It is an instruction document for the main model, not library code. The main agent owns file I/O, user 确认节点, and review; subagents do scoped PDF reads and web research.
@@ -436,7 +438,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - **管理层口径校核** (§2.11.4) — Part 1 §1-§5必填。
 - **5步护城河分析** (§3必需):非银行按a分类（大/准/强/省/专）+b可证伪检验+c跨年定量追溯+d悲观情景+e宽/中/窄/弱标签执行。非银行必须完成资本消耗测试,并从提价、对手、切换成本、ROE路标中任选1项。**银行分支**只运行`industry-overlays.md`定义的银行quality bundle并据此完成同样的定性、可证伪、跨年、压力情景和标签步骤,不要求毛利率、CFO/NI或资本开支。具体数字准绳见`.claude/skills/value-profile/references/moat-framework.md`和template §3。
 - **§1.1/§1.3产品分析**→**delegate到`product-analysis`子skill**。统一section resolver解析`part1/§1.1`或`part1/§1.3`;调用`product-analysis`前先向用户输出`正在调用product-analysis: <ticker> <resolved-section> (Mode B)`，再按其SKILL.md以`--target-profile <absolute-path> --section <part1/§1.1|part1/§1.3> --ticker <ticker> --year <YYYY> --as-of <YYYY-MM-DD> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path> --auto|--interactive`调用并用product Schema验收。A+H逐法域追加全部counterpart。普通worker不得代写或补写产品section；新建、失效或用户明确要求重跑时，不得因目标section已有正文或标为已完成而跳过。Mode B不得修改profile，父skill复核后通过Step 3e原子写入。
-- **产品分析接收门槛**:除Schema外,要求目标键集合精确匹配、annual/event/counterpart哈希三方一致且citation属于当前section。§1.1与§1.3合计必须实质覆盖产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、财报映射和失效测试；缺项、只有品牌故事或只列收入结构均拒绝。持久化`moat_handoff`的`claim/evidence/counterevidence/citation_ids/evidence_grade`为`**产品与流程证据:**`，并在机器字段保存隐藏的`product-analysis`调用回执，至少含mode、section、terminal_status和schema_version；不得把人工套用方法论伪装成Mode B success。出现最终护城河标签则拒绝,最终护城河仍由父skill计算。`pending`保存真实未决并阻断§1.8和§3;`failure`不保存草稿;`dependency_failure`按返回动作修复后重试,最多2次。
+- **产品分析接收门槛**:除Schema外,要求目标键集合精确匹配、annual/event/counterpart哈希三方一致且citation属于当前section。§1.1与§1.3合计必须实质覆盖产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、`产品竞争力三问结论`、财报映射和失效测试；缺项、只有品牌故事、只列收入结构或逐项填表但没有三问综合结论均拒绝。三问结论必须回答持续选择、其他资本为何未抢走份额及巨资进入后的防守与持续创新，并区分事实、推断和未知项；低切换成本不得写成锁定客户。§1.8和§3只消费已验收结论，普通worker不得重建、替代或补写。持久化`moat_handoff`的`claim/evidence/counterevidence/citation_ids/evidence_grade`为`**产品与流程证据:**`，并在机器字段保存隐藏的`product-analysis`调用回执，至少含mode、section、terminal_status和schema_version；不得把人工套用方法论伪装成Mode B success。出现最终护城河标签则拒绝,最终护城河仍由父skill计算。`pending`保存真实未决并阻断§1.8和§3;`failure`不保存草稿;`dependency_failure`按返回动作修复后重试,最多2次。
 - **§4管理层分析**→**delegate到`management-analysis`子skill**。全流程进入管理层block时传`--section part1/§4`;显式定向某个管理层subsection时必须传`--section <resolved-part1/§4.x>`,不得扩大目标。其余参数为`--target-profile <path> --filing-manifest <absolute-json-path> --event-manifest <absolute-json-path>`并继承当前`--auto`或`--interactive`;AS_OF从Part 0读取,两个manifest都传持久化后的真实绝对路径,不得省略。Mode B子skill无论模式都只返回`draft_sections`和结构化flags,父skill是Mode B唯一写入者;父skill复核后把section正文、管理层状态、人工清单和阻断原因在同一次原子写入中保存。详细流程见`.claude/skills/management-analysis/SKILL.md`§2-§3。Fallback:5个完整`N→N+1`比较需6份年报,每行来源写入该section`**引用:**`;连续未达标记guidance不可信风险,证据置信度不因管理层未兑现而降低,目标突然消失必须指出,言行一致检验≥2事件。
 **管理层否决handoff**:Mode B子skill无论auto或interactive都只返回`draft_veto`和`management_veto=false`;父skill只对用户或auto已接受的内存草稿执行事务,interactive以accept或edit后的已接受正文为准。系统性画大饼唯一引用`management-analysis§2.7.2`:只在同一指标ID、连续3个可比财年、单位口径和目标方向一致时累计;不同指标不得拼接。父skill先预先计算完整事务:命中时同步写`**管理层:**一票否决触发`和`**管理层否决:**是—<reason>`,未命中时清除旧`管理层否决`阻断原因。随后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <profile-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`完成一次CAS原子写入;非A+H省略counterpart guard。正文、Part 0状态和阻断原因集合一次保存,不存在“先保存正文再补Part 0”的中间状态,冲突时全部保持原状态。
 **证据完整否决finalizer**:管理层否决已确认,或财报排雷命中高风险、`剔除`时,先完成最终live revalidation并用全部annual、event、counterpart及已建立的market manifest作为CAS guard,再写终态`已否决`。该终态不输出数字估值,保留全部已完成证据,并使resume确定性复现同一结果。
@@ -455,7 +457,7 @@ financial-redflag-scan重试耗尽或management-analysis重试耗尽后,对应se
 - 正文只是按template指导问题逐项填空,没有围绕公司级关键问题解释数据、原因和商业含义。
 - 同一证据缺口在多个可见section重复解释，或护城河来源写成`测试通过/证据窗口/连续序列`等研究流程状态。
 - 正文写“缺乏数据，无法分析”后继续列举缺失字段、已查来源、旧年份样本或接口错误。
-- §1.1缺核心产品利润地图、设计和交付流程、流程经济性或单位经济;§1.3缺直接竞品、替代方案、适用龙头、龙头差距、2至3项价值机制或财报映射。
+- §1.1缺核心产品利润地图、设计和交付流程、流程经济性或单位经济;§1.3缺直接竞品、替代方案、适用龙头、龙头差距、2至3项价值机制、`产品竞争力三问结论`或财报映射。
 - 产品流程、竞争比较或价值机制缺显式证据等级;未披露成本被写成精确单点值;高毛利被直接写成品牌、身份、情绪或稀缺性证明。
 - 填写区 generic, 无 ticker 特定细节。§3护城河写茅台必须引用茅台镇水源 / 12987工艺/基酒5年陈化/品牌价格带。
 - §1.8 四问任一 < 50字/品牌复读/结论标签无场景 → §2.6.2退回; 退回的是 §1.8本节, 不动 §1.1-§1.7。
@@ -605,97 +607,6 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 3. **定性 section**（§1-§5, §4.5定性项）继续 PDF。没有数据源能替代管理层原话。
 4. **`scripts/download_filings.py`** 挪进 `src/ah_research/integrations/cninfo_client.py`, 暴露为 repo 方法。
 
-### §4.6 Profile 输出风格 — 给人读的, 不是给 AI 读的
+### §4.6 Profile写作与读者渲染
 
-Profile 的读者是人（研究员 / 投资人 / 审阅人）, 不是另一个 AI agent。写法必须服务于人类 scan + 理解。
-
-- **§4.6.1 浓缩原则**: 核心是"内容少但每句精华, 信息量高"。Part 0执行摘要的好生意、护城河、管理层、财报排雷、能力圈、投资论点和三项主要风险统一使用 **状态标题 + 无前缀结论句 + 三色圆点证据**：结论单独用`>`引用块，不写`一句话判断：`；证据用`signal-list`和`signal-item`，绿色=正面、红色=负面、黄色=待验证，每条只表达一类判断，避免把无因果关系的事实并在同一条。每块保留3-5条最关键证据，细节留Part 1-5 / §Q / §4.5；目标是1-2分钟读完全部结论和跟踪项。
-- **§4.6.2 禁用 AI 自引用 + 内嵌文献引用 (全 profile 非仅 Part 0)**: narrative body 禁两类内嵌 refs:
-
-  **(a) 禁 `(§x.y)` 自引用**: 例 "毛利率92% (§1.1)"——事实自证, 不需指向源 section。允许的 § 引用形式: `**引用:**` 结构字段 / 开头为 "依据 §2.2 三大前提..." 的规则指向句 / "SKILL §2.9 守则" 这类 rule pointer。禁: 句尾裸括号 section id 如 `XXX (§1.5)`。
-
-  **(b)证据落点**:叙述段不内嵌`XXX(年报-YYYY.md p.NN)`式引用;叙述段数字通过本节`**引用:**`逐条映射到来源。紧凑数据表为避免映射歧义,表格单元格可直接带页码或URL。两种形式都必须让数字唯一可追溯。
-
-- **§4.6.2.bis body 段落 readability**: 每个 section 身体段落写给人读, 不是给 AI dump:
-  - 正文可以是一段自然完整的分析，不按固定句数或固定模板切割；不强制套用“结论、数据、风险”三段式。
-  - 需要解释变化时，优先按“数据 → 问题 → 原因 → 商业含义”展开，让读者看见推理过程；没有新增含义时不强行总结。
-  - 禁 `(a)(b)(c)(d)` / `①②③④` inline list 散排在段落内——用真 markdown `- xxx` bullet, 每条独立一行。
-  - 每个独立概念一段；只有主题变化或连续阅读费力时才拆段，不设固定句数。
-  - 数字尽量配紧凑上下文, 不用"在...的情况下/基于...的考虑"长从句包数字。
-  - 信息较多时可用 `**核心资产**` / `**生产流程**` / `**分产品收入**` 等自然子标题帮助阅读，不为形式完整强制分块。
-  - 表格承担层级、包含关系、合计和算术校验；正文只写对业务的解释，不逐行复述表格。口径提示仅在省略后会导致实质性误读时保留。
-  - AI操作提醒、处理步骤和防错指令只留在skill、隐藏注释或控制台输出，不得进入用户可见正文。
-  - 引用、置信度和管理层口径校核属于证据层，继续保存在对应section供追溯和恢复，由HTML阅读版统一隐藏；最终投影和负向检查按`references/reader-rendering.md`执行。会改变投资判断的口径限制、证据冲突和未知项必须先写入自然正文，不能只藏在这些字段里。
-  - 每个证据缺口指定一个最相关的归口section并完整解释一次；其他section只使用已确认数据，不重复缺失年份、口径变化和搜索过程。护城河章节写经济机制及其证据，不写研究流程状态。
-  - 缺少的数据使本节无法形成有效分析时，正文直接写“缺乏数据，无法分析”，不展开检索失败、来源报错或底层缺项清单；子问题没有数据时只写“<子问题>缺乏数据，无法分析”，不列举缺失字段、已查来源、旧年份样本或接口错误，句后不得继续解释缺什么或为什么没找到。内部恢复信息保留在隐藏字段。
-- **§4.6.2.ter 层级收入表**:同一分类维度含父子关系时,父skill在Step 3c把子skill草稿规范为`references/profile-writing-style.md`定义的三列层级明细表。表题右侧写`报告期 · 金额单位`;正文固定为收入类别、收入、占总收入三列,父子关系只在首列缩进,金额和占比分列并右对齐。不得保留每层单独一列、`rowspan`、占位短横线或`金额 / 占比`合并单元格。产品、渠道、地区等交叉维度继续分表,不得跨表相加。
-- **§4.6.3英文与中文金融术语**:写Part 0或Part 1-5前必须读取`references/profile-writing-style.md`。正文只保留该文件白名单中的行业缩写;其他英文使用自然中文。Step 3c发现白名单外英文时退回重写。
-- **§4.6.4 Part 0状态词**:template是字段顺序和状态词的唯一来源。严格使用其6项顺序和既有选项,不得自造状态词。常见误译及替换方式见`references/profile-writing-style.md`。
-- **§4.6.5 跟踪项 / 风险项视觉强调**: Part 0 + section 内遇到"需跟踪 / 需注意 / 风险信号"条目, 用 `⚠️ **跟踪 N**:` 或 `⚠️ **注意**:` 格式显式 flag, reader 一眼识别"哪些项需持续观察"。
-- **§4.6.6 Part 0 heading 唯一**: 使用 `### 执行摘要` 作为 Part 0 结论块的唯一 heading, **不另套 `### 结论速览` / `### 结论` 等二级 heading**（重复 + 冗余）。
-- **§4.6.7 自然中文措辞 / 词序 — 禁 AI 风格 awkward 句式**: Profile 的每段中文写完必须通过"母语 reader 自读流畅度 check"——读起来像原生中文, 不是"英文思路翻译过来"。以下 pattern 是 AI 直译高频 awkward 病症, 必须替换:
-
-  | ❌ AI-style awkward | ✅ 自然中文 |
-  |---|---|
-  | 靠什么生产 | 怎么生产 / 生产方式 |
-  | 靠什么环节赚什么钱（"靠什么 X 赚什么 Y" 双疑问空洞式）| 在哪个环节赚钱 / 赚钱的核心环节 |
-  | 具备...可持续性 | 能否持续 / 可不可持续 |
-  | 在...的情况下 | 拆成短句去掉 "情况下" |
-  | 使得 + 长从句 | 拆成两个短句 |
-  | 作为一个...公司 | 这家公司 / 本公司 |
-  | 不仅...而且... 冗余对仗 | 改成一个短句 |
-  | 通过...的方式 | 直接说动作, 不用"方式" |
-  | 对于...来说 | 直接用"X 如何..." |
-  | 基于...的考虑 | "考虑到 X" 或直接说原因 |
-
-  **判定办法**: 写完一段读一遍——读起来卡、需停顿才懂、像翻译腔 = awkward, 改成母语自然说法。Step 3c 主 agent review 时抽查本节目标 / 结论句 / 填写区头尾句, 发现 awkward 句退回重派。Step 3c必须检查并改写“闭合”,按`references/profile-writing-style.md`改为“已核实”“证据完整”“已完成判断”“仍缺资料”或“尚不能判断”。
-
-- **§4.6.8 禁写 AI-runtime meta blocks**: Profile 是 ticker-specific research doc, 不含运行 telemetry。**禁写**以下块:
-  - "本profile完成状态"/"填写section数"/"Auto mode完成时间"/"Profile定位"等完成状态meta
-  - "> 本摘要基于 AI 研究 + 用户审阅, 非投资建议" 等 AI-generated disclaimer
-  - "置信度分布: 高 X% / 中 Y% / 低 Z%" 等 profile-level 统计（section 级 `**置信度:**` 字段保留）
-  - "最近审阅日期" 除非已填 Part 0 header 表格里
-  - 模板要求的`父级动作请求`、`动作执行台账`、`排雷终态`和`排雷失败原因`属于机器流程字段。机器流程字段必须保留，但统一放入HTML注释，供恢复和校验使用，不在阅读版显示。
-  - Part 0内部工作流字段统一放入HTML注释；可见区只保留公司基本信息和自然表述的`仍需补充`，不得向读者展示manifest路径、运行状态、失败原因或恢复字段。
-  
-  Skill 运行 telemetry (完成数 / 路径 / 时间) 走**console final summary**（主 agent 自行打出, 不入文件）, 不是 profile 内容。
-- **§4.6.9 Step 1.4 cleanup + §2.11.3 禁用空话 + 本 §4.6 narrative 守则** 共同构成"给人读"的 output quality。Auto mode 跑完应人工快扫 Part 0 1-2 分钟能 read off 所有关键结论 + 跟踪项——做不到 (浓缩失败 / 英文缩写残留 / heading 重复 / 自引用没清 / meta block 残留 / awkward 翻译腔) = regression, 需修正。
-
-### §4.7子 agent prompt 模板（Step 3b dispatch 示例）
-
-针对600519.SH §1.3; 换 section 时替换目标 block / 数据源 hint / page range。
-
-```
-You are researching §1.3 差异化 for ticker 600519.SH（贵州茅台 / Kweichow Moutai, SH exchange）.
-Report date: 2026-04-28.
-
-本节目标（from template）:
-回答"公司解决了客户什么样的别人没能解决的需求和痛点"。必须具体到产品/场景, 不要抽象。
-
-指导问题:
-- 客户在哪个场景下选择公司产品而非竞品?
-- 切换成本在哪里?（品牌/渠道/工艺/关系/价格带）
-- 差异化可持续多久? 什么会打破?
-
-数据源 hint: 年报第三节"公司业务概要"; 招股说明书"业务与技术"。
-
-PDFs to read:
-- /Users/brian_huang/repos/ah-research-vp/data/filings/600519.SH/_extracted/年报-2024/text.md pages 8-35
-- /Users/brian_huang/repos/ah-research-vp/data/filings/600519.SH/_extracted/年报-2023/text.md pages 8-35
-- /Users/brian_huang/repos/ah-research-vp/data/filings/600519.SH/_extracted/招股说明书/text.md pages 40-80
-
-Adjacent context（已填好 sections）:
-§1.1 公司核心资产、主营产品和服务: <inlined content>
-§1.2 公司客户: <inlined content>
-
-Output requirements:
-1. 中文作答。
-2. 先走§2.2三大前提3行判定;仅当目标为§1.8时再完成§2.6能力圈四问4段回答。
-3. §1.3 填写区写 3-6 条关于茅台差异化的具体论断。候选证据: 茅台镇水源、12987 工艺、基酒 5 年陈化、品牌价格带、经销商渠道网, 每条带年报页码。
-4. 每条引用 `年报-YYYY.pdf p.NN` 或 web URL。若选中年报未披露 → `待补充—年报未披露`;若需要外部核验且当前仍缺证,返回unresolved claim输入,不得直接写`证据不足,需人工补充`。
-5. 填 **管理层口径校核:**, 对比年报 vs 研报 / 价盘 / 媒体。"年报说 X, 我们同意" = 不合格。
-6. 按引用密度和 spin-check 深度设 **置信度:** 高/中/低。
-7. 禁用 §2.11.3 的 8 条空话。只写 ticker-specific 证据。
-
-返回完整 section block（heading + 填写区 + 引用 + 置信度 + 管理层口径校核）。
-```
+写Part 0和Part 1-5前必须完整读取`references/profile-writing-style.md`，并以其作为正文措辞、执行摘要、引用落点、缺口表达、层级表和最终质量检查的唯一规则来源。研究内容完成后再完整读取`references/reader-rendering.md`执行读者投影；渲染层不得补研究结论。任一写作验收或负向检查未通过都不得生成最终HTML。
