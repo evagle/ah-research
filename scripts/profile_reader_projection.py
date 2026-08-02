@@ -113,18 +113,11 @@ def _is_machine_table(lines: list[str]) -> bool:
 def _clean_structure(lines: list[str]) -> list[str]:
     cleaned = [line.rstrip() for line in lines]
 
-    index = 0
-    while index < len(cleaned):
-        if not HEADING_PATTERN.match(cleaned[index]):
-            index += 1
-            continue
-        next_index = index + 1
-        while next_index < len(cleaned) and not cleaned[next_index].strip():
-            next_index += 1
-        if next_index == len(cleaned) or HEADING_PATTERN.match(cleaned[next_index]):
-            del cleaned[index:next_index]
-            continue
-        index += 1
+    last_content = len(cleaned) - 1
+    while last_content >= 0 and not cleaned[last_content].strip():
+        last_content -= 1
+    if last_content >= 0 and HEADING_PATTERN.match(cleaned[last_content]):
+        del cleaned[last_content:]
 
     compacted: list[str] = []
     blank_count = 0

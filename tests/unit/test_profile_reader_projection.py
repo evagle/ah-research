@@ -10,7 +10,11 @@ def test_reader_projection_removes_machine_blocks_and_preserves_analysis() -> No
     fingerprint = "a" * 64
     source = f"""# 泡泡玛特投资研究
 
-## 行业分析
+## Part 1 - 定性分析
+
+## §1 商业模式
+
+### §1.1 行业分析
 
 收入同比增长42.4%，主要由毛绒品类和海外市场拉动。
 
@@ -40,6 +44,9 @@ def test_reader_projection_removes_machine_blocks_and_preserves_analysis() -> No
     result = project_reader_markdown(source)
 
     assert "收入同比增长42.4%" in result.markdown
+    assert "## Part 1 - 定性分析" in result.markdown
+    assert "## §1 商业模式" in result.markdown
+    assert "### §1.1 行业分析" in result.markdown
     assert "| 收入 | 130.4 |" in result.markdown
     assert "新品热度和海外履约仍需继续观察" in result.markdown
     assert "路由终态" not in result.markdown
