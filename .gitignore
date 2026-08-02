@@ -238,8 +238,8 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 
-# Source discovery probe cache
-tmp/source-discovery/
+# Temporary files
+tmp/
 
 # Editor
 .vscode/
