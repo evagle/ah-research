@@ -1,0 +1,393 @@
+{
+  "schema_version": "1.1",
+  "subject": "POP MART INTERNATIONAL GROUP LIMITED (09992.HK)",
+  "as_of": "2026-08-02",
+  "primary_market_scope_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+  "status": "publishable-with-gaps",
+  "roles": [
+    {
+      "role": "market-definition",
+      "claim_ids": ["popmart.market-definition"],
+      "claim_states": [
+        {"claim_id": "popmart.market-definition", "state": "accepted"}
+      ],
+      "state": "accepted",
+      "accepted_evidence_count": 1,
+      "required_periods": [],
+      "accepted_periods": [],
+      "missing_periods": [],
+      "missing_coverage": [],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [],
+      "lineage_ids": ["frost-sullivan-top-toy-2026"],
+      "series": [],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": null,
+      "not_applicable_reason": null
+    },
+    {
+      "role": "historical-market-size",
+      "claim_ids": ["popmart.market-size.2021-2025"],
+      "claim_states": [
+        {"claim_id": "popmart.market-size.2021-2025", "state": "accepted"}
+      ],
+      "state": "accepted",
+      "accepted_evidence_count": 5,
+      "required_periods": ["2021", "2022", "2023", "2024", "2025"],
+      "accepted_periods": ["2021", "2022", "2023", "2024", "2025"],
+      "missing_periods": [],
+      "missing_coverage": [],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [
+        "1bf03ca8051715f4d6425a59c1ebd7bad2a82b8092a1f2ca3f6e64a00ed0798c"
+      ],
+      "lineage_ids": ["frost-sullivan-top-toy-2026"],
+      "series": [
+        {
+          "series_id": "china-pop-toy-gmv-history-2021-2025",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "1bf03ca8051715f4d6425a59c1ebd7bad2a82b8092a1f2ca3f6e64a00ed0798c",
+          "metric": "market size",
+          "unit": "CNY billion",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "historical-estimate",
+          "periods": ["2021", "2022", "2023", "2024", "2025"],
+          "published_at": "2026-03-31",
+          "data_vintage": "2026-03-31",
+          "lineage_id": "frost-sullivan-top-toy-2026"
+        }
+      ],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": null,
+      "not_applicable_reason": null
+    },
+    {
+      "role": "industry-forecast",
+      "claim_ids": [
+        "popmart.forecast.2026-2030",
+        "popmart.forecast.2026-2030:prior-vintage",
+        "popmart.forecast.2026-2030:later-vintage"
+      ],
+      "claim_states": [
+        {"claim_id": "popmart.forecast.2026-2030", "state": "accepted"},
+        {"claim_id": "popmart.forecast.2026-2030:prior-vintage", "state": "exhausted"},
+        {"claim_id": "popmart.forecast.2026-2030:later-vintage", "state": "exhausted"}
+      ],
+      "state": "partial",
+      "accepted_evidence_count": 5,
+      "required_periods": ["2026", "2027", "2028", "2029", "2030"],
+      "accepted_periods": ["2026", "2027", "2028", "2029", "2030"],
+      "missing_periods": [],
+      "missing_coverage": [
+        "No prior forecast vintage using the same GMV series fingerprint",
+        "No later forecast vintage published by AS_OF"
+      ],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [
+        "1bf03ca8051715f4d6425a59c1ebd7bad2a82b8092a1f2ca3f6e64a00ed0798c"
+      ],
+      "lineage_ids": ["frost-sullivan-top-toy-2026"],
+      "series": [
+        {
+          "series_id": "china-pop-toy-gmv-forecast-2026-2030",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "1bf03ca8051715f4d6425a59c1ebd7bad2a82b8092a1f2ca3f6e64a00ed0798c",
+          "metric": "market size",
+          "unit": "CNY billion",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "forecast",
+          "periods": ["2026", "2027", "2028", "2029", "2030"],
+          "published_at": "2026-03-31",
+          "data_vintage": "2026-03-31",
+          "lineage_id": "frost-sullivan-top-toy-2026"
+        }
+      ],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": "Version chase found an older RSV forecast but no comparable prior GMV vintage; no later publication existed by AS_OF.",
+      "not_applicable_reason": null
+    },
+    {
+      "role": "market-concentration",
+      "claim_ids": ["popmart.cr5.2025"],
+      "claim_states": [
+        {"claim_id": "popmart.cr5.2025", "state": "accepted"}
+      ],
+      "state": "accepted",
+      "accepted_evidence_count": 1,
+      "required_periods": ["2025"],
+      "accepted_periods": ["2025"],
+      "missing_periods": [],
+      "missing_coverage": [],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [
+        "c81861862636780705e4dbfb10a13fd4e2dfa2b88bdb4b6d911de38ff2f89fda"
+      ],
+      "lineage_ids": ["frost-sullivan-top-toy-2026"],
+      "series": [
+        {
+          "series_id": "china-pop-toy-cr5-2025",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "c81861862636780705e4dbfb10a13fd4e2dfa2b88bdb4b6d911de38ff2f89fda",
+          "metric": "CR5",
+          "unit": "percent",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "historical-estimate",
+          "periods": ["2025"],
+          "published_at": "2026-03-31",
+          "data_vintage": "2026-03-31",
+          "lineage_id": "frost-sullivan-top-toy-2026"
+        }
+      ],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": null,
+      "not_applicable_reason": null
+    },
+    {
+      "role": "subject-market-share",
+      "claim_ids": [
+        "popmart.share.2021",
+        "popmart.share.2022",
+        "popmart.share.2023",
+        "popmart.share.2024",
+        "popmart.share.2025"
+      ],
+      "claim_states": [
+        {"claim_id": "popmart.share.2021", "state": "accepted"},
+        {"claim_id": "popmart.share.2022", "state": "exhausted"},
+        {"claim_id": "popmart.share.2023", "state": "exhausted"},
+        {"claim_id": "popmart.share.2024", "state": "exhausted"},
+        {"claim_id": "popmart.share.2025", "state": "accepted"}
+      ],
+      "state": "partial",
+      "accepted_evidence_count": 2,
+      "required_periods": ["2021", "2022", "2023", "2024", "2025"],
+      "accepted_periods": ["2021", "2025"],
+      "missing_periods": ["2022", "2023", "2024"],
+      "missing_coverage": [
+        "2022 public evidence uses retail value rather than the primary GMV series",
+        "2023 company-level share not found",
+        "2024 public evidence uses RSV rather than the primary GMV series"
+      ],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [
+        "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae"
+      ],
+      "lineage_ids": [
+        "frost-sullivan-miniso-2022",
+        "frost-sullivan-top-toy-2026"
+      ],
+      "series": [
+        {
+          "series_id": "pop-mart-gmv-share-2021",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae",
+          "metric": "company market share",
+          "unit": "percent",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "historical-estimate",
+          "periods": ["2021"],
+          "published_at": "2022-06-30",
+          "data_vintage": "2022-06-30",
+          "lineage_id": "frost-sullivan-miniso-2022"
+        },
+        {
+          "series_id": "pop-mart-gmv-share-2025",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae",
+          "metric": "company market share",
+          "unit": "percent",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "historical-estimate",
+          "periods": ["2025"],
+          "published_at": "2026-03-31",
+          "data_vintage": "2026-03-31",
+          "lineage_id": "frost-sullivan-top-toy-2026"
+        }
+      ],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": "The primary GMV series is missing comparable company-share observations for 2022-2024.",
+      "not_applicable_reason": null
+    },
+    {
+      "role": "competitor-market-share",
+      "claim_ids": [
+        "competitors.share.2021",
+        "competitors.share.2022",
+        "competitors.share.2023",
+        "competitors.share.2024",
+        "competitors.share.2025"
+      ],
+      "claim_states": [
+        {"claim_id": "competitors.share.2021", "state": "exhausted"},
+        {"claim_id": "competitors.share.2022", "state": "exhausted"},
+        {"claim_id": "competitors.share.2023", "state": "exhausted"},
+        {"claim_id": "competitors.share.2024", "state": "exhausted"},
+        {"claim_id": "competitors.share.2025", "state": "accepted"}
+      ],
+      "state": "partial",
+      "accepted_evidence_count": 1,
+      "required_periods": ["2021", "2022", "2023", "2024", "2025"],
+      "accepted_periods": ["2025"],
+      "missing_periods": ["2021", "2022", "2023", "2024"],
+      "missing_coverage": [
+        "No comparable GMV ranking table for named competitors in 2021-2024"
+      ],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [
+        "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae"
+      ],
+      "lineage_ids": ["frost-sullivan-top-toy-2026"],
+      "series": [
+        {
+          "series_id": "named-competitor-gmv-share-2025",
+          "market_definition_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+          "series_fingerprint": "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae",
+          "metric": "company market share",
+          "unit": "percent",
+          "measurement_basis": "GMV",
+          "channel_scope": "all retail channels",
+          "denominator": "total China pop toy market GMV",
+          "period_semantics": "calendar-year",
+          "value_status": "historical-estimate",
+          "periods": ["2025"],
+          "published_at": "2026-03-31",
+          "data_vintage": "2026-03-31",
+          "lineage_id": "frost-sullivan-top-toy-2026"
+        }
+      ],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": "Only the 2025 primary-GMV ranking names enough competitors for acceptance.",
+      "not_applicable_reason": null
+    },
+    {
+      "role": "current-partial-period",
+      "claim_ids": ["popmart.current-partial.2026"],
+      "claim_states": [
+        {"claim_id": "popmart.current-partial.2026", "state": "exhausted"}
+      ],
+      "state": "exhausted",
+      "accepted_evidence_count": 0,
+      "required_periods": [],
+      "accepted_periods": [],
+      "missing_periods": [],
+      "missing_coverage": [
+        "2026 H1/YTD market size, subject share, competitor share and concentration"
+      ],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [],
+      "lineage_ids": [],
+      "series": [],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": "No public same-scope 2026 H1/YTD table was found by AS_OF.",
+      "not_applicable_reason": null
+    },
+    {
+      "role": "industry-drivers",
+      "claim_ids": ["popmart.industry-drivers"],
+      "claim_states": [
+        {"claim_id": "popmart.industry-drivers", "state": "accepted"}
+      ],
+      "state": "accepted",
+      "accepted_evidence_count": 3,
+      "required_periods": [],
+      "accepted_periods": [],
+      "missing_periods": [],
+      "missing_coverage": [],
+      "market_definition_fingerprints": [
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df"
+      ],
+      "scope_fingerprints": [],
+      "lineage_ids": [
+        "kpmg-china-pop-toy-2026",
+        "frost-sullivan-top-toy-2026"
+      ],
+      "series": [],
+      "ledger_paths": [
+        "/Users/brian_huang/repos/ah-research-popmart-profile/data/filings/09992.HK/research/source-index.md"
+      ],
+      "gap_reason": null,
+      "not_applicable_reason": null
+    }
+  ],
+  "scope_breaks": [
+    {
+      "from_scope_fingerprint": "9130547c6e4c7e19bbd7ec4f4ebbc161351e1eb025efafe5a6516a3881df25fa",
+      "to_scope_fingerprint": "1bf03ca8051715f4d6425a59c1ebd7bad2a82b8092a1f2ca3f6e64a00ed0798c",
+      "reason": "The older KPMG and TOP TOY vintage uses RSV while the primary 2026 vintage uses GMV.",
+      "comparable": false
+    },
+    {
+      "from_scope_fingerprint": "15489a16b144173e1cef93a59b8b99c5226918d0e1a5a1805b1a82355f747758",
+      "to_scope_fingerprint": "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae",
+      "reason": "The 2024 company ranking is measured by RSV while the primary company-share series is measured by GMV.",
+      "comparable": false
+    },
+    {
+      "from_scope_fingerprint": "d57b9022316bce7a436d31648f54ef4de515d875263b56fdd816a22a2ca3a4c3",
+      "to_scope_fingerprint": "2194cb85a7cc5cf91f30050261228d656b176c81bdc02b60fb84be6ab1362aae",
+      "reason": "The 2017, 2019 and 2022 observations use terminal retail or retail-value measures rather than the primary GMV denominator.",
+      "comparable": false
+    },
+    {
+      "from_scope_fingerprint": "fef2a22fecea06191d98a17ff61d627d99c5c3f021509fd574c2b8e864a538ad",
+      "to_scope_fingerprint": "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+      "reason": "The 52TOYS table covers the broader China IP toy market rather than the primary China pop toy market.",
+      "comparable": false
+    }
+  ],
+  "unresolved_claim_ids": [
+    "popmart.forecast.2026-2030:prior-vintage",
+    "popmart.forecast.2026-2030:later-vintage",
+    "popmart.share.2022",
+    "popmart.share.2023",
+    "popmart.share.2024",
+    "competitors.share.2021",
+    "competitors.share.2022",
+    "competitors.share.2023",
+    "competitors.share.2024",
+    "popmart.current-partial.2026"
+  ]
+}

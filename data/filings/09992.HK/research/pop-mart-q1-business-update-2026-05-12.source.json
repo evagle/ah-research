@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "source_name": "Pop Mart Q1 2026 business update",
+  "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0512/2026051200579.pdf",
+  "raw_path": "data/filings/09992.HK/research/pop-mart-q1-business-update-2026-05-12.pdf",
+  "sha256": "c55e621825d12a79e3be8c561b44f3742df2b74d8f10672c7d3163b6cf099ebb",
+  "text_path": "data/filings/09992.HK/research/pop-mart-q1-business-update-2026-05-12.txt",
+  "text_sha256": "5b71c8f17bdb2dcfba305c03089f47711c9065ce6a37a19c9ddb0a3044514052",
+  "retrieved_at": "2026-08-02",
+  "http_method": "GET",
+  "media_type": "application/pdf",
+  "restore_command": "curl --fail --location --retry 3 'https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0512/2026051200579.pdf' --output 'data/filings/09992.HK/research/pop-mart-q1-business-update-2026-05-12.pdf'"
+}
