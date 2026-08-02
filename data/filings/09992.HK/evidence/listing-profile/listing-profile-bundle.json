@@ -1,0 +1,27 @@
+{
+  "ticker": "09992.HK",
+  "exchange": "HK",
+  "AS_OF": "2026-07-29",
+  "query_issuer_code": "09992",
+  "listing_date": "2020-12-11",
+  "listing_codes": {
+    "HK": "09992"
+  },
+  "listing_dates": {
+    "HK": "2020-12-11"
+  },
+  "listing_profile": {
+    "source_url": "https://www1.hkex.com.hk/hkexwidget/data/getequityquote",
+    "http_method": "GET",
+    "request_encoding": "query",
+    "query_params": {
+      "issuer_code": "09992"
+    },
+    "response_schema": "canonical_listing_profile_v1",
+    "request_bootstrap": {
+      "type": "hkex_equity_quote_token_v1",
+      "page_url": "https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities/Equities-Quote"
+    },
+    "source_file": "data/filings/09992.HK/evidence/listing-profile/hkex-equity-quote.json"
+  }
+}
