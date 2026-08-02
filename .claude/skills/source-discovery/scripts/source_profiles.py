@@ -61,6 +61,8 @@ class RouteCandidate:
     reachability: str
     utility: str
     direct_url: str
+    document_types: tuple[str, ...]
+    relationship_uses: tuple[str, ...]
     stale: bool
     skip_reason: str | None
 
@@ -289,6 +291,8 @@ def _eligible_route_candidate(
         reachability=reachability,
         utility=utility,
         direct_url=direct_url,
+        document_types=_optional_string_tuple(function, "document_types"),
+        relationship_uses=_optional_string_tuple(function, "relationship_uses"),
         stale=stale,
         skip_reason=skip_reason,
     )
@@ -301,6 +305,15 @@ def _fallback_route_ids(function: Mapping[str, object]) -> tuple[str, ...]:
     if not all(isinstance(fallback, str) for fallback in fallbacks):
         raise ValueError("fallbacks must contain only strings")
     return tuple(fallbacks)
+
+
+def _optional_string_tuple(function: Mapping[str, object], key: str) -> tuple[str, ...]:
+    value = function.get(key)
+    if value is None:
+        return ()
+    if not isinstance(value, list) or not all(isinstance(item, str) for item in value):
+        raise ValueError(f"{key} must contain only strings")
+    return tuple(value)
 
 
 def _should_follow_fallbacks(candidate: RouteCandidate) -> bool:

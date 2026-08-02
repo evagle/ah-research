@@ -1,0 +1,404 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/research-ledger.schema.json",
+  "title": "Research Ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim_id",
+    "request_scope_fingerprint",
+    "absence_claim",
+    "status",
+    "applicable_routes",
+    "attempts",
+    "acceptance_failures",
+    "accepted_evidence",
+    "conflict_evidence",
+    "gate",
+    "next_escalation",
+    "skipped_after_acceptance",
+    "unattempted_routes"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "request_scope_fingerprint": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "absence_claim": {
+      "type": "boolean"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["accepted", "exhausted", "conflict", "blocked"]
+    },
+    "applicable_routes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/route"
+      }
+    },
+    "attempts": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attempt"
+      }
+    },
+    "acceptance_failures": {
+      "$ref": "#/$defs/failures"
+    },
+    "accepted_evidence": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/acceptedEvidence"
+        }
+      ]
+    },
+    "conflict_evidence": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/conflictEvidence"
+        }
+      ]
+    },
+    "gate": {
+      "$ref": "#/$defs/gate"
+    },
+    "next_escalation": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/nextEscalation"
+        }
+      ]
+    },
+    "skipped_after_acceptance": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/skippedAfterAcceptance"
+      }
+    },
+    "unattempted_routes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/unattemptedRoute"
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "const": "conflict"
+          }
+        },
+        "required": ["status"]
+      },
+      "then": {
+        "properties": {
+          "acceptance_failures": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ],
+  "$defs": {
+    "failures": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "route": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_id",
+        "route_layer",
+        "subject_relation",
+        "document_type"
+      ],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route_layer": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subject_relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_type": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "attempt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "route_id",
+        "route_layer",
+        "subject_relation",
+        "document_type",
+        "query_variant",
+        "started_at",
+        "completed_at",
+        "artifact_identity",
+        "lineage_id",
+        "terminal_reason",
+        "acceptance_failures"
+      ],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route_layer": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "subject_relation": {
+          "type": "string",
+          "minLength": 1
+        },
+        "document_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "query_variant": {
+          "type": "string",
+          "minLength": 1
+        },
+        "started_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "completed_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "artifact_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lineage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "terminal_reason": {
+          "type": "string",
+          "enum": [
+            "accepted",
+            "not-found",
+            "rejected",
+            "conflict",
+            "access-unavailable",
+            "technical-failure",
+            "request-budget-exhausted",
+            "not-applicable"
+          ]
+        },
+        "acceptance_failures": {
+          "$ref": "#/$defs/failures"
+        }
+      }
+    },
+    "acceptedEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["candidate_document_id", "artifact_identity", "lineage_id"],
+      "properties": {
+        "candidate_document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lineage_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["outcome", "failures"],
+      "properties": {
+        "outcome": {
+          "type": "string",
+          "enum": ["passed", "failed", "unresolved"]
+        },
+        "failures": {
+          "$ref": "#/$defs/failures"
+        }
+      }
+    },
+    "nextEscalation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["next_layer", "route_ids"],
+      "properties": {
+        "next_layer": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "route_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "conflictEvidenceSide": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "definition_scope_fingerprint",
+        "unit",
+        "value",
+        "value_status",
+        "artifact_identity",
+        "lineage_id"
+      ],
+      "properties": {
+        "definition_scope_fingerprint": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "oneOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        },
+        "value_status": {
+          "type": "string",
+          "enum": ["observed", "historical-estimate", "forecast"]
+        },
+        "artifact_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "lineage_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "event_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "value": {
+                "type": "string"
+              }
+            },
+            "required": ["value"]
+          },
+          "then": {
+            "required": ["event_key", "evidence_id"]
+          }
+        }
+      ]
+    },
+    "conflictEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["left", "right"],
+      "properties": {
+        "left": {
+          "$ref": "#/$defs/conflictEvidenceSide"
+        },
+        "right": {
+          "$ref": "#/$defs/conflictEvidenceSide"
+        }
+      }
+    },
+    "unattemptedRoute": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_id", "route_layer", "reason"],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route_layer": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "skippedAfterAcceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["route_id", "route_layer", "reason"],
+      "properties": {
+        "route_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "route_layer": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

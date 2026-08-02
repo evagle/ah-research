@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/route-cache.schema.json",
+  "title": "Research Route Cache",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "recipes"],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/recipe"
+      }
+    }
+  },
+  "$defs": {
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/nonBlankString"
+      }
+    },
+    "nonBlankString": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_type",
+        "geographies",
+        "industries",
+        "subject_relation",
+        "document_type",
+        "source_function",
+        "query_pattern",
+        "index_endpoint",
+        "identity_rule",
+        "extraction_hint",
+        "reviewed_at"
+      ],
+      "properties": {
+        "claim_type": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "geographies": {
+          "$ref": "#/$defs/labels"
+        },
+        "industries": {
+          "$ref": "#/$defs/labels"
+        },
+        "subject_relation": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "document_type": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "source_function": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "query_pattern": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "index_endpoint": {
+          "$ref": "#/$defs/nonBlankString",
+          "format": "uri"
+        },
+        "identity_rule": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "extraction_hint": {
+          "$ref": "#/$defs/nonBlankString"
+        },
+        "reviewed_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

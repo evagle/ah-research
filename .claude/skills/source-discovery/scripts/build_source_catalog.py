@@ -135,6 +135,18 @@ def _render_profile(
                 "  - Adjacent alternatives (not executable fallbacks): "
                 + ", ".join(f"`{alternative}`" for alternative in adjacent)
             )
+        document_types = _optional_str_list(function, "document_types")
+        if document_types:
+            lines.append(
+                "  - Document types: "
+                + ", ".join(f"`{document_type}`" for document_type in document_types)
+            )
+        relationship_uses = _optional_str_list(function, "relationship_uses")
+        if relationship_uses:
+            lines.append(
+                "  - Relationship uses: "
+                + ", ".join(f"`{relationship_use}`" for relationship_use in relationship_uses)
+            )
         issuer_copy = function.get("issuer_copy_evidence")
         if isinstance(issuer_copy, Mapping):
             lines.extend(

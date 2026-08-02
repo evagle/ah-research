@@ -61,6 +61,37 @@ data/filings/<ticker>/runs/<run-id>/
 
 `checkpoint.json`、`report.md`、`drafts/`、候选`manifests/`、`query/`、`logs/`和`tmp/`只属于当前run，不得跨run共写。共享大文件不复制到run；checkpoint只记录artifact ID、绝对路径和SHA-256。
 
+对`value-profile`的外部research状态,checkpoint允许增加可选checkpoint键`research_ledger`。未含该可选键的旧run继续有效,直到`value-profile`首次创建外部research state。
+
+- 每个run最多一个binding; `research_ledger`存在时对象结构固定为`artifact_id`、绝对`path`和小写64位十六进制`sha256`,不得增减字段或存第二份research ledger绑定。
+- `value-profile`的binding路径固定解析到`<run>/logs/research-ledger.json`; wrapper仍是accepted candidate identities的唯一来源,checkpoint只保存该wrapper的artifact binding,不复制claim内容。
+- 更新必须原子: checkpoint binding必须与ledger文件发布处于同一临界区,或在先完成durable ledger write再写checkpoint binding之后、先于任何dispatch或状态迁移。不得先写checkpoint再补ledger文件,也不得在写完ledger前开始新的source-discovery调度。
+- binding更新必须执行CAS: 首次创建传`--expected-prior-sha256 create-only`; 已存在binding时必须传checkpoint当前`research_ledger.sha256`,且只在锁内当前SHA与expected prior SHA完全相等时覆盖。缺失、陈旧或错误的expected prior SHA必须在写ledger和checkpoint前失败。
+- resume时验证`path`位于同一run目录内,重算sha256并与checkpoint值一致后才允许信任该binding;不一致即拒绝恢复。路径越界、文件缺失、哈希不一致或对象形状不符都必须拒绝恢复,不得猜测、回填或静默重建。
+
+wrapper顶层是非空的`claim_id -> entry`映射,不另建manifest或执行状态。每个entry字段固定为`request`、`planner_inventory_receipt`、`ledger`和`accepted_candidate`; `planner_inventory_receipt`是planner返回的单一确定性inventory artifact。其strict normalized `planner_inputs` snapshot固定绑定request scope/content identity、source function、maintained profile identity/content hashes、maintained relation source bindings、bound routes、AS_OF/effective planning time、vocabulary/reachability identities和route inventory digest; `planner_input_fingerprint`必须由该snapshot规范重算,不得由caller任意声明。source-discovery contract validator和`financial_run_store`分别独立重算fingerprint; run-store还必须核对receipt scope/content identity与wrapper request。wrapper不得再保存第二份caller声明的planner route list; ledger schema内的`applicable_routes`必须逐项匹配该receipt。嵌套request、receipt和ledger分别执行source-discovery contract校验。只有`accepted` ledger可持有非null `accepted_candidate`,且handoff必须绑定claim、request scope、candidate document、artifact identity/SHA-256、source-document binding SHA-256、lineage和consuming section IDs。
+
+该receipt只提供deterministic tamper-evident binding,不声称防御同一process内可重算整个对象的恶意代码;不得加入secret,也不得据此建立第二个执行state machine。
+
+首次绑定、合法CAS更新和只读恢复校验使用:
+
+```bash
+# First creation only.
+uv run python scripts/financial_run_store.py bind-research-ledger \
+  --root data/filings --ticker <ticker> --run-id <run-id> \
+  --wrapper <absolute-claim-indexed-wrapper.json> \
+  --expected-prior-sha256 create-only
+
+# Update only; read the current value from checkpoint research_ledger.sha256.
+uv run python scripts/financial_run_store.py bind-research-ledger \
+  --root data/filings --ticker <ticker> --run-id <run-id> \
+  --wrapper <absolute-claim-indexed-wrapper.json> \
+  --expected-prior-sha256 <current-checkpoint-sha256>
+
+uv run python scripts/financial_run_store.py validate-research-ledger \
+  --root data/filings --ticker <ticker> --run-id <run-id>
+```
+
 ## 4.Resolver动作
 
 解析stdout中的`action`，只允许：

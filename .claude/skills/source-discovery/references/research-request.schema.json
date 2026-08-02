@@ -1,0 +1,172 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/research-request.schema.json",
+  "title": "Research Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim_id",
+    "claim_type",
+    "subject",
+    "metric",
+    "geographies",
+    "industries",
+    "population",
+    "product_scope",
+    "measurement_basis",
+    "period_start",
+    "period_end",
+    "frequency",
+    "continuity_required",
+    "required_latest_period",
+    "accepted_units",
+    "definition_constraints",
+    "value_status_allowed",
+    "minimum_source_authority",
+    "minimum_conclusion_evidence",
+    "minimum_originality",
+    "minimum_independence",
+    "independent_cross_check_required",
+    "absence_claim",
+    "as_of"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metric": {
+      "type": "string",
+      "minLength": 1
+    },
+    "geographies": {
+      "$ref": "#/$defs/labels"
+    },
+    "industries": {
+      "$ref": "#/$defs/labels"
+    },
+    "population": {
+      "type": "string",
+      "minLength": 1
+    },
+    "product_scope": {
+      "type": "string",
+      "minLength": 1
+    },
+    "measurement_basis": {
+      "type": "string",
+      "minLength": 1
+    },
+    "period_start": {
+      "type": "string",
+      "minLength": 1
+    },
+    "period_end": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frequency": {
+      "type": "string",
+      "minLength": 1
+    },
+    "continuity_required": {
+      "type": "boolean"
+    },
+    "required_latest_period": {
+      "type": "string",
+      "minLength": 1
+    },
+    "accepted_units": {
+      "$ref": "#/$defs/labels"
+    },
+    "definition_constraints": {
+      "$ref": "#/$defs/labels"
+    },
+    "value_status_allowed": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/valueStatus"
+      }
+    },
+    "minimum_source_authority": {
+      "$ref": "#/$defs/rating"
+    },
+    "minimum_conclusion_evidence": {
+      "$ref": "#/$defs/rating"
+    },
+    "minimum_originality": {
+      "$ref": "#/$defs/rating"
+    },
+    "minimum_independence": {
+      "$ref": "#/$defs/rating"
+    },
+    "independent_cross_check_required": {
+      "type": "boolean"
+    },
+    "accepted_source_classes": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/sourceClass"
+      }
+    },
+    "absence_claim": {
+      "type": "boolean"
+    },
+    "as_of": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "$defs": {
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rating": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"]
+    },
+    "valueStatus": {
+      "type": "string",
+      "enum": ["observed", "historical-estimate", "forecast"]
+    },
+    "sourceClass": {
+      "type": "string",
+      "enum": [
+        "official-regulator",
+        "official-exchange",
+        "official-court",
+        "issuer-first-party",
+        "named-counterparty",
+        "auditor",
+        "original-research",
+        "academic",
+        "association",
+        "media",
+        "search-summary",
+        "anonymous",
+        "unsourced-aggregation"
+      ]
+    }
+  }
+}

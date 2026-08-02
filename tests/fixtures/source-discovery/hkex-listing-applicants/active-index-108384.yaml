@@ -1,0 +1,46 @@
+active_index_identity:
+  index_url: https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json
+  response_sha256: e1e136478f8094b731f680ae744604cb0f943b757b3ace4b4560c49f2da13e54
+  retrieved_at: "2026-08-01T18:32:04.375845+00:00"
+  application_record:
+    id: 108384
+    d: "31/03/2026"
+    a: TOP TOY International Group Limited
+    s: A
+    w: sehk/2026/108384/documents/warn26033103584.pdf
+    sD: 34
+    sA: 295
+    ls:
+      - d: "31/03/2026"
+        nS1: OC Announcement - Appointment
+        u1: sehk/2026/108384/documents/sehk26033103668.pdf
+      - d: "31/03/2026"
+        nF: Application Proof (1st submission)
+        nS1: Full Version
+        nS2: Multi-Files
+        u1: sehk/2026/108384/documents/sehk26033103586.pdf
+        u2: sehk/2026/108384/2026033103581.htm
+    ps: []
+    hasPhip: false
+    postingDate: "Mar 31, 2026"
+historical_evidence_artifact:
+  url: https://www1.hkexnews.hk/app/sehk/2026/108384/a131511/sehk26033103632.pdf
+  sha256: eb50b5d3ada6e4a271e24c3ba37828cdd2b1dcd2ef11648ed1318dfa6d8b7cdc
+  size_bytes: 353595
+  relation_to_current_active_index: unverified
+  artifact_role: historical-evidence-artifact
+  current_application_proof: false
+  evidence_chart:
+    title: Market Size of China's Pop Toy Industry by GMV, 2020-2030E
+    source: Frost & Sullivan
+    scope: China pop-toy market
+    unit: 亿元
+    values:
+      2020: 249
+      2021: 345
+      2022: 352
+      2023: 430
+      2024: 587
+      2025: 875
+    latest_period: 2025
+    2026_status: not asserted

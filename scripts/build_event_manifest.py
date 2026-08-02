@@ -4,11 +4,13 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import http.cookiejar
 import json
 import os
 import re
 import sys
 import tempfile
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -242,6 +244,20 @@ EventFetcher = Callable[
 ]
 DocumentFetcher = Callable[[str], bytes]
 
+HKEX_EQUITY_QUOTE_PAGE_URL = (
+    "https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities/Equities-Quote"
+)
+HKEX_EQUITY_QUOTE_API_URL = "https://www1.hkex.com.hk/hkexwidget/data/getequityquote"
+HKEX_EQUITY_QUOTE_BOOTSTRAP = "hkex_equity_quote_token_v1"
+_HKEX_TOKEN_FUNCTION = re.compile(
+    r"LabCI\.getToken\s*=\s*function\s*\(\)\s*\{(?P<body>.*?)^\s*\};",
+    re.MULTILINE | re.DOTALL,
+)
+_HKEX_TOKEN_RETURN = re.compile(
+    r"""^\s*return\s+["'](?P<token>[^"']+)["']\s*;""",
+    re.MULTILINE,
+)
+
 
 def _sha256(path: Path) -> str:
     digest = hashlib.sha256()
@@ -272,6 +288,7 @@ def _fetch_official_single(
     request_encoding: str,
     query_params: dict[str, object],
     request_headers: object = None,
+    request_bootstrap: object = None,
 ) -> bytes:
     if request_headers is None:
         extra_headers: dict[str, str] = {}
@@ -285,6 +302,15 @@ def _fetch_official_single(
         "User-Agent": "ah-research-event-manifest/1.0",
         **extra_headers,
     }
+    if request_bootstrap is not None:
+        return _fetch_bootstrapped_identity(
+            source_url,
+            http_method,
+            request_encoding,
+            query_params,
+            headers,
+            request_bootstrap,
+        )
     if http_method == "GET" and request_encoding == "query":
         separator = "&" if "?" in source_url else "?"
         request_url = f"{source_url}{separator}{urllib.parse.urlencode(query_params, doseq=True)}"
@@ -325,6 +351,156 @@ def _fetch_official_single(
         raise ManifestError(f"profile or roster live official request failed: {exc}") from exc
 
 
+def _fetch_bootstrapped_identity(
+    source_url: str,
+    http_method: str,
+    request_encoding: str,
+    query_params: dict[str, object],
+    headers: dict[str, str],
+    request_bootstrap: object,
+) -> bytes:
+    if not isinstance(request_bootstrap, dict):
+        raise ManifestError("request_bootstrap must be an object")
+    if set(request_bootstrap) != {"type", "page_url"}:
+        raise ManifestError("request_bootstrap fields are invalid")
+    if request_bootstrap.get("type") != HKEX_EQUITY_QUOTE_BOOTSTRAP:
+        raise ManifestError("request_bootstrap type is unsupported")
+    if (
+        source_url != HKEX_EQUITY_QUOTE_API_URL
+        or request_bootstrap.get("page_url") != HKEX_EQUITY_QUOTE_PAGE_URL
+        or http_method != "GET"
+        or request_encoding != "query"
+    ):
+        raise ManifestError("HKEX equity quote bootstrap contract is invalid")
+    if set(query_params) != {"issuer_code"}:
+        raise ManifestError("HKEX equity quote query must contain only issuer_code")
+    issuer_code = str(query_params.get("issuer_code") or "")
+    if not re.fullmatch(r"\d{5}", issuer_code):
+        raise ManifestError("HKEX equity quote issuer_code must contain five digits")
+
+    sym = issuer_code.lstrip("0") or "0"
+    page_query = urllib.parse.urlencode({"sym": sym, "sc_lang": "en"})
+    page_url = f"{HKEX_EQUITY_QUOTE_PAGE_URL}?{page_query}"
+    cookie_jar = http.cookiejar.CookieJar()
+    opener = urllib.request.build_opener(
+        urllib.request.HTTPCookieProcessor(cookie_jar),
+    )
+    try:
+        page_request = urllib.request.Request(page_url, headers=headers)
+        with opener.open(page_request, timeout=30) as response:
+            final_page = urllib.parse.urlparse(response.geturl())
+            if (
+                final_page.scheme != "https"
+                or (final_page.hostname or "").lower() != "www.hkex.com.hk"
+            ):
+                raise ManifestError("HKEX token page redirected outside the declared HTTPS host")
+            page_body = response.read()
+        page_text = page_body.decode("utf-8")
+        function_match = _HKEX_TOKEN_FUNCTION.search(page_text)
+        token_match = (
+            _HKEX_TOKEN_RETURN.search(function_match.group("body"))
+            if function_match is not None
+            else None
+        )
+        if token_match is None:
+            raise ManifestError("HKEX token page does not contain LabCI.getToken")
+        token = urllib.parse.unquote(token_match.group("token"))
+        if not token or len(token) > 512:
+            raise ManifestError("HKEX token page returned an invalid token")
+
+        callback = "ahResearchCallback"
+        api_query = urllib.parse.urlencode(
+            {
+                "sym": sym,
+                "token": token,
+                "lang": "eng",
+                "qid": int(time.time() * 1000),
+                "callback": callback,
+            }
+        )
+        api_request = urllib.request.Request(
+            f"{HKEX_EQUITY_QUOTE_API_URL}?{api_query}",
+            headers={
+                **headers,
+                "Accept": "application/javascript, application/json, text/javascript, */*",
+                "Referer": page_url,
+            },
+        )
+        with opener.open(api_request, timeout=30) as response:
+            final_api = urllib.parse.urlparse(response.geturl())
+            if (
+                final_api.scheme != "https"
+                or (final_api.hostname or "").lower() != "www1.hkex.com.hk"
+            ):
+                raise ManifestError(
+                    "HKEX equity quote API redirected outside the declared HTTPS host"
+                )
+            api_body = response.read()
+    except ManifestError:
+        raise
+    except (OSError, UnicodeDecodeError, urllib.error.URLError) as exc:
+        raise ManifestError(f"HKEX equity quote bootstrap failed: {exc}") from exc
+
+    prefix = f"{callback}("
+    try:
+        jsonp = api_body.decode("utf-8").strip()
+        if not jsonp.startswith(prefix) or not jsonp.endswith(")"):
+            raise ManifestError("HKEX equity quote response is not expected JSONP")
+        payload = json.loads(jsonp[len(prefix) : -1])
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise ManifestError(f"HKEX equity quote response is invalid: {exc}") from exc
+    data = payload.get("data") if isinstance(payload, dict) else None
+    quote = data.get("quote") if isinstance(data, dict) else None
+    if (
+        not isinstance(data, dict)
+        or data.get("responsecode") != "000"
+        or not isinstance(quote, dict)
+        or quote.get("product_type") != "EQTY"
+    ):
+        raise ManifestError("HKEX equity quote response does not identify an equity")
+    response_sym = str(quote.get("sym") or "")
+    if not response_sym.isdigit() or response_sym.zfill(5) != issuer_code:
+        raise ManifestError("HKEX equity quote response does not match issuer_code")
+    try:
+        listing_date = datetime.strptime(
+            str(quote.get("listing_date") or ""),
+            "%d %b %Y",
+        ).date()
+    except ValueError as exc:
+        raise ManifestError("HKEX equity quote listing_date is invalid") from exc
+    issuer_name = str(quote.get("issuer_name") or "").strip()
+    if not issuer_name:
+        raise ManifestError("HKEX equity quote issuer_name is missing")
+
+    stable_profile = {
+        "query": dict(query_params),
+        "issuer_code": issuer_code,
+        "listing_codes": {"HK": issuer_code},
+        "listing_date": listing_date.isoformat(),
+        "listing_dates": {"HK": listing_date.isoformat()},
+        "listing_status": "listed",
+        "listing_statuses": {"HK": "listed"},
+        "delisting_date": None,
+        "delisting_dates": {"HK": None},
+        "official_result_total": 1,
+        "official_fields": {
+            "sym": response_sym,
+            "issuer_name": issuer_name,
+            "listing_category": quote.get("listing_category"),
+            "chairman": quote.get("chairman"),
+        },
+    }
+    return (
+        json.dumps(
+            stable_profile,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        )
+        + "\n"
+    ).encode("utf-8")
+
+
 def _fetch_identity_response(
     fetcher: RosterFetcher,
     source_url: str,
@@ -332,6 +508,7 @@ def _fetch_identity_response(
     request_encoding: str,
     query_params: dict[str, object],
     request_headers: object = None,
+    request_bootstrap: object = None,
 ) -> bytes:
     if fetcher is _fetch_official_roster:
         return _fetch_official_single(
@@ -340,6 +517,7 @@ def _fetch_identity_response(
             request_encoding,
             query_params,
             request_headers,
+            request_bootstrap,
         )
     return fetcher(source_url, query_params)
 
@@ -1580,6 +1758,7 @@ def _validate_listing_profile(
     raw_adapter = raw_profile.get("response_adapter")
     response_adapter = raw_adapter if isinstance(raw_adapter, dict) else {}
     request_headers = raw_profile.get("request_headers", {})
+    request_bootstrap = raw_profile.get("request_bootstrap")
     if response_schema == "canonical_listing_profile_v1":
         if (
             not isinstance(query_params, dict)
@@ -1610,6 +1789,7 @@ def _validate_listing_profile(
             request_encoding,
             query_params,
             request_headers,
+            request_bootstrap,
         )
         live_payload = json.loads(live_body.decode("utf-8"))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
@@ -1665,6 +1845,7 @@ def _validate_listing_profile(
             "http_method": http_method,
             "request_encoding": request_encoding,
             "request_headers": request_headers,
+            **({"request_bootstrap": request_bootstrap} if request_bootstrap is not None else {}),
             "query_params": query_params,
             "response_schema": response_schema,
             "response_adapter": response_adapter,
@@ -2207,6 +2388,7 @@ def build_manifest(
             str(listing_profile["request_encoding"]),
             listing_profile["query_params"],
             listing_profile.get("request_headers", {}),
+            listing_profile.get("request_bootstrap"),
         )
     except OSError as exc:
         raise ManifestError(f"official listing profile changed during construction: {exc}") from exc
@@ -2501,6 +2683,7 @@ def revalidate_manifest(
             str(profile.get("request_encoding") or "query"),
             query_params,
             profile.get("request_headers", {}),
+            profile.get("request_bootstrap"),
         )
         if hashlib.sha256(live_body).hexdigest() != expected_sha256:
             raise ManifestError(f"{profile_name} live official response hash differs")

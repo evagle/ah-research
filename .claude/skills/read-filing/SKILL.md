@@ -22,6 +22,7 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 `source-discovery` must be invoked only for peer/industry context and source search that is outside the official exchange filing/event evidence pipeline.
 `read-filing` remains the authority for exchange filing selection, official event source discovery, manifest construction, source preflight, and Mode B evidence binding.
 `source-discovery` cannot choose annual reports, replace official event sources, weaken live revalidation, or write profile sections.
+外部补研前必须完整读取`references/external-research-handoff.md`。`read-filing`只在所需事实超出已绑定annual、event及counterpart manifests时构造handoff；每个外部request都必须保留父annual/event/counterpart manifest的绝对路径和SHA-256，并把`not_present_in_selected_filing`与`public_availability_unresolved`严格区分。同行、listing applicant和industry证据路线交给`source-discovery`; `read-filing`自己消费返回结果并完成引用绑定，外部研究不得改写任何已绑定manifest。
 
 ## §0运行模式
 

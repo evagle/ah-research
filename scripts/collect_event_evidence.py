@@ -136,6 +136,7 @@ def _fetch_one(
             "response_schema": response_schema,
             "response_adapter": row.get("response_adapter", {}),
             "request_headers": row.get("request_headers", {}),
+            "request_bootstrap": row.get("request_bootstrap"),
         },
     )
     if len(bodies) != 1:
@@ -270,6 +271,7 @@ def _default_response_fetcher(
         str(contract.get("response_schema") or "") if isinstance(contract, dict) else str(contract)
     )
     request_headers = contract.get("request_headers", {}) if isinstance(contract, dict) else {}
+    request_bootstrap = contract.get("request_bootstrap") if isinstance(contract, dict) else None
     if response_schema in {
         "canonical_listing_profile_v1",
         "native_json_listing_profile_v1",
@@ -283,6 +285,7 @@ def _default_response_fetcher(
                 encoding,
                 params,
                 request_headers,
+                request_bootstrap,
             )
         ]
     return build_event_manifest._fetch_official_event_pages(
@@ -448,6 +451,7 @@ def collect_evidence(
                 "response_schema": plan_row.get("response_schema"),
                 "response_adapter": plan_row.get("response_adapter", {}),
                 "request_headers": plan_row.get("request_headers", {}),
+                "request_bootstrap": plan_row.get("request_bootstrap"),
             },
         )
         if len(bodies) != 1:

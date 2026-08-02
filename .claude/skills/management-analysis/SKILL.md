@@ -13,6 +13,158 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享目录、run隔离、无感resolver和旧路径兼容只以该文件为准。
 
+### source-discovery handoff
+
+运行前还必须完整读取`.claude/skills/read-filing/references/external-research-handoff.md`。只在已绑定的annual/event/counterpart manifests之外补外部证据；官方 filing、event 和 counterpart manifest 证据继续由`read-filing`拥有，`management-analysis`继续拥有最终管理判断、pending gate和一票否决schema。
+
+`source-discovery`只用于四类外部补研:外部承诺、治理事件、counterpart evidence和适用监管语境。它只能补充bound manifests未覆盖或不足以定性的外部证据，不能改写、替换、降级或绕过`read-filing`已绑定的annual、event或counterpart manifests，也不能替代本skill的最终判断或veto schema。
+
+Any discovered official regulator/exchange/court governance event is only a lead back to `read-filing` revalidation/rebinding and cannot be directly accepted through external handoff. Source-discovery may accept counterpart-side or non-manifest context only.
+
+外部补研必须先拆成独立`claim_id`，并让每条请求显式写清证据对象、事件窗口、连续性、最新期和可接受来源门槛。四类claim必须分别建单，不能打包成一个模糊的“管理层外部补研”请求。请求体按`research-request.schema.json`校验，候选事实只消费通过`candidate-claim.schema.json`验收的`accepted_candidates`，未决项只消费符合`research-ledger.schema.json`的终态ledger。对敏感管理结论还必须显式声明`accepted_source_classes`; 未落在请求白名单内的source class即使rating很高也不得进入最终accepted candidate。以下JSON中的字面值只作示意模板；运行时必须从invocation、issuer context和bound manifest context派生真实`as_of`、事件窗口、`required_latest_period`、`geographies`、`industries`、`subject`、`population`、`product_scope`和`measurement_basis`，不得把示例里的年份、AS_OF、jurisdiction、industry、subject或事件范围原样复制到真实请求。
+
+Recommended request set:
+
+```json
+[
+  {
+    "schema_version": "1.0",
+    "claim_id": "management-external-commitments-2023-2026",
+    "claim_type": "external-commitment",
+    "subject": "Named management commitments outside bound manifests",
+    "metric": "dated public management commitment with attributable outcome evidence",
+    "geographies": ["target-jurisdiction"],
+    "industries": ["issuer-industry"],
+    "population": "board members, executives, controlling shareholder representatives, and affected counterparties",
+    "product_scope": "management conduct and commitments outside bound manifests",
+    "measurement_basis": "dated attributable commitment and outcome evidence",
+    "period_start": "2023-01-01",
+    "period_end": "2026-08-02",
+    "frequency": "event-driven",
+    "continuity_required": false,
+    "required_latest_period": "2026-08-02",
+    "accepted_units": ["event"],
+    "definition_constraints": [
+      "must preserve commitment date, speaker identity, quoted commitment text, and target or milestone",
+      "must preserve attributable outcome evidence or explicit unresolved outcome window",
+      "must name the external document or event carrying the commitment"
+    ],
+    "value_status_allowed": ["observed"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "accepted_source_classes": ["issuer-first-party", "named-counterparty", "auditor"],
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "management-governance-events-2023-2026",
+    "claim_type": "governance-event",
+    "subject": "External governance events involving the issuer, board, or management",
+    "metric": "dated governance event with legal or board-process effect",
+    "geographies": ["target-jurisdiction"],
+    "industries": ["issuer-industry"],
+    "population": "issuer directors, officers, controllers, board committees, and named governance bodies",
+    "product_scope": "governance events outside bound manifests",
+    "measurement_basis": "dated attributable governance event evidence",
+    "period_start": "2023-01-01",
+    "period_end": "2026-08-02",
+    "frequency": "event-driven",
+    "continuity_required": false,
+    "required_latest_period": "2026-08-02",
+    "accepted_units": ["event"],
+    "definition_constraints": [
+      "must preserve occurrence date, publication date, governance body, action, and named subjects",
+      "must preserve `issuer_connection`, `subject_role_at_occurrence`, and current role if available",
+      "must stay outside already-bound official event manifests and cite the external governance route used",
+      "official regulator/exchange/court governance events are discovery leads only and must return to read-filing revalidation/rebinding"
+    ],
+    "value_status_allowed": ["observed"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "accepted_source_classes": ["issuer-first-party", "named-counterparty", "auditor"],
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "management-counterpart-evidence-2023-2026",
+    "claim_type": "counterpart-evidence",
+    "subject": "Counterpart-side evidence about management conduct outside bound manifests",
+    "metric": "counterpart-side statement or action evidencing management conduct",
+    "geographies": ["target-jurisdiction"],
+    "industries": ["issuer-industry"],
+    "population": "named counterparties, suppliers, customers, lenders, auditors, partners, and exchange applicants",
+    "product_scope": "counterpart-side evidence tied to a specific management event or transaction",
+    "measurement_basis": "dated attributable counterpart statement or document",
+    "period_start": "2023-01-01",
+    "period_end": "2026-08-02",
+    "frequency": "event-driven",
+    "continuity_required": false,
+    "required_latest_period": "2026-08-02",
+    "accepted_units": ["event", "document"],
+    "definition_constraints": [
+      "must come from a named counterparty or counterpart-side attributable record",
+      "must preserve counterpart identity, relationship to issuer, event date, and exact claimed interaction",
+      "must link to the same commitment, governance event, or transaction under review"
+    ],
+    "value_status_allowed": ["observed"],
+    "minimum_source_authority": "Medium",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "accepted_source_classes": ["named-counterparty", "auditor"],
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "management-regulatory-context-2023-2026",
+    "claim_type": "regulatory-context",
+    "subject": "Applicable regulatory context for management conduct under review",
+    "metric": "applicable rule or enforcement framework in force during the event window",
+    "geographies": ["target-jurisdiction"],
+    "industries": ["issuer-industry"],
+    "population": "issuer management, directors, controllers, and the governing jurisdiction",
+    "product_scope": "official regulatory context tied to the specific management event or conduct",
+    "measurement_basis": "official rule text and applicability to the subject event",
+    "period_start": "2023-01-01",
+    "period_end": "2026-08-02",
+    "frequency": "event-driven",
+    "continuity_required": false,
+    "required_latest_period": "2026-08-02",
+    "accepted_units": ["document"],
+    "definition_constraints": [
+      "must be an official law, rule, code, listing rule, or regulator guidance in force during the event window",
+      "must preserve jurisdiction, effective date, cited provision, and applicability to the subject or event",
+      "must not replace bound official event evidence or create a violation conclusion without underlying accepted evidence"
+    ],
+    "value_status_allowed": ["observed"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "accepted_source_classes": ["official-regulator", "official-exchange", "official-court"],
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  }
+]
+```
+
+`management-analysis`只可把`accepted_candidates`写入管理层事实句、治理事件表、文化判断和诚信结论；未通过gate的candidate、搜索日志、单一路线命中、弱来源摘要或空结果都只能停留在warning、pending或跟踪项，不能直接升格为管理结论。
+
+`unresolved_claims`只接收`blocked`、`conflict`或`exhausted`，并保留`claim_id`、`acceptance_failures`、`accepted_evidence`、`conflict_evidence`、`next_escalation`和route lineage。在返回`pending`或`需人工`前,相关外部claim必须先有通过`research-ledger.schema.json`校验的终态ledger。`technical-failure`、`access-unavailable`和`request-budget-exhausted`只可落为`blocked`，不得把这些失败改写成`未发生`、`没有`、`查无记录`或事实性absence；它们表示技术、访问或预算受阻，不表示事实缺席。
+
+媒体报道、匿名爆料、社交帖子、搜索摘要和无署名聚合页只可作为discovery lead，用来提示后续路线，不得直接支持任何最终判断。不得用弱来源支持私下动机、个人品格、内部文化或诚信结论；这类结论只能建立在已接受的官方、具名counterpart、正式监管、法院、审计、交易或其他可归责一手证据上。
+
 ## §0运行模式
 
 本 skill 支持两种模式, 主 agent 根据 invocation 参数选择:
@@ -114,13 +266,13 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 
 ### §2.7道德风险一票否决（§1.6 / §1.7推出）
 
-- **规则优先级**:management-analysis专属诚信否决规则优先。`financial-redflag-scan`只对正式财务造假或财务虚假陈述自动一票否决;本skill还独立覆盖管理层或实控人的欺诈、操纵市场、内幕交易和已证实股东利益输送。两者冲突时按本节较严格但证据闭合的规则执行,调查中事项仍只标待定。
+- **规则优先级**:management-analysis专属诚信否决规则优先。`financial-redflag-scan`只对正式财务造假或财务虚假陈述自动一票否决;本skill还独立覆盖管理层或实控人的欺诈、操纵市场、内幕交易和已证实股东利益输送。两者冲突时按本节较严格且证据完整的规则执行,调查中事项仍只标待定。
 - **§2.7.1前置触发条件**:上市以来存在欺诈、操纵股价、内幕交易、虚假陈述和财务造假正式处罚或生效纪律处分/已证实的违规关联交易或股东利益输送/大股东占款。问询、刑事立案或调查中事项只标`需人工/待定`并阻断估值,不作前置否决;正式判决或生效处罚再按对应类别判定。以上不依赖本skill后续分析,在`§4.pre`扫描。
 - **§2.7.1b事件归类去重**:`§4.pre`四行互斥归类,按`虚假陈述处罚记录>大股东占款>关联输送>道德风险其他事项`的优先顺序分配唯一行。虚假陈述只计入`虚假陈述处罚记录`,不得同时计入道德风险;同一事件只计数一次,但可在其他行的解释中引用而不增加触发数。
 - **§2.7.1a任职归因**:监管事件必须读取`subject_role_at_occurrence`和`issuer_connection`。现任或离任管理人员在任职期间或与发行人有关的行为纳入本公司诚信判断;离任后个人无关行为不得归因给发行人。关键人变更按事件发生日前后24个月检查CFO、董事长、审计师变更、财报重述和处罚;关系不明时写`需人工`,不得自动否决。
 - **§2.7.2后置触发条件**:系统性画大饼在§4.2完成后复核。对适用百分比gap的同一指标ID,连续3年gap>20%触发,不得把超额完成的负gap计入。对上限、减亏、亏损或其他非正目标,同一指标ID连续3年`directional_miss=true`触发;不得因gap为`N/A`使该路径不可达,也不得在尚无兑现表时预判。
 - **§2.7.3阶段C后置触发条件**:`§4.8`必须完整读取`references/related-party-alignment.md`。Mode A和Mode B共用这10行canonical schema:资金占用、关联采购不公允定价、关联销售不公允定价、商标/品牌授权费、销售/采购渠道被控制、关联担保、关联方长期预付款、大股东主导合营项目沉淀、集团代付/分担高管薪酬、大小股东分红权差异。银行必须额外完成4行:银行关联授信、银行关联存款、银行关联资产转让、银行关联担保;非银行不生成银行4行扩展。状态到严重度的固定映射以reference为唯一来源,严重度枚举为`无/预警/高风险/一票否决/待定`。证实大股东侵占上市公司利益、违规担保或非公允利益输送时触发;`需人工`、问询或调查中事项只返回待复核,不得当作已证实否决。
-- **§2.7.4后果与恢复**:Mode A报告结论写`弃权`;Mode B只在Part 1的`§4.pre`、`§4.2`或`§4.8`记录证据。风险严重度和证据置信度分开:官方处罚窗口完整、文书逐字节复核且归因闭合时,证据置信度保持`高`,不得因否决结论而降级。Mode B只返回`draft_veto=true`和`management_veto=false`,同时返回`reason`与`citations`;父skill先在内存中重算有效否决和全部联动字段,再与正文通过同一次原子写入持久化。本skill不得修改Part 0或Part 4;前置否决跳过尚未开始的深挖section,后置否决保留已完成section并停止剩余未完成section。resume必须从`§4.pre、§4.2和§4.8`重建否决状态,不得只依赖内存handoff。
+- **§2.7.4后果与恢复**:Mode A报告结论写`弃权`;Mode B只在Part 1的`§4.pre`、`§4.2`或`§4.8`记录证据。风险严重度和证据置信度分开:官方处罚窗口完整、文书逐字节复核且归因明确时,证据置信度保持`高`,不得因否决结论而降级。Mode B只返回`draft_veto=true`和`management_veto=false`,同时返回`reason`与`citations`;父skill先在内存中重算有效否决和全部联动字段,再与正文通过同一次原子写入持久化。本skill不得修改Part 0或Part 4;前置否决跳过尚未开始的深挖section,后置否决保留已完成section并停止剩余未完成section。resume必须从`§4.pre、§4.2和§4.8`重建否决状态,不得只依赖内存handoff。
 
 ### §2.8财务分配4大测试（§1.4推出 — 管理层质量的财报侧面）
 
@@ -142,7 +294,7 @@ description: Use when a user asks to evaluate a Shanghai/Shenzhen A-share or HK 
 **管理层最终三态决策表**:
 
 - 任一§2.7否决成立→弃权。
-- `关键人变更`在24个月窗口内与处罚、重述或审计异常同向且归因未闭合→有保留;证据闭合后按底层事件重算。
+- `关键人变更`在24个月窗口内与处罚、重述或审计异常同向且归因尚不明确→有保留;证据完整后按底层事件重算。
 - `§4.8最高严重度`为`一票否决`→弃权,为`高风险/预警`→有保留,为`待定`→按pending处理,为`无`才不改变结论。
 - 存在pending或证据不足→有保留;不存在pending或证据不足,但资本分配为任一`有保留`状态时也判有保留。
 - 无否决、无未决且资本分配合格→合格。
@@ -325,7 +477,7 @@ Acceptable后写中文终稿。`§4.1-§4.8`各自填写`**引用:**`、`**置�
 
 ### Step 5 — Output
 
-Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`,两者都要求每个已完成section至少一条非占位引用。联合类型为:`source_type=filing_text/filing_pdf`时含`section_id/jurisdiction/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote`;`source_type=event_document`时含`section_id/jurisdiction/source_type/event_manifest_sha256/document_url/artifact_path/content_sha256/artifact_sha256/page/quote`,HTML文书的page可为null。artifact_path必须是最终持久artifact的绝对路径。Mode B每个返回的draft section必须至少有一条`section_id`完全相同的citation;citation的section_id还必须属于当前stage,Stage A只能引用`part1/§4.pre`,不得引用§4.8。resume时逐条复核机器引用,任一不符即按该引用自身的`section_id`失效对应section;缺失或未知section_id时fail closed并失效全部管理层section。
+Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`,两者都要求每个已完成section至少一条非占位引用。两种模式的最终用户可见Markdown都把完整清单放入HTML注释,保留原标记供恢复和schema校验。联合类型为:`source_type=filing_text/filing_pdf`时含`section_id/jurisdiction/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote`;`source_type=event_document`时含`section_id/jurisdiction/source_type/event_manifest_sha256/document_url/artifact_path/content_sha256/artifact_sha256/page/quote`,HTML文书的page可为null。artifact_path必须是最终持久artifact的绝对路径。Mode B每个返回的draft section必须至少有一条`section_id`完全相同的citation;citation的section_id还必须属于当前stage,Stage A只能引用`part1/§4.pre`,不得引用§4.8。resume时逐条复核机器引用,任一不符即按该引用自身的`section_id`失效对应section;缺失或未知section_id时fail closed并失效全部管理层section。
 
 **Mode A**:
 - 使用Step 2选定的standalone路径,先记录standalone基线SHA-256,生成完整draft后运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <standalone-path> --expected-sha256 <baseline-profile-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`;非A+H省略counterpart guard,并发冲突或guard变化时不得覆盖
@@ -337,7 +489,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 
 **Mode B**:
 - 无论`--auto`还是`--interactive`都不直接写target-profile,仅返回`draft_sections`和`management_veto/management_pending/pending_gate/reason/citations/unresolved_rows`等结构化flags,由父skill复核并原子写入
-- 返回对象必须通过`references/mode-b-response.schema.json`校验。schema校验只是必要条件,主agent还必须逐section执行完成条件,并验证每条event citation的`event_manifest_sha256`逐条等于顶层`event_manifest_sha256`;不相等立即拒绝。`draft_sections`按精确标题逐section包含未完成目标:`§4.pre`只含风险表、扫描结论、引用和置信度;`§4.1-§4.8`包含各自填写区、引用、置信度与管理层口径校核;每个draft section包含`**机器引用清单:**`
+- 返回对象必须通过`references/mode-b-response.schema.json`校验。schema校验只是必要条件,主agent还必须逐section执行完成条件,并验证每条event citation的`event_manifest_sha256`逐条等于顶层`event_manifest_sha256`;不相等立即拒绝。`draft_sections`按精确标题逐section包含未完成目标:`§4.pre`只含风险表、扫描结论、引用和置信度;`§4.1-§4.8`包含各自填写区、引用、置信度与管理层口径校核;每个draft section包含`**机器引用清单:**`,并把清单放在HTML注释中
 - draft_sections的键必须是canonical复合section ID。全stage调用时键集合必须恰好等于当前stage中尚未完成的section;显式定向调用时键集合恰好等于该精确目标,不要求补齐同stage其他section。
 - 返回值必须是以下JSON对象,不得增加第二种顶层形态:
   ```json
@@ -378,6 +530,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 ## §4 Policy
 
 - **中文输出**: 填写区/引用/置信度/管理层口径校核/总结结论均中文
+- **自然中文**:用户可见正文遵守`../value-profile/references/profile-writing-style.md`;不得把`close/closed`直译为“闭合”,应按事实状态写“已核实”“已完成判断”“仍缺资料”或“尚不能判断”
 - **中文空格规则**:只禁止两个中文字符之间出现不恰当空格;不禁止中文与英文或数字之间为可读性保留正常空格
 - **引用落点**:Mode A可在数字后带`(年报-YYYY.pdf p.NN)`;Mode B遵守父profile契约,表格单元格可带页码,叙述段集中到本section`**引用:**`
 - **禁用8条空话**: "管理层优秀/战略正确/执行力强/具企业家精神/稳健经营/锐意进取/勤勉尽责/诚信专业" 无具体佐证 → 退回

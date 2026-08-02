@@ -49,6 +49,17 @@
           "type": "object",
           "additionalProperties": {"type": "string"}
         },
+        "request_bootstrap": {
+          "type": "object",
+          "required": ["type", "page_url"],
+          "properties": {
+            "type": {"const": "hkex_equity_quote_token_v1"},
+            "page_url": {
+              "const": "https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities/Equities-Quote"
+            }
+          },
+          "additionalProperties": false
+        },
         "response_schema": {"type": "string"},
         "response_adapter": {"type": "object"}
       },

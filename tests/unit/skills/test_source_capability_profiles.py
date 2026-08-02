@@ -22,6 +22,9 @@ SCHEMA_PATH = (
 )
 FIXTURES_ROOT = REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "profiles"
 SCENARIOS_ROOT = REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "scenarios"
+HKEX_LISTING_APPLICANT_FIXTURES_ROOT = (
+    REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "hkex-listing-applicants"
+)
 SCRIPT_PATH = (
     REPO_ROOT / ".claude" / "skills" / "source-discovery" / "scripts" / "source_profiles.py"
 )
@@ -90,6 +93,7 @@ EXPECTED_PROFILE_IDS = {
     "hk-police",
     "hkex-ccass",
     "hkex-di",
+    "hkex-listing-applicants",
     "hkex-market-data",
     "hkexnews",
     "hkma",
@@ -197,6 +201,14 @@ def load_profile(name: str) -> dict[str, object]:
 def load_scenario(name: str) -> dict[str, object]:
     path = SCENARIOS_ROOT / name
     assert path.is_file(), f"missing scenario fixture: {path}"
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
+
+def load_hkex_listing_applicant_identity(name: str) -> dict[str, object]:
+    path = HKEX_LISTING_APPLICANT_FIXTURES_ROOT / name
+    assert path.is_file(), f"missing HKEX listing-applicant fixture: {path}"
     payload = yaml.safe_load(path.read_text(encoding="utf-8"))
     assert isinstance(payload, dict)
     return payload
@@ -841,6 +853,184 @@ def test_approved_status_ttls_match_global_constraints() -> None:
     assert source_profiles.ttl_for_status("moved") == timedelta(days=7)
     assert source_profiles.ttl_for_status("broken-link") == timedelta(days=7)
     assert source_profiles.ttl_for_status("unverified") == timedelta(hours=24)
+
+
+def test_listing_applicant_routes_stale_pop_mart_evidence_to_bound_historical_artifact() -> None:
+    source_profiles = load_source_profiles_module()
+    scenario = load_scenario("pop-mart.yaml")
+    identity = load_hkex_listing_applicant_identity("active-index-108384.yaml")
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    requirement = next(
+        requirement
+        for requirement in scenario["required_functions"]
+        if requirement["function_id"] == "listing-applicant-documents"
+    )
+    evidence = requirement["listing_applicant_evidence"]
+    active_index = identity["active_index_identity"]
+    active_record = active_index["application_record"]
+    historical_artifact = identity["historical_evidence_artifact"]
+
+    assert evidence["trigger"] == "stale target evidence"
+    assert evidence["relation"] == "active-listing-applicant"
+    assert evidence["identity_fixture"] == "hkex-listing-applicants/active-index-108384.yaml"
+    assert active_index == {
+        "index_url": "https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json",
+        "response_sha256": "e1e136478f8094b731f680ae744604cb0f943b757b3ace4b4560c49f2da13e54",
+        "retrieved_at": "2026-08-01T18:32:04.375845+00:00",
+        "application_record": {
+            "id": 108384,
+            "d": "31/03/2026",
+            "a": "TOP TOY International Group Limited",
+            "s": "A",
+            "w": "sehk/2026/108384/documents/warn26033103584.pdf",
+            "sD": 34,
+            "sA": 295,
+            "ls": [
+                {
+                    "d": "31/03/2026",
+                    "nS1": "OC Announcement - Appointment",
+                    "u1": "sehk/2026/108384/documents/sehk26033103668.pdf",
+                },
+                {
+                    "d": "31/03/2026",
+                    "nF": "Application Proof (1st submission)",
+                    "nS1": "Full Version",
+                    "nS2": "Multi-Files",
+                    "u1": "sehk/2026/108384/documents/sehk26033103586.pdf",
+                    "u2": "sehk/2026/108384/2026033103581.htm",
+                },
+            ],
+            "ps": [],
+            "hasPhip": False,
+            "postingDate": "Mar 31, 2026",
+        },
+    }
+    assert evidence["current_active_index_identity"] == {
+        "index_url": active_index["index_url"],
+        "response_sha256": active_index["response_sha256"],
+        "application_id": active_record["id"],
+        "applicant": active_record["a"],
+        "status": active_record["s"],
+        "publication_date": active_record["d"],
+    }
+    assert historical_artifact == {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108384/a131511/sehk26033103632.pdf",
+        "sha256": "eb50b5d3ada6e4a271e24c3ba37828cdd2b1dcd2ef11648ed1318dfa6d8b7cdc",
+        "size_bytes": 353595,
+        "relation_to_current_active_index": "unverified",
+        "artifact_role": "historical-evidence-artifact",
+        "current_application_proof": False,
+        "evidence_chart": {
+            "title": "Market Size of China's Pop Toy Industry by GMV, 2020-2030E",
+            "source": "Frost & Sullivan",
+            "scope": "China pop-toy market",
+            "unit": "亿元",
+            "values": {
+                2020: 249,
+                2021: 345,
+                2022: 352,
+                2023: 430,
+                2024: 587,
+                2025: 875,
+            },
+            "latest_period": 2025,
+            "2026_status": "not asserted",
+        },
+    }
+    assert evidence["historical_evidence_artifact"] == historical_artifact
+
+    profile = profiles["hkex-listing-applicants"]
+    function = next(
+        function
+        for function in profile["functions"]
+        if function["id"] == "listing-applicant-documents"
+    )
+    routes = source_profiles.select_routes(
+        profiles=[profile],
+        function_id="listing-applicant-documents",
+        now=datetime.fromisoformat(scenario["as_of"]),
+    )
+
+    assert [route.source_id for route in routes] == ["hkex-listing-applicants"]
+    assert routes[0].direct_url == (
+        "https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json"
+    )
+    assert routes[0].document_types == (
+        "application-proof",
+        "PHIP",
+        "listing-application",
+    )
+    assert routes[0].relationship_uses == (
+        "active-listing-applicant",
+        "recent-listing-applicant",
+    )
+    assert function["document_types"] == [
+        "application-proof",
+        "PHIP",
+        "listing-application",
+    ]
+    assert function["relationship_uses"] == [
+        "active-listing-applicant",
+        "recent-listing-applicant",
+    ]
+
+
+def test_cross_industry_scenarios_bind_official_and_listing_applicant_routes() -> None:
+    source_profiles = load_source_profiles_module()
+    forward_scenario = load_scenario("evidence-gate-cross-industry.yaml")
+    guizhou_scenario = load_scenario("guizhou-moutai.yaml")
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    official_case = forward_scenario["cases"]["official_statistics_early_stop"]
+    fresh_drinks_case = forward_scenario["cases"]["fresh_drinks_listing_applicant"]
+    guizhou_requirement = next(
+        requirement
+        for requirement in guizhou_scenario["required_functions"]
+        if requirement["function_id"] == "official-statistics"
+    )
+
+    assert official_case["request"]["claim_id"] == "cn-consumer-retail-sales-2021-2025"
+    assert guizhou_requirement["evidence_gate"]["claim_id"] == official_case["request"]["claim_id"]
+    assert (
+        guizhou_requirement["evidence_gate"]["expected_accepted_layer"]
+        == official_case["expected"]["accepted_layer"]
+    )
+    assert guizhou_requirement["evidence_gate"]["forbidden_route_layers_after_acceptance"]
+    assert (
+        guizhou_requirement["evidence_gate"]["evidence_level"]
+        == official_case["expected"]["evidence_level"]
+    )
+    official_routes = source_profiles.select_routes(
+        profiles=[profiles[source_id] for source_id in official_case["candidate_source_ids"]],
+        function_id=official_case["source_function"],
+        now=datetime.fromisoformat(forward_scenario["as_of"]),
+        geographies=official_case["request"]["geographies"],
+        industries=official_case["request"]["industries"],
+    )
+    assert [route.source_id for route in official_routes] == ["national-bureau-statistics"]
+
+    assert fresh_drinks_case["request"]["industries"] == ["fresh drinks"]
+    assert (
+        fresh_drinks_case["uncataloged_original"]["runtime_evidence"]["evidence_level"]
+        == fresh_drinks_case["expected"]["evidence_level"]
+    )
+    listing_profile = profiles[fresh_drinks_case["candidate_source_ids"][0]]
+    direct_listing_routes = source_profiles.select_routes(
+        profiles=[listing_profile],
+        function_id=fresh_drinks_case["source_function"],
+        now=datetime.fromisoformat(forward_scenario["as_of"]),
+        geographies=fresh_drinks_case["request"]["geographies"],
+        industries=fresh_drinks_case["request"]["industries"],
+    )
+    assert direct_listing_routes == []
+    listing_function = next(
+        function
+        for function in listing_profile["functions"]
+        if function["id"] == fresh_drinks_case["source_function"]
+    )
+    for relation_record in fresh_drinks_case["relation_records"]:
+        assert relation_record["source_id"] == listing_profile["id"]
+        assert relation_record["source_function"] == listing_function["id"]
+        assert relation_record["relation"] in listing_function["relationship_uses"]
 
 
 @pytest.mark.parametrize(
@@ -1553,7 +1743,23 @@ def test_reviewed_snapshot_contains_only_known_sources_and_statuses() -> None:
     snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
     assert set(snapshot) <= known_source_ids
-    assert set(snapshot) == known_source_ids
+    assert known_source_ids - set(snapshot) == {"hkex-listing-applicants"}
     for source_id, observation in snapshot.items():
         assert observation["status"] in APPROVED_STATUSES, source_id
         assert observation["evidence_level"] in {"High", "Medium", "Low"}, source_id
+
+
+def test_kpmg_china_exposes_verified_public_report_asset_route() -> None:
+    profiles = {profile["id"]: profile for profile in load_maintained_profiles()}
+    kpmg = profiles["kpmg-china"]
+    research_reports = next(
+        function for function in kpmg["functions"] if function["id"] == "research-reports"
+    )
+
+    assert "assets.kpmg.com" in kpmg["official_domains"]
+    assert research_reports["workflow_evidence"] == "High"
+    assert any(
+        route["url"].startswith("https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/")
+        for route in research_reports["direct_urls"]
+    )
+    assert kpmg["access"]["status"] == "reachable"

@@ -161,7 +161,8 @@ _RE_HK_MULTI_YEAR_END_EN = re.compile(
     re.IGNORECASE,
 )
 _RE_HK_COVER_FISCAL_YEAR = re.compile(
-    r"fiscal\s+year\s+((?:19|20)\d{2})\s+annual\s+report",
+    r"\b(?:(?:fiscal\s+year\s+)?((?:19|20)\d{2})\s+annual\s+report|"
+    r"annual\s+report\s+((?:19|20)\d{2}))\b",
     re.IGNORECASE,
 )
 _RE_HK_PERIOD_END_ZH = re.compile(r"截至\s*((?:19|20)\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日")
@@ -1468,7 +1469,8 @@ def extract_hk_report_period_end(pdf_path: Path) -> date:
     confirmed_dates = cover_dates & statement_dates
     if len(confirmed_dates) != 1:
         cover_fiscal_years = {
-            int(match.group(1)) for match in _RE_HK_COVER_FISCAL_YEAR.finditer(cover_text)
+            int(match.group(1) or match.group(2))
+            for match in _RE_HK_COVER_FISCAL_YEAR.finditer(cover_text)
         }
         if len(cover_fiscal_years) == 1:
             cover_fiscal_year = next(iter(cover_fiscal_years))

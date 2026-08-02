@@ -1,0 +1,78 @@
+id: hkex-listing-applicants
+name: HKEX listing applicants
+aliases:
+- HKEX active listing applicants
+- HKEX application proof index
+- HKEX PHIP index
+publisher_type: official-exchange
+official_domains:
+- hkexnews.hk
+geographies:
+- HK
+industries:
+- cross-industry
+authority:
+  level: High
+  scope: HKEX-published listing-applicant index records and application documents. The index is discovery
+    metadata; the opened official PDF is the evidence artifact.
+functions:
+- id: listing-applicant-documents
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json
+    kind: active Main Board listing-applicant index
+    stability: public JSON index; application records and paths change as applications progress
+  search:
+    method: retrieve the active HKEX listing-applicant JSON index, select an application record, then open
+      the official application PDF or the current replacement version
+    fields:
+    - active or inactive index identity
+    - application ID
+    - issuer
+    - publication date
+    - document path
+    - version or replacement relation
+    example_query: find TOP TOY application ID 108384 in the active index, then open the official application
+      PDF and preserve its final URL
+    result_identity: active or inactive index identity, application ID, issuer, publication date, document path,
+      version or replacement relation, and final PDF URL
+  citation:
+    use: Search indexes are discovery records. Cite the opened official application PDF as the evidence artifact
+      and preserve application ID, issuer, publication date, document path, version or replacement relation,
+      and final PDF URL.
+    required_fields:
+    - application ID
+    - issuer
+    - publication date
+    - document path
+    - version or replacement relation
+    - final PDF URL
+  fallbacks: []
+  document_types:
+  - application-proof
+  - PHIP
+  - listing-application
+  relationship_uses:
+  - active-listing-applicant
+  - recent-listing-applicant
+access:
+  status: reachable
+  last_checked: '2026-08-02T02:32:23+08:00'
+  final_url: https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json
+  limitation: The active JSON index is a current discovery surface, not proof of a document's contents,
+    permanence, activity history, or replacement status. Open the final official PDF and retain the index
+    identity and version relation.
+  observed_error:
+    state: none
+    category: none
+    message: The active JSON index and the TOP TOY application PDF both returned successfully.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: The active index and the TOP TOY PDF were requested at their listed HKEXnews URLs.
+    response_status: Active index returned HTTP 200 application/json; the TOP TOY PDF returned HTTP 200 application/pdf.
+    recognizable_content: Active index root exposed app, genDate, and uDate; application 108384 identified TOP TOY.
+    access_indications: No login or paywall was observed for the index or sampled PDF.
+    technical_restriction: Do not treat a current index record or constructed path as a permanent or final document identity.

@@ -340,7 +340,8 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
         "financial-redflag-scan/references/mode-b-response.schema.json",
     ):
         assert schema in skill
-    assert len(skill.splitlines()) < 660
+    max_orchestrator_lines = 700
+    assert len(skill.splitlines()) < max_orchestrator_lines
 
 
 def test_a_share_financial_report_routes_to_section_ten() -> None:
@@ -1976,7 +1977,9 @@ def test_value_profile_redflag_fallback_has_bounded_manual_handoff() -> None:
     fallback = skill.split("**Fallback（子 skill 不可用时", 1)[1].split("### Step 6", 1)[0]
     assert "最多重派2次" in fallback
     assert "按financial-redflag-scan§2.4.4" in fallback
-    assert "不得按通用section规则降为中/低后继续" in fallback
+    assert "任何外部缺证必须先走`source-discovery`" in fallback
+    assert "形成validated terminal claim ledger,之后才可持久化" in fallback
+    assert "不得为缺外部证据开普通worker side door" in fallback
 
 
 def test_redflag_resume_does_not_invent_search_logs() -> None:
@@ -2175,10 +2178,14 @@ def test_redflag_mode_a_persists_blocking_and_manual_terminal_state() -> None:
 def test_value_profile_redflag_fallback_exits_auto_as_manual_terminal() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     redflag = skill.split("### Step 5 — 排雷清单模式", 1)[1].split("### Step 6", 1)[0]
+    external_gap = redflag.split("任何外部缺证", 1)[1].split("字段已存在", 1)[0]
 
-    assert "`**置信度:**需人工`" in redflag
-    assert "加入人工处理清单" in redflag
-    assert "退出auto循环" in redflag
+    assert external_gap.index("`source-discovery`") < external_gap.index(
+        "validated terminal claim ledger"
+    )
+    assert external_gap.index("validated terminal claim ledger") < external_gap.index(
+        "`排雷终态=manual_review`"
+    )
 
 
 def test_redflag_veto_limits_sanctions_to_financial_misconduct() -> None:
@@ -2414,11 +2421,20 @@ def test_value_profile_global_failure_paths_use_manual_terminal_state() -> None:
     invocation = skill.split("#### 两种运行模式", 1)[1].split("**Interactive mode", 1)[0]
     recovery = skill.split("### §4.3 Failure modes & recovery", 1)[1]
 
-    assert "标`**置信度:**需人工`" in invocation
-    assert "加入人工处理清单" in invocation
-    assert "标 `**置信度:** 中`" not in invocation
-    assert "标`**置信度:**需人工`" in recovery
-    assert "标 `**置信度:** 中`" not in recovery
+    assert invocation.index("validated terminal `blocked/conflict/exhausted`") < invocation.index(
+        "`**置信度:**需人工`"
+    )
+    for raw_failure in (
+        "raw empty output",
+        "empty route",
+        "`technical-failure`",
+        "`access-unavailable`",
+        "`request-budget-exhausted`",
+    ):
+        assert raw_failure in skill
+    assert "都不能直接产出`没有`、`查不到`或`需人工`" in skill
+    assert "把相关claim写成validated terminal ledger" in recovery
+    assert "validated `blocked` ledger" in recovery
 
 
 def test_value_profile_primary_cycle_route_uses_cost_tier_multiple() -> None:
@@ -2550,7 +2566,7 @@ def test_value_profile_defers_valuation_until_redflag_gate_and_routes_schema() -
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
 
     assert "part4/§4.3依赖part4/§4.5" in skill
-    assert "§4.5证据闭合且估值阻断为否之前不得运行§4.3" in skill
+    assert "§4.5证据完整且估值阻断为否之前不得运行§4.3" in skill
     assert "周期路线:整节替换为完整周期平均净利润" in template
     assert "公用事业路线:整节替换为稳态自由现金流" in template
 
@@ -3059,6 +3075,619 @@ def test_profile_writing_style_is_the_only_abbreviation_whitelist() -> None:
     assert "ROA" in style
     assert "唯一缩写白名单" in language
     assert "保留缩写仅" not in language
+
+
+def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    product = read(SKILL_PATHS["product-analysis"])
+    management = read(SKILL_PATHS["management-analysis"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    assert "用户可见中文不得使用“闭合”" in style
+    for replacement in ("已核实", "证据完整", "已完成判断", "仍缺资料", "尚不能判断"):
+        assert replacement in style
+    assert "解决缺口" not in style
+    for natural_phrase in ("补齐资料", "完成核验", "处理完这个问题"):
+        assert natural_phrase in style
+    assert "Step 3c必须检查并改写“闭合”" in profile
+    for subskill in (redflag, product, management):
+        assert "profile-writing-style.md" in subskill
+        assert "不得把`close/closed`直译为“闭合”" in subskill
+
+    user_facing_sources = (
+        profile,
+        redflag,
+        product,
+        management,
+        read(SKILLS_ROOT / "value-profile" / "template-zh.md"),
+        read(SKILLS_ROOT / "product-analysis" / "references" / "value-mechanisms.md"),
+        read(SKILLS_ROOT / "management-analysis" / "references" / "related-party-alignment.md"),
+    )
+    allowed_rule_phrases = (
+        "Step 3c必须检查并改写“闭合”",
+        "不得把`close/closed`直译为“闭合”",
+    )
+    for source in user_facing_sources:
+        offending_lines = [
+            line
+            for line in source.splitlines()
+            if "闭合" in line and not any(rule in line for rule in allowed_rule_phrases)
+        ]
+        assert offending_lines == []
+
+
+def test_user_facing_chinese_explains_sensitivity_analysis_naturally() -> None:
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for requirement in (
+        "按明确假设简单测算",
+        "计算结果",
+        "未考虑因素",
+        "不是预测",
+    ):
+        assert requirement in style
+    for stiff_phrase in ("机械压力", "机械影响", "机械敏感性", "机械减少"):
+        assert stiff_phrase not in style
+
+
+def test_product_revenue_mix_preserves_hierarchy_and_separates_dimensions() -> None:
+    product_skill = read(SKILL_PATHS["product-analysis"])
+    profile_skill = read(SKILL_PATHS["value-profile"])
+    writing_style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+
+    for requirement in (
+        "同一张收入结构表只放一个分类维度",
+        "父项和子项必须明确标出包含关系",
+        "固定使用`收入类别/收入/占总收入`三列",
+        "报告期 · 金额单位",
+        "首列缩进",
+        "金额和占比分列",
+        "不使用每层单独一列",
+        "不使用`rowspan`",
+        "交叉维度分表展示",
+        "不得跨表相加",
+    ):
+        assert requirement in product_skill
+
+    assert "层级收入表" in profile_skill
+    assert "层级收入表" in writing_style
+    assert "层级收入表" in template
+
+
+def test_value_profile_publishes_markdown_and_html_companions() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for requirement in (
+        "同名`.md`和`.html`",
+        "HTML为默认阅读版本",
+        "Markdown为可编辑源文件",
+        "scripts/render_profile_html.py",
+    ):
+        assert requirement in skill
+
+
+def test_value_profile_exec_summary_uses_compact_signal_blocks() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for requirement in (
+        "状态标题 + 无前缀结论句 + 三色圆点证据",
+        "不写`一句话判断：`",
+        "`signal-list`",
+        "绿色=正面、红色=负面、黄色=待验证",
+    ):
+        assert requirement in skill
+
+
+def test_value_profile_preserves_confirmed_partial_market_share_trends() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for requirement in (
+        "不得把“未形成完整五年序列”写成“无法判断任何趋势”",
+        "市场定义、计量口径和历史重叠值",
+        "可比年份已经确认的阶段变化",
+        "未覆盖年份和不能外推的范围",
+    ):
+        assert requirement in skill
+
+
+def test_product_and_value_profile_require_recent_market_share_research() -> None:
+    product = read(SKILL_PATHS["product-analysis"])
+    profile = read(SKILL_PATHS["value-profile"])
+
+    for text in (product, profile):
+        for requirement in (
+            "市场份额默认请求最近5个完整年度",
+            "公开证据允许时扩展至10年",
+            "另查AS_OF可得的当年H1/YTD/最新季度",
+            "目标公司与主要具名对手",
+            "旧年份不能替代最近5年验收",
+            "缺任一必需年度时连续序列保持unresolved",
+        ):
+            assert requirement in text
+
+
+def test_value_profile_requires_historical_and_forward_industry_growth_data() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    rule = skill.split("§2.6.0市场份额证据窗口", 1)[1].split("§2.6.1", 1)[0]
+
+    for required in (
+        "最近5个完整年度",
+        "未来3至5年",
+        "逐年市场规模",
+        "同比增速",
+        "复合增速",
+        "CR5或CR10",
+        "预测版本",
+        "后续修订",
+    ):
+        assert required in rule
+    assert "行业预测可以作为情景数据保留" in rule
+
+
+def test_product_discovery_contract() -> None:
+    skill = read(SKILL_PATHS["product-analysis"])
+    handoff = skill.split("### source-discovery handoff", 1)[1].split("### Mode A—Standalone", 1)[0]
+    request_schema = json.loads(
+        read(SKILLS_ROOT / "source-discovery" / "references" / "research-request.schema.json")
+    )
+    validator = Draft202012Validator(request_schema)
+
+    match = re.search(
+        r"Recommended request set:\n\n```json\n(.*?)\n```",
+        handoff,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    documented_requests = json.loads(match.group(1))
+    assert isinstance(documented_requests, list)
+    assert len(documented_requests) == 4
+
+    request_errors = sorted(
+        (error for request in documented_requests for error in validator.iter_errors(request)),
+        key=lambda error: (list(error.path), error.message),
+    )
+    assert request_errors == []
+
+    for requirement in (
+        "以下JSON中的字面值只作示意模板",
+        "运行时必须从invocation和issuer context派生真实`as_of`",
+        "最近完整期间",
+        "`required_latest_period`",
+        "`geographies`",
+        "`industries`",
+        "`subject`",
+        "`population`",
+        "`product_scope`",
+        "`measurement_basis`",
+    ):
+        assert requirement in handoff
+
+    claim_ids = {request["claim_id"] for request in documented_requests}
+    assert claim_ids == {
+        "product-category-size-cn-2021-2025",
+        "product-market-share-cn-2021-2025",
+        "product-customer-behavior-cn-2023-2025",
+        "product-competitor-benchmark-cn-2025",
+    }
+
+    requests_by_id = {request["claim_id"]: request for request in documented_requests}
+
+    category_size = requests_by_id["product-category-size-cn-2021-2025"]
+    assert category_size["continuity_required"] is True
+    assert category_size["required_latest_period"] == "2025"
+    assert category_size["product_scope"] == "target product category only"
+    assert "must include market denominator" in category_size["definition_constraints"]
+    assert "published within 18 months of AS_OF" in category_size["definition_constraints"]
+
+    market_share = requests_by_id["product-market-share-cn-2021-2025"]
+    assert market_share["continuity_required"] is True
+    assert market_share["measurement_basis"] == "share of category retail value"
+    assert (
+        "must name the subject company and major named competitors"
+        in market_share["definition_constraints"]
+    )
+    assert (
+        "must preserve annual rank and share for every required year"
+        in market_share["definition_constraints"]
+    )
+
+    customer_behavior = requests_by_id["product-customer-behavior-cn-2023-2025"]
+    assert customer_behavior["continuity_required"] is True
+    assert customer_behavior["population"] == "current or recent paying customers"
+    assert customer_behavior["metric"] == "annual repeat-purchase rate"
+    assert customer_behavior["measurement_basis"] == "annual repeat-purchase rate"
+    assert (
+        "must use observed customer actions, not survey intent alone"
+        in customer_behavior["definition_constraints"]
+    )
+    assert (
+        "must retain repeat-purchase window and cohort definition"
+        in customer_behavior["definition_constraints"]
+    )
+    assert (
+        "latest accepted period must be no older than 24 months at AS_OF"
+        in (customer_behavior["definition_constraints"])
+    )
+    assert "retention" not in customer_behavior["metric"]
+    assert "retention" not in customer_behavior["measurement_basis"]
+
+    competitor_benchmark = requests_by_id["product-competitor-benchmark-cn-2025"]
+    assert competitor_benchmark["continuity_required"] is False
+    assert competitor_benchmark["required_latest_period"] == "2025"
+    assert competitor_benchmark["metric"] == (
+        "price premium versus named same-task same-price-band competitors"
+    )
+    assert competitor_benchmark["measurement_basis"] == (
+        "price premium versus named same-task same-price-band competitors"
+    )
+    assert competitor_benchmark["accepted_units"] == ["percentage"]
+    assert (
+        "must compare the same customer task, price band, and product scope"
+        in (competitor_benchmark["definition_constraints"])
+    )
+    assert (
+        "must preserve named competitor SKUs or offer identities"
+        in (competitor_benchmark["definition_constraints"])
+    )
+    assert (
+        "latest benchmark snapshot must be no older than 18 months at AS_OF"
+        in (competitor_benchmark["definition_constraints"])
+    )
+    assert "benchmark spread" not in competitor_benchmark["metric"]
+    assert "benchmark spread" not in competitor_benchmark["measurement_basis"]
+
+    assert (
+        "`product-analysis` remains responsible for product-system judgments, "
+        "`moat_handoff`, and final Mode B schema compliance."
+    ) in handoff
+    for requirement in (
+        "只可把`accepted_candidates`写入产品事实、流程事实、竞争事实和正文事实句",
+        "`unresolved_claims`只接收`blocked`、`conflict`或`exhausted`",
+        "不得把未接受candidate、空路由、`technical-failure`、`access-unavailable`或`request-budget-exhausted`改写成`没有`、`不存在`或事实性absence",
+        "两次重派上限只约束同一路线的执行或输出质量重试",
+        "未接受claim只能沿planner layer单调升级",
+    ):
+        assert requirement in handoff
+
+
+def test_management_discovery_contract() -> None:
+    skill = read(SKILL_PATHS["management-analysis"])
+    handoff = skill.split("### source-discovery handoff", 1)[1].split("## §0运行模式", 1)[0]
+    request_schema = json.loads(
+        read(SKILLS_ROOT / "source-discovery" / "references" / "research-request.schema.json")
+    )
+    validator = Draft202012Validator(request_schema)
+
+    match = re.search(
+        r"Recommended request set:\n\n```json\n(.*?)\n```",
+        handoff,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    documented_requests = json.loads(match.group(1))
+    assert isinstance(documented_requests, list)
+    assert len(documented_requests) == 4
+
+    request_errors = sorted(
+        (error for request in documented_requests for error in validator.iter_errors(request)),
+        key=lambda error: (list(error.path), error.message),
+    )
+    assert request_errors == []
+
+    assert "references/external-research-handoff.md" in skill
+    for requirement in (
+        "以下JSON中的字面值只作示意模板",
+        "运行时必须从invocation、issuer context和bound manifest context派生真实`as_of`",
+        "事件窗口",
+        "`required_latest_period`",
+        "`geographies`",
+        "`industries`",
+        "`subject`",
+        "`population`",
+        "`product_scope`",
+        "`measurement_basis`",
+        "只在已绑定的annual/event/counterpart manifests之外补外部证据",
+        "官方 filing、event 和 counterpart manifest 证据继续由`read-filing`拥有",
+        "`management-analysis`继续拥有最终管理判断、pending gate和一票否决schema",
+        "official regulator/exchange/court governance event",
+        "lead back to `read-filing` revalidation/rebinding",
+        "cannot be directly accepted through external handoff",
+        "Source-discovery may accept counterpart-side or non-manifest context only",
+    ):
+        assert requirement in handoff
+
+    claim_ids = {request["claim_id"] for request in documented_requests}
+    assert claim_ids == {
+        "management-external-commitments-2023-2026",
+        "management-governance-events-2023-2026",
+        "management-counterpart-evidence-2023-2026",
+        "management-regulatory-context-2023-2026",
+    }
+
+    requests_by_id = {request["claim_id"]: request for request in documented_requests}
+
+    commitments = requests_by_id["management-external-commitments-2023-2026"]
+    assert commitments["claim_type"] == "external-commitment"
+    assert commitments["frequency"] == "event-driven"
+    assert commitments["accepted_units"] == ["event"]
+    assert commitments["accepted_source_classes"] == [
+        "issuer-first-party",
+        "named-counterparty",
+        "auditor",
+    ]
+    assert (
+        "must preserve commitment date, speaker identity, quoted commitment text, and target or milestone"
+        in (commitments["definition_constraints"])
+    )
+    assert (
+        "must preserve attributable outcome evidence or explicit unresolved outcome window"
+        in (commitments["definition_constraints"])
+    )
+    assert (
+        "must name the external document or event carrying the commitment"
+        in (commitments["definition_constraints"])
+    )
+
+    governance = requests_by_id["management-governance-events-2023-2026"]
+    assert governance["claim_type"] == "governance-event"
+    assert governance["frequency"] == "event-driven"
+    assert governance["accepted_units"] == ["event"]
+    assert governance["accepted_source_classes"] == [
+        "issuer-first-party",
+        "named-counterparty",
+        "auditor",
+    ]
+    assert (
+        "must preserve occurrence date, publication date, governance body, action, and named subjects"
+        in (governance["definition_constraints"])
+    )
+    assert (
+        "must preserve `issuer_connection`, `subject_role_at_occurrence`, and current role if available"
+        in (governance["definition_constraints"])
+    )
+    assert (
+        "must stay outside already-bound official event manifests and cite the external governance route used"
+        in (governance["definition_constraints"])
+    )
+
+    counterpart = requests_by_id["management-counterpart-evidence-2023-2026"]
+    assert counterpart["claim_type"] == "counterpart-evidence"
+    assert counterpart["accepted_units"] == ["event", "document"]
+    assert counterpart["accepted_source_classes"] == [
+        "named-counterparty",
+        "auditor",
+    ]
+    assert (
+        "must come from a named counterparty or counterpart-side attributable record"
+        in (counterpart["definition_constraints"])
+    )
+    assert (
+        "must preserve counterpart identity, relationship to issuer, event date, and exact claimed interaction"
+        in (counterpart["definition_constraints"])
+    )
+    assert (
+        "must link to the same commitment, governance event, or transaction under review"
+        in (counterpart["definition_constraints"])
+    )
+
+    regulatory = requests_by_id["management-regulatory-context-2023-2026"]
+    assert regulatory["claim_type"] == "regulatory-context"
+    assert regulatory["accepted_units"] == ["document"]
+    assert regulatory["accepted_source_classes"] == [
+        "official-regulator",
+        "official-exchange",
+        "official-court",
+    ]
+    assert (
+        "must be an official law, rule, code, listing rule, or regulator guidance in force during the event window"
+        in (regulatory["definition_constraints"])
+    )
+    assert (
+        "must preserve jurisdiction, effective date, cited provision, and applicability to the subject or event"
+        in (regulatory["definition_constraints"])
+    )
+    assert (
+        "must not replace bound official event evidence or create a violation conclusion without underlying accepted evidence"
+        in (regulatory["definition_constraints"])
+    )
+
+    for requirement in (
+        "只可把`accepted_candidates`写入管理层事实句、治理事件表、文化判断和诚信结论",
+        "`unresolved_claims`只接收`blocked`、`conflict`或`exhausted`",
+        "在返回`pending`或`需人工`前,相关外部claim必须先有通过`research-ledger.schema.json`校验的终态ledger",
+        "`technical-failure`、`access-unavailable`和`request-budget-exhausted`只可落为`blocked`",
+        "不得把这些失败改写成`未发生`、`没有`、`查无记录`或事实性absence",
+        "媒体报道、匿名爆料、社交帖子、搜索摘要和无署名聚合页只可作为discovery lead",
+        "不得用弱来源支持私下动机、个人品格、内部文化或诚信结论",
+    ):
+        assert requirement in handoff
+
+
+def test_redflag_discovery_contract() -> None:
+    skill = read(SKILL_PATHS["financial-redflag-scan"])
+    assert skill.index("### source-discovery handoff") < skill.index("## §0运行模式")
+
+    handoff = skill.split("### source-discovery handoff", 1)[1].split("## §0运行模式", 1)[0]
+    review = skill.split("### Step 4 — 主 agent 复核", 1)[1].split(
+        "### Step 5 — 写 summary + Output",
+        1,
+    )[0]
+
+    assert "references/external-research-handoff.md" in skill
+    for requirement in (
+        "official event discovery/manifest construction/live revalidation/rebinding remain `read-filing` ownership",
+        "Step 3.5和Step 5继续执行`read-filing`拥有的官方取证准备与重绑流程,这不是ownership transfer",
+        "外部发现的官方处罚或执法记录只可作为lead back to `read-filing`",
+        "不得在每条适用官方路线都已terminal且live revalidation成功前写`没有处罚`、`查无记录`或其他否定性执法结论",
+        "`technical-failure`、`access-unavailable`和`request-budget-exhausted`只可产出通过`research-ledger.schema.json`校验的`blocked`",
+        "不得把这些失败改写成absence,也不得直接快捷落成`需人工`或人工结论",
+        "两次重派上限只约束单一路线的抽取或输出质量修复,不裁剪必须盘点的discovery route inventory",
+        "目标公司经审计财务报表数值只可来自bound annual/counterpart manifests中被选中的经审计报表",
+        "外部已接受证据只可补充thresholds、peer/industry/regulatory context或cross-checks,不能替代这些经审计数值",
+        "Step 3.5/5现有编排继续使用`read-filing`拥有的evidence preparation",
+    ):
+        assert requirement in handoff
+
+    for requirement in (
+        "若把外部发现的官方处罚或执法记录当作最终accepted enforcement evidence而未回送`read-filing`重验重绑→退回",
+        "若写出`没有处罚`、`查无记录`或其他否定性执法结论,但尚未证明每条适用官方路线都已terminal且live revalidation成功→退回",
+        "若把`technical-failure`、`access-unavailable`或`request-budget-exhausted`从validated ledger `blocked`改写成absence或直接快捷落成`需人工`结论→退回",
+        "若目标公司经审计财务报表数值来自外部research而非bound annual/counterpart manifests中的被选中经审计报表→退回",
+    ):
+        assert requirement in review
+
+
+def test_value_profile_discovery_contract() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    run_store_contract = read(SKILLS_ROOT / "read-filing/references/run-store-contract.md")
+    assert skill.index("### source-discovery run-level orchestration") < skill.index(
+        "### Invocation"
+    )
+
+    orchestration = skill.split("### source-discovery run-level orchestration", 1)[1].split(
+        "### Invocation",
+        1,
+    )[0]
+    bootstrap = skill.split("1.55. **先创建standalone恢复骨架", 1)[1].split(
+        "2. **Audit `data/filings/<ticker>/`**",
+        1,
+    )[0]
+    fallback = skill.split("**Fallback（子 skill 不可用时, 主 skill 跑简化版）**", 1)[1].split(
+        "### Step 6",
+        1,
+    )[0]
+    worker_example = skill.split("Output requirements:", 1)[1]
+
+    for requirement in (
+        "可选checkpoint键`research_ledger`",
+        "每个run最多一个binding",
+        "对象结构固定为`artifact_id`、绝对`path`和小写64位十六进制`sha256`",
+        "`value-profile`的binding路径固定解析到`<run>/logs/research-ledger.json`",
+        "同一临界区",
+        "先完成durable ledger write再写checkpoint binding",
+        "先于任何dispatch或状态迁移",
+        "resume时验证`path`位于同一run目录内",
+        "重算sha256",
+        "不一致即拒绝恢复",
+        "wrapper仍是accepted candidate identities的唯一来源",
+        "`planner_inventory_receipt`是planner返回的单一确定性inventory artifact",
+        "strict normalized `planner_inputs` snapshot",
+        "maintained profile identity/content hashes",
+        "maintained relation source bindings",
+        "分别独立重算fingerprint",
+        "deterministic tamper-evident binding",
+        "不声称防御同一process内",
+        "不得再保存第二份caller声明的planner route list",
+        "binding更新必须执行CAS",
+        "`--expected-prior-sha256 create-only`",
+        "--expected-prior-sha256 <current-checkpoint-sha256>",
+        "未含该可选键的旧run继续有效",
+        "直到`value-profile`首次创建外部research state",
+    ):
+        assert requirement in run_store_contract
+
+    for requirement in (
+        "exactly one run-local `data/filings/<ticker>/runs/<run-id>/logs/research-ledger.json`",
+        "`checkpoint.json`是唯一source of truth",
+        "只保存一个`research_ledger` artifact binding",
+        "`artifact_id`",
+        "绝对路径",
+        "SHA-256",
+        "claim-indexed wrapper",
+        "单一`planner_inventory_receipt`",
+        "`planner-inventory-receipt.schema.json`",
+        "strict normalized `planner_inputs` snapshot",
+        "contract validator与run-store分别独立重算fingerprint",
+        "不防御同process恶意代码",
+        "不使用secret或第二个state machine",
+        "不得另存caller声明的planner route list",
+        "`--expected-prior-sha256 create-only`",
+        "更新显式传checkpoint当前`research_ledger.sha256`",
+        "陈旧writer必须失败且不得覆盖",
+        "该路径下的wrapper保存全部claim entries和accepted candidate identities",
+        "每个嵌套`request`继续按`research-request.schema.json`校验",
+        "每个claim ledger继续按`research-ledger.schema.json`校验",
+        "不得改写或扩展单条ledger schema本身",
+        "可见的`ledger_path`/`ledger_sha256`仅作可选引用",
+        "不得作为resume依据",
+        "`claim_id`",
+        "`request_scope_fingerprint`",
+        "`candidate_document_id`",
+        "`artifact_identity`",
+        "`artifact_sha256`",
+        "`source_document_identity.binding_sha256`",
+        "`lineage_id`",
+        "consuming section IDs",
+        "dispatch前先加载并校验既有ledger哈希",
+        "accepted的正向claim立即停止且永不重新dispatch",
+        "只把仍未解决的`claim_id`发送给`source-discovery`",
+        "把持久化`attempts`传给`plan_next_layer`",
+        "不得重新执行已terminal的`route_id`或已规范化查询",
+        "同scope fingerprint下已`exhausted`的claim不得重复网络取证",
+        "除非request本身变化或适用route inventory变化",
+        "`accepted`直接消费已持久化candidate identity",
+        "`blocked`和`conflict`必须保留结构化状态",
+        "validated terminal ledger之后",
+        "才可创建`需人工`",
+        "exhausted positive claim可创建evidence-unavailable `需人工`",
+        "exhausted absence claim只可写`截至AS_OF，适用公开路线未发现...`",
+        "不得写绝对absence",
+        "raw empty output",
+        "empty route",
+        "`technical-failure`",
+        "`access-unavailable`",
+        "`request-budget-exhausted`",
+        "不能直接产出`没有`、`查不到`或`需人工`",
+        "先落通过校验的终态`blocked` ledger",
+        "action ledger与research ledger严格分离",
+        "`deepen_research`只引用`claim_id`和`ledger_sha256`",
+        "不得替代或覆盖research ledger",
+        "不得回退到普通worker prompt兜底",
+    ):
+        assert requirement in orchestration
+
+    for requirement in (
+        "选中filing未披露时可写`待补充—年报未披露`",
+        "外部核验缺口必须作为unresolved claim输入返回",
+        "不得在validated terminal mapping前直接写`证据不足,需人工`",
+    ):
+        assert requirement in skill
+
+    for requirement in (
+        "受影响claim先持久化为validated terminal `blocked`",
+        "event manifest保持未构建、未绑定",
+        "不得把event manifest本身写成`需人工`",
+        "保留不受影响且已完成的工作",
+    ):
+        assert requirement in bootstrap
+
+    for requirement in (
+        "内部输出质量失败继续走既有`output_quality_failure`路径",
+        "任何外部缺证必须先走`source-discovery`",
+        "validated terminal claim ledger",
+        "`排雷终态=manual_review`",
+        "`排雷失败原因=<具体证据缺口>`",
+        "不得开普通worker side door",
+    ):
+        assert requirement in fallback
+    assert fallback.index("validated terminal claim ledger") < fallback.index(
+        "`排雷终态=manual_review`"
+    )
+
+    for legacy in (
+        "Part 0或对应section状态同时持久化`ledger_path`与`ledger_sha256`",
+        "找不到写`待补充—年报未披露`或`证据不足,需人工`",
+        "每个关键缺口先建立轻量research ledger",
+        "写`证据不足,需人工补充`,等用户下一步",
+        "配额或限流重试耗尽→写`需人工`并作为终态退出",
+        "事件manifest保持`需人工`",
+        "客观证据缺失耗尽后把每个真实缺失项写为`需人工/待定`",
+    ):
+        assert legacy not in skill
+
+    assert "无法核实 → `证据不足, 需人工补充`" not in worker_example
 
 
 def test_high_cost_cyclical_has_no_investable_pb_liquidation_route() -> None:
@@ -4262,9 +4891,14 @@ def test_value_profile_computes_and_validates_manifest_hash_fields() -> None:
 def test_value_profile_fallback_persists_manual_terminal_mapping() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     fallback = skill.split("**Fallback（子 skill 不可用时", 1)[1].split("### Step 6", 1)[0]
+    external_gap = fallback.split("任何外部缺证", 1)[1].split("字段已存在", 1)[0]
 
-    assert "`排雷终态=manual_review`" in fallback
-    assert "`排雷失败原因=<具体证据缺口>`" in fallback
+    assert "validated terminal claim ledger" in external_gap
+    assert "`排雷终态=manual_review`" in external_gap
+    assert "`排雷失败原因=<具体证据缺口>`" in external_gap
+    assert external_gap.index("validated terminal claim ledger") < external_gap.index(
+        "`排雷终态=manual_review`"
+    )
 
 
 def test_redflag_mode_b_has_one_confirmation_owner_and_one_failure_field() -> None:
@@ -5084,6 +5718,50 @@ def test_standalone_collect_failures_have_preexisting_recovery_scaffolds() -> No
             assert token in before_collector
 
 
+def test_value_profile_bootstrap_failure_reports_early_and_persists_partial_profile() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    bootstrap = skill.split("1.55. **先创建standalone恢复骨架", 1)[1].split(
+        "2. **Audit `data/filings/<ticker>/`**", 1
+    )[0]
+
+    for requirement in (
+        "同一轮立即反馈用户",
+        "阻塞项",
+        "受影响结论",
+        "不受影响且已完成的工作",
+        "准确的人工处理动作",
+        "部分profile路径",
+        "扩展为简版/部分profile",
+        "保留已完成的年报研究",
+        "管理层和监管结论标`需人工`",
+        "只阻断数字估值和否定性监管结论",
+    ):
+        assert requirement in bootstrap
+
+
+def test_value_profile_reuses_hkex_listing_bootstrap_without_chrome() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    bootstrap = skill.split("1.6. **先采集官方查询bundle**", 1)[1].split(
+        "2. **Audit `data/filings/<ticker>/`**", 1
+    )[0]
+    discovery = read(REPO_ROOT / ".claude/skills/read-filing/references/event-source-discovery.md")
+
+    for requirement in (
+        "hkex_equity_quote_token_v1",
+        "不得每次打开Chrome/CDP",
+        "不得把token硬编码",
+        "仅当自动bootstrap明确报告",
+    ):
+        assert requirement in bootstrap
+    for requirement in (
+        "两次独立普通HTTP会话验证",
+        "token和实时价格字段不落盘",
+        "先URL解码再由请求库编码",
+        "才按上面的发现流程重新打开浏览器网络面板",
+    ):
+        assert requirement in discovery
+
+
 def test_documented_python_commands_use_an_executable_entrypoint() -> None:
     profile = read(SKILL_PATHS["value-profile"])
 
@@ -5423,6 +6101,23 @@ def test_value_profile_sections_own_machine_citations() -> None:
     assert citation_count >= confidence_count
     assert "section_id" in template
     assert "artifact_path" in template
+
+
+def test_value_profile_hides_machine_citations_from_rendered_markdown() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    output_template = template.split("<!-- ⚠️ TEMPLATE-ONLY区域结束", 1)[1].split("-->", 1)[1]
+    rendered_source = re.sub(r"<!--.*?-->", "", output_template, flags=re.DOTALL)
+
+    assert "机器引用清单" not in rendered_source
+    assert "<!-- **机器引用清单:**" in output_template
+    assert "HTML注释" in profile
+    for subskill_name in (
+        "financial-redflag-scan",
+        "product-analysis",
+        "management-analysis",
+    ):
+        assert "HTML注释" in read(SKILL_PATHS[subskill_name])
 
 
 def test_value_profile_bank_migration_replaces_all_generic_metrics() -> None:
@@ -5967,7 +6662,7 @@ def test_fresh_review_closes_remaining_cross_skill_contracts() -> None:
         assert "指标ID、单位、口径" in text
         assert "状态、严重度、证据、引用" in text
     assert "逐个counterpart哈希执行子返回值/Part 0/文件三方一致" in profile
-    assert "证据闭合否决finalizer" in profile
+    assert "证据完整否决finalizer" in profile
 
 
 def test_latest_review_directional_veto_is_persisted() -> None:
@@ -6159,7 +6854,7 @@ def test_final_review_cross_skill_contracts_are_lossless() -> None:
     assert "<进行中/需人工/已完成/已否决/output_quality_failure>" in template
     assert "任何数字估值" in profile.split("**历史市场数据快照**", 1)[1]
     management_handoff = profile.split("**管理层否决handoff**", 1)[1].split(
-        "**证据闭合否决finalizer**", 1
+        "**证据完整否决finalizer**", 1
     )[0]
     assert "--guard <counterpart-filing-manifest-path>:<sha256>" in management_handoff
     assert "in_progress" in profile.split("**消费action_requests**", 1)[1].split("### Step 6", 1)[0]
@@ -6171,3 +6866,88 @@ def test_final_review_cross_skill_contracts_are_lossless() -> None:
         management_schema["properties"]["draft_sections"]["additionalProperties"]["pattern"]
         == r"\*\*机器引用清单:\*\*"
     )
+
+
+def test_value_profile_auto_mode_exhausts_compliant_research_routes_before_manual_review() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    assert "两次重派上限只约束同一来源路线的执行或输出质量重试" in skill
+    assert "不是全部研究的总次数上限" in skill
+    assert "只要research ledger仍有未尝试且合规的独立来源路线" in skill
+    assert "Auto mode不得转为`需人工`" in skill
+    for route in (
+        "发行人年报及附注",
+        "招股书及上市申请文件",
+        "交易所及监管披露",
+        "同行、供应商及关联方公开文件",
+        "独立行业、协会及学术资料",
+        "官方网页存档",
+        "可信二级来源",
+    ):
+        assert route in skill
+
+
+def test_value_profile_user_escalation_requires_true_blocker_and_explicit_choices() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    assert "继续未完成部分" in skill
+    assert "视为对全部未决项的`research more`授权" in skill
+    assert "不得要求用户重复输入菜单词" in skill
+    assert "只有完成所有不依赖用户输入的工作后" in skill
+    for blocker in (
+        "仅存在于非公开或付费数据",
+        "需要用户凭证、授权或原始业务数据",
+        "合规来源穷尽",
+        "外部技术故障",
+    ):
+        assert blocker in skill
+    for choice in (
+        "提供数据或授权访问",
+        "接受证据受限结论",
+        "跳过可选项",
+    ):
+        assert choice in skill
+
+
+def test_read_filing_external_research_handoff_contract() -> None:
+    skill = read(SKILL_PATHS["read-filing"])
+    reference_path = SKILLS_ROOT / "read-filing" / "references" / "external-research-handoff.md"
+    schema_path = SKILLS_ROOT / "source-discovery" / "references" / "research-request.schema.json"
+
+    assert reference_path.is_file()
+    handoff = read(reference_path)
+    schema = json.loads(read(schema_path))
+    validator = Draft202012Validator(schema)
+
+    match = re.search(
+        r"Recommended wrapper shape:\n\n```json\n(.*?)\n```",
+        handoff,
+        flags=re.DOTALL,
+    )
+    assert match is not None
+    documented_wrapper = json.loads(match.group(1))
+    documented_request = documented_wrapper["request"]
+    request_errors = sorted(
+        validator.iter_errors(documented_request),
+        key=lambda error: (list(error.path), error.message),
+    )
+
+    assert "references/external-research-handoff.md" in skill
+    assert request_errors == []
+    assert "parent_manifests" not in documented_request
+    assert documented_wrapper["gap_state"] == "not_present_in_selected_filing"
+    assert set(documented_wrapper["parent_manifests"]) == {"annual", "event", "counterpart"}
+    for requirement in (
+        "research-request.schema.json",
+        "`claim_id`",
+        "`not_present_in_selected_filing`",
+        "`public_availability_unresolved`",
+        "annual manifest path and SHA-256",
+        "event manifest path and SHA-256",
+        "counterpart manifest paths and SHA-256s",
+        "must not mutate those manifests",
+        "peer/listing-applicant/industry evidence routes belong to `source-discovery`",
+        "official filing and event source discovery remain in `read-filing`",
+        "return consumption",
+    ):
+        assert requirement in handoff

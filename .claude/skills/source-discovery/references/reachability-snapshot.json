@@ -1368,10 +1368,10 @@
     }
   },
   "kpmg-china": {
-    "status": "moved",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://kpmg.com/cn/zh.html",
-    "limitation": "moved/redirected; public-limited. Consulting/accounting-house perspective; variable methodological transparency; some premium assets may sit behind forms Audited fallback peers: U24-Deloitte, U24-EY, U24-PwC, U29.",
+    "status": "reachable",
+    "last_checked": "2026-08-02T09:32:12+08:00",
+    "final_url": "https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2026/04/panoramic-insights-and-trend-prospects-of-the-tide-play.pdf.coredownload.inline.pdf",
+    "limitation": "Public KPMG asset PDFs are directly retrievable when the exact URL is known; archive discovery remains less structured and some reports may require forms. Consulting perspective and underlying third-party data lineage must remain explicit.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -1379,10 +1379,10 @@
     },
     "evidence_level": "High",
     "reviewed_probe": {
-      "redirect_chain": "`https://home.kpmg/cn/zh/home.html` -> `https://kpmg.com/cn/zh.html`",
+      "redirect_chain": "No redirect for the verified assets.kpmg.com PDF",
       "response_status": "`200`",
-      "recognizable_content": "KPMG China live insights archive",
-      "access_indications": "Some PDFs/downloadables may be gated/contact-driven",
+      "recognizable_content": "KPMG China report PDF with title, author metadata, 46 pages and Frost & Sullivan source notes",
+      "access_indications": "Exact report PDF is public; other assets may be gated or difficult to discover",
       "technical_restriction": "None recorded"
     }
   },

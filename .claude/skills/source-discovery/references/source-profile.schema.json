@@ -321,6 +321,24 @@
             "minLength": 1
           }
         },
+        "document_types": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "relationship_uses": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
         "issuer_copy_evidence": {
           "$ref": "#/$defs/issuerCopyEvidence"
         }

@@ -13,6 +13,18 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享数据、run隔离、无感resolver和旧路径兼容只以该文件为准。
 
+### source-discovery handoff
+
+运行前还必须完整读取`.claude/skills/read-filing/references/external-research-handoff.md`。`source-discovery`在本skill中只用于official filing/event/counterpart manifests之外的外部阈值解释、同业/行业/监管语境和交叉验证线索，不能替代`read-filing`已经绑定或应当绑定的官方证据。
+
+official event discovery/manifest construction/live revalidation/rebinding remain `read-filing` ownership. Step 3.5和Step 5继续执行`read-filing`拥有的官方取证准备与重绑流程,这不是ownership transfer. Step 3.5/5现有编排继续使用`read-filing`拥有的evidence preparation.
+
+外部发现的官方处罚或执法记录只可作为lead back to `read-filing`，由`read-filing`按官方路线重查、重验、重建manifest并重绑证据；`financial-redflag-scan`不得把这类外部命中的官方记录直接当作最终accepted enforcement evidence。
+
+不得在每条适用官方路线都已terminal且live revalidation成功前写`没有处罚`、`查无记录`或其他否定性执法结论。`technical-failure`、`access-unavailable`和`request-budget-exhausted`只可产出通过`research-ledger.schema.json`校验的`blocked`；不得把这些失败改写成absence,也不得直接快捷落成`需人工`或人工结论。两次重派上限只约束单一路线的抽取或输出质量修复,不裁剪必须盘点的discovery route inventory。
+
+目标公司经审计财务报表数值只可来自bound annual/counterpart manifests中被选中的经审计报表。外部已接受证据只可补充thresholds、peer/industry/regulatory context或cross-checks,不能替代这些经审计数值。Step 3.5/5的官方查询、manifest构建、在线重验与rebinding仍由`read-filing`负责，本skill只消费已绑定结果并做财务风险判断。
+
 ## §0运行模式
 
 ### Mode A — Standalone
@@ -123,13 +135,13 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 
 ### §2.5管理层道德风险 = 一票否决（§1.3推出）
 
-历史正式财务造假或财务虚假陈述处罚记录、已证实的股东利益输送或违规资金占用→直接大幅降级并阻断估值,Mode A报告结论写`剔除`,Mode B返回对应阻断请求。风险结论和证据置信度分开:官方处罚窗口完整、文书逐字节复核且归因闭合时,即使结论为`剔除`,证据置信度保持`高`;不得为了表达风险严重而强制降为低。与财务造假无关的其他处罚按底层事项和独立阈值定严重度,不得据此一票否决。
+历史正式财务造假或财务虚假陈述处罚记录、已证实的股东利益输送或违规资金占用→直接大幅降级并阻断估值,Mode A报告结论写`剔除`,Mode B返回对应阻断请求。风险结论和证据置信度分开:官方处罚窗口完整、文书逐字节复核且归因明确时,即使结论为`剔除`,证据置信度保持`高`;不得为了表达风险严重而强制降为低。与财务造假无关的其他处罚按底层事项和独立阈值定严重度,不得据此一票否决。
 
 ### §2.6 summary 段落写法
 
 - **§2.6.1结果不是简单列表**:29项扫完后按模板原字段名写`**发现的风险小结:**`1-2段,聚焦`是/需人工`项,说明①雷是什么②为何对本ticker重要③交叉验证的下一步;随后填写`**引用:**`并把小结中的叙述数字逐条映射到页码或独立来源。
 - **§2.6.2无重大风险前提**:29项、6项、三表勾稽4条、8类补充质检和造假识别5个维度的全部适用行均为`无`,且不存在`待定/需人工`,才可写"本次扫描未发现重大风险";任何层异常均进入§2.6.3聚合。
-- **§2.6.3结论聚合**:触发任一`一票否决`→`剔除`;存在任一`预警/高风险/待定`→`有保留`;其余为`无重大风险`。pattern只能解释已触发风险,不得单独升级为剔除;3个不同的29项清单ID指向同一模式时,模式综合严重度至少为`高风险`,但最终结论仍按行级最高严重度聚合。同一事实跨层出现只计1次;6项、三表勾稽、8类补充质检和5个维度不增加29项计数,只提供严重度覆盖或解释证据。销售收现和CFO桥按各自容差判断;维持性CapEx按输入与敏感性完整性判断。任一高风险、一票否决或结论为`剔除`时,§4.5写`**估值阻断:**是—<原因>`并返回`valuation_blocked=true`;任一`需人工`或`待定`写`**估值阻断:**是—证据需人工`并返回`valuation_blocked=true`;只有全部适用检查证据闭合且无上述信号时才写`否`。
+- **§2.6.3结论聚合**:触发任一`一票否决`→`剔除`;存在任一`预警/高风险/待定`→`有保留`;其余为`无重大风险`。pattern只能解释已触发风险,不得单独升级为剔除;3个不同的29项清单ID指向同一模式时,模式综合严重度至少为`高风险`,但最终结论仍按行级最高严重度聚合。同一事实跨层出现只计1次;6项、三表勾稽、8类补充质检和5个维度不增加29项计数,只提供严重度覆盖或解释证据。销售收现和CFO桥按各自容差判断;维持性CapEx按输入与敏感性完整性判断。任一高风险、一票否决或结论为`剔除`时,§4.5写`**估值阻断:**是—<原因>`并返回`valuation_blocked=true`;任一`需人工`或`待定`写`**估值阻断:**是—证据需人工`并返回`valuation_blocked=true`;只有全部适用检查证据完整且无上述信号时才写`否`。
 - **§2.6.4证据置信度固定映射**:`高`=完整官方窗口且无代理口径,所有适用行可复算;`中`=官方窗口完整但存在已披露且不影响阈值方向的代理口径;`低`=关键结论仅有二级来源或窗口不足;`需人工`=存在待定、证据冲突或终端质量失败。取所有关键结论中的最低档,不得凭主观上调。
 
 ### §2.7确认策略（§1.4推出）
@@ -247,6 +259,10 @@ Mode B跳过Step 1的1-6项,但必须执行第7项,使用自身调用read-filing
 
 - 任一量化检查的`是/需人工`缺实际值、阈值或页码→退回;任一定性检查缺事件/主体/日期/文书或原文依据→退回;`否/不适用/通过/未见异常`也必须有证据,不满足§2.4.3a即退回
 - 引用AS_OF之后的证据,或未用event manifest证明监管事件窗口→退回并按截止日重查
+- 若把外部发现的官方处罚或执法记录当作最终accepted enforcement evidence而未回送`read-filing`重验重绑→退回
+- 若写出`没有处罚`、`查无记录`或其他否定性执法结论,但尚未证明每条适用官方路线都已terminal且live revalidation成功→退回
+- 若把`technical-failure`、`access-unavailable`或`request-budget-exhausted`从validated ledger `blocked`改写成absence或直接快捷落成`需人工`结论→退回
+- 若目标公司经审计财务报表数值来自外部research而非bound annual/counterpart manifests中的被选中经审计报表→退回
 - 29项少答/跳答 → 退回补齐
 - 6项高危附加检查未显式 flag → 退回重扫
 - 8类补充质检信号少答/跳答→退回补齐
@@ -261,13 +277,13 @@ Mode B跳过Step 1的1-6项,但必须执行第7项,使用自身调用read-filing
 - 风险小结空洞/仅列表,或`**引用:**`未覆盖小结中的叙述数字→退回改写§2.6.1格式
 - Mode B 子 agent 填了主 profile §4.5以外的 section → 退回
 
-自动复核失败时最多重派2次,每次只补明确缺口并保留已完成行。重试耗尽后不得无限重派:只有客观字段不可得时按§2.4.4填写缺失项的`需人工/待定`搜索日志证据和人工动作。若字段已经存在但输出缺行、枚举非法、JSON不可解析或结论与行级证据冲突,终态写`output_quality_failure`,置信度写`需人工`,并阻断估值;不得把输出格式失败伪装成字段客观不可得。交互模式的`research more`由用户显式触发,不计入自动重派次数。
+自动复核失败时最多重派2次,每次只补明确缺口并保留已完成行。两次重派上限只约束单一路线的抽取或输出质量修复,不裁剪必须盘点的discovery route inventory。重试耗尽后不得无限重派:只有客观字段不可得时按§2.4.4填写缺失项的`需人工/待定`搜索日志证据和人工动作。若字段已经存在但输出缺行、枚举非法、JSON不可解析或结论与行级证据冲突,终态写`output_quality_failure`,置信度写`需人工`,并阻断估值;不得把输出格式失败伪装成字段客观不可得。交互模式的`research more`由用户显式触发,不计入自动重派次数。
 
 Acceptable后写中文终稿。
 
 ### Step 5 — 写 summary + Output
 
-Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`。每条列`dependent_check_ids`,每个canonical check ID使用`checklist/1..29`、`high-risk/<id>`、`reconciliation/1..4`、`supplemental/1..8`、`bank/<id>`、`insurer/<id>`或`dimension/<id>`命名空间。联合类型均含最终持久证据的绝对`artifact_path`;`source_type=filing_text/filing_pdf`还含`source_pdf_sha256/artifact_sha256/page/quote`,`source_type=event_document`还含`event_manifest_sha256/document_url/content_sha256/artifact_sha256/page/quote`;HTML文书page可为null。action_requests.citations复用同一联合类型。恢复run时逐条复核机器引用并失效全部依赖ID。
+Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板内`**机器引用清单:**`。两种模式的最终用户可见Markdown都把完整清单放入HTML注释,保留原标记供恢复和schema校验。每条列`dependent_check_ids`,每个canonical check ID使用`checklist/1..29`、`high-risk/<id>`、`reconciliation/1..4`、`supplemental/1..8`、`bank/<id>`、`insurer/<id>`或`dimension/<id>`命名空间。联合类型均含最终持久证据的绝对`artifact_path`;`source_type=filing_text/filing_pdf`还含`source_pdf_sha256/artifact_sha256/page/quote`,`source_type=event_document`还含`event_manifest_sha256/document_url/content_sha256/artifact_sha256/page/quote`;HTML文书page可为null。action_requests.citations复用同一联合类型。恢复run时逐条复核机器引用并失效全部依赖ID。
 
 **Mode A**:
 - 最终发布前运行`uv run python scripts/download_filings.py --revalidate <bound-annual-manifest-path>`和`uv run python scripts/build_event_manifest.py --revalidate <bound-event-manifest-path>`,A+H还要逐一重验证全部counterpart manifest;再运行`uv run python scripts/publish_text_cas.py --source <draft-path> --target <final-report-path> --expected-sha256 <baseline-report-sha256> --guard <bound-annual-manifest-path>:<sha256> --guard <bound-event-manifest-path>:<sha256> --guard <counterpart-filing-manifest-path>:<sha256>`,非A+H省略最后一类guard;任一漂移或冲突不得覆盖
@@ -292,6 +308,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 ## §4 Policy
 
 - **中文输出**: 填写区/引用/置信度 / summary / 结论均中文
+- **自然中文**:用户可见正文遵守`../value-profile/references/profile-writing-style.md`;不得把`close/closed`直译为“闭合”,应按事实状态写“已核实”“已完成判断”“仍缺资料”或“尚不能判断”
 - **中文空格规则**:只禁止两个中文字符之间出现不恰当空格;不禁止中文与英文或数字之间为可读性保留正常空格
 - **引用必带页码**: `(年报-YYYY.pdf p.NN)` 格式
 - **子 agent 输出禁空话**: "财务稳健/经营规范/无重大风险" 无具体数字 → 退回
@@ -342,7 +359,7 @@ Mode A使用全局`## 机器引用清单`;Mode B每个draft section使用模板�
 期望:子skill填完§4.5 block（29项清单+6项高危附加检查+三表勾稽4条+造假识别5个维度+8类补充质检信号+`**发现的风险小结:**`+`**引用:**`+`**估值阻断:**`+`**结论:**`+`**置信度:**`）后交还控制
 ```
 
-子skill返回主skill Step 5时区分两类终态:证据闭合且复核通过时,`--auto`或`--interactive`接受后派生控制台状态`已完成`;自动重试耗尽且仍有未决证据时,置信度写`需人工`,返回`manual_review_required=true`,加入人工处理清单并阻断估值,不得标`已完成`。`--interactive`选择research more时把hint附加后重新派发Step 3子agent。
+子skill返回主skill Step 5时区分两类终态:证据完整且复核通过时,`--auto`或`--interactive`接受后派生控制台状态`已完成`;自动重试耗尽且仍有未决证据时,置信度写`需人工`,返回`manual_review_required=true`,加入人工处理清单并阻断估值,不得标`已完成`。`--interactive`选择research more时把hint附加后重新派发Step 3子agent。
 
 Mode B只返回以下版本化JSON schema,不得增加并行顶层形态。返回前必须通过`references/mode-b-response.schema.json`校验;Schema只固定机器信封,`draft_section`正文保持自由Markdown:
 

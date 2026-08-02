@@ -1,9 +1,33 @@
 # Search Playbook
 
-Use this playbook after the source-discovery workflow has decomposed the
-question, identified the claim type, and chosen the first portfolio. Escalate
-from known sources to dynamic discovery, then keep tracing back to the original
-publisher before using a source for conclusions.
+Use this playbook after a validated request has a current planner layer. It
+describes routes for that layer; it does not authorize an always-broad search.
+After each layer, validate candidates and use the acceptance gate before asking
+the planner for another layer.
+
+## Gate-Driven Layers
+
+`plan_next_layer` returns only the earliest unresolved applicable layer:
+
+1. Bound local evidence.
+2. Highest-authority fitting sources.
+3. Same-function fallbacks.
+4. Subject relationships: direct peers, category leaders, and active or recent
+   listing applicants.
+5. Document types: prospectus, listing application, industry overview,
+   methodology appendix, association report, and archive.
+6. Broad dynamic discovery.
+
+Execute only the returned layer. A passed positive candidate ends discovery for
+its `claim_id`; do not seek corroboration merely to increase route count.
+Escalate only a claim whose gate remains unresolved. For an absence claim, keep
+planning until every applicable route is terminal; `technical-failure`,
+`access-unavailable`, and `request-budget-exhausted` require a `blocked`
+ledger, never an absence conclusion.
+
+Use `rank_with_route_cache` only to reorder routes that already fit the same
+current layer. The cache cannot introduce a route, skip an applicable earlier
+layer, or change claim scope or acceptance requirements.
 
 ## Query Templates
 
@@ -51,6 +75,7 @@ Every route below assumes:
 
 Read the applicable site guide before a direct route: `site-guides/sse.md`,
 `site-guides/cninfo.md`, `site-guides/hkexnews.md`,
+`site-guides/hkex-listing-applicants.md`,
 `site-guides/hong-kong-regulatory.md`, or
 `site-guides/official-statistics.md`.
 
@@ -108,6 +133,39 @@ original analyst/report publisher.
 
 Use this route for valuation ranges, market structure context, listing
 comparables, and attributable market commentary.
+
+For market-share time series, use the relationship layer before broad dynamic
+discovery. Expand from the subject issuer to current and former peers, then to
+active, revised, inactive, and archived listing-applicant industry-overview
+documents. Search each required year and the current partial period
+independently. Query both the metric and table identity:
+
+- `"{industry}" "market share" "{year}" "{company or competitor}" filetype:pdf`
+- `"{industry}" "top five companies" "{year}" GMV OR RSV OR "retail value"`
+- `site:hkexnews.hk/app/sehk "{industry}" "{year}" "market share"`
+- `site:hkexnews.hk/listedco/listconews "{competitor}" prospectus "market share"`
+
+Record the whole ranking table when available, not only the subject company's
+row. Keep full-year and H1/YTD/quarter tables separate, and preserve revisions
+when a later commissioned report restates an earlier market estimate.
+
+When annual company shares remain missing, broker research is a required
+document route rather than an optional commentary source. Search company
+reports and industry reports separately for the subject, each named competitor,
+and the category; a peer report may reproduce a table omitted from the subject
+report. Search the broker's own research site first, then Eastmoney, Hibor,
+Datayes, Sina, or another report index and delivery host. Preserve authorship
+and access lineage separately: the named broker and analysts authored the
+report, while a portal may only index or deliver the PDF.
+
+Extract the complete table and its footnotes. Record report title, broker,
+analysts, publication date, page, table title, period, geography, product
+scope, GMV/RSV/retail-value basis, named competitors, source note, original
+data provider, canonical report URL, and any separate PDF delivery URL. If the
+source note names Frost & Sullivan, CIC, Euromonitor, IDC, or another provider,
+follow that citation into prospectuses, listing applications, provider
+releases, or later official reproductions. Do not treat two broker reports as
+independent confirmation when both reproduce the same underlying table.
 
 ## macro/official statistics
 
@@ -229,16 +287,18 @@ regulatory regimes and needs comparable definitions.
 
 ## Dynamic Discovery Notes
 
-When a route is thin, discover uncataloged candidates from original report
-citations, official link directories, association member lists, bibliography
-trails, archive snapshots, and issuer ecosystem pages. Validate provenance,
-methodology transparency, correction history, coverage, timeliness,
-reproducibility, access stability, conflicts of interest, and fitness for the
-requested claim before using the source.
+Use this section only when broad dynamic discovery is the current planner
+layer. Discover uncataloged candidates from original report citations, official
+link directories, association member lists, bibliography trails, archive
+snapshots, and issuer ecosystem pages. Validate provenance, methodology
+transparency, correction history, coverage, timeliness, reproducibility, access
+stability, conflicts of interest, and fitness for the requested claim before
+using the source.
 
-Do not stop on the first unavailable source. Move through same-category peers,
-adjacent-category peers, and original-document tracing paths until the route is
-exhausted and the ledger captures the final error and next fallback decision.
+Do not stop an absence claim on the first unavailable source. Follow the
+remaining applicable routes until the terminal ledger records the final error
+and next fallback decision. Positive claims still stop as soon as their
+acceptance gate passes.
 
 ## Uncataloged Hong Kong Official Sources
 

@@ -8,11 +8,10 @@ description: Use when research needs external reports, industry or macro data, c
 Use this skill when a caller needs external evidence beyond already-bound filing,
 event, counterpart, or market manifests. Inputs are the research question,
 `AS_OF`, geography, industry, required fact types, and any caller-supplied
-source constraints. Output is a source portfolio and research ledger with
-candidate source, query, status, result, access limitation, evidence level, and
-next fallback.
+source constraints. This Skill returns structured source-discovery handoff
+only; it never writes company analysis.
 
-Read `references/source-catalog.md` before known-source routing.
+Read `references/source-catalog.md` before selecting the current layer.
 The catalog supplies seed routes and audited access facts, not an allowlist or
 runtime claim grades. Then read the detailed route guidance in
 `references/search-playbook.md`.
@@ -21,19 +20,162 @@ For a direct site workflow, read the matching guide before retrieving:
 
 - `references/site-guides/sse.md`
 - `references/site-guides/cninfo.md`
+- `references/site-guides/hkex-listing-applicants.md`
 - `references/site-guides/hkexnews.md`
 - `references/site-guides/hong-kong-regulatory.md`
 - `references/site-guides/official-statistics.md`
+
+## Contracts And Helpers
+
+Use the version `1.0` schemas in `references/` without restating their fields:
+
+- `research-request.schema.json` defines each requested `claim_id`.
+- `candidate-claim.schema.json` carries one retrieved, attributable candidate.
+- `planner-inventory-receipt.schema.json` binds a strict normalized
+  `planner_inputs` snapshot and complete route inventory. The snapshot records
+  request scope/content identity, source function, maintained profile
+  identity/content hashes, maintained relation source bindings, bound routes,
+  AS_OF/effective planning time, vocabulary/reachability identities, and the
+  route inventory digest.
+- `research-ledger.schema.json` records attempts and terminal state.
+- `route-cache.schema.json` stores reviewed successful-route recipes only.
+
+Use only the implemented helper boundaries:
+
+- `research_contracts.validate_payload` validates each schema; `load_schema`
+  loads it.
+- `evidence_gate.evaluate_candidate` and `evaluate_stitched_series` return the
+  acceptance decision and ordered failures.
+- `discovery_planner.plan_next_layer` returns only the earliest unresolved
+  layer plus its single `inventory_receipt`; persist that receipt with the
+  ledger instead of constructing a second route list.
+  `generate_query_variants` preserves the request scope.
+- `source_lineage.lineage_id` and `same_lineage` identify underlying evidence,
+  not merely a republisher.
+- `route_cache.load_route_cache`, `rank_with_route_cache`, and
+  `record_success` manage reviewed route recipes.
+
+These helpers do not fetch documents or execute a discovery loop. The caller
+retrieves the selected route, records its result, and constructs the terminal
+ledger. Cache only reorders fitting routes; it cannot add routes, advance a
+layer, or change authority, claim support, or acceptance requirements.
+Receipt validation recomputes the planner-input fingerprint and inventory
+digest from the persisted snapshot. This is a deterministic tamper-evident
+binding, not protection from malicious code inside the same process; it uses
+no secret and creates no separate execution state.
 
 ## Workflow
 
 Follow this sequence exactly:
 
-`question decomposition -> known-source routing -> dynamic discovery -> access/provenance validation -> independent cross-check -> fallback exhaustion -> source ledger handoff`
+`decompose request -> validate request -> execute current layer -> validate candidate(s) -> stop accepted claims -> escalate unresolved claims -> terminal ledger handoff`
+
+1. Decompose multi-period or multi-metric work into explicit `claim_id` values
+   and construct a `research-request`; validate it before routing.
+2. Read the source catalog before selecting the current layer. Use
+   `plan_next_layer` with completed attempts and any terminal ledger; execute
+   only the returned current layer. Use the playbook for that layer's routes.
+3. Validate every retrieved `candidate-claim`, derive its lineage, and call the
+   acceptance gate after the layer. Preserve the gate's
+   `acceptance_failures` in the claim ledger.
+4. Stop accepted positive claims. Re-plan only the unresolved claims, then
+   repeat from their current layer. Write terminal ledgers before handoff.
+
+Only unresolved `claim_id` values escalate.
+Positive claims stop immediately after the acceptance gate passes.
+Absence claims stop only after every applicable route is terminal.
+Route count is not an acceptance criterion.
+For an absence claim, `technical-failure`, `access-unavailable`, and
+`request-budget-exhausted` are `blocked`, never factual absence.
+
+Return exactly these top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, and `status`.
+An empty result without a terminal ledger is invalid output. `unresolved_claims`
+contains only terminal `blocked`, `conflict`, or `exhausted` claims; do not turn
+an incomplete route into a conclusion.
+
+For industry and competitor claims, expand beyond the target issuer to current
+and former peers, parents, subsidiaries, customers, suppliers, and each
+relevant listing applicant. Treat a listing applicant document as attributable
+evidence with its draft/final status, commissioning relationship, scope, and
+lineage preserved.
+
+For HKEX listing applicants, the active or inactive index is discovery metadata
+and an opened official PDF supports document contents. A historical PDF is not
+current application proof: revalidate the relevant index and match application
+ID, title, type, version, and document path. For TOP TOY application `108384`,
+the known 2020-2025 chart PDF is historical evidence, not current proof.
+
+## Market-Share Time Series
+
+Market-share requests target the latest five completed annual periods and
+extend to ten completed annual periods when public evidence permits. Search the
+current partial period (H1, YTD, or latest quarter) separately when the AS_OF
+date and publication cycle make it available. Label partial periods explicitly;
+never annualize them or compare them directly with full years.
+
+Require annual share, rank, market denominator, measurement basis, geography,
+and source lineage for the subject company and its major named competitors.
+Historical observations outside the latest five completed periods cannot
+satisfy recent-series acceptance. They remain useful background only.
+
+Search active, revised, inactive, and archived listing-applicant documents for
+the subject, peers, and adjacent competitors. Then search final prospectuses,
+issuer and competitor filings, original research publishers, named broker
+reports, and report citation trails. A newer peer or listing applicant may
+contain a fresher industry table than the target issuer.
+
+Treat broker research as a required document route when filings and
+listing-applicant documents leave annual market-share gaps. Search both company
+reports and industry reports for the subject company, every named competitor,
+and the category. Preserve the broker, analyst, report title, publication date,
+page, table title, geography, period, measurement basis, named competitors,
+original data provider, report URL, and PDF delivery URL. If a broker table
+cites Frost & Sullivan, CIC, Euromonitor, IDC, or another data provider,
+continue tracing Frost & Sullivan, CIC, Euromonitor, IDC, or another cited data
+provider to its original table or a later official reproduction. A
+portal-hosted PDF may preserve report contents, but Eastmoney, Hibor, Datayes,
+Sina, and other distributors do not become the report author. Attribute the
+claim to the named broker and retain the distributor as access lineage.
+
+Do not divide issuer accounting revenue by industry GMV, RSV, retail value,
+shipments, users, or another non-identical denominator. Calculate a share only
+when numerator and denominator have the same period, geography, product scope,
+measurement basis, and value status.
+
+If any required annual period remains missing, keep the continuous-series
+claim unresolved and continue through applicable route layers. Still report the
+strongest partial series separately with missing years, scope breaks, and
+evidence levels. A wider or narrower market may be reported as a separate
+cross-section, but it cannot fill a gap in the requested series.
+
+## Industry Size, Growth, Concentration, And Forecasts
+
+For industry trend research, collect the latest five completed annual periods
+and extend to ten when public evidence permits. Separately collect the next three to five forecast years. Preserve annual market size, year-over-year growth, CAGR, CR5 or CR10, product-category shares, geography, measurement
+basis, and source lineage.
+
+Forecast evidence must retain the forecast vintage, publication date, forecast
+period, methodology, original data provider, commissioning relationship, and
+whether later evidence revised or replaced it. Do not discard an industry
+forecast merely because it is a forecast. Label it as a forecast and keep it
+separate from completed-period observations and issuer financial forecasts.
+
+Search industry reports, consulting and accounting-firm outlooks, association
+reports, listing-applicant industry sections, broker industry reports, and the
+original data-provider trail. When two publications reproduce the same
+underlying provider series, treat them as one lineage rather than independent
+confirmation.
+
+When a later vintage changes an estimate or forecast, preserve both vintages.
+Calculate the revision explicitly only when geography, product scope and
+measurement basis remain comparable; otherwise report the nominal difference
+and the scope break. Prefer the latest completed-period estimate for historical
+analysis, but keep older forecasts for forecast-error and expectation tracking.
+Never splice forecasts from different vintages into one continuous series.
 
 At the start, translate the request into claim types, time bounds, geography,
 industry vocabulary, acceptable evidence types, and any source restrictions.
-Then route through known high-authority sources before expanding outward.
+Use those constraints to select only the earliest applicable planner layer.
 
 Keep separate ratings for:
 
@@ -58,6 +200,11 @@ Keep `evidence_level` separate from those fields. `evidence_level` records
 confidence in the access/provenance conclusion for this ledger row, not the
 source's authority, practical usefulness, reachability, or support for the
 research claim.
+
+`source_authority` is the publisher's authority for this source type;
+`conclusion_evidence` is support for this specific claim after inspection; and
+`lineage_id` identifies the underlying report or dataset for independence and
+republication checks. None substitutes for another.
 
 Evaluate each newly discovered candidate on:
 
@@ -196,7 +343,10 @@ alternatives are guidance only: they may help with a changed or related claim,
 but they cannot stand in for an unavailable same-function route. Record the
 scope change and source boundary before using any adjacent evidence.
 
-If a source returns no result, is paywalled, requires unavailable access, or fails technically, continue through other applicable sources in the same category and then adjacent categories.
+If a source returns no result, is paywalled, requires unavailable access, or
+fails technically, record its terminal result and continue through the remaining
+applicable routes in the current layer. Escalate to another category only when
+the planner returns it for an unresolved claim.
 
 Report a source gap only after recording every compliant route attempted, its query, access result, and final error.
 
