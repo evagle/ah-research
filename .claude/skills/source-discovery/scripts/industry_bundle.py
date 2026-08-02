@@ -343,6 +343,10 @@ def _validate_role_state(
             raise ValueError(f"{role_name} not-applicable roles require not_applicable_reason")
         if accepted_evidence_count not in {None, 0}:
             raise ValueError(f"{role_name} not-applicable roles cannot retain accepted evidence")
+        if missing_coverage:
+            raise ValueError(f"{role_name} not-applicable roles cannot retain missing_coverage")
+        if schema_version == "1.1" and _mappings(role, "series"):
+            raise ValueError(f"{role_name} not-applicable roles cannot retain series evidence")
         return
 
     raise ValueError(f"unknown role state: {state}")
@@ -361,6 +365,12 @@ def _validate_claim_states(
         raise ValueError(f"{role_name} claim_states must cover claim_ids exactly")
 
     states = tuple(_string_field(claim_state, "state") for claim_state in claim_states)
+    state_set = set(states)
+    if "not-applicable" in state_set:
+        if role_name not in NOT_APPLICABLE_ROLES:
+            raise ValueError(f"{role_name} claim cannot be not-applicable")
+        if state_set != {"not-applicable"}:
+            raise ValueError(f"{role_name} not-applicable claim states cannot be mixed")
     derived_state = _derive_role_state(states)
     if _state(role) != derived_state:
         raise ValueError(

@@ -653,6 +653,134 @@ def test_claim_states_keep_accepted_forecast_claims_terminal() -> None:
     assert "pop-mart-industry-forecast:prior-vintage" not in payload["unresolved_claim_ids"]
 
 
+def test_not_applicable_claim_state_cannot_be_mixed_with_accepted() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    current = next(outcome for outcome in outcomes if outcome["role"] == "current-partial-period")
+    current.update(
+        {
+            "claim_ids": [
+                "pop-mart-current-partial-period",
+                "pop-mart-current-partial-period:not-applicable",
+            ],
+            "claim_states": [
+                {
+                    "claim_id": "pop-mart-current-partial-period",
+                    "state": "accepted",
+                },
+                {
+                    "claim_id": "pop-mart-current-partial-period:not-applicable",
+                    "state": "not-applicable",
+                },
+            ],
+        }
+    )
+
+    with pytest.raises(ValueError, match="not-applicable claim states cannot be mixed"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+def test_required_role_rejects_not_applicable_claim_state() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    historical = next(
+        outcome for outcome in outcomes if outcome["role"] == "historical-market-size"
+    )
+    historical["claim_ids"] = [
+        "pop-mart-historical-market-size",
+        "pop-mart-historical-market-size:not-applicable",
+    ]
+    historical["claim_states"] = [
+        {
+            "claim_id": "pop-mart-historical-market-size",
+            "state": "accepted",
+        },
+        {
+            "claim_id": "pop-mart-historical-market-size:not-applicable",
+            "state": "not-applicable",
+        },
+    ]
+
+    with pytest.raises(ValueError, match="historical-market-size claim cannot be not-applicable"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+def test_not_applicable_role_rejects_missing_coverage() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    current = next(outcome for outcome in outcomes if outcome["role"] == "current-partial-period")
+    current.update(
+        {
+            "state": "not-applicable",
+            "claim_states": [
+                {
+                    "claim_id": "pop-mart-current-partial-period",
+                    "state": "not-applicable",
+                }
+            ],
+            "accepted_periods": [],
+            "accepted_evidence_count": 0,
+            "missing_coverage": ["H1 evidence not searched"],
+            "not_applicable_reason": "No partial period exists for this publication cycle",
+        }
+    )
+
+    with pytest.raises(ValueError, match="not-applicable roles cannot retain missing_coverage"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
+def test_not_applicable_role_rejects_series_evidence() -> None:
+    bundle = load_bundle_module()
+    outcomes = complete_role_outcomes_v11()
+    current = next(outcome for outcome in outcomes if outcome["role"] == "current-partial-period")
+    retained_series = series_descriptor("historical-market-size", [])
+    retained_series.update(
+        {
+            "series_id": "current-partial-period:not-applicable",
+            "lineage_id": "lineage-current-partial-period",
+        }
+    )
+    current.update(
+        {
+            "state": "not-applicable",
+            "claim_states": [
+                {
+                    "claim_id": "pop-mart-current-partial-period",
+                    "state": "not-applicable",
+                }
+            ],
+            "accepted_periods": [],
+            "accepted_evidence_count": 0,
+            "scope_fingerprints": [retained_series["series_fingerprint"]],
+            "series": [retained_series],
+            "not_applicable_reason": "No partial period exists for this publication cycle",
+        }
+    )
+
+    with pytest.raises(ValueError, match="not-applicable roles cannot retain series evidence"):
+        bundle.evaluate_industry_bundle(
+            subject="Pop Mart",
+            as_of=AS_OF,
+            primary_market_scope_fingerprint=PRIMARY_SCOPE_FINGERPRINT,
+            role_outcomes=outcomes,
+        )
+
+
 @pytest.mark.parametrize("years", (6, 10))
 def test_completed_history_accepts_six_to_ten_year_windows(years: int) -> None:
     bundle = load_bundle_module()
