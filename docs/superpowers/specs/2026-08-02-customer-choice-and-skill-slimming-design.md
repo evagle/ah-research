@@ -3,23 +3,25 @@
 ## Purpose
 
 Make product analysis answer why customers repeatedly choose the target
-company over named alternatives, while removing duplicated instructions from
-the `value-profile` orchestrator.
+company, why competitors have not arbitraged away its advantage, and whether
+the advantage survives funded entry, while removing duplicated instructions
+from the `value-profile` orchestrator.
 
 ## Customer Choice Contract
 
-Every `product-analysis` run must answer five adaptive questions:
+Every `product-analysis` run must answer three adaptive questions:
 
-1. What concrete functional, economic, emotional, or social outcome attracts
-   the customer?
-2. In the same buying situation, why does the customer choose this product
-   rather than a named direct competitor or substitute?
-3. Why does the customer repurchase, renew, or expand usage after the first
-   purchase? Preference, habit, and true switching cost must remain distinct.
-4. If a competitor copies the offer or invests heavily, which advantages
-   remain, and what time or cost does replication require?
-5. What repeatable process produces the next product, version, or hit, and
-   which past success may have been luck?
+1. Why does the customer buy and continue to repurchase, renew, or expand
+   usage here instead of choosing a named alternative? The answer must
+   distinguish concrete attraction, preference, habit, and true switching
+   cost.
+2. Why has other capital not offered a better-value product or service and
+   taken the company's market share? The answer must identify capability,
+   cost, channel, resource, or replication-time constraints rather than use
+   circular claims such as "the brand is strong."
+3. If a well-funded incumbent or entrant commits substantial capital, can the
+   company defend or expand its share? This answer must also test whether the
+   next product, version, or hit comes from a repeatable process or past luck.
 
 The questions adapt by business type. Consumer products emphasize attraction,
 design, identity, experience, collection, and social behavior. B2B products
@@ -33,14 +35,14 @@ Low-switching-cost businesses must not claim to prevent customers from leaving;
 the analysis instead asks whether the company can earn the customer's choice
 again on each purchase.
 
-`product-analysis` owns the detailed method. `value-profile` requires the five
+`product-analysis` owns the detailed method. `value-profile` requires the three
 answers in the combined §1.1/§1.3 handoff and rejects generic brand language.
 §1.8 and §3 synthesize the accepted product evidence but do not rerun product
 research.
 
 ## Pop Mart Update
 
-Update §1.3 to present one coherent chain:
+Update §1.3 to present one coherent chain under the three core questions:
 
 ```text
 customer attraction
@@ -105,7 +107,7 @@ in both the orchestrator and its references.
 
 Keep validation focused:
 
-- extend the existing product-analysis contract test with the five questions;
+- extend the existing product-analysis contract test with the three questions;
 - update the existing value-profile ownership and prompt tests to read the
   owned references;
 - update the existing Pop Mart product-section test with the new synthesis;
