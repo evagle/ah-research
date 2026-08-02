@@ -18,6 +18,11 @@ ARTIFACT_IDENTITY = "sha256:4d13f5048b8c4c1a9d7ee546c7274140123456789abcdef01234
 SCOPE_FINGERPRINT = "13f5048b8c4c1a9d7ee546c7274140123456789abcdef0123456789abcdef010"
 SECOND_ARTIFACT_IDENTITY = "sha256:8d31f5048b8c4c1a9d7ee546c7274140123456789abcdef0123456789abcdef0"
 SECOND_SCOPE_FINGERPRINT = "43f5048b8c4c1a9d7ee546c7274140123456789abcdef0123456789abcdef010"
+V11_MARKET_DEFINITION_FINGERPRINT = (
+    "28526a331a9894948a6ed310f73382adfcabec9bb84322729f8599a3dcb86d22"
+)
+V11_SERIES_FINGERPRINT = "60dbf4c49f36ccfd7ee9c278ca76a4122e3dacf0901ff3ccb4343dbf5a788e9b"
+V11_GATE_SCOPE_FINGERPRINT = "9704c96e841966b852a08465602397c0d488b18750df8901d3ff5a8b7e1adc8c"
 EVENT_CLAIM_ID = "management-governance-event-2025"
 EVENT_ARTIFACT_IDENTITY = "sha256:1d31f5048b8c4c1a9d7ee546c7274140123456789abcdef0123456789abcdeff"
 EVENT_SCOPE_FINGERPRINT = "73f5048b8c4c1a9d7ee546c7274140123456789abcdef0123456789abcdef010"
@@ -30,6 +35,17 @@ def load_contracts_module():
     if script_dir not in sys.path:
         sys.path.insert(0, script_dir)
     spec = importlib.util.spec_from_file_location("research_contracts", CONTRACTS_PATH)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+def load_contracts_module_without_sys_path_injection():
+    assert CONTRACTS_PATH.is_file(), f"missing contract validator: {CONTRACTS_PATH}"
+    spec = importlib.util.spec_from_file_location("research_contracts_direct", CONTRACTS_PATH)
     assert spec is not None
     assert spec.loader is not None
     module = importlib.util.module_from_spec(spec)
@@ -184,6 +200,47 @@ def candidate_payload() -> dict[str, object]:
     }
     bind_candidate_identity(payload)
     bind_candidate_lineage(payload, "NDRI-CN-POP-2025")
+    return payload
+
+
+def request_v11_payload() -> dict[str, object]:
+    payload = request_payload()
+    payload.update(
+        {
+            "schema_version": "1.1",
+            "channel_scope": "all retail channels",
+            "denominator": "total in-scope retail value",
+        }
+    )
+    return payload
+
+
+def candidate_v11_payload() -> dict[str, object]:
+    payload = candidate_payload()
+    payload.update(
+        {
+            "schema_version": "1.1",
+            "market_definition_fingerprint": V11_MARKET_DEFINITION_FINGERPRINT,
+            "series_fingerprint": V11_SERIES_FINGERPRINT,
+            "scope_fingerprint": V11_GATE_SCOPE_FINGERPRINT,
+        }
+    )
+    candidate_scope = payload["scope"]
+    assert isinstance(candidate_scope, dict)
+    candidate_scope.update(
+        {
+            "channel_scope": "all retail channels",
+            "denominator": "total in-scope retail value",
+        }
+    )
+    lineage = payload["lineage"]
+    assert isinstance(lineage, dict)
+    lineage["provider_table_id"] = "china pop-toy market 2025"
+    for value in payload["values"]:
+        value["definition_scope_fingerprint"] = V11_GATE_SCOPE_FINGERPRINT
+        canonical_value = value["canonical_value"]
+        assert isinstance(canonical_value, dict)
+        canonical_value["definition_scope_fingerprint"] = V11_GATE_SCOPE_FINGERPRINT
     return payload
 
 
@@ -386,6 +443,68 @@ def route_cache_payload() -> dict[str, object]:
     }
 
 
+def industry_bundle_payload() -> dict[str, object]:
+    return {
+        "schema_version": "1.0",
+        "subject": "Pop Mart",
+        "as_of": "2026-08-02",
+        "primary_market_scope_fingerprint": "a" * 64,
+        "status": "publishable-with-gaps",
+        "roles": [
+            {
+                "role": role,
+                "claim_ids": [f"pop-mart-{role}"],
+                "state": "partial" if role == "subject-market-share" else "accepted",
+                "required_periods": (
+                    ["2021", "2022", "2023", "2024", "2025"]
+                    if role
+                    in {
+                        "historical-market-size",
+                        "subject-market-share",
+                        "competitor-market-share",
+                    }
+                    else []
+                ),
+                "accepted_periods": (
+                    ["2021", "2022", "2024", "2025"]
+                    if role == "subject-market-share"
+                    else (
+                        ["2021", "2022", "2023", "2024", "2025"]
+                        if role
+                        in {
+                            "historical-market-size",
+                            "competitor-market-share",
+                        }
+                        else []
+                    )
+                ),
+                "missing_periods": ["2023"] if role == "subject-market-share" else [],
+                "scope_fingerprints": ["a" * 64],
+                "lineage_ids": [f"lineage-{role}"],
+                "ledger_paths": [f"research/{role}.json"],
+                "gap_reason": (
+                    "No comparable 2023 public company-share table"
+                    if role == "subject-market-share"
+                    else None
+                ),
+                "not_applicable_reason": None,
+            }
+            for role in (
+                "market-definition",
+                "historical-market-size",
+                "industry-forecast",
+                "market-concentration",
+                "subject-market-share",
+                "competitor-market-share",
+                "current-partial-period",
+                "industry-drivers",
+            )
+        ],
+        "scope_breaks": [],
+        "unresolved_claim_ids": ["pop-mart-subject-market-share"],
+    }
+
+
 def applicable_route_payload(
     route_id: str = "layer-1-ndri-market-size",
     route_layer: int = 1,
@@ -575,6 +694,90 @@ def test_request_requires_explicit_acceptance_requirements() -> None:
     unknown_requirement["minimum_route_count"] = 3
     with pytest.raises(ValueError, match="minimum_route_count"):
         contracts.validate_payload("research-request", unknown_requirement)
+
+
+def test_v11_request_and_candidate_make_market_and_series_identity_explicit() -> None:
+    contracts = load_contracts_module()
+
+    contracts.validate_payload("research-request", request_v11_payload())
+    contracts.validate_payload("candidate-claim", candidate_v11_payload())
+
+    for field in ("channel_scope", "denominator"):
+        incomplete_request = request_v11_payload()
+        del incomplete_request[field]
+        with pytest.raises(ValueError, match=field):
+            contracts.validate_payload("research-request", incomplete_request)
+
+        incomplete_candidate = candidate_v11_payload()
+        del incomplete_candidate["scope"][field]
+        with pytest.raises(ValueError, match=field):
+            contracts.validate_payload("candidate-claim", incomplete_candidate)
+
+    for field in ("market_definition_fingerprint", "series_fingerprint"):
+        incomplete_candidate = candidate_v11_payload()
+        del incomplete_candidate[field]
+        with pytest.raises(ValueError, match=field):
+            contracts.validate_payload("candidate-claim", incomplete_candidate)
+
+
+def test_v11_candidate_rejects_forged_market_or_series_fingerprint() -> None:
+    contracts = load_contracts_module()
+
+    forged_market = candidate_v11_payload()
+    forged_market["market_definition_fingerprint"] = "0" * 64
+    with pytest.raises(ValueError, match="market definition fingerprint"):
+        contracts.validate_payload("candidate-claim", forged_market)
+
+    forged_series = candidate_v11_payload()
+    forged_series["series_fingerprint"] = "0" * 64
+    with pytest.raises(ValueError, match="series fingerprint"):
+        contracts.validate_payload("candidate-claim", forged_series)
+
+
+def test_contract_module_loads_via_file_location_without_sys_path_setup() -> None:
+    script_dir = str(CONTRACTS_PATH.parent)
+    original_sys_path = sys.path[:]
+    original_direct_module = sys.modules.get("research_contracts_direct")
+    try:
+        sys.path[:] = [entry for entry in sys.path if entry != script_dir]
+        assert script_dir not in sys.path
+
+        module = load_contracts_module_without_sys_path_injection()
+        schema = module.load_schema("industry-bundle")
+
+        assert schema["title"] == "Industry Analysis Bundle"
+        assert script_dir not in sys.path
+    finally:
+        sys.path[:] = original_sys_path
+        if original_direct_module is None:
+            sys.modules.pop("research_contracts_direct", None)
+        else:
+            sys.modules["research_contracts_direct"] = original_direct_module
+
+
+def test_industry_analysis_bundle_schema_is_registered() -> None:
+    contracts = load_contracts_module()
+
+    canonical = contracts.load_schema("industry-analysis-bundle")
+    alias = contracts.load_schema("industry-bundle")
+
+    assert canonical["title"] == "Industry Analysis Bundle"
+    assert alias == canonical
+
+
+def test_industry_bundle_schema_accepts_valid_payload() -> None:
+    contracts = load_contracts_module()
+
+    contracts.validate_payload("industry-bundle", industry_bundle_payload())
+
+
+def test_industry_bundle_schema_rejects_unknown_role_state() -> None:
+    contracts = load_contracts_module()
+    payload = industry_bundle_payload()
+    payload["roles"][0]["state"] = "done"
+
+    with pytest.raises(ValueError, match="industry-analysis-bundle violates schema"):
+        contracts.validate_payload("industry-bundle", payload)
 
 
 def test_request_optionally_accepts_strict_source_classes() -> None:

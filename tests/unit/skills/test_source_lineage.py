@@ -31,6 +31,7 @@ def candidate(
     data_vintage: str,
     cited_source_ids: list[str] | None = None,
     underlying_report_id: str | None = None,
+    provider_table_id: str | None = None,
 ) -> dict[str, object]:
     result: dict[str, object] = {
         "source": {
@@ -46,6 +47,7 @@ def candidate(
                 [underlying_report_id] if underlying_report_id is not None else []
             ),
             "cited_source_ids": cited_source_ids or [],
+            "provider_table_id": provider_table_id,
         },
     }
     return result
@@ -93,6 +95,34 @@ def test_immediate_publisher_does_not_create_false_independence() -> None:
 
     assert lineage.same_lineage(frost, republished) is True
     assert lineage.lineage_id(frost) == lineage.lineage_id(republished)
+
+
+def test_provider_table_identity_survives_different_republication_titles() -> None:
+    lineage = load_lineage_module()
+    provider_release = candidate(
+        immediate_publisher="Frost & Sullivan",
+        original_publisher="Frost & Sullivan",
+        title="China Pop-Toy Market Forecast",
+        methodology_owner="Frost & Sullivan",
+        data_vintage="2025-12-31",
+        provider_table_id="CN Pop Toy Forecast Table 7",
+    )
+    prospectus_republication = candidate(
+        immediate_publisher="Listing Applicant",
+        original_publisher="Listing Applicant",
+        title="Industry Overview",
+        methodology_owner="frost & sullivan",
+        data_vintage="2025-12-31",
+        provider_table_id=" cn  pop toy forecast table 7 ",
+    )
+
+    assert lineage.provider_table_identity(provider_release) == (
+        "frost & sullivan",
+        "cn pop toy forecast table 7",
+        "2025-12-31",
+    )
+    assert lineage.same_lineage(provider_release, prospectus_republication) is True
+    assert lineage.lineage_id(provider_release).startswith("provider-table:")
 
 
 def test_official_statistics_and_separate_consultant_do_not_share_lineage() -> None:

@@ -24,6 +24,10 @@ def lineage_id(candidate: Mapping[str, object]) -> str:
     if explicit_ids:
         return _hashed_id("underlying", explicit_ids)
 
+    table_identity = provider_table_identity(candidate)
+    if table_identity:
+        return _hashed_id("provider-table", table_identity)
+
     source = _mapping(candidate, "source")
     document = _mapping(candidate, "document")
     lineage = _mapping(candidate, "lineage")
@@ -36,6 +40,19 @@ def lineage_id(candidate: Mapping[str, object]) -> str:
     }
     canonical = json.dumps(provenance, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
     return f"derived:{hashlib.sha256(canonical.encode('utf-8')).hexdigest()}"
+
+
+def provider_table_identity(candidate: Mapping[str, object]) -> tuple[str, ...]:
+    """Return a normalized provider/table/vintage identity when declared."""
+    lineage = _mapping(candidate, "lineage")
+    provider_table_id = _normalized_text(lineage.get("provider_table_id"))
+    if not provider_table_id:
+        return ()
+    return (
+        _normalized_text(lineage.get("methodology_owner")),
+        provider_table_id,
+        _normalized_text(candidate.get("data_vintage")),
+    )
 
 
 def same_lineage(left: Mapping[str, object], right: Mapping[str, object]) -> bool:

@@ -1,0 +1,485 @@
+subject: "SMIC"
+as_of: "2026-08-02"
+market_definition:
+  geographies: ["Global"]
+  industries: ["semiconductor foundry"]
+  population: "merchant foundry customers"
+  product_scope: "pure-play semiconductor foundry services"
+  channel_scope: "direct foundry contracts"
+primary_market_scope_fingerprint: &market_fingerprint "af8e4d2ee34ef1f53388ab87be9f6ee51e194d199b2dcac4f06ad5baa963a6d2"
+
+candidate_templates:
+  market_revenue: &market_revenue
+    metric: "global pure-play foundry market revenue"
+    measurement_basis: "foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "USD billion"
+    immediate_publisher: "TrendForce"
+    methodology_owner: "TrendForce"
+    report_title: "Global Foundry Revenue 2021-2025"
+    published_at: "2026-03-20"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Global Foundry Revenue Table 2021-2025"
+  market_forecast: &market_forecast
+    metric: "global pure-play foundry market revenue"
+    measurement_basis: "foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "USD billion"
+    immediate_publisher: "TrendForce"
+    methodology_owner: "TrendForce"
+    report_title: "Global Foundry Revenue Forecast 2026-2030"
+    published_at: "2026-07-20"
+    data_vintage: "2026-06-30"
+    provider_table_id: "Global Foundry Revenue Forecast Table 2026-2030"
+  concentration: &concentration
+    metric: "top-five foundry revenue share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    immediate_publisher: "TrendForce"
+    methodology_owner: "TrendForce"
+    report_title: "Global Foundry Revenue Ranking 2025"
+    published_at: "2026-03-20"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Global Foundry Revenue Ranking Table 2025"
+  subject_share: &subject_share
+    metric: "SMIC foundry revenue market share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    immediate_publisher: "TrendForce"
+    methodology_owner: "TrendForce"
+    report_title: "Global Foundry Company Revenue Shares 2021-2025"
+    published_at: "2026-03-20"
+    data_vintage: "2025-12-31"
+    provider_table_id: "SMIC Foundry Revenue Share Table 2021-2025"
+  competitor_share: &competitor_share
+    metric: "competitor foundry revenue market share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    immediate_publisher: "TrendForce"
+    methodology_owner: "TrendForce"
+    report_title: "Global Foundry Company Revenue Shares 2021-2025"
+    published_at: "2026-03-20"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Competitor Foundry Revenue Share Table 2021-2025"
+
+request_templates:
+  market_revenue: &market_revenue_request
+    claim_type: "historical-market-size"
+    metric: "global pure-play foundry market revenue"
+    measurement_basis: "foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "USD billion"
+    value_status_allowed: ["historical-estimate"]
+  market_forecast: &market_forecast_request
+    claim_type: "industry-forecast"
+    metric: "global pure-play foundry market revenue"
+    measurement_basis: "foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "USD billion"
+    value_status_allowed: ["forecast"]
+  concentration: &concentration_request
+    claim_type: "market-concentration"
+    metric: "top-five foundry revenue share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+  subject_share: &subject_share_request
+    claim_type: "subject-market-share"
+    metric: "SMIC foundry revenue market share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+  competitor_share: &competitor_share_request
+    claim_type: "competitor-market-share"
+    metric: "competitor foundry revenue market share"
+    measurement_basis: "share of foundry service revenue"
+    denominator: "total global pure-play foundry revenue"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+
+evidence_cases:
+  - case_id: "smic-market-history"
+    request:
+      <<: *market_revenue_request
+      claim_id: "smic-market-history"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - <<: *market_revenue
+        candidate_id: "smic-market-history"
+        values:
+          - {period: "2021", value: 110.2, status: "historical-estimate"}
+          - {period: "2022", value: 125.4, status: "historical-estimate"}
+          - {period: "2023", value: 117.1, status: "historical-estimate"}
+          - {period: "2024", value: 131.6, status: "historical-estimate"}
+          - {period: "2025", value: 145.8, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "smic-market-forecast"
+    request:
+      <<: *market_forecast_request
+      claim_id: "smic-market-forecast"
+      periods: ["2026", "2027", "2028", "2029", "2030"]
+    candidates:
+      - <<: *market_forecast
+        candidate_id: "smic-market-forecast"
+        values:
+          - {period: "2026", value: 160.0, status: "forecast"}
+          - {period: "2027", value: 176.0, status: "forecast"}
+          - {period: "2028", value: 193.0, status: "forecast"}
+          - {period: "2029", value: 211.0, status: "forecast"}
+          - {period: "2030", value: 230.0, status: "forecast"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "smic-concentration"
+    request:
+      <<: *concentration_request
+      claim_id: "smic-concentration"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - <<: *concentration
+        candidate_id: "smic-concentration"
+        values:
+          - {period: "2025", value: 88.3, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "smic-subject-share"
+    request:
+      <<: *subject_share_request
+      claim_id: "smic-subject-share"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - <<: *subject_share
+        candidate_id: "smic-subject-share"
+        values:
+          - {period: "2021", value: 5.3, status: "historical-estimate"}
+          - {period: "2022", value: 5.6, status: "historical-estimate"}
+          - {period: "2023", value: 5.7, status: "historical-estimate"}
+          - {period: "2024", value: 5.9, status: "historical-estimate"}
+          - {period: "2025", value: 6.1, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "smic-competitor-share-2023-2025"
+    request:
+      <<: *competitor_share_request
+      claim_id: "smic-competitor-share-2023-2025"
+      periods: ["2023", "2024", "2025"]
+    candidates:
+      - <<: *competitor_share
+        candidate_id: "smic-competitor-share-2023-2025"
+        values:
+          - {period: "2023", value: 57.1, status: "historical-estimate"}
+          - {period: "2024", value: 58.0, status: "historical-estimate"}
+          - {period: "2025", value: 58.7, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "smic-wafer-share-mismatch"
+    request:
+      <<: *subject_share_request
+      claim_id: "smic-wafer-share-mismatch"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - candidate_id: "smic-wafer-share-mismatch"
+        metric: "SMIC foundry revenue market share"
+        measurement_basis: "share of wafer shipments"
+        denominator: "total global foundry wafer shipments"
+        unit: "percent"
+        immediate_publisher: "TrendForce"
+        methodology_owner: "TrendForce"
+        report_title: "Global Foundry Wafer Shipment Shares 2025"
+        published_at: "2026-03-20"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Global Foundry Wafer Share Table 2025"
+        values:
+          - {period: "2025", value: 6.8, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope"]}
+
+  - case_id: "smic-accounting-revenue-share"
+    request:
+      <<: *subject_share_request
+      claim_id: "smic-accounting-revenue-share"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - candidate_id: "smic-accounting-revenue-share"
+        metric: "SMIC accounting revenue"
+        measurement_basis: "issuer accounting revenue"
+        denominator: "issuer reported operating revenue"
+        unit: "USD billion"
+        immediate_publisher: "SMIC"
+        methodology_owner: "SMIC"
+        source_class: "issuer-first-party"
+        publisher_type: "issuer-filing"
+        report_title: "SMIC 2025 Annual Report"
+        published_at: "2026-03-27"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Issuer Revenue Statement 2025"
+        values:
+          - {period: "2025", value: 8.4, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope", "continuity"]}
+
+  - case_id: "smic-installed-capacity-mismatch"
+    request:
+      <<: *market_revenue_request
+      claim_id: "smic-installed-capacity-mismatch"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - candidate_id: "smic-installed-capacity-mismatch"
+        metric: "global foundry installed capacity"
+        measurement_basis: "monthly wafer capacity"
+        denominator: "installed 8-inch-equivalent wafer capacity"
+        unit: "thousand wafers per month"
+        immediate_publisher: "SEMI"
+        methodology_owner: "SEMI"
+        report_title: "Global Foundry Capacity 2021-2025"
+        published_at: "2026-03-10"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Global Foundry Capacity Table 2021-2025"
+        values:
+          - {period: "2021", value: 8200.0, status: "historical-estimate"}
+          - {period: "2022", value: 8900.0, status: "historical-estimate"}
+          - {period: "2023", value: 9400.0, status: "historical-estimate"}
+          - {period: "2024", value: 9900.0, status: "historical-estimate"}
+          - {period: "2025", value: 10400.0, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope", "continuity"]}
+
+role_evidence:
+  historical-market-size: ["smic-market-history"]
+  industry-forecast: ["smic-market-forecast"]
+  market-concentration: ["smic-concentration"]
+  subject-market-share: ["smic-subject-share"]
+  competitor-market-share: ["smic-competitor-share-2023-2025"]
+
+role_outcomes:
+  - role: "market-definition"
+    claim_ids: ["smic-market-definition"]
+    claim_states: [{claim_id: "smic-market-definition", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["smic-market-definition-lineage"]
+    series: []
+    ledger_paths: ["research/smic/market-definition.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "historical-market-size"
+    claim_ids: ["smic-market-history"]
+    claim_states: [{claim_id: "smic-market-history", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 5
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&market_series "2c37e3c570be24246c7a743b986e3a741f03d22efefe77b4c897ee733fac3edf"]
+    lineage_ids: [&history_lineage "provider-table:e05eca93aaf2f88888038e76f79cbd6949a78474825e660cb59d8c0c29ff8497"]
+    series:
+      - series_id: "global-foundry-revenue:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *market_series
+        metric: "global pure-play foundry market revenue"
+        unit: "USD billion"
+        measurement_basis: "foundry service revenue"
+        channel_scope: "direct foundry contracts"
+        denominator: "total global pure-play foundry revenue"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2021", "2022", "2023", "2024", "2025"]
+        published_at: "2026-03-20"
+        data_vintage: "2025-12-31"
+        lineage_id: *history_lineage
+    ledger_paths: ["research/smic/historical-market-size.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "industry-forecast"
+    claim_ids: ["smic-market-forecast"]
+    claim_states: [{claim_id: "smic-market-forecast", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 5
+    required_periods: ["2026", "2027", "2028", "2029", "2030"]
+    accepted_periods: ["2026", "2027", "2028", "2029", "2030"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [*market_series]
+    lineage_ids: [&forecast_lineage "provider-table:437a4969981cb17da950eb44ca355283c6a11af6added5782fc6a5d590c6eba6"]
+    series:
+      - series_id: "global-foundry-revenue:2026-06-30"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *market_series
+        metric: "global pure-play foundry market revenue"
+        unit: "USD billion"
+        measurement_basis: "foundry service revenue"
+        channel_scope: "direct foundry contracts"
+        denominator: "total global pure-play foundry revenue"
+        period_semantics: "calendar-year"
+        value_status: "forecast"
+        periods: ["2026", "2027", "2028", "2029", "2030"]
+        published_at: "2026-07-20"
+        data_vintage: "2026-06-30"
+        lineage_id: *forecast_lineage
+    ledger_paths: ["research/smic/industry-forecast.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "market-concentration"
+    claim_ids: ["smic-concentration"]
+    claim_states: [{claim_id: "smic-concentration", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: ["2025"]
+    accepted_periods: ["2025"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&concentration_series "6d52e053910842ff52b92e4fb83d5b2a408483681c9045a43c1bc1b38c4df91c"]
+    lineage_ids: [&concentration_lineage "provider-table:a6075c66edf4792404361311ccb89bd75f1004d799b23eb06bee8bb77cee1d65"]
+    series:
+      - series_id: "global-foundry-concentration:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *concentration_series
+        metric: "top-five foundry revenue share"
+        unit: "percent"
+        measurement_basis: "share of foundry service revenue"
+        channel_scope: "direct foundry contracts"
+        denominator: "total global pure-play foundry revenue"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2025"]
+        published_at: "2026-03-20"
+        data_vintage: "2025-12-31"
+        lineage_id: *concentration_lineage
+    ledger_paths: ["research/smic/market-concentration.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "subject-market-share"
+    claim_ids: ["smic-subject-share"]
+    claim_states: [{claim_id: "smic-subject-share", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 5
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&subject_series "3abd0eb4caa0558f6ecb433d04bc35aef71e8ae181c62e10cca88802389f7bde"]
+    lineage_ids: [&subject_lineage "provider-table:a290a75f65c76ef440fc64f996c3119d33969b4bd0d8438b868f0c6a8414b75a"]
+    series:
+      - series_id: "smic-foundry-revenue-share:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *subject_series
+        metric: "SMIC foundry revenue market share"
+        unit: "percent"
+        measurement_basis: "share of foundry service revenue"
+        channel_scope: "direct foundry contracts"
+        denominator: "total global pure-play foundry revenue"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2021", "2022", "2023", "2024", "2025"]
+        published_at: "2026-03-20"
+        data_vintage: "2025-12-31"
+        lineage_id: *subject_lineage
+    ledger_paths: ["research/smic/subject-market-share.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "competitor-market-share"
+    claim_ids:
+      - "smic-competitor-share-2021-2022"
+      - "smic-competitor-share-2023-2025"
+    claim_states:
+      - {claim_id: "smic-competitor-share-2021-2022", state: "exhausted"}
+      - {claim_id: "smic-competitor-share-2023-2025", state: "accepted"}
+    state: "partial"
+    accepted_evidence_count: 3
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2023", "2024", "2025"]
+    missing_periods: ["2021", "2022"]
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&competitor_series "25fe8f13396ef8bf864e6bcd1cfe4a845a81b9ba98c322c3372bcff72d17a8fe"]
+    lineage_ids: [&competitor_lineage "provider-table:9c610b66fbf7cb582078dec02790bd62c8be1115150544a5edcdce60d146d7bd"]
+    series:
+      - series_id: "competitor-foundry-revenue-share:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *competitor_series
+        metric: "competitor foundry revenue market share"
+        unit: "percent"
+        measurement_basis: "share of foundry service revenue"
+        channel_scope: "direct foundry contracts"
+        denominator: "total global pure-play foundry revenue"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2023", "2024", "2025"]
+        published_at: "2026-03-20"
+        data_vintage: "2025-12-31"
+        lineage_id: *competitor_lineage
+    ledger_paths: ["research/smic/competitor-market-share.json"]
+    gap_reason: "The 2021 and 2022 competitor tables use wafer or capacity denominators instead of foundry revenue."
+    not_applicable_reason: null
+
+  - role: "current-partial-period"
+    claim_ids: ["smic-current-partial-period"]
+    claim_states: [{claim_id: "smic-current-partial-period", state: "not-applicable"}]
+    state: "not-applicable"
+    accepted_evidence_count: 0
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["smic-publication-cycle"]
+    series: []
+    ledger_paths: ["research/smic/current-partial-period.json"]
+    gap_reason: null
+    not_applicable_reason: "Foundry market datasets publish after annual close, so current partial-period figures remain separate."
+
+  - role: "industry-drivers"
+    claim_ids: ["smic-industry-drivers"]
+    claim_states: [{claim_id: "smic-industry-drivers", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["smic-industry-drivers-2026"]
+    series: []
+    ledger_paths: ["research/smic/industry-drivers.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+scope_breaks:
+  - from_scope_fingerprint: "14f104bc86aafb39070ad3f2b036c188ce2491fa3103071caf3d5055e9911f00"
+    to_scope_fingerprint: *subject_series
+    reason: "Wafer-shipment share uses a different measurement basis and denominator from foundry-revenue share."
+    comparable: false
+  - from_scope_fingerprint: "77ae4be9c240160d9ac6d62185997dbe6d82ef5d3effa22abf928639ba583ef4"
+    to_scope_fingerprint: *market_series
+    reason: "Installed wafer capacity cannot be stitched into a foundry-revenue market series."
+    comparable: false
+  - from_scope_fingerprint: "0c38637b8a9321b0aff4e8321242a682cc1d2c26a164306a4da55b4b1d4cb14e"
+    to_scope_fingerprint: *subject_series
+    reason: "SMIC issuer accounting revenue is not the global foundry-revenue denominator."
+    comparable: false
+
+unresolved_claim_ids:
+  - "smic-competitor-share-2021-2022"

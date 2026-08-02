@@ -11,13 +11,18 @@ from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from datetime import date
 
-from research_contracts import validate_payload
+from research_contracts import (
+    market_definition_fingerprint,
+    series_fingerprint,
+    validate_payload,
+)
 
 FAILURE_ORDER = (
     "identity",
     "scope",
     "continuity",
     "value_status",
+    "vintage",
     "freshness",
     "authority",
     "conclusion_evidence",
@@ -95,6 +100,7 @@ def evaluate_candidate(
             )
         ),
         "value_status": not _value_statuses_match(request, candidate),
+        "vintage": False,
         "freshness": not _is_fresh_for_covered_latest_period(request, candidate),
         "authority": not _authority_matches(request, candidate),
         "conclusion_evidence": not _conclusion_evidence_matches(request, candidate),
@@ -141,6 +147,7 @@ def _evaluate_event_candidate(
             )
         ),
         "value_status": not _value_statuses_match(request, candidate),
+        "vintage": False,
         "freshness": not _is_fresh_for_covered_latest_period(request, candidate),
         "authority": not _authority_matches(request, candidate),
         "conclusion_evidence": not _conclusion_evidence_matches(request, candidate),
@@ -221,6 +228,7 @@ def evaluate_stitched_series(
             not status_matches
             or any(not _value_statuses_match(request, candidate) for candidate in candidates)
         ),
+        "vintage": not _forecast_vintages_match(candidates, required_periods),
         "freshness": any(
             not _is_fresh_for_covered_latest_period(request, candidate) for candidate in candidates
         ),
@@ -307,6 +315,21 @@ def _scope_matches(
         return False
     if _normalized_labels(scope.get("industries")) != _normalized_labels(request.get("industries")):
         return False
+    if _string_field(request, "schema_version") == "1.1":
+        if candidate.get("market_definition_fingerprint") != (
+            request_market_definition_fingerprint(request)
+        ):
+            return False
+        if candidate.get("series_fingerprint") != series_fingerprint(candidate):
+            return False
+        if _normalized_text(scope.get("channel_scope")) != _normalized_text(
+            request.get("channel_scope")
+        ):
+            return False
+        if _normalized_text(scope.get("denominator")) != _normalized_text(
+            request.get("denominator")
+        ):
+            return False
     return (
         _normalized_text(scope.get("population")) == _normalized_text(request.get("population"))
         and _normalized_text(scope.get("product_scope"))
@@ -330,6 +353,13 @@ def _scope_fingerprint(request: Mapping[str, object], candidate: Mapping[str, ob
         "population": _normalized_text(scope.get("population")),
         "product_scope": _normalized_text(scope.get("product_scope")),
     }
+    if _string_field(request, "schema_version") == "1.1":
+        payload.update(
+            {
+                "channel_scope": _normalized_text(scope.get("channel_scope")),
+                "denominator": _normalized_text(scope.get("denominator")),
+            }
+        )
     canonical = json.dumps(payload, ensure_ascii=True, separators=(",", ":"), sort_keys=True)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
@@ -346,9 +376,16 @@ def request_scope_fingerprint(request: Mapping[str, object]) -> str:
                 "population": request.get("population"),
                 "product_scope": request.get("product_scope"),
                 "measurement_basis": request.get("measurement_basis"),
+                "channel_scope": request.get("channel_scope"),
+                "denominator": request.get("denominator"),
             },
         },
     )
+
+
+def request_market_definition_fingerprint(request: Mapping[str, object]) -> str:
+    """Return the market identity shared by metric-specific request roles."""
+    return market_definition_fingerprint(request)
 
 
 def _frequency_matches(request: Mapping[str, object], candidate: Mapping[str, object]) -> bool:
@@ -484,14 +521,48 @@ def _is_fresh_for_covered_latest_period(
             and period_date <= as_of
             for value in event_values
         )
+    vintage_year = _year(candidate.get("data_vintage"))
+    if vintage_year is None:
+        return False
+    covered_values = tuple(
+        value
+        for value in _candidate_values(candidate)
+        if _string_field(value, "period") in _required_periods(request)
+    )
+    non_forecast_years = tuple(
+        period_year
+        for value in covered_values
+        if _normalized_text(value.get("status")) != "forecast"
+        and (period_year := _year(value.get("period"))) is not None
+    )
+    if non_forecast_years and vintage_year < max(non_forecast_years):
+        return False
+
     latest_period = _string_field(request, "required_latest_period")
     if latest_period not in {
         _string_field(value, "period") for value in _candidate_values(candidate)
     }:
         return True
     latest_year = _year(latest_period)
-    vintage_year = _year(candidate.get("data_vintage"))
-    return latest_year is not None and vintage_year is not None and vintage_year >= latest_year
+    if latest_year is not None and latest_year < as_of.year:
+        return vintage_year >= latest_year
+    return True
+
+
+def _forecast_vintages_match(
+    candidates: Sequence[Mapping[str, object]],
+    required_periods: set[str],
+) -> bool:
+    forecast_vintages = {
+        _string_field(candidate, "data_vintage")
+        for candidate in candidates
+        if any(
+            _string_field(value, "period") in required_periods
+            and _normalized_text(value.get("status")) == "forecast"
+            for value in _candidate_values(candidate)
+        )
+    }
+    return len(forecast_vintages) <= 1
 
 
 def _authority_matches(request: Mapping[str, object], candidate: Mapping[str, object]) -> bool:

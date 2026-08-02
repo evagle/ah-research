@@ -812,7 +812,7 @@ def test_source_discovery_uses_the_gated_planner_handoff_contract() -> None:
             "single `inventory_receipt`",
             "instead of constructing a second route list",
             "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
-            "`ledger_sha256`, and `status`",
+            "`ledger_sha256`, `status`, and `industry_bundle`",
             "An empty result without a terminal ledger is invalid output.",
         ),
     )
@@ -863,6 +863,109 @@ def test_industry_trend_discovery_preserves_history_forecast_and_revision_vintag
             "Never splice forecasts from different vintages into one continuous series.",
         ),
     )
+
+
+def test_industry_bundle_builds_all_role_requests_before_gated_routing() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    industry_section = skill.split(
+        "## Industry Size, Growth, Concentration, And Forecasts",
+        1,
+    )[1].split("## Catalog And Uncataloged Sources", 1)[0]
+
+    for role in (
+        "market-definition",
+        "historical-market-size",
+        "industry-forecast",
+        "market-concentration",
+        "subject-market-share",
+        "competitor-market-share",
+        "current-partial-period",
+        "industry-drivers",
+    ):
+        assert f"`{role}`" in industry_section
+
+    assert_contains_all(
+        industry_section,
+        (
+            "Construct all eight role requests before routing.",
+            "derive the latest completed five-year window from `AS_OF`",
+            "Search each unresolved role independently.",
+            "version chase",
+            "preserve partial accepted evidence",
+            "Only unresolved roles continue through the planner.",
+            "Broader, narrower, or adjacent markets cannot fill the primary-market requirement.",
+            "`evaluate_industry_bundle`",
+            "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
+            "`ledger_sha256`, `status`, and `industry_bundle`",
+            "publishable-with-gaps",
+            "Never convert `exhausted` or `blocked` into absence.",
+        ),
+    )
+
+
+def test_industry_contract_documents_v11_identity_vintage_and_claim_state_evolution() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Unambiguous `schema_version: 1.0` payloads remain valid.",
+            "New industry requests, candidates, and bundles use `schema_version: 1.1`.",
+            "`market_definition_fingerprint` is metric-independent",
+            "`series_fingerprint` retains metric, canonical unit, measurement basis, frequency, period semantics, and denominator",
+            "`channel_scope` and `denominator` are required machine-visible fields",
+            "publication date and `data_vintage` are evidence dates, not the forecast horizon",
+            "Render one forecast series per `data_vintage`",
+            "`claim_states` are independently terminal",
+            "Never redispatch an accepted claim",
+            "`partial` and `blocked` roles retain accepted evidence",
+            "`provider_table_id`",
+        ),
+    )
+
+
+def test_forecast_version_chase_uses_child_claims_without_reopening_base() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "`<base-forecast-claim-id>:prior-vintage`",
+            "`<base-forecast-claim-id>:later-vintage`",
+            "distinct child claim IDs under the `industry-forecast` role",
+            "The accepted base forecast claim remains stopped.",
+            "Only unresolved version child claim IDs continue through planner layers.",
+            "Positive claims stop immediately after the acceptance gate passes.",
+        ),
+    )
+
+
+def test_search_playbook_requires_forecast_version_chase_queries() -> None:
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+
+    assert_contains_all(
+        playbook,
+        (
+            "exact table title",
+            "provider",
+            "publication vintage",
+            "prior version",
+            "later version",
+            '"{exact table title}" "{provider}" "{publication year}" filetype:pdf',
+            '"{provider}" "{industry}" forecast "{prior year}" filetype:pdf',
+            '"{provider}" "{industry}" forecast "{later year}" filetype:pdf',
+        ),
+    )
+    for excluded_signal in (
+        "broker target prices",
+        "broker ratings",
+        "issuer earnings forecasts",
+    ):
+        assert excluded_signal in playbook
 
 
 def test_offline_cross_industry_regression_stops_and_resumes_without_redispatch() -> None:

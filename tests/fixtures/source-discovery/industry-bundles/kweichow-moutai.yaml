@@ -1,0 +1,524 @@
+subject: "Kweichow Moutai"
+as_of: "2026-08-02"
+market_definition:
+  geographies: ["China"]
+  industries: ["premium baijiu"]
+  population: "legal-drinking-age retail consumers"
+  product_scope: "premium baijiu"
+  channel_scope: "all retail channels"
+primary_market_scope_fingerprint: &market_fingerprint "5d0ebeddcf704809125eda5b9fdeaea66c806068641e3715eb1046f8bbfa1863"
+
+candidate_templates:
+  market_value: &market_value
+    metric: "premium baijiu retail sales value"
+    measurement_basis: "retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "CNY billion"
+    immediate_publisher: "China Insights Consultancy"
+    methodology_owner: "China Insights Consultancy"
+    report_title: "China Premium Baijiu Market 2021-2025"
+    published_at: "2026-04-10"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Premium Baijiu Retail Value Table 2021-2025"
+  market_forecast: &market_forecast
+    metric: "premium baijiu retail sales value"
+    measurement_basis: "retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "CNY billion"
+    immediate_publisher: "China Insights Consultancy"
+    methodology_owner: "China Insights Consultancy"
+    report_title: "China Premium Baijiu Forecast 2026-2030"
+    published_at: "2026-07-08"
+    data_vintage: "2026-06-30"
+    provider_table_id: "Premium Baijiu Retail Value Forecast 2026-2030"
+  concentration: &concentration
+    metric: "top-five premium baijiu brand share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    immediate_publisher: "China Insights Consultancy"
+    methodology_owner: "China Insights Consultancy"
+    report_title: "Premium Baijiu Brand Ranking 2025"
+    published_at: "2026-04-10"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Premium Baijiu Brand Ranking Table 2025"
+  subject_share: &subject_share
+    metric: "Kweichow Moutai brand market share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    immediate_publisher: "China Insights Consultancy"
+    methodology_owner: "China Insights Consultancy"
+    report_title: "Premium Baijiu Brand Shares 2021-2025"
+    published_at: "2026-04-10"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Moutai Premium Baijiu Share Table 2021-2025"
+  competitor_share: &competitor_share
+    metric: "competitor brand market share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    immediate_publisher: "China Insights Consultancy"
+    methodology_owner: "China Insights Consultancy"
+    report_title: "Premium Baijiu Brand Shares 2021-2025"
+    published_at: "2026-04-10"
+    data_vintage: "2025-12-31"
+    provider_table_id: "Competitor Premium Baijiu Share Table 2021-2025"
+
+request_templates:
+  market_value: &market_value_request
+    claim_type: "historical-market-size"
+    metric: "premium baijiu retail sales value"
+    measurement_basis: "retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "CNY billion"
+    value_status_allowed: ["historical-estimate"]
+  market_forecast: &market_forecast_request
+    claim_type: "industry-forecast"
+    metric: "premium baijiu retail sales value"
+    measurement_basis: "retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "CNY billion"
+    value_status_allowed: ["forecast"]
+  concentration: &concentration_request
+    claim_type: "market-concentration"
+    metric: "top-five premium baijiu brand share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+  subject_share: &subject_share_request
+    claim_type: "subject-market-share"
+    metric: "Kweichow Moutai brand market share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+  competitor_share: &competitor_share_request
+    claim_type: "competitor-market-share"
+    metric: "competitor brand market share"
+    measurement_basis: "share of retail sales value"
+    denominator: "total premium baijiu retail sales"
+    unit: "percent"
+    value_status_allowed: ["historical-estimate"]
+
+evidence_cases:
+  - case_id: "moutai-market-history"
+    request:
+      <<: *market_value_request
+      claim_id: "moutai-market-history"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - <<: *market_value
+        candidate_id: "moutai-market-history"
+        values:
+          - {period: "2021", value: 220.0, status: "historical-estimate"}
+          - {period: "2022", value: 235.0, status: "historical-estimate"}
+          - {period: "2023", value: 251.0, status: "historical-estimate"}
+          - {period: "2024", value: 269.0, status: "historical-estimate"}
+          - {period: "2025", value: 286.0, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-market-forecast"
+    request:
+      <<: *market_forecast_request
+      claim_id: "moutai-market-forecast"
+      periods: ["2026", "2027", "2028", "2029", "2030"]
+    candidates:
+      - <<: *market_forecast
+        candidate_id: "moutai-market-forecast"
+        values:
+          - {period: "2026", value: 302.0, status: "forecast"}
+          - {period: "2027", value: 319.0, status: "forecast"}
+          - {period: "2028", value: 337.0, status: "forecast"}
+          - {period: "2029", value: 356.0, status: "forecast"}
+          - {period: "2030", value: 376.0, status: "forecast"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-concentration"
+    request:
+      <<: *concentration_request
+      claim_id: "moutai-concentration"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - <<: *concentration
+        candidate_id: "moutai-concentration"
+        values:
+          - {period: "2025", value: 74.0, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-subject-share-2021-2022"
+    request:
+      <<: *subject_share_request
+      claim_id: "moutai-subject-share-2021-2022"
+      periods: ["2021", "2022"]
+    candidates:
+      - <<: *subject_share
+        candidate_id: "moutai-subject-share-2021-2022"
+        values:
+          - {period: "2021", value: 41.0, status: "historical-estimate"}
+          - {period: "2022", value: 41.8, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-subject-share-2024-2025"
+    request:
+      <<: *subject_share_request
+      claim_id: "moutai-subject-share-2024-2025"
+      periods: ["2024", "2025"]
+    candidates:
+      - <<: *subject_share
+        candidate_id: "moutai-subject-share-2024-2025"
+        values:
+          - {period: "2024", value: 43.1, status: "historical-estimate"}
+          - {period: "2025", value: 43.7, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-competitor-share-2021"
+    request:
+      <<: *competitor_share_request
+      claim_id: "moutai-competitor-share-2021"
+      periods: ["2021"]
+      continuity_required: false
+    candidates:
+      - <<: *competitor_share
+        candidate_id: "moutai-competitor-share-2021"
+        values:
+          - {period: "2021", value: 18.4, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-competitor-share-2025"
+    request:
+      <<: *competitor_share_request
+      claim_id: "moutai-competitor-share-2025"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - <<: *competitor_share
+        candidate_id: "moutai-competitor-share-2025"
+        values:
+          - {period: "2025", value: 17.2, status: "historical-estimate"}
+    expected: {passed: true, failures: []}
+
+  - case_id: "moutai-issuer-revenue-share"
+    request:
+      <<: *subject_share_request
+      claim_id: "moutai-issuer-revenue-share"
+      periods: ["2025"]
+      continuity_required: false
+    candidates:
+      - candidate_id: "moutai-issuer-revenue-share"
+        metric: "Kweichow Moutai accounting revenue"
+        measurement_basis: "issuer accounting revenue"
+        denominator: "issuer reported operating revenue"
+        unit: "CNY billion"
+        immediate_publisher: "Kweichow Moutai"
+        methodology_owner: "Kweichow Moutai"
+        source_class: "issuer-first-party"
+        publisher_type: "issuer-filing"
+        report_title: "Kweichow Moutai 2025 Annual Report"
+        published_at: "2026-03-30"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Issuer Revenue Statement 2025"
+        values:
+          - {period: "2025", value: 181.2, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope", "continuity"]}
+
+  - case_id: "moutai-total-baijiu-mismatch"
+    request:
+      <<: *market_value_request
+      claim_id: "moutai-total-baijiu-mismatch"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - candidate_id: "moutai-total-baijiu-mismatch"
+        metric: "total baijiu retail sales value"
+        product_scope: "all baijiu"
+        measurement_basis: "retail sales value"
+        denominator: "total baijiu retail sales"
+        unit: "CNY billion"
+        immediate_publisher: "China Insights Consultancy"
+        methodology_owner: "China Insights Consultancy"
+        report_title: "China Baijiu Market 2021-2025"
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Total Baijiu Retail Value Table 2021-2025"
+        values:
+          - {period: "2021", value: 603.0, status: "historical-estimate"}
+          - {period: "2022", value: 621.0, status: "historical-estimate"}
+          - {period: "2023", value: 640.0, status: "historical-estimate"}
+          - {period: "2024", value: 661.0, status: "historical-estimate"}
+          - {period: "2025", value: 683.0, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope"]}
+
+  - case_id: "moutai-volume-mismatch"
+    request:
+      <<: *market_value_request
+      claim_id: "moutai-volume-mismatch"
+      periods: ["2021", "2022", "2023", "2024", "2025"]
+    candidates:
+      - candidate_id: "moutai-volume-mismatch"
+        metric: "premium baijiu sales volume"
+        measurement_basis: "sales volume"
+        denominator: "total premium baijiu liters sold"
+        unit: "million liters"
+        immediate_publisher: "China Insights Consultancy"
+        methodology_owner: "China Insights Consultancy"
+        report_title: "China Premium Baijiu Volume 2021-2025"
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        provider_table_id: "Premium Baijiu Volume Table 2021-2025"
+        values:
+          - {period: "2021", value: 32.0, status: "historical-estimate"}
+          - {period: "2022", value: 32.4, status: "historical-estimate"}
+          - {period: "2023", value: 32.8, status: "historical-estimate"}
+          - {period: "2024", value: 33.1, status: "historical-estimate"}
+          - {period: "2025", value: 33.4, status: "historical-estimate"}
+    expected: {passed: false, failures: ["scope", "continuity"]}
+
+role_evidence:
+  historical-market-size: ["moutai-market-history"]
+  industry-forecast: ["moutai-market-forecast"]
+  market-concentration: ["moutai-concentration"]
+  subject-market-share:
+    - "moutai-subject-share-2021-2022"
+    - "moutai-subject-share-2024-2025"
+  competitor-market-share:
+    - "moutai-competitor-share-2021"
+    - "moutai-competitor-share-2025"
+
+role_outcomes:
+  - role: "market-definition"
+    claim_ids: ["moutai-market-definition"]
+    claim_states: [{claim_id: "moutai-market-definition", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["moutai-market-definition-lineage"]
+    series: []
+    ledger_paths: ["research/kweichow-moutai/market-definition.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "historical-market-size"
+    claim_ids: ["moutai-market-history"]
+    claim_states: [{claim_id: "moutai-market-history", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 5
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2023", "2024", "2025"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&market_series "5f3cbbd9e64ac47196ba40bf4d6d1c77cb18051ac9461d031204073f5ed20dd3"]
+    lineage_ids: [&history_lineage "provider-table:ab85f4b548ef1cc8cd4172371c34121a4df4f6705674feb70fc81d91eef925e2"]
+    series:
+      - series_id: "premium-baijiu-retail-value:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *market_series
+        metric: "premium baijiu retail sales value"
+        unit: "CNY billion"
+        measurement_basis: "retail sales value"
+        channel_scope: "all retail channels"
+        denominator: "total premium baijiu retail sales"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2021", "2022", "2023", "2024", "2025"]
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        lineage_id: *history_lineage
+    ledger_paths: ["research/kweichow-moutai/historical-market-size.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "industry-forecast"
+    claim_ids: ["moutai-market-forecast"]
+    claim_states: [{claim_id: "moutai-market-forecast", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 5
+    required_periods: ["2026", "2027", "2028", "2029", "2030"]
+    accepted_periods: ["2026", "2027", "2028", "2029", "2030"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [*market_series]
+    lineage_ids: [&forecast_lineage "provider-table:7fef4b1b2f2a02f2a5c021796191753305400b9c1aa5153fda682c9c7e7f14de"]
+    series:
+      - series_id: "premium-baijiu-retail-value:2026-06-30"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *market_series
+        metric: "premium baijiu retail sales value"
+        unit: "CNY billion"
+        measurement_basis: "retail sales value"
+        channel_scope: "all retail channels"
+        denominator: "total premium baijiu retail sales"
+        period_semantics: "calendar-year"
+        value_status: "forecast"
+        periods: ["2026", "2027", "2028", "2029", "2030"]
+        published_at: "2026-07-08"
+        data_vintage: "2026-06-30"
+        lineage_id: *forecast_lineage
+    ledger_paths: ["research/kweichow-moutai/industry-forecast.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "market-concentration"
+    claim_ids: ["moutai-concentration"]
+    claim_states: [{claim_id: "moutai-concentration", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: ["2025"]
+    accepted_periods: ["2025"]
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&concentration_series "300bd8748ca1994a4d65c6740d7a3c5a237a1725c57277342316b7bcda733f52"]
+    lineage_ids: [&concentration_lineage "provider-table:53fb3e6e131ee1148422cf3705094a046b3a746c86e6bca5fc6d9eed23be1f55"]
+    series:
+      - series_id: "premium-baijiu-concentration:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *concentration_series
+        metric: "top-five premium baijiu brand share"
+        unit: "percent"
+        measurement_basis: "share of retail sales value"
+        channel_scope: "all retail channels"
+        denominator: "total premium baijiu retail sales"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2025"]
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        lineage_id: *concentration_lineage
+    ledger_paths: ["research/kweichow-moutai/market-concentration.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+  - role: "subject-market-share"
+    claim_ids:
+      - "moutai-subject-share-2021-2022"
+      - "moutai-subject-share-2023"
+      - "moutai-subject-share-2024-2025"
+    claim_states:
+      - {claim_id: "moutai-subject-share-2021-2022", state: "accepted"}
+      - {claim_id: "moutai-subject-share-2023", state: "exhausted"}
+      - {claim_id: "moutai-subject-share-2024-2025", state: "accepted"}
+    state: "partial"
+    accepted_evidence_count: 4
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2022", "2024", "2025"]
+    missing_periods: ["2023"]
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&subject_series "8b1c94dd3c4360eaaa77c6751d3e7eacb4b81aa8d8239f526cce76aabd202f71"]
+    lineage_ids: [&subject_lineage "provider-table:19b187b714348f2c4c681c02479e40b84db804d63e479b67b23ead5927529731"]
+    series:
+      - series_id: "moutai-premium-share:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *subject_series
+        metric: "Kweichow Moutai brand market share"
+        unit: "percent"
+        measurement_basis: "share of retail sales value"
+        channel_scope: "all retail channels"
+        denominator: "total premium baijiu retail sales"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2021", "2022", "2024", "2025"]
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        lineage_id: *subject_lineage
+    ledger_paths: ["research/kweichow-moutai/subject-market-share.json"]
+    gap_reason: "No continuous premium-baijiu retail-value table confirms Moutai brand share for 2023."
+    not_applicable_reason: null
+
+  - role: "competitor-market-share"
+    claim_ids:
+      - "moutai-competitor-share-2021"
+      - "moutai-competitor-share-2022-2024"
+      - "moutai-competitor-share-2025"
+    claim_states:
+      - {claim_id: "moutai-competitor-share-2021", state: "accepted"}
+      - {claim_id: "moutai-competitor-share-2022-2024", state: "exhausted"}
+      - {claim_id: "moutai-competitor-share-2025", state: "accepted"}
+    state: "partial"
+    accepted_evidence_count: 2
+    required_periods: ["2021", "2022", "2023", "2024", "2025"]
+    accepted_periods: ["2021", "2025"]
+    missing_periods: ["2022", "2023", "2024"]
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: [&competitor_series "9d8ef57dacc7c0b13e9d91d67799fb9fa10bc57ce529fe1c31f4dc3fe422c799"]
+    lineage_ids: [&competitor_lineage "provider-table:faa114476a411e441229604361a5a0479573ea2d6e2ad29e945447650b9f24e1"]
+    series:
+      - series_id: "premium-baijiu-competitor-share:2025-12-31"
+        market_definition_fingerprint: *market_fingerprint
+        series_fingerprint: *competitor_series
+        metric: "competitor brand market share"
+        unit: "percent"
+        measurement_basis: "share of retail sales value"
+        channel_scope: "all retail channels"
+        denominator: "total premium baijiu retail sales"
+        period_semantics: "calendar-year"
+        value_status: "historical-estimate"
+        periods: ["2021", "2025"]
+        published_at: "2026-04-10"
+        data_vintage: "2025-12-31"
+        lineage_id: *competitor_lineage
+    ledger_paths: ["research/kweichow-moutai/competitor-market-share.json"]
+    gap_reason: "Premium-baijiu competitor tables are unavailable for 2022 through 2024."
+    not_applicable_reason: null
+
+  - role: "current-partial-period"
+    claim_ids: ["moutai-current-partial-period"]
+    claim_states: [{claim_id: "moutai-current-partial-period", state: "not-applicable"}]
+    state: "not-applicable"
+    accepted_evidence_count: 0
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["moutai-publication-cycle"]
+    series: []
+    ledger_paths: ["research/kweichow-moutai/current-partial-period.json"]
+    gap_reason: null
+    not_applicable_reason: "Premium-baijiu market studies close annually, so the current partial period remains separate."
+
+  - role: "industry-drivers"
+    claim_ids: ["moutai-industry-drivers"]
+    claim_states: [{claim_id: "moutai-industry-drivers", state: "accepted"}]
+    state: "accepted"
+    accepted_evidence_count: 1
+    required_periods: []
+    accepted_periods: []
+    missing_periods: []
+    missing_coverage: []
+    market_definition_fingerprints: [*market_fingerprint]
+    scope_fingerprints: []
+    lineage_ids: ["moutai-industry-drivers-2026"]
+    series: []
+    ledger_paths: ["research/kweichow-moutai/industry-drivers.json"]
+    gap_reason: null
+    not_applicable_reason: null
+
+scope_breaks:
+  - from_scope_fingerprint: "5737746d77bce6972a074306af80d106c124b6f43e27106cf0beffb8274b2779"
+    to_scope_fingerprint: *market_series
+    reason: "Total-baijiu retail value uses a broader product market than premium baijiu."
+    comparable: false
+  - from_scope_fingerprint: "b0ff5447aa0704e7b6022f8ec67e559bb8285a68843ed12c37177ddea07de414"
+    to_scope_fingerprint: *market_series
+    reason: "Premium-baijiu sales volume has a different unit, measurement basis, and denominator from retail sales value."
+    comparable: false
+  - from_scope_fingerprint: "a031f6960a24933768225d5734933dae0fbc8c1d7cab8aac7979c8b7eccc6020"
+    to_scope_fingerprint: *subject_series
+    reason: "Issuer accounting revenue cannot be divided by premium-baijiu retail sales to manufacture market share."
+    comparable: false
+
+unresolved_claim_ids:
+  - "moutai-subject-share-2023"
+  - "moutai-competitor-share-2022-2024"
