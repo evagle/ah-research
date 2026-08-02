@@ -4751,6 +4751,27 @@ def test_hk_period_parser_uses_latest_year_from_multi_year_heading(tmp_path, mon
     assert df.extract_hk_report_period_end(pdf_path) == date(2023, 3, 31)
 
 
+@pytest.mark.parametrize("cover_text", [b"ANNUAL REPORT 2025", b"2025 ANNUAL REPORT"])
+def test_hk_period_parser_accepts_annual_report_year_on_cover(tmp_path, monkeypatch, cover_text):
+    pdf_path = tmp_path / "report.pdf"
+    pdf_path.write_bytes(b"%PDF-fake")
+    outputs = iter(
+        [
+            cover_text,
+            (b"Consolidated financial statements\nfor the year ended 31 December 2025"),
+        ]
+    )
+    monkeypatch.setattr(
+        df.subprocess,
+        "run",
+        lambda *_args, **_kwargs: subprocess.CompletedProcess(
+            args=[], returncode=0, stdout=next(outputs), stderr=b""
+        ),
+    )
+
+    assert df.extract_hk_report_period_end(pdf_path) == date(2025, 12, 31)
+
+
 def test_annual_manifest_declares_listing_history_scope(tmp_path):
     path = df.write_annual_manifest(
         tmp_path,

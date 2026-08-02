@@ -1183,6 +1183,28 @@ requested claim without an explicit scope change.
 - Access observation evidence: `High`
 - Site guide: None
 
+## `hkex-listing-applicants` - HKEX listing applicants
+
+- Aliases/origins: `HKEX active listing applicants`, `HKEX application proof index`, `HKEX PHIP index`
+- Publisher type: `official-exchange`
+- Official domains: `hkexnews.hk`
+- Provenance authority: `High` - HKEX-published listing-applicant index records and application documents. The index is discovery metadata; the opened official PDF is the evidence artifact.
+- Function: `listing-applicant-documents`
+  - Authority: `High`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [active Main Board listing-applicant index](<https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json>)
+  - Search example: `find TOP TOY application ID 108384 in the active index, then open the official application PDF and preserve its final URL`
+  - Same-function fallbacks: None
+  - Document types: `application-proof`, `PHIP`, `listing-application`
+  - Relationship uses: `active-listing-applicant`, `recent-listing-applicant`
+- Current status: `reachable`
+- Last checked: `2026-08-02T02:32:23+08:00`
+- Access limitations: The active JSON index is a current discovery surface, not proof of a document's contents, permanence, activity history, or replacement status. Open the final official PDF and retain the index identity and version relation.
+- Access observation evidence: `High`
+- Site guide: [`hkex-listing-applicants` guide](site-guides/hkex-listing-applicants.md)
+
 ## `hkex-market-data` - HKEX market data
 
 - Aliases/origins: `hkex`, `C02`, `HKEX`, `HKEX official quotes`, `HKEX daily quotations`, `build_event_manifest hkex; build_market_manifest hkex; download_filings HKEX_SEARCH_URL, HKEX_BASE_URL, HKEX_ACTIVE_STOCK_URL; domains hkex.com.hk and hkexnews.hk`
@@ -1528,19 +1550,19 @@ requested claim without an explicit scope change.
 
 - Aliases/origins: `U24-KPMG`, `KPMG China`, `U24`, `supplied U24c KPMG China`
 - Publisher type: `consulting-research`
-- Official domains: `kpmg.com`
+- Official domains: `kpmg.com`, `assets.kpmg.com`
 - Provenance authority: `Medium` - Insight archive browsing, China tax alerts, economic monitors, M&A, regulatory, and enterprise trend reports. Medium-to-high authority for KPMG-attributable advisory analysis; not official statistics
 - Function: `research-reports`
   - Authority: `Medium`
   - Utility: `High`
-  - Completed workflow evidence: `Low`
-  - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://kpmg.com/cn/zh.html>)
-  - Search example: `site:kpmg.com industry report`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [primary route](<https://kpmg.com/cn/zh.html>), [verified public China industry report PDF](<https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2026/04/panoramic-insights-and-trend-prospects-of-the-tide-play.pdf.coredownload.inline.pdf>)
+  - Search example: `site:assets.kpmg.com/content/dam/kpmgsites/cn/pdf/ ("潮玩" OR "行业报告" OR "趋势预测") filetype:pdf`
   - Same-function fallbacks: `deloitte-china-research-reports`, `ey-china-research-reports`
-- Current status: `moved`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: moved/redirected; public-limited. Consulting/accounting-house perspective; variable methodological transparency; some premium assets may sit behind forms Audited fallback peers: U24-Deloitte, U24-EY, U24-PwC, U29.
+- Current status: `reachable`
+- Last checked: `2026-08-02T09:32:12+08:00`
+- Access limitations: Public KPMG asset PDFs are directly retrievable when the exact URL is known; archive discovery remains less structured and some reports may require forms. Consulting perspective and underlying third-party data lineage must remain explicit.
 - Access observation evidence: `High`
 - Site guide: None
 

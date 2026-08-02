@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import ast
+import importlib.util
 import re
 import subprocess
 import sys
+from datetime import UTC, datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -17,6 +19,8 @@ SNAPSHOT_PATH = SKILL_ROOT / "references" / "reachability-snapshot.json"
 CATALOG_PATH = SKILL_ROOT / "references" / "source-catalog.md"
 CATALOG_BUILDER_PATH = SKILL_ROOT / "scripts" / "build_source_catalog.py"
 SITE_GUIDES_ROOT = SKILL_ROOT / "references" / "site-guides"
+SCENARIOS_ROOT = REPO_ROOT / "tests" / "fixtures" / "source-discovery" / "scenarios"
+SOURCE_DISCOVERY_SCRIPTS_ROOT = SKILL_ROOT / "scripts"
 
 
 def read(path: Path) -> str:
@@ -93,10 +97,114 @@ def assert_contains_all(text: str, phrases: tuple[str, ...]) -> None:
         assert phrase in text
 
 
+def load_scenario(name: str) -> dict[str, object]:
+    path = SCENARIOS_ROOT / name
+    assert path.is_file(), f"missing scenario fixture: {path}"
+    payload = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert isinstance(payload, dict)
+    return payload
+
+
+def load_runtime_module(name: str):
+    path = SOURCE_DISCOVERY_SCRIPTS_ROOT / f"{name}.py"
+    assert path.is_file(), f"missing runtime module: {path}"
+    script_dir = str(SOURCE_DISCOVERY_SCRIPTS_ROOT)
+    if script_dir not in sys.path:
+        sys.path.insert(0, script_dir)
+    spec = importlib.util.spec_from_file_location(name, path)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
+class RecordingDispatch:
+    def __init__(self) -> None:
+        self.calls: list[dict[str, object]] = []
+        self.route_sources: dict[str, tuple[str, str]] = {}
+
+    def dispatch(
+        self,
+        route,
+        terminal_reason: str,
+    ) -> dict[str, object]:
+        query_variant = route.query_variants[0] if route.query_variants else route.route_id
+        started_at = datetime(2026, 8, 2, 1, len(self.calls), tzinfo=UTC)
+        completed_at = datetime(2026, 8, 2, 1, len(self.calls), 30, tzinfo=UTC)
+        call = {
+            "route_id": route.route_id,
+            "route_layer": route.route_layer,
+            "subject_relation": route.subject_relation,
+            "document_type": route.document_type,
+            "query_variant": query_variant,
+            "started_at": started_at.isoformat(),
+            "completed_at": completed_at.isoformat(),
+            "artifact_identity": f"none:{terminal_reason}",
+            "lineage_id": f"none:{terminal_reason}",
+            "terminal_reason": terminal_reason,
+            "acceptance_failures": ["gate-not-passed"],
+        }
+        self.calls.append(call)
+        if route.source_id is not None and route.source_function is not None:
+            self.route_sources[route.route_id] = (
+                route.source_id,
+                route.source_function,
+            )
+        return call
+
+
+def dispatch_plan(
+    spy: RecordingDispatch,
+    route_plan,
+    terminal_reason: str,
+) -> tuple[dict[str, object], ...]:
+    return tuple(spy.dispatch(route, terminal_reason) for route in route_plan.routes)
+
+
+def route_inventory(route_plans) -> list[dict[str, object]]:
+    return [
+        {
+            "route_id": route.route_id,
+            "route_layer": route.route_layer,
+            "subject_relation": route.subject_relation,
+            "document_type": route.document_type,
+        }
+        for route_plan in route_plans
+        for route in route_plan.routes
+    ]
+
+
+def accepted_attempt(
+    dispatched_attempt: dict[str, object],
+    candidate: dict[str, object],
+    gate_result,
+) -> dict[str, object]:
+    assert gate_result.passed is True
+    return {
+        **dispatched_attempt,
+        "artifact_identity": candidate["artifact"]["identity"],
+        "lineage_id": candidate["lineage_id"],
+        "terminal_reason": "accepted",
+        "acceptance_failures": [],
+    }
+
+
 def test_source_discovery_skill_has_required_resources() -> None:
     assert (SKILL_ROOT / "SKILL.md").is_file()
     assert (SKILL_ROOT / "references/source-catalog.md").is_file()
     assert (SKILL_ROOT / "references/search-playbook.md").is_file()
+
+
+def test_direct_route_guide_list_includes_listing_applicants() -> None:
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    direct_route_guides = playbook.split(
+        "Read the applicable site guide before a direct route:",
+        1,
+    )[1].split("\n\n", 1)[0]
+
+    assert "`site-guides/hkex-listing-applicants.md`" in direct_route_guides
 
 
 def test_source_discovery_skill_frontmatter_and_workflow_contract() -> None:
@@ -111,16 +219,11 @@ def test_source_discovery_skill_frontmatter_and_workflow_contract() -> None:
     )
 
     skill = require_text(SKILL_ROOT / "SKILL.md")
-    for step in (
-        "question decomposition",
-        "known-source routing",
-        "dynamic discovery",
-        "access/provenance validation",
-        "independent cross-check",
-        "fallback exhaustion",
-        "source ledger handoff",
-    ):
-        assert step in skill
+    assert (
+        "`decompose request -> validate request -> execute current layer -> "
+        "validate candidate(s) -> stop accepted claims -> escalate unresolved claims -> "
+        "terminal ledger handoff`"
+    ) in skill
     for criterion in (
         "provenance",
         "primary/secondary status",
@@ -138,10 +241,10 @@ def test_source_discovery_skill_frontmatter_and_workflow_contract() -> None:
 
 def test_runtime_loads_catalog_before_known_source_routing() -> None:
     skill = require_text(SKILL_ROOT / "SKILL.md")
-    catalog_instruction = "Read `references/source-catalog.md` before known-source routing."
+    catalog_instruction = "Read `references/source-catalog.md` before selecting the current layer."
     assert catalog_instruction in skill
     assert skill.index(catalog_instruction) < skill.index(
-        "`question decomposition -> known-source routing"
+        "`decompose request -> validate request -> execute current layer"
     )
 
 
@@ -525,12 +628,14 @@ def test_source_catalog_is_seed_registry_not_closed_allowlist() -> None:
 
 
 def test_source_discovery_enforces_company_site_and_fallback_rules() -> None:
-    combined = "\n".join(
-        (
-            require_text(SKILL_ROOT / "SKILL.md"),
-            require_text(SKILL_ROOT / "references/search-playbook.md"),
-            require_text(SKILL_ROOT / "references/source-catalog.md"),
-        )
+    combined = " ".join(
+        "\n".join(
+            (
+                require_text(SKILL_ROOT / "SKILL.md"),
+                require_text(SKILL_ROOT / "references/search-playbook.md"),
+                require_text(SKILL_ROOT / "references/source-catalog.md"),
+            )
+        ).split()
     )
     for phrase in (
         "Treat company websites as first-party subject evidence",
@@ -540,7 +645,8 @@ def test_source_discovery_enforces_company_site_and_fallback_rules() -> None:
         "Use aggregators, media, social platforms, and report indexes for discovery only",
         "conclusions must cite the original publisher whenever the original can be identified",
         "One failed request never proves permanent closure.",
-        "continue through other applicable sources in the same category and then adjacent categories",
+        "continue through the remaining applicable routes in the current layer",
+        "Escalate to another category only when the planner returns it for an unresolved claim.",
         "Report a source gap only after recording every compliant route attempted, its query, "
         "access result, and final error.",
     ):
@@ -676,3 +782,333 @@ def test_existing_financial_skills_reference_source_discovery() -> None:
             "event sources, weaken live revalidation, or write profile sections.",
         ),
     )
+
+
+def test_source_discovery_requires_claim_level_acceptance_before_stopping() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert "Only unresolved `claim_id` values escalate" in skill
+    assert "absence claim" in skill
+    assert "listing applicant" in skill
+    assert "acceptance_failures" in skill
+
+
+def test_source_discovery_uses_the_gated_planner_handoff_contract() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+
+    assert_contains_all(
+        skill,
+        (
+            "decompose request -> validate request -> execute current layer -> "
+            "validate candidate(s) -> stop accepted claims -> escalate unresolved claims -> "
+            "terminal ledger handoff",
+            "Positive claims stop immediately after the acceptance gate passes.",
+            "Absence claims stop only after every applicable route is terminal.",
+            "Route count is not an acceptance criterion.",
+            "`planner-inventory-receipt.schema.json`",
+            "strict normalized",
+            "maintained relation source bindings",
+            "deterministic tamper-evident",
+            "single `inventory_receipt`",
+            "instead of constructing a second route list",
+            "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
+            "`ledger_sha256`, and `status`",
+            "An empty result without a terminal ledger is invalid output.",
+        ),
+    )
+
+
+def test_market_share_discovery_requires_recent_company_and_competitor_series() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Market-share requests target the latest five completed annual periods",
+            "extend to ten completed annual periods when public evidence permits",
+            "Search the current partial period (H1, YTD, or latest quarter) separately",
+            "Historical observations outside the latest five completed periods cannot satisfy recent-series acceptance",
+            "the subject company and its major named competitors",
+            "Search active, revised, inactive, and archived listing-applicant documents",
+            "Treat broker research as a required document route when filings and listing-applicant documents leave annual market-share gaps",
+            "Search both company reports and industry reports for the subject company, every named competitor, and the category",
+            "Preserve the broker, analyst, report title, publication date, page, table title, geography, period, measurement basis, named competitors, original data provider, report URL, and PDF delivery URL",
+            "continue tracing Frost & Sullivan, CIC, Euromonitor, IDC, or another cited data provider to its original table or a later official reproduction",
+            "A portal-hosted PDF may preserve report contents, but Eastmoney, Hibor, Datayes, Sina, and other distributors do not become the report author",
+            "Do not divide issuer accounting revenue by industry GMV, RSV, retail value, shipments, users, or another non-identical denominator",
+            "keep the continuous-series claim unresolved",
+            "report the strongest partial series separately",
+        ),
+    )
+
+
+def test_industry_trend_discovery_preserves_history_forecast_and_revision_vintages() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    industry_trends = skill.split(
+        "## Industry Size, Growth, Concentration, And Forecasts",
+        1,
+    )[1].split("## Catalog And Uncataloged Sources", 1)[0]
+    industry_trends = " ".join(industry_trends.split())
+
+    assert_contains_all(
+        industry_trends,
+        (
+            "latest five completed annual periods",
+            "next three to five forecast years",
+            "annual market size, year-over-year growth, CAGR, CR5 or CR10",
+            "forecast vintage",
+            "Do not discard an industry forecast merely because it is a forecast.",
+            "Never splice forecasts from different vintages into one continuous series.",
+        ),
+    )
+
+
+def test_offline_cross_industry_regression_stops_and_resumes_without_redispatch() -> None:
+    contracts = load_runtime_module("research_contracts")
+    source_profiles = load_runtime_module("source_profiles")
+    gate = load_runtime_module("evidence_gate")
+    planner = load_runtime_module("discovery_planner")
+    scenario = load_scenario("evidence-gate-cross-industry.yaml")
+    maintained_profiles = {
+        profile["id"]: profile
+        for profile in source_profiles.load_profiles(
+            PROFILES_ROOT,
+            SKILL_ROOT / "references" / "source-profile.schema.json",
+        )
+    }
+    now = datetime.fromisoformat(scenario["as_of"]).astimezone(UTC)
+
+    official_case = scenario["cases"]["official_statistics_early_stop"]
+    official_expected = official_case["expected"]
+    official_request = official_case["request"]
+    official_candidate = official_case["candidate"]
+    guizhou_scenario = load_scenario(official_case["source_scenario"])
+    guizhou_gate = next(
+        requirement["evidence_gate"]
+        for requirement in guizhou_scenario["required_functions"]
+        if requirement["function_id"] == official_case["source_function"]
+    )
+    contracts.validate_payload("request", official_request)
+    contracts.validate_payload("candidate", official_candidate)
+    assert (
+        official_candidate["runtime_evidence"]["evidence_level"]
+        == official_expected["evidence_level"]
+        == guizhou_gate["evidence_level"]
+    )
+
+    official_plan = planner.plan_next_layer(
+        official_request,
+        [maintained_profiles[source_id] for source_id in official_case["candidate_source_ids"]],
+        {},
+        source_function=official_case["source_function"],
+        now=now,
+    )
+    assert official_plan is not None
+    assert (
+        official_plan.current_layer
+        == official_expected["accepted_layer"]
+        == guizhou_gate["expected_accepted_layer"]
+    )
+    official_dispatch = RecordingDispatch()
+    official_attempts = dispatch_plan(official_dispatch, official_plan, "rejected")
+    assert all(attempt["terminal_reason"] != "accepted" for attempt in official_attempts)
+    without_official_gate = planner.plan_next_layer(
+        official_request,
+        [maintained_profiles[source_id] for source_id in official_case["candidate_source_ids"]],
+        {},
+        completed_attempts=official_attempts,
+        source_function=official_case["source_function"],
+        now=now,
+    )
+    assert without_official_gate is not None
+    official_result = gate.evaluate_candidate(official_request, official_candidate)
+    assert official_result.passed is True
+    assert (
+        planner.plan_next_layer(
+            official_request,
+            [maintained_profiles[source_id] for source_id in official_case["candidate_source_ids"]],
+            {},
+            completed_attempts=official_attempts,
+            source_function=official_case["source_function"],
+            gate_result=official_result,
+            now=now,
+        )
+        is None
+    )
+    assert {call["route_layer"] for call in official_dispatch.calls} == {
+        official_expected["accepted_layer"]
+    }
+    assert not {call["route_layer"] for call in official_dispatch.calls}.intersection(
+        guizhou_gate["forbidden_route_layers_after_acceptance"]
+    )
+    assert (
+        sum(call["route_layer"] == planner.BROAD_DYNAMIC for call in official_dispatch.calls)
+        == official_expected["broad_dynamic_dispatches"]
+    )
+
+    fresh_drinks_case = scenario["cases"]["fresh_drinks_listing_applicant"]
+    fresh_expected = fresh_drinks_case["expected"]
+    fresh_drinks_request = fresh_drinks_case["request"]
+    relation_records = fresh_drinks_case["relation_records"]
+    relation_record = relation_records[0]
+    listing_profile = maintained_profiles[relation_record["source_id"]]
+    listing_function = next(
+        function
+        for function in listing_profile["functions"]
+        if function["id"] == relation_record["source_function"]
+    )
+    uncataloged_candidate = fresh_drinks_case["uncataloged_original"]
+    contracts.validate_payload("request", fresh_drinks_request)
+    contracts.validate_payload("candidate", uncataloged_candidate)
+    assert relation_record["source_id"] in fresh_drinks_case["candidate_source_ids"]
+    assert relation_record["source_function"] == fresh_drinks_case["source_function"]
+    assert relation_record["relation"] in listing_function["relationship_uses"]
+    assert "catalog_source_id" not in uncataloged_candidate["source"]
+    assert uncataloged_candidate["source"]["original_publisher"] not in {
+        profile["name"] for profile in maintained_profiles.values()
+    }
+    assert (
+        uncataloged_candidate["runtime_evidence"]["evidence_level"]
+        == fresh_expected["evidence_level"]
+    )
+
+    fresh_dispatch = RecordingDispatch()
+    attempts: tuple[dict[str, object], ...] = ()
+    relationship_plan = planner.plan_next_layer(
+        fresh_drinks_request,
+        [listing_profile],
+        {},
+        relation_records=relation_records,
+        completed_attempts=attempts,
+        source_function=fresh_drinks_case["source_function"],
+        now=now,
+    )
+    assert relationship_plan is not None
+    assert relationship_plan.current_layer == planner.SUBJECT_RELATIONSHIP
+    assert {route.subject_relation for route in relationship_plan.routes} == {
+        fresh_expected["listing_applicant_relation"]
+    }
+    attempts += dispatch_plan(
+        fresh_dispatch,
+        relationship_plan,
+        "not-found",
+    )
+    assert fresh_dispatch.route_sources[relationship_plan.routes[0].route_id] == (
+        relation_record["source_id"],
+        relation_record["source_function"],
+    )
+
+    document_plan = planner.plan_next_layer(
+        fresh_drinks_request,
+        [listing_profile],
+        {},
+        relation_records=relation_records,
+        completed_attempts=attempts,
+        source_function=fresh_drinks_case["source_function"],
+        now=now,
+    )
+    assert document_plan is not None
+    assert document_plan.current_layer == planner.DOCUMENT_TYPE
+    attempts += dispatch_plan(fresh_dispatch, document_plan, "rejected")
+
+    broad_plan = planner.plan_next_layer(
+        fresh_drinks_request,
+        [listing_profile],
+        {},
+        relation_records=relation_records,
+        completed_attempts=attempts,
+        source_function=fresh_drinks_case["source_function"],
+        now=now,
+    )
+    assert broad_plan is not None
+    assert broad_plan.current_layer == planner.BROAD_DYNAMIC
+    broad_dispatch = dispatch_plan(fresh_dispatch, broad_plan, "rejected")
+    pre_gate_attempts = attempts + broad_dispatch
+    assert all(attempt["terminal_reason"] != "accepted" for attempt in pre_gate_attempts)
+    without_fresh_gate = planner.plan_next_layer(
+        fresh_drinks_request,
+        [listing_profile],
+        {},
+        relation_records=relation_records,
+        completed_attempts=pre_gate_attempts,
+        source_function=fresh_drinks_case["source_function"],
+        now=now,
+    )
+    assert without_fresh_gate is not None
+    uncataloged_result = gate.evaluate_candidate(
+        fresh_drinks_request,
+        uncataloged_candidate,
+    )
+    assert uncataloged_result.passed is True
+    assert (
+        planner.plan_next_layer(
+            fresh_drinks_request,
+            [listing_profile],
+            {},
+            relation_records=relation_records,
+            completed_attempts=pre_gate_attempts,
+            source_function=fresh_drinks_case["source_function"],
+            gate_result=uncataloged_result,
+            now=now,
+        )
+        is None
+    )
+    assert [call["route_layer"] for call in fresh_dispatch.calls].count(
+        planner.BROAD_DYNAMIC
+    ) == fresh_expected["broad_dynamic_dispatches"]
+
+    persisted_attempts = (
+        *attempts,
+        accepted_attempt(
+            broad_dispatch[0],
+            uncataloged_candidate,
+            uncataloged_result,
+        ),
+    )
+    resumed_ledger = {
+        "schema_version": "1.0",
+        "claim_id": fresh_drinks_request["claim_id"],
+        "request_scope_fingerprint": uncataloged_result.scope_fingerprint,
+        "absence_claim": fresh_drinks_request["absence_claim"],
+        "status": "accepted",
+        "applicable_routes": broad_plan.inventory_receipt["route_inventory"],
+        "attempts": list(persisted_attempts),
+        "acceptance_failures": [],
+        "accepted_evidence": {
+            "candidate_document_id": uncataloged_candidate["document"]["document_id"],
+            "artifact_identity": uncataloged_candidate["artifact"]["identity"],
+            "lineage_id": uncataloged_candidate["lineage_id"],
+        },
+        "conflict_evidence": None,
+        "gate": {"outcome": "passed", "failures": []},
+        "next_escalation": None,
+        "skipped_after_acceptance": [],
+        "unattempted_routes": [],
+    }
+    contracts.validate_payload(
+        "ledger",
+        resumed_ledger,
+        planner_inventory_receipt=broad_plan.inventory_receipt,
+    )
+    assert resumed_ledger["attempts"] == list(persisted_attempts)
+    assert resumed_ledger["accepted_evidence"] == {
+        "candidate_document_id": uncataloged_candidate["document"]["document_id"],
+        "artifact_identity": uncataloged_candidate["artifact"]["identity"],
+        "lineage_id": uncataloged_candidate["lineage_id"],
+    }
+    resumed_dispatch = RecordingDispatch()
+    resumed_plan = planner.plan_next_layer(
+        fresh_drinks_request,
+        [listing_profile],
+        {},
+        relation_records=relation_records,
+        source_function=fresh_drinks_case["source_function"],
+        ledger=resumed_ledger,
+        now=now,
+    )
+    if resumed_plan is not None:
+        dispatch_plan(resumed_dispatch, resumed_plan, "not-found")
+    assert resumed_plan is None
+    assert len(resumed_dispatch.calls) == fresh_expected["resumed_dispatches"]

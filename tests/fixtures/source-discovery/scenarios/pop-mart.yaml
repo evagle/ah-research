@@ -8,6 +8,61 @@ scope:
   claim_scope: HKEX filings, issuer IR context, statutory ownership, SFC regulatory context, and China consumer context
 as_of: "2026-08-02T08:00:00+00:00"
 required_functions:
+  - name: HKEX active listing-applicant expansion after stale target evidence
+    function_id: listing-applicant-documents
+    geographies: [HK]
+    candidate_source_ids: [hkex-listing-applicants, hkexnews]
+    expected_route_order: [hkex-listing-applicants]
+    expected_excluded_source_ids: [hkexnews]
+    forbidden_final_citation_source_ids: []
+    expected_first_choice:
+      source_id: hkex-listing-applicants
+      publisher_type: official-exchange
+      skip_reason: null
+      direct_url: https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json
+    citation_readiness:
+      citation_use_contains: opened official application PDF
+      required_identity_fields:
+        [application ID, issuer, publication date, document path, version or replacement relation, final PDF URL]
+      search_fields:
+        [active or inactive index identity, application ID, issuer, publication date, document path, version or replacement relation]
+      result_identity_contains:
+        [active or inactive index identity, application ID, issuer, publication date, document path, version or replacement relation]
+      search_result_is_final_citation: false
+      opening_final_document_required: true
+      final_document_instruction_contains: opened official application PDF
+    listing_applicant_evidence:
+      trigger: stale target evidence
+      relation: active-listing-applicant
+      identity_fixture: hkex-listing-applicants/active-index-108384.yaml
+      current_active_index_identity:
+        index_url: https://www1.hkexnews.hk/ncms/json/eds/appactive_app_sehk_e.json
+        response_sha256: e1e136478f8094b731f680ae744604cb0f943b757b3ace4b4560c49f2da13e54
+        application_id: 108384
+        applicant: TOP TOY International Group Limited
+        status: A
+        publication_date: "31/03/2026"
+      historical_evidence_artifact:
+        url: https://www1.hkexnews.hk/app/sehk/2026/108384/a131511/sehk26033103632.pdf
+        sha256: eb50b5d3ada6e4a271e24c3ba37828cdd2b1dcd2ef11648ed1318dfa6d8b7cdc
+        size_bytes: 353595
+        relation_to_current_active_index: unverified
+        artifact_role: historical-evidence-artifact
+        current_application_proof: false
+        evidence_chart:
+          title: Market Size of China's Pop Toy Industry by GMV, 2020-2030E
+          source: Frost & Sullivan
+          scope: China pop-toy market
+          unit: 亿元
+          values:
+            2020: 249
+            2021: 345
+            2022: 352
+            2023: 430
+            2024: 587
+            2025: 875
+          latest_period: 2025
+          2026_status: not asserted
   - name: HKEXnews filings and title search
     function_id: company-disclosures
     geographies: [HK]

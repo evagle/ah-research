@@ -1,0 +1,252 @@
+request:
+  schema_version: "1.0"
+  claim_id: cn-pop-toy-market-2020-2025
+  claim_type: market-size
+  subject: China pop-toy market
+  metric: annual retail market size
+  geographies: [China]
+  industries: [pop-toys]
+  population: retail consumers
+  product_scope: pop toys only
+  measurement_basis: retail value
+  period_start: "2020"
+  period_end: "2025"
+  frequency: annual
+  continuity_required: true
+  required_latest_period: "2025"
+  accepted_units: [CNY billion]
+  definition_constraints: [pop toys only, retail value]
+  value_status_allowed: [observed, historical-estimate, forecast]
+  minimum_source_authority: High
+  minimum_conclusion_evidence: High
+  minimum_originality: High
+  minimum_independence: Medium
+  independent_cross_check_required: false
+  absence_claim: false
+  as_of: "2026-08-02"
+
+candidates:
+  fitting_official:
+    schema_version: "1.0"
+    claim_id: cn-pop-toy-market-2020-2025
+    metric: annual retail market size
+    frequency: annual
+    period_semantics: calendar-year
+    source:
+      immediate_publisher: China Consumer Products Statistics Office
+      original_publisher: China Consumer Products Statistics Office
+      publisher_type: official-statistics
+      canonical_url: https://statistics.example.org/pop-toys/2025
+    document:
+      document_id: CCP-POP-TOY-2025
+      title: China Pop-Toy Retail Market, 2020-2025
+      published_at: "2026-02-01"
+      canonical_url: https://statistics.example.org/pop-toys/2025
+    values:
+      - period: "2020"
+        value: 20.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 20.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2021"
+        value: 24.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 24.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2022"
+        value: 28.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 28.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2023"
+        value: 31.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 31.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2024"
+        value: 34.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 34.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2025"
+        value: 37.0
+        unit: CNY billion
+        status: forecast
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 37.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+    canonical_unit: CNY billion
+    scope:
+      geographies: [China]
+      industries: [pop-toys]
+      product_scope: pop toys only
+      population: retail consumers
+      measurement_basis: retail value
+    data_vintage: "2025-12-31"
+    artifact:
+      identity: sha256:1111111111111111111111111111111111111111111111111111111111111111
+      sha256: "1111111111111111111111111111111111111111111111111111111111111111"
+    source_document_identity:
+      source_canonical_url: https://statistics.example.org/pop-toys/2025
+      document_canonical_url: https://statistics.example.org/pop-toys/2025
+      document_id: CCP-POP-TOY-2025
+      artifact_sha256: "1111111111111111111111111111111111111111111111111111111111111111"
+      binding_sha256: a972a94658867967e768be6e44e44262c721a15a14bbcb89987ed43808059e40
+    scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+    reconciliations: []
+    lineage:
+      methodology_owner: China Consumer Products Statistics Office
+      underlying_dataset_ids: []
+      underlying_report_ids: [china-consumer-products-statistics-pop-toys-2025]
+      cited_source_ids: []
+    lineage_id: underlying:605b7c3be98840fbe89b2f887ac424783fadacc43b3ebcdd05e262dd185c3ae1
+    runtime_evidence:
+      source_authority: High
+      conclusion_evidence: High
+      originality: High
+      independence: High
+      evidence_level: High
+
+  stitch_early:
+    schema_version: "1.0"
+    claim_id: cn-pop-toy-market-2020-2025
+    metric: annual retail market size
+    frequency: annual
+    period_semantics: calendar-year
+    source:
+      immediate_publisher: China Consumer Products Statistics Office
+      original_publisher: China Consumer Products Statistics Office
+      publisher_type: official-statistics
+      canonical_url: https://statistics.example.org/pop-toys/2022
+    document:
+      document_id: CCP-POP-TOY-2022
+      title: China Pop-Toy Retail Market, 2020-2022
+      published_at: "2023-02-01"
+      canonical_url: https://statistics.example.org/pop-toys/2022
+    values:
+      - period: "2020"
+        value: 20.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 20.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2021"
+        value: 24.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 24.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2022"
+        value: 28.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 28.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+    canonical_unit: CNY billion
+    scope:
+      geographies: [China]
+      industries: [pop-toys]
+      product_scope: pop toys only
+      population: retail consumers
+      measurement_basis: retail value
+    data_vintage: "2022-12-31"
+    artifact:
+      identity: sha256:2222222222222222222222222222222222222222222222222222222222222222
+      sha256: "2222222222222222222222222222222222222222222222222222222222222222"
+    source_document_identity:
+      source_canonical_url: https://statistics.example.org/pop-toys/2022
+      document_canonical_url: https://statistics.example.org/pop-toys/2022
+      document_id: CCP-POP-TOY-2022
+      artifact_sha256: "2222222222222222222222222222222222222222222222222222222222222222"
+      binding_sha256: 6fee1b9b297bc0278a578dd1ad0f239c7960cc552f92b2888cab97b8454356c2
+    scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+    reconciliations: []
+    lineage:
+      methodology_owner: China Consumer Products Statistics Office
+      underlying_dataset_ids: []
+      underlying_report_ids: [china-consumer-products-statistics-pop-toys-2022]
+      cited_source_ids: []
+    lineage_id: underlying:3196dab1b7bbe61cf8371e6624903c26890ed398263759318619eac899e89b81
+    runtime_evidence:
+      source_authority: High
+      conclusion_evidence: High
+      originality: High
+      independence: High
+      evidence_level: High
+
+  stitch_late:
+    schema_version: "1.0"
+    claim_id: cn-pop-toy-market-2020-2025
+    metric: annual retail market size
+    frequency: annual
+    period_semantics: calendar-year
+    source:
+      immediate_publisher: China Consumer Products Statistics Office
+      original_publisher: China Consumer Products Statistics Office
+      publisher_type: official-statistics
+      canonical_url: https://statistics.example.org/pop-toys/2025
+    document:
+      document_id: CCP-POP-TOY-2025-REV
+      title: China Pop-Toy Retail Market, 2022-2025
+      published_at: "2026-02-01"
+      canonical_url: https://statistics.example.org/pop-toys/2025
+    values:
+      - period: "2022"
+        value: 28.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 28.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2023"
+        value: 31.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 31.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2024"
+        value: 34.0
+        unit: CNY billion
+        status: observed
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 34.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+      - period: "2025"
+        value: 37.0
+        unit: CNY billion
+        status: forecast
+        definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+        canonical_value: {value: 37.0, unit: CNY billion, definition_scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582, reconciliation_id: null}
+    canonical_unit: CNY billion
+    scope:
+      geographies: [China]
+      industries: [pop-toys]
+      product_scope: pop toys only
+      population: retail consumers
+      measurement_basis: retail value
+    data_vintage: "2025-12-31"
+    artifact:
+      identity: sha256:3333333333333333333333333333333333333333333333333333333333333333
+      sha256: "3333333333333333333333333333333333333333333333333333333333333333"
+    source_document_identity:
+      source_canonical_url: https://statistics.example.org/pop-toys/2025
+      document_canonical_url: https://statistics.example.org/pop-toys/2025
+      document_id: CCP-POP-TOY-2025-REV
+      artifact_sha256: "3333333333333333333333333333333333333333333333333333333333333333"
+      binding_sha256: 341e53f5d2fd32a89d0917fbe60ca7c2c0e06f0366b005ad22470d68390edcc3
+    scope_fingerprint: b6616573be4a7627d0ece917e9230e2ffa226066166adac7a5d5dc1eebf21582
+    reconciliations: []
+    lineage:
+      methodology_owner: China Consumer Products Statistics Office
+      underlying_dataset_ids: []
+      underlying_report_ids: [china-consumer-products-statistics-pop-toys-2025-revision]
+      cited_source_ids: []
+    lineage_id: underlying:730df99a62e1aa5eb838d92c477bcde24cd9b3c0d775ec99d9697b4103442d9b
+    runtime_evidence:
+      source_authority: High
+      conclusion_evidence: High
+      originality: High
+      independence: High
+      evidence_level: High

@@ -1,0 +1,445 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ah-research-source-discovery.local/candidate-claim.schema.json",
+  "title": "Candidate Claim",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "claim_id",
+    "metric",
+    "frequency",
+    "period_semantics",
+    "source",
+    "document",
+    "values",
+    "canonical_unit",
+    "scope",
+    "data_vintage",
+    "artifact",
+    "source_document_identity",
+    "scope_fingerprint",
+    "reconciliations",
+    "lineage",
+    "lineage_id",
+    "runtime_evidence"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "claim_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "metric": {
+      "type": "string",
+      "minLength": 1
+    },
+    "frequency": {
+      "type": "string",
+      "enum": ["annual", "quarterly", "monthly", "event-driven"]
+    },
+    "period_semantics": {
+      "type": "string",
+      "enum": ["calendar-year", "calendar-quarter", "calendar-month", "event-date"]
+    },
+    "source": {
+      "$ref": "#/$defs/source"
+    },
+    "document": {
+      "$ref": "#/$defs/document"
+    },
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/value"
+      }
+    },
+    "canonical_unit": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope": {
+      "$ref": "#/$defs/scope"
+    },
+    "data_vintage": {
+      "type": "string",
+      "format": "date"
+    },
+    "artifact": {
+      "$ref": "#/$defs/artifact"
+    },
+    "source_document_identity": {
+      "$ref": "#/$defs/sourceDocumentIdentity"
+    },
+    "scope_fingerprint": {
+      "$ref": "#/$defs/sha256"
+    },
+    "reconciliations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/reconciliation"
+      }
+    },
+    "lineage": {
+      "$ref": "#/$defs/lineage"
+    },
+    "lineage_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "runtime_evidence": {
+      "$ref": "#/$defs/runtimeEvidence"
+    }
+  },
+  "$defs": {
+    "labels": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "rating": {
+      "type": "string",
+      "enum": ["High", "Medium", "Low"]
+    },
+    "sourceClass": {
+      "type": "string",
+      "enum": [
+        "official-regulator",
+        "official-exchange",
+        "official-court",
+        "issuer-first-party",
+        "named-counterparty",
+        "auditor",
+        "original-research",
+        "academic",
+        "association",
+        "media",
+        "search-summary",
+        "anonymous",
+        "unsourced-aggregation"
+      ]
+    },
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "immediate_publisher",
+        "original_publisher",
+        "publisher_type",
+        "canonical_url"
+      ],
+      "properties": {
+        "immediate_publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "original_publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "publisher_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_class": {
+          "$ref": "#/$defs/sourceClass"
+        },
+        "canonical_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["document_id", "title", "published_at", "canonical_url"],
+      "properties": {
+        "document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "published_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "canonical_url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "value": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "period",
+        "value",
+        "unit",
+        "status",
+        "definition_scope_fingerprint",
+        "canonical_value"
+      ],
+      "properties": {
+        "period": {
+          "type": "string",
+          "minLength": 1
+        },
+        "value": {
+          "type": ["number", "string"]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "type": "string",
+          "enum": ["observed", "historical-estimate", "forecast"]
+        },
+        "definition_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "evidence_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Source-specific evidence identity for the supporting document, notice, filing, or record that produced this value."
+        },
+        "event_key": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Normalized cross-source event identity derived from the claim-relevant event date, named subject(s), and event/action type."
+        },
+        "canonical_value": {
+          "$ref": "#/$defs/canonicalValue"
+        }
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "geographies",
+        "industries",
+        "product_scope",
+        "population",
+        "measurement_basis"
+      ],
+      "properties": {
+        "geographies": {
+          "$ref": "#/$defs/labels"
+        },
+        "industries": {
+          "$ref": "#/$defs/labels"
+        },
+        "product_scope": {
+          "type": "string",
+          "minLength": 1
+        },
+        "population": {
+          "type": "string",
+          "minLength": 1
+        },
+        "measurement_basis": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity", "sha256"],
+      "properties": {
+        "identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "sourceDocumentIdentity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_canonical_url",
+        "document_canonical_url",
+        "document_id",
+        "artifact_sha256",
+        "binding_sha256"
+      ],
+      "properties": {
+        "source_canonical_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "document_canonical_url": {
+          "type": "string",
+          "format": "uri"
+        },
+        "document_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        },
+        "binding_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "canonicalValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "value",
+        "unit",
+        "definition_scope_fingerprint",
+        "reconciliation_id"
+      ],
+      "properties": {
+        "value": {
+          "type": ["number", "string"]
+        },
+        "unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "definition_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "reconciliation_id": {
+          "type": ["string", "null"],
+          "minLength": 1
+        }
+      }
+    },
+    "reconciliation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reconciliation_id",
+        "from_unit",
+        "to_unit",
+        "from_scope_fingerprint",
+        "to_scope_fingerprint",
+        "method",
+        "formula",
+        "artifact_identity",
+        "artifact_sha256"
+      ],
+      "properties": {
+        "reconciliation_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "from_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "to_unit": {
+          "type": "string",
+          "minLength": 1
+        },
+        "from_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "to_scope_fingerprint": {
+          "$ref": "#/$defs/sha256"
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "formula": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_identity": {
+          "type": "string",
+          "minLength": 1
+        },
+        "artifact_sha256": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "methodology_owner",
+        "underlying_dataset_ids",
+        "underlying_report_ids",
+        "cited_source_ids"
+      ],
+      "properties": {
+        "methodology_owner": {
+          "type": "string",
+          "minLength": 1
+        },
+        "underlying_dataset_ids": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "underlying_report_ids": {
+          "$ref": "#/$defs/identifierList"
+        },
+        "cited_source_ids": {
+          "$ref": "#/$defs/identifierList"
+        }
+      }
+    },
+    "identifierList": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "runtimeEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "source_authority",
+        "conclusion_evidence",
+        "originality",
+        "independence",
+        "evidence_level"
+      ],
+      "properties": {
+        "source_authority": {
+          "$ref": "#/$defs/rating"
+        },
+        "conclusion_evidence": {
+          "$ref": "#/$defs/rating"
+        },
+        "originality": {
+          "$ref": "#/$defs/rating"
+        },
+        "independence": {
+          "$ref": "#/$defs/rating"
+        },
+        "evidence_level": {
+          "$ref": "#/$defs/rating"
+        }
+      }
+    }
+  }
+}

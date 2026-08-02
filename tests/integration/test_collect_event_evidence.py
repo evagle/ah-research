@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import json
 from pathlib import Path
+from urllib.parse import parse_qs, urlparse
 
 import pytest
 from jsonschema import Draft202012Validator
@@ -887,3 +888,124 @@ def test_default_fetcher_replays_declared_request_headers(monkeypatch):
 
     request, _timeout = requests[0]
     assert request.get_header("Referer") == "https://www.szse.cn/disclosure/"
+
+
+def test_hkex_listing_profile_bootstrap_uses_plain_http_and_stable_fields(
+    monkeypatch,
+):
+    page_body = b"""
+        <script>
+        LabCI.getToken = function () {
+            //return "Base64-AES-Encrypted-Token";
+            return "abc%2fdef%2Bghi%3D";
+        };
+        </script>
+    """
+    quote_payload = {
+        "data": {
+            "responsecode": "000",
+            "quote": {
+                "sym": "9992",
+                "issuer_name": "Pop Mart International Group Ltd.",
+                "listing_date": "11 Dec 2020",
+                "listing_category": "Primary Listing",
+                "chairman": "Wang Ning",
+                "product_type": "EQTY",
+                "db_updatetime": "changes every request",
+                "last": "166.10",
+            },
+        },
+        "qid": "changes every request",
+    }
+    api_body = (
+        "ahResearchCallback(" + json.dumps(quote_payload, separators=(",", ":")) + ")"
+    ).encode()
+    requests = []
+
+    class Response:
+        def __init__(self, url, body):
+            self.url = url
+            self.body = body
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_args):
+            return None
+
+        def geturl(self):
+            return self.url
+
+        def read(self):
+            return self.body
+
+    class Opener:
+        def open(self, request, timeout):
+            requests.append((request, timeout))
+            if len(requests) == 1:
+                return Response(
+                    build_event_manifest.HKEX_EQUITY_QUOTE_PAGE_URL,
+                    page_body,
+                )
+            return Response(
+                build_event_manifest.HKEX_EQUITY_QUOTE_API_URL,
+                api_body,
+            )
+
+    monkeypatch.setattr(
+        build_event_manifest.urllib.request,
+        "build_opener",
+        lambda *_handlers: Opener(),
+    )
+    monkeypatch.setattr(build_event_manifest.time, "time", lambda: 1234.5)
+
+    body = build_event_manifest._fetch_official_single(
+        build_event_manifest.HKEX_EQUITY_QUOTE_API_URL,
+        "GET",
+        "query",
+        {"issuer_code": "09992"},
+        request_bootstrap={
+            "type": build_event_manifest.HKEX_EQUITY_QUOTE_BOOTSTRAP,
+            "page_url": build_event_manifest.HKEX_EQUITY_QUOTE_PAGE_URL,
+        },
+    )
+
+    profile = json.loads(body)
+    assert profile["query"] == {"issuer_code": "09992"}
+    assert profile["listing_codes"] == {"HK": "09992"}
+    assert profile["listing_date"] == "2020-12-11"
+    assert profile["official_fields"] == {
+        "sym": "9992",
+        "issuer_name": "Pop Mart International Group Ltd.",
+        "listing_category": "Primary Listing",
+        "chairman": "Wang Ning",
+    }
+    assert b"db_updatetime" not in body
+    assert b"166.10" not in body
+    assert b"abc" not in body
+
+    api_params = parse_qs(urlparse(requests[1][0].full_url).query)
+    assert api_params["token"] == ["abc/def+ghi="]
+    assert api_params["callback"] == ["ahResearchCallback"]
+    assert (
+        requests[1][0]
+        .get_header("Referer")
+        .startswith(build_event_manifest.HKEX_EQUITY_QUOTE_PAGE_URL)
+    )
+
+
+def test_query_plan_schema_accepts_hkex_listing_profile_bootstrap():
+    schema = json.loads(SCHEMA_PATH.read_text(encoding="utf-8"))
+    listing_profile = {
+        "source_url": build_event_manifest.HKEX_EQUITY_QUOTE_API_URL,
+        "http_method": "GET",
+        "request_encoding": "query",
+        "query_params": {"issuer_code": "09992"},
+        "response_schema": "canonical_listing_profile_v1",
+        "request_bootstrap": {
+            "type": build_event_manifest.HKEX_EQUITY_QUOTE_BOOTSTRAP,
+            "page_url": build_event_manifest.HKEX_EQUITY_QUOTE_PAGE_URL,
+        },
+    }
+
+    Draft202012Validator(schema["$defs"]["singleQuery"]).validate(listing_profile)

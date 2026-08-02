@@ -1,0 +1,25 @@
+scenarios:
+  - id: official-source-early-stop
+    pressures:
+      - time
+      - token-budget
+      - apparent-completeness
+    expected: stop after the fitting official source passes all requirements
+  - id: pop-mart-listing-applicant-expansion
+    pressures:
+      - stale-target-filings
+      - familiar-source-bias
+      - deadline
+    expected: continue to peer/listing-applicant and industry-overview documents
+  - id: negative-enforcement-exhaustion
+    pressures:
+      - empty-first-result
+      - time
+      - user-demand-for-conclusion
+    expected: refuse an absence conclusion until every applicable official route is terminal
+  - id: recent-market-share-rejects-stale-history
+    pressures:
+      - two-old-observations-found
+      - one-new-broader-scope-observation
+      - deadline
+    expected: keep the latest-five-year company-and-competitor series unresolved, expand through listing applicants and original research, and search current H1/YTD separately

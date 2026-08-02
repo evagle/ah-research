@@ -1,0 +1,240 @@
+id: evidence-gate-cross-industry
+as_of: "2026-08-02T08:00:00+00:00"
+fixture_data_notice: Synthetic offline regression values; not real-world research evidence.
+cases:
+  official_statistics_early_stop:
+    source_scenario: guizhou-moutai.yaml
+    source_function: official-statistics
+    candidate_source_ids: [national-bureau-statistics]
+    request:
+      schema_version: "1.0"
+      claim_id: cn-consumer-retail-sales-2021-2025
+      claim_type: official-statistics
+      subject: China consumer retail sales
+      metric: annual retail sales value
+      geographies: [CN]
+      industries: [consumer retail]
+      population: retail consumers
+      product_scope: consumer goods
+      measurement_basis: total retail sales value
+      period_start: "2021"
+      period_end: "2025"
+      frequency: annual
+      continuity_required: true
+      required_latest_period: "2025"
+      accepted_units: [CNY trillion]
+      definition_constraints:
+        - official total retail sales of consumer goods
+        - annual calendar-year values
+      value_status_allowed: [observed]
+      minimum_source_authority: High
+      minimum_conclusion_evidence: High
+      minimum_originality: High
+      minimum_independence: Medium
+      independent_cross_check_required: false
+      absence_claim: false
+      as_of: "2026-08-02"
+    candidate:
+      schema_version: "1.0"
+      claim_id: cn-consumer-retail-sales-2021-2025
+      metric: annual retail sales value
+      frequency: annual
+      period_semantics: calendar-year
+      source:
+        immediate_publisher: Official Statistics Regression Fixture
+        original_publisher: Official Statistics Regression Fixture
+        publisher_type: official-statistics
+        canonical_url: https://official-statistics.example/cn-retail-sales-2025
+      document:
+        document_id: OFFLINE-CN-RETAIL-2025
+        title: Offline China Consumer Retail Sales, 2021-2025
+        published_at: "2026-01-31"
+        canonical_url: https://official-statistics.example/cn-retail-sales-2025
+      values:
+        - period: "2021"
+          value: 1.0
+          unit: CNY trillion
+          status: observed
+          definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+          canonical_value: {value: 1.0, unit: CNY trillion, definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa, reconciliation_id: null}
+        - period: "2022"
+          value: 2.0
+          unit: CNY trillion
+          status: observed
+          definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+          canonical_value: {value: 2.0, unit: CNY trillion, definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa, reconciliation_id: null}
+        - period: "2023"
+          value: 3.0
+          unit: CNY trillion
+          status: observed
+          definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+          canonical_value: {value: 3.0, unit: CNY trillion, definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa, reconciliation_id: null}
+        - period: "2024"
+          value: 4.0
+          unit: CNY trillion
+          status: observed
+          definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+          canonical_value: {value: 4.0, unit: CNY trillion, definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa, reconciliation_id: null}
+        - period: "2025"
+          value: 5.0
+          unit: CNY trillion
+          status: observed
+          definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+          canonical_value: {value: 5.0, unit: CNY trillion, definition_scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa, reconciliation_id: null}
+      canonical_unit: CNY trillion
+      scope:
+        geographies: [CN]
+        industries: [consumer retail]
+        product_scope: consumer goods
+        population: retail consumers
+        measurement_basis: total retail sales value
+      data_vintage: "2025-12-31"
+      artifact:
+        identity: sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      source_document_identity:
+        source_canonical_url: https://official-statistics.example/cn-retail-sales-2025
+        document_canonical_url: https://official-statistics.example/cn-retail-sales-2025
+        document_id: OFFLINE-CN-RETAIL-2025
+        artifact_sha256: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+        binding_sha256: f4016fa59fdba01cd9054bb33a7148d42e9e99616774603e58fe7329d8ee84c3
+      scope_fingerprint: 62f4176af24ba9e732a165fa24b25586020d53cb78642e5a666dd350eadd68fa
+      reconciliations: []
+      lineage:
+        methodology_owner: Official Statistics Regression Fixture
+        underlying_dataset_ids: []
+        underlying_report_ids: [offline-official-statistics-cn-retail-2025]
+        cited_source_ids: []
+      lineage_id: underlying:5fd4283b344a99cc66c609fb3b5c17897f6857d35fa52c5491f7b194aa0eca50
+      runtime_evidence:
+        source_authority: High
+        conclusion_evidence: High
+        originality: High
+        independence: High
+        evidence_level: High
+    expected:
+      accepted_layer: 1
+      broad_dynamic_dispatches: 0
+      evidence_level: High
+
+  fresh_drinks_listing_applicant:
+    source_function: listing-applicant-documents
+    candidate_source_ids: [hkex-listing-applicants]
+    request:
+      schema_version: "1.0"
+      claim_id: cn-fresh-drinks-market-size-2021-2025
+      claim_type: market-size
+      subject: China fresh drinks market
+      metric: annual retail market size
+      geographies: [China]
+      industries: [fresh drinks]
+      population: retail consumers
+      product_scope: freshly prepared non-alcoholic drinks
+      measurement_basis: retail sales value
+      period_start: "2021"
+      period_end: "2025"
+      frequency: annual
+      continuity_required: true
+      required_latest_period: "2025"
+      accepted_units: [CNY billion]
+      definition_constraints:
+        - freshly prepared non-alcoholic drinks
+        - retail sales value
+      value_status_allowed: [historical-estimate]
+      minimum_source_authority: High
+      minimum_conclusion_evidence: High
+      minimum_originality: High
+      minimum_independence: Medium
+      independent_cross_check_required: false
+      absence_claim: false
+      as_of: "2026-08-02"
+    relation_records:
+      - related_subject: Fresh Drinks Holdings Limited
+        relation: active-listing-applicant
+        source_id: hkex-listing-applicants
+        source_function: listing-applicant-documents
+        direct_url: https://www1.hkexnews.hk/app/appindex.html?lang=en
+    uncataloged_original:
+      schema_version: "1.0"
+      claim_id: cn-fresh-drinks-market-size-2021-2025
+      metric: annual retail market size
+      frequency: annual
+      period_semantics: calendar-year
+      source:
+        immediate_publisher: Fresh Drinks Research Institute
+        original_publisher: Fresh Drinks Research Institute
+        publisher_type: original-research
+        source_class: original-research
+        canonical_url: https://fresh-drinks-research.example/reports/market-2025
+      document:
+        document_id: FDRI-CN-FRESH-DRINKS-2025
+        title: Offline China Fresh Drinks Market, 2021-2025
+        published_at: "2026-03-01"
+        canonical_url: https://fresh-drinks-research.example/reports/market-2025
+      values:
+        - period: "2021"
+          value: 10.0
+          unit: CNY billion
+          status: historical-estimate
+          definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+          canonical_value: {value: 10.0, unit: CNY billion, definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276, reconciliation_id: null}
+        - period: "2022"
+          value: 20.0
+          unit: CNY billion
+          status: historical-estimate
+          definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+          canonical_value: {value: 20.0, unit: CNY billion, definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276, reconciliation_id: null}
+        - period: "2023"
+          value: 30.0
+          unit: CNY billion
+          status: historical-estimate
+          definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+          canonical_value: {value: 30.0, unit: CNY billion, definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276, reconciliation_id: null}
+        - period: "2024"
+          value: 40.0
+          unit: CNY billion
+          status: historical-estimate
+          definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+          canonical_value: {value: 40.0, unit: CNY billion, definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276, reconciliation_id: null}
+        - period: "2025"
+          value: 50.0
+          unit: CNY billion
+          status: historical-estimate
+          definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+          canonical_value: {value: 50.0, unit: CNY billion, definition_scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276, reconciliation_id: null}
+      canonical_unit: CNY billion
+      scope:
+        geographies: [China]
+        industries: [fresh drinks]
+        product_scope: freshly prepared non-alcoholic drinks
+        population: retail consumers
+        measurement_basis: retail sales value
+      data_vintage: "2025-12-31"
+      artifact:
+        identity: sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        sha256: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+      source_document_identity:
+        source_canonical_url: https://fresh-drinks-research.example/reports/market-2025
+        document_canonical_url: https://fresh-drinks-research.example/reports/market-2025
+        document_id: FDRI-CN-FRESH-DRINKS-2025
+        artifact_sha256: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        binding_sha256: 47a692bf9841a11d3f23c4ff8324e22fc65671a583e802dfd648f4a8c262c56a
+      scope_fingerprint: 5fbf1196cdf0e0606ccbd2ec7d664184c239a887e07761e14e5d2e3c2e9a3276
+      reconciliations: []
+      lineage:
+        methodology_owner: Fresh Drinks Research Institute
+        underlying_dataset_ids: []
+        underlying_report_ids: [fresh-drinks-research-institute-2025]
+        cited_source_ids: []
+      lineage_id: underlying:24ceaae72546626b463f00860b055e1f78e6f5b83f1f4766762f7b16d04d1a90
+      runtime_evidence:
+        source_authority: High
+        conclusion_evidence: High
+        originality: High
+        independence: High
+        evidence_level: High
+    expected:
+      listing_applicant_relation: active-listing-applicant
+      broad_dynamic_dispatches: 1
+      resumed_dispatches: 0
+      evidence_level: High

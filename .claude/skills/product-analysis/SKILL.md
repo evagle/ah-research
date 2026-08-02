@@ -7,7 +7,7 @@ description: Use when a user asks what a company truly sells, how its products a
 
 ## §0定位与模式
 
-本skill把公司披露的“主营业务”还原为可观察、可计量、可比较的产品系统。结论必须沿着产品事实、交付事实、单位经济、客户行为、竞争对标和财报数字闭合，不能用品牌故事或管理层口号替代证据。
+本skill把公司披露的“主营业务”还原为可观察、可计量、可比较的产品系统。结论必须由产品事实、交付事实、单位经济、客户行为、竞争对标和财报数字共同支撑，不能用品牌故事或管理层口号替代证据。
 
 本skill只判断产品及其相对竞争优势，不给出最终护城河等级、管理层诚信结论或估值。
 
@@ -24,6 +24,149 @@ description: Use when a user asks what a company truly sells, how its products a
 `source-discovery` must be invoked when product-analysis needs industry structure, product benchmarks, consumer/customer data, specialist vertical research, or competitor evidence beyond issuer filings.
 `source-discovery` may supply external context and source ledgers only; `product-analysis` remains responsible for product-system judgments, `moat_handoff`, and final Mode B schema compliance.
 `source-discovery` cannot replace `read-filing` annual, event, or counterpart manifests and cannot be used to bypass parent-bound manifest hashes.
+
+市场份额默认请求最近5个完整年度，公开证据允许时扩展至10年，另查AS_OF可得的当年H1/YTD/最新季度。请求必须同时覆盖目标公司与主要具名对手，保存每年排名、份额、市场分母、地域、产品范围、GMV/RSV/零售额等计量口径及来源lineage。旧年份不能替代最近5年验收；缺任一必需年度时连续序列保持unresolved，继续通过当前及历史竞品、拟上市公司申请稿、最终招股书、原始咨询报告和具名券商原报告升级检索。已验证的部分序列仍须单列，不得因连续序列未完成而抹去阶段变化；当期H1/YTD/季度只作独立截面，不年化、不与全年直接比较。不得用发行人会计收入除以行业GMV、RSV、零售额、出货量或用户数推算份额，除非分子分母的期间、地域、产品范围和计量基础完全一致。
+
+外部补研必须先拆成独立`claim_id`，并让每条请求显式写清范围、期间、连续性、最新期和新鲜度门槛。四类最低请求分别是类别规模、市场份额、客户行为和竞品对标；不得把它们打包成一个模糊的“产品力补研”请求。请求体按`research-request.schema.json`校验，事实输入只消费通过`candidate-claim.schema.json`验收的`accepted_candidates`，未决项只消费符合`research-ledger.schema.json`的终态ledger。以下JSON中的字面值只作示意模板；运行时必须从invocation和issuer context派生真实`as_of`、最近完整期间、`required_latest_period`、`geographies`、`industries`、`subject`、`population`、`product_scope`和`measurement_basis`，不得把示例里的年份、AS_OF、地域、行业或主体描述原样复制到真实请求。
+
+Recommended request set:
+
+```json
+[
+  {
+    "schema_version": "1.0",
+    "claim_id": "product-category-size-cn-2021-2025",
+    "claim_type": "category-size",
+    "subject": "China target product category",
+    "metric": "annual category retail value",
+    "geographies": ["China"],
+    "industries": ["target-industry"],
+    "population": "end customers in the target category",
+    "product_scope": "target product category only",
+    "measurement_basis": "category retail value",
+    "period_start": "2021",
+    "period_end": "2025",
+    "frequency": "annual",
+    "continuity_required": true,
+    "required_latest_period": "2025",
+    "accepted_units": ["CNY million", "CNY billion"],
+    "definition_constraints": [
+      "must include market denominator",
+      "must preserve publisher methodology and scope notes",
+      "published within 18 months of AS_OF"
+    ],
+    "value_status_allowed": ["observed", "historical-estimate"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "Medium",
+    "independent_cross_check_required": true,
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "product-market-share-cn-2021-2025",
+    "claim_type": "market-share",
+    "subject": "Target company share in the China target product category",
+    "metric": "annual category retail value share",
+    "geographies": ["China"],
+    "industries": ["target-industry"],
+    "population": "category buyers in the target market",
+    "product_scope": "target product category only",
+    "measurement_basis": "share of category retail value",
+    "period_start": "2021",
+    "period_end": "2025",
+    "frequency": "annual",
+    "continuity_required": true,
+    "required_latest_period": "2025",
+    "accepted_units": ["percentage"],
+    "definition_constraints": [
+      "must name the subject company and major named competitors",
+      "must preserve annual rank and share for every required year",
+      "denominator must match the category-size claim"
+    ],
+    "value_status_allowed": ["observed", "historical-estimate"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "product-customer-behavior-cn-2023-2025",
+    "claim_type": "customer-behavior",
+    "subject": "Customer behavior in the China target product category",
+    "metric": "annual repeat-purchase rate",
+    "geographies": ["China"],
+    "industries": ["target-industry"],
+    "population": "current or recent paying customers",
+    "product_scope": "target product category only",
+    "measurement_basis": "annual repeat-purchase rate",
+    "period_start": "2023",
+    "period_end": "2025",
+    "frequency": "annual",
+    "continuity_required": true,
+    "required_latest_period": "2025",
+    "accepted_units": ["percentage"],
+    "definition_constraints": [
+      "must use observed customer actions, not survey intent alone",
+      "must retain repeat-purchase window and cohort definition",
+      "must retain comparison population and channel scope",
+      "latest accepted period must be no older than 24 months at AS_OF"
+    ],
+    "value_status_allowed": ["observed", "historical-estimate"],
+    "minimum_source_authority": "Medium",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "product-competitor-benchmark-cn-2025",
+    "claim_type": "competitor-benchmark",
+    "subject": "Target product benchmark versus named competitors in China",
+    "metric": "price premium versus named same-task same-price-band competitors",
+    "geographies": ["China"],
+    "industries": ["target-industry"],
+    "population": "customers evaluating the same target task",
+    "product_scope": "same product scope as the target offer",
+    "measurement_basis": "price premium versus named same-task same-price-band competitors",
+    "period_start": "2025",
+    "period_end": "2025",
+    "frequency": "annual",
+    "continuity_required": false,
+    "required_latest_period": "2025",
+    "accepted_units": ["percentage"],
+    "definition_constraints": [
+      "must compare the same customer task, price band, and product scope",
+      "must preserve named competitor SKUs or offer identities",
+      "must include named peers plus the applicable leader",
+      "latest benchmark snapshot must be no older than 18 months at AS_OF"
+    ],
+    "value_status_allowed": ["observed", "historical-estimate"],
+    "minimum_source_authority": "High",
+    "minimum_conclusion_evidence": "High",
+    "minimum_originality": "High",
+    "minimum_independence": "High",
+    "independent_cross_check_required": true,
+    "absence_claim": false,
+    "as_of": "2026-08-02"
+  }
+]
+```
+
+`product-analysis`只可把`accepted_candidates`写入产品事实、流程事实、竞争事实和正文事实句；未通过gate的candidate、单一路线命中、搜索日志、媒体摘要或空结果都只能留在warning、pending或跟踪项，不能直接升格为事实。
+
+`unresolved_claims`只接收`blocked`、`conflict`或`exhausted`，并保留各自的`claim_id`、`acceptance_failures`、`accepted_evidence`、`conflict_evidence`、`next_escalation`和route lineage。不得把未接受candidate、空路由、`technical-failure`、`access-unavailable`或`request-budget-exhausted`改写成`没有`、`不存在`或事实性absence；对正向产品结论同样不得把unresolved解释成反证。
+
+未接受claim只能沿planner layer单调升级；只有当前layer的适用路线都达到终态后，planner才可返回下一layer。两次重派上限只约束同一路线的执行或输出质量重试，不是全部研究的总次数上限；只要ledger仍显示未尝试且合规的路线或更高layer，claim就保持unresolved并继续升级。
 
 ### Mode A—Standalone
 
@@ -194,9 +337,11 @@ section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quot
 - 关键强结论只有`低`或`需人工`证据。
 - Mode B绑定、目标section或引用校验失败。
 
-自动模式只针对明确缺口重查，最多2次。耗尽后返回pending和具体人工动作，不得降低标准或补写想象。
+自动模式对非discovery的明确缺口重查最多2次；若缺口已经交给`source-discovery`，两次上限只约束同一路线的执行或输出质量重试，未接受claim必须沿planner layer单调升级，直到terminal ledger到达`accepted`、`blocked`、`conflict`或`exhausted`。全部适用路线终态后仍未接受时返回pending和具体人工动作，不得降低标准或补写想象。
 
 ## §4输出契约
+
+收入结构必须先识别年报的分类轴。同一张收入结构表只放一个分类维度；父项和子项必须明确标出包含关系，并分别校验同层级加总。有多层父子分类时采用层级明细表：标题右侧标注`报告期 · 金额单位`，固定使用`收入类别/收入/占总收入`三列，父子关系通过首列缩进表达，金额和占比分列并右对齐；不使用每层单独一列，不使用`rowspan`，不放占位短横线，也不新增数字`层级`字段。IP归属、具体IP、产品品类、渠道和地区等交叉维度分表展示，明确说明不得跨表相加。
 
 ### §4.1 Mode A
 
@@ -211,7 +356,7 @@ success或pending都必须保留以下10个栏目，并按此顺序生成。pend
 7. `## 核心价值机制`
 8. `## 流程和竞争力失效条件`
 9. `## 待补证据与跟踪指标`
-10. `## 机器引用清单`
+10. 隐藏的机器引用元数据：将`## 机器引用清单`及其内容完整放入HTML注释
 
 一句话结论同时包含产品、客户任务和经济来源，不用夸张修辞代替事实。
 
@@ -256,3 +401,4 @@ success或pending都必须保留以下10个栏目，并按此顺序生成。pend
 - 不得编造BOM、单位成本、良率、产能、复购率或渠道库存。
 - 不得在Mode B直接写profile或输出估值。
 - 不得用英文撰写profile正文。中文字符之间不得出现不恰当空格。
+- 用户可见正文遵守`../value-profile/references/profile-writing-style.md`;不得把`close/closed`直译为“闭合”,应按事实状态写“已核实”“已完成判断”“仍缺资料”或“尚不能判断”。

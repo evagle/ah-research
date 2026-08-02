@@ -114,6 +114,11 @@ required_functions:
       source_id: national-bureau-statistics
       publisher_type: official-statistics
       skip_reason: null
+    evidence_gate:
+      claim_id: cn-consumer-retail-sales-2021-2025
+      expected_accepted_layer: 1
+      forbidden_route_layers_after_acceptance: [2, 3, 4, 5]
+      evidence_level: High
     citation_readiness:
       citation_use_contains: opened official release
       required_identity_fields: [publisher, title, date, url]

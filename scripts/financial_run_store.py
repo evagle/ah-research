@@ -30,6 +30,9 @@ SHARED_ARTIFACT_KINDS = (
 RUN_LOCAL_DIRECTORIES = ("drafts", "manifests", "query", "logs", "tmp")
 TICKER_PATTERN = re.compile(r"^(?:\d{6}\.(?:SH|SZ)|\d{5}\.HK)$")
 SKILL_PATTERN = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+SHA256_PATTERN = re.compile(r"^[a-f0-9]{64}$")
+RESEARCH_LEDGER_FILENAME = "research-ledger.json"
+CREATE_ONLY_SENTINEL = "create-only"
 
 ResolutionAction = Literal["created", "resumed", "reused"]
 SharedArtifactKind = Literal[
@@ -63,6 +66,23 @@ class PromotedArtifact:
     artifact_id: str
     path: Path
     sha256: str
+
+
+def _research_contract_api():
+    scripts_dir = (
+        Path(__file__).resolve().parents[1] / ".claude" / "skills" / "source-discovery" / "scripts"
+    )
+    if not scripts_dir.is_dir():
+        raise RunStoreError(f"source-discovery scripts are missing: {scripts_dir}")
+    scripts_path = str(scripts_dir)
+    if scripts_path not in os.sys.path:
+        os.sys.path.insert(0, scripts_path)
+    try:
+        from evidence_gate import request_scope_fingerprint
+        from research_contracts import validate_payload
+    except ImportError as exc:
+        raise RunStoreError(f"source-discovery contracts are unavailable: {exc}") from exc
+    return validate_payload, request_scope_fingerprint
 
 
 def _canonical_json(value: Any) -> bytes:
@@ -533,6 +553,361 @@ def complete_run(
         os.close(lock_fd)
 
 
+def validate_research_ledger_wrapper(wrapper: Mapping[str, Any]) -> None:
+    """Validate one claim-indexed value-profile research-ledger wrapper."""
+    if not isinstance(wrapper, Mapping) or not wrapper:
+        raise RunStoreError("research ledger wrapper must be a nonempty claim mapping")
+    validate_payload, request_scope_fingerprint = _research_contract_api()
+    for claim_id, raw_entry in wrapper.items():
+        if not isinstance(claim_id, str) or not claim_id:
+            raise RunStoreError("research ledger wrapper claim IDs must be nonempty strings")
+        entry = _strict_mapping(
+            raw_entry,
+            {
+                "request",
+                "planner_inventory_receipt",
+                "ledger",
+                "accepted_candidate",
+            },
+            f"research ledger entry {claim_id}",
+        )
+        request = _mapping_field(entry, "request", claim_id)
+        ledger = _mapping_field(entry, "ledger", claim_id)
+        planner_inventory_receipt = _mapping_field(
+            entry,
+            "planner_inventory_receipt",
+            claim_id,
+        )
+        try:
+            validate_payload("request", request)
+        except (TypeError, ValueError) as exc:
+            raise RunStoreError(f"research ledger entry {claim_id} is invalid: {exc}") from exc
+
+        expected_scope = request_scope_fingerprint(request)
+        _validate_run_store_planner_receipt(
+            claim_id,
+            request,
+            expected_scope,
+            planner_inventory_receipt,
+        )
+        try:
+            validate_payload(
+                "ledger",
+                ledger,
+                planner_inventory_receipt=planner_inventory_receipt,
+            )
+        except (TypeError, ValueError) as exc:
+            raise RunStoreError(f"research ledger entry {claim_id} is invalid: {exc}") from exc
+
+        if request.get("claim_id") != claim_id or ledger.get("claim_id") != claim_id:
+            raise RunStoreError(f"research ledger entry {claim_id} has a claim ID mismatch")
+        if ledger.get("request_scope_fingerprint") != expected_scope:
+            raise RunStoreError(
+                f"research ledger entry {claim_id} has a request scope fingerprint mismatch"
+            )
+        if ledger.get("absence_claim") != request.get("absence_claim"):
+            raise RunStoreError(f"research ledger entry {claim_id} has an absence-claim mismatch")
+        _validate_accepted_candidate_handoff(
+            claim_id,
+            ledger,
+            entry.get("accepted_candidate"),
+        )
+
+
+def _validate_run_store_planner_receipt(
+    claim_id: str,
+    request: Mapping[str, Any],
+    expected_scope: str,
+    receipt: Mapping[str, Any],
+) -> None:
+    if receipt.get("claim_id") != claim_id:
+        raise RunStoreError(f"research ledger entry {claim_id} receipt claim ID mismatch")
+    if receipt.get("request_scope_fingerprint") != expected_scope:
+        raise RunStoreError(
+            f"research ledger entry {claim_id} receipt request scope does not match wrapper request"
+        )
+
+    planner_inputs = receipt.get("planner_inputs")
+    if not isinstance(planner_inputs, Mapping):
+        raise RunStoreError(f"research ledger entry {claim_id} planner_inputs must be an object")
+    expected_fingerprint = _sha256(_canonical_json(planner_inputs))
+    if receipt.get("planner_input_fingerprint") != expected_fingerprint:
+        raise RunStoreError(
+            f"research ledger entry {claim_id} run-store planner input fingerprint mismatch"
+        )
+    route_inventory = receipt.get("route_inventory")
+    if (
+        not isinstance(route_inventory, Sequence)
+        or isinstance(route_inventory, (str, bytes))
+        or planner_inputs.get("route_inventory_sha256") != _sha256(_canonical_json(route_inventory))
+    ):
+        raise RunStoreError(
+            f"research ledger entry {claim_id} run-store route inventory SHA-256 mismatch"
+        )
+
+    request_identity = planner_inputs.get("request_identity")
+    if not isinstance(request_identity, Mapping):
+        raise RunStoreError(f"research ledger entry {claim_id} request identity must be an object")
+    if (
+        request_identity.get("claim_id") != claim_id
+        or request_identity.get("request_scope_fingerprint") != expected_scope
+    ):
+        raise RunStoreError(f"research ledger entry {claim_id} planner request identity mismatch")
+    if request_identity.get("request_content_sha256") != _sha256(_canonical_json(request)):
+        raise RunStoreError(f"research ledger entry {claim_id} planner request content mismatch")
+    if planner_inputs.get("as_of") != request.get("as_of"):
+        raise RunStoreError(f"research ledger entry {claim_id} planner AS_OF mismatch")
+
+
+def bind_research_ledger(
+    root: Path,
+    ticker: str,
+    run_id: str,
+    wrapper: Mapping[str, Any],
+    *,
+    expected_prior_sha256: str = CREATE_ONLY_SENTINEL,
+) -> PromotedArtifact:
+    """Atomically bind the singleton research ledger to a value-profile run."""
+    validate_research_ledger_wrapper(wrapper)
+    _validate_expected_prior_sha256(expected_prior_sha256)
+    run_path, runs_root = _research_run_path(root, ticker, run_id)
+    lock_fd = _locked_index(runs_root)
+    try:
+        checkpoint_path = run_path / "checkpoint.json"
+        checkpoint = _read_research_checkpoint(checkpoint_path, ticker, run_id)
+        if "research_ledger" in checkpoint:
+            _load_bound_research_ledger(run_path, checkpoint)
+            prior_sha256 = checkpoint["research_ledger"]["sha256"]
+            if expected_prior_sha256 == CREATE_ONLY_SENTINEL:
+                raise RunStoreError(
+                    "research ledger expected prior SHA-256 is create-only, "
+                    "but a binding already exists"
+                )
+            if prior_sha256 != expected_prior_sha256:
+                raise RunStoreError(
+                    "research ledger expected prior SHA-256 does not match the current binding"
+                )
+        elif expected_prior_sha256 != CREATE_ONLY_SENTINEL:
+            raise RunStoreError(
+                "research ledger expected prior SHA-256 cannot update a missing binding"
+            )
+
+        ledger_path = (run_path / "logs" / RESEARCH_LEDGER_FILENAME).resolve()
+        body = _canonical_json(wrapper) + b"\n"
+        content_sha256 = _sha256(body)
+        identifier = _research_ledger_artifact_id(content_sha256)
+        _write_json_atomic(ledger_path, wrapper)
+        checkpoint["research_ledger"] = {
+            "artifact_id": identifier,
+            "path": str(ledger_path),
+            "sha256": content_sha256,
+        }
+        _write_json_atomic(checkpoint_path, checkpoint)
+        return PromotedArtifact(identifier, ledger_path, content_sha256)
+    finally:
+        os.close(lock_fd)
+
+
+def _validate_expected_prior_sha256(expected_prior_sha256: str) -> None:
+    if expected_prior_sha256 != CREATE_ONLY_SENTINEL and (
+        not isinstance(expected_prior_sha256, str)
+        or not SHA256_PATTERN.fullmatch(expected_prior_sha256)
+    ):
+        raise RunStoreError(
+            "research ledger expected prior SHA-256 must be create-only or a lowercase SHA-256"
+        )
+
+
+def load_research_ledger(
+    root: Path,
+    ticker: str,
+    run_id: str,
+) -> dict[str, Any]:
+    """Load a checkpoint-bound research ledger without rebuilding it."""
+    run_path, runs_root = _research_run_path(root, ticker, run_id)
+    lock_fd = _locked_index(runs_root)
+    try:
+        checkpoint = _read_research_checkpoint(
+            run_path / "checkpoint.json",
+            ticker,
+            run_id,
+        )
+        return _load_bound_research_ledger(run_path, checkpoint)
+    finally:
+        os.close(lock_fd)
+
+
+def _research_run_path(root: Path, ticker: str, run_id: str) -> tuple[Path, Path]:
+    _validate_identity(ticker)
+    if not isinstance(run_id, str) or not run_id or Path(run_id).name != run_id:
+        raise RunStoreError(f"run ID is invalid: {run_id}")
+    runs_root = _ticker_root(root, ticker) / "runs"
+    run_path = (runs_root / run_id).resolve()
+    if run_path.parent != runs_root.resolve() or not run_path.is_dir():
+        raise RunStoreError(f"run ID is missing or invalid: {run_id}")
+    return run_path, runs_root
+
+
+def _read_research_checkpoint(
+    checkpoint_path: Path,
+    ticker: str,
+    run_id: str,
+) -> dict[str, Any]:
+    try:
+        checkpoint = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RunStoreError(f"checkpoint is unreadable: {checkpoint_path}: {exc}") from exc
+    if not isinstance(checkpoint, dict):
+        raise RunStoreError(f"checkpoint must be an object: {checkpoint_path}")
+    if checkpoint.get("ticker") != ticker or checkpoint.get("run_id") != run_id:
+        raise RunStoreError(f"checkpoint identity mismatch: {checkpoint_path}")
+    if checkpoint.get("skill_name") != "value-profile":
+        raise RunStoreError("research ledger binding is only valid for a value-profile run")
+    return checkpoint
+
+
+def _load_bound_research_ledger(
+    run_path: Path,
+    checkpoint: Mapping[str, Any],
+) -> dict[str, Any]:
+    binding = checkpoint.get("research_ledger")
+    if not isinstance(binding, Mapping):
+        raise RunStoreError("research ledger is not bound in checkpoint")
+    if set(binding) != {"artifact_id", "path", "sha256"}:
+        raise RunStoreError(
+            "research ledger checkpoint binding must contain exactly artifact_id, path, and sha256"
+        )
+    raw_path = binding.get("path")
+    if not isinstance(raw_path, str) or not Path(raw_path).is_absolute():
+        raise RunStoreError("research ledger checkpoint path must be absolute")
+    ledger_path = Path(raw_path)
+    expected_path = (run_path / "logs" / RESEARCH_LEDGER_FILENAME).resolve()
+    if ledger_path != expected_path or ledger_path.resolve() != expected_path:
+        raise RunStoreError("research ledger checkpoint path is not the fixed run path")
+    if not ledger_path.is_file():
+        raise RunStoreError(f"research ledger file is missing: {ledger_path}")
+    try:
+        body = ledger_path.read_bytes()
+    except OSError as exc:
+        raise RunStoreError(f"research ledger is unreadable: {ledger_path}: {exc}") from exc
+
+    recorded_sha256 = binding.get("sha256")
+    if not isinstance(recorded_sha256, str) or not SHA256_PATTERN.fullmatch(recorded_sha256):
+        raise RunStoreError("research ledger checkpoint SHA-256 is invalid")
+    content_sha256 = _sha256(body)
+    if content_sha256 != recorded_sha256:
+        raise RunStoreError("research ledger SHA-256 mismatch")
+    expected_artifact_id = _research_ledger_artifact_id(content_sha256)
+    if binding.get("artifact_id") != expected_artifact_id:
+        raise RunStoreError("research ledger artifact ID mismatch")
+    try:
+        wrapper = json.loads(body)
+    except (UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RunStoreError(f"research ledger is invalid JSON: {ledger_path}: {exc}") from exc
+    if not isinstance(wrapper, dict):
+        raise RunStoreError("research ledger wrapper must be a JSON object")
+    validate_research_ledger_wrapper(wrapper)
+    return wrapper
+
+
+def _research_ledger_artifact_id(content_sha256: str) -> str:
+    return artifact_id(
+        "research-ledger",
+        "1",
+        (),
+        {"content_sha256": content_sha256},
+    )
+
+
+def _strict_mapping(
+    value: object,
+    expected_keys: set[str],
+    context: str,
+) -> Mapping[str, Any]:
+    if not isinstance(value, Mapping):
+        raise RunStoreError(f"{context} must be an object")
+    if set(value) != expected_keys:
+        raise RunStoreError(f"{context} must contain exactly: {', '.join(sorted(expected_keys))}")
+    return value
+
+
+def _mapping_field(
+    mapping: Mapping[str, Any],
+    key: str,
+    claim_id: str,
+) -> Mapping[str, Any]:
+    value = mapping.get(key)
+    if not isinstance(value, Mapping):
+        raise RunStoreError(f"research ledger entry {claim_id}.{key} must be an object")
+    return value
+
+
+def _validate_accepted_candidate_handoff(
+    claim_id: str,
+    ledger: Mapping[str, Any],
+    raw_handoff: object,
+) -> None:
+    if ledger.get("status") != "accepted":
+        if raw_handoff is not None:
+            raise RunStoreError(
+                f"research ledger entry {claim_id} cannot retain accepted candidate handoff"
+            )
+        return
+    handoff = _strict_mapping(
+        raw_handoff,
+        {
+            "claim_id",
+            "request_scope_fingerprint",
+            "candidate_document_id",
+            "artifact_identity",
+            "artifact_sha256",
+            "source_document_identity",
+            "lineage_id",
+            "consuming_section_ids",
+        },
+        f"research ledger entry {claim_id} accepted candidate",
+    )
+    artifact_sha256 = handoff.get("artifact_sha256")
+    if not isinstance(artifact_sha256, str) or not SHA256_PATTERN.fullmatch(artifact_sha256):
+        raise RunStoreError(
+            f"research ledger entry {claim_id} accepted candidate SHA-256 is invalid"
+        )
+    if handoff.get("artifact_identity") != f"sha256:{artifact_sha256}":
+        raise RunStoreError(
+            f"research ledger entry {claim_id} accepted candidate artifact identity mismatch"
+        )
+    source_identity = _strict_mapping(
+        handoff.get("source_document_identity"),
+        {"binding_sha256"},
+        f"research ledger entry {claim_id} source document identity",
+    )
+    binding_sha256 = source_identity.get("binding_sha256")
+    if not isinstance(binding_sha256, str) or not SHA256_PATTERN.fullmatch(binding_sha256):
+        raise RunStoreError(f"research ledger entry {claim_id} source binding SHA-256 is invalid")
+    sections = handoff.get("consuming_section_ids")
+    if (
+        not isinstance(sections, Sequence)
+        or isinstance(sections, (str, bytes))
+        or not all(isinstance(section, str) and section for section in sections)
+        or len(sections) != len(set(sections))
+    ):
+        raise RunStoreError(f"research ledger entry {claim_id} consuming section IDs are invalid")
+    accepted_evidence = ledger.get("accepted_evidence")
+    if not isinstance(accepted_evidence, Mapping):
+        raise RunStoreError(f"research ledger entry {claim_id} lacks accepted evidence")
+    expected = {
+        "claim_id": claim_id,
+        "request_scope_fingerprint": ledger.get("request_scope_fingerprint"),
+        "candidate_document_id": accepted_evidence.get("candidate_document_id"),
+        "artifact_identity": accepted_evidence.get("artifact_identity"),
+        "lineage_id": accepted_evidence.get("lineage_id"),
+    }
+    if any(handoff.get(field) != value for field, value in expected.items()):
+        raise RunStoreError(
+            f"research ledger entry {claim_id} accepted candidate identity mismatch"
+        )
+
+
 def promote_artifact(
     root: Path,
     ticker: str,
@@ -616,6 +991,16 @@ def _parse_parameters(values: Sequence[str]) -> dict[str, Any]:
     return parsed
 
 
+def _read_json_mapping(path: Path, context: str) -> dict[str, Any]:
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+        raise RunStoreError(f"{context} is unreadable: {path}: {exc}") from exc
+    if not isinstance(payload, dict):
+        raise RunStoreError(f"{context} must be a JSON object: {path}")
+    return payload
+
+
 def _add_common_identity(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--ticker", required=True)
@@ -649,6 +1034,16 @@ def _build_parser() -> argparse.ArgumentParser:
     promote_parser.add_argument("--schema-version", required=True)
     promote_parser.add_argument("--input-artifact", action="append", default=[])
     promote_parser.add_argument("--parameter", action="append", default=[])
+
+    bind_ledger_parser = subparsers.add_parser("bind-research-ledger")
+    _add_common_identity(bind_ledger_parser)
+    bind_ledger_parser.add_argument("--run-id", required=True)
+    bind_ledger_parser.add_argument("--wrapper", type=Path, required=True)
+    bind_ledger_parser.add_argument("--expected-prior-sha256", required=True)
+
+    validate_ledger_parser = subparsers.add_parser("validate-research-ledger")
+    _add_common_identity(validate_ledger_parser)
+    validate_ledger_parser.add_argument("--run-id", required=True)
     return parser
 
 
@@ -679,7 +1074,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 result_path=args.result_path,
             )
             output = {"status": "completed", "run_id": args.run_id}
-        else:
+        elif args.command == "promote":
             promoted = promote_artifact(
                 args.root,
                 args.ticker,
@@ -690,6 +1085,26 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _parse_parameters(args.parameter),
             )
             output = asdict(promoted)
+        elif args.command == "bind-research-ledger":
+            binding = bind_research_ledger(
+                args.root,
+                args.ticker,
+                args.run_id,
+                _read_json_mapping(args.wrapper, "research ledger wrapper"),
+                expected_prior_sha256=args.expected_prior_sha256,
+            )
+            output = asdict(binding)
+        else:
+            wrapper = load_research_ledger(
+                args.root,
+                args.ticker,
+                args.run_id,
+            )
+            output = {
+                "status": "valid",
+                "run_id": args.run_id,
+                "claim_ids": sorted(wrapper),
+            }
         print(json.dumps(output, ensure_ascii=False, default=str, sort_keys=True))
         return 0
     except RunStoreError as exc:
