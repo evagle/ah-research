@@ -3133,7 +3133,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "用户可见中文不得使用“闭合”" in style
     for replacement in ("已核实", "证据完整", "已完成判断", "仍缺资料", "尚不能判断"):
         assert replacement in style
-    mandated_heading = "口径断点与未解决缺口"
+    mandated_heading = "口径与数据限制"
     style_lines = style.splitlines()
     assert style_lines.count(mandated_heading) == 1
     style_without_fixed_industry_heading = "\n".join(
@@ -7099,7 +7099,7 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
         "预测版本对照",
         "集中度与竞争对手",
         "当期部分期间",
-        "口径断点与未解决缺口",
+        "口径与数据限制",
     )
 
     assert "Consume `industry_bundle.status`; do not infer completion from prose." in skill
@@ -7122,8 +7122,8 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
 
     for requirement in (
         "`complete`: render all six blocks normally.",
-        "`publishable-with-gaps`: retain accepted values, render every gap, and continue the profile.",
-        "`blocked`: retain accepted values, render blocked routes, mark the industry chapter for manual follow-up, and do not claim factual absence.",
+        "`publishable-with-gaps`: retain accepted values, render every investor-relevant missing period and impact, and continue the profile.",
+        "`blocked`: retain accepted values, describe the investor-relevant limitation, mark the industry chapter for manual follow-up, and preserve blocked routes in the HTML audit comment without claiming factual absence.",
         "missing years",
         "terminal route status",
         "next evidence needed",
@@ -7141,11 +7141,9 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "覆盖人群",
             "产品范围",
             "渠道范围",
-            "market definition fingerprint",
             "计量口径",
             "单位",
             "提供方",
-            "lineage",
         ),
         "历史市场规模与逐年增速": (
             "年度",
@@ -7154,13 +7152,8 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "同比增速",
             "区间CAGR",
             "值状态",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
         "预测版本对照": (
@@ -7172,12 +7165,6 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "方法与来源注释",
             "原始提供方",
             "委托关系",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
-            "计量口径",
-            "lineage",
             "替代/修订关系",
         ),
         "集中度与竞争对手": (
@@ -7186,15 +7173,11 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "目标公司排名",
             "目标公司份额",
             "完整市场分母",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
             "竞争对手名称",
             "竞争对手排名",
             "竞争对手份额",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
         "当期部分期间": (
@@ -7203,27 +7186,14 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "数值",
             "单位",
             "市场范围",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
-        "口径断点与未解决缺口": (
-            "角色",
-            "角色状态",
-            "独立claim状态",
-            "缺失期间",
-            "缺失覆盖",
-            "from scope fingerprint",
-            "to scope fingerprint",
-            "口径断点原因",
-            "ledger path",
-            "终态路由状态",
-            "下一步所需证据",
+        "口径与数据限制": (
+            "缺失或不可比内容",
+            "期间",
+            "对投资判断的影响",
         ),
     }
     for index, block in enumerate(blocks):
@@ -7249,6 +7219,44 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
     )[0]
     assert "#### 行业驱动因素" in history_block
     assert "|驱动因素|影响方向|适用期间|证据|来源|" in history_block
+
+
+def test_industry_bundle_audit_details_are_hidden_from_investor_html() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    html = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.html")
+
+    for text in (skill, template, style):
+        assert "读者正文只保留口径差异、缺失期间及其投资影响" in text
+        assert "fingerprint、claim状态、role状态、route终态、schema版本和ledger路径" in text
+        assert "HTML注释" in text
+
+    assert "**口径与数据限制**" in report
+    assert "<!-- industry-bundle-audit" in report
+    industry_html = html.split("行业bundle采用", 1)[1].split("§2.3 竞争对手营收净利对比", 1)[0]
+
+    for machine_detail in (
+        "市场定义指纹",
+        "序列指纹",
+        "原口径指纹",
+        "主口径指纹",
+        "路由终态",
+        "行业bundle状态",
+        "schema版本",
+        "角色claim逐项终止",
+        "source-index.md",
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+    ):
+        assert machine_detail not in industry_html
+
+    for investor_context in (
+        "旧版RSV与新版GMV不能直接拼接",
+        "2022-2024年缺少同口径的公司及具名对手份额",
+        "2026年上半年或年初至今行业数据尚未取得",
+    ):
+        assert investor_context in industry_html
 
 
 def test_related_procurement_private_quotes_are_a_qualified_limitation_not_a_blocker() -> None:

@@ -140,18 +140,20 @@ template是状态词的唯一来源。常见误译按下表修正:
 预测版本对照
 集中度与竞争对手
 当期部分期间
-口径断点与未解决缺口
+口径与数据限制
 
 接受无歧义的industry bundle `schema_version: 1.0`作为向后兼容输入；新运行使用
 `schema_version: 1.1`。v1.1的`market_definition_fingerprint`不含metric，
 每个series另保留metric、unit、measurement basis和denominator对应的
-`series_fingerprint`。每张数值表逐行显示两个fingerprint、`channel_scope`、
-`denominator`、计量口径、提供方和lineage。机器引用属于同一表的证据记录，
-但必须紧跟该表写入`机器引用清单`HTML注释，不得显示在渲染正文中。预测发布日期
+`series_fingerprint`。读者正文只保留口径差异、缺失期间及其投资影响；
+fingerprint、claim状态、role状态、route终态、schema版本和ledger路径，以及
+`channel_scope`、`denominator`和lineage，必须紧跟对应块写入HTML注释，不得显示
+在渲染正文中。机器引用属于同一表的证据记录，同样写入HTML注释。预测发布日期
 和`data_vintage`是证据日期，不是forecast horizon；每个`data_vintage`单独
 渲染一个series，严禁跨vintage拼接。
 
-最后一块另保留角色状态、逐claim的`claim_states`、缺失期间、
+最后一块的可见内容只回答“哪些数据不可比或缺失，以及这会限制什么判断”；其HTML
+审计注释另保留角色状态、逐claim的`claim_states`、缺失期间、
 `missing_coverage`、ledger path、终态路由状态和下一步所需证据。
 `claim_states`逐claim独立终止；accepted claim不得重新进入`unresolved_claims`
 或重派。`partial`和`blocked`必须保留已接受evidence、periods和series，再单列
@@ -174,10 +176,10 @@ role状态、缺失期间和口径断点。历史块中的`行业驱动因素`�
 状态写法：
 
 - `complete`：正常填写六个固定块。
-- `publishable-with-gaps`：保留已接受值，逐年列出缺失期间、终态路由状态和下一步
-  所需证据，并继续profile。
-- `blocked`：保留已接受值，逐route列出阻断状态，把行业章节标为需要人工跟进，
-  不得把阻断或未取得资料写成事实不存在。
+- `publishable-with-gaps`：保留已接受值，在正文逐年列出缺失期间及其投资影响，在
+  HTML注释保存终态路由状态和下一步所需证据，并继续profile。
+- `blocked`：保留已接受值，正文说明投资判断限制并标记需要人工跟进，逐route阻断
+  状态只写入HTML注释；不得把阻断或未取得资料写成事实不存在。
 
 ## 9. 面向读者的正文
 
