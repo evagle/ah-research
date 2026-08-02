@@ -651,11 +651,24 @@ def test_request_requires_explicit_acceptance_requirements() -> None:
 
 
 def test_contract_module_loads_via_file_location_without_sys_path_setup() -> None:
-    module = load_contracts_module_without_sys_path_injection()
+    script_dir = str(CONTRACTS_PATH.parent)
+    original_sys_path = sys.path[:]
+    original_direct_module = sys.modules.get("research_contracts_direct")
+    try:
+        sys.path[:] = [entry for entry in sys.path if entry != script_dir]
+        assert script_dir not in sys.path
 
-    schema = module.load_schema("industry-bundle")
+        module = load_contracts_module_without_sys_path_injection()
+        schema = module.load_schema("industry-bundle")
 
-    assert schema["title"] == "Industry Analysis Bundle"
+        assert schema["title"] == "Industry Analysis Bundle"
+        assert script_dir not in sys.path
+    finally:
+        sys.path[:] = original_sys_path
+        if original_direct_module is None:
+            sys.modules.pop("research_contracts_direct", None)
+        else:
+            sys.modules["research_contracts_direct"] = original_direct_module
 
 
 def test_industry_analysis_bundle_schema_is_registered() -> None:
