@@ -38,6 +38,17 @@ def load_contracts_module():
     return module
 
 
+def load_contracts_module_without_sys_path_injection():
+    assert CONTRACTS_PATH.is_file(), f"missing contract validator: {CONTRACTS_PATH}"
+    spec = importlib.util.spec_from_file_location("research_contracts_direct", CONTRACTS_PATH)
+    assert spec is not None
+    assert spec.loader is not None
+    module = importlib.util.module_from_spec(spec)
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return module
+
+
 def request_payload() -> dict[str, object]:
     return {
         "schema_version": "1.0",
@@ -637,6 +648,14 @@ def test_request_requires_explicit_acceptance_requirements() -> None:
     unknown_requirement["minimum_route_count"] = 3
     with pytest.raises(ValueError, match="minimum_route_count"):
         contracts.validate_payload("research-request", unknown_requirement)
+
+
+def test_contract_module_loads_via_file_location_without_sys_path_setup() -> None:
+    module = load_contracts_module_without_sys_path_injection()
+
+    schema = module.load_schema("industry-bundle")
+
+    assert schema["title"] == "Industry Analysis Bundle"
 
 
 def test_industry_analysis_bundle_schema_is_registered() -> None:

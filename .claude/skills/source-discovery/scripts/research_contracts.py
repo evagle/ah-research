@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import importlib.util
 import json
 import re
 from collections.abc import Mapping, Sequence
@@ -10,7 +11,19 @@ from datetime import datetime
 from pathlib import Path
 
 from jsonschema import Draft202012Validator, FormatChecker
-from source_lineage import lineage_id
+
+
+def _load_lineage_id():
+    source_lineage_path = Path(__file__).resolve().with_name("source_lineage.py")
+    spec = importlib.util.spec_from_file_location("source_lineage", source_lineage_path)
+    if spec is None or spec.loader is None:
+        raise ImportError(f"cannot load source_lineage module from {source_lineage_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.lineage_id
+
+
+lineage_id = _load_lineage_id()
 
 REFERENCES_DIR = Path(__file__).resolve().parents[1] / "references"
 SCHEMA_FILENAMES = {
