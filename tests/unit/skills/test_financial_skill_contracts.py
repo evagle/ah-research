@@ -314,6 +314,12 @@ def test_product_analysis_requires_relative_competition_and_evidence() -> None:
     assert "2至3项" in skill
     assert "高毛利" in skill
     assert "不能单独证明" in skill
+    for question in (
+        "客户为什么从它这里购买并持续复购或续约",
+        "为什么其他资本没有提供更高性价比",
+        "假设巨头携巨资进入",
+    ):
+        assert question in skill
     for grade in ("`高`", "`中`", "`低`", "`需人工`"):
         assert grade in skill
     assert "行为证据" in mechanisms
@@ -328,7 +334,59 @@ def test_value_profile_delegates_product_sections_without_moving_moat_ownership(
     assert "`part1/§1.3`" in skill
     assert "`moat_handoff`" in skill
     assert "最终护城河" in skill
+    assert "产品竞争力三问结论" in skill
     assert "产品与流程证据" in template
+
+
+def test_value_profile_visibly_invokes_product_analysis_for_every_product_section() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for requirement in (
+        "调用`product-analysis`前先向用户输出",
+        "正在调用product-analysis",
+        "--target-profile <absolute-path>",
+        "--section <part1/§1.1|part1/§1.3>",
+        "不得因目标section已有正文或标为已完成而跳过",
+        "普通worker不得代写或补写",
+        "隐藏的`product-analysis`调用回执",
+        "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、财报映射和失效测试",
+    ):
+        assert requirement in skill
+
+
+def test_pop_mart_product_sections_apply_product_analysis_structure() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    product = report.split("### §1.1 公司核心资产、主营产品和服务", 1)[1].split(
+        "### §1.2 公司客户", 1
+    )[0]
+    differentiation = report.split("### §1.3 差异化", 1)[1].split("### §1.4 盈利模式", 1)[0]
+
+    for requirement in (
+        "**一句话产品本质:**",
+        "**核心产品与利润地图:**",
+        "**设计与交付流程:**",
+        "**流程经济性与单位经济:**",
+        "**财报勾稽:**",
+        "product-analysis;mode=methodology",
+    ):
+        assert requirement in product
+
+    for requirement in (
+        "**客户任务与购买标准:**",
+        "**产品竞争力三问结论:**",
+        "盲盒随机性只是放大器",
+        "每次购买时重新赢得客户",
+        "收藏者社区",
+        "IP命中率",
+        "**竞争阶梯与龙头差距:**",
+        "直接竞品：TOP TOY",
+        "替代方案：布鲁可",
+        "适用龙头：泡泡玛特",
+        "**核心价值机制:**",
+        "**财报映射与失效条件:**",
+        "product-analysis;mode=methodology",
+    ):
+        assert requirement in differentiation
 
 
 def test_value_profile_delegates_contract_details_to_owned_references() -> None:
@@ -340,7 +398,13 @@ def test_value_profile_delegates_contract_details_to_owned_references() -> None:
         "financial-redflag-scan/references/mode-b-response.schema.json",
     ):
         assert schema in skill
-    max_orchestrator_lines = 700
+    for reference in (
+        "references/operations.md",
+        "references/profile-writing-style.md",
+        "references/reader-rendering.md",
+    ):
+        assert reference in skill
+    max_orchestrator_lines = 625
     assert len(skill.splitlines()) < max_orchestrator_lines
 
 
@@ -3087,7 +3151,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "用户可见中文不得使用“闭合”" in style
     for replacement in ("已核实", "证据完整", "已完成判断", "仍缺资料", "尚不能判断"):
         assert replacement in style
-    mandated_heading = "口径断点与未解决缺口"
+    mandated_heading = "口径与数据限制"
     style_lines = style.splitlines()
     assert style_lines.count(mandated_heading) == 1
     style_without_fixed_industry_heading = "\n".join(
@@ -3096,7 +3160,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "解决缺口" not in style_without_fixed_industry_heading
     for natural_phrase in ("补齐资料", "完成核验", "处理完这个问题"):
         assert natural_phrase in style
-    assert "Step 3c必须检查并改写“闭合”" in profile
+    assert "profile-writing-style.md" in profile
     for subskill in (redflag, product, management):
         assert "profile-writing-style.md" in subskill
         assert "不得把`close/closed`直译为“闭合”" in subskill
@@ -3110,10 +3174,7 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
         read(SKILLS_ROOT / "product-analysis" / "references" / "value-mechanisms.md"),
         read(SKILLS_ROOT / "management-analysis" / "references" / "related-party-alignment.md"),
     )
-    allowed_rule_phrases = (
-        "Step 3c必须检查并改写“闭合”",
-        "不得把`close/closed`直译为“闭合”",
-    )
+    allowed_rule_phrases = ("不得把`close/closed`直译为“闭合”",)
     for source in user_facing_sources:
         offending_lines = [
             line
@@ -3162,14 +3223,12 @@ def test_value_profile_prose_is_written_for_human_readers() -> None:
     ):
         assert requirement in style
 
-    canonical = "正文可以是一段自然完整的分析，不按固定句数或固定模板切割"
-    assert canonical in profile
-    assert canonical in operations
-
-    metadata_rule = "引用、置信度和管理层口径校核属于证据层"
-    assert metadata_rule in profile
-    assert metadata_rule in operations
-    assert metadata_rule in style
+    assert "profile-writing-style.md" in profile
+    assert "profile-writing-style.md" in operations
+    assert "reader-rendering.md" in profile
+    assert "reader-rendering.md" in operations
+    assert "正文可以是一段自然完整的分析，不按固定句数或固定模板切割" in style
+    assert "引用、置信度和管理层口径校核属于证据层" in style
     assert "HTML阅读版统一隐藏" in style
 
 
@@ -3178,11 +3237,15 @@ def test_value_profile_states_missing_data_once_without_research_narration() -> 
     operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
     style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
 
-    for source in (profile, operations, style):
-        assert "缺乏数据，无法分析" in source
-        assert "不展开检索失败、来源报错或底层缺项清单" in source
-        assert "不列举缺失字段、已查来源、旧年份样本或接口错误" in source
-        assert "句后不得继续解释缺什么或为什么没找到" in source
+    assert "profile-writing-style.md" in profile
+    assert "profile-writing-style.md" in operations
+    for requirement in (
+        "缺乏数据，无法分析",
+        "不展开检索失败、来源报错或底层缺项清单",
+        "不列举缺失字段、已查来源、旧年份样本或接口错误",
+        "句后不得继续解释缺什么或为什么没找到",
+    ):
+        assert requirement in style
 
     assert "数据不足时停止在简洁结论" in style
     assert "子问题缺少数据时" in style
@@ -3192,10 +3255,13 @@ def test_value_profile_states_missing_data_once_without_research_narration() -> 
 
 def test_value_profile_hides_machine_only_workflow_fields() -> None:
     profile = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
     workflow_block = template.split("**建议动作:**", 1)[1].split("**引用:**", 1)[0]
 
-    assert "机器流程字段必须保留，但统一放入HTML注释" in profile
+    assert "profile-writing-style.md" in profile
+    assert "机器流程字段" in style
+    assert "HTML注释" in style
     assert "<!--" in workflow_block
     assert "-->" in workflow_block
     for field in ("动作执行台账", "排雷终态", "排雷失败原因"):
@@ -3228,6 +3294,7 @@ def test_value_profile_research_is_question_driven_not_template_filling() -> Non
 
 def test_value_profile_hides_part0_workflow_metadata_from_readers() -> None:
     profile = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
     template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
     part0_header = template.split("## Part 0", 1)[1].split("### 执行摘要", 1)[0]
     hidden = part0_header.split("<!-- 以下为机器工作流字段", 1)[1].split("-->", 1)[0]
@@ -3242,7 +3309,8 @@ def test_value_profile_hides_part0_workflow_metadata_from_readers() -> None:
         "人工处理清单",
     ):
         assert field in hidden
-    assert "Part 0内部工作流字段统一放入HTML注释" in profile
+    assert "profile-writing-style.md" in profile
+    assert "Part 0内部工作流字段保留在Markdown的HTML注释中" in style
 
 
 def test_pop_mart_moat_discusses_economic_mechanisms_not_research_status() -> None:
@@ -3285,7 +3353,7 @@ def test_product_revenue_mix_preserves_hierarchy_and_separates_dimensions() -> N
     ):
         assert requirement in product_skill
 
-    assert "层级收入表" in profile_skill
+    assert "profile-writing-style.md" in profile_skill
     assert "层级收入表" in writing_style
     assert "层级收入表" in template
 
@@ -3303,7 +3371,7 @@ def test_value_profile_publishes_markdown_and_html_companions() -> None:
 
 
 def test_value_profile_exec_summary_uses_compact_signal_blocks() -> None:
-    skill = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
 
     for requirement in (
         "状态标题 + 无前缀结论句 + 三色圆点证据",
@@ -3311,7 +3379,7 @@ def test_value_profile_exec_summary_uses_compact_signal_blocks() -> None:
         "`signal-list`",
         "绿色=正面、红色=负面、黄色=待验证",
     ):
-        assert requirement in skill
+        assert requirement in style
 
 
 def test_value_profile_preserves_confirmed_partial_market_share_trends() -> None:
@@ -4817,10 +4885,12 @@ def test_value_profile_supports_historical_as_of_and_end_year() -> None:
 
 def test_ability_circle_questions_only_run_in_section_18() -> None:
     skill = read(SKILL_PATHS["value-profile"])
-    prompt = skill.split("### §4.7子 agent prompt 模板", 1)[1]
+    dispatch = skill.split("#### 3b. Scoped research dispatch", 1)[1].split(
+        "#### 3c. Main-agent review", 1
+    )[0]
 
-    assert "§1 subsection 必需" not in prompt
-    assert "仅当目标为§1.8" in prompt
+    assert "§1 subsection 必需" not in dispatch
+    assert "仅当目标为§1.8" in dispatch
 
 
 def test_failed_valuation_prerequisite_uses_qualitative_finalizer() -> None:
@@ -7053,7 +7123,7 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
         "预测版本对照",
         "集中度与竞争对手",
         "当期部分期间",
-        "口径断点与未解决缺口",
+        "口径与数据限制",
     )
 
     assert "Consume `industry_bundle.status`; do not infer completion from prose." in skill
@@ -7076,8 +7146,8 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
 
     for requirement in (
         "`complete`: render all six blocks normally.",
-        "`publishable-with-gaps`: retain accepted values, render every gap, and continue the profile.",
-        "`blocked`: retain accepted values, render blocked routes, mark the industry chapter for manual follow-up, and do not claim factual absence.",
+        "`publishable-with-gaps`: retain accepted values, render every investor-relevant missing period and impact, and continue the profile.",
+        "`blocked`: retain accepted values, describe the investor-relevant limitation, mark the industry chapter for manual follow-up, and preserve blocked routes in the HTML audit comment without claiming factual absence.",
         "missing years",
         "terminal route status",
         "next evidence needed",
@@ -7095,11 +7165,9 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "覆盖人群",
             "产品范围",
             "渠道范围",
-            "market definition fingerprint",
             "计量口径",
             "单位",
             "提供方",
-            "lineage",
         ),
         "历史市场规模与逐年增速": (
             "年度",
@@ -7108,13 +7176,8 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "同比增速",
             "区间CAGR",
             "值状态",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
         "预测版本对照": (
@@ -7126,12 +7189,6 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "方法与来源注释",
             "原始提供方",
             "委托关系",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
-            "计量口径",
-            "lineage",
             "替代/修订关系",
         ),
         "集中度与竞争对手": (
@@ -7140,15 +7197,11 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "目标公司排名",
             "目标公司份额",
             "完整市场分母",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
             "竞争对手名称",
             "竞争对手排名",
             "竞争对手份额",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
         "当期部分期间": (
@@ -7157,27 +7210,14 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "数值",
             "单位",
             "市场范围",
-            "market definition fingerprint",
-            "series fingerprint",
-            "渠道范围",
-            "完整市场分母",
             "计量口径",
             "提供方",
-            "lineage",
             "来源",
         ),
-        "口径断点与未解决缺口": (
-            "角色",
-            "角色状态",
-            "独立claim状态",
-            "缺失期间",
-            "缺失覆盖",
-            "from scope fingerprint",
-            "to scope fingerprint",
-            "口径断点原因",
-            "ledger path",
-            "终态路由状态",
-            "下一步所需证据",
+        "口径与数据限制": (
+            "缺失或不可比内容",
+            "期间",
+            "对投资判断的影响",
         ),
     }
     for index, block in enumerate(blocks):
@@ -7203,6 +7243,158 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
     )[0]
     assert "#### 行业驱动因素" in history_block
     assert "|驱动因素|影响方向|适用期间|证据|来源|" in history_block
+
+
+def test_industry_bundle_audit_details_are_hidden_from_investor_html() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    html = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.html")
+
+    for text in (skill, template, style):
+        assert "读者正文只保留口径差异、缺失期间及其投资影响" in text
+        assert "fingerprint、claim状态、role状态、route终态、schema版本和ledger路径" in text
+        assert "HTML注释" in text
+
+    assert "**口径与数据限制**" in report
+    assert "<!-- industry-bundle-audit" in report
+    industry_html = html.split("行业bundle采用", 1)[1].split("§2.3 竞争对手营收净利对比", 1)[0]
+
+    for machine_detail in (
+        "市场定义指纹",
+        "序列指纹",
+        "原口径指纹",
+        "主口径指纹",
+        "路由终态",
+        "行业bundle状态",
+        "schema版本",
+        "角色claim逐项终止",
+        "source-index.md",
+        "02991581f41fcf59e5785f9e641f782b1fbe3673f5fd7ae939b7deab010a06df",
+    ):
+        assert machine_detail not in industry_html
+
+    for investor_context in (
+        "旧版RSV与新版GMV不能直接拼接",
+        "2022-2024年缺少同口径的公司及具名对手份额",
+        "2026年上半年或年初至今行业数据尚未取得",
+    ):
+        assert investor_context in industry_html
+
+
+def test_related_procurement_private_quotes_are_a_qualified_limitation_not_a_blocker() -> None:
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    alignment = read(
+        SKILLS_ROOT / "management-analysis" / "references" / "related-party-alignment.md"
+    )
+
+    for text in (management, redflag, profile, template, alignment):
+        assert "采购台账或向独立OEM询价通常属于公司内部资料" in text
+        assert "不得仅因公开资料无法取得而标`需人工`或阻断估值" in text
+        assert "不得据此反向证明关联采购价格公允" in text
+        assert "已披露交易金额、条款、期末余额、治理程序和可得代理证据" in text
+        assert "异常定价、资金转移或无法解释的现金流异常" in text
+
+
+def test_pop_mart_profile_treats_private_procurement_quotes_as_monitoring_only() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    alignment = report.split("### §4.8 大股东与上市公司利益一致性检查", 1)[1].split(
+        "## §5 风险分析", 1
+    )[0]
+
+    assert "关联采购独立报价" not in part_zero
+    assert "取得关联采购按交易对手和SKU拆分及独立报价" not in part_zero
+    assert "| 2 | 关联采购不公允定价 | 有异常迹象 | 预警 |" in alignment
+    assert "该项按预警通过" in alignment
+    assert "采购台账或向独立OEM询价通常属于公司内部资料" in alignment
+    assert "公开资料基本无法取得" in alignment
+    assert "不能证明采购价格公允，也不能证明存在利益输送" in alignment
+    assert "关联采购38.08亿元" in alignment
+    assert "约占销售成本36.8%" in alignment
+
+
+def test_qualified_public_regulatory_clearance_is_not_blocked_by_manifest_perfection() -> None:
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+
+    for text in (management, redflag, profile, template):
+        assert "公开记录限定通过" in text
+        assert "截至AS_OF，适用公开来源未发现其他重大事件" in text
+        assert "不得表述为绝对不存在" in text
+        assert "完整事件清单本身不构成估值阻断" in text
+        assert "未解决的正面命中或证据冲突" in text
+
+
+def test_pop_mart_profile_uses_qualified_public_regulatory_clearance() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    pre_scan = report.split("### §4.pre 风险一票否决前置扫描", 1)[1].split(
+        "### §4.1 专注主业，眼光长远", 1
+    )[0]
+
+    assert "严格监管事件清单" not in part_zero
+    assert "**管理层否决:** 否" in part_zero
+    assert (
+        "workflow-state:management_pending=false;pending_gate=false;unresolved_rows=[]" in part_zero
+    )
+    assert "| 虚假陈述处罚记录 | 否 |" in pre_scan
+    assert "截至2026-08-02，适用公开来源未发现其他重大事件" in pre_scan
+    assert "四项2021-2022年经营合规处罚" in pre_scan
+    assert "金鹰诉讼" in pre_scan
+    assert "不得表述为绝对不存在" in pre_scan
+
+
+def test_private_inventory_aging_uses_proxies_without_becoming_an_automatic_blocker() -> None:
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+
+    for text in (redflag, profile, template):
+        assert "汇总库存年龄或减值信息可在部分发行人的公开披露中取得" in text
+        assert "不得预设全部属于内部资料" in text
+        assert "区分汇总库存年龄与SKU级明细" in text
+        assert "若可比同业存在同口径披露而目标公司未披露" in text
+        assert "先核对业务模式、会计口径、监管要求和重要性" in text
+        assert "只有该差异确实削弱风险判断时才记录透明度预警" in text
+        assert "否则仅说明披露限制" in text
+        assert "SKU级库存库龄、期后销售比例和售价经适用公开来源核查仍未披露时" in text
+        assert "可能涉及内部经营资料、审计底稿或商业敏感信息" in text
+        assert "不得预设未来一定不会披露" in text
+        assert "完成历史和当期公开披露检查后" in text
+        assert "不得仅因未披露而标`需人工`或阻断估值" in text
+        assert "存货余额与构成、周转天数、拨备率、审计程序、历史和同业代理及压力测试" in text
+        assert "不得反向证明不存在滞销或减值不足" in text
+        assert "出现正面异常且可能实质改变结论时" in text
+        assert "才考虑升级" in text
+
+
+def test_pop_mart_inventory_private_data_is_monitoring_not_manual_review() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    redflag = report.split("### §4.5 负面清单 - 排雷风险", 1)[1].split(
+        "### §4.6 基准日价格与仓位", 1
+    )[0]
+
+    assert "库存库龄与期后销售" not in part_zero
+    assert "取得2025年库存SKU库龄和期后销售" not in part_zero
+    assert "| 14 | 存货占比及减值风险 | 是 | 预警 |" in redflag
+    assert "SKU级库存库龄、期后销售比例和售价" in redflag
+    assert "其可能涉及公司内部经营资料、审计底稿或商业敏感信息" in redflag
+    assert "商业敏感信息" in redflag
+    assert "历年公开材料未披露" in redflag
+    assert "也可能在后续报告中披露" in redflag
+    assert "当前缺失本身不构成独立估值阻断" in redflag
+    assert "后续新年报仍需复核" in redflag
+    assert "额外拨备约1.68亿元" in redflag
+    assert "约占2025年税前利润1.0%" in redflag
+    assert "不能证明不存在滞销或减值不足" in redflag
 
 
 def test_value_profile_documents_v11_series_and_claim_state_rendering() -> None:

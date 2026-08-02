@@ -541,29 +541,31 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 缺少分析所需数据时写“缺乏数据，无法分析”，绝不编造或展开检索失败过程。落在 "不做清单" 行业 (见 industry-overlays §8) → 整份 profile 降级为 "观察档案, 不下注"。
 -->
 
-**industry_bundle状态:** <complete/publishable-with-gaps/blocked>
-
-**契约版本:** 接受无歧义的`schema_version: 1.0`历史bundle；新运行使用
-`schema_version: 1.1`。v1.1逐series显示metric-independent
-`market_definition_fingerprint`、metric/unit/measurement/denominator-specific
-`series_fingerprint`、渠道和分母。预测发布日期与`data_vintage`是证据日期，
-不是预测终点；每个`data_vintage`单独成series，不跨版本拼接。
+<!-- industry-bundle-audit
+status: <complete/publishable-with-gaps/blocked>
+schema_version: <1.0/1.1>
+读者正文只保留口径差异、缺失期间及其投资影响。
+fingerprint、claim状态、role状态、route终态、schema版本和ledger路径只保存在HTML注释。
+预测发布日期与data_vintage是证据日期，不是预测终点；每个data_vintage单独成series，不跨版本拼接。
+-->
 
 #### 市场定义矩阵
 
-|市场名称|地域|覆盖人群|产品范围|渠道范围|market definition fingerprint|计量口径|单位|提供方|lineage|
-|---|---|---|---|---|---|---|---|---|---|
-|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
+|市场名称|地域|覆盖人群|产品范围|渠道范围|计量口径|单位|提供方|
+|---|---|---|---|---|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+- market_definition_fingerprint/channel_scope/denominator/lineage:[待填写]
+**机器引用清单:**
 - 市场定义矩阵:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
 #### 历史市场规模与逐年增速
 
-|年度|市场规模|单位|同比增速|区间CAGR|值状态|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|提供方|lineage|来源|
-|---|---:|---|---:|---:|---|---|---|---|---|---|---|---|---|
-|[最近完整年度-4至最近完整年度逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[observed/historical-estimate]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+|年度|市场规模|单位|同比增速|区间CAGR|值状态|计量口径|提供方|来源|
+|---|---:|---|---:|---:|---|---|---|---|
+|[最近完整年度-4至最近完整年度逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[observed/historical-estimate]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
 #### 行业驱动因素
 
@@ -571,27 +573,33 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 |---|---|---|---|---|
 |[仅填写industry-drivers角色的accepted candidate]|[正向/负向/混合]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+- market_definition_fingerprint/series_fingerprint/channel_scope/denominator/lineage:[待填写]
+**机器引用清单:**
 - 历史市场规模与逐年增速及行业驱动因素:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
 #### 预测版本对照
 
-|发布日期|数据版本|预测年度|预测值|单位|方法与来源注释|原始提供方|委托关系|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|lineage|替代/修订关系|
-|---|---|---|---:|---|---|---|---|---|---|---|---|---|---|---|
-|[evidence publication date]|[data vintage；每个版本单独成series]|[未来3至5年逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[prior/later/替代/并行]|
+|发布日期|数据版本|预测年度|预测值|单位|方法与来源注释|原始提供方|委托关系|替代/修订关系|
+|---|---|---|---:|---|---|---|---|---|
+|[evidence publication date]|[data vintage；每个版本单独成series]|[未来3至5年逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[prior/later/替代/并行]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+- market_definition_fingerprint/series_fingerprint/channel_scope/denominator/lineage:[待填写]
+**机器引用清单:**
 - 预测版本对照:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
 #### 集中度与竞争对手
 
-|期间|CR5/CR10|目标公司排名|目标公司份额|完整市场分母|market definition fingerprint|series fingerprint|渠道范围|竞争对手名称|竞争对手排名|竞争对手份额|计量口径|提供方|lineage|来源|
-|---|---:|---:|---:|---:|---|---|---|---|---:|---:|---|---|---|---|
-|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[每个具名对手逐行]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+|期间|CR5/CR10|目标公司排名|目标公司份额|完整市场分母|竞争对手名称|竞争对手排名|竞争对手份额|计量口径|提供方|来源|
+|---|---:|---:|---:|---:|---|---:|---:|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[每个具名对手逐行]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+- market_definition_fingerprint/series_fingerprint/channel_scope/denominator/lineage:[待填写]
+**机器引用清单:**
 - 集中度与竞争对手:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
@@ -604,25 +612,30 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 ### §2.2市场规模、增速、供需
 
-**本节目标:** 单列当期部分期间和全部口径断点。`publishable-with-gaps`继续profile但逐项展示缺口；`blocked`保留已接受值并标记人工跟进,不声称事实不存在。
+**本节目标:** 单列当期部分期间和全部口径限制。读者正文只保留口径差异、缺失期间及其投资影响；fingerprint、claim状态、role状态、route终态、schema版本和ledger路径写入HTML注释。`publishable-with-gaps`继续profile；`blocked`保留已接受值并标记人工跟进,不声称事实不存在。
 
 #### 当期部分期间
 
-|期间标签|指标|数值|单位|市场范围|market definition fingerprint|series fingerprint|渠道范围|完整市场分母|计量口径|提供方|lineage|来源|
-|---|---|---:|---|---|---|---|---|---|---|---|---|---|
-|[H1/YTD/最新季度/not-applicable]|[规模/份额/排名]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+|期间标签|指标|数值|单位|市场范围|计量口径|提供方|来源|
+|---|---|---:|---|---|---|---|---|
+|[H1/YTD/最新季度/not-applicable]|[规模/份额/排名]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+- market_definition_fingerprint/series_fingerprint/channel_scope/denominator/lineage:[待填写]
+**机器引用清单:**
 - 当期部分期间:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
-#### 口径断点与未解决缺口
+#### 口径与数据限制
 
-|角色|角色状态|独立claim状态|缺失期间|缺失覆盖|from scope fingerprint|to scope fingerprint|口径断点原因|ledger path|终态路由状态|下一步所需证据|
-|---|---|---|---|---|---|---|---|---|---|---|
-|[八个role逐项填写]|[accepted/partial/exhausted/blocked/not-applicable]|[claim_states逐claim填写；accepted不回到unresolved_claims]|[逐年列出/无]|[missing_coverage逐项列出/无]|[scope_breaks映射/无]|[scope_breaks映射/无]|[scope_breaks.reason/无]|[绝对路径]|[attempts[].terminal_reason逐route列出]|[next_escalation/unattempted_routes/new publication/data release required]|
+|缺失或不可比内容|期间|对投资判断的影响|
+|---|---|---|
+|[逐项填写scope break或missing period]|[逐年列出/无]|[不能计算的增速、份额变化或竞争结论]|
 
-<!-- **机器引用清单:**
+<!-- industry-bundle-audit
+role_status/claim_states/missing_periods/missing_coverage/from_scope_fingerprint/to_scope_fingerprint/ledger_path/terminal_route_status/next_evidence_needed:
+- [八个role逐项填写]
+**机器引用清单:**
 - 口径断点与未解决缺口:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
@@ -1262,7 +1275,8 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 <!-- 指导要求:
   - 识别所有潜在抽血渠道,逐项判断状态,只允许`否/有异常迹象/重大异常/已证实侵占/需人工/不适用`,并附证据。
-  - 每项带年报附注页码或公开披露 URL, 无证据标 "需人工"。
+  - 每项带年报附注页码或公开披露 URL。采购台账或向独立OEM询价通常属于公司内部资料;完成公开来源调查后,不得仅因公开资料无法取得而标`需人工`或阻断估值。
+  - 关联采购使用已披露交易金额、条款、期末余额、治理程序和可得代理证据作限定判断;不得据此反向证明关联采购价格公允。仅规模或集中度高时写`有异常迹象/预警`;只有异常定价、资金转移或无法解释的现金流异常且影响无法评估时才转`需人工/待定`。
   - 国企(控股股东为国资委/地方政府/省国资)需特别关注政策性任务/地方采购/税收土地反哺等"合规抽血"。
   - 民企(大股东为自然人或家族)需关注资金占用/担保/关联方转移。
   - 即使合法交易金额较小也要记录并量化;一旦达到canonical一票否决证据标准,不得按金额降级。
@@ -2121,6 +2135,11 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 -->
 
 <!-- 数据源: 年报"财务报告"附注 + "公司治理" + "股东情况"; 审计报告; 监管处罚记录 -->
+
+<!-- 公开记录限定通过:严格event manifest优先;交易所公告已枚举、适用公开监管路线已terminal、已知事件均已归类且没有未解决的正面命中或证据冲突时,可写`截至AS_OF，适用公开来源未发现其他重大事件`。不得表述为绝对不存在;完整事件清单本身不构成估值阻断。唯一权威来源不可达且无替代、正面命中无法分类或覆盖范围过窄时仍为需人工。 -->
+
+<!-- 关联采购公开边界:采购台账或向独立OEM询价通常属于公司内部资料;不得仅因公开资料无法取得而标`需人工`或阻断估值。使用已披露交易金额、条款、期末余额、治理程序和可得代理证据判断,不得据此反向证明关联采购价格公允;只有异常定价、资金转移或无法解释的现金流异常且重大影响无法评估时才升级。 -->
+<!-- 库存披露边界:先查目标公司历年年报、招股书、审计关键事项和可比同业,区分汇总库存年龄与SKU级明细。汇总库存年龄或减值信息可在部分发行人的公开披露中取得,不得预设全部属于内部资料。若可比同业存在同口径披露而目标公司未披露,先核对业务模式、会计口径、监管要求和重要性;只有该差异确实削弱风险判断时才记录透明度预警,否则仅说明披露限制。SKU级库存库龄、期后销售比例和售价经适用公开来源核查仍未披露时,可归为公开资料限制,并说明其可能涉及内部经营资料、审计底稿或商业敏感信息;不得预设未来一定不会披露。完成历史和当期公开披露检查后,不得仅因未披露而标`需人工`或阻断估值。改用存货余额与构成、周转天数、拨备率、审计程序、历史和同业代理及压力测试;不得反向证明不存在滞销或减值不足。出现正面异常且可能实质改变结论时,才考虑升级。 -->
 
 | # | 检查项 | 看哪里 | 触发条件 | 应采取动作 | 填写（状态+严重度+证据页码+实际动作） |
 |---|---|---|---|---|---|

@@ -88,6 +88,16 @@ Route count is not an acceptance criterion.
 For an absence claim, `technical-failure`, `access-unavailable`, and
 `request-budget-exhausted` are `blocked`, never factual absence.
 
+Classify fields that normally exist only in company records separately from
+ordinary public-source gaps. SKU-level procurement ledgers, rebates, and
+same-spec independent OEM quotations are normally nonpublic-by-design. After
+applicable public routes are terminal, return the strongest public evidence
+and this scope limitation; do not keep opening unrelated web routes. The caller
+must not treat the limitation itself as evidence of fair or unfair pricing, or
+as an automatic valuation blocker. Escalation requires a positive material
+anomaly that cannot be assessed from disclosed amounts, terms, balances,
+governance procedures, proxies, or stress tests.
+
 Return exactly these seven top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`.
 For a non-industry request, set `industry_bundle` to `null`; do not remove the
 field or change the other six handoff fields.

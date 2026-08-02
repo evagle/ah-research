@@ -23,6 +23,14 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
 
 **管理层口径校核:** 管理层计划仍需验证。
 
+| 类型 | 原口径指纹 | 主口径指纹 | 影响 |
+|---|---|---|---|
+| 市场规模 | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb | 不可拼接 |
+
+角色状态为accepted，路由终态为exhausted，schema_version为1.1。
+
+恢复账本为/Users/example/research/source-index.md。
+
 ## 风险
 
 **引用:**
@@ -65,6 +73,8 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     output = source.with_suffix(".html")
     assert result.returncode == 0, result.stderr
     assert result.stdout.strip() == str(output)
+    assert "[reader-projection] removed machine-table" in result.stderr
+    assert "[reader-projection] removed machine-paragraph" in result.stderr
     html = output.read_text(encoding="utf-8")
     assert html.startswith("<!doctype html>")
     assert "<title>公司 &amp; 测试</title>" in html
@@ -90,6 +100,11 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert "置信度:" not in html
     assert "管理层口径校核:" not in html
     assert "管理层计划仍需验证" not in html
+    assert "原口径指纹" not in html
+    assert "路由终态" not in html
+    assert "schema_version" not in html
+    assert "/Users/example/research/source-index.md" not in html
+    assert "收入结构" in html
     assert "@media (max-width: 900px)" in html
     assert ".signal-positive" in html
     assert ".signal-negative" in html
