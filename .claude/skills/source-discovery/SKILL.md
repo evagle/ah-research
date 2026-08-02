@@ -173,6 +173,46 @@ and the scope break. Prefer the latest completed-period estimate for historical
 analysis, but keep older forecasts for forecast-error and expectation tracking.
 Never splice forecasts from different vintages into one continuous series.
 
+### Industry Bundle Gate
+
+Construct all eight role requests before routing. Use these mandatory roles:
+
+- `market-definition`
+- `historical-market-size`
+- `industry-forecast`
+- `market-concentration`
+- `subject-market-share`
+- `competitor-market-share`
+- `current-partial-period`
+- `industry-drivers`
+
+For annual roles, derive the latest completed five-year window from `AS_OF`;
+extend it only when public evidence permits. The market-definition role
+establishes the primary market scope fingerprint before comparable series are
+accepted.
+Broader, narrower, or adjacent markets cannot fill the primary-market requirement.
+Keep those observations as explicit scope breaks instead.
+
+Search each unresolved role independently.
+Only unresolved roles continue through the planner.
+Stop redispatching an accepted role, preserve partial accepted evidence when a
+role remains unresolved, and keep each role's claim IDs, accepted and missing
+periods, scope fingerprint, lineage, and terminal ledger paths.
+
+After finding any forecast, run a mandatory version chase for the discovered
+table and provider. Search its publication vintage, prior version, and later
+version; preserve revisions and scope breaks rather than choosing one vintage
+silently. The version chase is part of the `industry-forecast` role even when
+the first forecast candidate passes its claim-level acceptance gate.
+
+After every role is terminal for the current run, call
+`evaluate_industry_bundle` with the subject, `AS_OF`, primary market scope
+fingerprint, all eight role outcomes, and scope breaks.
+Return `industry_bundle`, `ledger_path`, and `ledger_sha256`. The bundle status is
+`complete`, `publishable-with-gaps`, or `blocked`; never infer a different
+status from narrative prose.
+Never convert `exhausted` or `blocked` into absence.
+
 At the start, translate the request into claim types, time bounds, geography,
 industry vocabulary, acceptable evidence types, and any source restrictions.
 Use those constraints to select only the earliest applicable planner layer.

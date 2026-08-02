@@ -3087,7 +3087,8 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "用户可见中文不得使用“闭合”" in style
     for replacement in ("已核实", "证据完整", "已完成判断", "仍缺资料", "尚不能判断"):
         assert replacement in style
-    assert "解决缺口" not in style
+    style_without_fixed_industry_block = style.replace("口径断点与未解决缺口", "")
+    assert "解决缺口" not in style_without_fixed_industry_block
     for natural_phrase in ("补齐资料", "完成核验", "处理完这个问题"):
         assert natural_phrase in style
     assert "Step 3c必须检查并改写“闭合”" in profile
@@ -6907,6 +6908,52 @@ def test_value_profile_user_escalation_requires_true_blocker_and_explicit_choice
         "跳过可选项",
     ):
         assert choice in skill
+
+
+def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    blocks = (
+        "市场定义矩阵",
+        "历史市场规模与逐年增速",
+        "预测版本对照",
+        "集中度与竞争对手",
+        "当期部分期间",
+        "口径断点与未解决缺口",
+    )
+
+    assert "Consume `industry_bundle.status`; do not infer completion from prose." in skill
+    assert '`research_contracts.validate_payload("industry-bundle", industry_bundle)`' in skill
+    for block in blocks:
+        assert block in skill
+        assert block in template
+        assert block in style
+
+    for requirement in (
+        "`complete`: render all six blocks normally.",
+        "`publishable-with-gaps`: retain accepted values, render every gap, and continue the profile.",
+        "`blocked`: retain accepted values, render blocked routes, mark the industry chapter for manual follow-up, and do not claim factual absence.",
+        "missing years",
+        "terminal route status",
+        "next evidence needed",
+    ):
+        assert requirement in skill
+
+    industry_template = template.split("### §2.1行业基本情况 + 竞争格局", 1)[1].split(
+        "### §2.3竞争对手营收净利对比",
+        1,
+    )[0]
+    for field in ("市场范围", "计量口径", "提供方", "lineage", "机器引用"):
+        assert field in industry_template
+    for field in (
+        "角色状态",
+        "缺失期间",
+        "ledger path",
+        "终态路由状态",
+        "下一步所需证据",
+    ):
+        assert field in industry_template.split("口径断点与未解决缺口", 1)[1]
 
 
 def test_read_filing_external_research_handoff_contract() -> None:

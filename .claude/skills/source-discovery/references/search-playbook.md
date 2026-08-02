@@ -167,6 +167,19 @@ follow that citation into prospectuses, listing applications, provider
 releases, or later official reproductions. Do not treat two broker reports as
 independent confirmation when both reproduce the same underlying table.
 
+For every discovered forecast table, run a version chase even after the first
+candidate passes. Bind searches to the exact table title, provider, and
+publication vintage, then search the prior version and later version
+independently:
+
+- `"{exact table title}" "{provider}" "{publication year}" filetype:pdf`
+- `"{provider}" "{industry}" forecast "{prior year}" filetype:pdf`
+- `"{provider}" "{industry}" forecast "{later year}" filetype:pdf`
+
+Record each vintage's publication date, forecast window, methodology, scope,
+lineage, and revision relationship. A missing prior or later version remains a
+terminally ledgered search result; it does not erase an accepted forecast.
+
 ## macro/official statistics
 
 Primary portfolio: national statistical agencies, ministries, central banks,

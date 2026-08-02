@@ -865,6 +865,61 @@ def test_industry_trend_discovery_preserves_history_forecast_and_revision_vintag
     )
 
 
+def test_industry_bundle_builds_all_role_requests_before_gated_routing() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    industry_section = skill.split(
+        "## Industry Size, Growth, Concentration, And Forecasts",
+        1,
+    )[1].split("## Catalog And Uncataloged Sources", 1)[0]
+
+    for role in (
+        "market-definition",
+        "historical-market-size",
+        "industry-forecast",
+        "market-concentration",
+        "subject-market-share",
+        "competitor-market-share",
+        "current-partial-period",
+        "industry-drivers",
+    ):
+        assert f"`{role}`" in industry_section
+
+    assert_contains_all(
+        industry_section,
+        (
+            "Construct all eight role requests before routing.",
+            "derive the latest completed five-year window from `AS_OF`",
+            "Search each unresolved role independently.",
+            "version chase",
+            "preserve partial accepted evidence",
+            "Only unresolved roles continue through the planner.",
+            "Broader, narrower, or adjacent markets cannot fill the primary-market requirement.",
+            "`evaluate_industry_bundle`",
+            "`industry_bundle`, `ledger_path`, and `ledger_sha256`",
+            "publishable-with-gaps",
+            "Never convert `exhausted` or `blocked` into absence.",
+        ),
+    )
+
+
+def test_search_playbook_requires_forecast_version_chase_queries() -> None:
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+
+    assert_contains_all(
+        playbook,
+        (
+            "exact table title",
+            "provider",
+            "publication vintage",
+            "prior version",
+            "later version",
+            '"{exact table title}" "{provider}" "{publication year}" filetype:pdf',
+            '"{provider}" "{industry}" forecast "{prior year}" filetype:pdf',
+            '"{provider}" "{industry}" forecast "{later year}" filetype:pdf',
+        ),
+    )
+
+
 def test_offline_cross_industry_regression_stops_and_resumes_without_redispatch() -> None:
     contracts = load_runtime_module("research_contracts")
     source_profiles = load_runtime_module("source_profiles")

@@ -127,6 +127,10 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 - **§2.6.0市场份额证据窗口**:市场份额默认请求最近5个完整年度，公开证据允许时扩展至10年，另查AS_OF可得的当年H1/YTD/最新季度；该请求同时覆盖目标公司与主要具名对手，并保存每年排名、份额、市场分母、地域、产品范围、计量口径和source lineage。旧年份不能替代最近5年验收；缺任一必需年度时连续序列保持unresolved，继续调用`source-discovery`扩展当前及历史竞品、拟上市公司申请稿、最终招股书、原始咨询报告和具名券商原报告。profile必须把已验证部分序列、缺失年份和不可比截面分开写；当期H1/YTD/季度不年化、不与全年直接比较。不得用发行人会计收入除以行业GMV、RSV、零售额、出货量或用户数补份额，除非分子分母期间、地域、产品范围和计量基础完全一致。
 - **§2.6.0行业规模、增速与集中度证据窗口**:行业章节必须收集最近5个完整年度的逐年市场规模、同比增速、复合增速和可得的CR5或CR10，公开证据允许时扩展至10年；另收集未来3至5年预测及逐年预测值。行业预测可以作为情景数据保留，不因其为预测而删除，但必须与已发生数据分表，保存预测版本、发布日期、原始数据提供方、委托关系、计量口径和后续修订。新版本改变历史估计或未来预测时并列展示版本差异，不得跨预测版本拼接连续序列，也不得把行业预测当成公司盈利预测或既成事实。
+- **§2.6.0行业bundle消费契约**:调用`source-discovery`后接收`industry_bundle`、`ledger_path`和`ledger_sha256`,并执行`research_contracts.validate_payload("industry-bundle", industry_bundle)`。Consume `industry_bundle.status`; do not infer completion from prose. 行业章节固定渲染`市场定义矩阵`、`历史市场规模与逐年增速`、`预测版本对照`、`集中度与竞争对手`、`当期部分期间`、`口径断点与未解决缺口`六个块,不得用通用行业问题替代。每张表都保存市场范围、计量口径、提供方、lineage和机器引用；机器引用按`references/profile-writing-style.md`写入同块HTML注释。最后一块逐role保存role state、missing periods、ledger path、terminal route status和next evidence needed。
+  - `complete`: render all six blocks normally.
+  - `publishable-with-gaps`: retain accepted values, render every gap, and continue the profile. 必须逐项显示missing years、terminal route status和next evidence needed。
+  - `blocked`: retain accepted values, render blocked routes, mark the industry chapter for manual follow-up, and do not claim factual absence.
 - **§2.6.1四问是 §1末节 synthesis, 不是 §1开场前置**: §1.8能力圈四问 = §1.1-§1.7 具体拆解之后的综合判定章节（非 gate）。子 agent 在 §1.1-§1.7 全部填完之后才填 §1.8, 4段独立作答, 每问 ≥ 50字, 含 ticker 特定证据（产品 SKU / 客户场景/竞品名/挑战者份额/假想敌推演）, 呼应 §1.1-§1.7的引用（不另起炉灶）, 禁品牌复读和结论标签。份额序列不满五年时,不得把“未形成完整五年序列”写成“无法判断任何趋势”;先按市场定义、计量口径和历史重叠值核对可比性,明确写出可比年份已经确认的阶段变化,再单独列出未覆盖年份和不能外推的范围。**理由**: 读懂业务才能判定是否在能力圈, 反之是结论先行——与价值投资"看懂再下注"精神相反。
 - **§2.6.2任一失败 = profile 整体降级**:主agent复核任一问<50字、仅品牌复读或仅结论无场景时退回补证据（auto mode扩大scope重派,最多2次）;反复退回仍失败→§1.8写`**置信度:**需人工`,记录最后错误、已尝试来源和缺失证据,加入人工处理清单并阻断估值,不得按低置信度已完成继续。§1.1-§1.7保留原置信度;§1.8失败不否定其事实拆解,但profile保持观察状态。
 
