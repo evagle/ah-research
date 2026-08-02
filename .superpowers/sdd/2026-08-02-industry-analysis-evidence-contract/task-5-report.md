@@ -1,10 +1,15 @@
-# Task 5 Report: Final Verification and Documentation Audit
+# Historical Task 5 Report: Final Verification and Documentation Audit
+
+> **Superseded snapshot:** This report records the original Task 5 run ending
+> at `556c1af`; it does not describe the final-review fix wave or the branch's
+> current verification state. The authoritative final-wave results are written
+> to `final-fix-report.md` in this directory.
 
 Evidence level: direct command output captured during execution in `/Users/brian_huang/repos/ah-research-industry-analysis`.
 
 ## Outcome
 
-- Status: `DONE`
+- Status: `HISTORICAL_SNAPSHOT`
 - Branch: `feat/industry-analysis-evidence-contract`
 - Final verification summary: the Task 5 contract check exposed a real defect in `.claude/skills/source-discovery/scripts/research_contracts.py` when loaded via `importlib.util.spec_from_file_location(...)`; I fixed that defect, added a regression test, reran the required commands exactly, and all checks passed.
 - Commit created: `556c1af` (`Fix contract path import`)

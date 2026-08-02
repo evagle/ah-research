@@ -6967,6 +6967,7 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "覆盖人群",
             "产品范围",
             "渠道范围",
+            "market definition fingerprint",
             "计量口径",
             "单位",
             "提供方",
@@ -6979,7 +6980,10 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "同比增速",
             "区间CAGR",
             "值状态",
-            "scope fingerprint",
+            "market definition fingerprint",
+            "series fingerprint",
+            "渠道范围",
+            "完整市场分母",
             "计量口径",
             "提供方",
             "lineage",
@@ -6994,6 +6998,10 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "方法与来源注释",
             "原始提供方",
             "委托关系",
+            "market definition fingerprint",
+            "series fingerprint",
+            "渠道范围",
+            "完整市场分母",
             "计量口径",
             "lineage",
             "替代/修订关系",
@@ -7004,6 +7012,9 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "目标公司排名",
             "目标公司份额",
             "完整市场分母",
+            "market definition fingerprint",
+            "series fingerprint",
+            "渠道范围",
             "竞争对手名称",
             "竞争对手排名",
             "竞争对手份额",
@@ -7018,6 +7029,10 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
             "数值",
             "单位",
             "市场范围",
+            "market definition fingerprint",
+            "series fingerprint",
+            "渠道范围",
+            "完整市场分母",
             "计量口径",
             "提供方",
             "lineage",
@@ -7026,7 +7041,9 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
         "口径断点与未解决缺口": (
             "角色",
             "角色状态",
+            "独立claim状态",
             "缺失期间",
+            "缺失覆盖",
             "from scope fingerprint",
             "to scope fingerprint",
             "口径断点原因",
@@ -7058,6 +7075,26 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
     )[0]
     assert "#### 行业驱动因素" in history_block
     assert "|驱动因素|影响方向|适用期间|证据|来源|" in history_block
+
+
+def test_value_profile_documents_v11_series_and_claim_state_rendering() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    combined = " ".join(f"{skill}\n{template}\n{style}".split())
+
+    for requirement in (
+        "Accept unambiguous industry bundle `schema_version: 1.0` payloads for backward compatibility.",
+        "New industry runs consume `schema_version: 1.1`.",
+        "`market_definition_fingerprint` is metric-independent",
+        "`series_fingerprint` preserves metric, unit, measurement basis, and denominator",
+        "Render one forecast series per `data_vintage`",
+        "publication date and `data_vintage` are not forecast-horizon dates",
+        "`claim_states` terminate independently",
+        "accepted claims never return to `unresolved_claims`",
+        "`partial` and `blocked` retain accepted evidence",
+    ):
+        assert requirement in combined
 
 
 def test_value_profile_derives_gap_rendering_from_bundle_and_ledgers() -> None:

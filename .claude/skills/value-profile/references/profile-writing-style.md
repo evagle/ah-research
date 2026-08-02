@@ -134,10 +134,20 @@ profile必须把每节清单写入HTML注释，同时保留原标记：
 当期部分期间
 口径断点与未解决缺口
 
-每张表逐行保留市场范围、计量口径、提供方和lineage。机器引用属于同一表的
-证据记录，但必须紧跟该表写入`机器引用清单`HTML注释，不得显示在渲染正文中。
-最后一块另保留角色状态、缺失期间、ledger path、终态路由状态和下一步所需
-证据。
+接受无歧义的industry bundle `schema_version: 1.0`作为向后兼容输入；新运行使用
+`schema_version: 1.1`。v1.1的`market_definition_fingerprint`不含metric，
+每个series另保留metric、unit、measurement basis和denominator对应的
+`series_fingerprint`。每张数值表逐行显示两个fingerprint、`channel_scope`、
+`denominator`、计量口径、提供方和lineage。机器引用属于同一表的证据记录，
+但必须紧跟该表写入`机器引用清单`HTML注释，不得显示在渲染正文中。预测发布日期
+和`data_vintage`是证据日期，不是forecast horizon；每个`data_vintage`单独
+渲染一个series，严禁跨vintage拼接。
+
+最后一块另保留角色状态、逐claim的`claim_states`、缺失期间、
+`missing_coverage`、ledger path、终态路由状态和下一步所需证据。
+`claim_states`逐claim独立终止；accepted claim不得重新进入`unresolved_claims`
+或重派。`partial`和`blocked`必须保留已接受evidence、periods和series，再单列
+未覆盖内容。
 
 所有数值表只从validated `accepted_candidates`填值；`industry_bundle`只决定
 role状态、缺失期间和口径断点。历史块中的`行业驱动因素`子表只渲染

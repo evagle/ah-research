@@ -903,6 +903,29 @@ def test_industry_bundle_builds_all_role_requests_before_gated_routing() -> None
     )
 
 
+def test_industry_contract_documents_v11_identity_vintage_and_claim_state_evolution() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Unambiguous `schema_version: 1.0` payloads remain valid.",
+            "New industry requests, candidates, and bundles use `schema_version: 1.1`.",
+            "`market_definition_fingerprint` is metric-independent",
+            "`series_fingerprint` retains metric, canonical unit, measurement basis, frequency, period semantics, and denominator",
+            "`channel_scope` and `denominator` are required machine-visible fields",
+            "publication date and `data_vintage` are evidence dates, not the forecast horizon",
+            "Render one forecast series per `data_vintage`",
+            "`claim_states` are independently terminal",
+            "Never redispatch an accepted claim",
+            "`partial` and `blocked` roles retain accepted evidence",
+            "`provider_table_id`",
+        ),
+    )
+
+
 def test_forecast_version_chase_uses_child_claims_without_reopening_base() -> None:
     skill = require_text(SKILL_ROOT / "SKILL.md")
     playbook = require_text(SKILL_ROOT / "references/search-playbook.md")

@@ -177,6 +177,20 @@ Never splice forecasts from different vintages into one continuous series.
 
 ### Industry Bundle Gate
 
+Contract evolution is additive. Unambiguous `schema_version: 1.0` payloads
+remain valid. New industry requests, candidates, and bundles use
+`schema_version: 1.1`.
+
+For v1.1, `market_definition_fingerprint` is metric-independent and identifies
+geography, industry, population, product scope, and `channel_scope`.
+`series_fingerprint` retains metric, canonical unit, measurement basis,
+frequency, period semantics, and denominator within that market definition.
+`channel_scope` and `denominator` are required machine-visible fields on the
+request and candidate; accepted bundle series repeat them so cross-role
+compatibility can be checked without interpreting prose. A provider table also
+records normalized `provider_table_id`, methodology owner, and data vintage so
+different report titles do not create false lineage independence.
+
 Construct all eight role requests before routing. Use these mandatory roles:
 
 - `market-definition`
@@ -197,9 +211,14 @@ Keep those observations as explicit scope breaks instead.
 
 Search each unresolved role independently.
 Only unresolved roles continue through the planner.
-Stop redispatching an accepted role, preserve partial accepted evidence when a
-role remains unresolved, and keep each role's claim IDs, accepted and missing
-periods, scope fingerprint, lineage, and terminal ledger paths.
+`claim_states` are independently terminal within each role. Never redispatch an
+accepted claim, including an accepted base or version-chase child. `partial` and
+`blocked` roles retain accepted evidence: preserve partial accepted evidence,
+accepted periods, series metadata, and lineage while separately recording
+missing periods or `missing_coverage`. Keep each role's claim IDs, per-claim
+states, accepted and
+missing coverage, market-definition and series fingerprints, lineage, and
+terminal ledger paths.
 
 After finding any forecast, run a mandatory version chase for the discovered
 table and provider. Search its publication vintage, prior version, and later
@@ -210,6 +229,11 @@ silently. Create `<base-forecast-claim-id>:prior-vintage` and
 Only unresolved version child claim IDs continue through planner layers.
 Each accepted child stops independently under the ordinary positive-claim
 rule; version chase never reopens or redispatches the accepted base claim.
+The publication date and `data_vintage` are evidence dates, not the forecast
+horizon: both must be on or before `AS_OF`, while forecast values may extend
+through the requested future periods. Never stitch candidates with different
+data vintages. Render one forecast series per `data_vintage`, even when the
+series fingerprint and forecast periods overlap.
 
 After every role is terminal for the current run, call
 `evaluate_industry_bundle` with the subject, `AS_OF`, primary market scope
