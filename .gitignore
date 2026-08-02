@@ -251,6 +251,7 @@ tmp/
 
 # Local agent worktrees
 .claude/worktrees/
+.superpowers/
 
 # Third-party copyrighted materials (read-only research cache, do not commit)
 data/research/唐书房/*.pdf
