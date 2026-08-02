@@ -315,9 +315,9 @@ def test_product_analysis_requires_relative_competition_and_evidence() -> None:
     assert "高毛利" in skill
     assert "不能单独证明" in skill
     for question in (
-        "客户为什么从它这里购买并持续复购或续约",
-        "为什么其他资本没有提供更高性价比",
-        "假设巨头携巨资进入",
+        "客户为什么选择并持续选择公司的产品或服务",
+        "现有对手为什么不能靠降价或更高性价比抢走客户",
+        "新对手携巨资进入，公司凭什么守住并扩大市场",
     ):
         assert question in skill
     for grade in ("`高`", "`中`", "`低`", "`需人工`"):
@@ -349,7 +349,7 @@ def test_value_profile_visibly_invokes_product_analysis_for_every_product_sectio
         "不得因目标section已有正文或标为已完成而跳过",
         "普通worker不得代写或补写",
         "隐藏的`product-analysis`调用回执",
-        "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、财报映射和失效测试",
+        "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、`产品竞争力三问结论`、财报映射和失效测试",
     ):
         assert requirement in skill
 
@@ -3760,7 +3760,10 @@ def test_value_profile_discovery_contract() -> None:
         "### Step 6",
         1,
     )[0]
-    worker_example = skill.split("Output requirements:", 1)[1]
+    worker_contract = skill.split("#### 3b. Scoped research dispatch", 1)[1].split(
+        "#### 3c. Main-agent review",
+        1,
+    )[0]
 
     for requirement in (
         "可选checkpoint键`research_ledger`",
@@ -3889,7 +3892,7 @@ def test_value_profile_discovery_contract() -> None:
     ):
         assert legacy not in skill
 
-    assert "无法核实 → `证据不足, 需人工补充`" not in worker_example
+    assert "无法核实 → `证据不足, 需人工补充`" not in worker_contract
 
 
 def test_high_cost_cyclical_has_no_investable_pb_liquidation_route() -> None:
