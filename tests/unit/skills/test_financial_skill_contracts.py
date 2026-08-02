@@ -331,6 +331,52 @@ def test_value_profile_delegates_product_sections_without_moving_moat_ownership(
     assert "产品与流程证据" in template
 
 
+def test_value_profile_visibly_invokes_product_analysis_for_every_product_section() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for requirement in (
+        "调用`product-analysis`前先向用户输出",
+        "正在调用product-analysis",
+        "--target-profile <absolute-path>",
+        "--section <part1/§1.1|part1/§1.3>",
+        "不得因目标section已有正文或标为已完成而跳过",
+        "普通worker不得代写或补写",
+        "隐藏的`product-analysis`调用回执",
+        "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、财报映射和失效测试",
+    ):
+        assert requirement in skill
+
+
+def test_pop_mart_product_sections_apply_product_analysis_structure() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    product = report.split("### §1.1 公司核心资产、主营产品和服务", 1)[1].split(
+        "### §1.2 公司客户", 1
+    )[0]
+    differentiation = report.split("### §1.3 差异化", 1)[1].split("### §1.4 盈利模式", 1)[0]
+
+    for requirement in (
+        "**一句话产品本质:**",
+        "**核心产品与利润地图:**",
+        "**设计与交付流程:**",
+        "**流程经济性与单位经济:**",
+        "**财报勾稽:**",
+        "product-analysis;mode=methodology",
+    ):
+        assert requirement in product
+
+    for requirement in (
+        "**客户任务与购买标准:**",
+        "**竞争阶梯与龙头差距:**",
+        "直接竞品：TOP TOY",
+        "替代方案：布鲁可",
+        "适用龙头：泡泡玛特",
+        "**核心价值机制:**",
+        "**财报映射与失效条件:**",
+        "product-analysis;mode=methodology",
+    ):
+        assert requirement in differentiation
+
+
 def test_value_profile_delegates_contract_details_to_owned_references() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     assert "公共证据规则不在本skill重定义" in skill
@@ -7203,6 +7249,120 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
     )[0]
     assert "#### 行业驱动因素" in history_block
     assert "|驱动因素|影响方向|适用期间|证据|来源|" in history_block
+
+
+def test_related_procurement_private_quotes_are_a_qualified_limitation_not_a_blocker() -> None:
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+    alignment = read(
+        SKILLS_ROOT / "management-analysis" / "references" / "related-party-alignment.md"
+    )
+
+    for text in (management, redflag, profile, template, alignment):
+        assert "采购台账或向独立OEM询价通常属于公司内部资料" in text
+        assert "不得仅因公开资料无法取得而标`需人工`或阻断估值" in text
+        assert "不得据此反向证明关联采购价格公允" in text
+        assert "已披露交易金额、条款、期末余额、治理程序和可得代理证据" in text
+        assert "异常定价、资金转移或无法解释的现金流异常" in text
+
+
+def test_pop_mart_profile_treats_private_procurement_quotes_as_monitoring_only() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    alignment = report.split("### §4.8 大股东与上市公司利益一致性检查", 1)[1].split(
+        "## §5 风险分析", 1
+    )[0]
+
+    assert "关联采购独立报价" not in part_zero
+    assert "取得关联采购按交易对手和SKU拆分及独立报价" not in part_zero
+    assert "| 2 | 关联采购不公允定价 | 有异常迹象 | 预警 |" in alignment
+    assert "该项按预警通过" in alignment
+    assert "采购台账或向独立OEM询价通常属于公司内部资料" in alignment
+    assert "公开资料基本无法取得" in alignment
+    assert "不能证明采购价格公允，也不能证明存在利益输送" in alignment
+    assert "关联采购38.08亿元" in alignment
+    assert "约占销售成本36.8%" in alignment
+
+
+def test_qualified_public_regulatory_clearance_is_not_blocked_by_manifest_perfection() -> None:
+    management = read(SKILL_PATHS["management-analysis"])
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+
+    for text in (management, redflag, profile, template):
+        assert "公开记录限定通过" in text
+        assert "截至AS_OF，适用公开来源未发现其他重大事件" in text
+        assert "不得表述为绝对不存在" in text
+        assert "完整事件清单本身不构成估值阻断" in text
+        assert "未解决的正面命中或证据冲突" in text
+
+
+def test_pop_mart_profile_uses_qualified_public_regulatory_clearance() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    pre_scan = report.split("### §4.pre 风险一票否决前置扫描", 1)[1].split(
+        "### §4.1 专注主业，眼光长远", 1
+    )[0]
+
+    assert "严格监管事件清单" not in part_zero
+    assert "**管理层否决:** 否" in part_zero
+    assert (
+        "workflow-state:management_pending=false;pending_gate=false;unresolved_rows=[]" in part_zero
+    )
+    assert "| 虚假陈述处罚记录 | 否 |" in pre_scan
+    assert "截至2026-08-02，适用公开来源未发现其他重大事件" in pre_scan
+    assert "四项2021-2022年经营合规处罚" in pre_scan
+    assert "金鹰诉讼" in pre_scan
+    assert "不得表述为绝对不存在" in pre_scan
+
+
+def test_private_inventory_aging_uses_proxies_without_becoming_an_automatic_blocker() -> None:
+    redflag = read(SKILL_PATHS["financial-redflag-scan"])
+    profile = read(SKILL_PATHS["value-profile"])
+    template = read(SKILLS_ROOT / "value-profile" / "template-zh.md")
+
+    for text in (redflag, profile, template):
+        assert "汇总库存年龄或减值信息可在部分发行人的公开披露中取得" in text
+        assert "不得预设全部属于内部资料" in text
+        assert "区分汇总库存年龄与SKU级明细" in text
+        assert "若可比同业存在同口径披露而目标公司未披露" in text
+        assert "先核对业务模式、会计口径、监管要求和重要性" in text
+        assert "只有该差异确实削弱风险判断时才记录透明度预警" in text
+        assert "否则仅说明披露限制" in text
+        assert "SKU级库存库龄、期后销售比例和售价经适用公开来源核查仍未披露时" in text
+        assert "可能涉及内部经营资料、审计底稿或商业敏感信息" in text
+        assert "不得预设未来一定不会披露" in text
+        assert "完成历史和当期公开披露检查后" in text
+        assert "不得仅因未披露而标`需人工`或阻断估值" in text
+        assert "存货余额与构成、周转天数、拨备率、审计程序、历史和同业代理及压力测试" in text
+        assert "不得反向证明不存在滞销或减值不足" in text
+        assert "出现正面异常且可能实质改变结论时" in text
+        assert "才考虑升级" in text
+
+
+def test_pop_mart_inventory_private_data_is_monitoring_not_manual_review() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    part_zero = report.split("## Part 1", 1)[0]
+    redflag = report.split("### §4.5 负面清单 - 排雷风险", 1)[1].split(
+        "### §4.6 基准日价格与仓位", 1
+    )[0]
+
+    assert "库存库龄与期后销售" not in part_zero
+    assert "取得2025年库存SKU库龄和期后销售" not in part_zero
+    assert "| 14 | 存货占比及减值风险 | 是 | 预警 |" in redflag
+    assert "SKU级库存库龄、期后销售比例和售价" in redflag
+    assert "其可能涉及公司内部经营资料、审计底稿或商业敏感信息" in redflag
+    assert "商业敏感信息" in redflag
+    assert "历年公开材料未披露" in redflag
+    assert "也可能在后续报告中披露" in redflag
+    assert "当前缺失本身不构成独立估值阻断" in redflag
+    assert "后续新年报仍需复核" in redflag
+    assert "额外拨备约1.68亿元" in redflag
+    assert "约占2025年税前利润1.0%" in redflag
+    assert "不能证明不存在滞销或减值不足" in redflag
 
 
 def test_value_profile_documents_v11_series_and_claim_state_rendering() -> None:
