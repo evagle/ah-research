@@ -125,19 +125,33 @@ profile必须把每节清单写入HTML注释，同时保留原标记：
 ## 8. 行业bundle固定块
 
 行业章节只按已校验的`industry_bundle.status`写作，不从来源数量、段落是否写完
-或叙述语气推断证据状态。固定块及顺序如下，不得合并或改名：
+或叙述语气推断证据状态。固定块按下列逐行名称和顺序输出，不得合并或改名：
 
-1. `市场定义矩阵`
-2. `历史市场规模与逐年增速`
-3. `预测版本对照`
-4. `集中度与竞争对手`
-5. `当期部分期间`
-6. `口径断点与未解决缺口`
+市场定义矩阵
+历史市场规模与逐年增速
+预测版本对照
+集中度与竞争对手
+当期部分期间
+口径断点与未解决缺口
 
 每张表逐行保留市场范围、计量口径、提供方和lineage。机器引用属于同一表的
 证据记录，但必须紧跟该表写入`机器引用清单`HTML注释，不得显示在渲染正文中。
 最后一块另保留角色状态、缺失期间、ledger path、终态路由状态和下一步所需
 证据。
+
+所有数值表只从validated `accepted_candidates`填值；`industry_bundle`只决定
+role状态、缺失期间和口径断点。历史块中的`行业驱动因素`子表只渲染
+`industry-drivers` role的accepted evidence。
+
+缺口行按机器字段直接映射：
+
+- 口径断点依次取`scope_breaks[].from_scope_fingerprint`、
+  `scope_breaks[].to_scope_fingerprint`和`scope_breaks[].reason`。
+- route终态逐项取对应`ledger.attempts[].terminal_reason`。
+- `blocked`先取`ledger.next_escalation`,为空时列出
+  `ledger.unattempted_routes`。
+- `exhausted`且没有下一route时写
+  `new publication/data release required`。
 
 状态写法：
 

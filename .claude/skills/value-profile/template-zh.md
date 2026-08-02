@@ -537,9 +537,9 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 #### 市场定义矩阵
 
-|角色|市场范围|计量口径|提供方|lineage|地域|产品边界|主市场匹配|
-|---|---|---|---|---|---|---|---|
-|market-definition|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[是/否—scope break]|
+|市场名称|地域|覆盖人群|产品范围|渠道范围|计量口径|单位|提供方|lineage|
+|---|---|---|---|---|---|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
 
 <!-- **机器引用清单:**
 - 市场定义矩阵:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
@@ -547,19 +547,25 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 #### 历史市场规模与逐年增速
 
-|年度|市场规模|逐年增速|市场范围|计量口径|提供方|lineage|
-|---|---:|---:|---|---|---|---|
-|[最近完整年度-4至最近完整年度逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
+|年度|市场规模|单位|同比增速|区间CAGR|值状态|scope fingerprint|计量口径|提供方|lineage|来源|
+|---|---:|---|---:|---:|---|---|---|---|---|---|
+|[最近完整年度-4至最近完整年度逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[observed/historical-estimate]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
+
+#### 行业驱动因素
+
+|驱动因素|影响方向|适用期间|证据|来源|
+|---|---|---|---|---|
+|[仅填写industry-drivers角色的accepted candidate]|[正向/负向/混合]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
 <!-- **机器引用清单:**
-- 历史市场规模与逐年增速:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
+- 历史市场规模与逐年增速及行业驱动因素:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
 -->
 
 #### 预测版本对照
 
-|预测版本|发布日期|预测年度|预测值|市场范围|计量口径|提供方|lineage|修订关系|
-|---|---|---|---:|---|---|---|---|---|
-|[待填写]|[待填写]|[未来3至5年逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[prior/later/替代/并行]|
+|发布日期|数据版本|预测年度|预测值|单位|方法与来源注释|原始提供方|委托关系|计量口径|lineage|替代/修订关系|
+|---|---|---|---:|---|---|---|---|---|---|---|
+|[待填写]|[data vintage]|[未来3至5年逐年填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[prior/later/替代/并行]|
 
 <!-- **机器引用清单:**
 - 预测版本对照:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
@@ -567,9 +573,9 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 #### 集中度与竞争对手
 
-|期间|CR5/CR10|目标公司份额|具名竞争对手份额|市场范围|计量口径|提供方|lineage|
-|---|---:|---:|---|---|---|---|---|
-|[待填写]|[待填写]|[待填写]|[对手名称:份额]|[待填写]|[待填写]|[待填写]|[待填写]|
+|期间|CR5/CR10|目标公司排名|目标公司份额|完整市场分母|竞争对手名称|竞争对手排名|竞争对手份额|计量口径|提供方|lineage|来源|
+|---|---:|---:|---:|---:|---|---:|---:|---|---|---|---|
+|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[每个具名对手逐行]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
 <!-- **机器引用清单:**
 - 集中度与竞争对手:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
@@ -588,9 +594,9 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 #### 当期部分期间
 
-|期间标签|数值或份额|不可年化说明|市场范围|计量口径|提供方|lineage|
-|---|---:|---|---|---|---|---|
-|[H1/YTD/最新季度/not-applicable]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|
+|期间标签|指标|数值|单位|市场范围|计量口径|提供方|lineage|来源|
+|---|---|---:|---|---|---|---|---|---|
+|[H1/YTD/最新季度/not-applicable]|[规模/份额/排名]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[待填写]|[candidate ID/页码或URL]|
 
 <!-- **机器引用清单:**
 - 当期部分期间:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]
@@ -598,9 +604,9 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 
 #### 口径断点与未解决缺口
 
-|角色状态|缺失期间|市场范围|计量口径|提供方|lineage|ledger path|终态路由状态|下一步所需证据|
+|角色|角色状态|缺失期间|from scope fingerprint|to scope fingerprint|口径断点原因|ledger path|终态路由状态|下一步所需证据|
 |---|---|---|---|---|---|---|---|---|
-|[accepted/partial/exhausted/blocked/not-applicable]|[逐年列出/无]|[主市场或scope break]|[待填写]|[待填写]|[待填写]|[绝对路径]|[accepted/exhausted/blocked]|[具体表名、版本、期间或访问条件]|
+|[八个role逐项填写]|[accepted/partial/exhausted/blocked/not-applicable]|[逐年列出/无]|[scope_breaks映射/无]|[scope_breaks映射/无]|[scope_breaks.reason/无]|[绝对路径]|[attempts[].terminal_reason逐route列出]|[next_escalation/unattempted_routes/new publication/data release required]|
 
 <!-- **机器引用清单:**
 - 口径断点与未解决缺口:[section_id/source_type/artifact_path/source_pdf_sha256/artifact_sha256/page/quote]

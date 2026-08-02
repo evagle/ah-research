@@ -176,9 +176,18 @@ independently:
 - `"{provider}" "{industry}" forecast "{prior year}" filetype:pdf`
 - `"{provider}" "{industry}" forecast "{later year}" filetype:pdf`
 
+Create `<base-forecast-claim-id>:prior-vintage` and
+`<base-forecast-claim-id>:later-vintage` as distinct child claim IDs under the
+`industry-forecast` role. The accepted base forecast claim remains stopped.
+Only unresolved version child claim IDs continue through planner layers.
+Apply the ordinary positive-claim stop rule separately to each child.
+
 Record each vintage's publication date, forecast window, methodology, scope,
 lineage, and revision relationship. A missing prior or later version remains a
 terminally ledgered search result; it does not erase an accepted forecast.
+Exclude broker target prices, broker ratings, and issuer earnings forecasts.
+They are valuation or issuer-performance signals, not industry market
+forecasts, even when they appear in the same broker report.
 
 ## macro/official statistics
 

@@ -812,7 +812,7 @@ def test_source_discovery_uses_the_gated_planner_handoff_contract() -> None:
             "single `inventory_receipt`",
             "instead of constructing a second route list",
             "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
-            "`ledger_sha256`, and `status`",
+            "`ledger_sha256`, `status`, and `industry_bundle`",
             "An empty result without a terminal ledger is invalid output.",
         ),
     )
@@ -895,9 +895,28 @@ def test_industry_bundle_builds_all_role_requests_before_gated_routing() -> None
             "Only unresolved roles continue through the planner.",
             "Broader, narrower, or adjacent markets cannot fill the primary-market requirement.",
             "`evaluate_industry_bundle`",
-            "`industry_bundle`, `ledger_path`, and `ledger_sha256`",
+            "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
+            "`ledger_sha256`, `status`, and `industry_bundle`",
             "publishable-with-gaps",
             "Never convert `exhausted` or `blocked` into absence.",
+        ),
+    )
+
+
+def test_forecast_version_chase_uses_child_claims_without_reopening_base() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "`<base-forecast-claim-id>:prior-vintage`",
+            "`<base-forecast-claim-id>:later-vintage`",
+            "distinct child claim IDs under the `industry-forecast` role",
+            "The accepted base forecast claim remains stopped.",
+            "Only unresolved version child claim IDs continue through planner layers.",
+            "Positive claims stop immediately after the acceptance gate passes.",
         ),
     )
 
@@ -918,6 +937,12 @@ def test_search_playbook_requires_forecast_version_chase_queries() -> None:
             '"{provider}" "{industry}" forecast "{later year}" filetype:pdf',
         ),
     )
+    for excluded_signal in (
+        "broker target prices",
+        "broker ratings",
+        "issuer earnings forecasts",
+    ):
+        assert excluded_signal in playbook
 
 
 def test_offline_cross_industry_regression_stops_and_resumes_without_redispatch() -> None:

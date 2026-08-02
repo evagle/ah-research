@@ -3087,8 +3087,13 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
     assert "用户可见中文不得使用“闭合”" in style
     for replacement in ("已核实", "证据完整", "已完成判断", "仍缺资料", "尚不能判断"):
         assert replacement in style
-    style_without_fixed_industry_block = style.replace("口径断点与未解决缺口", "")
-    assert "解决缺口" not in style_without_fixed_industry_block
+    mandated_heading = "口径断点与未解决缺口"
+    style_lines = style.splitlines()
+    assert style_lines.count(mandated_heading) == 1
+    style_without_fixed_industry_heading = "\n".join(
+        line for line in style_lines if line != mandated_heading
+    )
+    assert "解决缺口" not in style_without_fixed_industry_heading
     for natural_phrase in ("补齐资料", "完成核验", "处理完这个问题"):
         assert natural_phrase in style
     assert "Step 3c必须检查并改写“闭合”" in profile
@@ -6925,10 +6930,21 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
 
     assert "Consume `industry_bundle.status`; do not infer completion from prose." in skill
     assert '`research_contracts.validate_payload("industry-bundle", industry_bundle)`' in skill
+    assert "Populate every industry table only from validated `accepted_candidates`." in skill
+    assert (
+        "`industry_bundle` controls role status and gaps only; it does not supply table values."
+        in skill
+    )
+    assert (
+        "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
+        "`ledger_sha256`, `status`, and `industry_bundle`"
+    ) in skill
     for block in blocks:
         assert block in skill
         assert block in template
         assert block in style
+    block_positions = [template.index(f"#### {block}") for block in blocks]
+    assert block_positions == sorted(block_positions)
 
     for requirement in (
         "`complete`: render all six blocks normally.",
@@ -6944,16 +6960,134 @@ def test_value_profile_consumes_bundle_status_and_renders_fixed_industry_blocks(
         "### §2.3竞争对手营收净利对比",
         1,
     )[0]
-    for field in ("市场范围", "计量口径", "提供方", "lineage", "机器引用"):
-        assert field in industry_template
-    for field in (
-        "角色状态",
-        "缺失期间",
-        "ledger path",
-        "终态路由状态",
-        "下一步所需证据",
+    expected_headers = {
+        "市场定义矩阵": (
+            "市场名称",
+            "地域",
+            "覆盖人群",
+            "产品范围",
+            "渠道范围",
+            "计量口径",
+            "单位",
+            "提供方",
+            "lineage",
+        ),
+        "历史市场规模与逐年增速": (
+            "年度",
+            "市场规模",
+            "单位",
+            "同比增速",
+            "区间CAGR",
+            "值状态",
+            "scope fingerprint",
+            "计量口径",
+            "提供方",
+            "lineage",
+            "来源",
+        ),
+        "预测版本对照": (
+            "发布日期",
+            "数据版本",
+            "预测年度",
+            "预测值",
+            "单位",
+            "方法与来源注释",
+            "原始提供方",
+            "委托关系",
+            "计量口径",
+            "lineage",
+            "替代/修订关系",
+        ),
+        "集中度与竞争对手": (
+            "期间",
+            "CR5/CR10",
+            "目标公司排名",
+            "目标公司份额",
+            "完整市场分母",
+            "竞争对手名称",
+            "竞争对手排名",
+            "竞争对手份额",
+            "计量口径",
+            "提供方",
+            "lineage",
+            "来源",
+        ),
+        "当期部分期间": (
+            "期间标签",
+            "指标",
+            "数值",
+            "单位",
+            "市场范围",
+            "计量口径",
+            "提供方",
+            "lineage",
+            "来源",
+        ),
+        "口径断点与未解决缺口": (
+            "角色",
+            "角色状态",
+            "缺失期间",
+            "from scope fingerprint",
+            "to scope fingerprint",
+            "口径断点原因",
+            "ledger path",
+            "终态路由状态",
+            "下一步所需证据",
+        ),
+    }
+    for index, block in enumerate(blocks):
+        start = industry_template.index(f"#### {block}")
+        end = (
+            industry_template.index(f"#### {blocks[index + 1]}")
+            if index + 1 < len(blocks)
+            else len(industry_template)
+        )
+        block_text = industry_template[start:end]
+        table_header = next(
+            line for line in block_text.splitlines() if line.startswith("|") and line.endswith("|")
+        )
+        assert (
+            tuple(cell.strip() for cell in table_header.strip("|").split("|"))
+            == (expected_headers[block])
+        )
+        assert "**机器引用清单:**" in block_text
+
+    history_block = industry_template.split("#### 历史市场规模与逐年增速", 1)[1].split(
+        "#### 预测版本对照",
+        1,
+    )[0]
+    assert "#### 行业驱动因素" in history_block
+    assert "|驱动因素|影响方向|适用期间|证据|来源|" in history_block
+
+
+def test_value_profile_derives_gap_rendering_from_bundle_and_ledgers() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+    combined = f"{skill}\n{style}"
+
+    for mapping in (
+        "`scope_breaks[].from_scope_fingerprint`",
+        "`scope_breaks[].to_scope_fingerprint`",
+        "`scope_breaks[].reason`",
+        "`ledger.attempts[].terminal_reason`",
+        "`ledger.next_escalation`",
+        "`ledger.unattempted_routes`",
+        "`new publication/data release required`",
     ):
-        assert field in industry_template.split("口径断点与未解决缺口", 1)[1]
+        assert mapping in combined
+    assert "blocked" in combined
+    assert "exhausted" in combined
+
+
+def test_value_profile_excludes_non_industry_forecast_signals() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+
+    for excluded_signal in (
+        "broker target prices",
+        "broker ratings",
+        "issuer earnings forecasts",
+    ):
+        assert excluded_signal in skill
 
 
 def test_read_filing_external_research_handoff_contract() -> None:

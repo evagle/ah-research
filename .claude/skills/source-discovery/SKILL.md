@@ -88,7 +88,9 @@ Route count is not an acceptance criterion.
 For an absence claim, `technical-failure`, `access-unavailable`, and
 `request-budget-exhausted` are `blocked`, never factual absence.
 
-Return exactly these top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, and `status`.
+Return exactly these seven top-level fields: `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`.
+For a non-industry request, set `industry_bundle` to `null`; do not remove the
+field or change the other six handoff fields.
 An empty result without a terminal ledger is invalid output. `unresolved_claims`
 contains only terminal `blocked`, `conflict`, or `exhausted` claims; do not turn
 an incomplete route into a conclusion.
@@ -202,16 +204,27 @@ periods, scope fingerprint, lineage, and terminal ledger paths.
 After finding any forecast, run a mandatory version chase for the discovered
 table and provider. Search its publication vintage, prior version, and later
 version; preserve revisions and scope breaks rather than choosing one vintage
-silently. The version chase is part of the `industry-forecast` role even when
-the first forecast candidate passes its claim-level acceptance gate.
+silently. Create `<base-forecast-claim-id>:prior-vintage` and
+`<base-forecast-claim-id>:later-vintage` as distinct child claim IDs under the
+`industry-forecast` role. The accepted base forecast claim remains stopped.
+Only unresolved version child claim IDs continue through planner layers.
+Each accepted child stops independently under the ordinary positive-claim
+rule; version chase never reopens or redispatches the accepted base claim.
 
 After every role is terminal for the current run, call
 `evaluate_industry_bundle` with the subject, `AS_OF`, primary market scope
 fingerprint, all eight role outcomes, and scope breaks.
-Return `industry_bundle`, `ledger_path`, and `ledger_sha256`. The bundle status is
+Return `requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`. The bundle status is
 `complete`, `publishable-with-gaps`, or `blocked`; never infer a different
 status from narrative prose.
 Never convert `exhausted` or `blocked` into absence.
+
+Accepted industry values remain in validated `accepted_candidates`; the
+`industry_bundle` aggregates role state, required and missing periods, scope
+breaks, lineage, and ledger paths. Exclude broker target prices, broker ratings,
+and issuer earnings forecasts from industry candidate acceptance. A broker
+industry table can qualify when its underlying market evidence passes the
+normal gate, but its valuation opinion and issuer profit model cannot.
 
 At the start, translate the request into claim types, time bounds, geography,
 industry vocabulary, acceptable evidence types, and any source restrictions.
