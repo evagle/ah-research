@@ -209,6 +209,10 @@ def _document(title: str, body: str) -> str:
       background: #f8f9fa;
       font-weight: 600;
     }}
+    .hierarchy-table.hierarchy-normal .hierarchy-group td,
+    .hierarchy-table.hierarchy-normal .hierarchy-level-2 {{
+      font-weight: 400;
+    }}
     .hierarchy-table .hierarchy-subtotal td {{
       font-weight: 600;
     }}
