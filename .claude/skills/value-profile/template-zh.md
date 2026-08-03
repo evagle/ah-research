@@ -209,8 +209,8 @@ Skill 在调用时会复制本模板到 profiles/<ticker>-<date>.md, 然后逐�
 - [分析单位、单位收入、材料或履约成本、人工、折旧、渠道、售后及资本投入]
 - [未披露成本只给带公式、来源、假设和敏感性的区间]
 
-**财报勾稽:**
-- [映射毛利率、费用率、库存、应收、合同负债、资本开支和经营现金流]
+**财务数据核对:**
+- [说明毛利率、费用率、库存、应收、合同负债、资本开支和经营现金流之间的关系]
 
 **产品与流程证据:**
 - [claim/evidence/counterevidence/citation_ids/evidence_grade]
@@ -2216,9 +2216,9 @@ role_status/claim_states/missing_periods/missing_coverage/from_scope_fingerprint
 | reinsurance_dependency | | | |
 | related_party_transactions | | | |
 
-#### 三表勾稽
+#### 三张财务报表一致性检查
 
-| 勾稽 | 结果 | 严重度 | 证据与解释 |
+| 检查项目 | 结果 | 严重度 | 证据与解释 |
 |---|---|---|---|
 | 应有销售收现与现金流量表实际值 | | | |
 | 销售收现比 | | | |

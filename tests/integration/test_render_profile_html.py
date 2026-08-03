@@ -97,6 +97,14 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert ".hierarchy-level-3" in html
     assert ".hierarchy-total" in html
     assert "font-variant-numeric: tabular-nums" in html
+    normal_group_rule = html.split(".hierarchy-table.hierarchy-normal .hierarchy-group td", 1)[
+        1
+    ].split("}", 1)[0]
+    normal_child_rule = html.split(".hierarchy-table.hierarchy-normal .hierarchy-level-2", 1)[
+        1
+    ].split("}", 1)[0]
+    assert "font-weight: 400" in normal_group_rule
+    assert "font-weight: 400" in normal_child_rule
     assert "机器引用清单" not in html
     assert "年报第10页" not in html
     assert "年报第20页" not in html
