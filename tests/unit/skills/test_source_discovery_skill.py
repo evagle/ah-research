@@ -298,6 +298,24 @@ def test_runtime_uses_noninteractive_probing_before_headless_browser() -> None:
     )
 
 
+def test_runtime_never_uses_visible_or_user_driven_browser_challenges() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Browser automation always uses a fresh isolated headless context.",
+            "Never open visible Chrome",
+            "never attach to a personal browser profile",
+            "never ask the user to click, approve, log in, or solve a CAPTCHA",
+            "record the route as `blocked`",
+            "continue with the next same-function fallback",
+        ),
+    )
+
+
 def test_a_share_disclosure_body_prefers_cninfo_with_headless_sse_fallback() -> None:
     skill = require_text(SKILL_ROOT / "SKILL.md")
     search_playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
@@ -814,6 +832,50 @@ def test_source_discovery_uses_the_gated_planner_handoff_contract() -> None:
             "`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, "
             "`ledger_sha256`, `status`, and `industry_bundle`",
             "An empty result without a terminal ledger is invalid output.",
+        ),
+    )
+
+
+def test_source_discovery_defines_exhaustive_search_beyond_annual_reports() -> None:
+    skill = require_text(SKILL_ROOT / "SKILL.md")
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    combined = " ".join(f"{skill}\n{playbook}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Exhaustion is claim-scoped coverage, not a request count",
+            "Annual and interim reports are one evidence family.",
+            "They cannot by themselves establish external market size, relative market share, customer behavior, competitor capability, industry forecasts, or product superiority.",
+            "Public authorities: regulators, statistical agencies, ministries, exchanges, industry bureaus, and official association datasets.",
+            "Subject relationships: named competitors and category leaders",
+            "Original research: measurement bodies, data providers, consulting firms",
+            "Document routes: final prospectuses, listing applications, broker company reports, broker industry reports",
+            "Broad discovery: uncataloged original publishers",
+            "each required period, the subject, every named competitor, category synonyms, local-language and English terms",
+            "all discovered citations have been traced to an original or documented as unrecoverable",
+            "no unattempted applicable route remains in the inventory",
+            "accepted partial series and useful scope-break observations are retained",
+            "At the broad dynamic layer, repeat citation and bibliography tracing until a pass finds no new fitting original route.",
+            "This pass is required for `exhausted`",
+        ),
+    )
+
+
+def test_original_research_articles_are_not_mislabeled_as_media_reposts() -> None:
+    playbook = require_text(SKILL_ROOT / "references/search-playbook.md")
+    qianzhan = require_text(SKILL_ROOT / "references/sources/qianzhan.yaml")
+    combined = " ".join(f"{playbook}\n{qianzhan}".split())
+
+    assert_contains_all(
+        combined,
+        (
+            "Classify a source by the actual publisher and its claim-specific methodology",
+            "do not downgrade it to a media repost merely because it is an HTML article",
+            "a reliable research institute is not an official statistics agency",
+            "前瞻产业研究院",
+            "original research publisher",
+            "preserve the metric definition",
         ),
     )
 

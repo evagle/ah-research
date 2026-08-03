@@ -1709,6 +1709,25 @@
       "technical_restriction": "Recheck the target report because access can vary by campaign"
     }
   },
+  "qianzhan": {
+    "status": "reachable",
+    "last_checked": "2026-08-03T00:00:00+08:00",
+    "final_url": "https://bg.qianzhan.com/trends/",
+    "limitation": "Public original research articles and their charts are anonymously accessible. Full underlying industry reports may be commercial, and public articles do not always disclose the complete estimation methodology. Treat Qianzhan as the original research publisher when the page says 来源：前瞻产业研究院; preserve the metric definition and do not relabel it as official statistics.",
+    "observed_error": {
+      "state": "none",
+      "category": "none",
+      "message": "Original article HTML and chart assets were retrieved noninteractively."
+    },
+    "evidence_level": "High",
+    "reviewed_probe": {
+      "redirect_chain": "No material redirect recorded",
+      "response_status": "Public article HTML and chart images returned successfully",
+      "recognizable_content": "Article title, publication time, source attribution, quantitative findings, chart titles, and cited Qianzhan report",
+      "access_indications": "Full underlying reports may be paid; public trend articles are readable without login",
+      "technical_restriction": "Public articles may omit detailed estimation methodology"
+    }
+  },
   "questmobile": {
     "status": "reachable",
     "last_checked": "2026-08-02T00:00:00+08:00",

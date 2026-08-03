@@ -1,0 +1,27 @@
+{
+  "ticker": "00700.HK",
+  "exchange": "HK",
+  "AS_OF": "2026-04-09",
+  "query_issuer_code": "00700",
+  "listing_date": "2004-06-16",
+  "listing_codes": {
+    "HK": "00700"
+  },
+  "listing_dates": {
+    "HK": "2004-06-16"
+  },
+  "listing_profile": {
+    "source_url": "https://www1.hkex.com.hk/hkexwidget/data/getequityquote",
+    "http_method": "GET",
+    "request_encoding": "query",
+    "query_params": {
+      "issuer_code": "00700"
+    },
+    "response_schema": "canonical_listing_profile_v1",
+    "request_bootstrap": {
+      "type": "hkex_equity_quote_token_v1",
+      "page_url": "https://www.hkex.com.hk/Market-Data/Securities-Prices/Equities/Equities-Quote"
+    },
+    "source_file": "/Users/brian_huang/repos/ah-research/data/filings/00700.HK/evidence/listing-profile/hkex-equity-quote.json"
+  }
+}

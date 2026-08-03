@@ -8,7 +8,7 @@
 
 ## §3.pre — 三大前提 (§1 / §3 / §5 前置 gate)
 
-- **§3.pre 三大前提 judgement**: 子 agent 在 §1 / §3 / §5 定性段落前先输出3行判定, 依据 §2.2.1 (见 `references/rules.md`)。审计/CFO/ROE 属纯财务数据检查, 与业务理解无关, 所以可做前置 gate。任一假/存疑 → §2.2.2 全局降级。
+- **§3.pre 三大前提 judgement**: 子 agent 在 §1 / §3 / §5 定性段落前先输出3行判定, 依据 §2.2.1 (见 `references/rules.md`)。审计/CFO/ROE 属纯财务数据检查, 与业务理解无关, 所以可做前置 gate。三大前提为假或存疑只阻断数字估值；定性研究、产品分析和不依赖该前提的判断继续完成。
 
 **§1.8 能力圈四问 ≠ 前置 gate**: 四问是 **§1.1-§1.7 拆解完成后**的 synthesis 章节（见 §2.6）, 不是 §1.1 开场前的 gate。子 agent 在 §1.1-§1.7 全部填完之后, 基于已建立的业务理解综合回答四问。理由: 能力圈判定需要对业务先有认知, 才能给出实质性答案; 前置 gate 版本 = "没读就下结论", 与价值投资"看懂再下注"精神反着走。
 
@@ -21,14 +21,12 @@
 
 2. **Audit `data/filings/<ticker>/`**:
    - 若目录缺失 OR 匹配 `年报-*.pdf` 的文件 < **2** 份:
-     > `❌ 缺少年报 PDF. 是否 auto-run python scripts/download_filings.py <ticker> --years 5 --include-prospectus? [yes / no / show-command]`
-     - `yes` → Bash shell out, stream 输出。exit 0 重 audit; exit 1 打手动 URL (http://www.cninfo.com.cn) 并 abort。
-     - `no` → abort + 手动下载说明。
-     - `show-command` → 打印 CLI 并 abort, 不执行。
+     - Auto mode缺少年报时直接执行下载，不显示`yes/no/show-command`菜单。exit 0后重新audit；失败时记录具体错误并继续同功能官方fallback，只有适用路线terminal后才按state mapping处理受影响结论。
+     - Interactive mode才显示下载命令及`yes/no/show-command`菜单。
    - 否则列出: `Found N 年报（<years>）. 招股说明书: present / missing. research/: K files.`
-   - 检查 `data/filings/<ticker>/research/`, 空则非阻塞 offer `scripts/download_research.py <ticker> --years 3 --depth-only --max 15`。
+   - 检查 `data/filings/<ticker>/research/`；外部证据为空或有缺口时，Auto mode直接把缺口拆成claim交给`source-discovery`，Interactive mode才提供研究菜单。
 
-3. **PDF 预抽取 cache**: 任一 `_extracted/<pdf-stem>/text.md` 缺失 → 双语 offer `for pdf in data/filings/<ticker>/年报-*.pdf; do python scripts/extract_pdf.py "$pdf"; done`。`skip` → 子 agent 读 raw PDF（慢, 无 page markers）。说明: `text.md` 带 `<!-- page N -->` markers, Read 友好; 图表/表格截图 + LLM 描述在 `images/`, 是业务分析金矿。
+3. **PDF 预抽取 cache**: 任一 `_extracted/<pdf-stem>/text.md` 缺失时，Auto mode直接运行`extract_pdf.py`，Interactive mode才询问是否执行。抽取失败时保留原PDF并记录错误，不要求用户操作浏览器。说明: `text.md` 带 `<!-- page N -->` markers, Read 友好; 图表/表格截图 + LLM 描述在 `images/`, 是业务分析金矿。
 
 4. **Derive output path** `profiles/<ticker>-<YYYY-MM-DD>.md`:
    - 今日文件已存在 → 直接加载（continuation session）。
@@ -60,7 +58,7 @@
    ```
 
 3. **Route by mode**:
-   - **Auto mode (default)**: **直接进 Step 3 on next-undone, 不等输入**。Section 完成后回 Step 2 重新印进度表 + 跳下一节, 循环直到: 所有 undone section 填完 / 触发 abort 条件（§3.pre 假、§4 风险一票否决、Step 1 fetcher 失败）/ 达到 Step 6 估值触发条件（≥ 80% 已完成）。
+   - **Auto mode (default)**: **直接进 Step 3 on next-undone, 不等输入**。Section 完成后回 Step 2 重新印进度表 + 跳下一节，直到所有可独立完成的section结束。§3.pre为假或存疑只跳过数字估值；Step 1单一路线失败时继续同功能fallback；只有已确认的一票否决或所有剩余工作都依赖真实阻塞时才终止。
    - **Interactive mode (`--interactive`)**: 印 `[continue / pick-section / exit]` 菜单, 等用户:
      - `continue` → Step 3 on next-undone。
      - `pick-section` → 询问 id; §Q* 去 Step 4; §4.5 去 Step 5; 其他 Step 3。
@@ -122,13 +120,13 @@
 - 填写区 generic, 无 ticker 特定细节。§3 护城河写茅台必须引用茅台镇水源 / 12987 工艺/基酒5年陈化/品牌价格带。
 - §1.8 四问任一 < 50字/品牌复读/结论标签无场景 → §2.6.2 退回; 退回的是 §1.8 本节, 不动 §1.1-§1.7。
 
-**Auto mode 重派方式 (§2.2.4 深调查)**: 不简单重跑同 prompt, 必须**扩大 scope**——指示子 agent (a) 多读 1-2年年报横向追溯趋势 / (b) 增查研报 B 类运营明细 / (c) 展开附注项具体条款 / (d) web search 行业同行数据 / (e) 读招股说明书对应章节 / (f) 查监管披露或交易所问询函。**重派最多2次**; 仍薄弱 → Acceptable 放宽为 `**置信度:** 中` + 填 `**需人工跟进:** <具体缺什么>` 备注, 继续进下一节, 不 abort。Interactive mode 下用户可在 3d 主动 `research more: <hint>` 给方向, 主 agent 不强制自动加深。
+**Auto mode 重派方式 (§2.2.4 深调查)**: 不简单重跑同 prompt。先把外部缺口拆成独立claim交给`source-discovery`,保留已核实的部分证据,并只扩大未解决范围: 多读1-2年年报、展开附注、查招股书和监管披露,再按ledger搜索同行、供应商、行业、协会、学术、网页存档和可信二级来源。同一路线最多重试2次,随后转下一条独立合规路线；不是全部研究只能尝试2次。只有全部适用路线形成validated terminal `blocked/conflict/exhausted`后,才按state mapping决定该结论是否`需人工`。缺失数据只限制它直接支撑的结论,不得自动阻断同节其他问题、其他定性判断或整份profile；保留已核实的部分证据,分别写清“已知什么、可以判断什么、不能判断什么”。只有关键估值输入、法定前置门槛或明确一票否决项仍缺时才阻断对应路线。Interactive mode下用户可在3d主动`research more: <hint>`给方向。
 
 Acceptable 后写中文终稿, 填 `**引用:**` `**置信度:**` `**管理层口径校核:**`（Part 1 §1-§5）。
 
 ### 3d. Save by mode
 
-- **Auto mode (default)**: 3c review 通过 → **隐式 accept**, 直接原子写入 profile（`**置信度:**` 由 3c 写好）, 回 Step 2 找下一节, **不印 menu 不等用户**。3c 连续2次深调查仍不达标 → 隐式 accept 为 `**置信度:** 中` + `**需人工跟进:**` 备注, 继续。
+- **Auto mode (default)**: 3c review通过→**隐式accept**,直接原子写入profile（`**置信度:**`由3c写好）,回Step 2找下一节,**不印menu不等用户**。同一路线连续2次仍不达标时切换下一条独立路线；全部适用路线终态后仍缺关键证据,才按state mapping保存`需人工`。非关键缺口保留部分证据并继续不受影响的判断,不得机械降为中等置信度。
 - **Interactive mode (`--interactive`)**: 印 profile 内容中文 + 双语菜单:
   - `accept` → 保存, 覆盖原内容, 进度标 `已完成`。
   - `edit: <text>` → 应用修改, 保存为 `已完成`。
@@ -168,8 +166,7 @@ Acceptable 后写中文终稿, 填 `**引用:**` `**置信度:**` `**管理层�
 
 触发条件: ≥ 80% section 标 `已完成`。
 
-**前置检查**: 若 §3.pre 三大前提任一假/存疑 → abort:
-> `❌ 估值前置清单未通过（§<which> = 假/存疑）. 无法进入估值. 请先修复 §3.pre, 或将 Part 0 标 "不可估值 — 仅定性研究"。`
+**前置检查**: 若 §3.pre 三大前提任一假/存疑，只阻断本步骤的数字估值并把相关估值section写为条件跳过；不回滚或停止已经完成的定性研究。
 
 **生意类型检查** (§2.3.1): 判定落在6类哪类, "不适用 PE" / "默认回避" → Part 0 标 "定性研究 only", 不输出估值数字。
 

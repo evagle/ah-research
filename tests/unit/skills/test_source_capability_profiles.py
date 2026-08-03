@@ -129,6 +129,7 @@ EXPECTED_PROFILE_IDS = {
     "pop-mart",
     "pwc-china",
     "pwc-us-library",
+    "qianzhan",
     "questmobile",
     "roland-berger",
     "sec-edgar",

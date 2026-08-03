@@ -35,13 +35,17 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
 
 恢复账本为/Users/example/research/source-index.md。
 
-## 风险
+## Part 1 - 风险
 
 **引用:**
 - 年报第20页
 - 交易所公告第3页
 
 **置信度:** 高
+
+### §4.1 风险细分
+
+#### §Q1 供应链
 
 <div class="signal-list">
   <div class="signal-item signal-positive"><span class="signal-dot"></span><span>盈利能力强。</span></div>
@@ -83,6 +87,17 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert html.startswith("<!doctype html>")
     assert "<title>公司 &amp; 测试</title>" in html
     assert '<nav class="toc"' in html
+    toc = html.split('<nav class="toc"', 1)[1].split("</nav>", 1)[0]
+    assert "执行摘要" in toc
+    assert "Part 1 - 风险" in toc
+    assert "收入结构" in toc
+    assert "公司 &amp; 测试" in toc
+    assert "§4.1 风险细分" in toc
+    assert "§Q1 供应链" in toc
+    assert 'class="toc-level-2"' in toc
+    assert 'class="toc-level-1"' in toc
+    assert 'class="toc-level-3"' in toc
+    assert 'class="toc-level-4"' in toc
     assert 'id="section-1"' in html
     assert 'class="table-scroll"' in html
     assert 'class="table-heading"' in html
@@ -119,7 +134,16 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert "schema_version" not in html
     assert "/Users/example/research/source-index.md" not in html
     assert "收入结构" in html
+    assert ">Part 1 - 风险</h2>" in html
+    assert ">§4.1 风险细分</h3>" in html
+    assert ">§Q1 供应链</h4>" in html
     assert "@media (max-width: 900px)" in html
+    mobile_css = html.split("@media (max-width: 900px)", 1)[1]
+    assert ".toc {" in mobile_css
+    assert "position: static;" in mobile_css
+    assert "max-height: none;" in mobile_css
+    assert ".toc-level-3, .toc-level-4 { padding-left: 0; }" in mobile_css
+    assert "display: none;" not in mobile_css
     assert ".signal-positive" in html
     assert ".signal-negative" in html
     assert ".signal-pending" in html

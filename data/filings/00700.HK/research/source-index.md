@@ -1,0 +1,70 @@
+# 腾讯控股外部研究数据与来源
+
+- 股票代码：00700.HK
+- 信息截止日：2026-08-02
+- 记录原则：Git只保存提取后的数据、来源URL、计量口径和证据边界。第三方网页、图表及其他原始文件仅作为本地研究缓存，不进入版本历史。
+- 研究状态：广告已有2021-2025年同口径连续份额；游戏已有2021、2023-2024年同口径份额及2025年上半年多口径截面；云和支付已有可复核检查点。
+
+## 提取数据与来源
+
+| 编号 | 来源 | 提取数据 | 证据等级 | 口径与边界 |
+|---|---|---|---|---|
+| TENCENT-AR25 | [腾讯控股2025年年度报告](https://www1.hkexnews.hk/listedco/listconews/sehk/2026/0409/2026040901231.pdf) | 公司财务、分部收入和运营指标 | 高 | 管理层的竞争排名不作独立证据。 |
+| TENCENT-Q126 | [腾讯2026年第一季度业绩](https://static.www.tencent.com/uploads/2026/05/13/47382ae415a209fd161bc19a1f9b3704.pdf) | 当期收入、现金、回购和AIM+采用情况 | 高 | “最受欢迎”“领先”等自评不作独立排名。 |
+| CNNIC-57 | [第57次中国互联网络发展状况统计报告](https://www.cnnic.net.cn/) | 中国网民、即时通信、网络支付和短视频用户规模 | 高 | 报告引用的商业数据仍按原提供方归属。 |
+| PBOC-2025/26Q1 | [人民银行支付结算统计](http://www.pbc.gov.cn/goutongjiaoliu/113456/113469/index.html) | 2025全年及2026年一季度支付体系总量 | 高 | 行业总量不代表腾讯份额，季度不与全年直接比较。 |
+| WEIMOB-AR25 | [微盟集团2025年年度报告](https://www1.hkexnews.hk/search/titlesearch.xhtml?lang=en) | 商家可以跨多个平台经营 | 高 | 有限的服务商样本，不能外推为全部商户行为或微信商户流失率。 |
+| KC-IPO22 | [金山云上市文件](https://www1.hkexnews.hk/listedco/listconews/sehk/2022/1223/2022122300081.pdf) | 2021年Frost & Sullivan中国云服务收入中腾讯占11.1% | 中高 | 不能与云基础设施季度口径拼接。 |
+| LIANLIAN-IPO24 | [连连数字招股书](https://www1.hkexnews.hk/listedco/listconews/sehk/2024/0320/2024032000031.pdf) | 2022年数字支付服务交易额中腾讯映射公司占30.1% | 中高 | 公司由业务描述映射；不是个人移动支付份额。 |
+| QINIU-IPO24 | [七牛智能招股书](https://www1.hkexnews.hk/listedco/listconews/sehk/2024/0930/2024093000011.pdf) | 中国云服务市场由2023年5,137亿元预计增至2028年12,688亿元 | 中高 | 包含视听云及非视听云，不等于云基础设施服务。 |
+| MF-IPO24 | [Marketingforce上市文件](https://www1.hkexnews.hk/listedco/listconews/sehk/2024/0507/2024050700011.pdf) | 中国精准营销市场由2022年10,287亿元预计增至2027年17,285亿元 | 中高 | 计费额范围宽于互联网广告收入。 |
+| ZX-IPO23 | [中旭未来招股书](https://www1.hkexnews.hk/listedco/listconews/sehk/2023/0918/2023091800015.pdf) | 2022年Frost & Sullivan中国移动游戏收入中腾讯960亿元、占40.0% | 高 | 与前瞻的公司游戏业务收入口径分开。 |
+| QZ-MG21 | [前瞻产业研究院2021年数据](https://www.qianzhan.com/analyst/detail/220/220926-f1fbc7ef.html) | 腾讯51%，网易18% | 中高 | 按公司游戏业务收入占比；公开文章未完整披露估算方法。 |
+| QZ-MG23-24 | [2023年数据](https://bg.qianzhan.com/trends/detail/506/240422-51cd4f6e.html)、[2024年数据](https://bg.qianzhan.com/trends/detail/506/260213-d72eb875.html) | 腾讯48.2%降至47.5%，网易17.5%降至17.2%，CR2由65.0%降至64.7% | 中高 | 与2021年定义相同；2022年缺失，不写成无断点趋势。 |
+| QZ-GAME25H1 | [前瞻产业研究院2025年上半年数据](https://bg.qianzhan.com/trends/detail/506/250905-1f8a4bc2.html) | 腾讯占中国游戏实销收入50%、自研国内市场29%、自研海外市场28%；网易分别为28%、27%、12% | 中高 | 三个分母不同，且范围宽于移动游戏。 |
+| SENSOR-APR25 | [Sensor Tower 2025年4月榜单](https://sensortower.com/blog/top-10-worldwide-mobile-games-by-revenue-and-downloads-in-april-2025) | 《王者荣耀》当月全球手游收入第一 | 中高 | 不含中国第三方安卓市场，只用于长青运营观察。 |
+| SUPERCELL-FG25 | [Supercell原文](https://supercell.com/en/news/forever-game/) | 2024年全部在运营游戏收入增长，月活超过3亿，Brawl Stars上线五年后增长 | 高/中 | 公司行为证据高，能力归因中，不能单独证明因果。 |
+| SUPERCELL-SB25 | [Squad Busters停止开发报道](https://www.pocketgamer.biz/supercell-ceo-ilkka-paananen-thanks-players-as-squad-busters-prepares-to-shut-down-in-2026/) | 生命周期收入超过1亿美元仍未达预期，计划于2026年关闭 | 中 | 作为失败反例，说明组合能力不能消除单款随机性。 |
+| APPMAGIC-25 | [AppMagic 2025全球手游榜](https://mobilegamer.biz/the-top-grossing-mobile-games-of-2025/) | 《王者荣耀》估算收入16.8亿美元、全球第一；《三角洲行动》约3.55亿美元、居第21 | 中 | 不含平台抽成、广告、官网和中国安卓渠道收入。 |
+| IMZ-AD21-25 | [IMZ 2025报告正文](https://www.imz-lab.com/article.html?id=208) | 腾讯互联网广告收入份额：2021年15.0%、2022年14.0%、2023年14.36%、2024年15.40%、2025年16.60%，五年均第三 | 中高 | 私营平台收入含IMZ估算，不能当审计数据。 |
+| ANALYSYS-PAY | [易观2024年三季度正文](https://www.analysys.cn/article/detail/20021247) | 2021年四季度至2024年三季度公开检查点均为支付宝第一、腾讯金融第二 | 中高 | 公开数据未给两者连续精确份额。 |
+| IRESEARCH-PAY24-25 | [艾瑞2024版](https://report.iresearch.cn/report/202411/4649.shtml)、[2025版](https://report.iresearch.cn/report/202601/4780.shtml) | 两版均将微信支付与支付宝列为个人移动商业支付第一梯队 | 中高 | 梯队不是数值份额；2025版中的2025市场规模为估计值。 |
+| CANALYS-CLOUD | [2024年四季度](https://infotechlead.com/cloud/china-cloud-market-to-grow-15-in-2025-canalys-forecasts-89076)、[2025年一季度](https://infotechlead.com/cloud/top-cloud-providers-in-china-market-share-strategies-and-ai-push-q1-2025-90265)、[2025年二季度](https://infotechlead.com/cloud/alibaba-huawei-and-tencent-drive-chinas-ai-powered-cloud-market-growth-in-q2-2025-92377) | 中国大陆云基础设施中腾讯2024年四季度占15%，2025年一、二季度约10% | 中 | Canalys/Omdia署名数据的公开转载，可能存在范围或方法变化。 |
+
+## 官方市场数据
+
+观察日为2026年7月31日。Git仅保存以下提取值及其来源，原始响应保留在本地缓存。
+
+| 编号 | 官方来源 | 提取值 | 证据等级 | 使用边界 |
+|---|---|---|---|---|
+| MARKET-HKEX | [港交所每日报价](https://www.hkex.com.hk/eng/stat/smstat/dayquot/d260731e.htm) | 腾讯收盘价475.20港元 | 高 | 港交所700 TENCENT报价行；只用于观察日收盘价。 |
+| MARKET-HKGB | [香港政府债券收市参考定价](https://www.hkgb.gov.hk/en/others/documents/HKD_DailyClosingReferencePricings_IBPandGSBP.xls) | 10年期收益率3.446% | 中高 | 官方10年期基准债券收益率；作为无风险利率代理。 |
+| MARKET-FX | [中国货币网港元兑人民币中间价](https://www.chinamoney.com.cn/ags/ms/cm-u-bk-ccpr/CcprHisNew?startDate=2026-07-31&endDate=2026-07-31&currency=HKD%2FCNY&pageNum=1&pageSize=15) | 1港元=0.86559人民币；1人民币=1.155281369港元 | 高 | 人民币兑港元由官方中间价取倒数。 |
+
+## 可比较的外部截面
+
+| 主题 | 已接受事实 | 证据等级 | 口径限制 |
+|---|---|---|---|
+| 移动游戏 | F&S口径下腾讯2022年收入960亿元、份额40.0%；前瞻口径下腾讯2021年51%、2023年48.2%、2024年47.5%，网易同期18%、17.5%、17.2% | 2022高；前瞻中高 | 前瞻三个检查点定义相同，但2022缺失；F&S 2022分母不同，单列而不拼接。 |
+| 中国游戏，2025H1 | 腾讯占国内实销收入50%、自研国内市场29%、自研海外市场28%；网易分别为28%、27%、12% | 中高 | 三项分母不同，且范围宽于移动游戏。 |
+| 游戏长青能力 | 2024年Supercell全部在运营游戏收入增长；《王者荣耀》2025年仍居全球手游收入前列；《三角洲行动》进入前列 | 公司行为高；外部观察中至中高 | 支持组合能力，不代表单款必然成功；Squad Busters是明确失败反例。 |
+| 互联网广告 | 腾讯在IMZ口径的份额由2021年15.0%、2022年14.0%、2023年14.36%、2024年15.40%升至2025年16.60%，五年均第三 | 中高 | 含非上市平台估算，不能与腾讯会计收入完全对应。 |
+| 云服务 | 2021年F&S中国云服务收入中腾讯11.1%；Canalys/Omdia中国大陆云基础设施中腾讯2024Q4为15%，2025Q1/Q2约10% | 2021中高；2024-2025中 | 两种定义分开呈现，不能拼接。 |
+| 数字支付 | 2022年数字支付服务交易额中，对应腾讯的公司占30.1% | 中高 | 面向商户和企业的数字支付解决方案，不是个人移动支付。 |
+| 个人移动支付 | 易观2021Q4至2024Q3均显示支付宝第一、腾讯金融第二；艾瑞2024及2025版均将微信支付与支付宝列为第一梯队 | 中高 | 可确认双强位置，不能转成精确连续份额。 |
+
+## 仍未解决的覆盖
+
+| 主题 | 仍缺内容 | 对判断的影响 |
+|---|---|---|
+| 游戏公司份额 | 前瞻同口径仍缺2022及2025全年腾讯、网易份额 | 已有年份可判断腾讯显著领先；缺年只限制连续趋势精度。 |
+| 广告份额 | 2026季度公司份额及与腾讯会计收入的完整对应 | 五年连续份额足以判断先降后升；不计算未披露季度份额。 |
+| 云份额与价格 | 2021-2025完整同范围季度序列、同配置价格和腾讯续约率 | 现有检查点提示份额承压，但不能精确量化长期趋势。 |
+| 个人移动支付份额 | 2021-2025微信支付精确同口径百分比 | 稳定第二和第一梯队足以判断竞争位置；不虚构精确比例。 |
+| 商户留存 | 腾讯商家续约率、净收入留存和跨平台迁移率 | 微盟只作有限服务商样本，不外推为商家普遍行为。 |
+
+## 排除与降级
+
+- 游戏工委部分入口仅返回JavaScript页面外壳，不包含报告正文，不作为实质证据。
+- IMZ 2024报告入口未取得可直接解析的报告正文，不作为排名证据。
+- 未取得原始提供方材料的转载数值按中或中低证据处理，只作方向性检查点。

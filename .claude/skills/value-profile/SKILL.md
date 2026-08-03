@@ -95,6 +95,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - **§2.2.2任一假/存疑→阻断数字估值**:三大前提失败只改变投资资格和估值路线,不改变证据置信度。证据完整时继续完成全部定性研究并进入`定性研究终态`,Part 0记录具体失败前提且不输出估值数字、买卖点或仓位;只有来源窗口不足或冲突时才写`需人工`,不得把可靠的负面事实强制降为低置信度。
 - **§2.2.3销售收现交叉验证**:仅在报告披露毛额销售收现时计算。应有销售收现=营收×(1+有效VAT税率)−Δ应收账款账面余额−Δ应收票据账面余额+Δ合同负债+Δ预收款项（新收入准则前口径）−本期核销±汇兑影响±合并范围变动/合并处置影响±重分类调整−本期票据贴现−非现金抵账+收回已核销坏账。所有非经营滚动调整按附注披露方向代入,不得默认取0。有效VAT、容差和无法取数时的处理以`financial-redflag-scan`§2.3及`thresholds.yaml`为准。对比现金流量表实际值,背离>5%先查票据背书与口径差异;无法解释或连续2年背离时触发§4.5深调。
 - **§2.2.4 auto-mode深调查原则**:Auto mode下,main-agent review发现subagent证据薄弱、空白或论断generic时,先建立research ledger并扩大范围调查。两次重派上限只约束同一来源路线的执行或输出质量重试,不是全部研究的总次数上限。只要research ledger仍有未尝试且合规的独立来源路线,Auto mode不得转为`需人工`;全部路线均已取得结果、确认不适用或记录具体阻断后,仍无法获得关键证据,才写`**置信度:**需人工`和具体失败handoff,加入人工处理清单并退出该section自动循环。不得写中/低后继续或派生为已完成。Interactive mode由用户在Step 3d选择`research more`。
+- **§2.2.5 缺口影响范围**:缺失数据只限制它直接支撑的结论,不得自动阻断同节其他问题、其他定性判断或整份profile。先保留已核实的部分证据,分别写清“已知什么、可以判断什么、不能判断什么”,再继续不依赖该缺口的研究。只有缺口涉及关键估值输入、法定前置门槛、管理层或财报一票否决项,且适用公开路线已经达到合法终态时,才阻断对应估值路线或转人工；不得把一个产品指标、单一年份或单一外部数据源缺失升级为全局阻断。
 
 ### §2.3商业模式 → 估值方法对照
 
@@ -142,7 +143,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
   - 缺口映射必须可复现：从`scope_breaks[].reason`生成可见的口径差异及影响；`scope_breaks[].from_scope_fingerprint`、`scope_breaks[].to_scope_fingerprint`、每个`ledger.attempts[].terminal_reason`、`ledger.next_escalation`和`ledger.unattempted_routes`只写入HTML注释。`exhausted`且无下一route时在注释中写`new publication/data release required`。
   - 行业表不得消费broker target prices、broker ratings或issuer earnings forecasts；这些字段即使与行业表同页也必须排除。
 - **§2.6.1四问是 §1末节 synthesis, 不是 §1开场前置**: §1.8能力圈四问 = §1.1-§1.7 具体拆解之后的综合判定章节（非 gate）。子 agent 在 §1.1-§1.7 全部填完之后才填 §1.8, 4段独立作答, 每问 ≥ 50字, 含 ticker 特定证据（产品 SKU / 客户场景/竞品名/挑战者份额/假想敌推演）, 呼应 §1.1-§1.7的引用（不另起炉灶）, 禁品牌复读和结论标签。份额序列不满五年时,不得把“未形成完整五年序列”写成“无法判断任何趋势”;先按市场定义、计量口径和历史重叠值核对可比性,明确写出可比年份已经确认的阶段变化,再单独列出未覆盖年份和不能外推的范围。**理由**: 读懂业务才能判定是否在能力圈, 反之是结论先行——与价值投资"看懂再下注"精神相反。
-- **§2.6.2任一失败 = profile 整体降级**:主agent复核任一问<50字、仅品牌复读或仅结论无场景时退回补证据（auto mode扩大scope重派,最多2次）;反复退回仍失败→§1.8写`**置信度:**需人工`,记录最后错误、已尝试来源和缺失证据,加入人工处理清单并阻断估值,不得按低置信度已完成继续。§1.1-§1.7保留原置信度;§1.8失败不否定其事实拆解,但profile保持观察状态。
+- **§2.6.2任一失败 = 能力圈结论未完成**:主agent复核任一问<50字、仅品牌复读或仅结论无场景时退回补证据。先把缺口拆成claim交给`source-discovery`;同一路线最多重试2次，随后继续下一条独立合规路线。只有全部适用路线形成validated terminal后仍不能回答，§1.8才写`**置信度:**需人工`、加入人工处理清单并阻断估值。§1.1-§1.7保留原置信度，其他不依赖§1.8的定性研究继续；不得把能力圈结论未完成扩大为profile整体失败。
 
 ### §2.7波动纪律
 
@@ -262,7 +263,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 - Step 1 invalid ticker / 缺年报 PDF 且 fetcher 失败。
 - §3.pre 三大前提判为假 → 强制降级为 "仅定性研究", 通告用户并暂停 Step 6; 子 agent 的 Step 1-5 继续跑但估值部分不输出。
 - §2.12.2 §4风险一票否决（道德/占款/画大饼/处罚）触发 → 整份 profile 终止, 通告用户。
-- 管理层子skill返回`management_pending=true`或`pending_gate=true`→原子保存现有gate正文、两个pending字段、未决行和阻断原因,持久化人工处理清单并退出auto循环;不得继续派下游section或反复选择同一gate。
+- 管理层子skill返回`management_pending=true`时，原子保存现有正文、`management_pending`、`pending_gate`、未决行和阻断原因。`pending_gate=true`时持久化人工处理清单并退出auto循环，因为剩余最终行动依赖该gate；`pending_gate=false`属于非gate未决项。非gate未决项只暂停依赖它的结论，继续完成不依赖该未决项的section。不得反复选择同一未决项，也不得因非gate未决项退出整个auto循环。
 - Section-level问题不abort整份profile:只有当run-level research ledger里相关claim已形成validated terminal `blocked/conflict/exhausted`且state mapping明确允许section落`**置信度:**需人工`时,才记录失败handoff、加入人工处理清单并退出该section自动循环;未terminal的claim继续按未解决状态推进,不得把空路由、失败路由或预算耗尽直接翻成终态结论。
 
 **关键原则**:main-agent review（Step 3c）发现证据薄弱、空白或论断generic时,auto mode先扩大调查scope并重派;重试耗尽后先落真实搜索日志和validated terminal claim ledger,再按state mapping决定是否写`需人工`,不写虚假占位、不等待用户在线补方向,也不把缺证据section标完成。
@@ -295,7 +296,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
    **Bootstrap提前反馈与部分交付契约**:任一bootstrap、官方查询或证据采集步骤失败时,必须在同一轮立即反馈用户,明确列出`阻塞项`、`受影响结论`、`不受影响且已完成的工作`和`准确的人工处理动作`,不得只输出笼统失败摘要或等到整轮结束才说明。原始官方查询失败或其他technical failure时,受影响claim先持久化为validated terminal `blocked`,再由state mapping决定哪些section需要部分profile `需人工`;不得跳过claim ledger直接把原始失败翻成profile结论。提前反馈后继续执行一次性自主完成契约:穷尽不依赖失败接口的合规来源、技术替代路径和全部不受影响section,不能把通知用户当作暂停许可。把最小骨架扩展为简版/部分profile并原子保存到reserved路径:写`运行状态=需人工`、具体失败原因和逐项人工处理清单,保留已完成的年报研究及其引用,将管理层和监管结论标`需人工`,只阻断数字估值和否定性监管结论（例如“未发现处罚”）,不得清空已完成section或把访问失败解释为未检出。即使当前只有元数据和失败handoff也必须保存恢复入口。回复必须给出部分profile路径,让用户能直接检查现有成果并决定是否补证。
 
-1.6. **先采集官方查询bundle**:在任何`download_filings.py`命令前,按`../read-filing/references/event-query-plan.schema.json`生成计划,listing profile和subject roster显式保存HTTP方法、请求编码和实际请求要求的请求头,上市代码与日期只接受listing profile官方响应中的`listing_codes/listing_dates`。港股当前上市发行人的listing profile必须优先复用`../read-filing/references/event-source-discovery.md`中已验证的`hkex_equity_quote_token_v1` contract;collector自行通过普通HTTP发现动态token,不得每次打开Chrome/CDP,也不得把token硬编码。仅当自动bootstrap明确报告页面、token函数、JSONP schema或官方host/path变化时才重新执行浏览器发现流程。运行`uv run python scripts/collect_event_evidence.py --plan <absolute-query-plan.json> --bundle-out <absolute-official-query-bundle.json> --evidence-dir <absolute-immutable-evidence-dir>`并验证bundle后,读取采集器stdout返回的真实bundle路径;后续下载器和构建器只使用该真实路径。采集失败时先执行Step 1.55提前反馈与部分交付契约,并把受影响claim先持久化为validated terminal `blocked`。若官方发行人映射、上市日期和年报目录已核实,仅监管/事件来源失败,则进入`annual-only degraded path`:继续Step 2下载和分析年报,event manifest保持未构建、未绑定,不得把event manifest本身写成`需人工`,并保留不受影响且已完成的工作;只有相关claim完成validated terminal mapping后,对应section才可落部分profile `需人工`。若发行人身份或上市日期本身无法核实,则保存元数据级部分profile后停止取证,不得猜测身份继续下载。
+1.6. **先采集官方查询bundle**:在任何`download_filings.py`命令前,按`../read-filing/references/event-query-plan.schema.json`生成计划,listing profile和subject roster显式保存HTTP方法、请求编码和实际请求要求的请求头,上市代码与日期只接受listing profile官方响应中的`listing_codes/listing_dates`。港股当前上市发行人的listing profile必须优先复用`../read-filing/references/event-source-discovery.md`中已验证的`hkex_equity_quote_token_v1` contract;collector自行通过普通HTTP发现动态token,不得每次打开Chrome/CDP,也不得把token硬编码。仅当自动bootstrap明确报告页面、token函数、JSONP schema或官方host/path变化时才重新执行浏览器发现流程。浏览器发现流程继承`source-discovery`的隔离headless策略：只在非交互请求失败后使用全新隔离上下文，不得打开或接管可见/个人Chrome，不得要求用户点击、登录、批准或处理验证码；需要这些交互时记录`blocked`并继续同功能fallback。运行`uv run python scripts/collect_event_evidence.py --plan <absolute-query-plan.json> --bundle-out <absolute-official-query-bundle.json> --evidence-dir <absolute-immutable-evidence-dir>`并验证bundle后,读取采集器stdout返回的真实bundle路径;后续下载器和构建器只使用该真实路径。采集失败时先执行Step 1.55提前反馈与部分交付契约,并把受影响claim先持久化为validated terminal `blocked`。若官方发行人映射、上市日期和年报目录已核实,仅监管/事件来源失败,则进入`annual-only degraded path`:继续Step 2下载和分析年报,event manifest保持未构建、未绑定,不得把event manifest本身写成`需人工`,并保留不受影响且已完成的工作;只有相关claim完成validated terminal mapping后,对应section才可落部分profile `需人工`。若发行人身份或上市日期本身无法核实,则保存元数据级部分profile后停止取证,不得猜测身份继续下载。
 
 2. **Audit `data/filings/<ticker>/`**:
    - Part 2和管理层资本分配需要最近10个财年;公司上市满10年但文件不足时:
@@ -535,7 +536,9 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 - **高杠杆法**:仅在利润仍可预估时用8-12PE和35%买点折扣
 - 保险及`valuation.md`§3.1列明的默认回避行业继续完成定性研究,但不输出估值数字或买卖点
 
-**历史市场数据快照**:任何数字估值都先生成包含ticker、AS_OF、price和risk_free_rate完整请求契约的plan,无论AS_OF是否为当前日期都不得跳过;运行`uv run python scripts/build_market_manifest.py --plan <absolute-market-plan-path> --out <canonical-market-data-manifest-path> --evidence-dir <absolute-immutable-evidence-dir>`,读取stdout中的真实内容寻址路径并发布不可变`market-data manifest`。price请求必须以`query_params.issuer_code`绑定canonical ticker,并用`identity_path`从响应复核发行人身份;risk_free_rate请求和响应都用`tenor_path`绑定`10Y`。两类请求的`query_params.date`必须等于AS_OF,价格单位固定为A股`CNY`、港股`HKD`,无风险利率单位固定为`percent`;每个来源必须分别提供正整数`max_observation_age_days`,不得猜测全局默认值。`latest_observation_date_path`必须独立于`date_path`,分别保存最新可得观察日和所选观察日。manifest至少保存市场数据日期≤AS_OF、价格与无风险利率各自的官方请求URL、HTTP方法、参数、原始响应路径、价格官方响应SHA-256、无风险利率官方响应SHA-256和解析值。以内容哈希命名后写入Part 0的绝对路径及文件SHA-256;从首次绑定起所有save追加该文件guard,不得用当前行情或可变缓存替代。
+**估值输入与市场比较分层**:合理市值由3年后利润、适用估值方法和该方法要求的参数决定；当前价格只用于当前估值比较、买卖点触发和持仓姿态。缺少当前价格不得阻断合理市值。跨币种每股价值另依赖AS_OF当日或之前最近交易日的汇率；缺少汇率时仍输出财务报表币种的合理市值，只把当前价格比较和跨币种每股价值标为未完成。每个字段只消费已验证且已保存原始响应和哈希的直接输入，不得用缺失字段的估计值补洞。
+
+**历史市场数据快照**:完整的当前价格比较先生成包含ticker、AS_OF、price和risk_free_rate完整请求契约的plan,无论AS_OF是否为当前日期都不得跳过;运行`uv run python scripts/build_market_manifest.py --plan <absolute-market-plan-path> --out <canonical-market-data-manifest-path> --evidence-dir <absolute-immutable-evidence-dir>`,读取stdout中的真实内容寻址路径并发布不可变`market-data manifest`。price请求必须以`query_params.issuer_code`绑定canonical ticker,并用`identity_path`从响应复核发行人身份;risk_free_rate请求和响应都用`tenor_path`绑定`10Y`。两类请求的`query_params.date`必须等于AS_OF,价格单位固定为A股`CNY`、港股`HKD`,无风险利率单位固定为`percent`;每个来源必须分别提供正整数`max_observation_age_days`,不得猜测全局默认值。`latest_observation_date_path`必须独立于`date_path`,分别保存最新可得观察日和所选观察日。manifest至少保存市场数据日期≤AS_OF、价格与无风险利率各自的官方请求URL、HTTP方法、参数、原始响应路径、价格官方响应SHA-256、无风险利率官方响应SHA-256和解析值。以内容哈希命名后写入Part 0的绝对路径及文件SHA-256;从首次绑定起所有save追加该文件guard,不得用当前行情或可变缓存替代。任何数字估值只消费已经验证且保存原始响应与哈希的直接输入。若只有其中一项达到validated terminal缺口,保留另一项已验证证据并按上一段继续不依赖缺口的计算；不得把构建器暂不支持原始HTML、XLS或数组JSON写成市场没有数据。
 
 **主估值路线优先级**:`默认回避>银行PB法>周期法>公用事业DCF法>高杠杆法>PE法`。选中前一项后不得回退到后一项;银行的天然高杠杆不触发通用高杠杆PE法。高杠杆+周期仍以完整周期平均利润为基础并追加35%买点折扣,不得回退到单年PE。次级overlay只追加检查、压力测试或更深折扣,不替换主路线。
 
@@ -558,7 +561,7 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 
 **置信度汇总**:`高`当≥60%section为高;`中`为混合;`低`仅用于证据完整但可靠性较弱的内容。三大前提失败不下调证据置信度;证据完整时仍可进入`运行状态=已完成`的定性研究终态,但不输出数字估值。任何必填证据缺失保持`需人工`。
 
-**最终证据绑定**:无论数字估值还是仅定性研究finalizer,最终CAS前都运行`uv run python scripts/download_filings.py --revalidate <bound-annual-manifest-path>`和`uv run python scripts/build_event_manifest.py --revalidate <bound-event-manifest-path>`;前者重新请求年报官方目录和选中PDF,后者重新请求全部官方来源,仅重算本地manifest哈希不够。任何数字估值都必须已建立市场快照并运行`uv run python scripts/build_market_manifest.py --revalidate <bound-market-data-manifest-path>`;仅定性研究未建立市场快照时才可省略。按manifest保存的HTTP方法、URL和参数重放两项官方请求,逐字节比较响应SHA-256并重算解析值;这是market-data manifest执行最终live revalidation。A+H逐一重验证`counterpart_filing_manifests`。最终原子保存前重新计算两个manifest文件SHA-256,再计算全部counterpart和已建立的market-data manifest哈希;Auto mode和Interactive mode都必须与Part 0字段逐项一致,不一致时abort。成功终态必须同时满足`运行状态=已完成`和`证据阶段=已绑定`,再使用全部guard原子保存。
+**最终证据绑定**:无论数字估值还是仅定性研究finalizer,最终CAS前都运行`uv run python scripts/download_filings.py --revalidate <bound-annual-manifest-path>`和`uv run python scripts/build_event_manifest.py --revalidate <bound-event-manifest-path>`;前者重新请求年报官方目录和选中PDF,后者重新请求全部官方来源,仅重算本地manifest哈希不够。任何当前价格比较都必须已建立市场快照并运行`uv run python scripts/build_market_manifest.py --revalidate <bound-market-data-manifest-path>`；只输出不依赖当前价格的合理市值时，逐项重验证其实际消费的估值输入证据。按manifest保存的HTTP方法、URL和参数重放官方请求,逐字节比较响应SHA-256并重算解析值。A+H逐一重验证`counterpart_filing_manifests`。最终原子保存前重新计算两个manifest文件SHA-256,再计算全部counterpart和已建立的market-data manifest哈希;Auto mode和Interactive mode都必须与Part 0字段逐项一致,不一致时abort。成功终态必须同时满足`运行状态=已完成`和`证据阶段=已绑定`,再使用全部guard原子保存。
 
 - **Auto mode**:门槛通过且7项估值内容完整、数字源头可追溯时save并终止。控制台摘要使用动态值:`Profile完成.completed_sections/total_sections节已完成,估值Part 0已合成.路径:profiles/TICKER-DATE.md`。
 - **Interactive mode**: 印摘要 + 双语菜单 `[accept / edit / research more]`, 等用户确认 → save。

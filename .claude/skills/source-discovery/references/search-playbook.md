@@ -29,6 +29,36 @@ Use `rank_with_route_cache` only to reorder routes that already fit the same
 current layer. The cache cannot introduce a route, skip an applicable earlier
 layer, or change claim scope or acceptance requirements.
 
+## Layer Completion Checklist
+
+Do not treat an issuer annual report as a complete external search. At each
+planner layer, execute every applicable route returned for the unresolved
+coverage, including separate searches for each missing period and named
+competitor. After retrieval:
+
+1. Record a terminal result for every attempted route and validate every
+   candidate.
+2. Trace report footnotes, source notes, table titles, document IDs, and named
+   data providers back to the original publisher.
+3. Generate local-language, English, exact-title, category-synonym, year,
+   competitor, table-name, and document-ID variants without changing the claim
+   scope.
+4. Keep accepted periods and entities; calculate exactly which coverage remains
+   unresolved.
+5. Re-plan. Advance only when the current layer has no unattempted applicable
+   route for that unresolved coverage.
+
+At the broad dynamic layer, repeat citation and bibliography tracing until a
+pass finds no new fitting original route. Record that no-new-route pass in the
+ledger. This pass is required for `exhausted`, but it does not override a
+`blocked` access result or the positive-claim acceptance gate.
+
+All browser fallbacks inherit the runtime policy in `SKILL.md`: use a fresh
+isolated headless context only after noninteractive retrieval fails. A login,
+approval dialog, CAPTCHA, or challenge that would require user interaction is
+an access block. Record the route as `blocked`, close the context, and continue
+with the next same-function fallback; do not open visible or personal Chrome.
+
 ## Query Templates
 
 Start with a publisher-bound query when the likely publisher is known:
@@ -56,6 +86,15 @@ then continue on the official or original host.
 Every route below assumes:
 
 - Prefer the highest-authority applicable original first.
+- Classify a source by the actual publisher and its claim-specific methodology,
+  not by whether the retrieved artifact is formatted as an article, press page,
+  or downloadable report. A commercial research institute's own article is an
+  original research publication when it attributes the measurement to that
+  institute; do not downgrade it to a media repost merely because it is an
+  HTML article. Conversely, a reliable research institute is not an official
+  statistics agency. Preserve the publisher, cited underlying report, metric
+  definition, period, denominator, geography, estimation limits, and any
+  commissioning relationship, then grade the specific claim.
 - Keep `source_authority`, `practical_utility`, `current_reachability`, and
   `conclusion_evidence` as explicit `High`/`Medium`/`Low` fields on each
   access attempt and final ledger row.
