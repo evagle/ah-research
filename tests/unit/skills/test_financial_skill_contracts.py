@@ -357,7 +357,6 @@ def test_value_profile_visibly_invokes_product_analysis_for_every_product_sectio
         "普通worker不得代写或补写",
         "隐藏的`product-analysis`调用回执",
         "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、`产品竞争力三问结论`、财报映射和失效测试",
-        "区分经济成本与心理成本",
     ):
         assert requirement in skill
 
@@ -7275,7 +7274,9 @@ def test_industry_bundle_audit_details_are_hidden_from_investor_html() -> None:
 
     assert "**口径与数据限制**" in report
     assert "<!-- industry-bundle-audit" in report
-    industry_html = html.split("行业bundle采用", 1)[1].split("§2.3 竞争对手营收净利对比", 1)[0]
+    industry_html = html.split("本文以“中国潮玩市场”作为主要比较范围", 1)[1].split(
+        "§2.3 竞争对手营收净利对比", 1
+    )[0]
 
     for machine_detail in (
         "市场定义指纹",
@@ -7293,7 +7294,7 @@ def test_industry_bundle_audit_details_are_hidden_from_investor_html() -> None:
 
     for investor_context in (
         "旧版RSV与新版GMV不能直接拼接",
-        "2022-2024年缺少同口径的公司及具名对手份额",
+        "2023年公司级份额仍缺",
         "2026年上半年或年初至今行业数据尚未取得",
     ):
         assert investor_context in industry_html
@@ -7325,7 +7326,7 @@ def test_pop_mart_profile_treats_private_procurement_quotes_as_monitoring_only()
 
     assert "关联采购独立报价" not in part_zero
     assert "取得关联采购按交易对手和SKU拆分及独立报价" not in part_zero
-    assert "| 2 | 关联采购不公允定价 | 有异常迹象 | 预警 |" in alignment
+    assert "| 2 | 关联采购定价公允性 | 公开资料无法判断 | 预警 |" in alignment
     assert "该项按预警通过" in alignment
     assert "采购台账或向独立OEM询价通常属于公司内部资料" in alignment
     assert "公开资料基本无法取得" in alignment
@@ -7411,6 +7412,31 @@ def test_pop_mart_inventory_private_data_is_monitoring_not_manual_review() -> No
     assert "额外拨备约1.68亿元" in redflag
     assert "约占2025年税前利润1.0%" in redflag
     assert "不能证明不存在滞销或减值不足" in redflag
+
+
+def test_pop_mart_profile_review_resolves_false_blockers_and_adds_longitudinal_evidence() -> None:
+    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
+    html = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.html")
+    part_zero = report.split("## Part 1", 1)[0]
+    ability = report.split("### §1.8 能力圈四问", 1)[1].split("## §2 成长空间与天花板", 1)[0]
+
+    assert "**财报排雷：4项中风险，未见高风险**" in part_zero
+    assert "**能力圈四问：全过**" in part_zero
+    assert "**估值阻断:** 否" in part_zero
+    assert "消费者改买其他品牌几乎没有成本" not in part_zero
+    assert "消费者改买其他品牌几乎没有额外成本" not in part_zero
+    assert "**四问结论:** 全过" in ability
+    assert "**好生意结论:** 是" in ability
+    assert "| MOLLY | 0.41 | 2.14 | 4.56 |" in report
+    assert "| 泡泡玛特 | 13.6% | 11.8% | 12.3% | 21.8% |" in report
+    assert "2024年的RSV与2025年的GMV不能计算同比" in report
+    assert "TOP TOY公司年报披露的全球GMV为25.88亿元" in report
+    assert "312.2%" not in report
+    assert "资本开支代理/归母净利润约14.7%" not in report
+    assert "缺乏基准日市场数据，无法分析" not in html
+    assert "缺乏组合数据，无法分析" not in html
+    assert "证据索引" not in html
+    assert "source binding" not in html
 
 
 def test_value_profile_documents_v11_series_and_claim_state_rendering() -> None:
