@@ -6,6 +6,7 @@ import re
 from dataclasses import dataclass
 
 COMMENT_PATTERN = re.compile(r"<!--.*?-->", re.DOTALL)
+READER_EXCLUDE_SECTION_MARKER = "<!-- reader-exclude-section -->"
 READER_METADATA_PATTERN = re.compile(
     r"^\s*\*\*(引用|置信度|管理层口径校核)[:：]\*\*(.*)$",
 )
@@ -87,6 +88,48 @@ def _blank_comments(source: str) -> tuple[str, list[tuple[int, int, str]]]:
         return "".join("\n" if character == "\n" else " " for character in match.group())
 
     return COMMENT_PATTERN.sub(replace, source), comments
+
+
+def _blank_reader_excluded_sections(
+    source: str,
+) -> tuple[str, list[tuple[int, int, str]]]:
+    lines = source.splitlines(keepends=True)
+    exclusions: list[tuple[int, int, str]] = []
+    index = 0
+
+    while index < len(lines):
+        heading = re.match(r"^(#{2,6})\s+(.+?)\s*$", lines[index].rstrip("\r\n"))
+        if heading is None:
+            index += 1
+            continue
+
+        marker_index = index + 1
+        while marker_index < len(lines) and not lines[marker_index].strip():
+            marker_index += 1
+        if (
+            marker_index >= len(lines)
+            or lines[marker_index].strip() != READER_EXCLUDE_SECTION_MARKER
+        ):
+            index += 1
+            continue
+
+        heading_level = len(heading.group(1))
+        end = marker_index + 1
+        while end < len(lines):
+            next_heading = re.match(r"^(#{2,6})\s+\S", lines[end])
+            if next_heading is not None and len(next_heading.group(1)) <= heading_level:
+                break
+            end += 1
+
+        exclusions.append((index + 1, end, heading.group(2)))
+        for line_index in range(index, end):
+            lines[line_index] = "".join(
+                "\n" if character == "\n" else "\r" if character == "\r" else " "
+                for character in lines[line_index]
+            )
+        index = end
+
+    return "".join(lines), exclusions
 
 
 def _is_machine_paragraph(text: str) -> bool:
@@ -172,13 +215,15 @@ def format_removal(removal: Removal) -> str:
 def project_reader_markdown(source: str) -> ProjectionResult:
     """Remove machine-only Markdown blocks and return a validated reader projection."""
 
-    without_comments, comment_records = _blank_comments(source)
+    without_excluded_sections, exclusion_records = _blank_reader_excluded_sections(source)
+    without_comments, comment_records = _blank_comments(without_excluded_sections)
     lines = without_comments.splitlines()
     original_lines = source.splitlines()
     removed: set[int] = set()
     removals = [
-        Removal("html-comment", start, end, summary) for start, end, summary in comment_records
-    ]
+        Removal("reader-excluded-section", start, end, summary)
+        for start, end, summary in exclusion_records
+    ] + [Removal("html-comment", start, end, summary) for start, end, summary in comment_records]
 
     index = 0
     while index < len(lines):

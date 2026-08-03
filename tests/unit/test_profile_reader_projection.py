@@ -60,3 +60,40 @@ def test_reader_projection_removes_machine_blocks_and_preserves_analysis() -> No
         "machine-paragraph",
     }
     assert_reader_only(result.markdown)
+
+
+def test_reader_projection_removes_explicit_reader_excluded_sections() -> None:
+    source = """# 投资研究
+
+## 公司分析
+
+主营业务仍在增长。
+
+## 组合检查
+
+<!-- reader-exclude-section -->
+
+缺乏个人持仓数据，无法分析。
+
+## 风险
+
+库存周转需要跟踪。
+
+## 证据索引
+
+<!-- reader-exclude-section -->
+
+| Source | Internal ID |
+|---|---|
+| 年报 | C25-FS |
+"""
+
+    result = project_reader_markdown(source)
+
+    assert "主营业务仍在增长" in result.markdown
+    assert "库存周转需要跟踪" in result.markdown
+    assert "组合检查" not in result.markdown
+    assert "缺乏个人持仓数据" not in result.markdown
+    assert "证据索引" not in result.markdown
+    assert "C25-FS" not in result.markdown
+    assert {removal.category for removal in result.removals} >= {"reader-excluded-section"}

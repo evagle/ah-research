@@ -60,6 +60,8 @@ CLI先调用`scripts/profile_reader_projection.py`，再调用纯
 - claim、role、route及ledger/run-store状态和路径；
 - 已尝试来源、下一路由和accepted/exhausted等研究工作流叙述；
 - 只服务AI审计或恢复的整张表、整段或空标题。
+- 标题后带`<!-- reader-exclude-section -->`的完整章节；该标记只用于明确排除
+  证据附录、空模板或依赖个人持仓上下文的章节。
 
 表格按完整Markdown块删除，不能只删部分单元格留下破损表。删除后清理空标题、重复
 分隔线和多余空行，但不得改写正常投资正文或财务表。

@@ -19,6 +19,13 @@
 | `guosen-pop-mart-report-2024-11-25.pdf` | [东方财富分发的国信证券完整报告](https://pdf.dfcfw.com/pdf/H3_AP202411261641064332_1.pdf?1732609227000.pdf) | `21440d3fef339f9a835c98be1e7c4740025fd8203865bde5fb0abd6cb2d0f4c3` | 中：具名券商完整报告的第三方分发件 | PDF p.7-p.8的2023年市场规模与2019年份额图相邻，图中8.5%仍是2019年泡泡玛特份额，不能误写为2023年 |
 | `sinolink-pop-mart-report-2025-04-02.pdf` | [东方财富分发的国金证券完整报告](https://pdf.dfcfw.com/pdf/H3_AP202504031650735623_1.pdf?1743680508000.pdf) | `e4ee7891eb708ee796a90b4c558931b22f951719c57853f6cdadb7f7108f33db` | 中：具名券商完整报告的第三方分发件 | PDF p.12-p.13披露积木199-399元、MEGA 79-5,999元等产品价格带；不采用评级、目标价、预测或主观护城河判断 |
 | `kpmg-china-pop-toy-industry-2026-04.pdf` | [毕马威中国官方PDF](https://assets.kpmg.com/content/dam/kpmgsites/cn/pdf/zh/2026/04/panoramic-insights-and-trend-prospects-of-the-tide-play.pdf.coredownload.inline.pdf) | `c72fc81d2cda98c79f86cb3c9867cae186e1abb318bed685d442fd3df25fbc59` | 中：毕马威行业专题，底层市场序列来自Frost & Sullivan | PDF p.9沿用旧版RSV预测：2025E为825亿元、2026E-2030E复合增速18.7%；p.10披露2024年品类零售额份额。该报告不是独立于Frost & Sullivan的第二数据源，且2025E已被TOP TOY 2026年3月更新稿的875亿元GMV观察值替代 |
+
+## 产品竞争力补充
+
+- 泡泡玛特监管文件可建立四个核心IP的长期收入序列：MOLLY为2017-2025年，DIMOO和THE MONSTERS为2019-2025年，SKULLPANDA为2020-2025年。数字来自2020年最终招股书及2020-2025年报，证据等级高。序列证明多个既有IP能跨年变现且并非逐年单调增长，但不提供新IP命中率、失败IP分母或未来生命周期。
+- TOP TOY 2025年9月申请稿称83.2%的受访者愿意继续购买其产品。该数据来自受托消费者调查，证据等级中，只能作为购买意愿参照，不能与泡泡玛特实际会员复购率直接排名。
+- 名创优品2025年报披露TOP TOY中国内地门店2024-2025年平均售价为57.8元和55.6元，客单价为109.5元和109.8元；布鲁可2025年报披露9.9元价格带销量1.222亿件、占总销量47.8%。这些数据证明低价竞争具有规模，不能形成同款性价比排名。
+- TOP TOY受托行业表列示其2025年中国GMV为42亿元，但名创优品经审计年报披露TOP TOY全球GMV为25.88亿元。两者存在未调节的定义或统计边界冲突；4.8%份额和与泡泡玛特的精确差距仅作中等强度观察。
 | `52toys-hkex-inactive-application-2026-07-07.json` | https://www1.hkexnews.hk/ncms/json/eds/appinactive_sehk_e.json | 原始响应保存为`_raw/research/hkex-inactive-applications-2026-07-07.json` | 中：联交所申请名册 | 只证明2025年5月递表及申请现已失效；申请文件链接为`#`，不引用经营数据 |
 | `52toys-application-proof-zh-2025-05-22.pdf` | 原始HKEX URL已失效；[Wayback快照](https://web.archive.org/web/20250531020417id_/https://www1.hkexnews.hk/app/sehk/2025/107389/documents/sehk25052201447_c.pdf) | `0480a3170b8f6d642ba4b928005b4478ebafd3544c771a1bf03e35b9653445bb` | 中：原始HKEX申请稿的可验证存档 | 申请稿不是最终招股书或经审计年报；只采用CIC已发生市场规模及排名，不采用预测或52TOYS经营判断 |
 
