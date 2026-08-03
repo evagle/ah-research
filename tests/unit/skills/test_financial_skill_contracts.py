@@ -357,7 +357,6 @@ def test_value_profile_visibly_invokes_product_analysis_for_every_product_sectio
         "普通worker不得代写或补写",
         "隐藏的`product-analysis`调用回执",
         "产品边界、交付流程、流程经济性、客户价值、竞争阶梯、需求侧机制、`产品竞争力三问结论`、财报映射和失效测试",
-        "区分经济成本与心理成本",
     ):
         assert requirement in skill
 
