@@ -55,7 +55,7 @@ CLI先调用`scripts/profile_reader_projection.py`，再调用纯
 `scripts/profile_html_renderer.py`。projection自动删除：
 
 - HTML注释内的机器引用、回执和恢复数据；
-- `引用`、`置信度`、`管理层口径校核`及其续行；
+- `引用`、`置信度`、`管理层口径校核`、`估值阻断`、`管理层否决`及其续行；
 - 指纹、长哈希、schema版本和内部字段名；
 - claim、role、route及ledger/run-store状态和路径；
 - 已尝试来源、下一路由和accepted/exhausted等研究工作流叙述；

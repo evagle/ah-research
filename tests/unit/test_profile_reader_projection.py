@@ -26,6 +26,10 @@ def test_reader_projection_removes_machine_blocks_and_preserves_analysis() -> No
 
 **管理层口径校核:** 收入数据与年报一致。
 
+**估值阻断:** 否
+
+**管理层否决:** 否—公开监管记录限定通过
+
 | 类型 | 原口径指纹 | 主口径指纹 | 影响 |
 |---|---|---|---|
 | 市场规模 | {fingerprint} | {fingerprint} | 不可拼接 |
@@ -53,6 +57,8 @@ def test_reader_projection_removes_machine_blocks_and_preserves_analysis() -> No
     assert fingerprint not in result.markdown
     assert "/Users/example/research/source-index.md" not in result.markdown
     assert "2025年年报第20页" not in result.markdown
+    assert "估值阻断" not in result.markdown
+    assert "管理层否决" not in result.markdown
     assert {removal.category for removal in result.removals} >= {
         "html-comment",
         "reader-metadata",

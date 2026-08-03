@@ -8,8 +8,9 @@ from dataclasses import dataclass
 COMMENT_PATTERN = re.compile(r"<!--.*?-->", re.DOTALL)
 READER_EXCLUDE_SECTION_MARKER = "<!-- reader-exclude-section -->"
 READER_METADATA_PATTERN = re.compile(
-    r"^\s*\*\*(引用|置信度|管理层口径校核)[:：]\*\*(.*)$",
+    r"^\s*\*\*(引用|置信度|管理层口径校核|估值阻断|管理层否决)[:：]\*\*(.*)$",
 )
+INTERNAL_GATE_PATTERN = re.compile(r"(?:估值阻断|管理层否决)[:：]")
 HEADING_PATTERN = re.compile(r"^(#{2,6})\s+\S")
 TABLE_LINE_PATTERN = re.compile(r"^\s*\|.*\|\s*$")
 SEPARATOR_PATTERN = re.compile(r"^\s*(?:---+|\*\*\*+|___+)\s*$")
@@ -49,6 +50,7 @@ VISIBLE_LEAK_PATTERNS = (
     MACHINE_KEY_PATTERN,
     MACHINE_PARAGRAPH_PATTERN,
     WORKFLOW_STATE_PATTERN,
+    INTERNAL_GATE_PATTERN,
     re.compile(r"机器引用清单"),
 )
 

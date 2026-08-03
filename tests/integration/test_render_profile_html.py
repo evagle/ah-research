@@ -23,6 +23,10 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
 
 **管理层口径校核:** 管理层计划仍需验证。
 
+**估值阻断:** 否
+
+**管理层否决:** 否—公开监管记录限定通过
+
 | 类型 | 原口径指纹 | 主口径指纹 | 影响 |
 |---|---|---|---|
 | 市场规模 | aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa | bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb | 不可拼接 |
@@ -100,6 +104,8 @@ def test_render_profile_html_creates_reader_focused_companion(tmp_path: Path) ->
     assert "置信度:" not in html
     assert "管理层口径校核:" not in html
     assert "管理层计划仍需验证" not in html
+    assert "估值阻断:" not in html
+    assert "管理层否决:" not in html
     assert "原口径指纹" not in html
     assert "路由终态" not in html
     assert "schema_version" not in html
