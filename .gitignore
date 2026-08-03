@@ -241,6 +241,19 @@ data/filings/**/*.download.lock
 data/filings/**/runs/
 data/filings/**/research/*.txt
 
+# Raw third-party research assets remain local. Commit only extracted data,
+# source URLs, measurement scope, and lightweight provenance metadata.
+data/filings/**/research/**/*.htm
+data/filings/**/research/**/*.html
+data/filings/**/research/**/*.jpg
+data/filings/**/research/**/*.jpeg
+data/filings/**/research/**/*.png
+data/filings/**/research/**/*.gif
+data/filings/**/research/**/*.webp
+data/filings/**/research/**/*.gz
+data/filings/**/research/**/*.xls
+data/filings/**/research/**/*.xlsx
+
 # Test artifacts
 .coverage
 htmlcov/

@@ -1,0 +1,61 @@
+id: qianzhan
+name: Qianzhan Industry Research Institute
+aliases:
+- 前瞻产业研究院
+- 前瞻经济学人
+- Qianzhan
+publisher_type: commercial-data-provider
+official_domains:
+- qianzhan.com
+geographies:
+- CN
+industries:
+- cross-industry
+authority:
+  level: Medium
+  scope: China industry structure, market size, company share, concentration, and forecast research. Medium-to-high commercial authority when the original Qianzhan article or report is retrieved and its measurement scope is preserved; not official statistics.
+functions:
+- id: research-reports
+  authority: Medium
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Low
+  direct_urls:
+  - url: https://bg.qianzhan.com/trends/
+    kind: original research article archive
+    stability: reviewed seed
+  search:
+    method: publisher-bound web search
+    fields:
+    - official_domain
+    - exact_title
+    - industry
+    - year
+    example_query: 'site:bg.qianzhan.com/trends "前瞻产业研究院" "市场份额" "行业年份"'
+    result_identity: original publisher, title, author, publication date, cited report, measurement scope, URL
+  citation:
+    use: attributable industry measurement with period, denominator, geography, methodology limits, and cited report preserved
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+  - analysys-research-reports
+access:
+  status: reachable
+  last_checked: '2026-08-03T00:00:00+08:00'
+  final_url: https://bg.qianzhan.com/trends/
+  limitation: Public original research articles and their charts are anonymously accessible. Full underlying industry reports may be commercial, and public articles do not always disclose the complete estimation methodology. Treat Qianzhan as the original research publisher when the page says 来源：前瞻产业研究院; preserve the metric definition and do not relabel it as official statistics.
+  observed_error:
+    state: none
+    category: none
+    message: Original article HTML and chart assets were retrieved noninteractively.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: No material redirect recorded
+    response_status: Public article HTML and chart images returned successfully
+    recognizable_content: Article title, publication time, source attribution, quantitative findings, chart titles, and cited Qianzhan report
+    access_indications: Full underlying reports may be paid; public trend articles are readable without login
+    technical_restriction: Public articles may omit detailed estimation methodology

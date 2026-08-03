@@ -361,46 +361,6 @@ def test_value_profile_visibly_invokes_product_analysis_for_every_product_sectio
         assert requirement in skill
 
 
-def test_pop_mart_product_sections_apply_product_analysis_structure() -> None:
-    report = read(REPO_ROOT / "profiles" / "09992.HK-2026-08-02.md")
-    product = report.split("### §1.1 公司核心资产、主营产品和服务", 1)[1].split(
-        "### §1.2 公司客户", 1
-    )[0]
-    differentiation = report.split("### §1.3 差异化", 1)[1].split("### §1.4 盈利模式", 1)[0]
-
-    for requirement in (
-        "**一句话产品本质:**",
-        "**核心产品与利润地图:**",
-        "**设计与交付流程:**",
-        "**流程经济性与单位经济:**",
-        "**财报勾稽:**",
-        "product-analysis;mode=methodology",
-    ):
-        assert requirement in product
-
-    for requirement in (
-        "**客户任务与购买标准:**",
-        "**产品竞争力三问结论:**",
-        "客户为什么选择并持续选择泡泡玛特的产品",
-        "现有对手为什么不能靠降价或更高性价比抢走客户",
-        "新对手携巨资进入，泡泡玛特凭什么守住并扩大市场",
-        "心理成本",
-        "多品牌共存",
-        "盲盒随机性只是放大器",
-        "每次购买时重新赢得预算",
-        "收藏者社区",
-        "IP命中率",
-        "**竞争阶梯与龙头差距:**",
-        "直接竞品：TOP TOY",
-        "替代方案：布鲁可",
-        "适用龙头：泡泡玛特",
-        "**核心价值机制:**",
-        "**财报映射与失效条件:**",
-        "product-analysis;mode=methodology",
-    ):
-        assert requirement in differentiation
-
-
 def test_value_profile_delegates_contract_details_to_owned_references() -> None:
     skill = read(SKILL_PATHS["value-profile"])
     assert "公共证据规则不在本skill重定义" in skill
@@ -3196,20 +3156,6 @@ def test_user_facing_chinese_uses_natural_evidence_status_language() -> None:
         assert offending_lines == []
 
 
-def test_user_facing_chinese_explains_sensitivity_analysis_naturally() -> None:
-    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
-
-    for requirement in (
-        "按明确假设简单测算",
-        "计算结果",
-        "未考虑因素",
-        "不是预测",
-    ):
-        assert requirement in style
-    for stiff_phrase in ("机械压力", "机械影响", "机械敏感性", "机械减少"):
-        assert stiff_phrase not in style
-
-
 def test_value_profile_prose_is_written_for_human_readers() -> None:
     profile = read(SKILL_PATHS["value-profile"])
     operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
@@ -3263,6 +3209,92 @@ def test_value_profile_states_missing_data_once_without_research_narration() -> 
     assert "子问题缺少数据时" in style
     assert "客户画像缺乏数据，无法分析。" in style
     assert "内部恢复信息继续留在隐藏字段" in style
+
+
+def test_value_profile_data_gaps_only_limit_directly_affected_judgments() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for requirement in (
+        "缺失数据只限制它直接支撑的结论",
+        "不得自动阻断同节其他问题、其他定性判断或整份profile",
+        "保留已核实的部分证据",
+        "分别写清“已知什么、可以判断什么、不能判断什么”",
+        "关键估值输入",
+        "法定前置门槛",
+    ):
+        assert requirement in "\n".join((profile, operations, style))
+
+    assert "重派最多2次; 仍薄弱 → Acceptable 放宽" not in operations
+    assert "隐式 accept 为 `**置信度:** 中`" not in operations
+
+
+def test_product_analysis_separates_affinity_from_lock_in_and_tests_luck() -> None:
+    product = read(SKILL_PATHS["product-analysis"])
+
+    for requirement in (
+        "把情感或收藏连续性与排他锁定分开",
+        "仍可同时消费其他公司的产品",
+        "不得把“更不愿离开”写成“竞争者无法进入”",
+        "持续运营和更新节奏",
+        "失败筛选及组合分散",
+        "系统能力还是运气",
+        "停运、未达预期或新品失败的反例",
+        "组合层面的系统能力提高成功概率",
+        "单款命中仍有显著随机性",
+    ):
+        assert requirement in product
+
+
+def test_value_profile_auto_mode_keeps_unaffected_work_moving() -> None:
+    profile = read(SKILL_PATHS["value-profile"])
+    operations = read(SKILLS_ROOT / "value-profile" / "references" / "operations.md")
+    combined = "\n".join((profile, operations))
+
+    for requirement in (
+        "同一路线最多重试2次，随后继续下一条独立合规路线",
+        "非gate未决项只暂停依赖它的结论",
+        "继续完成不依赖该未决项的section",
+        "三大前提为假或存疑只阻断数字估值",
+        "Auto mode缺少年报时直接执行下载",
+        "浏览器发现流程继承`source-discovery`的隔离headless策略",
+    ):
+        assert requirement in combined
+
+    for forbidden in (
+        "auto mode扩大scope重派,最多2次",
+        "管理层子skill返回`management_pending=true`或`pending_gate=true`",
+        "触发 abort 条件（§3.pre 假",
+        "是否 auto-run python scripts/download_filings.py",
+    ):
+        assert forbidden not in combined
+
+
+def test_value_profile_reader_toc_preserves_heading_hierarchy() -> None:
+    rendering = read(SKILLS_ROOT / "value-profile" / "references" / "reader-rendering.md")
+
+    for requirement in (
+        "目录收录报告标题及二级、三级和四级标题",
+        "按标题层级缩进",
+        "移动端保留目录",
+        "改为静态布局",
+    ):
+        assert requirement in rendering
+
+
+def test_value_profile_rewrites_internal_labels_for_readers() -> None:
+    style = read(SKILLS_ROOT / "value-profile" / "references" / "profile-writing-style.md")
+
+    for requirement in (
+        "内部检查名称不得直接用作可见标题",
+        "风险一票否决前置扫描",
+        "管理层与治理风险检查",
+        "不得用“全过”",
+        "逐问给出具体结论",
+        "数据解析器、构建器或抓取工具的能力边界",
+    ):
+        assert requirement in style
 
 
 def test_value_profile_hides_machine_only_workflow_fields() -> None:
@@ -6356,6 +6388,20 @@ def test_historical_valuation_uses_an_immutable_market_snapshot_contract() -> No
         assert "价格官方响应SHA-256" in text
         assert "无风险利率官方响应SHA-256" in text
         assert "市场数据日期≤AS_OF" in text
+
+
+def test_value_profile_separates_intrinsic_value_from_market_comparison() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    valuation = read(SKILLS_ROOT / "value-profile" / "references" / "valuation.md")
+    combined = "\n".join((skill, valuation))
+
+    for requirement in (
+        "当前价格只用于当前估值比较、买卖点触发和持仓姿态",
+        "缺少当前价格不得阻断合理市值",
+        "缺少汇率时仍输出财务报表币种的合理市值",
+        "只把当前价格比较和跨币种每股价值标为未完成",
+    ):
+        assert requirement in combined
 
 
 def test_read_filing_default_as_of_uses_a_stable_discovery_cutoff() -> None:

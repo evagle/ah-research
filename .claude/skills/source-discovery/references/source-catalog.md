@@ -1906,6 +1906,26 @@ requested claim without an explicit scope change.
 - Access observation evidence: `High`
 - Site guide: None
 
+## `qianzhan` - Qianzhan Industry Research Institute
+
+- Aliases/origins: `前瞻产业研究院`, `前瞻经济学人`, `Qianzhan`
+- Publisher type: `commercial-data-provider`
+- Official domains: `qianzhan.com`
+- Provenance authority: `Medium` - China industry structure, market size, company share, concentration, and forecast research. Medium-to-high commercial authority when the original Qianzhan article or report is retrieved and its measurement scope is preserved; not official statistics.
+- Function: `research-reports`
+  - Authority: `Medium`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Low`
+  - Direct links: [original research article archive](<https://bg.qianzhan.com/trends/>)
+  - Search example: `site:bg.qianzhan.com/trends "前瞻产业研究院" "市场份额" "行业年份"`
+  - Same-function fallbacks: `iresearch-research-reports`, `analysys-research-reports`
+- Current status: `reachable`
+- Last checked: `2026-08-03T00:00:00+08:00`
+- Access limitations: Public original research articles and their charts are anonymously accessible. Full underlying industry reports may be commercial, and public articles do not always disclose the complete estimation methodology. Treat Qianzhan as the original research publisher when the page says 来源：前瞻产业研究院; preserve the metric definition and do not relabel it as official statistics.
+- Access observation evidence: `High`
+- Site guide: None
+
 ## `questmobile` - QuestMobile
 
 - Aliases/origins: `QuestMobile research`, `QuestMobile reports`

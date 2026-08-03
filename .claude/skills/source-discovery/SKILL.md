@@ -88,6 +88,59 @@ Route count is not an acceptance criterion.
 For an absence claim, `technical-failure`, `access-unavailable`, and
 `request-budget-exhausted` are `blocked`, never factual absence.
 
+## Exhaustive Search Contract
+
+Exhaustion is claim-scoped coverage, not a request count and not a synonym for
+reading the target issuer's annual reports. Annual and interim reports are one
+evidence family. They cannot by themselves establish external market size,
+relative market share, customer behavior, competitor capability, industry
+forecasts, or product superiority.
+
+Before execution, map every unresolved claim to all applicable evidence
+families below. Mark a family `not-applicable` only with a claim-specific
+reason:
+
+1. Bound issuer evidence: annual/interim reports, announcements, prospectuses,
+   investor presentations, product/pricing pages, and official newsrooms.
+2. Public authorities: regulators, statistical agencies, ministries,
+   exchanges, industry bureaus, and official association datasets.
+3. Subject relationships: named competitors and category leaders, plus
+   current or former parents, subsidiaries, customers, suppliers, partners,
+   and relevant active, revised, inactive, or archived listing applicants.
+4. Original research: measurement bodies, data providers, consulting firms,
+   academic or association research, methodology notes, and versioned datasets.
+5. Document routes: final prospectuses, listing applications, broker company
+   reports, broker industry reports, conference materials, archives, and the
+   original sources named in every citation trail.
+6. Broad discovery: uncataloged original publishers found through exact-title,
+   document-ID, table-name, bibliography, official-directory, archive, and
+   multilingual query variants.
+
+For each family, search the requested fact, each required period, the subject,
+every named competitor, category synonyms, local-language and English terms,
+and known table/report identities when applicable. A route that returns one
+period or one company does not exhaust the missing periods or other named
+companies. Preserve accepted partial evidence while continuing only the
+unresolved coverage.
+
+An unresolved positive claim is terminally `exhausted` only when all applicable
+families and every route in the planner's complete inventory are terminal, all
+discovered citations have been traced to an original or documented as
+unrecoverable, query variants no longer reveal a new fitting original route,
+and the ledger records missing periods/entities plus the final result for every
+attempt. Access failures produce `blocked`, not `exhausted`.
+
+Before handoff, run this stop check for every unresolved claim:
+
+- no unattempted applicable route remains in the inventory;
+- no required period, named competitor, or source function was silently
+  dropped;
+- no portal, media summary, broker table, prospectus, or listing application
+  contains an untraced original-source citation;
+- accepted partial series and useful scope-break observations are retained;
+- the terminal state follows the schema and does not turn missing evidence into
+  factual absence or an automatic blocker for unrelated judgments.
+
 Classify fields that normally exist only in company records separately from
 ordinary public-source gaps. SKU-level procurement ledgers, rebates, and
 same-spec independent OEM quotations are normally nonpublic-by-design. After
@@ -362,6 +415,11 @@ One failed request never proves permanent closure.
 Use noninteractive `urllib` or `curl` for default retrieval and probing.
 Use headless Chromium only for JS/session flows, such as a rendered JSF form,
 when noninteractive retrieval cannot complete the applicable official workflow.
+Browser automation always uses a fresh isolated headless context. Never open
+visible Chrome, never attach to a personal browser profile, and never ask the
+user to click, approve, log in, or solve a CAPTCHA. If an otherwise applicable
+route requires any of those actions, preserve the access observation, record
+the route as `blocked`, and continue with the next same-function fallback.
 Never use repeated user Allow prompts.
 
 For A-share issuer disclosures, use this default document-body retrieval order:
@@ -436,6 +494,19 @@ applicable routes in the current layer. Escalate to another category only when
 the planner returns it for an unresolved claim.
 
 Report a source gap only after recording every compliant route attempted, its query, access result, and final error.
+
+## Repository Storage Boundary
+
+Downloaded third-party HTML, images, spreadsheets, compressed responses, and
+other source payloads are local research caches. Use them for extraction and
+verification during the run, but never force-add them to Git.
+
+Version only the extracted values and lightweight provenance needed to
+understand them: publisher, title, source URL, publication or observation date,
+metric definition, period, geography, denominator, measurement limits, and
+evidence level. Repository records must not depend on local raw-file paths.
+Official filing workflow artifacts continue to follow the separate
+`read-filing` evidence and manifest contracts.
 
 ## Evidence Levels And Ledger Contract
 

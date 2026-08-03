@@ -1,0 +1,45 @@
+{
+  "schema_version": "curated-market-data/1.0",
+  "ticker": "00700.HK",
+  "as_of": "2026-08-02",
+  "observation_date": "2026-07-31",
+  "status": "extracted-data",
+  "limitation": "Only extracted observations and source URLs are versioned. Raw responses remain local research caches.",
+  "inputs": {
+    "price": {
+      "publisher": "Hong Kong Exchanges and Clearing Limited",
+      "source_url": "https://www.hkex.com.hk/eng/stat/smstat/dayquot/d260731e.htm",
+      "http_method": "GET",
+      "identity": "700 TENCENT",
+      "parse_location": "QUOTATIONS row for stock code 700; PRV.CLO./CLOSING second value",
+      "value": 475.2,
+      "unit": "HKD per share",
+      "source_authority": "High",
+      "conclusion_evidence": "High"
+    },
+    "risk_free_rate": {
+      "publisher": "Hong Kong Government Bond Programme",
+      "source_url": "https://www.hkgb.gov.hk/en/others/documents/HKD_DailyClosingReferencePricings_IBPandGSBP.xls",
+      "http_method": "GET",
+      "identity": "10GB3507001",
+      "parse_location": "Daily GB Closings - Benchmark; 2026-07-31 row; 10-year yield column",
+      "value": 3.446,
+      "unit": "percent per annum",
+      "source_authority": "High",
+      "conclusion_evidence": "Medium-High",
+      "qualification": "Official benchmark yield used as a risk-free-rate proxy."
+    },
+    "fx": {
+      "publisher": "China Foreign Exchange Trade System / ChinaMoney",
+      "source_url": "https://www.chinamoney.com.cn/ags/ms/cm-u-bk-ccpr/CcprHisNew?startDate=2026-07-31&endDate=2026-07-31&currency=HKD%2FCNY&pageNum=1&pageSize=15",
+      "http_method": "GET",
+      "identity": "HKD/CNY",
+      "parse_location": "records[0].date and records[0].values[0], with data.searchlist[0] equal to HKD/CNY",
+      "hkd_to_cny": 0.86559,
+      "cny_to_hkd": 1.155281369,
+      "unit": "CNY per HKD and reciprocal HKD per CNY",
+      "source_authority": "High",
+      "conclusion_evidence": "High"
+    }
+  }
+}
