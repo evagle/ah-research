@@ -399,22 +399,22 @@
     }
   },
   "caict": {
-    "status": "anti-bot",
-    "last_checked": "2026-08-02T00:00:00+08:00",
+    "status": "reachable-limited",
+    "last_checked": "2026-08-04T00:00:00+08:00",
     "final_url": "https://www.caict.ac.cn/kxyj/qwfb/qwsj/",
-    "limitation": "anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.",
+    "limitation": "Library index pages return a 412 WAF response, but publisher-bound search exposes official PDF identities and sampled Chinese and English PDF URLs are directly retrievable without login. Coverage is concentrated in ICT, telecom, cloud, AI, digital economy, industrial internet, and cybersecurity.",
     "observed_error": {
       "state": "error",
       "category": "anti-bot",
-      "message": "anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch."
+      "message": "Library HTML returned 412; direct official PDF retrieval returned 200."
     },
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`412 Precondition Failed` in curl and headless Chrome",
-      "recognizable_content": "Official protection page states the request triggered access-protection rules",
-      "access_indications": "Not directly validated due WAF",
-      "technical_restriction": "WAF blocks both direct CLI and fresh headless-browser retrieval from this environment"
+      "response_status": "Library HTML 412; sampled official cloud white-paper PDFs 200 application/pdf",
+      "recognizable_content": "CAICT report title, report number, publication date, copyright, figures, source notes, and methodology",
+      "access_indications": "Direct PDF files are public; no login observed",
+      "technical_restriction": "Discover PDF identity through publisher-bound search because library navigation is WAF-protected"
     }
   },
   "china-money": {
@@ -814,6 +814,25 @@
       "recognizable_content": "First-party product-sunset notice and historical analytics description.",
       "access_indications": "No retained-account behavior was tested.",
       "technical_restriction": "Treat former analytics product as historical; acquire a current replacement separately."
+    }
+  },
+  "frost-sullivan": {
+    "status": "reachable-limited",
+    "last_checked": "2026-08-04T00:00:00+08:00",
+    "final_url": "https://www.frostchina.com/zh/content/search",
+    "limitation": "Frost China keyword results and insight pages are anonymously accessible and may expose report summaries, market definitions, rankings, and source context. The global store publishes a detailed industry directory, but its search result route triggered a Cloudflare challenge and full reports are generally commercial.",
+    "observed_error": {
+      "state": "error",
+      "category": "anti-bot",
+      "message": "China search returned 200; global store search returned 403 Cloudflare."
+    },
+    "evidence_level": "High",
+    "reviewed_probe": {
+      "redirect_chain": "Language-prefixed China routes canonicalized to equivalent content routes",
+      "response_status": "Frost China search and insight routes 200; global industry directory 200; global store search 403",
+      "recognizable_content": "Report titles, content ids, dates, summaries, market definitions, rankings, keyword matches, and industry categories",
+      "access_indications": "China public content requires no login; global full reports are commercial",
+      "technical_restriction": "Use the China search first for China claims and the global industry directory for coverage discovery"
     }
   },
   "gallagher": {
@@ -1312,9 +1331,9 @@
   },
   "iresearch": {
     "status": "reachable-limited",
-    "last_checked": "2026-08-01T00:00:00+08:00",
-    "final_url": "https://www.iresearch.cn/",
-    "limitation": "public-limited; articles/report pages public, premium products commercial. Vendor-produced perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC, CAICT.",
+    "last_checked": "2026-08-04T00:00:00+08:00",
+    "final_url": "https://report.iresearch.cn/",
+    "limitation": "Keyword search, report pages, abstracts, contents, and sampled image previews are public. Some full reports and premium datasets require commercial access. Coverage is strongest in China internet, consumer, ecommerce, advertising, games, payments, cloud, enterprise software, health, and related digital markets.",
     "observed_error": {
       "state": "none",
       "category": "none",
@@ -1323,10 +1342,10 @@
     "evidence_level": "High",
     "reviewed_probe": {
       "redirect_chain": "No redirect recorded",
-      "response_status": "`200`; `gb2312` homepage rendered after charset handling",
-      "recognizable_content": "iResearch homepage, articles/report pages",
-      "access_indications": "Premium products/deeper databases commercial",
-      "technical_restriction": "Charset handling needed"
+      "response_status": "Report library, keyword search, report pages, and report preview returned 200",
+      "recognizable_content": "Report title, date, abstract, contents, report id, preview images, market size, ranking, and share articles",
+      "access_indications": "Public previews coexist with commercial full-report downloads",
+      "technical_restriction": "Search and preview HTML declare GB2312; decode as GB18030 when needed"
     }
   },
   "itu-statistics": {

@@ -10,7 +10,18 @@ official_domains:
 geographies:
 - CN
 industries:
-- cross-industry
+- consumer
+- commerce
+- media
+- financial-services
+- health
+- technology
+- cloud services
+- cloud computing
+- digital advertising
+- online games
+- payments
+- enterprise software
 authority:
   level: Medium
   scope: China internet, advertising, ecommerce, mobile, consumer-industry reports. Medium-to-high commercial
@@ -22,16 +33,25 @@ functions:
   workflow_evidence: Medium
   field_contract_evidence: Low
   direct_urls:
-  - url: https://www.iresearch.cn/
-    kind: primary route
-    stability: reviewed seed
+  - url: https://report.iresearch.cn/
+    kind: report library
+    stability: stable public route
+  - url: https://s.iresearch.cn/search/
+    kind: keyword search base
+    stability: append a URL-encoded keyword and trailing slash
+  - url: https://report.iresearch.cn/report_pdf.aspx
+    kind: report preview base
+    stability: append the report page id as the id query parameter
   search:
-    method: publisher-bound web search
+    method: official keyword search, report-only search, then report page and preview
     fields:
     - official_domain
-    - query
-    example_query: site:iresearch.cn industry report
-    result_identity: original publisher, title, author, date, methodology, URL
+    - industry
+    - metric
+    - year
+    - report_id
+    example_query: 'https://s.iresearch.cn/report/{URL-encoded industry keyword}/'
+    result_identity: iResearch report title, publication date, report id, official report URL, preview URL, metric definition, period, geography, units
   citation:
     use: attributable measurement with methodology and coverage noted
     required_fields:
@@ -44,11 +64,12 @@ functions:
   - idc-research-reports
 access:
   status: reachable-limited
-  last_checked: '2026-08-01T00:00:00+08:00'
-  final_url: https://www.iresearch.cn/
-  limitation: 'public-limited; articles/report pages public, premium products commercial. Vendor-produced
-    perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC,
-    CAICT.'
+  last_checked: '2026-08-04T00:00:00+08:00'
+  final_url: https://report.iresearch.cn/
+  limitation: Keyword search, report pages, abstracts, contents, and sampled image previews are public.
+    Some full reports and premium datasets require commercial access. Coverage is strongest in China
+    internet, consumer, ecommerce, advertising, games, payments, cloud, enterprise software, health,
+    and related digital markets; verify the requested industry before routing.
   observed_error:
     state: none
     category: none
@@ -56,7 +77,7 @@ access:
   evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`200`; `gb2312` homepage rendered after charset handling'
-    recognizable_content: iResearch homepage, articles/report pages
-    access_indications: Premium products/deeper databases commercial
-    technical_restriction: Charset handling needed
+    response_status: Report library, keyword search, report pages, and report preview returned 200
+    recognizable_content: Report title, date, abstract, contents, report id, preview images, market size, ranking, and share articles
+    access_indications: Public previews coexist with commercial full-report downloads
+    technical_restriction: Search and preview HTML declare GB2312; decode as GB18030 when needed
