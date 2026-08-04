@@ -31,7 +31,9 @@
 | IRESEARCH-PAY24-25 | [艾瑞2024版](https://report.iresearch.cn/report/202411/4649.shtml)、[2025版](https://report.iresearch.cn/report/202601/4780.shtml) | 两版均将微信支付与支付宝列为个人移动商业支付第一梯队 | 中高 | 梯队不是数值份额；2025版中的2025市场规模为估计值。 |
 | IRESEARCH-CLOUD24 | [艾瑞《2025年中国基础云服务行业数据报告》](https://report.iresearch.cn/report/202509/4750.shtml) | 2024年中国公有云IaaS中腾讯占8.0%、与移动云并列第四；IaaS+PaaS占8.3%、第四；PaaS占10.4%、第三 | 高 | 仅国内市场；数据来自专家访谈、公开资料整理、艾瑞云市场模型和自主研究。三个分层不能互相拼接。 |
 | CAICT-CLOUD24 | [中国信通院《云计算蓝皮书（2025年）》](https://www.caict.ac.cn/kxyj/qwfb/bps/202507/P020250722583603558109.pdf) | 2024年中国公有云IaaS（不含CDN）中腾讯占6.0%、第五；阿里17.7%、天翼16.9%、移动14.0%、华为8.7% | 高 | 市场规模依据企业财报、人员访谈、可信云评估和历史数据；与艾瑞、Canalys/Omdia的范围不同。 |
-| CANALYS-CLOUD | [2024年四季度](https://infotechlead.com/cloud/china-cloud-market-to-grow-15-in-2025-canalys-forecasts-89076)、[2025年一季度](https://infotechlead.com/cloud/top-cloud-providers-in-china-market-share-strategies-and-ai-push-q1-2025-90265)、[2025年二季度](https://infotechlead.com/cloud/alibaba-huawei-and-tencent-drive-chinas-ai-powered-cloud-market-growth-in-q2-2025-92377) | 中国大陆云基础设施中腾讯2024年四季度占15%，2025年一、二季度约10% | 中 | Canalys/Omdia署名数据的公开转载，可能存在范围或方法变化。 |
+| CANALYS-CLOUD-Q424 | [Communications Today转载Canalys 2024年四季度数据](https://www.communicationstoday.co.in/chinas-cloud-services-grow-14-to-11-1b-in-q4-2024/) | 中国大陆云基础设施中腾讯占15%，阿里36%，华为20% | 中 | 重估前的Canalys数据。Omdia随后重估历史收入，不能与新版2025年数据计算份额变化。 |
+| OMDIA-CLOUD-Q125 | [Omdia 2025年一季度官方发布](https://omdia.tech.informa.com/pr/2025/jul/mainland-chinas-cloud-infrastructure-market-growth-accelerated-in-q1-2025) | 中国大陆云基础设施中腾讯占10%，阿里33%，华为18% | 高 | Omdia明确披露已根据新增行业信息重估历史收入；公开页未给重估后的2024Q4份额。 |
+| OMDIA-CLOUD-Q225 | [Omdia 2025年二季度报告页](https://omdia.tech.informa.com/om141961/mainland-china-cloud-infrastructure-services-vendor-performance-index-2q25)、[InfotechLead公开转引归档](https://web.archive.org/web/20251128085156id_/https://infotechlead.com/cloud/alibaba-huawei-and-tencent-drive-chinas-ai-powered-cloud-market-growth-in-q2-2025-92377) | 二手报道转引腾讯占10%，阿里34%，华为17% | 中 | 官方报告页确认研究对象和期间，但公开摘要没有份额；10%尚未由可公开读取的Omdia正文直接复核，只作当期检查点。 |
 
 ## 官方市场数据
 
@@ -51,7 +53,7 @@
 | 中国游戏，2025H1 | 腾讯占国内实销收入50%、自研国内市场29%、自研海外市场28%；网易分别为28%、27%、12% | 中高 | 三项分母不同，且范围宽于移动游戏。 |
 | 游戏长青能力 | 2024年Supercell全部在运营游戏收入增长；《王者荣耀》2025年仍居全球手游收入前列；《三角洲行动》进入前列 | 公司行为高；外部观察中至中高 | 支持组合能力，不代表单款必然成功；Squad Busters是明确失败反例。 |
 | 互联网广告 | 腾讯在IMZ口径的份额由2021年15.0%、2022年14.0%、2023年14.36%、2024年15.40%升至2025年16.60%，五年均第三 | 中高 | 含非上市平台估算，不能与腾讯会计收入完全对应。 |
-| 云服务 | 2021年F&S中国云服务收入中腾讯11.1%；2024年艾瑞公有云IaaS、IaaS+PaaS和PaaS中腾讯分别占8.0%、8.3%和10.4%；信通院不含CDN的公有云IaaS口径为6.0%；Canalys/Omdia中国大陆云基础设施中腾讯2024Q4为15%，2025Q1/Q2约10% | 2024艾瑞和信通院高；2021中高；Canalys/Omdia中 | 各机构的产品范围、收入边界和期间不同，不能拼成连续趋势。 |
+| 云服务 | 2021年F&S中国云服务收入中腾讯11.1%；2024年艾瑞公有云IaaS、IaaS+PaaS和PaaS中腾讯分别占8.0%、8.3%和10.4%；信通院不含CDN的公有云IaaS口径为6.0%；Omdia重估后的2025Q1为10%，2025Q2二手转引为10% | 2024艾瑞和信通院高；2021中高；Omdia Q1高、Q2中 | 旧版Canalys 2024Q4为15%，但Omdia随后重估历史收入且未公开新版Q4值；不能把15%和10%解释为份额下降。 |
 | 数字支付 | 2022年数字支付服务交易额中，对应腾讯的公司占30.1% | 中高 | 面向商户和企业的数字支付解决方案，不是个人移动支付。 |
 | 个人移动支付 | 易观2021Q4至2024Q3均显示支付宝第一、腾讯金融第二；艾瑞2024及2025版均将微信支付与支付宝列为第一梯队 | 中高 | 可确认双强位置，不能转成精确连续份额。 |
 
@@ -61,7 +63,7 @@
 |---|---|---|
 | 游戏公司份额 | 前瞻同口径仍缺2022及2025全年腾讯、网易份额 | 已有年份可判断腾讯显著领先；缺年只限制连续趋势精度。 |
 | 广告份额 | 2026季度公司份额及与腾讯会计收入的完整对应 | 五年连续份额足以判断先降后升；不计算未披露季度份额。 |
-| 云份额与价格 | 2021-2025完整同范围年度或季度序列、同配置价格和腾讯续约率 | 2024年直接来源已经确认腾讯IaaS约居第四至第五、PaaS约居第三；缺口限制趋势量化，不再阻断当前竞争位置判断。 |
+| 云份额与价格 | Omdia重估后的2024Q4及更长同范围序列、同配置价格和腾讯续约率 | 2024年艾瑞和信通院直接来源已经确认腾讯IaaS约居第四至第五、PaaS约居第三；2025Q1可作新版季度检查点。缺口限制趋势量化，不阻断当前竞争位置判断。 |
 | 个人移动支付份额 | 2021-2025微信支付精确同口径百分比 | 稳定第二和第一梯队足以判断竞争位置；不虚构精确比例。 |
 | 商户留存 | 腾讯商家续约率、净收入留存和跨平台迁移率 | 微盟只作有限服务商样本，不外推为商家普遍行为。 |
 
