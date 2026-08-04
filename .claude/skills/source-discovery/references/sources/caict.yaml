@@ -10,7 +10,14 @@ official_domains:
 geographies:
 - CN
 industries:
-- cross-industry
+- technology
+- telecom
+- cloud services
+- cloud computing
+- artificial intelligence
+- digital economy
+- industrial internet
+- cybersecurity
 authority:
   level: High
   scope: Official ICT, telecom, digital economy, AI, industrial internet white papers. High authority
@@ -42,23 +49,54 @@ functions:
   fallbacks: []
   adjacent_alternatives:
   - cnnic-official-statistics
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.caict.ac.cn/kxyj/qwfb/bps/
+    kind: Chinese white-paper library
+    stability: stable path; index currently WAF-protected
+  - url: https://www.caict.ac.cn/english/research/whitepapers/
+    kind: English white-paper library
+    stability: stable path; direct PDF files are publicly retrievable
+  search:
+    method: publisher-bound indexed-PDF search followed by direct official PDF retrieval
+    fields:
+    - official_domain
+    - industry
+    - report_title
+    - year
+    - metric
+    example_query: 'site:caict.ac.cn/kxyj/qwfb ("市场份额" OR "市场规模") "{industry}" filetype:pdf'
+    result_identity: CAICT report title, report number, publication month, institute, official PDF URL, metric scope, period, geography, units
+  citation:
+    use: direct CAICT report with report number, page or figure, metric scope, period, and methodology preserved
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+  - frost-sullivan-research-reports
 access:
-  status: anti-bot
-  last_checked: '2026-08-02T00:00:00+08:00'
+  status: reachable-limited
+  last_checked: '2026-08-04T00:00:00+08:00'
   final_url: https://www.caict.ac.cn/kxyj/qwfb/qwsj/
-  limitation: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
-    navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
-    IDC, iResearch.'
+  limitation: Library index pages return a 412 WAF response, but publisher-bound search exposes official
+    PDF identities and sampled Chinese and English PDF URLs are directly retrievable without login.
+    Coverage is concentrated in ICT, telecom, cloud, AI, digital economy, industrial internet, and
+    cybersecurity; do not route CAICT as a universal industry source.
   observed_error:
     state: error
     category: anti-bot
-    message: 'anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction;
-      navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT,
-      IDC, iResearch.'
+    message: Library HTML returned 412; direct official PDF retrieval returned 200.
   evidence_level: High
   reviewed_probe:
     redirect_chain: No redirect recorded
-    response_status: '`412 Precondition Failed` in curl and headless Chrome'
-    recognizable_content: Official protection page states the request triggered access-protection rules
-    access_indications: Not directly validated due WAF
-    technical_restriction: WAF blocks both direct CLI and fresh headless-browser retrieval from this environment
+    response_status: Library HTML 412; sampled official cloud white-paper PDFs 200 application/pdf
+    recognizable_content: CAICT report title, report number, publication date, copyright, figures, source notes, and methodology
+    access_indications: Direct PDF files are public; no login observed
+    technical_restriction: Discover PDF identity through publisher-bound search because library navigation is WAF-protected

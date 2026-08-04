@@ -189,6 +189,26 @@ issuer and competitor filings, original research publishers, named broker
 reports, and report citation trails. A newer peer or listing applicant may
 contain a fresher industry table than the target issuer.
 
+Professional research routes are industry-scoped. Match the requested industry
+and its local-language/English synonyms against each provider profile before
+adding CAICT, iResearch, Frost & Sullivan, or another provider to the plan. A
+prospectus or listing application that names a provider for the exact market is
+itself proof that the provider covers that claim, even when the seed profile
+does not yet list the industry.
+
+An authenticated prospectus or listing application directly qualifies as a
+document-layer source for a market-size, forecast, ranking, or share claim when
+it identifies the professional provider and preserves the table's period,
+geography, market definition, denominator, and source note. Reproduction in a
+listing document is not an evidence defect and does not cap the claim at
+`Medium`; a well-specified table can support `High` conclusion evidence. Grade
+it from document authenticity, provider authority, attribution, scope,
+methodology disclosure, data vintage, and commissioning context. The
+provider's standalone report may remain private or unavailable. Open
+direct-provider searches as expansion work for complete rankings, additional
+years, methodology, and revisions; they are not a prerequisite for accepting
+an otherwise qualified listing-document table.
+
 Treat broker research as a required document route when filings and
 listing-applicant documents leave annual market-share gaps. Search both company
 reports and industry reports for the subject company, every named competitor,
@@ -197,7 +217,8 @@ page, table title, geography, period, measurement basis, named competitors,
 original data provider, report URL, and PDF delivery URL. If a broker table
 cites Frost & Sullivan, CIC, Euromonitor, IDC, or another data provider,
 continue tracing Frost & Sullivan, CIC, Euromonitor, IDC, or another cited data
-provider to its original table or a later official reproduction. A
+provider to its original table or a later official reproduction without
+discarding the qualified broker or listing-document observation. A
 portal-hosted PDF may preserve report contents, but Eastmoney, Hibor, Datayes,
 Sina, and other distributors do not become the report author. Attribute the
 claim to the named broker and retain the distributor as access lineage.
@@ -323,7 +344,11 @@ Keep separate ratings for:
   publisher is for this claim type. Use `High` for originals or official
   first-party statements about the publisher's own actions, `Medium` for
   credible secondary sources with transparent sourcing, and `Low` for weak,
-  indirect, conflicted, or unclear provenance.
+  indirect, conflicted, or unclear provenance. For a professional-research
+  table reproduced in an authenticated listing document, retain the named
+  research provider as the methodology owner and the listing document as the
+  authenticated access container. Do not reduce the provider's authority
+  merely because the table was accessed through the listing document.
 - `practical_utility`: source-property rating for whether the source can
   actually answer the requested fact type at the needed geography, industry,
   date, and granularity. Use `High`, `Medium`, or `Low`.

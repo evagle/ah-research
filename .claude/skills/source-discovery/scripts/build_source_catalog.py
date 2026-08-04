@@ -18,10 +18,11 @@ Do not reject a source solely because it is absent from the catalog.
 Use uncataloged sources when the question requires them and they pass validation.
 Record uncataloged sources with the same fields, access status, provenance, fallback peers, and evidence level.
 
-This catalog records source-level routing facts checked in the supplied audit
-reports dated `2026-08-01`. A failed request is a point-in-time observation,
-not proof of permanent closure. `Not recorded in audit` identifies a fact the
-seed audit did not establish; it is not an invented negative finding.
+This catalog records source-level routing facts checked in the supplied
+reviewed reachability snapshot. A failed request is a point-in-time
+observation, not proof of permanent closure. `Not recorded in audit` identifies
+a fact the seed audit did not establish; it is not an invented negative
+finding.
 
 Catalog ratings are route priors scoped to each record's stated best uses.
 Authority is claim-scoped and remains separate from current reachability and

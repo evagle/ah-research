@@ -1,0 +1,91 @@
+id: frost-sullivan
+name: Frost & Sullivan
+aliases:
+- Frost & Sullivan
+- 弗若斯特沙利文
+- 沙利文
+publisher_type: consulting-research
+official_domains:
+- frostchina.com
+- frost.com
+geographies:
+- Global
+- CN
+industries:
+- consumer
+- commerce
+- media
+- financial-services
+- health
+- technology
+- telecom
+- aviation
+- logistics
+- cloud services
+- cloud computing
+- digital advertising
+- industrial
+- energy
+- automotive
+- agriculture
+- chemicals and materials
+authority:
+  level: High
+  scope: Market size, forecasts, company share, rankings, competitive landscapes, and commissioned
+    industry research across Frost & Sullivan's declared industry coverage. High commercial research
+    authority when metric scope, period, geography, methodology owner, and commissioning context are preserved.
+functions:
+- id: research-reports
+  authority: High
+  utility: High
+  workflow_evidence: High
+  field_contract_evidence: Medium
+  direct_urls:
+  - url: https://www.frostchina.com/zh/content/search?page=1&query%5BfuzzyQuery%5D=
+    kind: China keyword search base
+    stability: stable public query route; append a URL-encoded keyword
+  - url: https://www.frostchina.com/zh/content/insight?page=1&query%5Btag%5D=INDUSTRY-RESEARCH
+    kind: China industry research archive
+    stability: stable public filtered route
+  - url: https://store.frost.com/industries.html
+    kind: global industry directory
+    stability: public category route
+  search:
+    method: official China fuzzy search and industry archive, then global store category and publisher-bound search
+    fields:
+    - official_domain
+    - industry
+    - metric
+    - company
+    - geography
+    - year
+    example_query: 'https://www.frostchina.com/zh/content/search?page=1&query%5BfuzzyQuery%5D={URL-encoded industry or metric}'
+    result_identity: Frost & Sullivan title, publication date, content id or report id, industry, period, geography, metric scope, commissioning context, official URL
+  citation:
+    use: attributable Frost & Sullivan measurement with period, denominator, geography, methodology, and commissioning context noted
+    required_fields:
+    - publisher
+    - title
+    - date
+    - url
+  fallbacks:
+  - iresearch-research-reports
+access:
+  status: reachable-limited
+  last_checked: '2026-08-04T00:00:00+08:00'
+  final_url: https://www.frostchina.com/zh/content/search
+  limitation: Frost China keyword results and insight pages are anonymously accessible and may expose
+    report summaries, market definitions, rankings, and source context. The global store publishes a
+    detailed industry directory, but its search result route triggered a Cloudflare challenge and full
+    reports are generally commercial. Check declared industry coverage before routing.
+  observed_error:
+    state: error
+    category: anti-bot
+    message: China search returned 200; global store search returned 403 Cloudflare.
+  evidence_level: High
+  reviewed_probe:
+    redirect_chain: Language-prefixed China routes canonicalized to equivalent content routes
+    response_status: Frost China search and insight routes 200; global industry directory 200; global store search 403
+    recognizable_content: Report titles, content ids, dates, summaries, market definitions, rankings, keyword matches, and industry categories
+    access_indications: China public content requires no login; global full reports are commercial
+    technical_restriction: Use the China search first for China claims and the global industry directory for coverage discovery

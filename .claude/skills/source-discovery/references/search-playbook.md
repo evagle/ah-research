@@ -116,7 +116,45 @@ Read the applicable site guide before a direct route: `site-guides/sse.md`,
 `site-guides/cninfo.md`, `site-guides/hkexnews.md`,
 `site-guides/hkex-listing-applicants.md`,
 `site-guides/hong-kong-regulatory.md`, or
-`site-guides/official-statistics.md`.
+`site-guides/official-statistics.md`. For professional industry research, read
+the provider guide when present, including `site-guides/caict.md`,
+`site-guides/iresearch.md`, and `site-guides/frost-sullivan.md`.
+
+## Professional Research Providers By Industry
+
+Do not fan out every commercial or institutional provider for every company.
+First map the requested market to provider coverage using the profile's
+`industries` labels and local-language/English synonyms. Then execute only
+matching routes:
+
+| Provider | Strongest recurring coverage | Direct public route |
+|---|---|---|
+| CAICT | Telecom, cloud, AI, digital economy, industrial internet, cybersecurity | Publisher-bound search for official `caict.ac.cn` white-paper and special-report PDFs; library HTML may return 412 while PDFs remain public |
+| iResearch | China consumer internet, ecommerce, advertising, games, payments, cloud, enterprise software, selected health/auto markets | `s.iresearch.cn/search/{keyword}/`, report-only `/report/{keyword}/`, then report page and `report_pdf.aspx?id={id}` |
+| Frost & Sullivan | Broad global and China technology, healthcare, consumer, industrial, mobility, energy, financial, media, and related markets | Frost China fuzzy search with `query[fuzzyQuery]`, China industry-research archive, then the global store industry directory |
+
+A provider explicitly named in an authenticated prospectus or listing
+application is applicable to that document's market even if the seed profile
+does not yet contain the industry label. Record that observed coverage and
+continue the claim.
+
+Treat a listing-document table attributed to CAICT, iResearch, Frost &
+Sullivan, CIC, Euromonitor, IDC, or another identifiable professional provider
+as substantive evidence when the document and table preserve the provider,
+period, geography, market definition, denominator or measurement basis, and
+data vintage. The listing document is an authenticated access container and
+the named research firm remains the methodology owner. Reproduction is not an
+evidence defect, does not impose a `Medium` ceiling, and can support `High`
+conclusion evidence when the table is well specified. Commissioned research
+without a public standalone report remains usable. Grade it from document
+authenticity, provider authority, attribution, scope, methodology disclosure,
+data vintage, and conflicts of interest.
+
+Run the provider's direct route as a separate expansion branch for missing
+years, full rankings, footnotes, methodology, and revised vintages. Failure to
+recover the standalone report does not reopen an accepted prospectus claim.
+Do not count the direct provider page and a prospectus reproduction as
+independent confirmation when they share one underlying dataset.
 
 ## company/filings
 
@@ -203,8 +241,10 @@ scope, GMV/RSV/retail-value basis, named competitors, source note, original
 data provider, canonical report URL, and any separate PDF delivery URL. If the
 source note names Frost & Sullivan, CIC, Euromonitor, IDC, or another provider,
 follow that citation into prospectuses, listing applications, provider
-releases, or later official reproductions. Do not treat two broker reports as
-independent confirmation when both reproduce the same underlying table.
+releases, or later official reproductions as an expansion branch; retain an
+otherwise qualified broker or listing-document observation while tracing. Do
+not treat two broker reports as independent confirmation when both reproduce
+the same underlying table.
 Record the provider's stable `provider_table_id` when available. Normalize it
 with the methodology owner and data vintage; a changed report title or
 immediate publisher does not create a new lineage.

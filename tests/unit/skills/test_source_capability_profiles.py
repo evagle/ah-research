@@ -81,6 +81,7 @@ EXPECTED_PROFILE_IDS = {
     "eurostat",
     "ey-china",
     "flurry",
+    "frost-sullivan",
     "gallagher",
     "gsma-mobile-economy",
     "guangdong-government",
@@ -494,6 +495,39 @@ def test_industry_scope_keeps_matching_and_cross_industry_routes() -> None:
     )
 
     assert [route.source_id for route in routes] == ["consumer-route", "global-route"]
+
+
+def test_professional_research_routes_follow_declared_industry_coverage() -> None:
+    source_profiles = load_source_profiles_module()
+    profiles_by_id = {profile["id"]: profile for profile in load_maintained_profiles()}
+    providers = [
+        profiles_by_id[source_id] for source_id in ("caict", "frost-sullivan", "iresearch")
+    ]
+
+    cloud_routes = source_profiles.select_routes(
+        profiles=providers,
+        function_id="research-reports",
+        now=datetime(2026, 8, 4, tzinfo=UTC),
+        geographies=["CN"],
+        industries=["cloud services"],
+    )
+    consumer_routes = source_profiles.select_routes(
+        profiles=providers,
+        function_id="research-reports",
+        now=datetime(2026, 8, 4, tzinfo=UTC),
+        geographies=["CN"],
+        industries=["consumer"],
+    )
+
+    assert {route.source_id for route in cloud_routes} == {
+        "caict",
+        "frost-sullivan",
+        "iresearch",
+    }
+    assert {route.source_id for route in consumer_routes} == {
+        "frost-sullivan",
+        "iresearch",
+    }
 
 
 def test_independent_market_research_excludes_issuer_route() -> None:
@@ -1447,6 +1481,10 @@ def test_core_seed_profiles_only_export_functions_with_audited_direct_entrypoint
         "sse-regulatory-materials": "https://www.sse.com.cn/regulation/supervision/inquiries/",
         "sec-edgar-company-disclosures": "https://www.sec.gov/edgar/search/",
         "caict-official-statistics": "https://www.caict.ac.cn/kxyj/qwfb/qwsj/",
+        "caict-research-reports": "https://www.caict.ac.cn/kxyj/qwfb/bps/",
+        "frost-sullivan-research-reports": (
+            "https://www.frostchina.com/zh/content/search?page=1&query%5BfuzzyQuery%5D="
+        ),
         "state-post-bureau-official-statistics": (
             "https://www.spb.gov.cn/gjyzj/c100276/common_list.shtml"
         ),
@@ -1461,7 +1499,6 @@ def test_core_seed_profiles_only_export_functions_with_audited_direct_entrypoint
         "pbc-market-data",
         "hkma-market-data",
         "sec-edgar-regulatory-materials",
-        "caict-research-reports",
     }
 
     for exported_function, expected_url in expected_first_direct_urls.items():

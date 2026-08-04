@@ -8,10 +8,11 @@ Do not reject a source solely because it is absent from the catalog.
 Use uncataloged sources when the question requires them and they pass validation.
 Record uncataloged sources with the same fields, access status, provenance, fallback peers, and evidence level.
 
-This catalog records source-level routing facts checked in the supplied audit
-reports dated `2026-08-01`. A failed request is a point-in-time observation,
-not proof of permanent closure. `Not recorded in audit` identifies a fact the
-seed audit did not establish; it is not an invented negative finding.
+This catalog records source-level routing facts checked in the supplied
+reviewed reachability snapshot. A failed request is a point-in-time
+observation, not proof of permanent closure. `Not recorded in audit` identifies
+a fact the seed audit did not establish; it is not an invented negative
+finding.
 
 Catalog ratings are route priors scoped to each record's stated best uses.
 Authority is claim-scoped and remains separate from current reachability and
@@ -484,11 +485,19 @@ requested claim without an explicit scope change.
   - Search example: `site:caict.ac.cn official statistics`
   - Same-function fallbacks: None
   - Adjacent alternatives (not executable fallbacks): `cnnic-official-statistics`
-- Current status: `anti-bot`
-- Last checked: `2026-08-02T00:00:00+08:00`
-- Access limitations: anti-bot/technical-limited; public in principle but CLI got 412 WAF. Automation friction; navigation cumbersome; policy-oriented institutional framing Audited fallback peers: CNNIC, MIIT, IDC, iResearch.
+- Function: `research-reports`
+  - Authority: `High`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [Chinese white-paper library](<https://www.caict.ac.cn/kxyj/qwfb/bps/>), [English white-paper library](<https://www.caict.ac.cn/english/research/whitepapers/>)
+  - Search example: `site:caict.ac.cn/kxyj/qwfb ("市场份额" OR "市场规模") "{industry}" filetype:pdf`
+  - Same-function fallbacks: `iresearch-research-reports`, `frost-sullivan-research-reports`
+- Current status: `reachable-limited`
+- Last checked: `2026-08-04T00:00:00+08:00`
+- Access limitations: Library index pages return a 412 WAF response, but publisher-bound search exposes official PDF identities and sampled Chinese and English PDF URLs are directly retrievable without login. Coverage is concentrated in ICT, telecom, cloud, AI, digital economy, industrial internet, and cybersecurity.
 - Access observation evidence: `High`
-- Site guide: None
+- Site guide: [`caict` guide](site-guides/caict.md)
 
 ## `china-money` - ChinaMoney
 
@@ -936,6 +945,26 @@ requested claim without an explicit scope change.
 - Access limitations: First-party page states Flurry Mobile Analytics, including SDK and Analytics UI, sunset on 2024-03-15. Old Yahoo developer documentation routes returned 404.
 - Access observation evidence: `High`
 - Site guide: None
+
+## `frost-sullivan` - Frost & Sullivan
+
+- Aliases/origins: `Frost & Sullivan`, `弗若斯特沙利文`, `沙利文`
+- Publisher type: `consulting-research`
+- Official domains: `frostchina.com`, `frost.com`
+- Provenance authority: `High` - Market size, forecasts, company share, rankings, competitive landscapes, and commissioned industry research across Frost & Sullivan's declared industry coverage. High commercial research authority when metric scope, period, geography, methodology owner, and commissioning context are preserved.
+- Function: `research-reports`
+  - Authority: `High`
+  - Utility: `High`
+  - Completed workflow evidence: `High`
+  - Stable field/API evidence: `Medium`
+  - Direct links: [China keyword search base](<https://www.frostchina.com/zh/content/search?page=1&query%5BfuzzyQuery%5D=>), [China industry research archive](<https://www.frostchina.com/zh/content/insight?page=1&query%5Btag%5D=INDUSTRY-RESEARCH>), [global industry directory](<https://store.frost.com/industries.html>)
+  - Search example: `https://www.frostchina.com/zh/content/search?page=1&query%5BfuzzyQuery%5D={URL-encoded industry or metric}`
+  - Same-function fallbacks: `iresearch-research-reports`
+- Current status: `reachable-limited`
+- Last checked: `2026-08-04T00:00:00+08:00`
+- Access limitations: Frost China keyword results and insight pages are anonymously accessible and may expose report summaries, market definitions, rankings, and source context. The global store publishes a detailed industry directory, but its search result route triggered a Cloudflare challenge and full reports are generally commercial.
+- Access observation evidence: `High`
+- Site guide: [`frost-sullivan` guide](site-guides/frost-sullivan.md)
 
 ## `gallagher` - Arthur J. Gallagher & Co. insights
 
@@ -1497,14 +1526,14 @@ requested claim without an explicit scope change.
   - Utility: `High`
   - Completed workflow evidence: `Medium`
   - Stable field/API evidence: `Low`
-  - Direct links: [primary route](<https://www.iresearch.cn/>)
-  - Search example: `site:iresearch.cn industry report`
+  - Direct links: [report library](<https://report.iresearch.cn/>), [keyword search base](<https://s.iresearch.cn/search/>), [report preview base](<https://report.iresearch.cn/report_pdf.aspx>)
+  - Search example: `https://s.iresearch.cn/report/{URL-encoded industry keyword}/`
   - Same-function fallbacks: `199it-research-reports`, `idc-research-reports`
 - Current status: `reachable-limited`
-- Last checked: `2026-08-01T00:00:00+08:00`
-- Access limitations: public-limited; articles/report pages public, premium products commercial. Vendor-produced perspective; uneven recency; premium data not fully open Audited fallback peers: 199IT, IDC, CNNIC, CAICT.
+- Last checked: `2026-08-04T00:00:00+08:00`
+- Access limitations: Keyword search, report pages, abstracts, contents, and sampled image previews are public. Some full reports and premium datasets require commercial access. Coverage is strongest in China internet, consumer, ecommerce, advertising, games, payments, cloud, enterprise software, health, and related digital markets.
 - Access observation evidence: `High`
-- Site guide: None
+- Site guide: [`iresearch` guide](site-guides/iresearch.md)
 
 ## `itu-statistics` - ITU Statistics
 
