@@ -1,0 +1,1055 @@
+[
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225655731",
+    "metric": "Authenticated original 关于为子公司提供担保的进展公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF"
+    },
+    "document": {
+      "document_id": "1225655731",
+      "title": "关于为子公司提供担保的进展公告",
+      "published_at": "2026-11-04",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-11-04",
+        "value": "关于为子公司提供担保的进展公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "9b612eee8cbbf162b0764ef1d2749d85694e316216492eae3500e37c55eb62b5",
+        "evidence_id": "1225655731",
+        "event_key": "20261105-official-document-1225655731",
+        "canonical_value": {
+          "value": "关于为子公司提供担保的进展公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "9b612eee8cbbf162b0764ef1d2749d85694e316216492eae3500e37c55eb62b5",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225655731",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-11-04",
+    "artifact": {
+      "identity": "sha256:17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056",
+      "sha256": "17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056"
+    },
+    "scope_fingerprint": "9b612eee8cbbf162b0764ef1d2749d85694e316216492eae3500e37c55eb62b5",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225655731"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225655731"
+      ]
+    },
+    "lineage_id": "underlying:efaa4db6d880a508fa1779c3229584d29b670f988d1def7af85ec5e979afc581",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF",
+      "document_id": "1225655731",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF",
+      "binding_sha256": "cd627fd13487482b1e36583e2df9581666e43fcb0c4e496c64a450d3c0e9aa41"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225607861",
+    "metric": "Authenticated original 2026年三季度报告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF"
+    },
+    "document": {
+      "document_id": "1225607861",
+      "title": "2026年三季度报告",
+      "published_at": "2026-10-17",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-10-17",
+        "value": "2026年三季度报告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "2007fdcd14445b2bac81d105f995df180763de700961061e738f6620f3807df3",
+        "evidence_id": "1225607861",
+        "event_key": "20261105-official-document-1225607861",
+        "canonical_value": {
+          "value": "2026年三季度报告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "2007fdcd14445b2bac81d105f995df180763de700961061e738f6620f3807df3",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225607861",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-10-17",
+    "artifact": {
+      "identity": "sha256:e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302"
+    },
+    "scope_fingerprint": "2007fdcd14445b2bac81d105f995df180763de700961061e738f6620f3807df3",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225607861"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225607861"
+      ]
+    },
+    "lineage_id": "underlying:60349065136d2d7a38acb0aa298265f45957a1c9f44fd2d21c4c88a400a394a5",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "document_id": "1225607861",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "binding_sha256": "33ea885f46e0389071c7ea93816859c543a7ab7e9ff8b87a8a4ecc6b4535e162"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225598337",
+    "metric": "Authenticated original 关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF"
+    },
+    "document": {
+      "document_id": "1225598337",
+      "title": "关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告",
+      "published_at": "2026-10-10",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-10-10",
+        "value": "关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "3d24b509ca364463d0f281f0a1a5d152a560a6374c56f0202582f3131f909e9a",
+        "evidence_id": "1225598337",
+        "event_key": "20261105-official-document-1225598337",
+        "canonical_value": {
+          "value": "关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "3d24b509ca364463d0f281f0a1a5d152a560a6374c56f0202582f3131f909e9a",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225598337",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-10-10",
+    "artifact": {
+      "identity": "sha256:23466655ad1e0b35f4cb0a1ccd3c3d87d59d70743d2df1bf90799f91966a926f",
+      "sha256": "23466655ad1e0b35f4cb0a1ccd3c3d87d59d70743d2df1bf90799f91966a926f"
+    },
+    "scope_fingerprint": "3d24b509ca364463d0f281f0a1a5d152a560a6374c56f0202582f3131f909e9a",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225598337"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225598337"
+      ]
+    },
+    "lineage_id": "underlying:9b818be3edf2e23f7ae62422dd8af9ec43e920180656cdb6c708db55d8ece624",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "23466655ad1e0b35f4cb0a1ccd3c3d87d59d70743d2df1bf90799f91966a926f",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF",
+      "document_id": "1225598337",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF",
+      "binding_sha256": "dea7d92ae72d4e52f1a687580d8640c997cb3f1e36835343859fcf9d19175d85"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225468251",
+    "metric": "Authenticated original 2026年半年度权益分派实施公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF"
+    },
+    "document": {
+      "document_id": "1225468251",
+      "title": "2026年半年度权益分派实施公告",
+      "published_at": "2026-08-12",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-08-12",
+        "value": "2026年半年度权益分派实施公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "2a6bfbddc96a8f0032123ab1ba30fb2e18928568e248b9c8a15de6170598a04e",
+        "evidence_id": "1225468251",
+        "event_key": "20261105-official-document-1225468251",
+        "canonical_value": {
+          "value": "2026年半年度权益分派实施公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "2a6bfbddc96a8f0032123ab1ba30fb2e18928568e248b9c8a15de6170598a04e",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225468251",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-08-12",
+    "artifact": {
+      "identity": "sha256:e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb",
+      "sha256": "e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb"
+    },
+    "scope_fingerprint": "2a6bfbddc96a8f0032123ab1ba30fb2e18928568e248b9c8a15de6170598a04e",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225468251"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225468251"
+      ]
+    },
+    "lineage_id": "underlying:4eeef942d505d798b5fa97f556fb52c7ba4e3d96111f14a161bc5ce73ba6a5f9",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF",
+      "document_id": "1225468251",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF",
+      "binding_sha256": "1cccf5ba9e7836f8c7ccc49e87ac336373fdd2bc742c37afaeb9ac57878e7851"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225440238",
+    "metric": "Authenticated original 关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF"
+    },
+    "document": {
+      "document_id": "1225440238",
+      "title": "关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告",
+      "published_at": "2026-07-25",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-07-25",
+        "value": "关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "6d8422d8e7ccedd1a1464321301cc3ea4cf7b13d5937e68a649f031494dd2da7",
+        "evidence_id": "1225440238",
+        "event_key": "20261105-official-document-1225440238",
+        "canonical_value": {
+          "value": "关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "6d8422d8e7ccedd1a1464321301cc3ea4cf7b13d5937e68a649f031494dd2da7",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225440238",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-07-25",
+    "artifact": {
+      "identity": "sha256:433953243faf7c4dba578b4ceb1a036018ea83424d2dcc1fe29bc3725db04897",
+      "sha256": "433953243faf7c4dba578b4ceb1a036018ea83424d2dcc1fe29bc3725db04897"
+    },
+    "scope_fingerprint": "6d8422d8e7ccedd1a1464321301cc3ea4cf7b13d5937e68a649f031494dd2da7",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225440238"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225440238"
+      ]
+    },
+    "lineage_id": "underlying:8ed08915bcaf7a86ec7cffdec322c7577b8d1c6b13488a54e0ef4e013dee33f4",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "433953243faf7c4dba578b4ceb1a036018ea83424d2dcc1fe29bc3725db04897",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF",
+      "document_id": "1225440238",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF",
+      "binding_sha256": "789eff259a377252a4f4be3746de8a33ff4685c7d494d2aa8d11bb4afdde4e13"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225440237",
+    "metric": "Authenticated original 2026年半年度非经营性资金占用及其他关联资金往来情况汇总表",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF"
+    },
+    "document": {
+      "document_id": "1225440237",
+      "title": "2026年半年度非经营性资金占用及其他关联资金往来情况汇总表",
+      "published_at": "2026-07-25",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-07-25",
+        "value": "2026年半年度非经营性资金占用及其他关联资金往来情况汇总表",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "6643b3fa20d45d6904346a25bd082020698c170d1ff5b8131942050eafc910bb",
+        "evidence_id": "1225440237",
+        "event_key": "20261105-official-document-1225440237",
+        "canonical_value": {
+          "value": "2026年半年度非经营性资金占用及其他关联资金往来情况汇总表",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "6643b3fa20d45d6904346a25bd082020698c170d1ff5b8131942050eafc910bb",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225440237",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-07-25",
+    "artifact": {
+      "identity": "sha256:eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0",
+      "sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0"
+    },
+    "scope_fingerprint": "6643b3fa20d45d6904346a25bd082020698c170d1ff5b8131942050eafc910bb",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225440237"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225440237"
+      ]
+    },
+    "lineage_id": "underlying:d8784e1a13a04b326176390af5ab8af9b27d927d1fbccc5faf229814d283305b",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF",
+      "document_id": "1225440237",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF",
+      "binding_sha256": "4cf4016468e2f11f901c60201b054fd3a86e8256d37808b1b5c6e09a73b91528"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225303075",
+    "metric": "Authenticated original 2025年度权益分派实施公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF"
+    },
+    "document": {
+      "document_id": "1225303075",
+      "title": "2025年度权益分派实施公告",
+      "published_at": "2026-05-14",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-05-14",
+        "value": "2025年度权益分派实施公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "6fb83f47a185d5f052a6ff32aee2831061bfd0ba8934cbe351cf657471907900",
+        "evidence_id": "1225303075",
+        "event_key": "20261105-official-document-1225303075",
+        "canonical_value": {
+          "value": "2025年度权益分派实施公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "6fb83f47a185d5f052a6ff32aee2831061bfd0ba8934cbe351cf657471907900",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225303075",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-05-14",
+    "artifact": {
+      "identity": "sha256:fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087",
+      "sha256": "fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087"
+    },
+    "scope_fingerprint": "6fb83f47a185d5f052a6ff32aee2831061bfd0ba8934cbe351cf657471907900",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225303075"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225303075"
+      ]
+    },
+    "lineage_id": "underlying:a70c6a17f88d08a1e8546ffa3f0f848098f50bad78a53a762b7c55d065b27fc5",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF",
+      "document_id": "1225303075",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF",
+      "binding_sha256": "a8a7dd994904368f2d1191ae56960fa2f1c37f7e74f8872efeba5584b9536e7d"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225285783",
+    "metric": "Authenticated original 2025年度股东会决议公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF"
+    },
+    "document": {
+      "document_id": "1225285783",
+      "title": "2025年度股东会决议公告",
+      "published_at": "2026-05-09",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-05-09",
+        "value": "2025年度股东会决议公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "9838c1d001712e571f2980e905afb0c81ad2c7a6c83c4fb6084fb7adb4286962",
+        "evidence_id": "1225285783",
+        "event_key": "20261105-official-document-1225285783",
+        "canonical_value": {
+          "value": "2025年度股东会决议公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "9838c1d001712e571f2980e905afb0c81ad2c7a6c83c4fb6084fb7adb4286962",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225285783",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-05-09",
+    "artifact": {
+      "identity": "sha256:8d13591747444261d6e37afa1bdeaa2cb799aa00f7f27b8f461177b83d376730",
+      "sha256": "8d13591747444261d6e37afa1bdeaa2cb799aa00f7f27b8f461177b83d376730"
+    },
+    "scope_fingerprint": "9838c1d001712e571f2980e905afb0c81ad2c7a6c83c4fb6084fb7adb4286962",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225285783"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225285783"
+      ]
+    },
+    "lineage_id": "underlying:1d080cda6d0eafb50accf7413cb1608e917d6cee6a7279d3e05749f78a025b38",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "8d13591747444261d6e37afa1bdeaa2cb799aa00f7f27b8f461177b83d376730",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF",
+      "document_id": "1225285783",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF",
+      "binding_sha256": "30670c2a7e659a960220bcf0c88d3e2af8113d563acfa55f40717beea4ed994e"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225123097",
+    "metric": "Authenticated original 关于拟变更会计师事务所的公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF"
+    },
+    "document": {
+      "document_id": "1225123097",
+      "title": "关于拟变更会计师事务所的公告",
+      "published_at": "2026-04-18",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-04-18",
+        "value": "关于拟变更会计师事务所的公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "47005092d5cc106637a58ed8e40bdae00fe4db3e42abe11c6020e3679ed28347",
+        "evidence_id": "1225123097",
+        "event_key": "20261105-official-document-1225123097",
+        "canonical_value": {
+          "value": "关于拟变更会计师事务所的公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "47005092d5cc106637a58ed8e40bdae00fe4db3e42abe11c6020e3679ed28347",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225123097",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-04-18",
+    "artifact": {
+      "identity": "sha256:17fefa35e55bc707e75c03d1b74a073274de78aeddd117d627b512573c6fdfc4",
+      "sha256": "17fefa35e55bc707e75c03d1b74a073274de78aeddd117d627b512573c6fdfc4"
+    },
+    "scope_fingerprint": "47005092d5cc106637a58ed8e40bdae00fe4db3e42abe11c6020e3679ed28347",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225123097"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225123097"
+      ]
+    },
+    "lineage_id": "underlying:0f9ba8eda4e102b19ca915a971da7e68189f4778f51966c3e83edb2ee36a3f35",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "17fefa35e55bc707e75c03d1b74a073274de78aeddd117d627b512573c6fdfc4",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF",
+      "document_id": "1225123097",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF",
+      "binding_sha256": "99aecfbfeac7eb48dd8d812373aac935eb215be6833d260c9abb5551f333c71d"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225123082",
+    "metric": "Authenticated original 关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF"
+    },
+    "document": {
+      "document_id": "1225123082",
+      "title": "关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告",
+      "published_at": "2026-04-18",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-04-18",
+        "value": "关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "7716507a179d20a7c86edb2b2d7b9fc4cdd797dfabfc1e56c200d2741b9b815e",
+        "evidence_id": "1225123082",
+        "event_key": "20261105-official-document-1225123082",
+        "canonical_value": {
+          "value": "关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "7716507a179d20a7c86edb2b2d7b9fc4cdd797dfabfc1e56c200d2741b9b815e",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225123082",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-04-18",
+    "artifact": {
+      "identity": "sha256:05a05ae9647f8fd87ae017071f0bd0c9544e625efcc4eacf257464239717dab3",
+      "sha256": "05a05ae9647f8fd87ae017071f0bd0c9544e625efcc4eacf257464239717dab3"
+    },
+    "scope_fingerprint": "7716507a179d20a7c86edb2b2d7b9fc4cdd797dfabfc1e56c200d2741b9b815e",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225123082"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225123082"
+      ]
+    },
+    "lineage_id": "underlying:730ca7dbe022910cd3e844987bf097d0a81451c0c7ccd8703374bcfe6d3e7bae",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "05a05ae9647f8fd87ae017071f0bd0c9544e625efcc4eacf257464239717dab3",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF",
+      "document_id": "1225123082",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF",
+      "binding_sha256": "52190b71dcbccd6bab675f2ec9e9cf35fbdb6bb8c7340e521898925381fafb61"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225123081",
+    "metric": "Authenticated original 关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF"
+    },
+    "document": {
+      "document_id": "1225123081",
+      "title": "关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告",
+      "published_at": "2026-04-18",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-04-18",
+        "value": "关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "14afb6cc85bf0bd55ffe27eeb701b8f5753a7681000835a93eb352d07ef1e730",
+        "evidence_id": "1225123081",
+        "event_key": "20261105-official-document-1225123081",
+        "canonical_value": {
+          "value": "关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "14afb6cc85bf0bd55ffe27eeb701b8f5753a7681000835a93eb352d07ef1e730",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225123081",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-04-18",
+    "artifact": {
+      "identity": "sha256:f05be05af2cc568e27de1c3011cbe8e89f4aae7a50792f1f5f0d4a64bcc2786f",
+      "sha256": "f05be05af2cc568e27de1c3011cbe8e89f4aae7a50792f1f5f0d4a64bcc2786f"
+    },
+    "scope_fingerprint": "14afb6cc85bf0bd55ffe27eeb701b8f5753a7681000835a93eb352d07ef1e730",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225123081"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225123081"
+      ]
+    },
+    "lineage_id": "underlying:f8f9bde6faa21a61479195bb598ce2ff158055d67d365164c416670391fa4deb",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "f05be05af2cc568e27de1c3011cbe8e89f4aae7a50792f1f5f0d4a64bcc2786f",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF",
+      "document_id": "1225123081",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF",
+      "binding_sha256": "fbd032c9b968bbf7dd8082cdc02606632b9b0aae3d64a54c08a9b099ff821dd3"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225123066",
+    "metric": "Authenticated original 控股股东、实际控制人及其他关联方资金占用情况的专项说明",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Deloitte",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "auditor",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF"
+    },
+    "document": {
+      "document_id": "1225123066",
+      "title": "控股股东、实际控制人及其他关联方资金占用情况的专项说明",
+      "published_at": "2026-04-18",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-04-18",
+        "value": "控股股东、实际控制人及其他关联方资金占用情况的专项说明",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "5b57b49ddaa6df220c25c67bbe67f075a3919ea74b379069deb067c00e3daec4",
+        "evidence_id": "1225123066",
+        "event_key": "20261105-official-document-1225123066",
+        "canonical_value": {
+          "value": "控股股东、实际控制人及其他关联方资金占用情况的专项说明",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "5b57b49ddaa6df220c25c67bbe67f075a3919ea74b379069deb067c00e3daec4",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225123066",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-04-18",
+    "artifact": {
+      "identity": "sha256:d5774aa6b53e28e94855d8b39214766de37ad30939ed14e9ab2135da8bef539c",
+      "sha256": "d5774aa6b53e28e94855d8b39214766de37ad30939ed14e9ab2135da8bef539c"
+    },
+    "scope_fingerprint": "5b57b49ddaa6df220c25c67bbe67f075a3919ea74b379069deb067c00e3daec4",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Deloitte",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225123066"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225123066"
+      ]
+    },
+    "lineage_id": "underlying:14c630e247b7ecaaf2727f066446cb8a520042776a41d795c287918adec10e60",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "d5774aa6b53e28e94855d8b39214766de37ad30939ed14e9ab2135da8bef539c",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF",
+      "document_id": "1225123066",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF",
+      "binding_sha256": "ed91e6afd9b7e37ca8a1f5a2ab36e8ef26ae11454f81b7fccb173302223a3f7d"
+    }
+  },
+  {
+    "schema_version": "1.0",
+    "claim_id": "20261105-official-document-1225123065",
+    "metric": "Authenticated original 2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+    "frequency": "event-driven",
+    "period_semantics": "event-date",
+    "source": {
+      "immediate_publisher": "Hikvision through CNINFO",
+      "original_publisher": "Hikvision",
+      "publisher_type": "statutory issuer disclosure",
+      "source_class": "issuer-first-party",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF"
+    },
+    "document": {
+      "document_id": "1225123065",
+      "title": "2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+      "published_at": "2026-04-18",
+      "canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF"
+    },
+    "values": [
+      {
+        "period": "2026-04-18",
+        "value": "2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+        "unit": "documentary statement",
+        "status": "observed",
+        "definition_scope_fingerprint": "1a81cc992f8a48f9673c416641e6191a291c76bfc5de7e7a51eaf1c1e681f306",
+        "evidence_id": "1225123065",
+        "event_key": "20261105-official-document-1225123065",
+        "canonical_value": {
+          "value": "2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+          "unit": "documentary statement",
+          "definition_scope_fingerprint": "1a81cc992f8a48f9673c416641e6191a291c76bfc5de7e7a51eaf1c1e681f306",
+          "reconciliation_id": null
+        }
+      }
+    ],
+    "canonical_unit": "documentary statement",
+    "scope": {
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Hikvision listed issuer",
+      "product_scope": "Specified original filing 1225123065",
+      "measurement_basis": "Document identity and directly inspected disclosure; no full-history absence assertion"
+    },
+    "data_vintage": "2026-04-18",
+    "artifact": {
+      "identity": "sha256:1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90",
+      "sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90"
+    },
+    "scope_fingerprint": "1a81cc992f8a48f9673c416641e6191a291c76bfc5de7e7a51eaf1c1e681f306",
+    "reconciliations": [],
+    "lineage": {
+      "methodology_owner": "Hikvision",
+      "underlying_dataset_ids": [],
+      "underlying_report_ids": [
+        "1225123065"
+      ],
+      "cited_source_ids": [
+        "CNINFO:1225123065"
+      ]
+    },
+    "lineage_id": "underlying:9f7ee346389353af19d2e5cd306f93e4ce65a3ac3989fb09e6296c162314ee3e",
+    "runtime_evidence": {
+      "source_authority": "High",
+      "conclusion_evidence": "High",
+      "originality": "High",
+      "independence": "Low",
+      "evidence_level": "High"
+    },
+    "source_document_identity": {
+      "artifact_sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90",
+      "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF",
+      "document_id": "1225123065",
+      "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF",
+      "binding_sha256": "a9529ebd0e9219444051f517ac243d3858b9f4c71b097e8f73a4f675287fe1d0"
+    }
+  }
+]

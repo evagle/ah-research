@@ -1,0 +1,16 @@
+{
+  "profile_path": "/Users/brian_huang/repos/ah-research/profiles/002415.SZ-2026-09-29-v2.md",
+  "previous_sha256": "30cbf20280a55fa2ea77b5cb2248932ae5f057af77a8d734647d88b9145fb370",
+  "updated_sha256": "668e7c37cf1f688339306efd5e48ac79d17bc814e758d4d89057f5291d9f2b47",
+  "evidence": {
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/analysis-a8086e0e0cecf885c8e862ac546083f0ba9b682c711533fbe213dba04ebb7659.json",
+    "sha256": "a8086e0e0cecf885c8e862ac546083f0ba9b682c711533fbe213dba04ebb7659"
+  },
+  "changes": [
+    "2026 H1 supplement",
+    "executive summary",
+    "monitoring table",
+    "source index"
+  ],
+  "full_workflow_completed": false
+}

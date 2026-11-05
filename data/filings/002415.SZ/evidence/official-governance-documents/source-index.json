@@ -1,0 +1,18 @@
+{
+  "status": "official_document_read_not_event_manifest_bound",
+  "documents": [
+    {
+      "publication_date": "2019-11-14",
+      "url": "https://static.cninfo.com.cn/finalpage/2019-11-14/1207087356.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-governance-documents/2019-investigation-7841e64cbed3bcf1c5d093d730722cdd7c618c2b34cf4e30cb9fce4d5120b91c.pdf",
+      "sha256": "7841e64cbed3bcf1c5d093d730722cdd7c618c2b34cf4e30cb9fce4d5120b91c"
+    },
+    {
+      "publication_date": "2020-03-14",
+      "url": "https://static.cninfo.com.cn/finalpage/2020-03-14/1207372360.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-governance-documents/2020-close-74d8f96804f3b7c4fd94b736b24d05817d015083b513f740c95cadf3a8627554.pdf",
+      "sha256": "74d8f96804f3b7c4fd94b736b24d05817d015083b513f740c95cadf3a8627554"
+    }
+  ],
+  "observed_classification": "2019 investigation for suspected disclosure violation; 2020 closure plus warning-letter administrative supervisory measure, recorded in securities/futures integrity file. Source does not say administrative punishment or effective disciplinary sanction; no final management veto inferred here."
+}

@@ -1,0 +1,84 @@
+{
+  "ticker": "002415.SZ",
+  "supplement_as_of": "2026-11-05",
+  "annual_as_of": "2026-04-18",
+  "scope": "2026 Q3 operating and selected governance update; not a full event/history completion",
+  "latest_fiscal_period": "2026-09-30",
+  "research_ledger": {
+    "artifact_id": "d5356f8c7009fd8c589ff324a83220fe2b05477e08e28deefbafb3cd2ea9add4",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/runs/value-profile-2025-20260929-v2/logs/research-ledger.json",
+    "sha256": "9f0b6fba363b87ed2be9b7a46d4ce4bb60e6224a09963524dcac09da168c391e"
+  },
+  "artifacts": {
+    "update-facts.json": {
+      "artifact_id": "1b868e3ce696066a66ca944de4944c99317254d9a0d151c38b98e4d16e5d5c58",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/facts/1b868e3ce696066a66ca944de4944c99317254d9a0d151c38b98e4d16e5d5c58.json",
+      "sha256": "4c0e3300fd0252ead9923a7af62ec65782a6aeac53555108b9086394e34cd8e1"
+    },
+    "update-citations.json": {
+      "artifact_id": "6a003273de31991cbee14693b382bfec8df0fe39d44a183aa52e2fcfdd4edf49",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/citations/6a003273de31991cbee14693b382bfec8df0fe39d44a183aa52e2fcfdd4edf49.json",
+      "sha256": "f26edabfe362664cf4799040d57c65c16c9b0b3faf610d03f6b4fcff5f0ef394"
+    },
+    "update-metrics.json": {
+      "artifact_id": "c7625aa9d4b0d2aeda26fb627e4969e9ec16df15b43d81e8649e6de548ac131e",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/metrics/c7625aa9d4b0d2aeda26fb627e4969e9ec16df15b43d81e8649e6de548ac131e.json",
+      "sha256": "801156f6cbfbc5744cd22a29b5d19c0014b23b279eb583d026fae5b9b9d4c9b9"
+    },
+    "new-discovery-candidates.json": {
+      "artifact_id": "8efa977dc71c66a0038f963f7a64e0794f84e2be076814ba71d33863fe38bf54",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/citations/8efa977dc71c66a0038f963f7a64e0794f84e2be076814ba71d33863fe38bf54.json",
+      "sha256": "da45b858460db0e1fbb12bdd506ab1b3cd084a1ea1dea1cc0133aa862d2ac415"
+    },
+    "discovery-observations.json": {
+      "artifact_id": "4a9d64e03a88e90c11c3c3bf63cde73556cf2fbb30913a3e5e7fc5a6c0092ffb",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4a9d64e03a88e90c11c3c3bf63cde73556cf2fbb30913a3e5e7fc5a6c0092ffb.json",
+      "sha256": "4024736987dba2243c304aa9a0f5db70111106db1508b94f3e4a6e46247e4b1a"
+    },
+    "industry-bundle": {
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/runs/value-profile-2025-20260929-v2/logs/industry-bundle-0dc84094f6fe95d49393f96f6778cfdd586b895ab50cd3d6a15d486d5ccacdab.json",
+      "sha256": "0dc84094f6fe95d49393f96f6778cfdd586b895ab50cd3d6a15d486d5ccacdab",
+      "repair": "Only ledger storage paths repaired. Role states and accepted evidence unchanged."
+    }
+  },
+  "source_artifacts": {
+    "page-1": {
+      "artifact_id": "7d32b7578582d59261aabce11a0b7529078780e61517ac38fb8b5fbdfce688dd",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/7d32b7578582d59261aabce11a0b7529078780e61517ac38fb8b5fbdfce688dd.json",
+      "sha256": "03d8153c2794956fcb2fcdfe29fe2f009d7aa3b3ef59212698001356b0a5b43c"
+    },
+    "page-2": {
+      "artifact_id": "f269e5c24a24d5f04fcca59e521b933e2f01241b2e0cd5ec763f8c263aeaa82d",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/f269e5c24a24d5f04fcca59e521b933e2f01241b2e0cd5ec763f8c263aeaa82d.json",
+      "sha256": "011cc2cb074fff735b3486a1ef022da7c07b36c77963c7d4a415578fa90d7cfa"
+    },
+    "page-3": {
+      "artifact_id": "9a6171af3b1ec00de9c2d1ce5ea2a480fb127ea39dcc605cb551428e37038ca9",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/9a6171af3b1ec00de9c2d1ce5ea2a480fb127ea39dcc605cb551428e37038ca9.json",
+      "sha256": "06d4b6b65c6729fd42e23ad759bb224d093ffe3531fe86ff6fc35d2951cb3eed"
+    },
+    "catalog": {
+      "artifact_id": "c1ecdef2752e3f01d863f1466ab928060ba990ef4db9bd80a97a195c35159aca",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/c1ecdef2752e3f01d863f1466ab928060ba990ef4db9bd80a97a195c35159aca.json",
+      "sha256": "7e3ae4fd5d538ecfc91ddcaffd2e39aa15184d9a86d4ff85cb88246d3255cd39"
+    },
+    "index": {
+      "artifact_id": "841e1f71a60d48bc8705a73a5fce31dd28e6d6ab4df490d00327120f92b125ac",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/citations/841e1f71a60d48bc8705a73a5fce31dd28e6d6ab4df490d00327120f92b125ac.json",
+      "sha256": "ecbd04c56ee4ec63424481697ea8c31c04647e5e26b466c9f7f797c47fe1e0e5"
+    }
+  },
+  "source_limitations": [
+    "Interim financial statements are unaudited",
+    "The complete historical event manifest is not built",
+    "Five-year market-share and market-size series remain unresolved"
+  ],
+  "assurance": "Source values and arithmetic verified; financial assurance and business sustainability kept separate",
+  "full_workflow_completed": false,
+  "image_inspection": {
+    "announcement_id": "1225123066",
+    "page": 1,
+    "quote": "我们对汇总表所载资料与本所审计贵公司2025年度财务报表时所复核的会计资料和经审计的财务报表的相关内容进行了核对，在所有重大方面没有发现不一致。",
+    "limitation": "No additional audit procedures on the summary beyond annual financial-statement related-party audit procedures."
+  }
+}

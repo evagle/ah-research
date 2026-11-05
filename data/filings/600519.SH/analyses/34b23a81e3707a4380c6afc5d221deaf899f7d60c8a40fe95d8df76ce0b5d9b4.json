@@ -1,0 +1,140 @@
+{
+  "ticker": "600519.SH",
+  "as_of": "2026-11-05",
+  "scope": "incremental quarterly and announcement update, not full-profile acceptance",
+  "fact_count": 182,
+  "metric_count": 188,
+  "assertions": 858,
+  "official_pdf_revalidation": [
+    {
+      "announcement_id": "1225652625",
+      "remote_sha256_match": true,
+      "bytes": 121025
+    },
+    {
+      "announcement_id": "1225649906",
+      "remote_sha256_match": true,
+      "bytes": 86614
+    },
+    {
+      "announcement_id": "1225649896",
+      "remote_sha256_match": true,
+      "bytes": 193430
+    },
+    {
+      "announcement_id": "1225475868",
+      "remote_sha256_match": true,
+      "bytes": 832321
+    },
+    {
+      "announcement_id": "1225475864",
+      "remote_sha256_match": true,
+      "bytes": 96562
+    },
+    {
+      "announcement_id": "1225475863",
+      "remote_sha256_match": true,
+      "bytes": 136379
+    },
+    {
+      "announcement_id": "1225431263",
+      "remote_sha256_match": true,
+      "bytes": 67261
+    },
+    {
+      "announcement_id": "1225379934",
+      "remote_sha256_match": true,
+      "bytes": 155250
+    },
+    {
+      "announcement_id": "1225366259",
+      "remote_sha256_match": true,
+      "bytes": 99225
+    },
+    {
+      "announcement_id": "1225347653",
+      "remote_sha256_match": true,
+      "bytes": 94853
+    },
+    {
+      "announcement_id": "1225333825",
+      "remote_sha256_match": true,
+      "bytes": 91427
+    },
+    {
+      "announcement_id": "1225324466",
+      "remote_sha256_match": true,
+      "bytes": 99404
+    },
+    {
+      "announcement_id": "1225324463",
+      "remote_sha256_match": true,
+      "bytes": 95895
+    },
+    {
+      "announcement_id": "1225188174",
+      "remote_sha256_match": true,
+      "bytes": 86837
+    },
+    {
+      "announcement_id": "1225187851",
+      "remote_sha256_match": true,
+      "bytes": 158374
+    },
+    {
+      "announcement_id": "1225114720",
+      "remote_sha256_match": true,
+      "bytes": 105547
+    },
+    {
+      "announcement_id": "1225114712",
+      "remote_sha256_match": true,
+      "bytes": 140578
+    },
+    {
+      "announcement_id": "1225055491",
+      "remote_sha256_match": true,
+      "bytes": 61927
+    },
+    {
+      "announcement_id": "1224764517",
+      "remote_sha256_match": true,
+      "bytes": 186470
+    },
+    {
+      "announcement_id": "1224462930",
+      "remote_sha256_match": true,
+      "bytes": 805855
+    },
+    {
+      "announcement_id": "1223413786",
+      "remote_sha256_match": true,
+      "bytes": 154608
+    },
+    {
+      "announcement_id": "1225366264",
+      "remote_sha256_match": true,
+      "bytes": 150473
+    }
+  ],
+  "2026_catalog_revalidation": [
+    {
+      "page": "1",
+      "hash_match": true,
+      "official_total": 67
+    },
+    {
+      "page": "2",
+      "hash_match": true,
+      "official_total": 67
+    },
+    {
+      "page": "3",
+      "hash_match": true,
+      "official_total": 67
+    }
+  ],
+  "historical_annual_rows_preserved": 128,
+  "status": "PASS_WITH_DECLARED_SCOPE",
+  "draft_sha256": "0b977c45dfe22e637a0be70e7f541c70726cb826e2ada6af1a1f4b77d33670c2"
+}

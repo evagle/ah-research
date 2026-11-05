@@ -1,0 +1,3752 @@
+{
+  "schema": "moutai-last-year-supplement/1.0",
+  "as_of": "2026-11-05",
+  "coverage": {
+    "window": [
+      "2025-11-05",
+      "2026-11-05"
+    ],
+    "aktools_version": "0.1.4",
+    "akshare_version": "1.20.27",
+    "transport": "official AKTools stdio MCP called through installed Python ClientSession",
+    "interfaces": {
+      "stock_research_report_em": {
+        "params": {
+          "symbol": "600519"
+        },
+        "returned_total_rows": 779,
+        "filtered_rows": 62,
+        "institutions": 17
+      },
+      "stock_zh_a_disclosure_report_cninfo": {
+        "params": {
+          "symbol": "600519",
+          "market": "沪深京",
+          "start_date": "20251105",
+          "end_date": "20261105"
+        },
+        "returned_rows": 93
+      }
+    },
+    "cninfo_pdf_resolution": "four native query pages; all 93 IDs match AKTools result; actual adjunctUrl used",
+    "downloaded_PDFs": 155,
+    "nonempty_texts": 154,
+    "limitations": [
+      "public portal coverage, not all brokerage research or all regulatory evidence",
+      "catalogs and extracted texts screened; selected pages reviewed deeply; not a 155-document full-page review",
+      "1224836309 text empty; 1225114715 table on PDF page 4 is scanned and visually inspected, not used as new numerical claim",
+      "comparative 2025 H1/Q3 reports are outside window and used only as denominators",
+      "broker forecast, rating and target price excluded; report-index date is not always cover date",
+      "existing full-profile annual/event binding, governance and market-share gaps remain open"
+    ],
+    "catalog_hashes": {
+      "reports-mcp.json": "bfde4fabe8ab04d42447c2910003b23d9de50b9acec57316e30c3964930d29fc",
+      "notices-mcp.json": "d2e562f9c2d6a28f732bb9de56aed9d7aa2a9219bdb681d96a4d502c6a6574e1",
+      "report-catalog.json": "98ff2da29354c355a36cb4dfcb8e2b92736f10ad550c0ab5934a1b2833630f58",
+      "notice-catalog.json": "7ca59a0cf4cd2d0344b7c79c42e395d610b209915d220e3aaaf836680475412d",
+      "notice-raw-page-1.json": "d9a78c07d1eb959ca33827a234a3aab6fa950bfc20bf907ef9da3910ae4b9ae1",
+      "notice-raw-page-2.json": "41466af3cff9bf9086152c7dff500cd2ad41eb70d7732471329ebb8c0d999e38",
+      "notice-raw-page-3.json": "7a970aa057d625a123e7f34c067196efa8eec2f6bdad9a1fef9e896eb2e165cd",
+      "notice-raw-page-4.json": "11e63e1316bde22183a6fbf4dfc37750b2287455aaf5835b475cd6a164282bc9"
+    }
+  },
+  "catalog": [
+    {
+      "document_id": "AP202611041831416424",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "2026Q3收入同比增长3%，以销定产、全面向C持续推进",
+      "date": "2026-11-04",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+      "http_status": 200,
+      "sha256": "f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+      "text_sha256": "f090bd594a3cb775aa6e77df168d9b62d6127e2576ee5acb885483c293dbd282",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202611031831375931",
+      "kind": "broker",
+      "author": "开源证券",
+      "title": "公司信息更新报告：营收业绩均超预期，后续增长仍有余力",
+      "date": "2026-11-03",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611031831375931_1.pdf",
+      "http_status": 200,
+      "sha256": "9f5adfd233ea9227b3c5c0be67c67ab8b51c3efc0e6e68c62d6c9938c40a5e85",
+      "text_sha256": "61dc4d0c9f6803c705142bf1bc54a6cb12fde936b0ae26714e5322d08d532fa8",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202611021831334793",
+      "kind": "broker",
+      "author": "万联证券",
+      "title": "点评报告：营收利润均同比正增长，大力推动渠道变革",
+      "date": "2026-11-02",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831334793_1.pdf",
+      "http_status": 200,
+      "sha256": "33ea4f42e41290dd78d18888942f6580a807e398a90189ac08ac12a7ecb1517b",
+      "text_sha256": "b42afe19eeeac18a1507fccd7fc1782f0adc8bb10e965e0de099040482cfc4ee",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202611021831307711",
+      "kind": "broker",
+      "author": "群益证券",
+      "title": "市场化调整成效显著，Q3符合预期",
+      "date": "2026-11-02",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831307711_1.pdf",
+      "http_status": 200,
+      "sha256": "817f0dce95965f8f1021dad08568e9aa5a427f58ebaa04df69a5c3bdc228ec1c",
+      "text_sha256": "4132c3845773d8cef506a9f813879826a13f1e83bfd6e52def8cfb9dd6765594",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202611021831304660",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "公司2026三季报点评：直销夯实塔基，行稳必定致远",
+      "date": "2026-11-02",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+      "http_status": 200,
+      "sha256": "e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+      "text_sha256": "172e7fbda2d378d5ddccf6ea9599dd99720ac6cab30d71854f9e5f2267275718",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202611011831287508",
+      "kind": "broker",
+      "author": "华鑫证券",
+      "title": "公司事件点评报告：业绩稳增长，C端放量明显",
+      "date": "2026-11-01",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611011831287508_1.pdf",
+      "http_status": 200,
+      "sha256": "bdf928e75e3402ec8a0ececf7ae0d82ad228e24b3b152b7c9052c14d5febd5d9",
+      "text_sha256": "85aa50c0d90f7e4dc683c395a69470cb8e64066be9c9c4c690a63526832a9b4a",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202610311831278978",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "业绩超预期，稳健配置首选",
+      "date": "2026-10-31",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202610311831278978_1.pdf",
+      "http_status": 200,
+      "sha256": "81deb8e16f7dff390c7cdefd99e12699a3c4a4e8887098f001afee8ba35d1364",
+      "text_sha256": "f922a2a72ccc328ddd79f7a810227490e5f6ac99aa7827f596529043ba8d1034",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202609211829719676",
+      "kind": "broker",
+      "author": "诚通证券",
+      "title": "贵州茅台公司跟踪报告：以动销定投放，缓解市场压力，低速稳态发展",
+      "date": "2026-09-21",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202609211829719676_1.pdf",
+      "http_status": 200,
+      "sha256": "8db286454e4d953e69f1d476ff5dc4647e598097f60d68fce754a996942709e2",
+      "text_sha256": "a6478199c0649bff4bcebc8eb4fd2c015da9e765bf460f8c248b620d06427038",
+      "pages": 15,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608211828244348",
+      "kind": "broker",
+      "author": "西南证券",
+      "title": "2026年中报点评：茅台酒稳健，系列酒主动调整",
+      "date": "2026-08-21",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608211828244348_1.pdf",
+      "http_status": 200,
+      "sha256": "b84eb750e1d1eba65d5ec24a66cffa559591cd93565a464a6eedcbff4c72b7a7",
+      "text_sha256": "a78dc182acb6669b8b865350a8c6c28523bba93790a636ae133fc1442aaa1c36",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608211828236036",
+      "kind": "broker",
+      "author": "中银证券",
+      "title": "市场化改革带来短期业绩阵痛，公司改革成效显著，基本面仍具韧性",
+      "date": "2026-08-21",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608211828236036_1.pdf",
+      "http_status": 200,
+      "sha256": "71bfb493b7f65679437aa991000b37f702d8257d253b2754f371c8c31e70cef2",
+      "text_sha256": "ef28c5b92aa620cff358581eacdebd1db3d18793c04c3629402850be66999310",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608191828157250",
+      "kind": "broker",
+      "author": "万联证券",
+      "title": "2026年中期业绩点评报告：提价与直销双轮驱动，改革深化稳基本盘",
+      "date": "2026-08-19",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608191828157250_1.pdf",
+      "http_status": 200,
+      "sha256": "5513e7992e8fea9458d60bfaa0465b2e9ff990afc1d4c3155256d8c6ceafe614",
+      "text_sha256": "3e857d47b67845e1941d280d60201bce02599594299642815bf8ba96714d6860",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608181828111071",
+      "kind": "broker",
+      "author": "山西证券",
+      "title": "短期业绩承压，i茅台延续高增",
+      "date": "2026-08-18",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608181828111071_1.pdf",
+      "http_status": 200,
+      "sha256": "00408fc9a32946e2ee19daf69260dbe4d26972d6e2419654d8c2f87176f734a8",
+      "text_sha256": "151982771967e369f3095c7dddfc7c33969dc4ccf34095c58f9bd386f818768f",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608181828101201",
+      "kind": "broker",
+      "author": "群益证券",
+      "title": "飞天整体稳健，推进全面向C",
+      "date": "2026-08-18",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608181828101201_1.pdf",
+      "http_status": 200,
+      "sha256": "46186af005aad125da40402792a5aa37c1a47e541c6e4016ee44880d7dc7bea9",
+      "text_sha256": "fef59bd777956f620d2480709e19f5f935c95e93c1aaf9fd86220c28d2b627d3",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608181828097561",
+      "kind": "broker",
+      "author": "太平洋",
+      "title": "市场化改革重塑渠道和价格体系，业绩保持韧性",
+      "date": "2026-08-18",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608181828097561_1.pdf",
+      "http_status": 200,
+      "sha256": "75ba13ef2f6192c74db2e341f34fd7904560a2362d39247c6e4be562f142715d",
+      "text_sha256": "9bdcd244a8887b7e093a24c5787c953b4083662a2a4a77a13ccee81a528d0f5d",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608181828095469",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "淡季收入短期承压，提价有望带动下半年改善",
+      "date": "2026-08-18",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608181828095469_1.pdf",
+      "http_status": 200,
+      "sha256": "2ca922f6862a3e18ebbffddb1e67a0603d259ab8db01c561b422382191330cae",
+      "text_sha256": "06946ffd5609064669d82cff23b5284da5b555736e26400c9fe9e87489ba11cd",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608171828051638",
+      "kind": "broker",
+      "author": "华鑫证券",
+      "title": "公司事件点评报告：i茅台超预期，改革效果逐步明显",
+      "date": "2026-08-17",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608171828051638_1.pdf",
+      "http_status": 200,
+      "sha256": "9b45b091b1fe7e8b3482da5b4d0a5c5d9990863ba7c051e8915a2eb59a30f623",
+      "text_sha256": "5c8b0406979c5c53de0e5ffd6f09999eb0885ba04bd0ab6acc0b7c7f6a7adb49",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608171828048790",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "2026上半年收入同比增长1.3%，继续深化市场化改革",
+      "date": "2026-08-17",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608171828048790_1.pdf",
+      "http_status": 200,
+      "sha256": "b70928ebec363dc0dc63ca95a467f0e1ceead11e0d6b9fa37516289a9ec9d0b1",
+      "text_sha256": "55f17fec3f5a5eafbc01f5ff8de4cea6ec5084bd305f795958c88bebc265ed64",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608161828030058",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "2026年中报点评：全面向C夯实塔基，底色不改向好可期",
+      "date": "2026-08-16",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608161828030058_1.pdf",
+      "http_status": 200,
+      "sha256": "bbc167e5b6b724c594338cf0ece2b09a1bb08061640b2748378dea4b1c386f82",
+      "text_sha256": "99b6e32fdd1ed02780fda411b191e0efa6bbdb9b47e60ab897bbd383f2175116",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202608161828029200",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "直营化改革成效凸显，经营仍具韧性",
+      "date": "2026-08-16",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202608161828029200_1.pdf",
+      "http_status": 200,
+      "sha256": "cae5ef5d7ace15bd6478bca8aa9d26f58c6390f8e92df259e457b2b29245b184",
+      "text_sha256": "051e5e624701f646dc18e681b4fd3ffd5f587ac260ec255c469e4e8aac7e99ba",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202607231827290069",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "需求根基稳固，市场化定价持续兑现",
+      "date": "2026-07-23",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202607231827290069_1.pdf",
+      "http_status": 200,
+      "sha256": "a782eefaae4e906a5e682c8f184bd0d2833406b80ac0954126aa76e5b5e704e6",
+      "text_sha256": "1f789d7266aa1b7059d7fc7fc8de92fa8d3ae623243d174cc7e889c3d01471b4",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202607201827134022",
+      "kind": "broker",
+      "author": "群益证券",
+      "title": "飞天茅台年内二次提价，进一步落实市场化机制",
+      "date": "2026-07-20",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202607201827134022_1.pdf",
+      "http_status": 200,
+      "sha256": "a01bd6011c6057794f19e2415b0ce65e6ba622cbe8a348edbc95d897c00c4ac2",
+      "text_sha256": "f3bab44ba83cc608036015908d9ec9dc2e68b3f01ca96fb8a65de523abd29460",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202605251822844635",
+      "kind": "broker",
+      "author": "诚通证券",
+      "title": "2025年年报及2026年一季报点评：顺势出清舒缓压力巩固优势稳健前行",
+      "date": "2026-05-25",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202605251822844635_1.pdf",
+      "http_status": 200,
+      "sha256": "a16088a541a7db8f30c1955546f8aed52c45d632ba772164b8695a41fb8c66f1",
+      "text_sha256": "3ea4022d21faf43ae167a3a78415b1dd2012e14141882f1dd1949e45115b2dbc",
+      "pages": 7,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202605051821970230",
+      "kind": "broker",
+      "author": "华鑫证券",
+      "title": "公司事件点评报告：i茅台持续发力，改革效果初显",
+      "date": "2026-05-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202605051821970230_1.pdf",
+      "http_status": 200,
+      "sha256": "8e96154a47904418463a47ab1b924ad9371a0ceca849334c626c47878c578beb",
+      "text_sha256": "f24342113877fb290dea8c2427cf62a97fa8e8ea8c1cad6862cb5087ca22cc97",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604291821727471",
+      "kind": "broker",
+      "author": "万联证券",
+      "title": "点评报告：业绩稳健增长，直销收入首次超越代理渠道",
+      "date": "2026-04-29",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604291821727471_1.pdf",
+      "http_status": 200,
+      "sha256": "116e74c7546a81619b9123b62e110b3ee524585580ee1328dc143359cb8fd56a",
+      "text_sha256": "a8237d9c36b762780b024d333390e7380d81cbdfe1e0667f604867b6c7126817",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604281821686501",
+      "kind": "broker",
+      "author": "开源证券",
+      "title": "公司信息更新报告：大单品放量价稳，触底信号明确",
+      "date": "2026-04-28",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604281821686501_1.pdf",
+      "http_status": 200,
+      "sha256": "ba917ea2be128e7cd1ad8bdc340ec35120d96ffd5915f6763a4844944acc078f",
+      "text_sha256": "b83a31d859cad5324f884c93c2438929a1e07425a8050f597e3727e651593699",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604281821665969",
+      "kind": "broker",
+      "author": "山西证券",
+      "title": "渠道重构落地，改革初现成效",
+      "date": "2026-04-28",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604281821665969_1.pdf",
+      "http_status": 200,
+      "sha256": "73f9cd187557ce3140f89f194ca57504d0228cee959c81d5889d346c773eaad3",
+      "text_sha256": "df8ea99b9effcc8ff4579545770bb11b56463e277b981372396b52a63eb1db18",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604281821660055",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "收入利润双稳增符合预期，i茅台放量显著",
+      "date": "2026-04-28",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604281821660055_1.pdf",
+      "http_status": 200,
+      "sha256": "8e62a02d2f414f87855afba582fd15ec398c739d2630dcca78908b160753a860",
+      "text_sha256": "7ebaff767945f1651c86a1374ea8d3c22ebc7fdb10b47dc4f8ccd5274a1ba2ca",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604281821659552",
+      "kind": "broker",
+      "author": "西南证券",
+      "title": "2026年一季报点评：茅台酒稳健，系列酒重拾增长",
+      "date": "2026-04-28",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604281821659552_1.pdf",
+      "http_status": 200,
+      "sha256": "c5794d93851c27d2380cba1486178fb8219cea086637ea2be7953141622001a5",
+      "text_sha256": "d9df18fcfa42980015e58990dacaf046d46ed02c5b9e8ddf3b23587a043e4936",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604281821658363",
+      "kind": "broker",
+      "author": "群益证券",
+      "title": "转型初见成效，i茅台收入大幅增长",
+      "date": "2026-04-28",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604281821658363_1.pdf",
+      "http_status": 200,
+      "sha256": "0153de6af478cfd4d76cc20cabf2174691143699d7b6a6e9bc63dfeef719f0be",
+      "text_sha256": "465c71d3ad9bc643e8e26e21bc62de03e60fb1c1f94a649611d790c964e19808",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604271821598041",
+      "kind": "broker",
+      "author": "中银证券",
+      "title": "i茅台大放异彩，2026年稳健开局",
+      "date": "2026-04-27",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604271821598041_1.pdf",
+      "http_status": 200,
+      "sha256": "bff6f7f50441cf35b132adc773157ca77a3cbc79b3fc1996a7fff63e73a05485",
+      "text_sha256": "7c3aa4df0d89a50fbab974ec81a7caec01775a5b249bdc7437fe7a3631c50bec",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604271821597817",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "2026Q1收入稳健增长，市场化改革成效逐步显现",
+      "date": "2026-04-27",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604271821597817_1.pdf",
+      "http_status": 200,
+      "sha256": "8cc0e13c1aa2571a625e0cc97e023dcd62f5e83e698af8371e5c33385ca891b1",
+      "text_sha256": "8293b475557327b2f0b4766e875dea9b1323b14e0c30d984f3b0b973de3ba671",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604261821593789",
+      "kind": "broker",
+      "author": "信达证券",
+      "title": "改革成效凸显，i茅台放量激增",
+      "date": "2026-04-26",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604261821593789_1.pdf",
+      "http_status": 200,
+      "sha256": "e7bc1149c444e506813659189a881e71a2c2ade96a07cfe08e0bfff3e1b77f60",
+      "text_sha256": "c78e75955488851f7f724398ca1db23cbc3d7f44e962cbf0b1f00352d00be411",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604261821593674",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "2026年一季报点评：锐意改革全面2C，强势开局确立企稳",
+      "date": "2026-04-26",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604261821593674_1.pdf",
+      "http_status": 200,
+      "sha256": "5d41262b3ae2cdab12bc569f7b44bcd219a5688316213fc801544613ae5106ec",
+      "text_sha256": "022edeaa43c2dc9560fb8779ef89cf1796eb1c4f419db512b30ea5ed4df12da9",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604261821586283",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "业绩符合预期，市场化改革成效斐然",
+      "date": "2026-04-26",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604261821586283_1.pdf",
+      "http_status": 200,
+      "sha256": "74ec263580e32eff8f18e424be8391e9f1c0c39dd12e48bd30c2491dceca0050",
+      "text_sha256": "91996c4e324834193b204d1d54cf244eee885fcbf4b4b77852ed735f66ae1e22",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604231821488125",
+      "kind": "broker",
+      "author": "西南证券",
+      "title": "2025年年报点评：茅台酒增速放缓，系列酒全年显著承压",
+      "date": "2026-04-23",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604231821488125_1.pdf",
+      "http_status": 200,
+      "sha256": "0b484c7cfc46298f7b8cda73a7c0705f873c12d0d4e7fc0b13f8353a0f88ad80",
+      "text_sha256": "c25ffa612ad7b8efe713ad9b98dda46e9204ba0a95f52aca0e3bb141cf57c114",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604221821432233",
+      "kind": "broker",
+      "author": "中银证券",
+      "title": "卸下包袱，着眼长期健康发展，2026年开启新篇章",
+      "date": "2026-04-22",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604221821432233_1.pdf",
+      "http_status": 200,
+      "sha256": "8ce9de696f5a3e213d4568890a83b595ddc25e327519198dc960dc98bb26795d",
+      "text_sha256": "2811e923e74ca96b779f2dd254c40457ef77d8e0506523fc4d194926240f24f9",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604211821393446",
+      "kind": "broker",
+      "author": "开源证券",
+      "title": "公司信息更新报告：主动调整释放压力，2026年改善趋势明确",
+      "date": "2026-04-21",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604211821393446_1.pdf",
+      "http_status": 200,
+      "sha256": "528ce4c06e0408f6d522b24b01a9f68b456177e41ac2e00f66d027c574b621bb",
+      "text_sha256": "6ad935f7317c0b64ef96d1ec62d0a3a7aff27480cd09d60b1ec2ea129724f7ba",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604191821320244",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "2025年释放经营压力，2026年改革破局",
+      "date": "2026-04-19",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604191821320244_1.pdf",
+      "http_status": 200,
+      "sha256": "58ff074ad32d5a65a1cf7f6ef855377f93a79914f4d85df844352edd0ca8ee44",
+      "text_sha256": "459939a72608209a0ae6942712cd37700d2adfead1ed1d3f441f9faa8c395e40",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604171821287518",
+      "kind": "broker",
+      "author": "信达证券",
+      "title": "面对承压，坚定改革",
+      "date": "2026-04-17",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604171821287518_1.pdf",
+      "http_status": 200,
+      "sha256": "4527f25b972bcb6f7bc2e72e633d8c02fef122f58f1d1a884337f8da59418a62",
+      "text_sha256": "a715b07016dcf90f9959904a38014d4895efc9aa8af06fb5b809bedbd51b2f6d",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604171821286410",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "超预期出清，市场化改革持续推进",
+      "date": "2026-04-17",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604171821286410_1.pdf",
+      "http_status": 200,
+      "sha256": "3a5020c246ffe27d6baf2c7e5a5e33d81792eefcd3b6bfcdbb171a8d094524b9",
+      "text_sha256": "76ac4c98a544072f48aa2510f467d93661f8ac73aa68044b200daace98ae6617",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604091821085016",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "推进价格市场化改革，助力2026年稳增长",
+      "date": "2026-04-09",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604091821085016_1.pdf",
+      "http_status": 200,
+      "sha256": "3c70c9a83389968e67a95c45c27e4d67b6c4ec03272e1a188c1f1d98451ccb2c",
+      "text_sha256": "48e2d4f4eb693330bc62e14592419c251545fd03424f7cf1ef6ccdf07116d342",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604071821047878",
+      "kind": "broker",
+      "author": "开源证券",
+      "title": "公司信息更新报告：提振行业信心，增强业绩保障",
+      "date": "2026-04-07",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604071821047878_1.pdf",
+      "http_status": 200,
+      "sha256": "d10b30fd1874181123ec207da258a591147c973611a7d6a384771fd1e1892d5f",
+      "text_sha256": "a3fe5e84a41fd2ba326738dac11b2e71ffd24a65206bd7f0e234de407bc0b91c",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604021820980236",
+      "kind": "broker",
+      "author": "中银证券",
+      "title": "淡季提价，渠道结构持续调整，市场化导向明确",
+      "date": "2026-04-02",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604021820980236_1.pdf",
+      "http_status": 200,
+      "sha256": "0c9d0556513a546afe27f1f4a4e29da6b0134c98ac114ed49e5ae838ca3e77fb",
+      "text_sha256": "c53ecda09ccfbd47b93af1adbaaa2db785d163d3a1fbbafc5c631b17e30ad596",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604011820949486",
+      "kind": "broker",
+      "author": "爱建证券",
+      "title": "首次覆盖报告：推进市场化改革，龙头持续变革转型",
+      "date": "2026-04-01",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+      "http_status": 200,
+      "sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+      "text_sha256": "5133a8920964947db21628f5a954d5d703e0bd507cac2b6b6292684d01dadb2e",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202604011820942555",
+      "kind": "broker",
+      "author": "东兴证券",
+      "title": "提价点评：价格市场化改革再尝试，提价进一步增厚业绩",
+      "date": "2026-04-01",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820942555_1.pdf",
+      "http_status": 200,
+      "sha256": "c5dc6e86bac5cbe4d53b69a2a8e49f83496303fed10ba78bbc2d8d57251350ad",
+      "text_sha256": "62a439c95bcc5426d6ff39c8592b776eb64e26a78e43ed52aacd95aed76d7b36",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603311820926225",
+      "kind": "broker",
+      "author": "信达证券",
+      "title": "市场化改革下的价格体系重构",
+      "date": "2026-03-31",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603311820926225_1.pdf",
+      "http_status": 200,
+      "sha256": "05157ba7f944ee2ee3292722025450827636c254613fbdcd0a1c5edc2e751c4f",
+      "text_sha256": "149509de19280b5488e2c239ec26c1a1c983bce1524de46b284df54568332945",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603311820890730",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "飞天茅台调价，市场化改革持续推进",
+      "date": "2026-03-31",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603311820890730_1.pdf",
+      "http_status": 200,
+      "sha256": "f54f88ffd33ede057f92e18d1c9d3a6832f74b316da4b4c17df1831cd79c2ddb",
+      "text_sha256": "795c9b31e623272171aa2c19e131e9341473079f5bb88ef5185b0c931a3d8fd0",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603231820696581",
+      "kind": "broker",
+      "author": "国金证券",
+      "title": "市场化转型专题：量价归位与渠道重构",
+      "date": "2026-03-23",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+      "http_status": 200,
+      "sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+      "text_sha256": "b1005253f78c1a099a49dd70964258b45d69a230951adf78e1a5c4cb2fc3be25",
+      "pages": 23,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603191820648186",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "革故鼎新，与时偕行，再论茅台的护城河与增长潜力",
+      "date": "2026-03-19",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603191820648186_1.pdf",
+      "http_status": 200,
+      "sha256": "6be1e0480af5f95b5855f232c0dd1fadb923e2f79be461e4249d640ab9cd8bdd",
+      "text_sha256": "4c77915e5d1bedf17bbfee48acefd2e1569ce0f7041c3a0ed1eaeffdac7e45f1",
+      "pages": 58,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603171820594543",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "步入2C新时代，降维竞争持续成长",
+      "date": "2026-03-17",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603171820594543_1.pdf",
+      "http_status": 200,
+      "sha256": "ebdbe4f4c3c98cddbe97d7cca2c6b991f1767ad22ecc9471a34bcd6e49b6d536",
+      "text_sha256": "a71a2bdcaa4b788784616c69b1ef065bf6df533f6ac565dfd40e8382700021b7",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202603031820234429",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "营销改革复盘专题：笃行不怠，臻于至善",
+      "date": "2026-03-03",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+      "http_status": 200,
+      "sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+      "text_sha256": "fc9fde333544cd5082e92c97b67383b8ea0beb65458c3ba32339aaf50d67883a",
+      "pages": 19,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202601151817046347",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "市场化运营方案披露，产品渠道运营全方位改革",
+      "date": "2026-01-15",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202601151817046347_1.pdf",
+      "http_status": 200,
+      "sha256": "5c16a7d9b582874237dbb4ec64cdaa2c93fc21d808504d60338fa9b9f66cc512",
+      "text_sha256": "29b0454ef2761fa6cc9930507dadb2dd5ee8e3b079e8435ec9ea011c5eaf8bc8",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202601091816872559",
+      "kind": "broker",
+      "author": "群益证券",
+      "title": "2026年推进市场化改革，i茅台春节前加大投放",
+      "date": "2026-01-09",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202601091816872559_1.pdf",
+      "http_status": 200,
+      "sha256": "093a7d5fba719c81da5e75292bfcdea4d465d3b29990ea840db21f49d74d88d2",
+      "text_sha256": "0616ddccf495c205e3ad8cc060f80962f18048a1dbf5e13d829d0cb539432e2d",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202601051815430375",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "全面推进市场化转型，解决供需适配问题",
+      "date": "2026-01-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202601051815430375_1.pdf",
+      "http_status": 200,
+      "sha256": "309c9d879ad05cc8e7e55a74740236f0becbc5ca32e4e5a79c58fcfcac598da7",
+      "text_sha256": "ad2ec78b65cf3e64cf50140e85b3213994a8de402ed519d1cd06fb3fd92940c9",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202512311811788626",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "2026加速营销转型，多元渠道构建更进一步",
+      "date": "2025-12-31",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202512311811788626_1.pdf",
+      "http_status": 200,
+      "sha256": "5537a58e460b391b608763c10d5a04ddb09e64e49f889038860e9fae183e2f47",
+      "text_sha256": "fd85d334a7c63b3454a5ce22e6ab4c0696cd6b5608b2b6ccc241fd956cbec266",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202512141800352882",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "量价调控思路清晰，长期韧性值得信赖",
+      "date": "2025-12-14",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202512141800352882_1.pdf",
+      "http_status": 200,
+      "sha256": "6c54cf5d85a7708fcc2ccf6e51fa430abdb8223d530b6f117baa9f3c9f9b8d78",
+      "text_sha256": "63ea2baea890be9f5e0d82f912d5d0237c30c2021556758ea53d133f14305a7b",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202512091796958027",
+      "kind": "broker",
+      "author": "中银证券",
+      "title": "股东大会强调高质量发展，聚焦渠道稳定性，稳步推进改革",
+      "date": "2025-12-09",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202512091796958027_1.pdf",
+      "http_status": 200,
+      "sha256": "8ebffa648cc4b6adedbea4497c718fec9d046b9bce57a8d9694a5c967795b2b5",
+      "text_sha256": "be64e1a257082ef2ff1b94c705aed31ff0cbc3c023a320e2e0051915950005c4",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202511061776269653",
+      "kind": "broker",
+      "author": "东莞证券",
+      "title": "事件点评：多措并举，彰显龙头担当",
+      "date": "2025-11-06",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202511061776269653_1.pdf",
+      "http_status": 200,
+      "sha256": "93d5f0d120c9acead79f7993aed1fc4de4a7faf1765814110944bb4d912fd0c9",
+      "text_sha256": "9fcb28f7549241447c5476ddf1377ccb9e607dd54f3b7430837d45b3f3309612",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202511051775664554",
+      "kind": "broker",
+      "author": "东兴证券",
+      "title": "收入保持韧性，底部价值凸显",
+      "date": "2025-11-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202511051775664554_1.pdf",
+      "http_status": 200,
+      "sha256": "dbe32ff636bdb63bde40cc57b484fdc8282406b4deec242085e4d3ec84194819",
+      "text_sha256": "bd837d1f035edc249f64b018658dc4d1e0c98881696909383850ab42c69f6bee",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202511051775482920",
+      "kind": "broker",
+      "author": "华鑫证券",
+      "title": "公司事件点评报告：释放渠道压力，主动降速保障良性经营",
+      "date": "2025-11-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202511051775482920_1.pdf",
+      "http_status": 200,
+      "sha256": "c9d82ba95d6e0182e206c61c442309985c2dc58b19f8f6d53e2d8afd516e7f95",
+      "text_sha256": "7e9d2c2807ac81ee5d206b40d3a867e1a9fd7ca845ec671672a4fe8df36a18f9",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202511051775482877",
+      "kind": "broker",
+      "author": "中邮证券",
+      "title": "营收利润基本符合预期，静待需求改善",
+      "date": "2025-11-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202511051775482877_1.pdf",
+      "http_status": 200,
+      "sha256": "6a3f5d68a0c0a6283fb8da0e49a40b3676d19b735610e4aee5e46016b6ecbed7",
+      "text_sha256": "47e27cd18ed786f7c15edbc17d803b0fc7e4d61f86e85e5e1e2ca92df747e25d",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "AP202511051775448346",
+      "kind": "broker",
+      "author": "山西证券",
+      "title": "经销贡献收入，期待需求逐步改善",
+      "date": "2025-11-05",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202511051775448346_1.pdf",
+      "http_status": 200,
+      "sha256": "f9de4f541fc27e3de749193a8040070c5026f6eb74727d085bbd738e35311f57",
+      "text_sha256": "e06c689e3c9c495a3adee4350516a9ea8f0c84a72c8a22e1aeefbe67b057add6",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225652625",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于召开2026年第三季度业绩说明会的公告",
+      "date": "2026-11-03",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225652625.PDF",
+      "http_status": 200,
+      "sha256": "565e9e36441e0dd59da36b23439f0f7d9df6b94f0bc6fa122fc64de1ad2c421a",
+      "text_sha256": "a009deeca7be623fd95921f2a8dfaab3c9b9d777e74c53865682490a2297de7d",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225649906",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第三季度主要经营数据公告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649906.PDF",
+      "http_status": 200,
+      "sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9",
+      "text_sha256": "72a8f28c50aee474ee94c2b399050fb842f27276924173a14ddc9f4f358c0d37",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225649903",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第五届董事会2026年度第七次会议决议公告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649903.PDF",
+      "http_status": 200,
+      "sha256": "b29ff9556d09f948ab9444cbb03ec0862d0b12b03a95b3f621b6ba07f67e00ae",
+      "text_sha256": "0e802002e9d215a1659f24a5a3e11320ae710fbd9c35391401fc555d51afcf55",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225649901",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于公司高级管理人员2026年度薪酬兑现方案的公告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649901.PDF",
+      "http_status": 200,
+      "sha256": "d2c3124a0b337fab2e9332c148cd3565ca6dd19ae33239b378bfaf32ac23a992",
+      "text_sha256": "c0ea825017123a1751d0f7c4008d2051425d48780449344d8fdc89e09e8611c4",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225649896",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第三季度报告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649896.PDF",
+      "http_status": 200,
+      "sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b",
+      "text_sha256": "50ca77c1044831e14d52acc2d8fea172c2a5a4b35b1c08f6bb207d2698d6f7c8",
+      "pages": 12,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475868",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年半年度报告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475868.PDF",
+      "http_status": 200,
+      "sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6",
+      "text_sha256": "ca0620fef523c37ffb83a33b5af73fe3cdc86d867308c49ae43e364f0fb211c7",
+      "pages": 110,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475864",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于会计政策变更的公告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475864.PDF",
+      "http_status": 200,
+      "sha256": "1a12378ed0e4a803eae00e73c74bc20eb2d73821fc960d746d52476dbf80df1d",
+      "text_sha256": "e8a4ab8e72737474afa6c6f1ec382aecdc1d714003951c8d1afeaaa52dce9f66",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475863",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于贵州茅台集团财务有限公司的风险评估报告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475863.PDF",
+      "http_status": 200,
+      "sha256": "cf2d50aa028fcf11ce9eb04746932b7a9be25c3e31d443295f77add844b1121b",
+      "text_sha256": "950e930ed6869a756202b3426579fb56af87fc63f7dde8c529eb96ceeea93b62",
+      "pages": 8,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475862",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第五届董事会2026年度第三次会议决议公告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475862.PDF",
+      "http_status": 200,
+      "sha256": "c22571b28d92addc54fed9a75e56b0ffb5c2abbf834000d5c3ea77e02df129cd",
+      "text_sha256": "f8b192229d88b774ce2a7cbd08d5f5e367b59a2b6af9bc5aa7de2c5966f96903",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475860",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年半年度报告摘要",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475860.PDF",
+      "http_status": 200,
+      "sha256": "9ba031b34a7f05caec0e71a154257b8b449fb0b18a58badd7e346fe66bc90313",
+      "text_sha256": "09af0b63d64abc128f4f83af4b2a8b93d4665982857f0b9a9ec43e39d407d986",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225475856",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于召开2026年半年度业绩说明会的公告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475856.PDF",
+      "http_status": 200,
+      "sha256": "fc78904a1a1babaea6e31838d5a8c3fc7933c6d1925fd3101942c130d21c66fc",
+      "text_sha256": "9b954d18e98cc88130b00cf74cec4df893d24fb5e5b6cda688921a5ec2c9d835",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225431263",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台重大事项公告",
+      "date": "2026-07-18",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-07-18/1225431263.PDF",
+      "http_status": 200,
+      "sha256": "24e51c43dfc6da7d3a19c67b88081715a3a3b4a26c2d83ec51a557e3e5692873",
+      "text_sha256": "b63039ceeffb043d9bc33df37a7d9ea56f47a69641f6a27482d8aa51e96cabbf",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225379934",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年年度权益分派实施公告",
+      "date": "2026-06-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-22/1225379934.PDF",
+      "http_status": 200,
+      "sha256": "6b082b6a00db748f23b6dea166b0296cd69d8c10542d352e23d2e2c344ea516e",
+      "text_sha256": "4d57c4bc26b1c357c649a3779a507dc69262f4591c664e97fbcc2c38d4fd3b70",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366265",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于职工董事选举结果的公告",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366265.PDF",
+      "http_status": 200,
+      "sha256": "fc7ded97153d8993e7d84ea606b03a4c78bdeec9577f7a1211b81b61ef89f7c6",
+      "text_sha256": "906475267ad02d10fae29dd749c7bcffacf43be2b746c199131f8a3c9f61e0c5",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366264",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度股东会决议公告",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366264.PDF",
+      "http_status": 200,
+      "sha256": "6868e886abe37f8c844a9df980775cb667d7caf2935f5ca01ea08bb68e4312c9",
+      "text_sha256": "b9a91c22e31933bde861aff86e413ae33dd7fbff114107d582b4ca22030e170d",
+      "pages": 7,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366263",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "北京市金杜律师事务所关于贵州茅台酒股份有限公司2025年度股东会之法律意见书",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366263.PDF",
+      "http_status": 200,
+      "sha256": "4ba60869c409c491d9a7abd99565cbb2685585a3888fe13ae0b11cc6d0d94aa3",
+      "text_sha256": "83e827c8d4a3ba97ec19ba6bc7b30ca80a797815ca294a309220786632fd6d87",
+      "pages": 9,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366262",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第五届董事会2026年度第一次会议决议公告",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366262.PDF",
+      "http_status": 200,
+      "sha256": "3acf8ec31b3b5c6478c85cf4cd8f787ff95c1bf41e39b1b1822bee3a500776e3",
+      "text_sha256": "5b862a45b37408f596e461d9a3a7522b5cc485d265afe647d4753efdbde01b1d",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366261",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台董事、高级管理人员考核和薪酬管理办法",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366261.PDF",
+      "http_status": 200,
+      "sha256": "b841c40b9f2196f12f5cad9348a71c3c64d1f0147a0e6dcbf15ca6531bc51535",
+      "text_sha256": "e90fc9badd78f8779b2cfd07692e527231feea5ffe09c3eae91766803ab142eb",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225366259",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于聘任董事会秘书的公告",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366259.PDF",
+      "http_status": 200,
+      "sha256": "c61a951f524c5e6d7f26695eb743a4266d6369e10130d52ba74d98eb579d7014",
+      "text_sha256": "4b50c0651f04fb6bc9b146cd4e44d60089003bacf5711b21144095e9181cf9e0",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225347653",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于调整2025年年度利润分配方案每股分红金额的公告",
+      "date": "2026-06-03",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-03/1225347653.PDF",
+      "http_status": 200,
+      "sha256": "f51131858f82005c9ed36dcb78ecca961f3f10cff71dc54039c4a37804ed5412",
+      "text_sha256": "2f95f6a0011503f706ea26c48ba7fca4b023954878f27f75e6971fcc360efdb0",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225347482",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度股东会会议资料",
+      "date": "2026-06-03",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-03/1225347482.PDF",
+      "http_status": 200,
+      "sha256": "bc265f2b68772c735fc1a5c2a0e6c4835c113935fe9908403941c3cbdde74add",
+      "text_sha256": "f221d5b198b1bafacb366002419c716c7311d418ccd7eb76cd91a19311e795c1",
+      "pages": 50,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225333825",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份实施结果暨股份变动的公告",
+      "date": "2026-05-28",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-28/1225333825.PDF",
+      "http_status": 200,
+      "sha256": "c3d2cf8322ad4b8d8b69c914a0afd265bf0f85cdaa1f023d00109caa0a9721c1",
+      "text_sha256": "730e7bb931535d61908562d6f7b79cf2b411865f6ccb03cd7842ab34510d6f89",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324469",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于召开2025年度股东会的通知",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324469.PDF",
+      "http_status": 200,
+      "sha256": "a3cc228e39e2c7924109c32fd799a743589276ac0da3375b18b1d43e788a4ddc",
+      "text_sha256": "c47f4cc8eb2a18cf938b1f682576058c3980be9e5acc626b7a0e7c48c4c4467c",
+      "pages": 9,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324468",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台独立董事候选人声明与承诺（王鑫）",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324468.PDF",
+      "http_status": 200,
+      "sha256": "d8293b958205e70f02807519917a1cc4626e19d80e9337421ff1c78fc4d3e5b6",
+      "text_sha256": "06641272f92a55f295902b781da497e3c9b7e2c77efb5737ed2eeec2212fd2d9",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324467",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台独立董事候选人声明与承诺（郭田勇）",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324467.PDF",
+      "http_status": 200,
+      "sha256": "7a92af4e2ba2812bae0dea7e8b988e34059e0db142664249debf755e9dd28d06",
+      "text_sha256": "c8dbc5d5879dbceafedd0d68cd32780bd402126552a3078d9608b1419c4864f1",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324466",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于聘任董事会秘书的公告",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324466.PDF",
+      "http_status": 200,
+      "sha256": "1d245b5097a321e362121f22b4c8aff1f81079d345ae445700d308240a00eae6",
+      "text_sha256": "a94c0b1e8caf08431e6ac84b6b709ee990ac536fa9625a405623c19ad2356d21",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324465",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台独立董事候选人声明与承诺（盛雷鸣）",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324465.PDF",
+      "http_status": 200,
+      "sha256": "6d0a7cae8694b43a31856ed422dac5bbd483006febc4355380f21923f4c72852",
+      "text_sha256": "9f6957fa335e677495051d069aa7fd894358bcc3f5a253f15650112afe17d688",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324464",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台独立董事提名人声明与承诺",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324464.PDF",
+      "http_status": 200,
+      "sha256": "665348a8a75e8f0eb861629128a54feb288d594ed446f32ed6ceab07086c8cac",
+      "text_sha256": "57ca4599dfc899cbda66a98b51a59bbd12b1558a3a95436cbd970d89ab4bc9d4",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324463",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于与关联方签订《商标许可协议》的公告",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324463.PDF",
+      "http_status": 200,
+      "sha256": "c9f210d9ef29b17256c0a7c4199aed31c5fb06a91e6cc472513db188a2a0692f",
+      "text_sha256": "39f8cef495d1da6531a9e6ad142d3eae12e7d5f2c9096e8306d17bfaa673eaa6",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225324462",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2026年度第八次会议决议公告",
+      "date": "2026-05-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324462.PDF",
+      "http_status": 200,
+      "sha256": "982759990c3094b914546f0563151d43eb87fd144c2554ce309de12f3abf0e5f",
+      "text_sha256": "95d1e3d5de1bdcf826f1c9ea1657d88f921089fb3515dbc390ab883d62d99a0a",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225282650",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份实施进展的公告",
+      "date": "2026-05-08",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-05-08/1225282650.PDF",
+      "http_status": 200,
+      "sha256": "90b33c87257efbf191911d8687fa5d8f10dab7225fa07aef03d82594576d0d13",
+      "text_sha256": "be27d9fc33944b041b4afb5f79426a243ec162f2f756a71cd4e2328dc59b3a34",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225228128",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于召开2025年度及2026年第一季度业绩说明会的公告",
+      "date": "2026-04-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-29/1225228128.PDF",
+      "http_status": 200,
+      "sha256": "66f9e665f8ceb7663e1e3e2c1f0b69047d179cb02f36ac34db38bed7b23e2dbe",
+      "text_sha256": "caad597ae5620566f66113a7295f08064cd915d548dbffef78348e166e490017",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225188174",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第一季度主要经营数据公告",
+      "date": "2026-04-25",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-25/1225188174.PDF",
+      "http_status": 200,
+      "sha256": "6634383a0c0c5c25f23886407666c41333496f2d1f22797eccf54c01bb3ef700",
+      "text_sha256": "869580edbb8ad8b162eb833c7a0891dd5156170c13a6df983d70aadd3a47be20",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225187851",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第一季度报告",
+      "date": "2026-04-25",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-25/1225187851.PDF",
+      "http_status": 200,
+      "sha256": "ca10d0e4fb3a1e4e9f258c04fc4c62000968f337a9b0bf6f714d4f153536d363",
+      "text_sha256": "d5462cddd45a2f2e5b2112e6c749c8371ebc8d39998e863c6e5cdcd65d72c2e1",
+      "pages": 12,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114747",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度独立董事述职报告（王鑫）",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114747.PDF",
+      "http_status": 200,
+      "sha256": "c9def5ed4360233d156dac62463022231bd7793385744b72a7529143aaf16365",
+      "text_sha256": "71c22ce68ebf112a2faaa84c9ffdac91c6ffb221d66b1adcc03d8fdea442a712",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114745",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于贵州茅台集团财务有限公司的风险评估报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114745.PDF",
+      "http_status": 200,
+      "sha256": "0225fe2f8dc67e8cdf751bcbb69239e831a0ceeb3c2c5c3ab9f5d74a3ba5dd09",
+      "text_sha256": "e43a614afb7ba2971781fef95536c3c322afb94e5638caf66c032a3fc5871ec0",
+      "pages": 8,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114743",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度董事会审计委员会履职情况报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114743.PDF",
+      "http_status": 200,
+      "sha256": "ef930cd4090d9b7d4ff8302e3af01fc0742e48c77d37a6ffa9e0729d3afbe9ba",
+      "text_sha256": "a02d1f4543c45eb9b892ef11e33250d3f3e317f530f2afd8c81c0469b24327da",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114741",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年年度报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114741.PDF",
+      "http_status": 200,
+      "sha256": "474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288",
+      "text_sha256": "20e5d92f927c8e10b4e666cd47513fe77a96e08ba4f5b968ef64453f664cc6cb",
+      "pages": 143,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114738",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年环境、社会及治理（ESG）报告（英文版）",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114738.PDF",
+      "http_status": 200,
+      "sha256": "4e2459125d323ed6708bc18fcf9fed871967e136b7871884270c38af6037e32a",
+      "text_sha256": "ca17d5a352f372ba1c24c5081aa9ade671370ebf2fe9c29a7b01a9a94e0d25e5",
+      "pages": 88,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114735",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2026年度第六次会议决议公告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114735.PDF",
+      "http_status": 200,
+      "sha256": "ce20dd048357caa0bd9e7800ba85ad0c47e7840db158892be692551ad2433858",
+      "text_sha256": "f1a6e81829647551d94c5fd2dc75228cfedeb75a6f85b17a207188db63b2aad6",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114733",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年年度报告（英文版）",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114733.PDF",
+      "http_status": 200,
+      "sha256": "8bfe8b4e075408021b0d2be08466507fcd9994a39b43f508ada329e18652d9b2",
+      "text_sha256": "639533eec829f3ae349b73d0bc24b617a2841426f874e6ddc0d7fd9ad4723572",
+      "pages": 194,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114731",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年年度报告摘要",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114731.PDF",
+      "http_status": 200,
+      "sha256": "62c95632c49ae215d8b013e61b67165ae0651c8bf03e64537ef1e16d851c02ea",
+      "text_sha256": "e156d573c536f99270b8bb0bcf85a7c16e40fe8db98783e7b499ff6a251f2575",
+      "pages": 7,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114729",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度内部控制评价报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114729.PDF",
+      "http_status": 200,
+      "sha256": "5b707bbc1103f9f565c1c275e6af226e3a778c57e50fae70c44cb34c2b606ed2",
+      "text_sha256": "6be1d50791c28d169da808e036f039f54fe16d00dc7c02fd60e266c05705a8bc",
+      "pages": 8,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114727",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于日常关联交易的公告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114727.PDF",
+      "http_status": 200,
+      "sha256": "bb56bf63969359a55f5dbca20f5164b174029221ad6fbc4959ceacfd54527784",
+      "text_sha256": "7d57be73328b26a6912f1caaf439df778c727b30be1e4e32c7bd5a9b3e7fba9f",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114725",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度环境、社会和治理（ESG）报告摘要",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114725.PDF",
+      "http_status": 200,
+      "sha256": "2cba0922b4ed275b1db297717de1026c7c20b87eeeecf0b41572391b6956507c",
+      "text_sha256": "595fa941cfefac1ad148e1b9f564d217dfc10018de402c4fe600449a29f3056b",
+      "pages": 6,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114724",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度独立董事述职报告（盛雷鸣）",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114724.PDF",
+      "http_status": 200,
+      "sha256": "4ef41d4c228e7817ce301b95588d42115426c5d5f0292a0b027d5997fbb278bd",
+      "text_sha256": "f078f710dcfb27a997c6779efdb75bee5a625896086765a809cbfa7961500b2f",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114722",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台董事会关于独立董事独立性评估的专项意见",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114722.PDF",
+      "http_status": 200,
+      "sha256": "f37e1cfd6208a61454df04bd96a815465a9820589a14cd99b61edfb5cfe1b112",
+      "text_sha256": "4ac723b11b4d84290a04a2a93893e306645db719f283ecbbf0834a97860ebca3",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114720",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于2025年年度利润分配方案及2026年中期利润分配安排的公告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114720.PDF",
+      "http_status": 200,
+      "sha256": "6433ce1670a7dd28902d3423563d819df515bd470c4a851bc66924d69e5ec054",
+      "text_sha256": "d727eff5c5d676493b56ff5b5b58ae572f639be6260ba735d66fdea33b85b4b4",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114719",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度内部控制审计报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114719.PDF",
+      "http_status": 200,
+      "sha256": "827e9bded05123347aabf50e9533d36834c08d2a00798676c5493f5b35145ac3",
+      "text_sha256": "3dab4810f379b3a88208b84c1640b4a473c9c266b0295da0ffbe99b2b6256b99",
+      "pages": 9,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114717",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度独立董事述职报告（郭田勇）",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114717.PDF",
+      "http_status": 200,
+      "sha256": "cf8bceda73305f8c98c422cac85e64fdee84e36efa39f8c348b7094b0c6cd37b",
+      "text_sha256": "563ed1d97e631ae28cc29bec1dad040b54e0462ee42ddcce3277a4ec5ebe58cc",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114716",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "关于贵州茅台酒股份有限公司非经营性资金占用及其他关联资金往来情况的专项审计说明",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114716.PDF",
+      "http_status": 200,
+      "sha256": "aafa019db68316108af134a5a1556826b7adff223c57ab608905644a30bc38c1",
+      "text_sha256": "a677aa186d9465b1c5ae6400f08b69d7a8bd76c59e0ae89ababe21c3dcd1bd1c",
+      "pages": 10,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114715",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "关于贵州茅台酒股份有限公司涉及财务公司关联交易的存款、贷款等金融业务的专项说明",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114715.PDF",
+      "http_status": 200,
+      "sha256": "e6d6e55688a8b140128d54459140a58b0c509c8a1065eceb1c403c61539106df",
+      "text_sha256": "f38c452fcc2d5c5e11d20933c3b7453c8b4033d100c4d0772f34b24846392794",
+      "pages": 10,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114714",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "贵州茅台对会计师事务所2025年度履职情况的评估报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114714.PDF",
+      "http_status": 200,
+      "sha256": "cb40ba34ccab5f076c3435d4aabbd424a616ff56c99977ba14d4624cde8ecf9d",
+      "text_sha256": "db564717ccbb57e3856d0f6ad6a1ae37e0e9e6a5df01f55c1b97cea485a44a52",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114713",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度审计报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114713.PDF",
+      "http_status": 200,
+      "sha256": "d2724a61ae6bb84ecfa3df9ecfdb47a816e38893a54d28a1bcdea9b350bf9217",
+      "text_sha256": "987833e8b09c53a0e5fe5ecf89d7cd866b1e12b54c1fd6bb33d4996740017c31",
+      "pages": 118,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114712",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于“提质增效重回报”工作2025年度行动方案评估报告暨2026年度行动方案的公告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114712.PDF",
+      "http_status": 200,
+      "sha256": "5ce9b1680791a269769f7f5bdfcae94cd044181a95cef576ef93e91a54fabf69",
+      "text_sha256": "06b729ed7704e9c7033254312ef4218296c5ebf97b53dfd577e6da4369116916",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114711",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年环境、社会及治理（ESG）报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114711.PDF",
+      "http_status": 200,
+      "sha256": "497eb340f3644e42c4d310731a0309778cd6e983ec3d9e6d91849cfffc3c593c",
+      "text_sha256": "bc34b7b4c51e959cdbac8508fd16ef8583ea2ecacfa3b8327a5ca5af10497970",
+      "pages": 88,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114710",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "贵州茅台审计委员会2025年度对会计师事务所履行监督职责情况的报告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114710.PDF",
+      "http_status": 200,
+      "sha256": "8f5ee3edfe006863b370f02022de4cd77321832c21f293d3f8f139969cb39e52",
+      "text_sha256": "bcd592bed70eb592aef31e318492030b40389ca2e79f57d8a94b8a35c4f09a6d",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225114709",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "贵州茅台关于续聘会计师事务所的公告",
+      "date": "2026-04-17",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114709.PDF",
+      "http_status": 200,
+      "sha256": "e0c1589c08e4d74887641b15bf1ae9427172b06fe05b2a6a139469af497bb6ac",
+      "text_sha256": "066d697376de5a14ef60b595ed6234811dc46ef72df4a86a32988a73cf923043",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225102861",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2026年度第五次会议决议公告",
+      "date": "2026-04-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-15/1225102861.PDF",
+      "http_status": 200,
+      "sha256": "db82f810e3aabc6a0e3d8048008d6e5295b7f6526205a4af73d25e28dc0d6d2c",
+      "text_sha256": "cbe8d166bb28e34706cdf395f97fd56d7eb5e6d5fad190af763a17018ae31c49",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225075835",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份实施进展的公告",
+      "date": "2026-04-03",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-03/1225075835.PDF",
+      "http_status": 200,
+      "sha256": "98c4fa60348a2ba5c27a364da598ffbe7b101e4f3d1d16c6dcc9838e969df015",
+      "text_sha256": "a9714557fbd9e21c92bf9dafa3702c210b4f51a35b85ef6b554b8b3725e22a82",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225055491",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台重大事项公告",
+      "date": "2026-03-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225055491.PDF",
+      "http_status": 200,
+      "sha256": "1e0369d26c16a059ed9d21b06d20fa5e3dc43cb4ab922b8d90d607d787b84b1b",
+      "text_sha256": "477bcf36a39387c4cb854adafbba5511259ea508d6881e4376fe9807915e9d15",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225055453",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2026年度第四次会议决议公告",
+      "date": "2026-03-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225055453.PDF",
+      "http_status": 200,
+      "sha256": "7cd899ba96a4f94a3471c85c1ca864438dc45949fb065c231367f23c9e2f5842",
+      "text_sha256": "3631bcf732dc73b865e54756601edeeb084af01ea0e9f854c5a225e6c148a43e",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1225009431",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于高级管理人员被实施留置的公告",
+      "date": "2026-03-14",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-14/1225009431.PDF",
+      "http_status": 200,
+      "sha256": "1c2cf0e9e7d37c41d942bfb26b7be282de9312097990924f45a54da5fcc6c582",
+      "text_sha256": "104517ecf50fcac462dac70c5c46bfe1cf273df8dc782c20bfa0b3a99285ee4b",
+      "pages": 1,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224994303",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份实施进展的公告",
+      "date": "2026-03-04",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-03-04/1224994303.PDF",
+      "http_status": 200,
+      "sha256": "e38a7f4648325569245b2a3ecc53ff069e7bc5fc94c580d7b13ffb9459366e7a",
+      "text_sha256": "11217ece1542ab68962633980b2f4d52e448fcfacfae97034a0c9987949cd5cc",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224965185",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份实施进展的公告",
+      "date": "2026-02-04",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-02-04/1224965185.PDF",
+      "http_status": 200,
+      "sha256": "b34a5ac090e68de4f8ccffa756f5fe6fc1d4756b987f2708fb0025778af2ec3b",
+      "text_sha256": "fedaf64d0cc63a6e80fb0e8b5e86a287e4fac99a83f2ab2ed17ed1766d1d423b",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224931927",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2026年度第一次会议决议公告",
+      "date": "2026-01-14",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-01-14/1224931927.PDF",
+      "http_status": 200,
+      "sha256": "e3fb1df19469908a13fc9331caa63360d5db749834a2b015c89ce2841476e815",
+      "text_sha256": "b77e72783468cc22228c02356316efe03935fb99af9b7f2165c46e86ed1093ba",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224917210",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于首次回购公司股份暨回购进展的公告",
+      "date": "2026-01-05",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-01-05/1224917210.PDF",
+      "http_status": 200,
+      "sha256": "724a604fa6772d5ddb489da56ce14f9ae0a2b67b2d77d44aab6a1194d40bbf12",
+      "text_sha256": "752225f5af4b469eceeca9771c184eb2dbffded554a1f7daae64c37ce2488dd0",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224906220",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于控股股东增持股份结果的公告",
+      "date": "2025-12-30",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-30/1224906220.PDF",
+      "http_status": 200,
+      "sha256": "ae056c65f53fcacd0b2cffd3562af0f2696d32593e25543ba279b59b07e57ee6",
+      "text_sha256": "9105c4735e6580e4dfeaf95f608ff428a38101793fe3d5640f1adf0e6b29686c",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224906219",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "北京市环球律师事务所关于贵州茅台酒股份有限公司控股股东增持公司股份之法律意见书",
+      "date": "2025-12-30",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-30/1224906219.PDF",
+      "http_status": 200,
+      "sha256": "4f8776cf3af9ed68786856ae9f855d15583a250c7d947ead199597872b0c6ef3",
+      "text_sha256": "a1d2980df8befcde073651626a83e0b1dad351ec64a88a816d69467fbf5a04db",
+      "pages": 9,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224896537",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于以集中竞价交易方式回购公司股份的回购报告书",
+      "date": "2025-12-25",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-25/1224896537.PDF",
+      "http_status": 200,
+      "sha256": "948ddbffb459b9bf73bea7e393b14d295f8bca74268e897092ce30cc1d417115",
+      "text_sha256": "4dbcbf4fd5019b867d329d4455b9d945db5d3f269d731e494c0ed6c0c71ba88b",
+      "pages": 9,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224896531",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于实施2025年中期权益分派后调整回购股份价格上限的公告",
+      "date": "2025-12-25",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-25/1224896531.PDF",
+      "http_status": 200,
+      "sha256": "1fdb90443dac6a6543e49595535a31c4556609582682614182ec60a2af47efc6",
+      "text_sha256": "1c29875638f4095584ae7c089ac4df0f5668d27ce7a5e892405101dc1438c5e4",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224867074",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年中期权益分派实施公告",
+      "date": "2025-12-11",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-11/1224867074.PDF",
+      "http_status": 200,
+      "sha256": "ad2f4548490a203bbcada1181341d9dc90b19a64a0ecf14ff1c8e6b9d4b71673",
+      "text_sha256": "f474eef6b0aea59905d162e33157b99b74c9d6a8025308033041eb66b9a0e9c7",
+      "pages": 4,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836351",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司关联交易决策管理细则（2025年11月修订）",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836351.PDF",
+      "http_status": 200,
+      "sha256": "344eb8cf812ebb2033c24c9363c6bd50e7a775ab3b8c091f0e245388678c1429",
+      "text_sha256": "4f1c51999f60f0af389c9a353c6cfe9248abd78c045bf91a3c8f6b8db6f4cfe8",
+      "pages": 19,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836347",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司董事会议事规则（2025年11月修订）",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836347.PDF",
+      "http_status": 200,
+      "sha256": "2721d5f59c8cdd23f768903552d1b1d309fcc5351e1e199278841db99124a961",
+      "text_sha256": "08196bc25398faf510e1630ddfdd9c75f8154f4b35e7bb4e36f2ca5f47e634db",
+      "pages": 21,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836346",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年第一次临时股东大会决议公告",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836346.PDF",
+      "http_status": 200,
+      "sha256": "e9cd2e1b449970b0ccde4f4d46c65d671d55c9bce9587471d8abe534bbef6d47",
+      "text_sha256": "f40ceaee9880f1fe6a1ca762158e06c1b5735dd2eeb88c9ec895fa3ca12952df",
+      "pages": 7,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836337",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2025年度第十五次会议决议公告",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836337.PDF",
+      "http_status": 200,
+      "sha256": "fcffdd9536999756cf077b25ba42cb56b7d89ef27ed3ea5b0ae4aea43c92ce08",
+      "text_sha256": "df3dcd1eee5f67bf7e552ac222d3159553e5453b949b8576f83f762eaa83ee5c",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836336",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份事项通知债权人公告",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836336.PDF",
+      "http_status": 200,
+      "sha256": "dce425acdcc6d8e8b40bc521ffc6fe02a9de26ea0fccc6c7f6bd70a7291cd555",
+      "text_sha256": "97c2e4dbcb3023ef845cacb622ef2bc1aec60c20465b9647dd80b342bca75d86",
+      "pages": 3,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836320",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司章程（2025年11月修订）",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836320.PDF",
+      "http_status": 200,
+      "sha256": "2d30903ed27ab4ff28ec49470c0e9510fe21909f7e54803bfc85d460082c3109",
+      "text_sha256": "609ad06a23692160c71882292bc0b09a2a19aa6c3bee1e994c0151a13ef84c19",
+      "pages": 55,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224836309",
+      "kind": "notice",
+      "author": "原文件署名中介",
+      "title": "北京市金杜律师事务所关于贵州茅台酒股份有限公司2025年第一次临时股东大会之法律意见书",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836309.PDF",
+      "http_status": 200,
+      "sha256": "d01512f07448c31e9c2a1d253577549935823f8220d24b2049fd2cff3d5f98b8",
+      "text_sha256": "cb7c7f5a50363e843bf55318c122a7f82614928eb2580384dc6aca3a963ef1cd",
+      "pages": 10,
+      "text_empty": true
+    },
+    {
+      "document_id": "1224836297",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司股东会议事规则（2025年11月修订）",
+      "date": "2025-11-29",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-29/1224836297.PDF",
+      "http_status": 200,
+      "sha256": "585fdfd702a8380623d0e41d6841e9b6068869f92bbe7f3d374d1c977601d3b5",
+      "text_sha256": "0a4d014ff5bd157dc5641a9dd5e849fefedb7660eb3583c5483bdef8d17951ef",
+      "pages": 22,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224825591",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份事项前十大股东及前十大无限售条件股东持股情况的公告",
+      "date": "2025-11-26",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-26/1224825591.PDF",
+      "http_status": 200,
+      "sha256": "8fb90d9b42c850986c0622c837c0870112ae9d400fa0090cdf10fc51e3155368",
+      "text_sha256": "25c61ca3c8f918c8d4ce3590b2bd1ccbc4344addc8bf6ef3cd9356818a8eeb7d",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224815995",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年第一次临时股东大会会议资料",
+      "date": "2025-11-20",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-20/1224815995.PDF",
+      "http_status": 200,
+      "sha256": "fea3d2cae19cfa7968d54b838872a23ca0e7cf2ce3ebd6993fa85c1be00c9be1",
+      "text_sha256": "c393ca7569b8e288de46cca83aeb605422d5ef383b3c86b028e509f96d9024a0",
+      "pages": 22,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224797192",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于回购股份事项前十大股东及前十大无限售条件股东持股情况的公告",
+      "date": "2025-11-11",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-11/1224797192.PDF",
+      "http_status": 200,
+      "sha256": "87d527013d60b06b7986338154df0714a2a573f1f2e1513a4dfd3623a34de3fd",
+      "text_sha256": "ae1b44fb8c88d44fb5515281dd4afbcf98b81467ae5b13f87c7cca267f92203e",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789665",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司董事会议事规则（修订稿）",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789665.PDF",
+      "http_status": 200,
+      "sha256": "0d0ca19fa1117cb363aeb1663d8d7315b52608e606effb3dd3bac018a65f21cd",
+      "text_sha256": "52dedae372181b67a1c741232d3b669dd973c794c4076027dff4fd188da9b853",
+      "pages": 21,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789664",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司股东会议事规则（修订稿）",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789664.PDF",
+      "http_status": 200,
+      "sha256": "ab59a3c32fee763b446c5e706edd5d650a5e8a0352c81c3aaf17e0c64e1e09a9",
+      "text_sha256": "e3ddf10d5e11a1ab66dfd0c114daf6a8c6b1b6662bde9783e2356bd3124ef427",
+      "pages": 22,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789663",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司章程（修订稿）",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789663.PDF",
+      "http_status": 200,
+      "sha256": "8801efddb2a1f80dc66b48056b5d06391e6caace3bc35c4dbb83a6f782c7cd86",
+      "text_sha256": "a69deb0a24e0918dd18b49f04b4eb3a503613b5a62869ce0b3a588f6ab678bde",
+      "pages": 55,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789662",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于修订公司《章程》及附件暨撤销监事会的公告",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789662.PDF",
+      "http_status": 200,
+      "sha256": "dc51e1e9c9030a6c6176e6766b8448d1aef8d4440d52067c0bd6734eaee63ce1",
+      "text_sha256": "f9fe0e984ae3952f6134450e7220b80625be932adbb92e4a8107cb344e92bc99",
+      "pages": 73,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789661",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于以集中竞价交易方式回购公司股份方案的公告",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789661.PDF",
+      "http_status": 200,
+      "sha256": "8641607be168633d08bfeb013a5529bcd29588e24c9963cc704cde82a3c25a64",
+      "text_sha256": "250f82dc0d9b2c1cbad2925ab90ef845a1f1c8347f47afffaa88810033617431",
+      "pages": 8,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789660",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于召开2025年第一次临时股东大会的通知",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789660.PDF",
+      "http_status": 200,
+      "sha256": "0fe4d047279293aa1cedaa1fe75f2522cc0872279933f9019675193bdc7b1d77",
+      "text_sha256": "7b2ea6216a68e385cda0feab34964b7fa3834c6c6258bf1b4ea417ea36617712",
+      "pages": 7,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789659",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于2025年中期利润分配方案暨贯彻落实“提质增效重回报”专项行动方案的公告",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789659.PDF",
+      "http_status": 200,
+      "sha256": "5ec98e5a3819395af3d3d949031ed68f4c26c5d79423b7a25f71721142b2824f",
+      "text_sha256": "ea5dfd66c4e8948f89ec82d9a18db54dd35e510734cd4689e67a82866bb2ebe4",
+      "pages": 5,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789658",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届监事会2025年度第五次会议决议公告",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789658.PDF",
+      "http_status": 200,
+      "sha256": "7c8fb7444bcbaa0da4d17353d3457b010298d0184beb4564fc2527fff1646465",
+      "text_sha256": "24544eecdb5b369adef56dca764fad576380d32309121945f6a9165f14983d03",
+      "pages": 2,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789657",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台酒股份有限公司关联交易决策管理细则（修订稿）",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789657.PDF",
+      "http_status": 200,
+      "sha256": "53592a1ee721737de5463fbc7e56c5d540bea87f26820eacc46bc84d39072769",
+      "text_sha256": "7fe35e97583d6e7f58484c9953f8bf8e8e3c7070da07622716de10886892885f",
+      "pages": 19,
+      "text_empty": false
+    },
+    {
+      "document_id": "1224789656",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台第四届董事会2025年度第十四次会议决议公告",
+      "date": "2025-11-06",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-11-06/1224789656.PDF",
+      "http_status": 200,
+      "sha256": "fee2dafbb62850f706a2a0828acc1454ed9b13950f8e47184845c1f8247bb431",
+      "text_sha256": "ab0bfce97a5c3226450ecba6aa7c144a6e88c2a6ef90f5c404bda29fc1ad7d89",
+      "pages": 3,
+      "text_empty": false
+    }
+  ],
+  "sources": [
+    {
+      "document_id": "1225649896",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第三季度报告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649896.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b",
+      "text_sha256": "50ca77c1044831e14d52acc2d8fea172c2a5a4b35b1c08f6bb207d2698d6f7c8",
+      "pages": 12,
+      "chars": 22970,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 8,
+          "text": "                     贵州茅台酒股份有限公司 2026 年第三季度报告\n\n\n\n  其他综合收益                                       6,360,136.45          -5,778,843.62\n  专项储备\n  盈余公积                                    49,251,429,608.71      50,543,176,610.94\n  一般风险准备                                   1,061,529,724.00       1,061,529,724.00\n  未分配利润                                  219,633,762,376.29     191,905,148,832.21\n 归属于母公司所有者权益（或股东权益）\n                                         271,204,740,541.63     244,637,811,032.18\n 合计\n  少数股东权益                                   9,216,876,481.22       9,321,442,876.89\n 所有者权益（或股东权益）合计                          280,421,617,022.85     253,959,253,909.07\n 负债和所有者权益（或股东权益）总计                       318,304,891,882.72     303,834,844,021.44\n公司负责人：陈华             主管会计工作负责人：余思明                        会计机构负责人：蔡聪应\n\n                              合并利润表\n                            2026 年 1—9 月\n编制单位：贵州茅台酒股份有限公司\n                                           单位：元 币种：人民币 审计类型：未经审计\n                             2026 年前三季度                       2025 年前三季度\n          项目\n                                （1-9 月）                          （1-9 月）\n一、营业总收入                          133,283,652,508.95             130,903,889,634.88\n 其中：营业收入                         130,970,743,649.04             128,453,707,655.86\n       利息收入                         2,312,908,859.91              2,450,181,979.02\n       已赚保费\n       手续费及佣金收入\n二、营业总成本                            44,486,918,820.21             41,426,154,052.85\n 其中：营业成本                           13,645,718,932.90             11,183,972,073.77\n       利息支出                              131,040,110.66             136,006,174.86\n       手续费及佣金支出                              216,201.81                  55,753.36\n       退保金\n       赔付支出净额\n       提取保险责任准备金净额\n       保单红利支出\n       分保费用\n       税金及附加                       20,776,015,728.76             20,645,707,926.55\n       销售费用                         4,830,628,836.78              4,478,672,252.48\n       管理费用                         5,322,622,377.82              5,503,383,668.62\n       研发费用                              147,652,442.32             113,086,640.98\n       财务费用                          -366,975,810.84               -634,730,437.77\n        其中：利息费用                           31,912,633.12               6,505,588.51\n              利息收入                       402,102,001.51             644,763,065.59\n  加：其他收益                                  31,484,861.99              24,453,342.83\n       投资收益（损失以“-”\n                                             230,947.61                  59,165.27\n号填列）\n\n                                8 / 12\n"
+        },
+        {
+          "pdf_page": 9,
+          "text": "                贵州茅台酒股份有限公司 2026 年第三季度报告\n\n\n\n     其中：对联营企业和合\n                                      -766,010.10\n营企业的投资收益\n        以摊余成本计量\n的金融资产终止确认收益\n       汇兑收益（损失以“-”\n号填列）\n     净敞口套期收益（损失以\n“-”号填列）\n     公允价值变动收益（损失\n                                   120,853,411.36        6,956,011.89\n以“-”号填列）\n     信用减值损失（损失以\n                                    30,137,787.46      -20,021,460.99\n“-”号填列）\n     资产减值损失（损失以\n“-”号填列）\n     资产处置收益（损失以\n                                      405,560.63          511,925.45\n“-”号填列）\n三、营业利润（亏损以“-”号填\n                             88,979,846,257.79      89,489,694,566.48\n列）\n  加：营业外收入                           47,105,398.34      39,970,046.24\n  减：营业外支出                            9,289,684.50     126,220,158.04\n四、利润总额（亏损总额以“-”号\n                             89,017,661,971.63      89,403,444,454.68\n填列）\n  减：所得税费用                    22,300,518,753.59      22,504,639,708.51\n五、净利润（净亏损以“-”号填\n                             66,717,143,218.04      66,898,804,746.17\n列）\n （一）按经营持续性分类\n    1.持续经营净利润（净亏损\n                             66,717,143,218.04      66,898,804,746.17\n以“-”号填列）\n    2.终止经营净利润（净亏损\n以“-”号填列）\n （二）按所有权归属分类\n   1.归属于母公司股东的净利\n                             64,467,425,981.95      64,626,746,712.18\n润（净亏损以“-”号填列）\n    2.少数股东损益（净亏损以\n                              2,249,717,236.09       2,272,058,033.99\n“-”号填列）\n六、其他综合收益的税后净额                       30,755,526.13        7,966,781.33\n （一）归属母公司所有者的其他\n                                    12,138,980.07        8,860,982.33\n综合收益的税后净额\n  1.不能重分类进损益的其他综\n合收益\n  （1）重新计量设定受益计划\n变动额\n\n\n                          9 / 12\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review"
+    },
+    {
+      "document_id": "1225475868",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年半年度报告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475868.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6",
+      "text_sha256": "ca0620fef523c37ffb83a33b5af73fe3cdc86d867308c49ae43e364f0fb211c7",
+      "pages": 110,
+      "chars": 237616,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 7,
+          "text": "               贵州茅台酒股份有限公司2026 年半年度报告\n\n\n    二是优质稳产态势稳固。公司始终坚持“质量是生命之魂”，着力凝聚全员质量共识，深入\n践行“崇本守道、坚守工艺、贮足陈酿、不卖新酒”质量观，有效实施质量目标绩效管理，促进\n全产业链各环节各工序切实履行好质量主体责任，从品质、效率、协同等方面全面提升供应链组\n织能力，以满足“全面向 C”的要求。公司持续强化全过程质量管控、持续夯实质量基础、持续深\n化质量改进。上半年，茅台酒、系列酒分别实现基酒产量 4.1 万吨、3.1 万吨，轮次产酒特征更\n加明显、比例更加协调，持续保持优质稳产。\n    三是改革转型初见成效。2026 年以来，公司始终坚持以消费者为中心、以市场需求为驱动，\n深入推进“全面向 C”茅台酒营销市场化改革。在产品结构上，系统梳理产品体系、明晰产品定\n位、优化产品结构、调控投放节奏，构建了以市场需求为导向的“金字塔”型产品结构，适配终\n端需求做好产品投放；在价格机制上，推动终端价格更加符合市场真实运行规律，构建了“随行\n就市、相对平稳、供需适配、量价平衡”的动态价格调整机制；在渠道布局上，构建批发、线下\n零售、线上零售、餐饮等渠道并行的渠道布局，通过“线上+线下”融合转型，线上管效率、管触\n达，线下管转化、管服务，形成以消费者为中心的良性渠道生态体系；在销售模式上，充分发挥\n了自营渠道平衡器和稳定器、社会渠道转化器和放大器的作用，构建“自售+经销+代售”多维协\n同的营销体系。\n    四是品牌文化协同发展。聚焦“卖酒”向“卖生活方式”转变，推进重点项目建设，打造多\n元化的文化体验场景；支持“东方传统色彩计划”，发布应用 2026 年度主题色“齐紫色”；参与\n2026 世界品牌莫干山大会、达沃斯世界经济论坛等国内外重大活动，传递茅台价值主张，公司品\n牌知名度、美誉度持续攀升。\n\n报告期内公司经营情况的重大变化，以及报告期内发生的对公司经营情况有重大影响和预计未\n来会有重大影响的事项\n□适用 √不适用\n\n三、报告期内核心竞争力分析\n√适用 □不适用\n  公司坚持“顺天敬人、明理厚德”的企业价值观，拥有“品质、品牌、工艺、环境、文化”\n组成“五大核心竞争力”。报告期内公司核心竞争力未发生重大变化。\n\n四、报告期内主要经营情况\n(一)   主营业务分析\n1、 财务报表相关科目变动分析表\n                                        单位：元   币种：人民币\n                                               变动比例\n科目                    本期数         上年同期数\n                                                （%）\n 营业收入           90,703,260,964.48  89,389,354,416.84\n                                                   1.47\n 营业成本            9,473,762,565.88   7,777,491,083.93\n                                                  21.81\n 销售费用            3,206,308,341.53   3,260,462,949.46\n                                                  -1.66\n 管理费用            3,635,355,263.82   3,694,704,172.74\n                                                  -1.61\n 财务费用             -243,237,716.96    -486,644,673.87\n                                                 不适用\n 研发费用              114,926,219.60      73,901,545.96\n                                                  55.51\n 经营活动产生的现金流量净额  70,690,750,119.06  13,119,061,031.33\n                                                 438.84\n 投资活动产生的现金流量净额  25,640,543,520.60    -314,350,963.69\n                                                 不适用\n 筹资活动产生的现金流量净额 -37,944,297,802.12 -39,892,813,631.78\n                                                 不适用\n营业收入变动原因说明：主要是本期销量增加。\n营业成本变动原因说明：主要是本期销量增加及生产成本增加。\n财务费用变动原因说明：主要是本期商业银行存款利率下降、规模及结构变化。\n研发费用变动原因说明：主要是本期费用化项目投入增加。\n经营活动产生的现金流量净额变动原因说明：主要是本期公司控股子公司贵州茅台集团财务有限\n                        7 / 110\n"
+        },
+        {
+          "pdf_page": 8,
+          "text": "                                    贵州茅台酒股份有限公司2026 年半年度报告\n\n\n公司吸收集团公司成员单位存款增加及不可随时支取的同业存款减少。\n投资活动产生的现金流量净额变动原因说明：主要是本期公司控股子公司贵州茅台集团财务有限\n公司购买的同业存单到期收回。\n筹资活动产生的现金流量净额变动原因说明：主要是本期公司回购股票减少。\n\n2、 本期公司业务类型、利润构成或利润来源发生重大变动的详细说明\n□适用 √不适用\n\n3、 销售情况\n                                                                                       单位：万元          币种：人民币\n                    按产品档次                                    按销售渠道                              按地区\n   项目\n                 茅台酒     系列酒                              直销     批发代理                      国内            国外\n报告期主要\n              7,772,443.79         1,293,418.65     5,196,204.70      3,869,657.74     8,962,212.26    103,650.18\n业务收入\n注：报告期内，公司通过“i 茅台”数字营销平台实现酒类不含税收入 4,026,356.42 万元。\n\n4、 经销商情况\n                                                                                                  单位：个\n   区域名称    报告期末经销商数量    报告期增加数量                                                              报告期减少数量\n    国内            2,307        220                                                                  266\n    国外              119         14                                                                   21\n注：本期国内经销商增减变动主要为系列酒经销商。\n\n(二)      非主营业务导致利润重大变化的说明\n□适用 √不适用\n\n(三)      资产、负债情况分析\n√适用 □不适用\n1、 资产及负债状况\n                                                                                         单位：元 币种：人民币\n                                                                            本期期末\n                                    本期期末                           上年期末\n                                                                            金额较上\n                                    数占总资                           数占总资\n  项目名称           本期期末数                            上年期末数                     年期末变                情况说明\n                                    产的比例                           产的比例\n                                                                             动比例\n                                     （%）                            （%）\n                                                                             （%）\n货币资金           53,518,798,979.08       17.32   51,690,610,946.50    17.01      3.54\n                                                                                       主要是公司控股子公司贵州茅台集团财务\n拆出资金          141,084,158,124.01       45.65   99,096,188,059.75    32.62     42.37\n                                                                                       有限公司存放同业增加\n                                                                                       主要是公司控股子公司贵州茅台酒销售有\n应收账款                  570,895.04      0.0002       2,609,048.49     0.001     -78.12\n                                                                                       限公司线上平台应收货款减少\n                                                                                       主要是公司全资子公司贵州茅台酱香酒营\n应收款项融资         2,475,749,125.89         0.80   4,457,064,160.16      1.47     -44.45   销有限公司、控股子公司贵州茅台酒销售有\n                                                                                       限公司拟贴现的银行承兑汇票减少\n                                                                                       主要是公司全资子公司贵州茅台酱香酒营\n预付款项              16,190,168.54         0.01       6,637,314.31     0.002     143.93\n                                                                                       销有限公司预付广告费增加\n其他应收款             47,328,677.41         0.02      36,281,302.94     0.012     30.45    主要是市场人员借款增加\n买 入返 售 金 融资                                                                            主要是公司控股子公司贵州茅台集团财务\n                 406,491,272.08         0.13   8,879,708,146.97      2.92     -95.42\n产                                                                                      有限公司赎回国债逆回购\n存货             61,317,208,371.30       19.84   61,427,421,796.18    20.22     -0.18\n一 年内 到 期 的非                                                                            主要是公司控股子公司贵州茅台集团财务\n               1,798,106,445.56         0.58   26,871,114,612.71     8.84     -93.31\n流动资产                                                                                   有限公司部分债权投资到期\n                                                                                       主要是公司控股子公司贵州茅台集团财务\n发放贷款和垫款          416,287,173.92         0.13   1,553,536,744.78      0.51     -73.20\n                                                                                       有限公司收回买方信贷\n                                                                                       主要是公司控股子公司贵州茅台集团财务\n其他债权投资         2,414,885,261.51         0.78   3,496,539,016.41      1.15     -30.93\n                                                                                       有限公司出售债券\n固定资产           22,220,890,242.73        7.19   22,488,122,304.35     7.40      -1.19\n使用权资产             221,878,454.33        0.07      221,738,227.51     0.07       0.06\n其他非流动资产           115,827,807.77        0.04      175,472,981.42     0.06     -33.99   主要是公司预付工程安全文明施工费转入\n\n                                                         8 / 110\n"
+        },
+        {
+          "pdf_page": 30,
+          "text": "                  贵州茅台酒股份有限公司2026 年半年度报告\n\n\n  专项储备\n  盈余公积                 49,251,429,608.71  50,543,176,610.94\n  未分配利润               107,646,565,355.82 127,322,996,467.02\n   所有者权益（或股东权\n                      158,148,992,327.71 178,999,246,453.61\n 益）合计\n    负债和所有者权益\n                      168,620,407,364.98 195,350,142,529.19\n （或股东权益）总计\n公司负责人：陈华     主管会计工作负责人：余思明           会计机构负责人：蔡聪应\n\n                          合并利润表\n                         2026 年 1—6 月\n                                                       单位：元 币种：人民币\n        项目                 附注           2026 年半年度          2025 年半年度\n一、营业总收入                                92,278,072,083.21 91,093,762,553.97\n其中：营业收入                    43          90,703,260,964.48 89,389,354,416.84\n   利息收入                    44           1,574,811,118.73  1,704,408,137.13\n   已赚保费\n   手续费及佣金收入\n二、营业总成本                                30,946,044,878.08   28,353,948,643.16\n其中：营业成本                    43           9,473,762,565.88    7,777,491,083.93\n   利息支出                    44              76,587,662.57       91,606,314.10\n   手续费及佣金支出                44                 183,088.17           42,669.36\n   退保金\n   赔付支出净额\n   提取保险责任准备金净额\n   保单红利支出\n   分保费用\n   税金及附加                   45          14,682,159,453.47   13,942,384,581.48\n   销售费用                    46           3,206,308,341.53    3,260,462,949.46\n   管理费用                    47           3,635,355,263.82    3,694,704,172.74\n   研发费用                    48             114,926,219.60       73,901,545.96\n   财务费用                    49            -243,237,716.96     -486,644,673.87\n   其中：利息费用                                 21,034,591.16        4,369,620.54\n       利息收入                               266,574,096.14      493,572,693.81\n 加：其他收益                    50              23,554,465.99       22,518,010.95\n   投资收益（损失以“-”号填\n                           51              1,013,870.58            59,165.27\n列）\n   其中：对联营企业和合营企业\n                                               16,912.87\n的投资收益\n      以摊余成本计量的金融\n资产终止确认收益（损失以“-”号\n填列）\n   汇兑收益（损失以“-”号填\n列）\n   净敞口套期收益（损失以\n“-”号填列）\n   公允价值变动收益（损失以\n                           52              22,082,651.62        1,758,003.31\n“-”号填列）\n\n                            30 / 110\n"
+        },
+        {
+          "pdf_page": 31,
+          "text": "             贵州茅台酒股份有限公司2026 年半年度报告\n\n\n     信用减值损失（损失以“-”\n                     53              32,473,761.91        4,312,358.58\n号填列）\n     资产减值损失（损失以“-”\n号填列）\n     资产处置收益（损失以“-”\n                     54                 139,731.04          511,925.45\n号填列）\n三、营业利润（亏损以“-”号填\n                                 61,411,291,686.27   62,768,973,374.37\n列）\n 加：营业外收入             55              35,315,234.56       32,407,899.24\n 减：营业外支出             56               8,187,743.54       23,380,506.79\n四、利润总额（亏损总额以“-”号\n                                 61,438,419,177.29   62,778,000,766.82\n填列）\n 减：所得税费用             57          15,405,088,610.51   15,791,319,317.58\n五、净利润（净亏损以“-”号填\n                                 46,033,330,566.78   46,986,681,449.24\n列）\n（一）按经营持续性分类\n   1.持续经营净利润（净亏损以\n                                 46,033,330,566.78   46,986,681,449.24\n“-”号填列）\n   2.终止经营净利润（净亏损以\n“-”号填列）\n（二）按所有权归属分类\n   1.归属于母公司股东的净利润\n                                 44,516,880,421.86   45,402,962,298.10\n（净亏损以“-”号填列）\n   2.少数股东损益（净亏损以\n                                 1,516,450,144.92     1,583,719,151.14\n“-”号填列）\n六、其他综合收益的税后净额        58              27,974,688.63       10,694,897.95\n （一）归属母公司所有者的其他综\n                                     11,538,418.03       10,694,897.95\n合收益的税后净额\n   1.不能重分类进损益的其他综合\n收益\n（1）重新计量设定受益计划变动额\n（2）权益法下不能转损益的其他综\n合收益\n（3）其他权益工具投资公允价值变\n动\n（4）企业自身信用风险公允价值变\n动\n   2.将重分类进损益的其他综合收\n                                     11,538,418.03       10,694,897.95\n益\n（1）权益法下可转损益的其他综合\n收益\n（2）其他债权投资公允价值变动                      17,107,138.79\n（3）金融资产重分类计入其他综合\n收益的金额\n（4）其他债权投资信用减值准备\n（5）现金流量套期储备\n（6）外币财务报表折算差额                        -5,568,720.76       10,694,897.95\n（7）其他\n\n\n                      31 / 110\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review"
+    },
+    {
+      "document_id": "1225649906",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2026年第三季度主要经营数据公告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649906.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9",
+      "text_sha256": "72a8f28c50aee474ee94c2b399050fb842f27276924173a14ddc9f4f358c0d37",
+      "pages": 1,
+      "chars": 1357,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券简称：贵州茅台                           证券代码：600519                        编号：临 2026－033\n\n\n                      贵州茅台酒股份有限公司\n              2026 年第三季度主要经营数据公告\n\n     本公司董事会及全体董事保证本公告内容不存在任何虚假记载、误导性陈述或者重\n大遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n\n     贵州茅台酒股份有限公司（以下简称“公司”）根据上海证券交易所《上\n市公司自律监管指引第 3 号——行业信息披露》之《第十二号——酒制造》\n的相关规定，现将公司 2026 年第三季度主要经营数据（未经审计）公告如\n下：\n     一、经营情况\n                                                                       单位：万元 币种：人民币\n                 按产品档次                          按销售渠道                        按地区分部\n 项目\n             茅台酒            系列酒             直销           批发代理              国内            国外\n年初至报告期\n末的主营业务    11,292,545.23   1,796,854.27   7,377,359.30   5,712,040.20   12,925,258.61   164,140.89\n收入\n\n     注：年初至报告期末，公司通过“i 茅台”数字营销平台实现酒类不含税收入 5,856,230.60 万\n\n元。\n\n     二、经销商变动情况\n                                                                                        单位：个\n区域名称      报告期末经销商数量                  年初至报告期末增加数量                   年初至报告期末减少数量\n 国内                          2285                         220                                 288\n 国外                           124                           20                                 22\n     注：本期国内经销商数量变动主要为系列酒经销商。\n\n     特此公告。\n                                                   贵州茅台酒股份有限公司董事会\n                                                             2026 年 10 月 31 日\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 1,
+          "quote": "注：本期国内经销商数量变动主要为系列酒经销商。",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1224906220",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于控股股东增持股份结果的公告",
+      "date": "2025-12-30",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-30/1224906220.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "ae056c65f53fcacd0b2cffd3562af0f2696d32593e25543ba279b59b07e57ee6",
+      "text_sha256": "9105c4735e6580e4dfeaf95f608ff428a38101793fe3d5640f1adf0e6b29686c",
+      "pages": 3,
+      "chars": 2545,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券代码：600519     证券简称：贵州茅台    公告编号：临 2025-056\n\n               贵州茅台酒股份有限公司\n         关于控股股东增持股份结果的公告\n  本公司董事会、全体董事及相关股东保证本公告内容不存在任何虚假记载、误导\n性陈述或者重大遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n\n重要内容提示：\n   已披露增持计划情况：贵州茅台酒股份有限公司（以下简称“公司”\n                                 ）\n于 2025 年 8 月 30 日披露了《控股股东增持股份计划公告》(公告编号：\n临 2025-033)，公司控股股东中国贵州茅台酒厂（集团）有限责任公司（以\n下简称“茅台集团”）计划自增持公告发布之日起 6 个月内，通过集中竞\n价交易方式增持公司股票，拟增持金额不低于人民币 30 亿元（含）且不\n高于人民币 33 亿元（含）\n             。\n   增持计划的实施结果:根据茅台集团相关通知，截至 2025 年 12 月\n26 日，本次增持计划已实施完毕。茅台集团增持了 2,071,359 股公司股\n票，占公司总股本的 0.17%，增持金额为 3,000,089,293.91 元。本次增\n持完成后，茅台集团及一致行动人贵州茅台酒厂（集团）技术开发有限公\n司（以下简称“技开公司”）合计持有公司股份 709,132,623 股，占公司\n总股本的 56.63%。\n\n  一、增持主体的基本情况\n\n增持主体名称     中国贵州茅台酒厂（集团）有限责任公司\n增持主体身份     控股股东或实控人               是 否\n\n\n                     1\n"
+        },
+        {
+          "pdf_page": 2,
+          "text": "            控股股东或实控人的一致行动人                 是 否\n            直接持股 5%以上股东                    是 否\n            董事、监事和高级管理人员                   是 否\n            其他：__________\n 增持前持股数量    679,211,576 股\n 增持前持股比例\n          54.07%\n （占总股本）\n    上述增持主体存在一致行动人：\n   股东名称        持股数量（股）           持股比例   一致行动关系形成原因\n贵州茅台酒厂（集团）\n                   27,849,688       2.22% 控股股东的全资子公司\n技术开发有限公司\n   二、增持计划的实施结果\n   （一）增持计划的实施结果\n 增持主体名称        中国贵州茅台酒厂（集团）有限责任公司\n 增持计划首次披露日     2025 年 8 月 30 日\n 增持计划拟实施期间     2025 年 9 月 1 日～2026 年 2 月 28 日\n               不低于人民币 30 亿元（含）且不高于人民币 33 亿\n 增持计划拟增持金额\n               元（含）\n 增持计划拟增持数量     以实际发生为准\n 增持计划拟增持比例     以实际发生为准\n 增持股份实施期间      2025 年 9 月 1 日～2025 年 12 月 26 日\n               2025 年 9 月 1 日～2025 年 12 月 26 日，茅台集团\n 增持股份结果\n               通过上海证券交易所集中竞价平台实施增持，具体\n 对应方式及数量\n               增持股票数为 2,071,359 股。\n 累计增持股份金额      3,000,089,293.91 元\n 累计增持股份比例\n               0.17%\n （占总股本）\n 增持计划完成后       709,132,623 股。其中，茅台集团持有 681,282,935\n\n                            2\n"
+        },
+        {
+          "pdf_page": 3,
+          "text": "增持主体(及其一致行 股，技开公司持有 27,849,688 股。\n动人)持股数量\n增持计划完成后\n           56.63%。其中，茅台集团持股比例为 54.40%，技\n增持主体（及其一致行\n           开公司持股比例为 2.22%。\n动人）持股比例\n   （二）实际增持数量是否达到增持计划下限                  是 否\n   截至 2025 年 12 月 26 日，本次增持计划已实施完毕。茅台集团增持\n了 2,071,359 股 公 司 股 票 ， 占 公 司 总 股 本 的 0.17% ， 增 持 金 额 为\n3,000,089,293.91 元。本次增持完成后，茅台集团直接持有公司股份\n681,282,935 股，占公司总股本的 54.40%。\n   三、其他说明\n   （一）本次增持行为符合《中华人民共和国公司法》《中华人民共和\n国证券法》等法律、行政法规有关规定。\n   （二）上述内容中，增持前持股比例按照增持计划公告日公司总股本\n（1,256,197,800 股）计算,增持后持股比例按照本公告日公司总股本\n（1,252,270,215 股）计算。持股比例均保留两位小数，存在因四舍五入\n进位的情况。\n   （三）北京市环球律师事务所就本次控股股东增持公司股份事项出具\n了法律意见书，具体内容详见与本公告同日披露的《北京市环球律师事务\n所关于贵州茅台酒股份有限公司控股股东增持公司股份之法律意见书》\n                              。\n   特此公告。\n\n\n                               贵州茅台酒股份有限公司董事会\n                                   2025 年 12 月 30 日\n\n\n\n                           3\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 1,
+          "quote": "3,000,089,293.91 元",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 1,
+          "quote": "2,071,359 股",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 3,
+          "quote": "增持前持股比例按照增持计划公告日公司总股本",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1224867074",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年中期权益分派实施公告",
+      "date": "2025-12-11",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-11/1224867074.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "ad2f4548490a203bbcada1181341d9dc90b19a64a0ecf14ff1c8e6b9d4b71673",
+      "text_sha256": "f474eef6b0aea59905d162e33157b99b74c9d6a8025308033041eb66b9a0e9c7",
+      "pages": 4,
+      "chars": 2419,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券代码：600519    证券简称：贵州茅台         公告编号：临 2025-053\n\n       贵州茅台酒股份有限公司2025年中期\n                 权益分派实施公告\n\n  本公司董事会及全体董事保证本公告内容不存在任何虚假记载、误导性陈述或者\n重大遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n  重要内容提示：\n\n   每股分配比例\n\n  A 股每股现金红利23.957元（含税）\n\n   相关日期\n\n股份类别   股权登记日         最后交易日    除权（息）日        现金红利发放日\n\n Ａ股     2025/12/18    －        2025/12/19     2025/12/19\n\n   差异化分红送转：否\n\n\n\n  一、通过分配方案的股东大会届次和日期\n\n  本次利润分配方案经贵州茅台酒股份有限公司（以下简称“公司”）\n\n2025 年 11 月 28 日召开的2025年第一次临时股东大会审议通过。\n\n  二、分配方案\n\n  （一）发放年度：2025年中期\n\n  （二）分派对象：\n\n  截至股权登记日下午上海证券交易所收市后，在中国证券登记结算有\n\n\n\n\n                          1\n"
+        },
+        {
+          "pdf_page": 2,
+          "text": "限责任公司上海分公司（以下简称“中国结算上海分公司”）登记在册的\n\n公司全体股东。\n\n   （三）分配方案：\n\n   本次利润分配以方案实施前的公司总股本1,252,270,215股为基数，\n\n每 股 派 发 现 金 红 利 23.957 元 （ 含 税 ）， 共 计 派 发 现 金 红 利\n\n30,000,637,540.76元（含税）\n                     。\n\n   三、相关日期\n\n股份类别    股权登记日        最后交易日    除权（息）日        现金红利发放日\n\n Ａ股     2025/12/18    －        2025/12/19     2025/12/19\n\n   四、分配实施办法\n\n   （一）实施办法\n\n   除公司自行发放现金红利的股东外，其他股东的现金红利委托中国结\n\n算上海分公司通过其资金清算系统向股权登记日上海证券交易所收市后\n\n登记在册并在上海证券交易所各会员办理了指定交易的股东派发。已办理\n\n指定交易的股东可于红利发放日在其指定的证券营业部领取现金红利，未\n\n办理指定交易的股东红利暂由中国结算上海分公司保管，待办理指定交易\n\n后再进行派发。\n\n   （二）自行发放对象\n\n   股东中国贵州茅台酒厂（集团）有限责任公司、贵州茅台酒厂（集团）\n\n技术开发有限公司、贵州金融控股集团有限责任公司（贵州贵民投资集团\n\n有限责任公司）、贵州省国有资本运营有限责任公司的现金红利由公司自\n\n\n\n\n                          2\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 2,
+          "quote": "30,000,637,540.76元",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1225379934",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年年度权益分派实施公告",
+      "date": "2026-06-22",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-22/1225379934.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "6b082b6a00db748f23b6dea166b0296cd69d8c10542d352e23d2e2c344ea516e",
+      "text_sha256": "4d57c4bc26b1c357c649a3779a507dc69262f4591c664e97fbcc2c38d4fd3b70",
+      "pages": 4,
+      "chars": 2578,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券代码：600519    证券简称：贵州茅台          公告编号：临 2026-027\n\n\n              贵州茅台酒股份有限公司\n           2025年年度权益分派实施公告\n\n   本公司董事会及全体董事保证本公告内容不存在任何虚假记载、误导性陈述或\n\n者重大遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n\n\n  重要内容提示：\n\n   每股分配比例\n\n  A 股每股现金红利28.02423元\n\n   相关日期\n\n                               除权（息）\n 股份类别    股权登记日         最后交易日                现金红利发放日\n                                 日\n\n  Ａ股       2026/6/25    －       2026/6/26      2026/6/26\n\n   差异化分红送转： 否\n\n\n\n  一、通过分配方案的股东会届次和日期\n\n  本次利润分配方案经贵州茅台酒股份有限公司（以下简称“公司”或\n\n“本公司”）2026 年 6 月 11 日的2025年度股东会审议通过。\n\n  二、分配方案\n\n  （一）发放年度：2025年年度\n\n\n                         1\n"
+        },
+        {
+          "pdf_page": 2,
+          "text": "   （二）分派对象：\n\n   截至股权登记日下午上海证券交易所收市后，在中国证券登记结算有\n\n限责任公司上海分公司（以下简称“中国结算上海分公司”）登记在册的本\n\n公司全体股东。\n\n   （三）分配方案：\n\n   本次利润分配以方案实施前的公司总股本扣除回购专用账户内的股\n\n份1,250,081,601股为基数，每股派发现金红利28.02423元（含税），共计派\n\n发现金红利35,032,574,305.19元。\n\n   三、相关日期\n\n                                除权（息）\n股份类别     股权登记日         最后交易日                 现金红利发放日\n                                  日\n\n  Ａ股       2026/6/25    －        2026/6/26      2026/6/26\n\n   四、分配实施办法\n\n   （一）实施办法\n\n   除公司自行发放现金红利的股东外，其他股东的现金红利委托中国结\n\n算上海分公司通过其资金清算系统，向股权登记日上海证券交易所收市后\n\n登记在册并在上海证券交易所各会员办理了指定交易的股东派发。已办理\n\n指定交易的股东可于红利发放日在其指定的证券营业部领取现金红利，未\n\n办理指定交易的股东红利暂由中国结算上海分公司保管，待办理指定交易\n\n后再进行派发。\n\n   （二）自行发放对象\n\n\n\n                            2\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 2,
+          "quote": "35,032,574,305.19",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1225475863",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于贵州茅台集团财务有限公司的风险评估报告",
+      "date": "2026-08-15",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475863.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "cf2d50aa028fcf11ce9eb04746932b7a9be25c3e31d443295f77add844b1121b",
+      "text_sha256": "950e930ed6869a756202b3426579fb56af87fc63f7dde8c529eb96ceeea93b62",
+      "pages": 8,
+      "chars": 5485,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "          贵州茅台酒股份有限公司关于\n    贵州茅台集团财务有限公司的风险评估报告\n\n\n  根据《上海证券交易所上市公司自律监管指引第 5 号——交易与关联\n交易》的要求，贵州茅台酒股份有限公司（以下简称“公司”）通过查验\n贵州茅台集团财务有限公司（以下简称“财务公司”）《中华人民共和国\n金融许可证》《企业法人营业执照》等证件资料，并审核了财务公司 2026\n年 6 月 30 日财务报表等相关资料，对财务公司的经营资质、业务和风险\n状况进行了评估，具体情况报告如下：\n  一、财务公司基本情况\n  财务公司经原中国银监会批准设立，于 2013 年 4 月 12 日挂牌，是中\n国白酒行业成立的首家企业集团财务公司。基本情况如下：\n  注册资本：25 亿元人民币\n  金融许可证机构编码：L0173H252030001\n  统一社会信用代码：91520000063064319M\n  经营范围：吸收成员单位存款；办理成员单位贷款；办理成员单位票\n据贴现；办理成员单位资金结算与收付；提供成员单位委托贷款、债券承\n销、非融资性保函、财务顾问、信用鉴证及咨询代理业务；从事同业拆借；\n办理成员单位票据承兑；办理成员单位产品买方信贷；从事固定收益类有\n价证券投资。监管部门批准的其他业务。\n            财务公司股权结构\n\n                                持股金额      持股比例\n            股东名称\n                                （亿元）       （%）\n贵州茅台酒股份有限公司                       12.75        51\n\n\n                      1\n"
+        },
+        {
+          "pdf_page": 2,
+          "text": "中国贵州茅台酒厂（集团）有限责任公司           10    40\n贵州茅台酒厂（集团）技术开发有限公司         2.25     9\n             合计              25   100\n\n  二、财务公司内控情况\n  （一）内部控制\n  根据《中华人民共和国公司法》《银行保险机构公司治理准则》《企\n业内部控制基本规范》的要求，财务公司按照《贵州茅台集团财务有限公\n司公司章程》（以下简称《财务公司章程》）设立了股东会、董事会，并\n对董事、高级管理层在内部控制中的职责进行了明确规定，建立了股东会、\n董事会和高级管理层之间各负其责、规范运作、相互制衡的公司治理结构。\n财务公司董事会下设 5 个专门委员会，分别为：战略决策委员会、关联交\n易委员会、提名与薪酬委员会、风险管理委员会、审计委员会。公司高管\n团队由 1 名总经理、2 名副总经理、1 名运营总监组成；公司现有前中后\n台 8 个职能部门。\n  （二）风险的识别、评估\n  为有效控制各项业务风险，财务公司在各主要业务环节建立了全流程\n的风险控制措施，制定了《全面风险管理办法》《金融资产风险分类管理\n办法》《风险指标监控与预警管理办法》等相应的风险控制制度。并根据\n各项业务的不同特点制定各自不同的风险控制制度、标准化操作流程和风\n险防范措施，各部门责任分离、相互监督，对业务中的各类风险进行预测、\n评估和控制。\n  （三）控制活动\n  1.资金管理\n  财务公司根据监管机构的规定，制定了《存款业务管理办法》《结算\n\n\n                  2\n"
+        },
+        {
+          "pdf_page": 7,
+          "text": "内控工作的重视程度，进一步提升了整体管理水平。针对外部监管要求的\n变化以及内部业务发展的需要，财务公司持续完善内部控制制度，确保其\n适应性和有效性，为公司的稳健运营提供了坚实保障。\n  三、财务公司经营管理及风险管理情况\n  （一）经营情况\n  截至 2026 年 6 月 30 日，财务公司资产总额为 1571.36 亿元、负债总\n额为 1451.96 亿元、所有者权益合计 119.41 亿元。2026 年 1-6 月，财务\n公司实现营业收入 15.76 亿元，实现利润总额 8.02 亿元，净利润 4.68 亿\n元。\n  （二）管理情况\n  财务公司自成立以来，一直坚持稳健经营的原则，严格按照《中华人\n民共和国公司法》《中华人民共和国银行业监督管理法》《企业会计准则》\n《企业集团财务公司管理办法》等国家有关金融法规、条例以及《财务公\n司章程》规范经营行为，加强内部管理。\n  （三）监管指标\n  截至 2026 年 6 月 30 日，财务公司的各项监管指标均符合相关规定\n要求。\n      指标名称          监管要求        2026 年 6 月 30 日\n      资本充足率          ≥10.5%         20.94%\n      不良资产率           ≤4%              0\n      不良贷款率           ≤5%              0\n     自有固定资产比例        ≤20%            0.06%\n       投资比例          ≤70%           28.99%\n      拆入资金比例         ≤100%             0\n\n\n\n                       7\n"
+        },
+        {
+          "pdf_page": 8,
+          "text": "  四、公司在财务公司的存贷款情况\n  截至 2026 年 6 月 30 日，公司在财务公司存款余额为 301.45 亿元，\n无贷款。公司在财务公司的存款安全性和流动性良好，未发生财务公司因\n流动性不足而延迟付款的情况。\n  五、风险评估意见\n  （一）财务公司具有合法有效的《中华人民共和国金融许可证》《企\n业法人营业执照》。\n  （二）未发现财务公司存在违反《企业集团财务公司管理办法》规定\n的情形，财务公司的资本充足率等指标均符合监管要求。\n  （三）财务公司自成立以来，严格按照《企业集团财务公司管理办法》\n之规定开展经营活动，财务公司的风险管理不存在重大缺陷。公司与财务\n公司发生的金融业务目前风险可控。\n\n\n\n\n                     贵州茅台酒股份有限公司董事会\n                         2026 年 8 月 13 日\n\n\n\n\n                     8\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 7,
+          "quote": "财务公司资产总额为1571.36亿元",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 7,
+          "quote": "20.94%",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 8,
+          "quote": "公司在财务公司存款余额为301.45亿元，无贷款",
+          "matching": "whitespace-normalized"
+        }
+      ],
+      "signed_date": "2026-08-13",
+      "published_at": "2026-08-15"
+    },
+    {
+      "document_id": "1225366261",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台董事、高级管理人员考核和薪酬管理办法",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366261.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "b841c40b9f2196f12f5cad9348a71c3c64d1f0147a0e6dcbf15ca6531bc51535",
+      "text_sha256": "e90fc9badd78f8779b2cfd07692e527231feea5ffe09c3eae91766803ab142eb",
+      "pages": 4,
+      "chars": 2135,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 2,
+          "text": "策与方案，并就董事、高级管理人员的薪酬以及法律法规和公司章程规定\n的其他事项向董事会提出建议。\n 第六条 公司薪酬与考核委员会下设办公室，负责内部董事和高级管\n理人员薪酬方案的具体实施。董事会办公室负责独立董事考核及津贴发放\n的具体实施。公司相关部门配合开展董事和高级管理人员考核和薪酬管理\n相关工作。\n  第七条 在董事会或者薪酬与考核委员会对董事个人进行评价或者\n讨论其报酬时，该董事应当回避。\n               第三章 绩效考核\n 第八条 绩效考核分为年度考核和任期考核。年度考核结果作为绩效\n年薪分配的依据；任期考核结果作为任期激励收入的依据。\n 第九条 内部董事的考核实行年度与任期相结合。年度考核注重公司\n年度经营效益，任期考核注重公司中长期发展目标。职工董事的考核还应\n关注职工的合法权益维护。\n 第十条 外部董事的考核注重战略监督、专业支持、勤勉合规。独立\n董事的考核还应注重其独立性、履职质效。\n 第十一条 高级管理人员的考核注重其履职情况，根据岗位职责和工\n作分工，实施差异化考核。\n               第四章 薪酬构成\n 第十二条 公司董事和高级管理人员薪酬应当与市场发展相适应，与\n公司经营业绩、个人业绩相匹配，与公司可持续发展相协调。\n 第十三条 内部董事的薪酬根据其在公司担任的主要职务或岗位相关\n\n\n\n\n                  2\n"
+        },
+        {
+          "pdf_page": 3,
+          "text": "薪酬管理制度确定，不因其担任董事职务而在公司领取额外的薪酬。\n  第十四条 独立董事在公司领取独立董事津贴，不领取其他形式的薪\n酬。其他外部董事不在公司领取任何薪酬。\n  第十五条 高级管理人员的薪酬由基本年薪、绩效年薪和任期激励收\n入等组成，其中绩效年薪占比原则上不低于基本年薪与绩效年薪总额的百\n分之五十。\n  第十六条 薪酬政策应为公司战略服务，并随着公司经营状况的变化\n做出相应的调整，以适应公司进一步发展的需要。\n               第五章 薪酬发放\n  第十七条 董事和高级管理人员的基本年薪，依据相应岗位标准按月\n发放；绩效年薪、任期激励收入依据绩效考核评价结果发放。\n  第十八条 独立董事的津贴定期发放。\n  第十九条 公司应当确定董事和高级管理人员一定比例的绩效年薪\n在年度报告披露和绩效评价后支付。\n  第二十条 董事和高级管理人员的薪酬为税前收入，应依法缴纳个人\n所得税。\n  第二十一条 董事和高级管理人员发生岗位变动的，从变动次月起开\n始领取或停止领取薪酬或津贴，并不得重复领取。\n              第六章 薪酬止付追索\n  第二十二条 公司因财务造假等错报对财务报告进行追溯重述时，应\n当及时对董事和高级管理人员绩效年薪和任期激励收入予以重新考核并\n相应追回超额发放部分。\n\n\n\n\n                  3\n"
+        },
+        {
+          "pdf_page": 4,
+          "text": "  第二十三条 公司董事和高级管理人员违反义务给公司造成损失，或\n者对财务造假、资金占用、违规担保等违法违规行为负有过错的，公司\n应当根据情节轻重减少、停止支付未支付的绩效年薪和任期激励收入，并\n对相关行为发生期间已经支付的绩效年薪和任期激励收入进行全额或部分\n追回。\n                第七章 附则\n  第二十四条 本办法未尽事宜，依照国家有关法律法规、规范性文件\n及公司章程的有关规定执行。\n  第二十五条 本办法经公司股东会审议通过之日起生效实施，由董事\n会负责解释。\n\n\n\n\n                  4\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 3,
+          "quote": "绩效年薪占比原则上不低于基本年薪与绩效年薪总额的百分之五十",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 3,
+          "quote": "相应追回超额发放部分",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 4,
+          "quote": "全额或部分追回",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1225366264",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年度股东会决议公告",
+      "date": "2026-06-12",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366264.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "6868e886abe37f8c844a9df980775cb667d7caf2935f5ca01ea08bb68e4312c9",
+      "text_sha256": "b9a91c22e31933bde861aff86e413ae33dd7fbff114107d582b4ca22030e170d",
+      "pages": 7,
+      "chars": 6213,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券代码：600519    证券简称：贵州茅台        公告编号：临 2026-023\n\n\n              贵州茅台酒股份有限公司\n              2025年度股东会决议公告\n  本公司及董事会全体成员保证公告内容不存在虚假记载、误导性陈述或者重大\n\n遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n\n  重要内容提示：\n   本次会议是否有否决议案：无\n\n\n  一、会议召开和出席情况\n  （一）股东会召开的时间：2026 年 6 月 11 日\n  （二）股东会召开的地点：贵州省仁怀市茅台镇茅台会议中心\n  （三）出席会议的普通股股东和恢复表决权的优先股股东及其持有股份\n  情况：\n\n1.出席会议的股东和代理人人数                               4,881\n\n2.出席会议的股东所持有表决权的股份总数（股）                 874,013,979\n\n3.出席会议的股东所持有表决权股份数占公司有\n                                           69.9166\n表决权股份总数的比例（%）\n\n\n\n  （四）表决方式是否符合《公司法》及《公司章程》的规定，会议主\n持情况等。\n  会议由公司董事会召集，采用的表决方式是现场投票和网络投票相结\n合的方式，董事长陈华主持会议，会议的召开符合《公司法》等法律、行\n\n                     1\n"
+        },
+        {
+          "pdf_page": 4,
+          "text": "属于上市公司股东的净利润。\n\n\n     5.议案名称：《关于制定<董事、高级管理人员考核和薪酬管理办法>\n的议案》\n     审议结果：通过\n     表决情况：\n股东            同意                          反对                    弃权\n类型       票数          比例（%）       票数        比例（%）         票数         比例（%）\n\nA股     838,784,994    95.9693 27,741,905        3.1741 7,487,080      0.8566\n\n\n\n\n     6.议案名称：《关于与关联方签订<商标许可协议>的议案》\n     审议结果：通过\n     表决情况：\n股东            同意                       反对                    弃权\n类型      票数           比例（%）      票数         比例（%）       票数       比例（%）\nA股    164,264,027     99.6256   408,570        0.2478 208,759       0.1266\n\n\n\n     （二）累积投票议案表决情况\n     7.关于选举董事的议案\n                                                 得票数占出席会\n议案                                                                   是否\n         议案名称                   得票数              议有效表决权的\n序号                                                                   当选\n                                                    比例（%）\n7.01 选举陈华为董事                      863,872,482             98.8397     是\n7.02 选举王莉为董事                      864,767,894             98.9421     是\n7.03 选举周雪为董事                      864,099,851             98.8657     是\n     会议选举陈华、王莉、周雪为公司第五届董事会董事。\n\n\n                                   4\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 4,
+          "quote": "关于制定<董事、高级管理人员考核和薪酬管理办法>的议案",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 4,
+          "quote": "审议结果：通过",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "1225649901",
+      "kind": "notice",
+      "author": "贵州茅台",
+      "title": "贵州茅台关于公司高级管理人员2026年度薪酬兑现方案的公告",
+      "date": "2026-10-31",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649901.PDF",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "d2c3124a0b337fab2e9332c148cd3565ca6dd19ae33239b378bfaf32ac23a992",
+      "text_sha256": "c0ea825017123a1751d0f7c4008d2051425d48780449344d8fdc89e09e8611c4",
+      "pages": 2,
+      "chars": 884,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "证券简称：贵州茅台            证券代码：600519     编号：临 2026－034\n\n\n               贵州茅台酒股份有限公司\n  关于高级管理人员 2026 年度薪酬兑现方案的公告\n\n 本公司董事会及全体董事保证本公告内容不存在任何虚假记载、误导性陈述或者重\n\n大遗漏，并对其内容的真实性、准确性和完整性承担法律责任。\n\n\n\n  贵州茅台酒股份有限公司（以下简称“公司”）根据《公司法》《上市\n公司治理准则》等法律、行政法规及《公司章程》\n                     《公司经理层成员薪酬管\n理办法》等规定，制定了《公司高级管理人员 2026 年度薪酬兑现方案》，\n并经公司董事会审议通过。现将相关情况公告如下：\n  一、适用对象\n  2026 年度任期内的公司高级管理人员\n  二、适用期限\n  2026 年 1 月 1 日至 2026 年 12 月 31 日\n  三、薪酬结构\n  高级管理人员的薪酬由基本年薪、绩效年薪和任期激励收入三部分组\n成。基本年薪根据上级相关规定确定；绩效年薪以基本年薪为基数，根据\n高级管理人员经营业绩考核结果折算考核评价系数，并结合绩效年薪调节\n系数综合确定；任期激励收入根据任期经营业绩考核评价结果兑现，实行\n延期支付。\n  四、薪酬兑现\n  高级管理人员薪酬由公司支付。基本年薪标准未确认前，暂按上一年\n\n\n                            1\n"
+        },
+        {
+          "pdf_page": 2,
+          "text": "度标准按月预发；绩效年薪在清算和兑现前可按月预发，预发标准与基本\n年薪保持一致，待年度经营业绩考核完成，再根据年度经营业绩考核结果\n和相关规定进行清算和兑现；任期激励收入待 2024 年至 2026 年任期届满、\n任期经营业绩考核完成后，结合考核结果和相关规定按照递延支付规则分\n期兑现。\n  特此公告。\n\n\n\n\n                  贵州茅台酒股份有限公司董事会\n                       2026 年 10 月 31 日\n\n\n\n\n                   2\n"
+        }
+      ],
+      "evidence_level": "High",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 1,
+          "quote": "任期激励收入根据任期经营业绩考核评价结果兑现，实行延期支付",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 2,
+          "quote": "待2024年至2026年任期届满",
+          "matching": "whitespace-normalized"
+        }
+      ]
+    },
+    {
+      "document_id": "AP202611041831416424",
+      "kind": "broker",
+      "author": "国信证券",
+      "title": "2026Q3收入同比增长3%，以销定产、全面向C持续推进",
+      "date": "2026-11-04",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+      "text_sha256": "f090bd594a3cb775aa6e77df168d9b62d6127e2576ee5acb885483c293dbd282",
+      "pages": 6,
+      "chars": 14926,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "                                                                               证券研究报告 | 2026年11月04 日\n\n\n\n\n贵州茅台（600519.SH）                                                                                                     优于大市\n\n2026Q3 收入同比增长 3%，以销定产、全面向 C 持续推进\n\n核心观点                                                                    公司研究·财报点评\n2026Q1-Q3 实现营业收入 1309.71 亿元，同比增长 1.96%；归母净利润 644.67                     食品饮料·白酒Ⅱ\n亿元，同比下降 0.25%；扣非归母净利润 643.25 亿元，同比下降 0.55%。其                            证券分析师：张向伟                   证券分析师：王新雨\n中，2026Q3 实现营业收入 402.67 亿元，同比增长 3.08%；归母净利润 199.51                                                   021-60875135\n                                                                        zhangxiangwei@guosen.com.cn wangxinyu8@guosen.com.cn\n亿元，同比增长 3.78%；扣非归母净利润 198.61 亿元，同比增长 2.96%。                             S0980523090001              S0980526070003\n\n系列酒恢复增长，直销占比明显提升。2026Q3 茅台酒/系列酒收入分别为                                    基础数据\n352.01/50.34 亿元，同比分别+0.79%/+22.14%。系列酒贡献约 77%的酒类收                       投资评级                                  优于大市(维持)\n                                                                        合理估值\n入增量，带动整体收入增长。分渠道看，直销/批发代理收入分别为                                          收盘价                                        1480.00 元\n                                                                        总市值/流通市值                       1850121/1850121 百万元\n218.12/184.24 亿元，同比分别+40.31%/-21.60%，直销占酒类收入比例同比                        52 周最高价/最低价                        1568.00/1151.01 元\n提升 14.40pcts 至 54.21%。其中，i 茅台收入 182.99 亿元，上年同期为 19.31                   近 3 个月日均成交额                            4516.21 百万元\n\n亿元。i 茅台快速增长，其他直销及批发代理收入下降，渠道结构持续调整。                                     市场走势\n\n毛利率仍有压力，税金率下降及管理费率优化形成对冲。2026Q3 毛利率\n89.64% ， 同 比 下 降 1.64pcts 。 销 售 / 管 理 / 研 发 费 用 率 分 别 为\n4.03%/4.19%/0.08%，同比分别+0.92/-0.44/-0.02pcts；税金及附加率\n15.13%，同比下降 2.03pcts，源于白酒消费税主要于生产销售环节计征，我\n们判断税金及附加率下降主要与生产端节奏有关，预计 2026Q3 产品生产包\n装进度慢于销售进度。由此，2026Q3 归母净利率同比提升 0.33pcts 至\n49.55%；2026Q3 销售收现 451.01 亿元，同比增长 3.19%。\n以销定产、全面向 C 持续推进，供给总量与产品结构逐步适配消费需求。产\n                                                                        资料来源：Wind、国信证券经济研究所整理\n品端，飞天 500ml 回归主力单品，精品、生肖及陈年酒分别对应不同价格带\n和消费需求。价格端，动态调整机制使非标产品定价更贴近市场，减轻渠道                                       相关研究报告\n倒挂压力。渠道端，i 茅台与自营店扩大直接触达消费者的范围，部分非飞                                      《贵州茅台（600519.SH）-2026 上半年收入同比增长 1.3%，继\n                                                                        续深化市场化改革》 ——2026-08-17\n天 500ml 产品探索代售模式，减少经销商提前买断库存的资金占用。                                      《贵州茅台（600519.SH）-2026Q1 收入稳健增长，市场化改革成\n                                                                        效逐步显现》 ——2026-04-26\n盈利预测与投资建议：随着渠道改革，公司供给总量及结构与消费需求逐步                                       《贵州茅台（600519.SH）-2025 年释放经营压力，2026 年改革\n                                                                        破局》 ——2026-04-18\n适配。在价格相对稳定的假设下，我们预计 2026Q4 销售总量较 2026Q3 适度                              《贵州茅台（600519.SH）-革故鼎新，与时偕行，再论茅台的护\n                                                                        城河与增长潜力》 ——2026-03-19\n回落，据此小幅下调 2026 年盈利预测。预计 2026-2028 年公司实现营业总                              《贵州茅台（600519.SH）-全面推进市场化转型，解决供需适配\n收入 1706/1809/1899 亿元（前预测值为 1733/1838/1993 亿元），同比                        问题》 ——2026-01-05\n\n-0.8%/6.0%/5.0%；2026-2028 年公司实现归母净利润 809/877/926 亿元（前\n预 测 值 为 824/886/972 亿 元 ） ， 同 比 -1.7%/8.3%/5.7% ； 实 现\nEPS64.62/70.01/73.98 元；当前股价对应 PE 分别为 22.9/21.1/20.0 倍，维\n持“优于大市”评级。\n风险提示：宏观经济复苏不及预期致行业需求承压，食品安全问题等。\n\n盈利预测和财务指标               2024      2025     2026E     2027E     2028E\n营业收入(百万元)           174,144     172,054   170,612   180,903   189,935\n(+/-%)                  15.7%    -1.2%      -0.8%      6.0%      5.0%\n净利润(百万元)                86228    82320      80918     87667    92645\n(+/-%)                  15.4%    -4.5%      -1.7%      8.3%      5.7%\n每股收益（元）                 68.64    65.74      64.62     70.01    73.98\nEBIT     Margin         67.9%    66.3%      64.9%     65.1%    65.4%\n净资产收益率（ROE）             37.0%    33.6%      31.0%     31.5%    31.7%\n市盈率（PE）                 21.6      22.5       22.9      21.1      20.0\nEV/EBITDA               15.9      16.4       16.8      15.8      15.0\n市净率（PB）                 7.98      7.58       7.11      6.66      6.34\n资料来源：Wind、国信证券经济研究所预测                        注：摊薄每股收益按最新总股本计算\n\n\n\n请务必阅读正文之后的免责声明及其项下所有内容\n"
+        }
+      ],
+      "evidence_level": "Medium",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 1,
+          "quote": "我们判断税金及附加率下降主要与生产端节奏有关",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 1,
+          "quote": "预计2026Q3产品生产包装进度慢于销售进度",
+          "matching": "whitespace-normalized"
+        }
+      ],
+      "original_authors": [
+        "张向伟",
+        "王新雨"
+      ],
+      "cover_date": "2026-11-04",
+      "index_date": "2026-11-04"
+    },
+    {
+      "document_id": "AP202611021831304660",
+      "kind": "broker",
+      "author": "东吴证券",
+      "title": "公司2026三季报点评：直销夯实塔基，行稳必定致远",
+      "date": "2026-11-02",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+      "status": "opened",
+      "http_status": 200,
+      "sha256": "e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+      "text_sha256": "172e7fbda2d378d5ddccf6ea9599dd99720ac6cab30d71854f9e5f2267275718",
+      "pages": 4,
+      "chars": 14310,
+      "text_empty": false,
+      "page_excerpts": [
+        {
+          "pdf_page": 1,
+          "text": "   证券研究报告·公司点评报告·白酒Ⅱ\n   贵州茅台（600519）\n   公司 2026 三季报点评：直销夯实塔基，行稳                                                            2026 年 11 月 02 日\n   必定致远\n                                                                                      证券分析师                         苏铖\n   买入（维持）                                                                      执业证书：S0600524120010\n                                                                                   such@dwzq.com.cn\n   [Table_EPS]\n   盈利预测与估值            2024A     2025A     2026E     2027E     2028E                   证券分析师                         周源\n   营业总收入（百万元）        174,144   172,054   176,913   187,800   196,332           执业证书：S0600526080002\n   同比（%）               15.66    (1.20)      2.82      6.15      4.54             zhouyuan@dwzq.com.cn\n   归母净利润（百万元）         86,228    82,320    83,723    90,066    93,658\n                                                                                            研究助理                    林蔚\n                                                                               执业证书：S0600126090009\n   同比（%）               15.38    (4.53)      1.70      7.58      3.99\n                                                                                   linw@dwzq.com.cn\n   EPS-最新摊薄（元/股）       68.98     65.85     66.97     72.05     74.92\n   P/E（现价&最新摊薄）        20.18     21.14     20.78     19.32     18.58   股价走势\n   [Table_Tag]\n   [Table_Summary]                                                                    贵州茅台                  沪深300\n   投资要点\n                                                                          9%\n                                                                          6%\n   ◼ 事件：公司披露 2026 三季报。1-9 月公司实现营业收入 1309.71 亿元（主                          3%\n\n     营口径），同比增长 1.96%；实现归属上市公司股东净利润 644.67 亿元，                             0%\n                                                                         -3%\n     同比下滑 0.25%；其中 Q3 实现营收 402.67 亿元，同比增长 3.08%，归                        -6%\n                                                                         -9%\n     属上市公司股东净利润 199.51 亿元，同比增长 3.78%。Q3 略好于市场                           -12%\n                                                                        -15%\n     预期。                                                                  2025/11/3   2026/3/3   2026/7/1       2026/10/29\n\n\n\n\n   ◼ 直销旺季再度发力，茅台酒和系列酒均有增长，Q3 好于市场预期。1-9\n     月份茅台酒和系列酒营收分别增长 2.18%和 0.47%，其中直销发力是茅                             市场数据\n     台酒保持增长的核心。分产品：26Q3 茅台酒和系列酒收入分别为 352.01                            收盘价(元)                             1,392.05\n     亿元和 50.34 亿元，分别增长 0.79%和 22.14%，茅台酒收入主要依靠塔                                                    1,151.01/1,568.\n     基产品普飞提价和放量，主要路径是直销，系列酒增长主要由茅台 1935                                一年最低/最高价\n                                                                                                                00\n     贡献， 公司调整茅台 1935 价格和费用支持政策后，      今年上半年茅台 1935                     市净率(倍)                                 6.42\n     开瓶动销积极，销售进度超前，Q2 调慢出货节奏后，Q3 旺季顺利再度\n     放量。分渠道：Q3 直销同比增长 40.31%，直销占比由上年同期的 39.8%                          流通 A 股市值(百万元)                    1,740,176.09\n     上升至 26Q3 的 54.2%。单三季度 i 茅台销售收入 182.98 亿元，同比增                      总市值(百万元)                         1,740,176.09\n     长 847.48%，占直销比例为 83.9%，较上半年的 77.5%上升 6.4pct。受非\n     标茅台酒缩减（停止总经销产品合作）和销售模式调整（塔身茅台酒产                                   基础数据\n     品改为代售）的影响，批发渠道收入 Q3 延续下滑，下滑幅度为 21.60%。\n                                                                       每股净资产(元,LF)                                  216.95\n   ◼ 产品结构处承压期，利润率维稳属难得，现金流表现仍旧良性。1-9 月                                 资产负债率(%,LF)                                   11.90\n     综合毛利率为 89.58%，同比下降 1.71pct，归母净利润率 48.37%，同比                       总股本(百万股)                                1,250.08\n     小幅下降 1.0pct；26Q3 综合毛利率 89.64%，同比下降 1.64pct，归母净                    流通 A 股(百万股)                             1,250.08\n     利润率 48.65%，同比提升 0.36pct，主因税金率季度波动，Q3 单季税金\n     率下降了 1.98pct，三项费用率合计同比上升了 0.55pct，其中销售费用\n     率同比上升 0.92pct，全面向 C 转型，市场投入相应变化，短期费用率                             相关研究\n     呈现小幅上升实属合理。今年各季销售回款和销售收入均匹配，Q3 销                                  《贵州茅台(600519)：2026 年中报点\n     售收现 451.01 亿元，同比增 3.19%，和收入高度一致。                                  评：全面向 C 夯实塔基，底色不改向\n   ◼ 直销夯实塔基，代售仍在探索，行稳定能致远。今年公司推进全面向 C                                  好可期》\n     的市场化改革，在价格机制上，构建了“随行就市、相对平稳、供需适                                                                        2026-08-16\n     配、量价平衡”的动态价格调整机制，期间普飞价格成功触底回升，并\n                                                                       《贵州茅台(600519)： 2026 年一季报\n     且实现若干次涨价。我们认为直销扩圈，降低了购买壁垒，扩大了购买\n     人群，夯实了普飞作为塔基产品的长期消费基础。受商政务需求疲弱影                                   点评：锐意改革全面 2C，强势开局确\n     响和销售方式变化，塔身（精品和生肖等）和塔尖产品（主要指陈年茅                                   立企稳》\n     台和高端文创系列）的代售模式短期贡献较小，但塔身和塔尖作为次要\n                                                                                                            2026-04-26\n     矛盾，随着普飞塔基夯实，价格支撑增强，销售操作完善，后续改善向\n     好亦可期。\n   ◼ 盈利预测与投资评级：普飞今年量价齐升得益于性价比改善+购买渠道\n     壁垒破除+务实有效的投放策略，普飞放量也是今年业绩稳健的支撑。\n     27 春节较晚，我们略微调 26-28 年归母净利润预测为 837.2/900.7/936.6\n\n                                                                                                                     1 / 4\n                                                                                          东吴证券研究所\n请务必阅读正文之后的免责声明部分\n"
+        }
+      ],
+      "evidence_level": "Medium",
+      "review_scope": "selected pages only; not full-document review",
+      "verified_quotes": [
+        {
+          "pdf_page": 1,
+          "quote": "非标茅台酒缩减（停止总经销产品合作）",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 1,
+          "quote": "销售模式调整（塔身茅台酒产",
+          "matching": "whitespace-normalized"
+        },
+        {
+          "pdf_page": 1,
+          "quote": "品改为代售）的影响",
+          "matching": "whitespace-normalized"
+        }
+      ],
+      "original_authors": [
+        "苏铖",
+        "周源"
+      ],
+      "research_assistant": "林蔚",
+      "cover_date": "2026-11-02",
+      "index_date": "2026-11-02"
+    },
+    {
+      "document_id": "1224462930",
+      "kind": "comparison",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年半年度报告",
+      "date": "2025-08-13",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224462930.PDF",
+      "sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c",
+      "text_sha256": "18ae78be63a19328273c48b570c262b1ca3c05723029a4d5b57f9f11bc2f633a",
+      "evidence_level": "High",
+      "review_scope": "outside retrieval window; prior-period comparison only",
+      "page_excerpts": [
+        {
+          "pdf_page": 8,
+          "text": "                               贵州茅台酒股份有限公司2025 年半年度报告\n\n\n公司投资支付的现金减少及收回投资收到的现金减少。\n筹资活动产生的现金流量净额变动原因说明：主要是本期公司回购股票。\n2、 本期公司业务类型、利润构成或利润来源发生重大变动的详细说明\n□适用 √不适用\n\n3、 销售情况\n                                                                              单位：万元        币种：人民币\n                    按产品档次                               按销售渠道                             按地区\n      项目\n                 茅台酒     系列酒                         直销     批发代理国内                                国外\n报告期主要业\n        7,558,994.89 1,376,252.94 4,000,959.89 4,934,287.94 8,645,947.06                      289,300.77\n务收入\n注：报告期内，公司通过“i 茅台”数字营销平台实现酒类不含税收入 1,076,043.75 万元。\n\n\n4、 经销商情况\n                                                                                              单位：个\n       区域名称                报告期末经销商数量                         报告期增加数量                   报告期减少数量\n        国内                        2,280                             160                       23\n        国外                          115                              11\n注：本期国内增加的经销商均为系列酒经销商。\n\n\n(二)        非主营业务导致利润重大变化的说明\n□适用 √不适用\n\n(三)        资产、负债情况分析\n√适用 □不适用\n1、 资产及负债状况\n                                                                                              单位：元\n                                                                  上年期\n                                                                           本期期末金\n                                   本期期末数                          末数占\n                                                                           额较上年期\n   项目名称          本期期末数             占总资产的        上年期末数             总资产                      情况说明\n                                                                           末变动比例\n                                   比例（%）                          的比例\n                                                                            （%）\n                                                                  （%）\n货币资金           51,644,880,716.93     17.67    59,295,822,956.89    19.84     -12.90\n拆出资金          126,350,827,693.10     43.23   127,187,293,298.17    42.55      -0.66\n                                                                                      主要是公司控股子公司贵州茅台集\n交易性金融资产                                         248,513,280.00      0.08    -100.00   团财务有限公司债务工具投资到期\n                                                                                      收回\n                                                                                      主要是公司全资子公司贵州茅台酱\n应收票据            2,815,781,163.80      0.96    1,984,407,967.50      0.66     41.90    香酒营销有限公司接受银行承兑汇\n                                                                                      票办理销售业务增加\n                                                                                      主要是公司控股子公司贵州赖茅酒\n应收账款               37,961,242.39      0.01       18,974,192.75      0.01     100.07\n                                                                                      业有限公司应收货款增加\n其他应收款             49,933,643.11       0.02       29,955,673.47      0.01      66.69   主要是市场人员备用金增加\n存货            54,971,731,959.60      18.81   54,343,285,157.47     18.18       1.16\n其他流动资产            73,752,187.69       0.03      160,176,582.69      0.05     -53.96   主要是留抵增值税进项税额减少\n                                                                                      主要是公司控股子公司贵州茅台集\n一年内到期的非流动\n                  718,089,270.04      0.25    1,210,959,803.42      0.41     -40.70   团财务有限公司部分债权投资到期\n资产\n                                                                                      收回\n                                                                                      主要是公司控股子公司贵州茅台集\n债权投资            1,003,884,684.50      0.34    1,515,174,439.92      0.51     -33.74   团财务有限公司购买的部分债券重\n                                                                                      分类到一年内到期的非流动资产\n固定资产          21,758,335,604.37       7.44   21,871,446,747.14      7.32     -0.52\n                                                                                      主要是公司控股子公司贵州茅台酒\n使用权资产             240,681,114.09      0.08      410,594,173.53      0.14     -41.38   销售有限公司部分租赁资产终止租\n                                                                                      赁\n开发支出             143,181,245.11       0.05       98,522,878.42      0.03      45.33   主要是资本化项目投入增加\n合同负债           5,506,895,535.57       1.88    9,592,453,014.66      3.21     -42.59   主要是经销商预付货款减少\n吸收存款及同业存放     20,634,003,830.54       7.06   23,102,858,820.97      7.73     -10.69\n应付职工薪酬           426,682,191.26       0.15    5,824,371,399.07      1.95     -92.67   主要是支付上年年终绩效工资\n应交税费           6,233,623,355.78       2.13    7,717,686,541.38      2.58     -19.23\n                                                 8 / 103\n"
+        }
+      ]
+    },
+    {
+      "document_id": "1224764517",
+      "kind": "comparison",
+      "author": "贵州茅台",
+      "title": "贵州茅台2025年第三季度报告",
+      "date": "2025-10-30",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-10-30/1224764517.PDF",
+      "sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a",
+      "text_sha256": "220b63d3b00e7cdb5bd81152344658e8f75bb3e10ee6975c051729f9b08eb4ed",
+      "evidence_level": "High",
+      "review_scope": "outside retrieval window; prior-period comparison only",
+      "page_excerpts": [
+        {
+          "pdf_page": 3,
+          "text": "                    贵州茅台酒股份有限公司 2025 年第三季度报告\n\n\n\n□适用 √不适用\n\n\n（三） 主要会计数据、财务指标发生变动的情况、原因\n□适用 √不适用\n\n（四） 销售情况\n                                                                              单位：万元 币种：人民币\n                     按产品档次                                 按销售渠道                     按地区分部\n    项目\n                茅台酒             系列酒                   直销             批发           国内            国外\n年初至报告期末的主\n             11,051,350.26    1,788,435.48    5,555,539.39    7,284,246.35    12,450,477.45   389,308.29\n营业务收入\n注：年初至报告期末，公司通过“i 茅台”数字营销平台实现酒类不含税收入 1,269,174.00 万元。\n\n\n（五） 经销商情况\n                                                                                              单位：个\n  区域名称      报告期末经销商数量                  年初至报告期末增加数量                           年初至报告期末减少数量\n   国内                          2,325                                 205                             23\n   国外                           121                                   17\n注：本期国内增加的经销商均为系列酒经销商。\n\n\n二、股东信息\n\n（一） 普通股股东总数和表决权恢复的优先股股东数量及前十名股东持股情况表\n                                                                                              单位：股\n                                       报告期末表决权恢复的优先股股东总\n报告期末普通股股东总数                  238,512\n                                       数（如有）\n              前 10 名股东持股情况（不含通过转融通出借股份）\n                                                                                        质押、标记或\n                                                             持股                          冻结情况\n                                                                      持有有限售条\n     股东名称               股东性质             持股数量                比例\n                                                                       件股份数量             股份\n                                                             (%)                                  数量\n                                                                                         状态\n中国贵州茅台酒厂（集团）\n                        国有法人             679,957,491         54.30                        无\n有限责任公司\n香港中央结算有限公司                   未知              61,040,802       4.87                       未知\n贵州省国有资本运营有限责\n                        国有法人                 56,996,777       4.55                       未知\n任公司\n贵州茅台酒厂（集团）技术\n                        国有法人                 27,849,688       2.22                        无\n开发有限公司\n中国工商银行－上证 50 交易\n                             未知              11,991,571       0.96                       未知\n型开放式指数证券投资基金\n中国工商银行股份有限公司\n                             未知              10,726,040       0.86                       未知\n－华泰柏瑞沪深 300 交易型\n\n                                             3 / 12\n"
+        }
+      ]
+    }
+  ],
+  "calculations": {
+    "q3_derivation": "Q3 = 9M - H1, same reporting basis for each comparative year",
+    "financial_inputs": [
+      {
+        "metric": "revenue",
+        "period": "2026-9M",
+        "value": "130970743649.04",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "revenue",
+        "period": "2026-H1",
+        "value": "90703260964.48",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "revenue",
+        "period": "2025-9M",
+        "value": "128453707655.86",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "revenue",
+        "period": "2025-H1",
+        "value": "89389354416.84",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "cost",
+        "period": "2026-9M",
+        "value": "13645718932.90",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "cost",
+        "period": "2026-H1",
+        "value": "9473762565.88",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "cost",
+        "period": "2025-9M",
+        "value": "11183972073.77",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "cost",
+        "period": "2025-H1",
+        "value": "7777491083.93",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "tax",
+        "period": "2026-9M",
+        "value": "20776015728.76",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "tax",
+        "period": "2026-H1",
+        "value": "14682159453.47",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "tax",
+        "period": "2025-9M",
+        "value": "20645707926.55",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "tax",
+        "period": "2025-H1",
+        "value": "13942384581.48",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "selling",
+        "period": "2026-9M",
+        "value": "4830628836.78",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "selling",
+        "period": "2026-H1",
+        "value": "3206308341.53",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "selling",
+        "period": "2025-9M",
+        "value": "4478672252.48",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "selling",
+        "period": "2025-H1",
+        "value": "3260462949.46",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "management",
+        "period": "2026-9M",
+        "value": "5322622377.82",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "management",
+        "period": "2026-H1",
+        "value": "3635355263.82",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "management",
+        "period": "2025-9M",
+        "value": "5503383668.62",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 8,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "management",
+        "period": "2025-H1",
+        "value": "3694704172.74",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 30,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "pretax",
+        "period": "2026-9M",
+        "value": "89017661971.63",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 9,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "pretax",
+        "period": "2026-H1",
+        "value": "61438419177.29",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 31,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "pretax",
+        "period": "2025-9M",
+        "value": "89403444454.68",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 9,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "pretax",
+        "period": "2025-H1",
+        "value": "62778000766.82",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 31,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "parent_profit",
+        "period": "2026-9M",
+        "value": "64467425981.95",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 9,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "parent_profit",
+        "period": "2026-H1",
+        "value": "44516880421.86",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 31,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "parent_profit",
+        "period": "2025-9M",
+        "value": "64626746712.18",
+        "unit": "CNY",
+        "document_id": "1225649896",
+        "pdf_page": 9,
+        "raw_sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+      },
+      {
+        "metric": "parent_profit",
+        "period": "2025-H1",
+        "value": "45402962298.10",
+        "unit": "CNY",
+        "document_id": "1225475868",
+        "pdf_page": 31,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "moutai_revenue",
+        "period": "2026-9M",
+        "value": "11292545.23",
+        "unit": "CNY-10k",
+        "document_id": "1225649906",
+        "pdf_page": 1,
+        "raw_sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9"
+      },
+      {
+        "metric": "moutai_revenue",
+        "period": "2026-H1",
+        "value": "7772443.79",
+        "unit": "CNY-10k",
+        "document_id": "1225475868",
+        "pdf_page": 8,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "moutai_revenue",
+        "period": "2025-9M",
+        "value": "11051350.26",
+        "unit": "CNY-10k",
+        "document_id": "1224764517",
+        "pdf_page": 3,
+        "raw_sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a"
+      },
+      {
+        "metric": "moutai_revenue",
+        "period": "2025-H1",
+        "value": "7558994.89",
+        "unit": "CNY-10k",
+        "document_id": "1224462930",
+        "pdf_page": 8,
+        "raw_sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c"
+      },
+      {
+        "metric": "series_revenue",
+        "period": "2026-9M",
+        "value": "1796854.27",
+        "unit": "CNY-10k",
+        "document_id": "1225649906",
+        "pdf_page": 1,
+        "raw_sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9"
+      },
+      {
+        "metric": "series_revenue",
+        "period": "2026-H1",
+        "value": "1293418.65",
+        "unit": "CNY-10k",
+        "document_id": "1225475868",
+        "pdf_page": 8,
+        "raw_sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+      },
+      {
+        "metric": "series_revenue",
+        "period": "2025-9M",
+        "value": "1788435.48",
+        "unit": "CNY-10k",
+        "document_id": "1224764517",
+        "pdf_page": 3,
+        "raw_sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a"
+      },
+      {
+        "metric": "series_revenue",
+        "period": "2025-H1",
+        "value": "1376252.94",
+        "unit": "CNY-10k",
+        "document_id": "1224462930",
+        "pdf_page": 8,
+        "raw_sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c"
+      }
+    ],
+    "q3_values_CNY": {
+      "revenue": {
+        "2026": "40267482684.56",
+        "2025": "39064353239.02"
+      },
+      "cost": {
+        "2026": "4171956367.02",
+        "2025": "3406480989.84"
+      },
+      "tax": {
+        "2026": "6093856275.29",
+        "2025": "6703323345.07"
+      },
+      "selling": {
+        "2026": "1624320495.25",
+        "2025": "1218209303.02"
+      },
+      "management": {
+        "2026": "1687267114.00",
+        "2025": "1808679495.88"
+      },
+      "pretax": {
+        "2026": "27579242794.34",
+        "2025": "26625443687.86"
+      },
+      "parent_profit": {
+        "2026": "19950545560.09",
+        "2025": "19223784414.08"
+      }
+    },
+    "q3_tax_rate_pct": {
+      "2025": "17.15969365742445605082481501",
+      "2026": "15.13344234360744754936714706"
+    },
+    "tax_rate_change_pp": "-2.02625131381700850145766795",
+    "tax_decrease_CNY": "609467069.78",
+    "pretax_increase_CNY": "953799106.48",
+    "tax_decrease_share_of_pretax_increase_pct": "63.89889292612582024737146931",
+    "product_q3_revenue_CNY_100m": {
+      "moutai": {
+        "2026": "352.010144",
+        "2025": "349.235537"
+      },
+      "series": {
+        "2026": "50.343562",
+        "2025": "41.218254"
+      }
+    },
+    "series_increment_CNY_100m": "9.125308",
+    "moutai_increment_CNY_100m": "2.774607",
+    "series_share_of_alcohol_revenue_increment_pct": "76.68380824568914988048233958",
+    "dividend_2025_financial_year_CNY": "65033211845.95",
+    "formulas": {
+      "tax_rate": "Q3 tax and surcharges / Q3 operating revenue; excludes interest income from denominator",
+      "tax_contribution": "(2025 Q3 tax - 2026 Q3 tax) / (2026 Q3 consolidated pretax profit - 2025 Q3 consolidated pretax profit); arithmetic bridge, not normalized earnings",
+      "series_contribution": "series Q3 YoY revenue increment / (series + Moutai Q3 YoY revenue increments); alcohol revenue only",
+      "dividend": "2025 interim paid in Dec 2025 + 2025 final paid in Jun 2026; not calendar-2026 cash outflow"
+    }
+  },
+  "live_revalidation": [
+    {
+      "document_id": "1225649896",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649896.PDF",
+      "http_status": 200,
+      "sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.378287+00:00"
+    },
+    {
+      "document_id": "1225475868",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475868.PDF",
+      "http_status": 200,
+      "sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.599424+00:00"
+    },
+    {
+      "document_id": "1225649906",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649906.PDF",
+      "http_status": 200,
+      "sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.184052+00:00"
+    },
+    {
+      "document_id": "1224906220",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-30/1224906220.PDF",
+      "http_status": 200,
+      "sha256": "ae056c65f53fcacd0b2cffd3562af0f2696d32593e25543ba279b59b07e57ee6",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.180356+00:00"
+    },
+    {
+      "document_id": "1224867074",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-12-11/1224867074.PDF",
+      "http_status": 200,
+      "sha256": "ad2f4548490a203bbcada1181341d9dc90b19a64a0ecf14ff1c8e6b9d4b71673",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.929117+00:00"
+    },
+    {
+      "document_id": "1225379934",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-22/1225379934.PDF",
+      "http_status": 200,
+      "sha256": "6b082b6a00db748f23b6dea166b0296cd69d8c10542d352e23d2e2c344ea516e",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:30.970483+00:00"
+    },
+    {
+      "document_id": "1225475863",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475863.PDF",
+      "http_status": 200,
+      "sha256": "cf2d50aa028fcf11ce9eb04746932b7a9be25c3e31d443295f77add844b1121b",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:31.139991+00:00"
+    },
+    {
+      "document_id": "1225366261",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366261.PDF",
+      "http_status": 200,
+      "sha256": "b841c40b9f2196f12f5cad9348a71c3c64d1f0147a0e6dcbf15ca6531bc51535",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:31.354234+00:00"
+    },
+    {
+      "document_id": "1225366264",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366264.PDF",
+      "http_status": 200,
+      "sha256": "6868e886abe37f8c844a9df980775cb667d7caf2935f5ca01ea08bb68e4312c9",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:31.694115+00:00"
+    },
+    {
+      "document_id": "1225649901",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649901.PDF",
+      "http_status": 200,
+      "sha256": "d2c3124a0b337fab2e9332c148cd3565ca6dd19ae33239b378bfaf32ac23a992",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:31.669511+00:00"
+    },
+    {
+      "document_id": "AP202611041831416424",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+      "http_status": 200,
+      "sha256": "f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:32.015065+00:00"
+    },
+    {
+      "document_id": "AP202611021831304660",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+      "http_status": 200,
+      "sha256": "e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:32.103010+00:00"
+    },
+    {
+      "document_id": "1224462930",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224462930.PDF",
+      "http_status": 200,
+      "sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:32.722123+00:00"
+    },
+    {
+      "document_id": "1224764517",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-10-30/1224764517.PDF",
+      "http_status": 200,
+      "sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a",
+      "result": "unchanged PDF",
+      "verified_at": "2026-11-05T03:21:32.631070+00:00"
+    }
+  ],
+  "requests": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "国信对Q3税金率变化与生产包装节奏的解释",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "贵州茅台与其销售渠道",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "attributed broker interpretation; not issuer-confirmed causation or consumer survey",
+      "period_start": "2025-11-05",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2025-11-05",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "东吴对非标产品与代售模式调整的观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "贵州茅台与其销售渠道",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "attributed broker interpretation; not issuer-confirmed causation or consumer survey",
+      "period_start": "2025-11-05",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2025-11-05",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    }
+  ],
+  "accepted_broker_candidates": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "metric": "国信对Q3税金率变化与生产包装节奏的解释",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "国信证券",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf"
+      },
+      "document": {
+        "document_id": "AP202611041831416424",
+        "title": "2026Q3收入同比增长3%，以销定产、全面向C持续推进",
+        "published_at": "2026-11-04",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "贵州茅台与其销售渠道",
+        "measurement_basis": "attributed broker interpretation; not issuer-confirmed causation or consumer survey"
+      },
+      "data_vintage": "2026-11-04",
+      "artifact": {
+        "identity": "sha256:f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+        "sha256": "f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+        "document_id": "AP202611041831416424",
+        "artifact_sha256": "f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+        "binding_sha256": "3a8af044af5a333d05be2342567895c3ae45446b5e1cb15d893d723c9207bdd7"
+      },
+      "scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "国信证券",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "AP202611041831416424:2026-11-04"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:356608492c3bd0dbb390907913da83c56ed2306e9cea23414090332c7c8ffe48",
+      "values": [
+        {
+          "period": "2026-11-04",
+          "value": "我们判断税金及附加率下降主要与生产端节奏有关 / 预计2026Q3产品生产包装进度慢于销售进度",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+          "event_key": "AP202611041831416424:publication:2026-11-04",
+          "evidence_id": "AP202611041831416424",
+          "canonical_value": {
+            "value": "我们判断税金及附加率下降主要与生产端节奏有关 / 预计2026Q3产品生产包装进度慢于销售进度",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "metric": "东吴对非标产品与代售模式调整的观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "东吴证券",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf"
+      },
+      "document": {
+        "document_id": "AP202611021831304660",
+        "title": "公司2026三季报点评：直销夯实塔基，行稳必定致远",
+        "published_at": "2026-11-02",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "贵州茅台与其销售渠道",
+        "measurement_basis": "attributed broker interpretation; not issuer-confirmed causation or consumer survey"
+      },
+      "data_vintage": "2026-11-02",
+      "artifact": {
+        "identity": "sha256:e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+        "sha256": "e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+        "document_id": "AP202611021831304660",
+        "artifact_sha256": "e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+        "binding_sha256": "53b80ce447a3ec5f6d52d84b73108232a2468b754722dc19f24b79e18fedd6c5"
+      },
+      "scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "东吴证券",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "AP202611021831304660:2026-11-02"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:8bf41f1ec58f7b183c04ed292cd8742a4b6c5f2fa7885090d3f25d064c101215",
+      "values": [
+        {
+          "period": "2026-11-02",
+          "value": "非标茅台酒缩减（停止总经销产品合作） / 销售模式调整（塔身茅台酒产 / 品改为代售）的影响",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+          "event_key": "AP202611021831304660:publication:2026-11-02",
+          "evidence_id": "AP202611021831304660",
+          "canonical_value": {
+            "value": "非标茅台酒缩减（停止总经销产品合作） / 销售模式调整（塔身茅台酒产 / 品改为代售）的影响",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    }
+  ],
+  "planner_inventory_receipts": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-last-year-AP202611041831416424",
+          "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+          "request_content_sha256": "79e30db2b253ea10f2a1ea9627b46e9ab30561242363c8b0c51ffb8537643019"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-aktools-broker-pdf",
+            "subject_relation": "bound-local",
+            "document_type": "cached-broker-report",
+            "route_binding_sha256": "262f31d74b44cffcbfb7188ba37425e7bef1f4f6a8f73e06844debce1fe6c85d"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T03:21:33.267173+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "1b0830d2852f269ce88d22c42b11186a62ef3a38d8ce55cbfdfd2533f6207a80"
+      },
+      "planner_input_fingerprint": "7e8591fc4dad4565a00db73c4cf1f458acd63908b3fbc206ae1c0b1eaa56ee92",
+      "route_inventory": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "a5ebd850897ac0f3203f10fda0003eeb86995af79e2eeda500be57a0c17f1679"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-last-year-AP202611021831304660",
+          "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+          "request_content_sha256": "7558bcc0bef0891316fff71ea207ccf2ce17177425f0de436a8141e5b0214cdf"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-aktools-broker-pdf",
+            "subject_relation": "bound-local",
+            "document_type": "cached-broker-report",
+            "route_binding_sha256": "262f31d74b44cffcbfb7188ba37425e7bef1f4f6a8f73e06844debce1fe6c85d"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T03:21:33.267173+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "1b0830d2852f269ce88d22c42b11186a62ef3a38d8ce55cbfdfd2533f6207a80"
+      },
+      "planner_input_fingerprint": "0231f3ec313b4b8ea1758dff6ca42aecc2c381208a8c1cf86a4f1cc8030f88f0",
+      "route_inventory": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "4fcfc67e8716ca6b64058843f9b4c08969bb9ce091f16d1ca3c46a4858d31872"
+    }
+  ],
+  "broker_ledgers": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+          "started_at": "2026-11-05T03:21:33.267173+00:00",
+          "completed_at": "2026-11-05T03:21:33.267173+00:00",
+          "artifact_identity": "sha256:f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+          "lineage_id": "underlying:356608492c3bd0dbb390907913da83c56ed2306e9cea23414090332c7c8ffe48",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "AP202611041831416424",
+        "artifact_identity": "sha256:f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+        "lineage_id": "underlying:356608492c3bd0dbb390907913da83c56ed2306e9cea23414090332c7c8ffe48"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+          "started_at": "2026-11-05T03:21:33.267173+00:00",
+          "completed_at": "2026-11-05T03:21:33.267173+00:00",
+          "artifact_identity": "sha256:e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+          "lineage_id": "underlying:8bf41f1ec58f7b183c04ed292cd8742a4b6c5f2fa7885090d3f25d064c101215",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "AP202611021831304660",
+        "artifact_identity": "sha256:e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+        "lineage_id": "underlying:8bf41f1ec58f7b183c04ed292cd8742a4b6c5f2fa7885090d3f25d064c101215"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        }
+      ],
+      "unattempted_routes": []
+    }
+  ],
+  "official_binding_status": "verified supplemental official source pages only; not a full annual/event manifest or Mode B success",
+  "exclusions": [
+    "诚通2026-09-18报告（索引9月21日）混用茅台酒与飞天、上半年与7月调整；不采纳其口径",
+    "production timing explanation retained as broker judgment, not issuer-confirmed causality"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "manifest_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/manifests/annual-reports-2026-04-18.json",
+  "manifest_sha256": "2ac0a0d3341bd053195ac7911c6f0702f2b02fa0c652de79956a1d7ddacd10b2",
+  "ticker": "002415.SZ",
+  "AS_OF": "2026-04-18",
+  "years": [
+    {
+      "year": 2016,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2016-7f12614fba47584265e5dfb4bc2a99ef6d93ac870f0742e4863125ead9e34c9e.pdf",
+      "pdf_sha256": "7f12614fba47584265e5dfb4bc2a99ef6d93ac870f0742e4863125ead9e34c9e",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2016-7f12614fba47584265e5dfb4bc2a99ef6d93ac870f0742e4863125ead9e34c9e/text.md",
+      "text_sha256": "f71e8bc15e5ffc6fe18ec31198a1b7e07f1bbc48f91c596f73daa27b38740850",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2016-7f12614fba47584265e5dfb4bc2a99ef6d93ac870f0742e4863125ead9e34c9e/metadata.json",
+      "pages": 168,
+      "valid": true
+    },
+    {
+      "year": 2017,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2017-3e88a5e569f0c3d78ee65c7003682057e402b1575da9a65e77489fbb6a121493.pdf",
+      "pdf_sha256": "3e88a5e569f0c3d78ee65c7003682057e402b1575da9a65e77489fbb6a121493",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2017-3e88a5e569f0c3d78ee65c7003682057e402b1575da9a65e77489fbb6a121493/text.md",
+      "text_sha256": "f6cac40e084cced71ad23cfafb24c4857552673354c7538529d33d053377c0dc",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2017-3e88a5e569f0c3d78ee65c7003682057e402b1575da9a65e77489fbb6a121493/metadata.json",
+      "pages": 187,
+      "valid": true
+    },
+    {
+      "year": 2018,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2018-c3eff1f5b6284f5df0f4b1bc59b4389f6d6d2dc0cf54a228a306b50664e532cc.pdf",
+      "pdf_sha256": "c3eff1f5b6284f5df0f4b1bc59b4389f6d6d2dc0cf54a228a306b50664e532cc",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2018-c3eff1f5b6284f5df0f4b1bc59b4389f6d6d2dc0cf54a228a306b50664e532cc/text.md",
+      "text_sha256": "78debc18210a66dbdca661fb6be4905d41529331870d878a8221ad23f3ebf509",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2018-c3eff1f5b6284f5df0f4b1bc59b4389f6d6d2dc0cf54a228a306b50664e532cc/metadata.json",
+      "pages": 201,
+      "valid": true
+    },
+    {
+      "year": 2019,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2019-aaf4d15f798ca0dd7c467eb2937b5722568f36f0b21aa078cce92edc699ffbbd.pdf",
+      "pdf_sha256": "aaf4d15f798ca0dd7c467eb2937b5722568f36f0b21aa078cce92edc699ffbbd",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2019-aaf4d15f798ca0dd7c467eb2937b5722568f36f0b21aa078cce92edc699ffbbd/text.md",
+      "text_sha256": "0e18133c70b9e4e064364f9a6cd037f6c89d825ba515381aa01b18a1df62482f",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2019-aaf4d15f798ca0dd7c467eb2937b5722568f36f0b21aa078cce92edc699ffbbd/metadata.json",
+      "pages": 236,
+      "valid": true
+    },
+    {
+      "year": 2020,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2020-08fe99d75cf299e165d465033035e3507e01cf18a729dbef36075f08d95e0636.pdf",
+      "pdf_sha256": "08fe99d75cf299e165d465033035e3507e01cf18a729dbef36075f08d95e0636",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2020-08fe99d75cf299e165d465033035e3507e01cf18a729dbef36075f08d95e0636/text.md",
+      "text_sha256": "d844e1240ef6aec3c61eb8de744de18a03c5800a2bd91e3da026a1bca130548a",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2020-08fe99d75cf299e165d465033035e3507e01cf18a729dbef36075f08d95e0636/metadata.json",
+      "pages": 256,
+      "valid": true
+    },
+    {
+      "year": 2021,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2021-7dde9ab08dc17b0c8a98fbeb2297f8541606b0122d3218b9d3d2989ff229980a.pdf",
+      "pdf_sha256": "7dde9ab08dc17b0c8a98fbeb2297f8541606b0122d3218b9d3d2989ff229980a",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2021-7dde9ab08dc17b0c8a98fbeb2297f8541606b0122d3218b9d3d2989ff229980a/text.md",
+      "text_sha256": "1298a565c20425ffa91a128a3ef0f5d5440bad2dfb120fc31f82a654bc86abad",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2021-7dde9ab08dc17b0c8a98fbeb2297f8541606b0122d3218b9d3d2989ff229980a/metadata.json",
+      "pages": 278,
+      "valid": true
+    },
+    {
+      "year": 2022,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2022-8ba8401a64c8229d5a434e6031875b4486f69b5850c65e3f2d0fd83ffe7a67ab.pdf",
+      "pdf_sha256": "8ba8401a64c8229d5a434e6031875b4486f69b5850c65e3f2d0fd83ffe7a67ab",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2022-8ba8401a64c8229d5a434e6031875b4486f69b5850c65e3f2d0fd83ffe7a67ab/text.md",
+      "text_sha256": "5618f0fdca62e2a7b25574c0f249caa93035d986ac7092302fae4ce1654dadb9",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2022-8ba8401a64c8229d5a434e6031875b4486f69b5850c65e3f2d0fd83ffe7a67ab/metadata.json",
+      "pages": 259,
+      "valid": true
+    },
+    {
+      "year": 2023,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2023-258cd87781e0ea36f2e4e73521d8e6c4ab740612969102d2c31a6ac279f5f67f.pdf",
+      "pdf_sha256": "258cd87781e0ea36f2e4e73521d8e6c4ab740612969102d2c31a6ac279f5f67f",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2023-258cd87781e0ea36f2e4e73521d8e6c4ab740612969102d2c31a6ac279f5f67f/text.md",
+      "text_sha256": "42215fcc2269290d42a2aa0784824b401872071675dd7595d75aad9ed0490ee3",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2023-258cd87781e0ea36f2e4e73521d8e6c4ab740612969102d2c31a6ac279f5f67f/metadata.json",
+      "pages": 278,
+      "valid": true
+    },
+    {
+      "year": 2024,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2024-f1a8771d81d6ed723c4d1a7d552400cf408cca4752033f5bbd0f88ae2729757b.pdf",
+      "pdf_sha256": "f1a8771d81d6ed723c4d1a7d552400cf408cca4752033f5bbd0f88ae2729757b",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2024-f1a8771d81d6ed723c4d1a7d552400cf408cca4752033f5bbd0f88ae2729757b/text.md",
+      "text_sha256": "ab729a0e8f2c50d6433be3f24dc39ed43f58812e1a427f00fbdea2ce207f900b",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2024-f1a8771d81d6ed723c4d1a7d552400cf408cca4752033f5bbd0f88ae2729757b/metadata.json",
+      "pages": 272,
+      "valid": true
+    },
+    {
+      "year": 2025,
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "text_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "metadata_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/metadata.json",
+      "pages": 263,
+      "valid": true
+    }
+  ]
+}

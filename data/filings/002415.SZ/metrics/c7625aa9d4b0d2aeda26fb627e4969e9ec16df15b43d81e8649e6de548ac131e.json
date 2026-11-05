@@ -1,0 +1,953 @@
+{
+  "ticker": "002415.SZ",
+  "metrics": [
+    {
+      "key": "2025_Q3_revenue",
+      "value": "23939742368.57",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_revenue",
+        "2025_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_revenue",
+      "value": "27221794841.81",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_revenue",
+        "2026_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cost",
+      "value": "13006457995.57",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_cost",
+        "2025_H1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cost",
+      "value": "13869861316.13",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_cost",
+        "2026_H1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_sales_expense",
+      "value": "3139995900.62",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_sales_expense",
+        "2025_H1_sales_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_sales_expense",
+      "value": "3193029420.10",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_sales_expense",
+        "2026_H1_sales_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_management_expense",
+      "value": "841825898.16",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_management_expense",
+        "2025_H1_management_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_management_expense",
+      "value": "876110758.04",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_management_expense",
+        "2026_H1_management_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_research_expense",
+      "value": "3068247936.42",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_research_expense",
+        "2025_H1_research_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_research_expense",
+      "value": "3177303726.55",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_research_expense",
+        "2026_H1_research_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_parent_net_income",
+      "value": "3661774929.80",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_parent_net_income",
+        "2025_H1_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_parent_net_income",
+      "value": "5015680795.76",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_parent_net_income",
+        "2026_H1_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_deducted_parent_net_income",
+      "value": "3481971466.50",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_deducted_parent_net_income",
+        "2025_H1_deducted_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_deducted_parent_net_income",
+      "value": "4983679645.18",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_deducted_parent_net_income",
+        "2026_H1_deducted_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_consolidated_ni",
+      "value": "3972290715.28",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_consolidated_ni",
+        "2025_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_consolidated_ni",
+      "value": "5590883325.57",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_consolidated_ni",
+        "2026_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cfo",
+      "value": "8354008871.16",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_cfo",
+        "2025_H1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cfo",
+      "value": "3982000977.28",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2026_H1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_capex",
+      "value": "1107192509.23",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2025_YTD_capex",
+        "2025_H1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_capex",
+      "value": "737571288.57",
+      "formula": "YTD - H1",
+      "inputs": [
+        "2026_YTD_capex",
+        "2026_H1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_revenue_yoy",
+      "value": "0.126016266398390780474795050",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_revenue",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_parent_net_income_yoy",
+      "value": "0.385471986055917658997251649",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_parent_net_income",
+        "2025_YTD_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_deducted_parent_net_income_yoy",
+      "value": "0.415189861408317434352504423",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_deducted_parent_net_income",
+        "2025_YTD_deducted_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_cfo_yoy",
+      "value": "-0.4733593277480658001025554199",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2025_YTD_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_capex_yoy",
+      "value": "-0.2763866924733018409104995308",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_capex",
+        "2025_YTD_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_gross_margin",
+      "value": "0.4536622724755498118222567254",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_YTD_cost",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_net_margin",
+      "value": "0.1417189628402158818616014121",
+      "formula": "parent NI / revenue",
+      "inputs": [
+        "2025_YTD_parent_net_income",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_cash_conversion",
+      "value": "1.335804494749559486014258594",
+      "formula": "CFO / consolidated NI",
+      "inputs": [
+        "2025_YTD_cfo",
+        "2025_YTD_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_simple_fcf",
+      "value": "10612074576.50",
+      "formula": "CFO - all cash capex",
+      "inputs": [
+        "2025_YTD_cfo",
+        "2025_YTD_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_gross_margin",
+      "value": "0.4962955574305392666281344804",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_YTD_cost",
+        "2026_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_net_margin",
+      "value": "0.1743737268876627453621553095",
+      "formula": "parent NI / revenue",
+      "inputs": [
+        "2026_YTD_parent_net_income",
+        "2026_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_cash_conversion",
+      "value": "0.4902452921987878913931821338",
+      "formula": "CFO / consolidated NI",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2026_YTD_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_simple_fcf",
+      "value": "4981098583.16",
+      "formula": "CFO - all cash capex",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2026_YTD_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_revenue_yoy",
+      "value": "0.137096399063547977966852014",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_revenue",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_parent_net_income_yoy",
+      "value": "0.369740328642740493536709013",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_parent_net_income",
+        "2025_Q3_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_deducted_parent_net_income_yoy",
+      "value": "0.431281012244906056871617963",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_deducted_parent_net_income",
+        "2025_Q3_deducted_parent_net_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cfo_yoy",
+      "value": "-0.5233425007451449712353048810",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_cfo",
+        "2025_Q3_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_capex_yoy",
+      "value": "-0.3338364535333192140368216497",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_capex",
+        "2025_Q3_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_gross_margin",
+      "value": "0.4567001684760854525821199218",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_Q3_cost",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_net_margin",
+      "value": "0.1529579923386088606869252065",
+      "formula": "parent NI / revenue",
+      "inputs": [
+        "2025_Q3_parent_net_income",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cash_conversion",
+      "value": "2.103070865137105192403222821",
+      "formula": "CFO / consolidated NI",
+      "inputs": [
+        "2025_Q3_cfo",
+        "2025_Q3_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_simple_fcf",
+      "value": "7246816361.93",
+      "formula": "CFO - all cash capex",
+      "inputs": [
+        "2025_Q3_cfo",
+        "2025_Q3_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_gross_margin",
+      "value": "0.4904868912307260165535942269",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_Q3_cost",
+        "2026_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_net_margin",
+      "value": "0.1842523913249249648559134396",
+      "formula": "parent NI / revenue",
+      "inputs": [
+        "2026_Q3_parent_net_income",
+        "2026_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cash_conversion",
+      "value": "0.7122310993449372820480716702",
+      "formula": "CFO / consolidated NI",
+      "inputs": [
+        "2026_Q3_cfo",
+        "2026_Q3_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_simple_fcf",
+      "value": "3244429688.71",
+      "formula": "CFO - all cash capex",
+      "inputs": [
+        "2026_Q3_cfo",
+        "2026_Q3_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_gross_profit",
+      "value": "29831825022.40",
+      "formula": "revenue - cost",
+      "inputs": [
+        "2025_YTD_revenue",
+        "2025_YTD_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_three_expenses",
+      "value": "19814858575.70",
+      "formula": "sum sales, management, research",
+      "inputs": [
+        "2025_YTD_sales_expense",
+        "2025_YTD_management_expense",
+        "2025_YTD_research_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_gross_profit",
+      "value": "36747873366.40",
+      "formula": "revenue - cost",
+      "inputs": [
+        "2026_YTD_revenue",
+        "2026_YTD_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_three_expenses",
+      "value": "20730888901.88",
+      "formula": "sum sales, management, research",
+      "inputs": [
+        "2026_YTD_sales_expense",
+        "2026_YTD_management_expense",
+        "2026_YTD_research_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_inventory_year_start_change",
+      "value": "12861849086.66",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2025_end_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_inventory_year_start_growth",
+      "value": "0.628259441824859279160315217",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2025_end_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_inventory_since_H1_change",
+      "value": "3845895022.87",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2026_H1_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_inventory_since_H1_growth",
+      "value": "0.130421721735998662228080802",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2026_H1_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_receivables_year_start_change",
+      "value": "-1446048231.38",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_receivables",
+        "2025_end_receivables"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_receivables_year_start_growth",
+      "value": "-0.0485049594334764075714127203",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_receivables",
+        "2025_end_receivables"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_receivables_since_H1_change",
+      "value": "582195965.32",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_receivables",
+        "2026_H1_receivables"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_receivables_since_H1_growth",
+      "value": "0.020954259349015267110111615",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_receivables",
+        "2026_H1_receivables"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cash_year_start_change",
+      "value": "-9424795671.06",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_cash",
+        "2025_end_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cash_year_start_growth",
+      "value": "-0.2026474814925359665919320548",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_cash",
+        "2025_end_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cash_since_H1_change",
+      "value": "-767833975.49",
+      "formula": "end - base",
+      "inputs": [
+        "2026_Q3_cash",
+        "2026_H1_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cash_since_H1_growth",
+      "value": "-0.0202855018748253051101764324",
+      "formula": "end / base - 1",
+      "inputs": [
+        "2026_Q3_cash",
+        "2026_H1_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_inventory_asset_ratio",
+      "value": "0.2357578162320687174712285992",
+      "formula": "inventory / assets",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2026_Q3_assets"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_sales_cash",
+      "value": "5207114148.19",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_sales_cash",
+        "2025_YTD_sales_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_tax_refund",
+      "value": "842285031.06",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_tax_refund",
+        "2025_YTD_tax_refund"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_other_cash_in",
+      "value": "-81936965.17",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_other_cash_in",
+        "2025_YTD_other_cash_in"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_purchase_cash",
+      "value": "-9967173302.39",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_purchase_cash",
+        "2025_YTD_purchase_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_staff_cash",
+      "value": "-850828954.64",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_staff_cash",
+        "2025_YTD_staff_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_tax_cash",
+      "value": "-1355043704.83",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_tax_cash",
+        "2025_YTD_tax_cash"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_bridge_other_cash_out",
+      "value": "-278032459.41",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_other_cash_out",
+        "2025_YTD_other_cash_out"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_gross_profit",
+      "value": "6916048344.00",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_gross_profit",
+        "2025_YTD_gross_profit"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_three_expenses",
+      "value": "-916030326.18",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_three_expenses",
+        "2025_YTD_three_expenses"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_tax_surcharge",
+      "value": "-70198046.60",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_tax_surcharge",
+        "2025_YTD_tax_surcharge"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_financial_expense",
+      "value": "-1145234292.39",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_financial_expense",
+        "2025_YTD_financial_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_other_income",
+      "value": "-9662980.21",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_other_income",
+        "2025_YTD_other_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_investment_income",
+      "value": "630503343.12",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_investment_income",
+        "2025_YTD_investment_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_fair_value",
+      "value": "70815566.72",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_fair_value",
+        "2025_YTD_fair_value"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_credit_loss",
+      "value": "-225439635.48",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_credit_loss",
+        "2025_YTD_credit_loss"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_asset_loss",
+      "value": "-18319225.12",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_asset_loss",
+        "2025_YTD_asset_loss"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_asset_disposal",
+      "value": "-18805647.13",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_asset_disposal",
+        "2025_YTD_asset_disposal"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_nonoperating_income",
+      "value": "18683863.52",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_nonoperating_income",
+        "2025_YTD_nonoperating_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_nonoperating_expense",
+      "value": "-15778577.82",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_nonoperating_expense",
+        "2025_YTD_nonoperating_expense"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_income_tax",
+      "value": "-756465853.09",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_income_tax",
+        "2025_YTD_income_tax"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "profit_bridge_minority_income",
+      "value": "-867855015.95",
+      "formula": "direction * (current - prior)",
+      "inputs": [
+        "2026_YTD_minority_income",
+        "2025_YTD_minority_income"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "inventory_stress_0.05",
+      "value": "1666702147.2730",
+      "formula": "additional pre-tax book loss = net inventory * assumed loss rate",
+      "inputs": [
+        "2026_Q3_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "inventory_stress_0.10",
+      "value": "3333404294.5460",
+      "formula": "additional pre-tax book loss = net inventory * assumed loss rate",
+      "inputs": [
+        "2026_Q3_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "inventory_stress_0.20",
+      "value": "6666808589.0920",
+      "formula": "additional pre-tax book loss = net inventory * assumed loss rate",
+      "inputs": [
+        "2026_Q3_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "cash_dividends_2026",
+      "value": "11914333015.00",
+      "formula": "annual + interim implemented distribution",
+      "inputs": [
+        "annual_dividend",
+        "interim_dividend"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_da_base",
+      "value": "2054402897.59",
+      "formula": "sum all four disclosed depreciation and amortization amounts",
+      "inputs": [
+        "depreciation",
+        "rou_amortization",
+        "intangible_amortization",
+        "deferred_amortization"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_0",
+      "value": "2054402897.59",
+      "formula": "D&A * (1 + assumed cost change)",
+      "inputs": [
+        "maintenance_da_base"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_cash_0",
+      "value": "23285008185.51",
+      "formula": "2025 CFO - estimated maintenance; not normalized cash",
+      "inputs": [
+        "2025_cfo",
+        "maintenance_0"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_0.02",
+      "value": "2095490955.5418",
+      "formula": "D&A * (1 + assumed cost change)",
+      "inputs": [
+        "maintenance_da_base"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_cash_0.02",
+      "value": "23243920127.5582",
+      "formula": "2025 CFO - estimated maintenance; not normalized cash",
+      "inputs": [
+        "2025_cfo",
+        "maintenance_0.02"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_0.05",
+      "value": "2157123042.4695",
+      "formula": "D&A * (1 + assumed cost change)",
+      "inputs": [
+        "maintenance_da_base"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "maintenance_cash_0.05",
+      "value": "23182288040.6305",
+      "formula": "2025 CFO - estimated maintenance; not normalized cash",
+      "inputs": [
+        "2025_cfo",
+        "maintenance_0.05"
+      ],
+      "evidence_level": "High"
+    }
+  ]
+}

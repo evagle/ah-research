@@ -1,0 +1,1008 @@
+{
+  "requests": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "revenue-rank",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "private-deployment enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "rank"
+      ],
+      "definition_constraints": [
+        "private-deployment enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "market-size",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "private-deployment enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB 100 million"
+      ],
+      "definition_constraints": [
+        "private-deployment enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "revenue-rank-upper-bound",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "public-cloud enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "rank"
+      ],
+      "definition_constraints": [
+        "public-cloud enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "market-size",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "public-cloud enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB 100 million"
+      ],
+      "definition_constraints": [
+        "public-cloud enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "WEIXIN-GMV25-DEDUP",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "retail-gmv",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "All Weixin retail commerce, deduplicated by order",
+      "measurement_basis": "Retail orders, excluding non-retail services and repeat channel attribution",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB"
+      ],
+      "definition_constraints": [
+        "All Weixin retail commerce, deduplicated by order",
+        "Retail orders, excluding non-retail services and repeat channel attribution"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "BUDDY-PAID-RETENTION26",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "paid-retention",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "WorkBuddy and CodeBuddy paid subscriber cohorts",
+      "measurement_basis": "Paid cohort retention with stated observation window",
+      "period_start": "2026-Q2",
+      "period_end": "2026-Q2",
+      "frequency": "quarterly",
+      "continuity_required": false,
+      "required_latest_period": "2026-Q2",
+      "accepted_units": [
+        "percent"
+      ],
+      "definition_constraints": [
+        "WorkBuddy and CodeBuddy paid subscriber cohorts",
+        "Paid cohort retention with stated observation window"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "TENCENT-AI-UNIT-COST26",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "task-cost",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "Tencent production AI agents",
+      "measurement_basis": "Actual cost per successfully completed task, not API sale price",
+      "period_start": "2026-Q2",
+      "period_end": "2026-Q2",
+      "frequency": "quarterly",
+      "continuity_required": false,
+      "required_latest_period": "2026-Q2",
+      "accepted_units": [
+        "RMB per task"
+      ],
+      "definition_constraints": [
+        "Tencent production AI agents",
+        "Actual cost per successfully completed task, not API sale price"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    }
+  ],
+  "accepted_candidates": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "metric": "revenue-rank",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 2,
+          "unit": "rank",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+          "canonical_value": {
+            "value": 2,
+            "unit": "rank",
+            "definition_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "rank",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "private-deployment enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "metric": "market-size",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 17.5,
+          "unit": "RMB 100 million",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+          "canonical_value": {
+            "value": 17.5,
+            "unit": "RMB 100 million",
+            "definition_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "RMB 100 million",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "private-deployment enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "metric": "revenue-rank-upper-bound",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 3,
+          "unit": "rank",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+          "canonical_value": {
+            "value": 3,
+            "unit": "rank",
+            "definition_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "rank",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "public-cloud enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "metric": "market-size",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 2.5,
+          "unit": "RMB 100 million",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+          "canonical_value": {
+            "value": 2.5,
+            "unit": "RMB 100 million",
+            "definition_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "RMB 100 million",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "public-cloud enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    }
+  ],
+  "unresolved_claims": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "WEIXIN-GMV25-DEDUP",
+      "request_scope_fingerprint": "66b47b9cec36ab3f9054259babdec438f9edcf5184c042d48c10ff33e327f8c1",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "All Weixin retail commerce, deduplicated by order",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "BUDDY-PAID-RETENTION26",
+      "request_scope_fingerprint": "75f481ae15489ccac98e395d3c863e83f5ff74ce77ed52faba50a88034d7a60c",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "WorkBuddy and CodeBuddy paid subscriber cohorts",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "TENCENT-AI-UNIT-COST26",
+      "request_scope_fingerprint": "66a2d2a04cb9c83076f462e0b68740dccfb75fc63a35bc436a51114ab999fcc9",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "Tencent production AI agents",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    }
+  ],
+  "ledger_path": "/Users/brian_huang/repos/ah-research/data/filings/00700.HK/research/market-ai-supplement-2026-11-05-ledger.json",
+  "ledger_sha256": "9ea2eec8e76cd385e1781e37abc6940dbf842f131f01383320b200358f9e10d9",
+  "status": "partial",
+  "industry_bundle": {
+    "status": "publishable-with-gaps",
+    "market": "China enterprise agent development platforms",
+    "period": "2025",
+    "missing_coverage": [
+      "vendor percentages",
+      "2021-2024 history",
+      "2026 partial-period revenue shares"
+    ],
+    "coverage_note": "Accepted single-year snapshots only; not an exhaustive market-series investigation"
+  }
+}

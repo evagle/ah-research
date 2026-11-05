@@ -1,0 +1,19 @@
+{
+  "profile_md_sha256": "0b977c45dfe22e637a0be70e7f541c70726cb826e2ada6af1a1f4b77d33670c2",
+  "profile_html_sha256": "6291cf0758a9a98192c357807ab1dce30f921b7d1a9927d56055acfb07c97d88",
+  "tables": 30,
+  "toc_links": 87,
+  "checked_topic_cells": 247,
+  "all_numeric_topic_cells_retained": true,
+  "original_profile_unchanged": true,
+  "desktop": {
+    "width": 1440,
+    "scrollWidth": 1440
+  },
+  "mobile": {
+    "width": 390,
+    "scrollWidth": 390
+  },
+  "visual_inspection": "desktop top/topic and mobile topic verified",
+  "status": "PASS"
+}

@@ -1,0 +1,46 @@
+{
+  "verified_at": "2026-11-05T03:30:34.233948+00:00",
+  "profile_md": "/Users/brian_huang/repos/ah-research/profiles/600519.SH-2026-11-05.md",
+  "profile_md_sha256": "d12c73267df870ef55ad999bad8a8062269bac037562b09160f3b925315f79cb",
+  "profile_html_sha256": "d062a88ff7b0cd6169c51842aa64cd5325f158363d6ca77d6f9c992ed4c6f168",
+  "scoped_status": "completed latest-year useful-facts supplement; inherited full-profile gaps remain",
+  "checks": [
+    "Decimal calculations match published rounding",
+    "all financial inputs matched original page text",
+    "14 original PDFs unchanged on live retrieval",
+    "155 catalog entries within requested date window",
+    "Parts 1–5 unchanged byte-for-byte as source substrings",
+    "2026-11-04 snapshots unchanged",
+    "CAS baseline and three source guards passed"
+  ],
+  "html": {
+    "tocLinks": 91,
+    "newEvidenceLinks": [
+      "https://static.cninfo.com.cn/finalpage/2025-12-11/1224867074.PDF",
+      "https://static.cninfo.com.cn/finalpage/2025-12-30/1224906220.PDF",
+      "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366261.PDF",
+      "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366264.PDF",
+      "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475863.PDF",
+      "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649901.PDF",
+      "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+      "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf"
+    ],
+    "desktop": {
+      "width": 1440,
+      "scrollWidth": 1440
+    },
+    "mobile": {
+      "width": 390,
+      "scrollWidth": 390
+    },
+    "unchangedTables": 32,
+    "intentionallyRevisedTables": 1,
+    "originalTables": 33,
+    "totalTables": 36
+  },
+  "evidence_guards": {
+    "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/last-year-facts-2026-11-05-evidence.json": "faafa2971fbe7cf6019eb9765a5bf2dbd533e6978179c93aab27b46e802689ee",
+    "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/last-year-facts-2026-11-05-ledger.json": "daf858a7a90c589c271ed516198264604c7330c120bb5b9e240406aec30d4a05",
+    "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/last-year-facts-2026-11-05-handoff.json": "681f9b2bb112cc161fdd9ffce0d8e57b16cd492c4db9c20e59669b1687297694"
+  }
+}

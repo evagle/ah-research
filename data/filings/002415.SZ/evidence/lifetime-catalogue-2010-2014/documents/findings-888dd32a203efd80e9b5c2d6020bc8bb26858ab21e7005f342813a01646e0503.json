@@ -1,0 +1,453 @@
+{
+  "status": "original_documents_read_not_event_manifest_bound",
+  "ticker": "002415.SZ",
+  "AS_OF": "2026-04-18",
+  "catalogue": {
+    "catalogue_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/catalogue-4c8b64ddc16875a64aae1fbee3a6a7037a18d11eeeab56105310713513811e89.json",
+    "sha256": "4c8b64ddc16875a64aae1fbee3a6a7037a18d11eeeab56105310713513811e89",
+    "total": 408,
+    "keyword_lead_count": 39
+  },
+  "document_index": {
+    "index_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/index-42bbb0a24e6b9d64a03361bf0fbd98c45e536f91e8b33ca8e85d00f4768eee43.json",
+    "sha256": "42bbb0a24e6b9d64a03361bf0fbd98c45e536f91e8b33ca8e85d00f4768eee43"
+  },
+  "events": [
+    {
+      "event_id": "governance-review-2010",
+      "source_ids": [
+        "58297106",
+        "58913842"
+      ],
+      "occurrence_date": "2010-12-20",
+      "publication_date": "2011-01-18",
+      "classification": "公司治理专项检查及整改意见；文书未称行政处罚或生效纪律处分",
+      "findings": "浙江证监局浙证监上市字[2010]226号指出缺少突发事件处理、年报重大差错追责、审计委员会年报工作、内幕知情人管理及大股东问询等制度，并要求培训及登记备案。2011-005整改报告称相关制度已获董事会审议通过。",
+      "limitations": "已取得发行人整改报告，未独立取得浙江证监局226号原文。不能把公司自评整改效果等同于监管后续验收。",
+      "draft_veto_from_this_evidence": false,
+      "evidence_level": "高（原始公告内容）；法律定性仅按文书用词，不作处罚不存在的全历史结论",
+      "sources": [
+        {
+          "id": "58297106",
+          "title": "公司治理专项活动自查报告和整改计划",
+          "url": "https://static.cninfo.com.cn/finalpage/2010-08-13/58297106.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.pdf",
+          "sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.txt",
+          "text_sha256": "36982fe72177677cd877610e4b9c00bed23fb9e7335829826b2b26760ffd0d39",
+          "page_count": 3
+        },
+        {
+          "id": "58913842",
+          "title": "公司治理专项活动整改报告",
+          "url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596",
+          "page_count": 5
+        }
+      ],
+      "citations": [
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.pdf",
+          "artifact_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "page": 1,
+          "quote": "证券代码：002415   证券简称：海康威视   公告编号：2010-015 号\n\n\n\n          杭州海康威视数字技术股份有限公司\n\n          公司治理专项活动自查报告和整改计划\n\n\n\n  本公司及全体董事、监事、高级管理人员保证公告内容真实、准确和完整，\n没有虚假记载、误导性陈述或者重大遗漏。\n\n   根据中国证监会证监公司字[2007]28号《关于开展加强上市公司治理专项\n活动有关事项的通知》及浙江证监局浙证监上市字[2010]号61号《关于开展公司\n治理专项活动的通知》，我公司针对通知内容，逐项核查自身情况，做出如下自\n查报告及整改计划。\n\n一、特别提示：公司治理方面存在的有待改进的问题\n  尽快制订公司《投资者关系管理制度》。\n\n二、公司治理概况\n  1、《公司章程》的不断完善\n  根据《上市公司章程指引》及深圳证券交易所的出台的一系列规定，制定了\n公司首发上市后的《公司章程》，并提交公司2009年度股东大会审议。\n  2、股东与股东大会\n  公司上市以来，为能确保所有股东，特别是中小股东享有平等地位，确保所\n有股东能够充分行使自己的权利，严格按照《股东大会议事规则》，召集、召开\n股东大会，每次股东大会均聘请有证券从业资格的律师出席并出具法律意见。公\n司的重大关联交易等事项，严格按照审批权限要求提交股东大会审议，涉及关联\n交易公平合理，未损害上市公司和股东利益，无内幕交易行为，真正做到了“公\n平、公正、公开”。充分保证中小股东的权益。股东大会有会议记录，记载股东\n大会的基本情况，包括出席人数、代表股份、会议议程、发言要点、表决结果、\n股东咨询等，并由与会董事和记录人员签名，资料安全保存。\n  3、董事与董事会\n  公司严格按照《公司章程》规定的董事选聘程序选举董事，公司董事和独立\n董事的人数、人员构成符合法律、法规的要求。公司董事会进一步完善了《董事\n会议事规则》，各位董事和独立董事能够勤勉尽责地履行职务，出席董事会、股\n东会，发表独立董事意见。积极参加有关培训，熟悉有关法律法规，了解作为董\n事的权利、义务和责任，在维护公司整体利益的同时，注重保障中小股东的利益，\n确保董事会的高效运作和科学决策。\n   董事会的召集、召开、通知、授权委托符合相关法律、法规的规定。会议记\n录完整，会议资料保存安全。董事会决议进行及时充分的公告。董事会的决策均\n在《公司章程》规定的权限范围之内。\n   此外，公司还设立了董事会四个专门委员会，即战略委员会、审计委员会、",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2010-08-13/58297106.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.txt",
+          "extracted_text_sha256": "36982fe72177677cd877610e4b9c00bed23fb9e7335829826b2b26760ffd0d39"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.pdf",
+          "artifact_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "page": 2,
+          "quote": "提名委员会、薪酬与考核委员会，制定了四个委员会的工作细则。四个委员会成\n员均由董事会成员组成。对于涉及到四个委员会讨论的工作事项，在相关议案提\n交董事会前，由四个委员会先行讨论，并形成意见之后，再提交董事会审议。\n  董事会秘书能够充分及时地筹备股东大会、董事会会议资料，确保股东大会、\n董事会的顺利召开，做好会议记录工作，并将会议材料完整地保存，以备查询。\n作为公司高级管理人员及投资者关系管理的主要负责人，董事会秘书注重投资者\n关系管理工作，及时全面地掌握公司信息，做好与交易所、证监局、中介机构、\n投资者的联系工作，保障了公司与监管机构和公众投资者的充分沟通。\n  4、监事与监事会\n  公司监事会包括监事成员3名，其中1名为职工代表大会选出的职工监事。自\n监事会成立以来，先后共召开了六次会议，会议的召集、召开程序符合《公司章\n程》 、《监事会议事规则》、《深圳证券交易所股票上市规则》的有关规定。\n公司监事在日常工作中勤勉尽职地履行监督职责，对公司治理等事项进行监督，\n对公司财务及董事、高级管理人员履行职责的合法合规性进行监督。\n   5、公司经营层\n  公司高级管理人员按照公司章程的规定由董事会选聘，并经独立董事认可。\n公司制定了《总经理工作细则》，经营班子按照公司章程规定的审批权限履行职\n责，公司经营层办公会议每周至少召开一次，职责清晰，勤勉尽责。\n  总经理身兼公司董事一职，参加了公司历次股东大会、董事会，能够充分领\n会董事会的战略意图，并在日常经营中贯彻执行，有效推动了公司经营管理迈上\n新台阶。\n  6、信息披露管理\n  公司重视信息披露和投资者关系管理工作，制定并严格执行《信息披露管理\n制度》，明确信息披露和投资者关系管理的责任人，规定了重大事项相关的报告、\n传递、审核和披露程序，真实、准确、完整、及时地进行信息披露，公平对待所\n有股东。主动加强与监管部门的联系与沟通，自觉接受监管部门的监督，提高公\n司运作透明度，保障全体股东的合法权益。\n\n三、公司治理存在的问题及原因\n  为贯彻证券市场公开、公平、公正原则，规范公司接待和推广的行为和管理，\n加强公司的推广以及与公众投资者的交流和沟通，根据《公司法》、《证券法》、\n中国证监会《上市公司信息披露管理办法》、《深圳证券交易所股票上市规则》\n及《深圳证券交易所上市公司公平信息披露指引》等法律、法规和规范性文件，\n并结合公司具体情况，有必要制定《投资者关系管理制度》。\n\n四、整改措施、整改时间及责任人\n  针对上条所列有待改进的工作，本公司将加紧完善公司治理的基本制度建\n设，整改措施、整改时间和责任人如下：\n  制订公司《投资者关系管理制度》于2010年10月31日前提交公司董事会审议\n通过，责任人为董事会秘书。\n\n五、有特色的公司治理做法\n  1、根据中国证监会、深圳证券交易所下发的各项法规文件，及时出台、修\n订公司各项制度。",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2010-08-13/58297106.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.txt",
+          "extracted_text_sha256": "36982fe72177677cd877610e4b9c00bed23fb9e7335829826b2b26760ffd0d39"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.pdf",
+          "artifact_sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+          "page": 3,
+          "quote": "2、当证券监管的相关法律法规出台时，公司将相关的文件资料及时发送到\n各股东单位、各位董事、监事和高管人员，以便相关人员及时了解与学习。必要\n时，由董事会秘书组织大家学习讨论。\n  3、做好投资者关系管理工作，投资者可通过公司网站、电话咨询等与公司\n保持沟通，了解公司相关信息，公司将认真听取投资者对公司日常经营管理、治\n理结构方面的建议和意见，努力提升公司质量，不断将公司做大做强。\n\n六、其它需要说明的事项\n  无\n\n  综上所述，公司依据《公司法》、《证券法》和有关法律法规要求以及《公\n司章程》的规定建立了完善的治理结构并按要求规范运作。股东会、董事会、监\n事会和经营层各司其职、协调运转、均衡运行。\n  公司已建立了比较完善的内部控制制度。\n  公司在信息披露方面遵循了真实、准确、完整、及时、公平的原则。\n  以上为我公司关于公司治理情况的自查报告及整改计划，欢迎监管部门和广\n大投资者对我公司治理情况进行分析评议并提出整改建议。为了使广大投资者和\n社会公众更好地参与公司治理情况的公众评议，提出各自的意见和建议，公司设\n立了专门的电话、传真和邮箱，具体如下：\n  联系人：刘翔\n  联系电话：0571-89710492\n  传真：0571-89986895\n  电子邮箱：hikvision@hikvision.com\n\n\n\n\n                  杭州海康威视数字技术股份有限公司\n                        董 事 会\n                      2010 年 8 月 12 日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2010-08-13/58297106.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.txt",
+          "extracted_text_sha256": "36982fe72177677cd877610e4b9c00bed23fb9e7335829826b2b26760ffd0d39"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "artifact_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "page": 1,
+          "quote": "证券代码：002415   证券简称：海康威视      公告编号：2011-005 号\n\n\n\n          杭州海康威视数字技术股份有限公司\n\n              公司治理专项活动整改报告\n\n\n\n  本公司及全体董事、监事、高级管理人员保证公告内容真实、准确和完整，没有虚假\n记载、误导性陈述或者重大遗漏。\n\n\n\n  根据中国证监会《关于开展加强上市公司治理专项活动有关事项的通知》\n                                 （证\n监公司字[2007]28 号）、《关于 2009 年上市公司治理相关工作的通知》（上市\n部函[2009]88）及浙江证监局《关于开展公司治理专项活动的通知》（浙证监上\n市字[2010]号 61 号），杭州海康威视数字技术股份有限公司（以下简称“公司”）\n针对通知内容，逐项核查自身情况，认真深入地开展了公司治理专项活动。2010\n年 7-8 月期间，公司认真全面自查了公司治理方面存在的问题与不足，制订了《公\n司治理专项活动的自查报告及整改计划》，该计划经董事会审议，并报浙江证监\n局备案；2010 年 8-12 月期间，通过专门的交流平台听取了投资者和社会公众对\n公司治理情况和整改计划的意见和建议；2010 年 12 日，公司接受了浙江证监局\n的专项检查。现将此次公司治理专项活动中自查发现的问题、公众评议的情况以\n及根据浙江证监局下发的《关于杭州海康威视数字技术股份有限公司治理情况综\n合评价结果和整改意见的通知》（浙证监上市字[2010]226 号）中所关注问题的\n整改情况报告如下：\n\n\n一、公司治理专项活动期间完成的主要工作\n  1、2010 年 7 月，公司启动了公司治理专项活动，成立了以董事长为组长、\n副董事长、董事会秘书和财务负责人为成员的领导小组，研究布置公司治理专项\n活动及工作计划，认真组织董事、监事、高级管理人员学习中国证监会、浙江证\n监局相关文件。\n  2、2010 年 8 月，公司对照证监会《关于开展加强上市公司治理专项活动有",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "extracted_text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "artifact_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "page": 2,
+          "quote": "关事项的通知》之附件《加强上市公司治理专项活动自查事项》进行了自查，并\n形成了《公司治理专项活动的自查报告及整改计划》。\n  3、2010 年 8 月 12 日，公司一届董事会十六次会议审议通过了《公司治理\n专项活动自查报告及整改计划》，并报浙江证监局备案。\n  4、2010 年 8 月 13 日，公司在巨潮资讯网（www.cninfo.com.cn）公告了《公\n司治理专项活动自查报告及整改计划》相关内容，听取投资者和社会公众意见及\n建议。\n  5、根据《公司法》、证监会《上市公司与投资者关系工作指引》、深交所\n《股票上市规则》、《中小企业板上市公司规范运作指引》、《公司章程》及其\n他有关法律、法规、规章的规定，结合公司实际情况，制定了 《公司投资者关\n系管理制度》，并提请 2010 年 10 月 25 日召开的公司一届董事会十七次会议审\n议通过。\n   6、2010 年 9 月 20 日，公司邀请保荐机构招商证券股份有限公司对公司董\n事、监事及其他高级管理人员进行了一场主题为《中小板企业上市规范运作与信\n息披露》的专题培训，向公司董监高进行了公司三会治理、规范运作及信息披露\n的基本理念的宣讲，希望通过培训将公司治理运作的理念与意识贯穿到董监高的\n日常工作之中。\n\n\n二、公司治理专项活动\n（一）自查阶段\n  公司相关部门对照《公司法》、《证券法》等有关法律法规，以及《公司章\n程》等内部规章制度，依据证监会《关于开展加强上市公司治理专项活动有关事\n项的通知》（证监公司字[2007]28号）中“加强上市公司治理专项活动自查事项”\n清单，对各自范围内的公司治理事项进行了自查，公司董事会办公室汇总全部自\n查结果的基础上，形成了《公司治理专项活动自查报告及整改计划》，提交公司\n一届董事会十六次会议审议通过后，并在巨潮资讯网（www.cninfo.com.cn）公\n开对外披露。\n（二）公众评议阶段\n  自2010年8月13日起，公司对治理专项活动自查报告进行公告后接受公众评",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "extracted_text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "artifact_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "page": 3,
+          "quote": "议。\n（三）整改提高阶段\n  1、经过两个月的工作，公司对专项活动中自查所发现的问题进行了整改，\n建立并完善投资者关系管理制度。\n  为贯彻证券市场公开、公平、公正原则，规范公司接待和推广的行为和管理，\n加强公司的推广以及与投资者及潜在投资者的交流和沟通，根据《公司法》、证\n监会《上市公司与投资者关系工作指引》、深交所《股票上市规则》、《中小企\n业板上市公司规范运作指引》、《公司章程》及其他有关法律、法规、规章的规\n定，结合公司具体情况，公司加强了投资者关系管理工作，进一步做好投资者关\n系管理档案工作，并起草了《投资者关系管理制度》提交公司一届董事会十七次\n会议审议通过。\n  2、2010年8月13日至2010年12月12日，公司设立了专门的评议电话、传真和\n电子邮箱，听取投资者和社会公众对公司治理情况和整改计划的意见和建议，接\n受社会公众评议。期间未收到社会公众对公司自查报告及整改计划提出的建议和\n意见。\n\n\n三、浙江证监局专项检查发现的问题及整改措施\n  浙江证监局于2010年12月上旬对我公司进行了专项检查，并于2010年12月20\n日下发了《关于杭州海康威视数字技术股份有限公司治理情况综合评价结果和整\n改意见的通知》（浙证监上市字[2010]226号），从内部控制及规范运作方面对\n公司治理提出了整改意见，对此，公司高度重视，结合公司治理的情况制订了整\n改方案，并积极组织相关部门开展整改工作，具体情况如下：\n  1、公司尚未制定《突发事件处理制度》、《年报信息披露重大差错责任追\n究制度》、《审计委员会年报工作规程》、《内幕知情人管理制度》、《大股东\n问询机制》等内控制度；\n  整改措施：根据《公司法》、《证券法》、深交所《股票上市规则》、《中\n小企业板上市公司规范运作指引》、《公司章程》及其他有关法律、法规、规章\n的规定，结合公司具体情况，公司已制定了《控股股东、实际控制人行为规范及\n信息问询制度》、《董事会审计委员会年报工作制度》、《独立董事年报工作规",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "extracted_text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "artifact_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "page": 4,
+          "quote": "程》、《年报信息披露重大差错责任追究制度》、《突发事件处理制度》、《内\n幕知情人管理制度》，同时以上制度已经公司一届董事会十九次会议审议通过，\n公司将在日常工作中严格贯彻落实各项制度要求，做好公司内部风险控制工作。\n  2、公司董事、监事、高级管理人员均应按照《上市公司高级管理人员培训\n工作指引》及相关实施细则要求，在任职期间接受中国证监会组织的持续教育培\n训，认真学习掌握证券市场知识，强化规范运作意识。同时，公司应自行组织各\n分、子公司相关负责人，对信息披露规则等证券市场知识进行学习。\n  整改措施：公司将严格按照《上市公司高级管理人员培训工作指引》及相关\n实施细则要求，密切留意证监会组织的各项持续教育培训的推出时间，推动公司\n董监高积极参加与自身职务相对应的持续教育培训，努力提升董监高的履职能力\n和水平。同时，公司会根据日常工作的需要选择合适时机与方式加强对公司分、\n子公司负责人的信息披露规则培训，从而保证公司内部信息传递、审核及披露流\n程的合法、合规。\n  3、公司应严格按照《信息披露管理制度》及浙江证监局下发的《关于进一\n步加强上市公司信息披露管理工作的通知》（浙证监上市字[2009]134号）有关\n规定，进一步规范和完善内幕知情人登记备案工作。\n  整改措施：公司已按要求制定了《内幕知情人管理制度》，在今后的工作中\n将严格按照有关法律法规、公司《信息披露管理制度》、《内幕知情人管理制度》\n和浙江证监局、深圳证券交易所下发的各类文件要求精神，认真做好公司的内幕\n知情人管理工作，在交易所要求的敏感时点认真做好内幕知情人登记备案和报备\n工作。\n\n\n四、开展治理专项活动取得的总体效果评价\n  公司本次治理专项活动的开展，是对公司治理、规范运作方面的整体认知和\n改善过程，这不仅有利于公司了解自身在治理方面的不足，更有助于公司以公众\n公司的新标准、新要求提高自身规范运作水平。经过此次治理专项活动，进一步\n增强了公司董事、监事、高级管理人员以及公司各部门规范运作的意识，公司日\n常运作的规范程度明显改善，透明度显著提高，并得到了投资者及社会公众对公\n司的治理水平的认同，形成了公司与利益相关者的良性互动。",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "extracted_text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+          "artifact_sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+          "page": 5,
+          "quote": "在今后的工作中，公司将严格按照中国证监会、深圳证券交易所、中国证监\n会浙江监管局的相关要求，结合公司日常运作中的实际情况，继续健全和完善公\n司治理的组织和制度建设，不断提高规范运作意识，继续做好信息披露工作，切\n实提升公司治理质量，保持公司健康、持续、稳定发展，为公司股东带来更好的\n回报，真正通过公司治理为公司带来长远价值。公司将以本次治理专项活动为契\n机，继续加强公司与广大投资者和社会公众的沟通，切实提升广大投资者在公司\n治理结构中所发挥的作用。\n  特此报告。\n\n\n                杭州海康威视数字技术股份有限公司\n                       董 事 会\n                     2011年1月17日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+          "extracted_text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596"
+        }
+      ]
+    },
+    {
+      "event_id": "counterguarantee-2011",
+      "source_ids": [
+        "60246880",
+        "60246881"
+      ],
+      "occurrence_date": "2011-11-25",
+      "publication_date": "2011-11-26",
+      "classification": "为自身全资子公司项目履约担保提供反担保的关联交易安排，非已证实违规担保",
+      "findings": "中国电科为重庆海康建设项目履约义务提供连带担保，上市公司拟向中国电科提供反担保。42项合同总价77.03亿元是项目合同总价，不是全部已发生担保损失或余额。董事会、监事会及独董和保荐人支持；公告时仍须股东大会审议并由关联股东回避。",
+      "limitations": "这两份公告证明拟议安排和当时程序状态，不能单独证明其后股东会结果、最终履约结清或任何侵占损失。",
+      "draft_veto_from_this_evidence": false,
+      "evidence_level": "高（原始公告内容）；法律定性仅按文书用词，不作处罚不存在的全历史结论",
+      "sources": [
+        {
+          "id": "60246880",
+          "title": "关于为实际控制人中国电子科技集团公司提供反担保的公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246880.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.pdf",
+          "sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.txt",
+          "text_sha256": "2bb982b5f833f16525b698b17cb6b15386cffe82bcc48d01b0d2a1252d37432d",
+          "page_count": 2
+        },
+        {
+          "id": "60246881",
+          "title": "招商证券股份有限公司关于公司为中国电子科技集团公司提供反担保事项的核查意见",
+          "url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246881.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.pdf",
+          "sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.txt",
+          "text_sha256": "56671156df8526429324dddfafac275045d43452d4019495b1eb1630a126fe78",
+          "page_count": 2
+        }
+      ],
+      "citations": [
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.pdf",
+          "artifact_sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+          "page": 1,
+          "quote": "证券代码：002415    证券简称：海康威视       公告编号：2011-038 号\n\n\n\n          杭州海康威视数字技术股份有限公司\n\n  关于为实际控制人中国电子科技集团公司提供反担保的公告\n\n\n\n  本公司及全体董事、监事、高级管理人员保证公告内容真实、准确和完整，没有虚假\n记载、误导性陈述或者重大遗漏。\n\n\n   2010 年 11 月 23 日公司发布实际控制人中国电子科技集团公司于 2010 年\n11 月 22 日与重庆市人民政府签署《关于重庆市社会公共视频信息管理系统建设\n总承包框架协议》（以下简称框架协议）的公告。重庆市社会公共视频信息管理\n系统建设项目（以下简称重庆项目或项目）原则上采取 BT 模式（BT 是英文 Build\n和 Transfer 缩写形式，意即“建设-移交”，是政府利用非政府资金来进行基础\n非经营性设施建设项目的一种融资模式。），项目建设期为 2-3 年，项目建设完成\n后业主 2 年左右时间内完成回购。截止 2011 年 10 月 9 日，经重庆市各级人民政\n府授权重庆市公安局及下属 41 个区县分局作为项目业主，与公司全资子公司重\n庆海康威视系统技术有限公司共计签署了全部 42 个建设合同。全部建设合同合\n计总价为人民币 77.03 亿元。\n  应建设合同甲方要求公司实际控制人中国电子科技集团公司对建设合同乙\n方公司全资子公司重庆海康威视系统技术有限公司签署的“平安重庆·应急联动\n防控体系数字化建设工程”中的 41 个区县建设项目合同项下的全部责任和义务，\n提供了连带责任担保。公司拟为实际控制人中国电子科技集团公司的上述连带责\n任担保事宜提供反担保。\n   以上事项已经公司一届董事会二十七次会议和公司一届监事会十四次会议\n决议通过。公司独立董事发表独立意见如下：因公司实际控制人中国电子科技集\n团公司对公司全资子公司重庆海康威视系统技术有限公司签署的“平安重庆·应\n急联动防控体系数字化建设工程”中的 41 个区县建设项目合同项下的全部责任\n和义务，提供了连带责任担保。公司为实际控制人中国电子科技集团公司的上述\n连带责任担保事宜提供反担保的行为，是正常的、必要的经营管理行为，该担保",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246880.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.txt",
+          "extracted_text_sha256": "2bb982b5f833f16525b698b17cb6b15386cffe82bcc48d01b0d2a1252d37432d"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.pdf",
+          "artifact_sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+          "page": 2,
+          "quote": "履行了必要的决策程序，符合中国证监会、深圳证券交易所关于上市公司对外提\n供担保的有关规定。同意公司为实际控制人中电子科技集团公司提供反担保并将\n该议案提交公司 2011 年第一次临时股东大会审议。\n  公司保荐机构招商证券股份有限公司对公司关联担保事项进行了尽职核查，\n核查意见如下：本保荐机构认为公司为实际控制人中国电子科技集团公司的上述\n担保事宜提供反担保的行为，是正常的、必要的经营管理行为，该事项已经公司\n第一届董事会第二十七次会议审议通过，并由独立董事发表明确意见，该担保履\n行了必要的决策程序，符合中国证监会、深圳证券交易所关于上市公司对外提供\n担保的有关规定。因此，本保荐机构同意公司为实际控制人中国电子科技集团公\n司的上述担保事宜提供反担保。\n  本事项尚需提交公司 2011 年第一次临时股东大会审议，关联股东回避表决。\n\n\n备查文件\n  1、   公司一届董事会二十七次会议决议；\n  2、   公司一届监事会十四次会议决议；\n  3、   公司独立董事关于一届董事会二十七次会议相关事项的独立意见；\n  4、   公司保荐机构招商证券股份有限公司关于杭州海康威视数字技术股\n       份有限公司为中国电子科技集团公司提供反担保事项的核查意见。\n\n\n  特此公告。\n\n\n                    杭州海康威视数字技术股份有限公司\n                             董   事    会\n                          2011 年 11 月 25 日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246880.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.txt",
+          "extracted_text_sha256": "2bb982b5f833f16525b698b17cb6b15386cffe82bcc48d01b0d2a1252d37432d"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.pdf",
+          "artifact_sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+          "page": 1,
+          "quote": "招商证券股份有限公司\n\n       关于杭州海康威视数字技术股份有限公司\n\n   为中国电子科技集团公司提供反担保事项的核查意见\n\n  招商证券股份有限公司（以下简称为“招商证券”）作为杭州海康威视数字\n技术股份有限公司（以下简称“海康威视”或“公司”）首次公开发行股票的保\n荐机构，根据《证券发行上市保荐业务管理办法》、\n                      《深圳证券交易所股票上市规\n则》、\n  《深圳证券交易所中小企业板上市公司规范运作指引》等有关规定，对海康\n威视关联担保事项进行了尽职核查，核查情况如下：\n\n  重庆市社会公共视频信息管理系统建设项目（以下简称“重庆项目”或“项\n目”）采取 BT 模式，项目建设期为 2-3 年，项目建设完成后业主 2 年左右时间\n内完成回购。截止 2011 年 10 月 9 日，经重庆市各级人民政府授权重庆市公安局\n及下属 41 个区县分局作为项目业主，与公司全资子公司重庆海康威视系统技术\n有限公司共计签署了全部 42 个建设合同。全部建设合同合计总价为人民币 77.03\n亿元。应重庆市人民政府要求，中国电子科技集团公司对重庆海康威视系统技术\n有限公司签署的“平安重庆·应急联动防控体系数字化建设工程”中的 41 个区\n县建设项目合同项下的全部责任和义务，提供了连带责任担保。公司拟为实际控\n制人中国电子科技集团公司的上述担保事宜提供反担保。\n\n  经核查，本保荐机构认为：\n\n  公司为实际控制人中国电子科技集团公司的上述担保事宜提供反担保的行\n为，是正常的、必要的经营管理行为，该事项已经公司第一届董事会第二十七次\n会议审议通过，并由独立董事发表明确意见，该担保履行了必要的决策程序，符\n合中国证监会、深圳证券交易所关于上市公司对外提供担保的有关规定。\n\n  因此，本保荐机构同意公司为实际控制人中国电子科技集团公司的上述担保\n事宜提供反担保。\n\n  （以下无正文）",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246881.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.txt",
+          "extracted_text_sha256": "56671156df8526429324dddfafac275045d43452d4019495b1eb1630a126fe78"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.pdf",
+          "artifact_sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+          "page": 2,
+          "quote": "本页无正文，为《招商证券股份有限公司关于杭州海康威视数字技术股份有\n限公司为中国电子科技集团公司提供反担保事项的核查意见》之签字盖章页\n\n\n\n\n 保荐代表人：康剑雄\n\n\n\n\n       马加暾\n\n\n\n\n                        招商证券股份有限公司\n\n                           2011 年11月25日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246881.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.txt",
+          "extracted_text_sha256": "56671156df8526429324dddfafac275045d43452d4019495b1eb1630a126fe78"
+        }
+      ]
+    },
+    {
+      "event_id": "related-contracts-2011-2012",
+      "source_ids": [
+        "60392469",
+        "60665281"
+      ],
+      "occurrence_date": "2011-12-30",
+      "publication_date": "2011-12-31",
+      "classification": "已披露关联工程设计/技术服务合同，未见文书认定非公允或违法",
+      "findings": "2011年南京莱斯技术服务合同3500万元，经关联董事回避、独董和保荐核查。2012年保荐核查另覆盖天博、四创、中华通信和奥特维项目设计合同，合计3870.83万元。定价公允性陈述来自发行人/保荐人，非独立采购台账核验。",
+      "limitations": "存在真实工程合同和程序披露，不等于取得独立价格审计结论。",
+      "draft_veto_from_this_evidence": false,
+      "evidence_level": "高（原始公告内容）；法律定性仅按文书用词，不作处罚不存在的全历史结论",
+      "sources": [
+        {
+          "id": "60392469",
+          "title": "关联交易公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2011-12-31/60392469.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.pdf",
+          "sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.txt",
+          "text_sha256": "8f4655903608db4b643681b583b86dee3f5f1ba82cf71c632ab5be154586bd72",
+          "page_count": 3
+        },
+        {
+          "id": "60665281",
+          "title": "招商证券股份有限公司关于公司关联交易的核查意见",
+          "url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6",
+          "page_count": 5
+        }
+      ],
+      "citations": [
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.pdf",
+          "artifact_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "page": 1,
+          "quote": "证券代码：002415    证券简称：海康威视     公告编号：2011-045 号\n\n\n\n           杭州海康威视数字技术股份有限公司\n\n                  关联交易公告\n\n\n\n     本公司及全体董事、监事、高级管理人员保证公告内容真实、准确和完整，没有虚假\n记载、误导性陈述或者重大遗漏。\n\n\n\n\n一、 关联交易概述\n  公司全资子公司重庆海康威视系统技术有限公司（以下简称重庆海康）与南\n京莱斯信息技术股份有限公司（以下简称南京莱斯）就平安重庆•应急联动防控\n体系数字化建设工程部分业务，签订技术服务合同书，合同总额 3500 万元。\n  由于南京莱斯信息技术股份有限公司与公司同受实际控制人中国电子科技\n集团公司控制，故本次交易构成关联交易。\n  上述交易已经 2011 年 12 月 30 日召开的公司二届董事会二次会议审议通过，\n关联董事回避表决。公司独立董事及保荐机构招商证券股份有限公司对本事项发\n表了独立意见。\n  本次关联交易未构成《上市公司重大资产重组管理办法》规定的重大资产重\n组。\n\n\n二、 关联方基本情况\n  南京莱斯信息技术股份有限公司为中国电子科技集团公司第二十八研究所\n投资控股的国有民品公司，注册地址：南京市白下区苜蓿园东街 1 号，法定代表\n人：惠荣昌，注册资本：8000 万元。经营范围：许可经营项目：莱斯牌应急通\n信车、莱斯牌大型应急指挥车改装。一般经营项目：电子专业工程施工；建筑智\n能化工程设计、施工；计算机信息系统软件开发、集成、服务；民航空中交通管\n制系统及配套设备研发；电子及通信产品（不含卫星地面接收设备）研发、销售；\n城市交通信号控制系统及智能交通产品研发、销售、服务；自营和代理各类商品",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-12-31/60392469.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.txt",
+          "extracted_text_sha256": "8f4655903608db4b643681b583b86dee3f5f1ba82cf71c632ab5be154586bd72"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.pdf",
+          "artifact_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "page": 2,
+          "quote": "和技术的进出口业务（国家限定公司经营或禁止进出口商品和技术除外）。\n  南京莱斯掌握业内先进的开发技术和方法，具有多年大型系统工程设计、开\n发、集成能力和丰富的行业经验，在行业内技术领先优势明显。该公司依法存续\n且经营状况良好，具备良好的履约能力。该公司与海康威视同受实际控制人中国\n电子科技集团公司控制。\n\n\n三、 关联交易基本情况\n  根据重庆市的有关保密要求，相关技术服务业务不得招标，鉴于南京莱斯具\n有业内优秀的大型系统工程设计、开发、集成能力，公司选定其作为合作方，进\n行了单一来源谈判。同时参考整体技术服务业务的工作量计算，经与对方的多轮\n谈判，最终达成了技术服务的相关协议。\n\n\n四、 交易的定价政策及定价依据\n  本次关联交易定价均遵循客观、公平、公正的原则，参考市场公允价格的基\n础上确定协议价格并签署合同。不存在损害交易双方利益的情况。\n\n\n五、 交易目的和交易对上市公司的影响\n 上述关联交易属于公司正常的业务范围，交易价格公平合理，有利于更好达\n成平安重庆项目业主预期目标，为项目业主提供优质服务，对公司的经营和发展\n是有利的，不存在损害中小股东利益的情况。同时，上述关联交易对公司独立性\n没有影响，公司业务不会因此类交易而对关联人形成依赖或被其控制。\n\n\n六、 独立董事及中介机构的意见\n 1、 独立董事意见\n\n  独立董事对公司关联交易事项进行了事前审查，并发表独立意见：经核查，\n董事会提供的《关于公司全资子公司重庆海康威视系统技术有限公司与南京莱斯\n信息技术股份有限公司签订技术服务合同书的议案》的有关资料，公司本次关联\n交易遵循了客观、公正和公平的交易原则，不存在任何内部交易，未损害公司及\n其他非关联方股东的合法权益。公司生产经营过程中与关联方发生的正常业务往",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-12-31/60392469.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.txt",
+          "extracted_text_sha256": "8f4655903608db4b643681b583b86dee3f5f1ba82cf71c632ab5be154586bd72"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.pdf",
+          "artifact_sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+          "page": 3,
+          "quote": "来，有利于保证公司的正常生产经营，交易定价遵循公平、公正的原则，未有违\n规情形，未有损害股东和公司权益情形，且符合监管部门及有关法律、法规、\n                                 《公\n司章程》等的规定。\n 2、 保荐机构招商证券股份有限公司核查意见\n\n  经核查，本保荐机构认为：海康威视公司全资子公司重庆海康与南京莱斯发\n生的关联交易已经通过独立董事和公司董事会二届二次会议审议通过，并经过独\n立董事发表了独立意见，本次关联交易事项决策程序符合有关法律、公司章程和\n《公司关联交易管理制度》的规定；上述关联交易定价遵循了公允、合理的原则，\n未损害上市公司利益；对海康威视公司全资子公司重庆海康与南京莱斯发生的关\n联交易事项无异议。\n\n\n七、 备查文件：\n 1、二届董事会二次会议决议；\n\n 2、独立董事关于二届董事会二次会议相关事项的独立意见；\n\n  3、招商证券股份有限公司关于杭州海康威视数字技术股份有限公司公司之\n\n全资子公司重庆海康威视系统技术有限公司与南京莱斯信息技术股份有限公司\n签订技术服务合同书的核查意见。\n  特此公告。\n\n\n                  杭州海康威视数字技术股份有限公司\n                         董 事 会\n                       2011年12月30日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2011-12-31/60392469.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.txt",
+          "extracted_text_sha256": "8f4655903608db4b643681b583b86dee3f5f1ba82cf71c632ab5be154586bd72"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "artifact_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "page": 1,
+          "quote": "招商证券股份有限公司关于杭州海康威视\n\n      数字技术股份有限公司关联交易的核查意见\n  根据《证券发行上市保荐业务管理办法》、\n                    《深圳交易所中小企业板块保荐工\n作指引》、\n    《深圳证券交易所中小企业板上市公司规范运作指引》和《中小企业板\n信息披露业务备忘录第 7 号：日常关联交易金额的确定和披露》等有关法律法规\n和规范性文件的要求，招商证券股份有限公司（以下简称“招商证券”）作为杭\n州海康威视数字技术股份有限公司（以下简称“海康威视”或“公司”）首次公\n开发行股票的保荐机构，对海康威视与关联企业拟发生的关联交易进行了认真、\n审慎的核查，并发表如下意见：\n\n  一、关联方基本情况\n\n  （一）中国电子科技集团公司第二十二研究所天博信息系统工程公司\n\n  1、公司基本情况\n  法定代表人：董庆生\n  注册资本：2,000 万元\n  注册地址：青岛高科技工业园（高新区）青大一路 19 号\n  经营范围：一般经营项目:电子产品、电子元器件、电讯器材、电器设备、\n仪器仪表、办公自动化设备、视频音响器材、监控设备、消防器材的研制、销售；\n通讯工程施工；通信设备、线路、管线的安装、调试、维护；通信集成及网络建\n设和维护；天线工程、电子系统工程、建筑智能化工程、建筑安装工程、铁塔的\n基础建设和铁塔的架设、塔桅、基站工程的设计、安装、技术服务。许可经营项\n目:承包与其实力、规模、业绩相适应的国外工程项目。对外派遣实施上述境外\n工程所需劳务人员。（以上范围需经许可经营的，须凭许可证经营）。\n  2、与本公司的关联关系：同受公司实际控制人中国电子科技集团公司控制。\n  3、该公司依法存续且经营情况正常，财务状况良好，具备良好的履约能力。\n\n  （二）安徽四创电子股份有限公司\n\n  1、公司基本情况\n  法定代表人：吴曼青\n  注册资本：11,760 万元",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "extracted_text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "artifact_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "page": 2,
+          "quote": "注册地址：安徽省合肥高新技术产业开发区\n  经营范围：许可经营项目：卫星电视广播地面接收设备设计、生产、安装、\n销售。一般经营项目：雷达整机及其配套产品、集成电路、广播电视及微波通信\n产品、电子系统工程及其产品的设计、研制、生产、销售、出口、服务；有线电\n视工程设计安装（乙级），校园网工程建设，安全技术防范工程设计、施工、维\n修；应急指挥通信系统、城市智能交通视频监控系统研发、生产与集成； 卫星\n导航集成电路及用户机的研发、生产与运营； 电源和特种元件的研发、生产； 车\n辆销售；家用电器、电子产品、通信设备销售；本企业生产所需的原辅材料、仪\n器仪表、机械设备、零配件及技术进口；承包境外建筑智能化系统集成工程的勘\n测、咨询、设计和监理，上述境外项目所需设备、材料出口；对外派遣实施上述\n境外项目所需劳务人员。\n  2、与本公司的关联关系：同受实际控制人中国电子科技集团公司控制。\n  3、该公司依法存续且经营情况正常，财务状况良好，具备良好的履约能力。\n\n  （三）中华通信系统有限责任公司\n\n  1、公司基本情况\n  法定代表人：涂天杰\n  注册资本：18,000 万元\n  注册地址：北京市海淀区复兴路 33 号中塔 803 室\n  经营范围：许可经营项目：（无）。一般经营项目：通信信息网络系统集成；\n通信工程、电子工程、建筑智能化系统工程的设计；各类电子工程的施工、监理；\n通信工程勘察测量；信息产业项目的投资；通信系统工程电子信息系统工程和测\n量控制系统工程的开发、安装、技术服务、技术咨询；电子产品、计算机软件的\n研制、生产、销售、技术服务；为电信运营商提供系统解决方案；电子计算机及\n配件、仪器仪表、机械设备、五金交电、家用电器、照相器材、化工材料（危险\n化学品除外）、建筑材料、装饰材料、IC 卡的销售；物业管理、自由房屋出租。\n  2、与本公司的关联关系：同受公司实际控制人中国电子科技集团公司控制。\n  3、该公司依法存续且经营情况正常，财务状况良好，具备良好的履约能力。\n\n  （四）北京奥特维科技有限公司",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "extracted_text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "artifact_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "page": 3,
+          "quote": "1、公司基本情况\n  法定代表人：杨定江\n  注册资本：3,100 万元\n  注册地址：北京市朝阳区酒仙桥北路乙 7 号\n  经营范围：技术推广服务；工程勘察设计；计算机系统服务；专业承包；基\n础软件服务；应用软件服务（不含医用软件服务）；销售电子产品。\n  2、与本公司的关联关系：同受公司实际控制人中国电子科技集团公司控制。\n  3、该公司依法存续且经营情况正常，财务状况良好，具备良好的履约能力。\n\n\n\n  二、关联交易的主要内容\n\n  1、公司全资子公司重庆海康威视系统技术有限公司拟与中国电子科技集团\n公司第二十二研究所天博信息系统工程公司签订重庆市 11 个区县建设项目的施\n工图设计合同，由其承担工程设计工作，合同总价款为人民币 1,427.21 万元；\n  2、公司全资子公司重庆海康威视系统技术有限公司拟与安徽四创电子股份\n有限公司签订重庆市 8 个区县建设项目的施工图设计合同，由其承担工程设计工\n作，合同总价款为人民币 1,171.80 万元；\n  3、公司全资子公司重庆海康威视系统技术有限公司拟与中华通信系统有限\n责任公司签订重庆市 4 个区县建设项目的施工图设计合同，由其承担工程设计工\n作，合同总价款为人民币 951.82 万元。\n  4、公司全资子公司重庆海康威视系统技术有限公司拟与北京奥特维科技有\n限公司签订重庆市 2 个区县建设项目的施工图设计合同，由其承担工程设计工\n作，合同总价款为人民币 320 万元。\n\n  三、关联交易定价政策\n\n  公司与上述关联方发生的关联交易的定价均遵循公平、公正、公开的原则，\n参考市场公允价格的基础上确定协议价格并签署合同。\n\n  四、交易目的和交易对上市公司的影响\n\n  上述关联交易属于公司正在实施的“平安重庆·应急联动防控体系数字化建\n设工程”的工程设计内容，交易价格公平合理，有利于提高工程设计质量，保证",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "extracted_text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "artifact_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "page": 4,
+          "quote": "重庆项目实施进展，稳定公司产品的市场份额和公司经营业绩，对公司的经营和\n发展是有利的，不存在损害中小股东利益的情况。同时，上述关联交易对公司独\n立性不产生影响，公司业务不会因此类交易而对关联人形成依赖或被其控制。\n\n  五、招商证券发表意见依据\n\n  保荐机构对海康威视与上述关联方拟发生的关联交易所作出的意见是根据\n海康威视公司及相关各方提供的资料及董事会决议、独立董事意见，资料各方对\n所提供资料的真实性、准确性和完整性负责。\n\n  六、招商证券的核查意见\n\n  经核查，本保荐机构认为：海康威视公司拟与上述关联方发生的关联交易已\n经通过独立董事和公司董事会二届四次会议审议通过，并经过独立董事发表了独\n立意见，本次关联交易事项决策程序符合有关法律、公司章程和《公司关联交易\n管理制度》的规定；上述关联交易定价遵循了公允、合理的原则，未损害上市公\n司利益；对海康威视公司上述关联交易事项无异议。\n\n  （以下无正文）",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "extracted_text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+          "artifact_sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+          "page": 5,
+          "quote": "（此页无正文，为《招商证券股份有限公司关于杭州海康威视数字技术股份有限\n公司关联交易的核查意见》之签章页）\n\n\n\n\n  保荐代表人：康剑雄\n\n\n\n       马加暾\n\n\n\n\n                        招商证券股份有限公司\n\n                           2012 年3月13日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+          "extracted_text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6"
+        }
+      ]
+    },
+    {
+      "event_id": "cashflow-correction-2012",
+      "source_ids": [
+        "62438362"
+      ],
+      "occurrence_date": "2013-04-26",
+      "publication_date": "2013-04-27",
+      "classification": "年度报告现金流量表关联交易抵销差错更正；非来源认定的财务造假处罚",
+      "findings": "2012年度合并现金流量表编制时关联方交易抵销环节出错：销售收现93.0464→75.2029亿元，采购付现58.8276→40.9840亿元，流入及流出各减少17.843565769亿元；经营现金流净额、年度业绩不变。",
+      "numerical_values": {
+        "sales_cash_before_cny": 9304641917.46,
+        "sales_cash_after_cny": 7520285340.56,
+        "purchase_cash_before_cny": 5882755192.36,
+        "purchase_cash_after_cny": 4098398615.46,
+        "adjustment_each_cny": 1784356576.9,
+        "cfo_net_change_cny": 0
+      },
+      "limitations": "更正属于已证实报表编制错误，应保留治理/财务质量背景；没有来源支持扩大为净利润造假或正式处罚。2012年不属于本次2016—2025定量窗口，不能改变该窗口已验证数字。",
+      "draft_veto_from_this_evidence": false,
+      "evidence_level": "高（原始公告内容）；法律定性仅按文书用词，不作处罚不存在的全历史结论",
+      "sources": [
+        {
+          "id": "62438362",
+          "title": "2012年度报告及年度审计报告更正公告",
+          "url": "https://static.cninfo.com.cn/finalpage/2013-04-27/62438362.PDF",
+          "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.pdf",
+          "sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+          "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.txt",
+          "text_sha256": "f2c2910bd14c63b8ea236dd56854f33e2dcbddda1d1ec7a3b61aed998c830840",
+          "page_count": 2
+        }
+      ],
+      "citations": [
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.pdf",
+          "artifact_sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+          "page": 1,
+          "quote": "证券代码：002415    证券简称：海康威视                    公告编号：2013-018 号\n\n\n\n           杭州海康威视数字技术股份有限公司\n\n           2012 年度报告及年度审计报告更正公告\n\n\n  本公司及全体董事、监事、高级管理人员保证公告内容真实、准确和完整，没有虚假记载、误导性陈\n\n述或者重大遗漏。\n\n\n  杭州海康威视数字技术股份有限公司二届董事会十五次会议审议通过并披\n露了公司2012年年度报告和公司2012年度审计报告，并登载于2013年4月9日的\n《证券时报》、《证券日报》和巨潮资讯网www.cninfo.com.cn上。 经事后核查，\n由于合并现金流量表编制时关联方交易抵销环节出错，2012年度报告第70页“第\n十节 财务报告”的“5、合并现金流量表”中的“销售商品、提供劳务收到的现\n金”、 “经营活动现金流入小计”、“购买商品、接受劳务支付的现金”和“经\n营活动现金流出小计”以及2012年年度审计报告第7页的“合并现金流量表”中\n的“销售商品、提供劳务收到的现金”、“经营活动现金流入小计”、“购买商\n品、接受劳务支付的现金”和“经营活动现金流出小计”出现差错，该差错仅涉\n及项目间调整，不涉及经营活动现金净流量。现对2012年度报告和2012年审计报\n告中披露的该部分内容予以更正如下：\n\n\n      项目             原披露数               调整后                  差异\n\n销售商品、提供劳务收到的现金   9,304,641,917.46   7,520,285,340.56   1,784,356,576.90\n\n经营活动现金流入小计       9,779,739,741.02   7,995,383,164.12   1,784,356,576.90\n\n购买商品、接受劳务支付的现金   5,882,755,192.36   4,098,398,615.46   1,784,356,576.90\n\n经营活动现金流出小计       8,342,949,879.60   6,558,593,302.70   1,784,356,576.90\n\n\n\n  除以上情况外，其他内容不变。\n  本更正公告不会对公司2012年度业绩造成影响。对于上述更正给投资者及报\n告使用人带来的不便，公司深表歉意，敬请广大投资者谅解！今后公司将采取切",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2013-04-27/62438362.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.txt",
+          "extracted_text_sha256": "f2c2910bd14c63b8ea236dd56854f33e2dcbddda1d1ec7a3b61aed998c830840"
+        },
+        {
+          "source_type": "filing_pdf",
+          "ticker": "002415.SZ",
+          "jurisdiction": "SZ",
+          "source_pdf_sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+          "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.pdf",
+          "artifact_sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+          "page": 2,
+          "quote": "实措施加强定期报告编制过程中的审核工作，提高信息披露的质量。\n 特此公告。\n\n\n\n\n                  杭州海康威视数字技术股份有限公司\n                        董 事   会\n                       2013年4月26日",
+          "official_url": "https://static.cninfo.com.cn/finalpage/2013-04-27/62438362.PDF",
+          "extracted_text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.txt",
+          "extracted_text_sha256": "f2c2910bd14c63b8ea236dd56854f33e2dcbddda1d1ec7a3b61aed998c830840"
+        }
+      ]
+    }
+  ],
+  "coverage_limit": "408 issuer announcements for2010-05-28 through2014-12-31 enumerated; seven materially relevant source documents read; remaining routine annual/related-party/guarantee title leads not individually certified. Applicable regulator/court/auditor routes and full historic subject roster not completed. No overall lifetime clearance."
+}

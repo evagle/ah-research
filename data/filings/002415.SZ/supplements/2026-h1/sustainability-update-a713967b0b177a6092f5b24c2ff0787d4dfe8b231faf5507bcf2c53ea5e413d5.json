@@ -1,0 +1,17 @@
+{
+  "profile_path": "/Users/brian_huang/repos/ah-research/profiles/002415.SZ-2026-09-29-v2.md",
+  "private_path": "/Users/brian_huang/repos/brian-huang-private/drafts/2026-09-29-hikvision-value-profile.md",
+  "previous_sha256": "491fa9152e5c0e929bdd39803d23e6f283f5cd89566358590f58355dfa360ac2",
+  "updated_sha256": "a713967b0b177a6092f5b24c2ff0787d4dfe8b231faf5507bcf2c53ea5e413d5",
+  "private_html_expected_sha256": "7d35e784b3498a9aaece7b2be28c029ab2d21a0559529db78a291a4dad295596",
+  "evidence": {
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/analysis-a8086e0e0cecf885c8e862ac546083f0ba9b682c711533fbe213dba04ebb7659.json",
+    "sha256": "a8086e0e0cecf885c8e862ac546083f0ba9b682c711533fbe213dba04ebb7659"
+  },
+  "changes": [
+    "Clarify good-business judgment and R&D treatment",
+    "Add persistence table and upgrading conditions",
+    "Align business conclusion and moat discussion"
+  ],
+  "full_workflow_completed": false
+}

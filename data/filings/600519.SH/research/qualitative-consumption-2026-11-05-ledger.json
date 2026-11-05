@@ -1,0 +1,1328 @@
+{
+  "claim_ledgers": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "request_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+          "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-HX",
+        "artifact_identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "request_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+          "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-BQ",
+        "artifact_identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "request_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+          "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-GJ",
+        "artifact_identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "request_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+          "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-SD",
+        "artifact_identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "request_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://finance.eastmoney.com/a/202602053642939679.html",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+          "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-CH",
+        "artifact_identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "request_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://www.sohu.com/a/884573014_554374",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+          "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-WD",
+        "artifact_identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "request_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+          "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-DW",
+        "artifact_identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "request_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+          "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-AJ",
+        "artifact_identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "request_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+          "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-RS",
+        "artifact_identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    }
+  ],
+  "access_records": [
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+      "query": "品牌溢价与社交价值的券商定性解释",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "券商对品牌机制的解释；非消费者调查。封面日期优先于配送索引。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "品牌溢价与社交价值的券商定性解释",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+      "query": "婚宴和宴席用酒的具名采访观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "新浪页面署名酒业家；搜狐快乐美食二三事及茅台时空均为同源转载，不增加独立证据数。观察针对43度茅台与部分地区，非全国比例。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "婚宴和宴席用酒的具名采访观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+      "query": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "封面图像核验作者及2026-03-22日期。礼赠原文处于风险偏好与服务需求分层上下文，不能推导所有礼赠者都更重保真。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+      "query": "自饮及日常化门槛的具名专家定性观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "HTML meta author=葡萄酒杂志WINEMAG，正文文编Susan。采访属于具名专家观察；非消费者亲述。拒绝采用其金融属性消失、保值及抢购证明护城河等强结论。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "自饮及日常化门槛的具名专家定性观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.eastmoney.com/a/202602053642939679.html",
+      "query": "2025至2026终端场景与偏好变化的观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "署明澎湃新闻来源，原站原稿未定位。使用其地方走访及匿名商超采访作有限反例，不代表全国全年。500–600元价位自饮观察不能移用于飞天茅台。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2025至2026终端场景与偏好变化的观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://www.sohu.com/a/884573014_554374",
+      "query": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "酒业家传媒署名平台原作。产品活动针对系列酒，非53度飞天；竞争品牌亦推出服务。排除未追溯的全国宴席规模和场景占比。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+      "query": "2012年以来客群与渠道转向的券商历史复盘",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "券商历史复盘及转化愿景。2013–2017、2018–2023、2024以来为报告分期，不是逐年消费者调查。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2012年以来客群与渠道转向的券商历史复盘",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+      "query": "商务场景修复及改革效果的条件性风险",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "产品分层解释与条件性风险；非已确认需求下滑。与国金类似的产品观点不当独立消费者调查。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "商务场景修复及改革效果的条件性风险",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+      "query": "2025地方酒商的按需采购模式观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "原站全文；地方渠道受访者未具名。具名专家的政务、年轻客群和场景占比缺原始调查口径，全部不采用。婚宴增长段涉及茅台1935，不外推飞天。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2025地方酒商的按需采购模式观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+      "query": "change",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+      "query": "self",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://business.sohu.com/a/792574146_121119044",
+      "query": "banquet",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://www.sohu.com/a/253151200_492251",
+      "query": "position",
+      "status": "access-unavailable",
+      "result": "403",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "未取得正文，不接受",
+      "source_authority": "Low",
+      "practical_utility": "来源追溯",
+      "current_reachability": "403",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+      "query": "banquet-sina",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.eastmoney.com/a/202602053642939679.html",
+      "query": "consumer-2026",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "http://finance.people.com.cn/stock/n/2013/0116/c222942-20214453.html",
+      "query": "gifting-2013",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    }
+  ]
+}

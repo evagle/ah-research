@@ -1,0 +1,15 @@
+{
+  "url": "https://www.cninfo.com.cn/new/hisAnnouncement/query",
+  "params": {
+    "stock": "002415,9900012688",
+    "tabName": "fulltext",
+    "pageSize": "100",
+    "pageNum": "1",
+    "column": "szse",
+    "category": "",
+    "seDate": "2026-01-01~2026-09-29"
+  },
+  "status": 200,
+  "sha256": "bad4ee9c2beef3286de02f518bcfaef42e751419bc6f73bd9811829596ed5723",
+  "fetched_at": "2026-09-29T08:15:45.432112+00:00"
+}

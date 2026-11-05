@@ -26,11 +26,14 @@ target_section（Mode B）
 
 ## 2.Manifest绑定
 
-公共证据集合包括：
+公共证据集合使用`jurisdiction-appropriate filing manifest`，包括：
 
 - annual filing manifest。
 - event manifest。
 - A+H发行人的全部counterpart filing manifests。
+- US SEC filing manifest，绑定CIK、完整submissions catalog、最新报告、audited baseline、可比季度、目录index、Inline XBRL HTML及适用8-K exhibits。
+
+A/H annual manifest字段语义保持不变；US分支不得把季度报告伪装为annual manifest，也不得放松A/H对完整年度报告候选枚举、PDF页码和event manifest的要求。
 
 每个绑定同时保存真实绝对路径和文件SHA-256。A+H的counterpart法域键集合必须与Part 0完全相等，不得缺键、多键或跨法域代用。
 
@@ -64,6 +67,7 @@ source preflight至少验证：
 filing_text
 filing_pdf
 event_document
+filing_html
 ```
 
 所有引用包含：
@@ -79,6 +83,8 @@ quote
 ```
 
 `filing_text`和`filing_pdf`追加`source_pdf_sha256`，page必须为正整数。`event_document`追加`event_manifest_sha256/document_url/content_sha256`，HTML文书page可以为null。
+
+`filing_html`仅用于US SEC HTML，追加`official_url/accession/form/report_period/anchor`。anchor必须是已绑定HTML中真实存在的DOM id，quote必须逐字存在；US HTML的page必须为null，除非原始申报文件本身提供稳定打印页码。不得为SEC HTML虚构PDF式页码。
 
 `artifact_path`必须指向最终持久证据的绝对路径。引用不得指向临时抽取目录。canonical citation ID按字段规范化JSON计算SHA-256；相同证据重复使用时复用同一ID。
 
@@ -102,7 +108,7 @@ quote
 
 形成否定性结论、保存草稿或写最终终态前，按manifest保存的真实请求契约执行live revalidation：
 
-1. 重放官方目录及事件来源请求。
+1. 重放官方目录及事件来源请求；US分支重放ticker mapping、submissions、历史catalog segment、目录index及选中文档请求。
 2. 比较响应哈希、结果总数、候选或事件集合。
 3. 重新下载选中官方PDF并比较远端、本地和manifest三方SHA-256。
 4. 重算annual、event及全部counterpart manifest文件SHA-256。

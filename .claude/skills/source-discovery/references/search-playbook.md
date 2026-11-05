@@ -5,6 +5,20 @@ describes routes for that layer; it does not authorize an always-broad search.
 After each layer, validate candidates and use the acceptance gate before asking
 the planner for another layer.
 
+## Structured Retrieval First
+
+For an applicable market-data, financial-table, broker-report, or announcement
+route, prefer AKShare through official AKTools before constructing a new web
+scraper or opening a portal UI. Follow [akshare-aktools.md](akshare-aktools.md).
+This selects the access method within the current route and layer; it does not
+move an aggregator ahead of an applicable official source. For Eastmoney
+A-share report-list retrieval, the installed `stock_research_report_em`
+adapter is preferred over the catalog's older visible-search recipe when it
+works. Record the actual method and outcome; it is not a stable vendor API
+guarantee. Fetch and inspect the PDF before accepting document contents.
+If the interface is absent, fails, or lacks the required coverage, use the
+catalog and site guides for the remaining same-function routes.
+
 ## Gate-Driven Layers
 
 `plan_next_layer` returns only the earliest unresolved applicable layer:
@@ -155,6 +169,62 @@ years, full rankings, footnotes, methodology, and revised vintages. Failure to
 recover the standalone report does not reopen an accepted prospectus claim.
 Do not count the direct provider page and a prospectus reproduction as
 independent confirmation when they share one underlying dataset.
+
+### Paywalled original report fallback
+
+If the original association or professional report is identifiable but
+terminally paywalled, open an unrestricted web-discovery branch. Search engines
+are discovery indexes, not evidence and not a source allowlist. Search the
+public internet for an official summary, conference deck, prospectus or listing
+application, named broker report, financial/business/technology publication,
+and any other page that may preserve the report's value and citation trail.
+Do not limit result domains to `source-catalog.md`, source profiles, or
+pre-enumerated publishers. General portals, forums, newsletters, encyclopedia
+pages, and social posts may expose useful citations even when they cannot
+themselves satisfy acceptance.
+
+Open a scoped `:secondary-reconstruction` child claim only after the original
+route is ledgered as blocked. Require two separately edited public
+reproductions with matching numbers and explicit attribution; at least one
+must come from an authenticated document, named broker, or established
+publication. Capture the exact quoted sentence or table context, immediate
+publisher, URL, publication date, original report title and vintage, metric,
+period, geography, population, channel, denominator, and named companies.
+
+Treat all reproductions of the same report as one lineage. Their agreement
+checks transcription, not methodology, and supports no more than `Medium`
+conclusion evidence. Three or more genuinely separately edited reproductions
+may establish high transcription confidence, but copied, syndicated, or
+near-identical articles count once. Split transaction value, transaction
+count, user usage, merchant coverage, online, offline, and
+comprehensive-payment measures into separate claims. Do not label a generic
+“market share” reproduction as transaction value or transaction count without
+explicit source text. If reproductions disagree on the original publisher,
+metric, data period, or value after scope normalization, return `conflict`; do
+not choose the more repeated value or average them.
+
+Capture the data period, original-report publication date, reproduction
+publication date, and access date separately. Only the data period belongs in
+the market-share time axis. Report and article dates describe evidence
+vintage, not the measured year or quarter.
+
+Run the following open-web query matrix separately for every missing period and
+metric:
+
+- Chinese and English names for every subject company and product.
+- `交易金额`, `交易规模`, `交易笔数`, `笔数占比`, `transaction value`,
+  `payment volume`, `transaction count`, and explicit online/offline variants.
+- Exact candidate values, report titles, table titles, named providers, and
+  distinctive quoted sentences.
+- `filetype:pdf`, prospectus, listing application, broker report, conference
+  deck, methodology, chart, and archive variants.
+- Queries without `site:` restrictions first; publisher-bound queries only
+  after a candidate publisher or report identity is discovered.
+
+Use at least one Chinese-language general search index and one additional
+independent web index when reachable. Deduplicate results by underlying report
+lineage, not domain count. A new domain is useful only when it contributes a
+new reproduction, fuller scope, clearer attribution, or a new citation trail.
 
 ## company/filings
 
@@ -396,12 +466,16 @@ regulatory regimes and needs comparable definitions.
 ## Dynamic Discovery Notes
 
 Use this section only when broad dynamic discovery is the current planner
-layer. Discover uncataloged candidates from original report citations, official
+layer. Execute open-internet search without domain restrictions, then discover
+uncataloged candidates from search results, original report citations, official
 link directories, association member lists, bibliography trails, archive
-snapshots, and issuer ecosystem pages. Validate provenance, methodology
-transparency, correction history, coverage, timeliness, reproducibility, access
-stability, conflicts of interest, and fitness for the requested claim before
-using the source.
+snapshots, and issuer ecosystem pages. The planner declares the search-index
+query as an `open-web-search` route; fitting result domains are runtime
+candidates and do not need catalog entries or advance enumeration. Record each
+candidate URL before retrieval. Validate provenance, methodology transparency,
+correction history, coverage, timeliness, reproducibility, access stability,
+conflicts of interest, and fitness for the requested claim before using the
+source.
 
 Do not stop an absence claim on the first unavailable source. Follow the
 remaining applicable routes until the terminal ledger records the final error

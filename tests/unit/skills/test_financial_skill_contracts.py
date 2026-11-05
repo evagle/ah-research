@@ -2360,6 +2360,55 @@ def test_targeted_q_section_resolves_industry_before_schema_selection() -> None:
     assert "次级overlay只追加不冲突的披露和风险检查" in part2
 
 
+def test_value_profile_quantitative_method_is_routed_from_step4() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    part2 = skill.split("### Step 4 — Part 2 bulk mode", 1)[1].split("### Step 5", 1)[0]
+    method_path = SKILLS_ROOT / "value-profile/references/quantitative-analysis.md"
+
+    assert method_path.exists()
+    assert "references/quantitative-analysis.md" in part2
+    assert "进入Step 4前完整读取" in part2
+
+
+def test_quantitative_method_prefers_full_ten_year_window_without_forcing_it() -> None:
+    method = read(SKILLS_ROOT / "value-profile/references/quantitative-analysis.md")
+
+    assert "存在10个可比完整财年时展示全部10年" in method
+    assert "推荐规范" in method
+    assert "上市历史不足" in method
+    assert "披露口径变化" in method
+    assert "不得为填满10年而猜数" in method
+
+
+def test_quantitative_method_separates_reported_calculated_and_interpretation_layers() -> None:
+    method = read(SKILLS_ROOT / "value-profile/references/quantitative-analysis.md")
+
+    for layer in ("报表原值层", "计算指标层", "分析结论层"):
+        assert layer in method
+    assert "趋势→原因→影响" in method
+    assert "证据等级" in method
+
+
+def test_quantitative_method_adapts_a_share_only_fields_for_hk_issuers() -> None:
+    method = read(SKILLS_ROOT / "value-profile/references/quantitative-analysis.md")
+
+    assert "销售商品、提供劳务收到的现金" in method
+    assert "应收账款、合同负债和经营现金流" in method
+    assert "扣非净利润" in method
+    assert "公司披露并提供对账的非国际财务报告准则盈利" in method
+    assert "不得自行构造港股扣非净利润" in method
+
+
+def test_quantitative_completion_requires_coverage_formula_and_consistency_checks() -> None:
+    skill = read(SKILL_PATHS["value-profile"])
+    part2 = skill.split("### Step 4 — Part 2 bulk mode", 1)[1].split("### Step 5", 1)[0]
+
+    for check in ("窗口覆盖", "公式与分母", "单位与币种", "跨表勾稽", "来源定位"):
+        assert check in part2
+    assert "随机抽取5个适用cell" not in part2
+    assert "≥4/5一致" not in part2
+
+
 def test_cycle_overlay_runs_adapted_moat_analysis_and_produces_label() -> None:
     overlays = read(SKILLS_ROOT / "value-profile/references/industry-overlays.md")
 

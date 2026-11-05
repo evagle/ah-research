@@ -1,0 +1,1927 @@
+{
+  "ticker": "600519.SH",
+  "metrics": [
+    {
+      "key": "2025_Q2_revenue",
+      "value": "38788396531.06",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_revenue",
+        "2025_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_revenue",
+      "value": "39064353239.02",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_revenue",
+        "2025_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_attributable_ni",
+      "value": "18555488059.34",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_attributable_ni",
+        "2025_Q1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_attributable_ni",
+      "value": "19223784414.08",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_attributable_ni",
+        "2025_H1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_deducted_ni",
+      "value": "18540363920.92",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_deducted_ni",
+        "2025_Q1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_deducted_ni",
+      "value": "19290368807.38",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_deducted_ni",
+        "2025_H1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_cfo",
+      "value": "4309865384.95",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_cfo",
+        "2025_Q1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cfo",
+      "value": "25077741123.94",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_cfo",
+        "2025_H1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_consolidated_ni",
+      "value": "19212045437.63",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_consolidated_ni",
+        "2025_Q1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_consolidated_ni",
+      "value": "19912123296.93",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_consolidated_ni",
+        "2025_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_cost",
+      "value": "3716060533.50",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_cost",
+        "2025_Q1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cost",
+      "value": "3406480989.84",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_cost",
+        "2025_H1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_total_revenue",
+      "value": "39650311970.20",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_total_revenue",
+        "2025_Q1_total_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_total_revenue",
+      "value": "39810127080.91",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_total_revenue",
+        "2025_H1_total_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_sales_receipts",
+      "value": "38942552841.30",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_sales_receipts",
+        "2025_Q1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_sales_receipts",
+      "value": "43705105031.36",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_sales_receipts",
+        "2025_H1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_capex",
+      "value": "694891460.42",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_capex",
+        "2025_Q1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_capex",
+      "value": "686866460.66",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_capex",
+        "2025_H1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_core",
+      "value": "32032471500.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_core",
+        "2025_Q1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_core",
+      "value": "34923553700.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_core",
+        "2025_H1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_series",
+      "value": "6740049600.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_series",
+        "2025_Q1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_series",
+      "value": "4121825400.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_series",
+        "2025_H1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_direct",
+      "value": "16789142700.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_direct",
+        "2025_Q1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_direct",
+      "value": "15545795000.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_direct",
+        "2025_H1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_wholesale",
+      "value": "21983378400.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_wholesale",
+        "2025_Q1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_wholesale",
+      "value": "23499584100.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_wholesale",
+        "2025_H1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_domestic",
+      "value": "36998053700.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_domestic",
+        "2025_Q1_domestic"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_domestic",
+      "value": "38045303900.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_domestic",
+        "2025_H1_domestic"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_overseas",
+      "value": "1774467400.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_overseas",
+        "2025_Q1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_overseas",
+      "value": "1000075200.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_overseas",
+        "2025_H1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_i_moutai",
+      "value": "4890246300.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_H1_i_moutai",
+        "2025_Q1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_i_moutai",
+      "value": "1931302500.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2025_YTD_i_moutai",
+        "2025_H1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_revenue",
+      "value": "36794008743.97",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_revenue",
+        "2026_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_revenue",
+      "value": "40267482684.56",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_revenue",
+        "2026_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_attributable_ni",
+      "value": "17274367535.41",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_attributable_ni",
+        "2026_Q1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_attributable_ni",
+      "value": "19950545560.09",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_attributable_ni",
+        "2026_H1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_deducted_ni",
+      "value": "17224222451.60",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_deducted_ni",
+        "2026_Q1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_deducted_ni",
+      "value": "19860616953.17",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_deducted_ni",
+        "2026_H1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_cfo",
+      "value": "43780858849.93",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_cfo",
+        "2026_Q1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cfo",
+      "value": "13368229713.23",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2026_H1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_consolidated_ni",
+      "value": "17879499076.89",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_consolidated_ni",
+        "2026_Q1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_consolidated_ni",
+      "value": "20683812651.26",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_consolidated_ni",
+        "2026_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_cost",
+      "value": "3953033365.56",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_cost",
+        "2026_Q1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cost",
+      "value": "4171956367.02",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_cost",
+        "2026_H1_cost"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_total_revenue",
+      "value": "37575159697.98",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_total_revenue",
+        "2026_Q1_total_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_total_revenue",
+      "value": "41005580425.74",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_total_revenue",
+        "2026_H1_total_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_sales_receipts",
+      "value": "42029108246.47",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_sales_receipts",
+        "2026_Q1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_sales_receipts",
+      "value": "45101055123.84",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_sales_receipts",
+        "2026_H1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_capex",
+      "value": "227351168.39",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_capex",
+        "2026_Q1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_capex",
+      "value": "617855662.68",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_capex",
+        "2026_H1_capex"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_core",
+      "value": "31719569300.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_core",
+        "2026_Q1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_core",
+      "value": "35201014400.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_core",
+        "2026_H1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_series",
+      "value": "5053308200.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_series",
+        "2026_Q1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_series",
+      "value": "5034356200.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_series",
+        "2026_H1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_direct",
+      "value": "22458013100.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_direct",
+        "2026_Q1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_direct",
+      "value": "21811546000.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_direct",
+        "2026_H1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_wholesale",
+      "value": "14314864400.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_wholesale",
+        "2026_Q1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_wholesale",
+      "value": "18423824600.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_wholesale",
+        "2026_H1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_domestic",
+      "value": "35888335300.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_domestic",
+        "2026_Q1_domestic"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_domestic",
+      "value": "39630463500.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_domestic",
+        "2026_H1_domestic"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_overseas",
+      "value": "884542200.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_overseas",
+        "2026_Q1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_overseas",
+      "value": "604907100.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_overseas",
+        "2026_H1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_i_moutai",
+      "value": "18710518300.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_H1_i_moutai",
+        "2026_Q1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_i_moutai",
+      "value": "18298741800.00",
+      "formula": "cumulative_high - cumulative_low",
+      "inputs": [
+        "2026_YTD_i_moutai",
+        "2026_H1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_revenue_yoy",
+      "value": "0.065380073282361807662047933",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_revenue",
+        "2025_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_attributable_ni_yoy",
+      "value": "0.014714182949831394897644976",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_attributable_ni",
+        "2025_Q1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_deducted_ni_yoy",
+      "value": "0.014528982539610253531009904",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_deducted_ni",
+        "2025_Q1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_cfo_yoy",
+      "value": "2.054750098573210297223336307",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_cfo",
+        "2025_Q1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_sales_receipts_yoy",
+      "value": "0.004426595095017261938575036",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_sales_receipts",
+        "2025_Q1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_core_yoy",
+      "value": "0.056187624860020015759682171",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_core",
+        "2025_Q1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_series_yoy",
+      "value": "0.122235809065623798590349808",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_series",
+        "2025_Q1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_direct_yoy",
+      "value": "0.270605264852634549014588266",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_direct",
+        "2025_Q1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_wholesale_yoy",
+      "value": "-0.1088392657453803707896573114",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_wholesale",
+        "2025_Q1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_overseas_yoy",
+      "value": "-0.8641447250492449847359098282",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_overseas",
+        "2025_Q1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_i_moutai_yoy",
+      "value": "2.671608839589415758723497797",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q1_i_moutai",
+        "2025_Q1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q1_gross_margin",
+      "value": "0.9197360935419889995830905718",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_Q1_cost",
+        "2025_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q1_net_margin",
+      "value": "0.5305724508093697619607560436",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2025_Q1_attributable_ni",
+        "2025_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q1_cash_conversion",
+      "value": "0.3171669159839823681371005080",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2025_Q1_cfo",
+        "2025_Q1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q1_direct_share",
+      "value": "0.4590841409411077951643660149",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2025_Q1_direct",
+        "2025_Q1_core",
+        "2025_Q1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q1_i_direct_share",
+      "value": "0.2528025784437430647895711885",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2025_Q1_i_moutai",
+        "2025_Q1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q1_gross_margin",
+      "value": "0.8975921762420660041222984402",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_Q1_cost",
+        "2026_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q1_net_margin",
+      "value": "0.5053402108977032383040198540",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2026_Q1_attributable_ni",
+        "2026_Q1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q1_cash_conversion",
+      "value": "0.9558163079434961764727740998",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2026_Q1_cfo",
+        "2026_Q1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q1_direct_share",
+      "value": "0.5475294599655999200783092421",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2026_Q1_direct",
+        "2026_Q1_core",
+        "2026_Q1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q1_i_direct_share",
+      "value": "0.7305118335021978130251538248",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2026_Q1_i_moutai",
+        "2026_Q1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q1_other_direct_yoy",
+      "value": "-0.5417367976800354346172810617",
+      "formula": "(current direct - current i) / (prior direct - prior i) - 1",
+      "inputs": [
+        "2025_Q1_direct",
+        "2025_Q1_i_moutai",
+        "2026_Q1_direct",
+        "2026_Q1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_revenue_yoy",
+      "value": "-0.0514171238167317417788155306",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_revenue",
+        "2025_Q2_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_attributable_ni_yoy",
+      "value": "-0.0690426745894803569628691855",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_attributable_ni",
+        "2025_Q2_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_deducted_ni_yoy",
+      "value": "-0.0709878983462095458977100390",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_deducted_ni",
+        "2025_Q2_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_cfo_yoy",
+      "value": "9.15828916671324630208506206",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_cfo",
+        "2025_Q2_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_sales_receipts_yoy",
+      "value": "0.079259195403763957400978309",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_sales_receipts",
+        "2025_Q2_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_core_yoy",
+      "value": "-0.0097682815389377619519617773",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_core",
+        "2025_Q2_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_series_yoy",
+      "value": "-0.2502565263021209814242316555",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_series",
+        "2025_Q2_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_direct_yoy",
+      "value": "0.337650974876757703655708400",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_direct",
+        "2025_Q2_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_wholesale_yoy",
+      "value": "-0.3488323705513798552455431509",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_wholesale",
+        "2025_Q2_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_overseas_yoy",
+      "value": "-0.5015167931515676196699922467",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_overseas",
+        "2025_Q2_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_i_moutai_yoy",
+      "value": "2.826089148106916414414545950",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q2_i_moutai",
+        "2025_Q2_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_gross_margin",
+      "value": "0.9041965931609380608559382915",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_Q2_cost",
+        "2025_Q2_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_net_margin",
+      "value": "0.4783772911180177643557492313",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2025_Q2_attributable_ni",
+        "2025_Q2_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_cash_conversion",
+      "value": "0.2243314174402486453484772358",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2025_Q2_cfo",
+        "2025_Q2_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_direct_share",
+      "value": "0.4330165339699821583177886258",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2025_Q2_direct",
+        "2025_Q2_core",
+        "2025_Q2_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q2_i_direct_share",
+      "value": "0.2912743305231421971295770808",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2025_Q2_i_moutai",
+        "2025_Q2_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_gross_margin",
+      "value": "0.8925631237121493492057796115",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_Q2_cost",
+        "2026_Q2_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_net_margin",
+      "value": "0.4694885967879489684208799967",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2026_Q2_attributable_ni",
+        "2026_Q2_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_cash_conversion",
+      "value": "2.448662496731722775134685587",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2026_Q2_cfo",
+        "2026_Q2_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_direct_share",
+      "value": "0.6107222123153130999878918912",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2026_Q2_direct",
+        "2026_Q2_core",
+        "2026_Q2_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q2_i_direct_share",
+      "value": "0.8331332881803332815760090549",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2026_Q2_i_moutai",
+        "2026_Q2_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q2_other_direct_yoy",
+      "value": "-0.6850552627721004445420669433",
+      "formula": "(current direct - current i) / (prior direct - prior i) - 1",
+      "inputs": [
+        "2025_Q2_direct",
+        "2025_Q2_i_moutai",
+        "2026_Q2_direct",
+        "2026_Q2_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_revenue_yoy",
+      "value": "0.030798652627844778304469578",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_revenue",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_attributable_ni_yoy",
+      "value": "0.037805310877170533750338923",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_attributable_ni",
+        "2025_Q3_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_deducted_ni_yoy",
+      "value": "0.029561287888484417953843630",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_deducted_ni",
+        "2025_Q3_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_cfo_yoy",
+      "value": "-0.4669284746516396692858331773",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_cfo",
+        "2025_Q3_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_sales_receipts_yoy",
+      "value": "0.031940206789992956545140914",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_sales_receipts",
+        "2025_Q3_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_core_yoy",
+      "value": "0.007944801447854947247249927",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_core",
+        "2025_Q3_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_series_yoy",
+      "value": "0.221389969599391570540566808",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_series",
+        "2025_Q3_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_direct_yoy",
+      "value": "0.403051178791435240204827093",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_direct",
+        "2025_Q3_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_wholesale_yoy",
+      "value": "-0.2159935885844039256847954173",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_wholesale",
+        "2025_Q3_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_overseas_yoy",
+      "value": "-0.3951383855934033760661198278",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_overseas",
+        "2025_Q3_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_i_moutai_yoy",
+      "value": "8.474819092296520094599370114",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_Q3_i_moutai",
+        "2025_Q3_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_gross_margin",
+      "value": "0.9127982237668948095783591402",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_Q3_cost",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_net_margin",
+      "value": "0.4921055340774986147804951766",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2025_Q3_attributable_ni",
+        "2025_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_cash_conversion",
+      "value": "1.259420743332099680300269435",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2025_Q3_cfo",
+        "2025_Q3_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_direct_share",
+      "value": "0.3981468577929622406970047833",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2025_Q3_direct",
+        "2025_Q3_core",
+        "2025_Q3_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_Q3_i_direct_share",
+      "value": "0.1242331125555174244868146016",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2025_Q3_i_moutai",
+        "2025_Q3_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_gross_margin",
+      "value": "0.8963939116904450050586467596",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_Q3_cost",
+        "2026_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_net_margin",
+      "value": "0.4954505280693832930706462573",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2026_Q3_attributable_ni",
+        "2026_Q3_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_cash_conversion",
+      "value": "0.6463136143527022734812672525",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2026_Q3_cfo",
+        "2026_Q3_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_direct_share",
+      "value": "0.5420987970221405143463497761",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2026_Q3_direct",
+        "2026_Q3_core",
+        "2026_Q3_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_Q3_i_direct_share",
+      "value": "0.8389474913882766494406219532",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2026_Q3_i_moutai",
+        "2026_Q3_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_other_direct_yoy",
+      "value": "-0.7419805255318918424612595732",
+      "formula": "(current direct - current i) / (prior direct - prior i) - 1",
+      "inputs": [
+        "2025_Q3_direct",
+        "2025_Q3_i_moutai",
+        "2026_Q3_direct",
+        "2026_Q3_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_revenue_yoy",
+      "value": "0.014698691541198490124079221",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_revenue",
+        "2025_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_attributable_ni_yoy",
+      "value": "-0.0195159485502795112169483063",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_attributable_ni",
+        "2025_H1_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_deducted_ni_yoy",
+      "value": "-0.0204017388379267307825962437",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_deducted_ni",
+        "2025_H1_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_cfo_yoy",
+      "value": "4.388400126368908875479890286",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_cfo",
+        "2025_H1_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_sales_receipts_yoy",
+      "value": "0.035074152514051520768552219",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_sales_receipts",
+        "2025_H1_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_core_yoy",
+      "value": "0.028237735718326434799322903",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_core",
+        "2025_H1_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_series_yoy",
+      "value": "-0.0601882746931679579191307668",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_series",
+        "2025_H1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_direct_yoy",
+      "value": "0.298739513232160895269559926",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_direct",
+        "2025_H1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_wholesale_yoy",
+      "value": "-0.2157616687444470457879278119",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_wholesale",
+        "2025_H1_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_overseas_yoy",
+      "value": "-0.6417217278751107368293558292",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_overseas",
+        "2025_H1_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_i_moutai_yoy",
+      "value": "2.741814791452485087153751880",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_H1_i_moutai",
+        "2025_H1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_gross_margin",
+      "value": "0.9129930948190760876917884831",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_H1_cost",
+        "2025_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_net_margin",
+      "value": "0.5079235955366354749191818596",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2025_H1_attributable_ni",
+        "2025_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_cash_conversion",
+      "value": "0.2792080782615516708188119821",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2025_H1_cfo",
+        "2025_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_direct_share",
+      "value": "0.4477726825401327452604076232",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2025_H1_direct",
+        "2025_H1_core",
+        "2025_H1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_i_direct_share",
+      "value": "0.2689463977605634031987258938",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2025_H1_i_moutai",
+        "2025_H1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_gross_margin",
+      "value": "0.8955521282791586908487856539",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_H1_cost",
+        "2026_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_net_margin",
+      "value": "0.4907969123545966701994901123",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2026_H1_attributable_ni",
+        "2026_H1_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_cash_conversion",
+      "value": "1.535642745130287226995218584",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2026_H1_cfo",
+        "2026_H1_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_direct_share",
+      "value": "0.5731616527814865013548562071",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2026_H1_direct",
+        "2026_H1_core",
+        "2026_H1_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_i_direct_share",
+      "value": "0.7748648585764914149744716562",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2026_H1_i_moutai",
+        "2026_H1_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_other_direct_yoy",
+      "value": "-0.6000404032096455250850371389",
+      "formula": "(current direct - current i) / (prior direct - prior i) - 1",
+      "inputs": [
+        "2025_H1_direct",
+        "2025_H1_i_moutai",
+        "2026_H1_direct",
+        "2026_H1_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_revenue_yoy",
+      "value": "0.019594887832458559301863739",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_revenue",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_attributable_ni_yoy",
+      "value": "-0.0024652444743899405089801700",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_attributable_ni",
+        "2025_YTD_attributable_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_deducted_ni_yoy",
+      "value": "-0.0055007489360966670254828306",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_deducted_ni",
+        "2025_YTD_deducted_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_cfo_yoy",
+      "value": "1.200681080332072005840676915",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2025_YTD_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_sales_receipts_yoy",
+      "value": "0.034087282209102056256515506",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_sales_receipts",
+        "2025_YTD_sales_receipts"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_core_yoy",
+      "value": "0.021824932187064714389027065",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_core",
+        "2025_YTD_core"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_series_yoy",
+      "value": "0.004707349017701214471544705",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_series",
+        "2025_YTD_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_direct_yoy",
+      "value": "0.327928538006459891196991405",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_direct",
+        "2025_YTD_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_wholesale_yoy",
+      "value": "-0.2158364880122430236039449709",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_wholesale",
+        "2025_YTD_wholesale"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_overseas_yoy",
+      "value": "-0.5783781280383215060742734248",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_overseas",
+        "2025_YTD_overseas"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_i_moutai_yoy",
+      "value": "3.614206247527919733622025034",
+      "formula": "current / prior - 1",
+      "inputs": [
+        "2026_YTD_i_moutai",
+        "2025_YTD_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_gross_margin",
+      "value": "0.9129338321340404512932291601",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2025_YTD_cost",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_net_margin",
+      "value": "0.5031131283911348982197163501",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2025_YTD_attributable_ni",
+        "2025_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_cash_conversion",
+      "value": "0.5709638953969023149007775937",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2025_YTD_cfo",
+        "2025_YTD_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_direct_share",
+      "value": "0.4326816274427956303264605722",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2025_YTD_direct",
+        "2025_YTD_core",
+        "2025_YTD_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_YTD_i_direct_share",
+      "value": "0.2284519847495852243430857935",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2025_YTD_i_moutai",
+        "2025_YTD_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_gross_margin",
+      "value": "0.8958109379796590816750735668",
+      "formula": "1 - cost / revenue",
+      "inputs": [
+        "2026_YTD_cost",
+        "2026_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_net_margin",
+      "value": "0.4922276852508544077266588860",
+      "formula": "attributable_ni / revenue",
+      "inputs": [
+        "2026_YTD_attributable_ni",
+        "2026_YTD_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_cash_conversion",
+      "value": "1.259930743101135202600454285",
+      "formula": "cfo / consolidated_ni",
+      "inputs": [
+        "2026_YTD_cfo",
+        "2026_YTD_consolidated_ni"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_direct_share",
+      "value": "0.5636132734736990799310541328",
+      "formula": "direct / (core + series)",
+      "inputs": [
+        "2026_YTD_direct",
+        "2026_YTD_core",
+        "2026_YTD_series"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_YTD_i_direct_share",
+      "value": "0.7938112218554950956502823443",
+      "formula": "i_moutai / direct",
+      "inputs": [
+        "2026_YTD_i_moutai",
+        "2026_YTD_direct"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_other_direct_yoy",
+      "value": "-0.6451238843172910184402174823",
+      "formula": "(current direct - current i) / (prior direct - prior i) - 1",
+      "inputs": [
+        "2025_YTD_direct",
+        "2025_YTD_i_moutai",
+        "2026_YTD_direct",
+        "2026_YTD_i_moutai"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_core_gross_margin",
+      "value": "0.9384931630639468643957191693",
+      "formula": "1 - cost / exact_revenue",
+      "inputs": [
+        "2025_H1_core_cost",
+        "2025_H1_core_exact_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2025_H1_series_gross_margin",
+      "value": "0.7759135316293236110255251588",
+      "formula": "1 - cost / exact_revenue",
+      "inputs": [
+        "2025_H1_series_cost",
+        "2025_H1_series_exact_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_core_gross_margin",
+      "value": "0.9227928256688909268002137483",
+      "formula": "1 - cost / exact_revenue",
+      "inputs": [
+        "2026_H1_core_cost",
+        "2026_H1_core_exact_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "2026_H1_series_gross_margin",
+      "value": "0.7359095226082869179882359536",
+      "formula": "1 - cost / exact_revenue",
+      "inputs": [
+        "2026_H1_series_cost",
+        "2026_H1_series_exact_revenue"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_finance_bridge_contribution",
+      "value": "42344005833.84",
+      "formula": "sum of four disclosed financial flow changes",
+      "inputs": [
+        "2025_YTD_cash_customer_deposits",
+        "2025_YTD_cash_loans",
+        "2025_YTD_cash_central_interbank",
+        "2025_YTD_cash_interbank_lending",
+        "2026_YTD_cash_customer_deposits",
+        "2026_YTD_cash_loans",
+        "2026_YTD_cash_central_interbank",
+        "2026_YTD_cash_interbank_lending"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_finance_bridge_share",
+      "value": "0.9232881642045785805199829353",
+      "formula": "financial flow contribution / CFO increase",
+      "inputs": [
+        "YTD_finance_bridge_contribution",
+        "2026_YTD_cfo",
+        "2025_YTD_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "YTD_remaining_cash_change",
+      "value": "3518171843.18",
+      "formula": "CFO change - four financial flow contributions",
+      "inputs": [
+        "YTD_finance_bridge_contribution",
+        "2026_YTD_cfo",
+        "2025_YTD_cfo"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_finished_change",
+      "value": "0.024716027661446989671503634",
+      "formula": "end / opening - 1",
+      "inputs": [
+        "2026_H1_finished",
+        "2025_end_finished"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_raw_material_change",
+      "value": "-0.3364970666253588150470006192",
+      "formula": "end / opening - 1",
+      "inputs": [
+        "2026_H1_raw_material",
+        "2025_end_raw_material"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_wip_change",
+      "value": "-0.2481298399270972103659628153",
+      "formula": "end / opening - 1",
+      "inputs": [
+        "2026_H1_wip",
+        "2025_end_wip"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_semi_finished_change",
+      "value": "0.269060213216809850812949761",
+      "formula": "end / opening - 1",
+      "inputs": [
+        "2026_H1_semi_finished",
+        "2025_end_semi_finished"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "H1_inventory_change",
+      "value": "-0.0017942056113911957385050852",
+      "formula": "end / opening - 1",
+      "inputs": [
+        "2026_H1_inventory",
+        "2025_end_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_balance_inventory_yoy",
+      "value": "0.099034566386685677113641271",
+      "formula": "same-date current / prior - 1",
+      "inputs": [
+        "2026_Q3_inventory",
+        "2025_Q3_inventory"
+      ],
+      "evidence_level": "High"
+    },
+    {
+      "key": "Q3_balance_contract_liability_yoy",
+      "value": "-0.7310003264839128603892675136",
+      "formula": "same-date current / prior - 1",
+      "inputs": [
+        "2026_Q3_contract_liability",
+        "2025_Q3_contract_liability"
+      ],
+      "evidence_level": "High"
+    }
+  ],
+  "cash_bridge": {
+    "sales_receipts": "4731032527.64",
+    "customer_deposits": "7884844083.88",
+    "interest_received": "102131558.93",
+    "other_received": "-587128621.07",
+    "purchases": "-929606637.94",
+    "loans": "1536450023.76",
+    "central_interbank": "35222711726.20",
+    "interbank_lending": "-2300000000.00",
+    "interest_paid": "-16697242.16",
+    "staff": "-417327705.21",
+    "taxes_paid": "-408232832.58",
+    "other_paid": "1044000795.57"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "as_of": "2026-11-05",
+  "scoped_research_status": "complete",
+  "full_profile_status": "incomplete inherited gaps",
+  "evidence_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/last-year-facts-2026-11-05-evidence.json",
+  "evidence_sha256": "faafa2971fbe7cf6019eb9765a5bf2dbd533e6978179c93aab27b46e802689ee",
+  "ledger_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/last-year-facts-2026-11-05-ledger.json",
+  "ledger_sha256": "daf858a7a90c589c271ed516198264604c7330c120bb5b9e240406aec30d4a05",
+  "accepted_fact_groups": [
+    "Q3 tax arithmetic",
+    "Q3 product growth contribution",
+    "dealer changes",
+    "controlling-shareholder purchases and dividends",
+    "finance-company deposits and balance sheet",
+    "executive incentive, deferral and clawback rules"
+  ],
+  "unresolved_causal_claims": [
+    "Q3 tax movement caused by production packaging schedule",
+    "channel reforms cause sustained incremental consumption"
+  ],
+  "preserved_full_profile_gaps": "existing full-profile annual/event binding, governance and market-share gaps remain open"
+}

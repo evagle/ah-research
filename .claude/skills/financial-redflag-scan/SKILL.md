@@ -9,6 +9,10 @@ description: Use when a user asks to scan a Shanghai/Shenzhen A-share or HK fili
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人不在当前下载器与官方目录适配范围内。
 
+### US latest-report branch
+
+US latest-report branch只消费`us-sec-filing-manifest/1.0`。10-Q未经审计，因此审计红线必须回到最近10-K的审计意见、关键审计事项和重述记录；不得因10-Q没有审计意见而自动判风险。季度盈利质量同时检查GAAP operating income、经营现金流、free cash flow、stock-based compensation、回购与稀释、税率和一次性项目。管理层使用Adjusted EBITDA或其他non-GAAP指标时，必须核验GAAP与non-GAAP reconciliation，逐项保留调整项目，不得以non-GAAP替代GAAP。只依赖冲突事实的结论标`Manual review`，不牵连无关SEC事实。
+
 **共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充公司财务风险判断特有规则。
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享数据、run隔离、无感resolver和旧路径兼容只以该文件为准。

@@ -1,0 +1,85 @@
+{
+  "ticker": "600519.SH",
+  "as_of": "2026-11-05",
+  "target_fiscal_year": 2025,
+  "quarterly_period_end": "2026-09-30",
+  "profile_status": "partial",
+  "incremental_update_status": "verified",
+  "strict_annual_event_binding_status": "not established for new cutoff",
+  "inputs": {
+    "page-1": {
+      "artifact_id": "1d0ea7677370157c031633a5ac8bdca4bb11672656ca43cfb4ab66be8b414600",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/1d0ea7677370157c031633a5ac8bdca4bb11672656ca43cfb4ab66be8b414600.json",
+      "sha256": "9f3e08a811a1a7670d5dc4829e4e96f9a652bcd415cc9e1ddf9c458216cd2f1a"
+    },
+    "page-2": {
+      "artifact_id": "3a629b2aad6e3e29804450b91925f5dc30950bac23b58a71b7fb4d49132d63c2",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/3a629b2aad6e3e29804450b91925f5dc30950bac23b58a71b7fb4d49132d63c2.json",
+      "sha256": "54d5cc1680fab7a3ad535a6424ff02bdccd7b6c7953faa701c3036d975d4d986"
+    },
+    "page-3": {
+      "artifact_id": "d93c7bb66fc01859121dd7c769726d45dd831ba2346a3f3408ce506028b4f815",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/d93c7bb66fc01859121dd7c769726d45dd831ba2346a3f3408ce506028b4f815.json",
+      "sha256": "1d6b9cf3b1b46b383d83f5cc2ac83ace2dbf8b11b6c01cadab8a59b951eb555e"
+    },
+    "catalog": {
+      "artifact_id": "c44a25425648833e478077fd25b915011b025feeaae167ca82a0f075e699e178",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/c44a25425648833e478077fd25b915011b025feeaae167ca82a0f075e699e178.json",
+      "sha256": "78d36665dd2da2cfa5930d5f1786a91d14567947a52c889e5c4879f28ae2fcc0"
+    },
+    "index": {
+      "artifact_id": "9df79dab0ec03a2f9d2840ae344f684d65f4b333b695ec90217bb209cfd49dce",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/citations/9df79dab0ec03a2f9d2840ae344f684d65f4b333b695ec90217bb209cfd49dce.json",
+      "sha256": "25c7e555c65aa92cae99e9ff579b12d2c5f729c330c45b0a2b774970e3ba6e36"
+    },
+    "facts.json": {
+      "artifact_id": "f7de7ce352b7f1ffa35c7d388d3373612e7a81ef2cf9dcacc7651a8126fb85ee",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/facts/f7de7ce352b7f1ffa35c7d388d3373612e7a81ef2cf9dcacc7651a8126fb85ee.json",
+      "sha256": "1c0a21fb7e80819c4f319384ae848d04aa61ef46beb23d25d45e5ddaa01415a0"
+    },
+    "metrics.json": {
+      "artifact_id": "bd3edb0855fd6b39fe2bd4fc9f37720988103b4924e9657aa7356e416e0c50c6",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/metrics/bd3edb0855fd6b39fe2bd4fc9f37720988103b4924e9657aa7356e416e0c50c6.json",
+      "sha256": "4be3f718ec784e12cb9c156f99f97bac30fad9ef26042df12c9d70bc575022cc"
+    },
+    "canonical-citations.json": {
+      "artifact_id": "06eb604207b0a48e319f8303adcd540989b48861da71487ed60a36cd09e3100f",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/citations/06eb604207b0a48e319f8303adcd540989b48861da71487ed60a36cd09e3100f.json",
+      "sha256": "72b845b28ef30cf0b5e16d5cd037693b7008f694d7910c818eb181af6ba9687e"
+    },
+    "evidence-index.json": {
+      "artifact_id": "dd337c19bc2274a295340849a28042b9771f0d9aea2387336ad3f3fc9c4bfc42",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/citations/dd337c19bc2274a295340849a28042b9771f0d9aea2387336ad3f3fc9c4bfc42.json",
+      "sha256": "1abd4f9863826917a84b9e1dddbd4bf75316b6b4674e2ffbfe1cdf0b8d3046e1"
+    },
+    "verification": {
+      "artifact_id": "34b23a81e3707a4380c6afc5d221deaf899f7d60c8a40fe95d8df76ce0b5d9b4",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/analyses/34b23a81e3707a4380c6afc5d221deaf899f7d60c8a40fe95d8df76ce0b5d9b4.json",
+      "sha256": "c36e82aacfa5f3fc4c2a6178795c2e4efd53356de08a8647b1d67cbeacfbc398"
+    }
+  },
+  "verified_facts": 182,
+  "verified_formulas": 188,
+  "annual_rows_reused_without_change": 128,
+  "conclusions": {
+    "High": [
+      "Quarter 3 revenue/profit growth 3.08%/3.78%, after Q2 -5.14%/-6.90%",
+      "YTD revenue 1309.71 and attributable NI 644.67, unit CNY 100 million; NI -0.25%",
+      "92.33% of CFO increment accounted for by four financial flow changes",
+      "H1 finished inventory +2.47%; Q3 total inventory +9.90% YoY",
+      "Official price, channel, dividend and buyback changes verified"
+    ],
+    "Medium": [
+      "Marketing and channel structural change confirmed; operating recovery remains preliminary, not full-year confirmation"
+    ]
+  },
+  "remaining_work": [
+    "Full historical governance and redflag evaluation",
+    "Current AS_OF strict annual/event binding",
+    "Peer and industry share research",
+    "Complete quantitative acceptance beyond added facts/formulas"
+  ],
+  "valuation": "withheld; full-year 2023-2025 gate unchanged at 90.67%",
+  "subagent_review": "not accepted; message payloads unreadable, work completed by root",
+  "source_profile_path": "/Users/brian_huang/repos/ah-research/tmp/moutai-2026-update/profile-draft.md"
+}

@@ -1,0 +1,146 @@
+[
+  {
+    "artifact_id": "b6a01532de8158add9065c821ad354fca30a22f3ec232bfb6032a8a2c5ee728c",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/b6a01532de8158add9065c821ad354fca30a22f3ec232bfb6032a8a2c5ee728c.pdf",
+    "sha256": "613779ed98205e7bf7ee8dfdfe91794ce84336297cbb42cbf5c4ad9f06a55312",
+    "year": 2010,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/b6a01532de8158add9065c821ad354fca30a22f3ec232bfb6032a8a2c5ee728c/text.md",
+    "text_sha256": "97444213342f521748a3dfc0727ad54fe928536be34279e72362e0ae6ff8519b",
+    "page_count": 99
+  },
+  {
+    "artifact_id": "2b07bec49a0afae9089b2180d7d6e7f398ee67400090781722ddf84cf5dc64fe",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/2b07bec49a0afae9089b2180d7d6e7f398ee67400090781722ddf84cf5dc64fe.pdf",
+    "sha256": "0b63ee70ae66fd908e8239c2745d8036a5f3a47be1e711f1f557fcd6ffbc6b1b",
+    "year": 2011,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/2b07bec49a0afae9089b2180d7d6e7f398ee67400090781722ddf84cf5dc64fe/text.md",
+    "text_sha256": "50bb11c80823faabb8eb888a3f5bcb534d8984557bfd382da44f0ebf8e028167",
+    "page_count": 101
+  },
+  {
+    "artifact_id": "c1326cf65395e19717f591ca5fe4daf90e64e9be2d4edd9f613abe9ed8f9152a",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/c1326cf65395e19717f591ca5fe4daf90e64e9be2d4edd9f613abe9ed8f9152a.pdf",
+    "sha256": "9a8faef737d4dd64e8260325247b8ffe77e5de506f4b23b046f28c0758377eae",
+    "year": 2012,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/c1326cf65395e19717f591ca5fe4daf90e64e9be2d4edd9f613abe9ed8f9152a/text.md",
+    "text_sha256": "cac5247ffc139d00cf5455971ca9b54e180a0016fb5665d9f608cd4893a222ad",
+    "page_count": 97
+  },
+  {
+    "artifact_id": "f1e7cd49c6969a05a56a6d9188b6929a31d74c9d51fec3bbcc9d95916372cfc0",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/f1e7cd49c6969a05a56a6d9188b6929a31d74c9d51fec3bbcc9d95916372cfc0.pdf",
+    "sha256": "26524de9281264e149c23bdc618a32820678c8d07c5dc7c88cbc7e19b3df0bff",
+    "year": 2013,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/f1e7cd49c6969a05a56a6d9188b6929a31d74c9d51fec3bbcc9d95916372cfc0/text.md",
+    "text_sha256": "85f856b4ac34fbcf6e13a95be248657a36d4670d2ba14f3c13faf02f24aa9446",
+    "page_count": 102
+  },
+  {
+    "artifact_id": "5397d3500c2fa3d71adb0b8d3c9b28ab7260c46edda144d3cf6ffd4618923fbe",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/5397d3500c2fa3d71adb0b8d3c9b28ab7260c46edda144d3cf6ffd4618923fbe.pdf",
+    "sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24",
+    "year": 2014,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/5397d3500c2fa3d71adb0b8d3c9b28ab7260c46edda144d3cf6ffd4618923fbe/text.md",
+    "text_sha256": "562ea4826da9f830ec6848b3f6e5e7278e952032314eafad1a44ae2f8000d430",
+    "page_count": 97
+  },
+  {
+    "artifact_id": "d5fb0a007db0e57cd5ab4f0c300ac15ab50a1cb579cf8a82b161536e92983257",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/d5fb0a007db0e57cd5ab4f0c300ac15ab50a1cb579cf8a82b161536e92983257.pdf",
+    "sha256": "11a32c1e7f02a54fc2eea3c0d852af59ad37af9a2cbe91857cd93a6208a96d6c",
+    "year": 2015,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/d5fb0a007db0e57cd5ab4f0c300ac15ab50a1cb579cf8a82b161536e92983257/text.md",
+    "text_sha256": "e6cb8355c427d3dff834fa28003984c48b4abee976d08f3ef9a8cf2f9b8c5421",
+    "page_count": 92
+  },
+  {
+    "artifact_id": "f88e0d7bd6da293c6d5fb902fb776996e7bef4b6344523b840831eddcc6197bd",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/f88e0d7bd6da293c6d5fb902fb776996e7bef4b6344523b840831eddcc6197bd.pdf",
+    "sha256": "dd26d9e0017a938cb5e1aa0a830bab7502d0de1f85eb7c00abffb4888c8c20ad",
+    "year": 2016,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/f88e0d7bd6da293c6d5fb902fb776996e7bef4b6344523b840831eddcc6197bd/text.md",
+    "text_sha256": "b7f3dd2f886be569c1ab61d5a1a0c203a610e5b6ec482489f1c5fd4df51a063f",
+    "page_count": 96
+  },
+  {
+    "artifact_id": "468e690b7c8c484bb895a604eac3e4932d73e22840b93cc6347ee34126726ecc",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/468e690b7c8c484bb895a604eac3e4932d73e22840b93cc6347ee34126726ecc.pdf",
+    "sha256": "b66a4641e5f2313ed7964e5bef0026021ff2164459d0e0615f1b4385ba1a78e3",
+    "year": 2017,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/468e690b7c8c484bb895a604eac3e4932d73e22840b93cc6347ee34126726ecc/text.md",
+    "text_sha256": "9c277fb0c477b4f15ad4370747a666e61f20672e4f77270c253b0e640f361e82",
+    "page_count": 98
+  },
+  {
+    "artifact_id": "fa80077dce910c5a48e70beb848be34643155ccabb7ab91c3cc31eec7166728e",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/fa80077dce910c5a48e70beb848be34643155ccabb7ab91c3cc31eec7166728e.pdf",
+    "sha256": "08728fc937836cfeed8e98aeda932da54c737efa6de4280ae001476c0e393dec",
+    "year": 2018,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/fa80077dce910c5a48e70beb848be34643155ccabb7ab91c3cc31eec7166728e/text.md",
+    "text_sha256": "4dc533d3a7a8e571126d8717c1fd7f374e2d1e1664d347e787a2e7efdc15661a",
+    "page_count": 112
+  },
+  {
+    "artifact_id": "b42f7c15ed91e9c6263c8494c869fa20da925df7af5006db3c6c68267f156224",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/b42f7c15ed91e9c6263c8494c869fa20da925df7af5006db3c6c68267f156224.pdf",
+    "sha256": "2a2b384ab09a7bc295fd2e33b999acdf4212340b0141031c991060dea2fad03d",
+    "year": 2019,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/b42f7c15ed91e9c6263c8494c869fa20da925df7af5006db3c6c68267f156224/text.md",
+    "text_sha256": "c444e018b13efdae466680dab1fc5498126b91f7028940636e970baff2fe0fd3",
+    "page_count": 123
+  },
+  {
+    "artifact_id": "6c3ec081ccaa7598938241fd5246d423632cde241ea6d0c2ed9f8d1f27c0e5c8",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/6c3ec081ccaa7598938241fd5246d423632cde241ea6d0c2ed9f8d1f27c0e5c8.pdf",
+    "sha256": "464e4c179a18ebea566c5ddc5a4dbcfb83824227e9a10eb1ba0baa23c9d58d2c",
+    "year": 2020,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/6c3ec081ccaa7598938241fd5246d423632cde241ea6d0c2ed9f8d1f27c0e5c8/text.md",
+    "text_sha256": "dd2d2b4668b523980ea931a10f9fca253c9384708288a16663808a2b773ce092",
+    "page_count": 120
+  },
+  {
+    "artifact_id": "d13bd2da9c432c87ff06374699148f149439134c3c6c2e58286517c0a2ff67c7",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/d13bd2da9c432c87ff06374699148f149439134c3c6c2e58286517c0a2ff67c7.pdf",
+    "sha256": "f65effdde58bcea99fd6bdb53f61b31d5c432e6dfb2661e5caf05156a433ea5a",
+    "year": 2021,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/d13bd2da9c432c87ff06374699148f149439134c3c6c2e58286517c0a2ff67c7/text.md",
+    "text_sha256": "bb0c359073392b8af6f9bc4056010211f91ca7c59f3f1c2c9107a2f871062456",
+    "page_count": 124
+  },
+  {
+    "artifact_id": "d9ea349963392dac2ad8e037763bafeb554a5375cf70ceec260d8511b2c68c53",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/d9ea349963392dac2ad8e037763bafeb554a5375cf70ceec260d8511b2c68c53.pdf",
+    "sha256": "de394171306b9f2c7d79f54990de2a9e9c99feb54413150180179e24f0d83358",
+    "year": 2022,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/d9ea349963392dac2ad8e037763bafeb554a5375cf70ceec260d8511b2c68c53/text.md",
+    "text_sha256": "ce67e90e725c4b12a7190ec11bc9d147f02686c28647a3a16da974cc02bd9010",
+    "page_count": 127
+  },
+  {
+    "artifact_id": "ad513d094d458a66776b751b9ed371e289bea7e787af200c0f9f4c5f235f0351",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/ad513d094d458a66776b751b9ed371e289bea7e787af200c0f9f4c5f235f0351.pdf",
+    "sha256": "2125ff97a452ea79b0d784e2432f7d224b6aecc330b644b593477d69e22f4ed1",
+    "year": 2023,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/ad513d094d458a66776b751b9ed371e289bea7e787af200c0f9f4c5f235f0351/text.md",
+    "text_sha256": "5b2b5a1141d4b289bd90ddc89ebcb1b1aab7caf2ab4e0e5df57160d879cf99a7",
+    "page_count": 143
+  },
+  {
+    "artifact_id": "b0fa22de4eea2ea6b97657068c07878d1b372c936ccfa121d618500868919d5e",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/b0fa22de4eea2ea6b97657068c07878d1b372c936ccfa121d618500868919d5e.pdf",
+    "sha256": "5299f4940e2ce4e91084b73dc457d558b9d335fa76fbfee6227e4254eb7f4a30",
+    "year": 2024,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/b0fa22de4eea2ea6b97657068c07878d1b372c936ccfa121d618500868919d5e/text.md",
+    "text_sha256": "d6a97fb0dc137da3e41940b41e8d13073b723b58440cfd8302833c49a52f9f39",
+    "page_count": 143
+  },
+  {
+    "artifact_id": "aa143157486a1148a48d21a1ba74d606f9e4182764a54b6e098022877c9ea230",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/aa143157486a1148a48d21a1ba74d606f9e4182764a54b6e098022877c9ea230.pdf",
+    "sha256": "474905deeaf0f875fc0a1b097a626c0c7852c427faadc5d7fc7816cbf45ea288",
+    "year": 2025,
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/aa143157486a1148a48d21a1ba74d606f9e4182764a54b6e098022877c9ea230/text.md",
+    "text_sha256": "117f62c463048d96630125fc4adbb7ceb31eb5b46b640af417b78f33ff7135d6",
+    "page_count": 143
+  }
+]

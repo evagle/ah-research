@@ -284,3 +284,6 @@ data/filings/**/*.pdf
 
 # Profile migration backups
 profiles/*.pre-migration
+
+# Transient profile writer locks
+profiles/.*.lock

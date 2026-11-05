@@ -1,0 +1,1101 @@
+{
+  "requests": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "品牌溢价与社交价值的券商定性解释",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "婚宴和宴席用酒的具名采访观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "自饮及日常化门槛的具名专家定性观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2025至2026终端场景与偏好变化的观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2025-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2025-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media",
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2012年以来客群与渠道转向的券商历史复盘",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "商务场景修复及改革效果的条件性风险",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2025地方酒商的按需采购模式观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    }
+  ],
+  "accepted_candidates": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "metric": "品牌溢价与社交价值的券商定性解释",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "华鑫证券／孙山山",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-HX",
+        "title": "国酒飘香恒久远，定海神针风向标",
+        "published_at": "2024-11-22",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2024-11-22",
+      "artifact": {
+        "identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "sha256": "df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+        "document_id": "Q-HX",
+        "artifact_sha256": "df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "binding_sha256": "3417581c04d764ce815bc4dc9609750beb0cdaf66fb3a5526f0f75e597648bb1"
+      },
+      "scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "华鑫证券／孙山山",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-HX:2024-11-22"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd",
+      "values": [
+        {
+          "period": "2024-11-22",
+          "value": "高端白酒需要更好地满足消费者对精神属性、社交属性的需求 / 品牌力强的酒企天然具备消费者认知度高、口碑效应强的优势",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+          "event_key": "Q-HX:publication:2024-11-22",
+          "evidence_id": "Q-HX",
+          "canonical_value": {
+            "value": "高端白酒需要更好地满足消费者对精神属性、社交属性的需求 / 品牌力强的酒企天然具备消费者认知度高、口碑效应强的优势",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "metric": "婚宴和宴席用酒的具名采访观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "finance.sina.com.cn",
+        "original_publisher": "酒业家团队；受访者信达证券张伟敬",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml"
+      },
+      "document": {
+        "document_id": "Q-BQ",
+        "title": "38度国窖、39度五粮液、42度青花汾……低度高端酒重构700+价格带竞争格局？",
+        "published_at": "2024-07-11",
+        "canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2024-07-11",
+      "artifact": {
+        "identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "sha256": "b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+        "document_id": "Q-BQ",
+        "artifact_sha256": "b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "binding_sha256": "377acf4d8e221165705cbdd12e6c8ccd9ed8660639f3d29ca462565f550d29a3"
+      },
+      "scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "酒业家团队",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-BQ:2024-07-11"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea",
+      "values": [
+        {
+          "period": "2024-07-11",
+          "value": "相比之前，如今更多的消费者觉得宴席上43度茅台有面子，能摆上台面。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+          "event_key": "Q-BQ:publication:2024-07-11",
+          "evidence_id": "Q-BQ",
+          "canonical_value": {
+            "value": "相比之前，如今更多的消费者觉得宴席上43度茅台有面子，能摆上台面。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "metric": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "国金证券／刘宸倩、叶韬",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-GJ",
+        "title": "市场化转型专题：量价归位与渠道重构",
+        "published_at": "2026-03-22",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-03-22",
+      "artifact": {
+        "identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+        "document_id": "Q-GJ",
+        "artifact_sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "binding_sha256": "431e335f7ae8a1c31fe9c0b6544e9fe5a46935f8f44b34d2b2a74fa080d82dcf"
+      },
+      "scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "国金证券／刘宸倩、叶韬",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-GJ:2026-03-22"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b",
+      "values": [
+        {
+          "period": "2026-03-22",
+          "value": "如票据处理、即时配送、产品组合配置、售后服务、私享品鉴等。 / 尤其在礼赠场景中，购买方与受赠方分离，进一步放大该需求特征。 / 不同年份茅台酒因稀缺性，以及存放过程中的陈化效应",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+          "event_key": "Q-GJ:publication:2026-03-22",
+          "evidence_id": "Q-GJ",
+          "canonical_value": {
+            "value": "如票据处理、即时配送、产品组合配置、售后服务、私享品鉴等。 / 尤其在礼赠场景中，购买方与受赠方分离，进一步放大该需求特征。 / 不同年份茅台酒因稀缺性，以及存放过程中的陈化效应",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "metric": "自饮及日常化门槛的具名专家定性观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "cj.sina.com.cn",
+        "original_publisher": "《葡萄酒》杂志WINEMAG／Susan；受访者蔡学飞、肖竹青",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k"
+      },
+      "document": {
+        "document_id": "Q-SD",
+        "title": "1499直售，″茅台自由″不是梦?",
+        "published_at": "2026-01-09",
+        "canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-01-09",
+      "artifact": {
+        "identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "sha256": "977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+        "document_canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+        "document_id": "Q-SD",
+        "artifact_sha256": "977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "binding_sha256": "2b2363d3e7592402532d4075f18aeeecd866036ff9708b782cbdb214f4b4b373"
+      },
+      "scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "《葡萄酒》杂志WINEMAG／Susan",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-SD:2026-01-09"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071",
+      "values": [
+        {
+          "period": "2026-01-09",
+          "value": "价格回归能降低消费门槛，吸引部分中产阶级及年轻消费者尝试购买。 / 短期内很难成为高频次、日常化的大众消费品",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+          "event_key": "Q-SD:publication:2026-01-09",
+          "evidence_id": "Q-SD",
+          "canonical_value": {
+            "value": "价格回归能降低消费门槛，吸引部分中产阶级及年轻消费者尝试购买。 / 短期内很难成为高频次、日常化的大众消费品",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "metric": "2025至2026终端场景与偏好变化的观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "finance.eastmoney.com",
+        "original_publisher": "澎湃新闻（东方财富全文转载）",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html"
+      },
+      "document": {
+        "document_id": "Q-CH",
+        "title": "白酒春节动销“分化”：飞天茅台热销货源紧张 酒商坦言“不敢囤货”",
+        "published_at": "2026-02-05",
+        "canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-02-05",
+      "artifact": {
+        "identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "sha256": "96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html",
+        "document_canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html",
+        "document_id": "Q-CH",
+        "artifact_sha256": "96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "binding_sha256": "2958f1851e772713cff1531f96f5ac9b6b4d809b11b970a02435e409bab648e4"
+      },
+      "scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "澎湃新闻（东方财富全文转载）",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-CH:2026-02-05"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10",
+      "values": [
+        {
+          "period": "2026-02-05",
+          "value": "终端渠道普遍反映飞天茅台等名酒春节礼赠、聚餐等需求依然旺盛 / 尽管价格降了很多，甚至有品牌推出买一赠一的活动，但和去年、前年相比，白酒整体卖得并不好",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+          "event_key": "Q-CH:publication:2026-02-05",
+          "evidence_id": "Q-CH",
+          "canonical_value": {
+            "value": "终端渠道普遍反映飞天茅台等名酒春节礼赠、聚餐等需求依然旺盛 / 尽管价格降了很多，甚至有品牌推出买一赠一的活动，但和去年、前年相比，白酒整体卖得并不好",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "metric": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "www.sohu.com",
+        "original_publisher": "酒业家团队；受访者北京正一堂丁永征",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://www.sohu.com/a/884573014_554374"
+      },
+      "document": {
+        "document_id": "Q-WD",
+        "title": "被重估的婚宴市场：茅台、五粮液、习酒、郎酒等头部品牌大力加码",
+        "published_at": "2025-04-15",
+        "canonical_url": "https://www.sohu.com/a/884573014_554374"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2025-04-15",
+      "artifact": {
+        "identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "sha256": "2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://www.sohu.com/a/884573014_554374",
+        "document_canonical_url": "https://www.sohu.com/a/884573014_554374",
+        "document_id": "Q-WD",
+        "artifact_sha256": "2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "binding_sha256": "31e160430374bbbff1a9b58a2c6c505776e45fbc5076570046a8af2c88ce11b5"
+      },
+      "scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "酒业家团队",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-WD:2025-04-15"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142",
+      "values": [
+        {
+          "period": "2025-04-15",
+          "value": "围绕茅台1935和茅台王子酒两大品牌 / 现在不仅仅是靠品牌和性价比就能打动消费者的时候了。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+          "event_key": "Q-WD:publication:2025-04-15",
+          "evidence_id": "Q-WD",
+          "canonical_value": {
+            "value": "围绕茅台1935和茅台王子酒两大品牌 / 现在不仅仅是靠品牌和性价比就能打动消费者的时候了。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "metric": "2012年以来客群与渠道转向的券商历史复盘",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "东吴证券／苏铖、孙瑜",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-DW",
+        "title": "营销改革复盘专题：笃行不怠，臻于至善",
+        "published_at": "2026-03-03",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-03-03",
+      "artifact": {
+        "identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+        "document_id": "Q-DW",
+        "artifact_sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "binding_sha256": "07205571235cea0052e0bde3719d395087eb1be5634ce08dae1d673f6ce919f4"
+      },
+      "scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "东吴证券／苏铖、孙瑜",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-DW:2026-03-03"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7",
+      "values": [
+        {
+          "period": "2026-03-03",
+          "value": "从政务市场转向民间商务市场 / 期待未来可相应加强新商务及年轻群体的培育转化。 / 加强对政务意见领袖的定向供应 / 整肃渠道腐败，扩大渠道触达面 / 加强场景营销",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+          "event_key": "Q-DW:publication:2026-03-03",
+          "evidence_id": "Q-DW",
+          "canonical_value": {
+            "value": "从政务市场转向民间商务市场 / 期待未来可相应加强新商务及年轻群体的培育转化。 / 加强对政务意见领袖的定向供应 / 整肃渠道腐败，扩大渠道触达面 / 加强场景营销",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "metric": "商务场景修复及改革效果的条件性风险",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "爱建证券／范林泉",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-AJ",
+        "title": "推进市场化改革，龙头持续变革转型",
+        "published_at": "2026-04-01",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-04-01",
+      "artifact": {
+        "identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+        "document_id": "Q-AJ",
+        "artifact_sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "binding_sha256": "f6e19db05a10d02c7fc72bd9f9d99ab605fac7fb409d7c572be6e106e3052294"
+      },
+      "scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "爱建证券／范林泉",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-AJ:2026-04-01"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a",
+      "values": [
+        {
+          "period": "2026-04-01",
+          "value": "通过价格分层实现消费分层，匹配多样化需求。 / 若经济复苏节奏偏慢、商务宴请等核心消费场景修复滞后",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+          "event_key": "Q-AJ:publication:2026-04-01",
+          "evidence_id": "Q-AJ",
+          "canonical_value": {
+            "value": "通过价格分层实现消费分层，匹配多样化需求。 / 若经济复苏节奏偏慢、商务宴请等核心消费场景修复滞后",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "metric": "2025地方酒商的按需采购模式观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "static.cdsb.com",
+        "original_publisher": "红星财经／刘谧、记者李伟铭；河南酒商采访",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html"
+      },
+      "document": {
+        "document_id": "Q-RS",
+        "title": "贵州茅台再调查：价格场景的“变”与“不变”",
+        "published_at": "2025-08-10",
+        "canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2025-08-10",
+      "artifact": {
+        "identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "sha256": "e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+        "document_canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+        "document_id": "Q-RS",
+        "artifact_sha256": "e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "binding_sha256": "f0ad6ef50506382ffcdce055284b8572268c8c86b42ed9c966a9c1124bc2b56b"
+      },
+      "scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "红星财经／刘谧、记者李伟铭",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-RS:2025-08-10"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa",
+      "values": [
+        {
+          "period": "2025-08-10",
+          "value": "采购模式也从“百箱囤货”变为“按需单件购买”，更趋理性。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+          "event_key": "Q-RS:publication:2025-08-10",
+          "evidence_id": "Q-RS",
+          "canonical_value": {
+            "value": "采购模式也从“百箱囤货”变为“按需单件购买”，更趋理性。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    }
+  ],
+  "unresolved_claims": [],
+  "ledger_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/research/qualitative-consumption-2026-11-05-ledger.json",
+  "ledger_sha256": "1d90462218f264a67b4909bef9ac168d14dc55e77d3d5a66ea5978e1e7fe189e",
+  "status": "complete",
+  "industry_bundle": null
+}

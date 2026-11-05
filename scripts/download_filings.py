@@ -46,9 +46,10 @@ from tenacity import (
 )
 
 try:
-    from scripts import build_event_manifest
+    from scripts import build_event_manifest, sec_filings
 except ModuleNotFoundError:  # Direct execution via `python scripts/...`.
     import build_event_manifest  # type: ignore[no-redef]
+    import sec_filings  # type: ignore[no-redef]
 
 _download_locks: dict[Path, threading.Lock] = {}
 _download_locks_guard = threading.Lock()
@@ -332,6 +333,8 @@ def parse_ticker(ticker: str) -> tuple[str, str]:
 
 def canonical_ticker(ticker: str) -> str:
     """Return one stable identity for all accepted ticker aliases."""
+    if ticker.strip().upper().endswith(".US"):
+        return sec_filings.parse_us_ticker(ticker)
     code, exchange = parse_ticker(ticker)
     if exchange == "HK":
         code = code.zfill(5)
@@ -2913,9 +2916,14 @@ def _load_listing_profile_bundle(
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
-        description="Fetch 年报 + 招股说明书 PDFs from cninfo (巨潮资讯网) for an A-share ticker.",
+        description="Fetch official A-share, HK, or US SEC filing evidence.",
     )
-    parser.add_argument("ticker", nargs="?", help="e.g. 600519.SH or 000001.SZ")
+    parser.add_argument("ticker", nargs="?", help="e.g. 600519.SH, 0700.HK, or ABNB.US")
+    parser.add_argument(
+        "--latest",
+        action="store_true",
+        help="Build a latest-report SEC filing manifest for a .US research ticker.",
+    )
     parser.add_argument(
         "--revalidate",
         type=Path,
@@ -3013,9 +3021,27 @@ def main(argv: list[str] | None = None) -> int:
             _print("error: ticker cannot be combined with --revalidate")
             return 2
         try:
-            _print(revalidate_annual_manifest(args.revalidate))
+            try:
+                manifest_header = json.loads(args.revalidate.read_text(encoding="utf-8"))
+            except (OSError, UnicodeDecodeError, json.JSONDecodeError) as exc:
+                raise FetchSchemaError(f"cannot read manifest for revalidation: {exc}") from exc
+            if (
+                isinstance(manifest_header, dict)
+                and manifest_header.get("schema_version") == "us-sec-filing-manifest/1.0"
+            ):
+                client = sec_filings.SecClient(
+                    os.environ.get("AH_RESEARCH_SEC_USER_AGENT", USER_AGENT)
+                )
+                _print(sec_filings.revalidate_filing_manifest(args.revalidate, client))
+            else:
+                _print(revalidate_annual_manifest(args.revalidate))
             return 0
-        except (FetchSchemaError, OSError, urllib.error.URLError) as exc:
+        except (
+            FetchSchemaError,
+            sec_filings.SecEvidenceError,
+            OSError,
+            urllib.error.URLError,
+        ) as exc:
             _print(f"error: {exc}")
             return 2
     if args.ticker is None:
@@ -3030,6 +3056,44 @@ def main(argv: list[str] | None = None) -> int:
         return 2
 
     out_dir: Path = args.out or Path("data/filings") / f"{code}.{exchange}"
+
+    if exchange == "US":
+        if not args.latest:
+            _print("error: .US research requires --latest")
+            return 2
+        incompatible = (
+            args.include_prospectus
+            or args.lang != "en"
+            or args.end_year is not None
+            or args.listing_date is not None
+            or args.listing_profile_bundle is not None
+            or args.manifest_out is not None
+        )
+        if incompatible:
+            _print("error: annual-only flags are incompatible with .US --latest")
+            return 2
+        try:
+            client = sec_filings.SecClient(os.environ.get("AH_RESEARCH_SEC_USER_AGENT", USER_AGENT))
+            manifest_path = sec_filings.build_filing_manifest(
+                normalized_ticker,
+                args.as_of or date.today(),
+                out_dir,
+                client,
+            )
+        except (
+            sec_filings.SecEvidenceError,
+            ValueError,
+            OSError,
+            urllib.error.URLError,
+        ) as exc:
+            _print(f"error: SEC filing download failed: {exc}")
+            return 2
+        _print(f"SEC filing manifest {manifest_path}")
+        return 0
+
+    if args.latest:
+        _print("error: --latest is currently supported only for .US research tickers")
+        return 2
     out_dir.mkdir(parents=True, exist_ok=True)
 
     failures: list[str] = []

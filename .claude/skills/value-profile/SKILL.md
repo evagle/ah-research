@@ -4,11 +4,8 @@ description: Use when a user asks for a complete value-investing profile or full
 ---
 
 # Value Profile Skill
-
 本 skill 是一份给主 Claude Code session 读的指令文档, 结构分三层: **§1投资哲学（信念/心法）→ §2规则（从哲学推出的纪律）→ §3流程（Step 1-6如何执行）**。读者应先把 §1完整通读 internalize, 再查 §2规则, 最后照 §3操作。§4是跨层 operational boilerplate。
-
-**覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。
-
+**覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围。**US latest-report研究边界**:收到`ABNB.US`或其他`.US`最新财报分析请求时，完整读取`references/us-latest-report-analysis.md`并调用`read-filing`的US branch。该路径输出业务、战略、KPI、盈利质量和possible re-rating factors，不自动输出完整美股估值profile或买卖建议；现有A/H交易、市场快照和估值流程不接受`.US`。
 **共享契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。公共证据规则不在本skill重定义;本skill只补充父级编排、CAS和最终结论规则。接收判断型子skill响应时,分别按`.claude/skills/product-analysis/references/mode-b-response.schema.json`、`.claude/skills/management-analysis/references/mode-b-response.schema.json`和`.claude/skills/financial-redflag-scan/references/mode-b-response.schema.json`校验机器信封;Markdown正文保持自由。
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。正常入口、共享artifact、run隔离和无感resolver只以该文件为准；本skill仍是最终profile的唯一写入者。`source-discovery` must be invoked for macro, industry, valuation context, announcement/regulatory-letter discovery outside existing manifests, specialist vertical research, and current external evidence gaps. `source-discovery` may supply source candidates, access/provenance validation, fallback exhaustion logs, and source ledger handoffs only; `value-profile` remains the orchestrator and only writer of the profile. Annual, event, counterpart, and market manifests remain authoritative for bound financial, regulatory, filing, and market data; `source-discovery` cannot override, replace, or backfill those manifests.
@@ -16,6 +13,8 @@ description: Use when a user asks for a complete value-investing profile or full
 **读者渲染契约**:每次生成HTML前必须完整读取`references/reader-rendering.md`。研究内容和证据在上游section流程中完成；渲染层只执行读者语气编辑、确定性投影、机器字段负向检查和纯HTML转换，不得新增事实、改数字或改变投资判断。详细过滤、控制台报告和失败条件只以该文件为准。
 
 **操作与写作契约**:详细执行只以`references/operations.md`为准；面向读者的正文只以`references/profile-writing-style.md`为准。主skill只保留编排、验收和所有权边界，不复制两份reference的正文。
+
+**默认取数**:需要新取行情、财务表、券商研报或公司公告时，优先使用已安装的AKShare＋官方AKTools；执行前读取[共享取数指南](../source-discovery/references/akshare-aktools.md)。先复用已绑定证据和同次取数结果，再调用结构化接口；接口缺失、失败或覆盖不足时简短告警并自动切换对应官方来源、其他数据源及网页发现，不停下无关研究。取数通道不改变AS_OF、原文核验、manifest绑定或`source-discovery`编排边界。
 
 ## §0 Skill 运行方式
 
@@ -54,6 +53,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 ② 客户为何从它这里采购, 不选其他机构?
 ③ 资本天性逐利, 为什么别的资本没抢走它的份额或逼它降利?
 ④ 假设同行/巨头挟巨资参与竞争, 它能否保住乃至扩张份额?
+执行摘要和§1.8都必须逐字写出上述完整问题，并让答案及证据等级紧跟问题。不得把问题缩写成“卖什么”“为什么选它”“假想敌抗打击”等标签，也不得只写“四问已回答”后改用信号卡概括答案。
 四问任一答 "抽象空话/品牌复读/结论标签无场景" = 能力圈外, **不下注**, 错过是价值投资的标配。"跨出能力圈下注, 是注定要被别人收割的——早晚而已。"
 违反症状: "行业龙头/品牌强大/成长空间巨大/护城河宽广" 这类空话撑起的 §1, 没有产品级拆分、客户场景、挑战者名单、假想敌推演。
 ### §1.7市场波动 ≠ 信息, 价格不改变价值
@@ -130,7 +130,11 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
 
 ### §2.6能力圈四问是 §1前置条件
 
-- **§2.6.0市场份额证据窗口**:市场份额默认请求最近5个完整年度，公开证据允许时扩展至10年，另查AS_OF可得的当年H1/YTD/最新季度；该请求同时覆盖目标公司与主要具名对手，并保存每年排名、份额、市场分母、地域、产品范围、计量口径和source lineage。旧年份不能替代最近5年验收；缺任一必需年度时连续序列保持unresolved，继续调用`source-discovery`扩展当前及历史竞品、拟上市公司申请稿、最终招股书、原始咨询报告和具名券商原报告。profile必须把已验证部分序列、缺失年份和不可比截面分开写；当期H1/YTD/季度不年化、不与全年直接比较。不得用发行人会计收入除以行业GMV、RSV、零售额、出货量或用户数补份额，除非分子分母期间、地域、产品范围和计量基础完全一致。
+- **§2.6.0市场份额证据窗口**:市场份额默认请求最近5个完整年度，公开证据允许时扩展至10年，另查AS_OF可得的当年H1/YTD/最新季度；该请求同时覆盖目标公司与主要具名对手，并保存每年排名、份额、市场分母、地域、产品范围、计量口径和source lineage。旧年份不能替代最近5年验收；缺任一必需年度时连续序列保持unresolved，继续调用`source-discovery`扩展当前及历史竞品、拟上市公司申请稿、最终招股书、原始咨询报告和具名券商原报告。profile必须把已验证的部分序列、缺失年份和不可直接比较的数据分开写；当期H1/YTD/季度不年化、不与全年直接比较。不得用发行人会计收入除以行业GMV、RSV、零售额、出货量或用户数补份额，除非分子分母期间、地域、产品范围和计量基础完全一致。
+- **§2.6.0多边平台份额口径**:支付、平台和其他多边网络若经历了五年以上的份额迁移，公开证据允许时必须展示近十年形成过程。主表按时间顺序同时保留份额和排名；后期只公布排名时在同一时间线标明“比例未公布”，不拆成两段。交易金额、交易笔数、活跃用户、使用率、商户覆盖和线下份额不得互相替代；“超过”“反超”或“抢回份额”必须写明指标和期间。新交互方式或产品功能只能解释竞争机制，在同口径份额确认前不得写成已经改变份额。
+- **§2.6.0多指标继续检索**:主份额口径缺少连续值时，不得停在一家研究机构或只反复搜索“市场份额”。为交易金额、交易笔数、线上和线下使用率、活跃用户及商户覆盖分别建立claim，并执行不限域名的开放互联网搜索。监管机构、行业协会、专业研究机构、上市文件和具名券商原报告是优先方向，不是网站白名单；来源目录只提供起始线索。搜索结果中的媒体、论坛、社交内容、学术材料和其他公开页面均可用于发现数字和引用链，再按`source-discovery`追溯原始出处并评估证据。替代指标不能填补主份额表的缺失年份，但可以独立支持用户迁移、场景强弱和竞争机制；profile必须明确每张表回答的不同问题。
+- **§2.6.0付费原始报告fallback**:行业协会或专业机构的原始报告确认存在但需付费时，不得把“无法直接下载”写成“没有数据”。保留原始claim的`blocked`状态，另按`source-discovery`建立`:secondary-reconstruction`子claim，并通过不限站点的互联网搜索寻找公开转引，不得只查询来源目录已有网站。至少两家独立编辑的公开出版物须一致转引同一数值并明确指向同一原始报告，且至少一家来自上市文件、具名券商或成熟财经/商业/科技媒体。相同原始报告的多个转引只验证抄录一致性，统一记为同一lineage，结论证据最高为`Medium`；三家以上真正独立编辑且一致的转引可写“数字转引一致性高”，但转载、联稿或正文高度相同的页面只算一家。profile写“据公开转引”，不得假装直接阅读了付费报告。
+- **§2.6.0支付份额年份与指标**:分别记录数据统计期、原报告发布日期和转载发布日期；profile表格的年份或季度只使用数据统计期。2025年发布但统计2024年交易的报告列入2024年，不得按发布年份错列。交易金额、交易笔数、用户使用率、商户覆盖、线上、线下及综合支付分别建claim；转引只写“市场份额”时不得自行补成交易笔数或交易金额。指标或原始出处在不同转引间冲突时先标为待核实，不按出现次数多数表决。
 - **§2.6.0行业规模、增速与集中度证据窗口**:行业章节必须收集最近5个完整年度的逐年市场规模、同比增速、复合增速和可得的CR5或CR10，公开证据允许时扩展至10年；另收集未来3至5年预测及逐年预测值。行业预测可以作为情景数据保留，不因其为预测而删除，但必须与已发生数据分表，保存预测版本、发布日期、原始数据提供方、委托关系、计量口径和后续修订。新版本改变历史估计或未来预测时并列展示版本差异，不得跨预测版本拼接连续序列，也不得把行业预测当成公司盈利预测或既成事实。
 - **§2.6.0行业bundle消费契约**:调用`source-discovery`后接收且保留七个顶层字段：`requests`, `accepted_candidates`, `unresolved_claims`, `ledger_path`, `ledger_sha256`, `status`, and `industry_bundle`。执行`research_contracts.validate_payload("industry-bundle", industry_bundle)`,并继续按candidate contract校验`accepted_candidates`。Consume `industry_bundle.status`; do not infer completion from prose. Populate every industry table only from validated `accepted_candidates`. `industry_bundle` controls role status and gaps only; it does not supply table values. 行业章节固定完成`市场定义矩阵`、`历史市场规模与逐年增速`、`预测版本对照`、`集中度与竞争对手`、`当期部分期间`、`口径与数据限制`六个逻辑块,不得用通用行业问题替代。读者正文只保留口径差异、缺失期间及其投资影响；fingerprint、claim状态、role状态、route终态、schema版本和ledger路径连同机器引用按`references/profile-writing-style.md`写入同块HTML注释，供AI恢复和审计；最终可见性统一由`references/reader-rendering.md`的projection契约处理。
   - Accept unambiguous industry bundle `schema_version: 1.0` payloads for backward compatibility. New industry runs consume `schema_version: 1.1`.
@@ -143,6 +147,7 @@ This skill runs as the **main Claude Code session agent** and orchestrates resea
   - 缺口映射必须可复现：从`scope_breaks[].reason`生成可见的口径差异及影响；`scope_breaks[].from_scope_fingerprint`、`scope_breaks[].to_scope_fingerprint`、每个`ledger.attempts[].terminal_reason`、`ledger.next_escalation`和`ledger.unattempted_routes`只写入HTML注释。`exhausted`且无下一route时在注释中写`new publication/data release required`。
   - 行业表不得消费broker target prices、broker ratings或issuer earnings forecasts；这些字段即使与行业表同页也必须排除。
 - **§2.6.1四问是 §1末节 synthesis, 不是 §1开场前置**: §1.8能力圈四问 = §1.1-§1.7 具体拆解之后的综合判定章节（非 gate）。子 agent 在 §1.1-§1.7 全部填完之后才填 §1.8, 4段独立作答, 每问 ≥ 50字, 含 ticker 特定证据（产品 SKU / 客户场景/竞品名/挑战者份额/假想敌推演）, 呼应 §1.1-§1.7的引用（不另起炉灶）, 禁品牌复读和结论标签。份额序列不满五年时,不得把“未形成完整五年序列”写成“无法判断任何趋势”;先按市场定义、计量口径和历史重叠值核对可比性,明确写出可比年份已经确认的阶段变化,再单独列出未覆盖年份和不能外推的范围。**理由**: 读懂业务才能判定是否在能力圈, 反之是结论先行——与价值投资"看懂再下注"精神相反。
+- **§2.6.1四问输出格式**:执行摘要和§1.8统一使用“完整问题 → 紧随其后的公司特定答案 → 证据等级”。问题必须写成读者可以直接理解的完整问句，不得使用“问1卖什么”“问2为什么选它”等内部速记，也不得把四个答案拆散到信号卡或其他章节中。
 - **§2.6.2任一失败 = 能力圈结论未完成**:主agent复核任一问<50字、仅品牌复读或仅结论无场景时退回补证据。先把缺口拆成claim交给`source-discovery`;同一路线最多重试2次，随后继续下一条独立合规路线。只有全部适用路线形成validated terminal后仍不能回答，§1.8才写`**置信度:**需人工`、加入人工处理清单并阻断估值。§1.1-§1.7保留原置信度，其他不依赖§1.8的定性研究继续；不得把能力圈结论未完成扩大为profile整体失败。
 
 ### §2.7波动纪律
@@ -458,6 +463,8 @@ financial-redflag-scan重试耗尽或management-analysis重试耗尽后,对应se
 - 正文只是按template指导问题逐项填空,没有围绕公司级关键问题解释数据、原因和商业含义。
 - 同一证据缺口在多个可见section重复解释，或护城河来源写成`测试通过/证据窗口/连续序列`等研究流程状态。
 - 正文写“缺乏数据，无法分析”后继续列举缺失字段、已查来源、旧年份样本或接口错误。
+- 用户可见正文使用“口径截面”“云截面”“竞争截面”或其他“截面”组合词，没有改写为具体期间、市场范围和可支持的判断。
+- 用户可见正文使用“趋势精度”“阻断判断”或类似流程术语，没有具体说明哪些变化无法确认、哪些判断仍然成立。
 - §1.1缺核心产品利润地图、设计和交付流程、流程经济性或单位经济;§1.3缺直接竞品、替代方案、适用龙头、龙头差距、2至3项价值机制、`产品竞争力三问结论`或财报映射。
 - 产品流程、竞争比较或价值机制缺显式证据等级;未披露成本被写成精确单点值;高毛利被直接写成品牌、身份、情绪或稀缺性证明。
 - 填写区 generic, 无 ticker 特定细节。§3护城河写茅台必须引用茅台镇水源 / 12987工艺/基酒5年陈化/品牌价格带。
@@ -486,14 +493,18 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 
 仅无`--section`的auto流程允许bulk;显式定向§Q时只更新已解析的一个section。显式定向§Q也必须先判定行业路由,不能依赖§1.1已经完成。
 
+进入Step 4前完整读取`references/quantitative-analysis.md`。该文件是数据窗口、公式、港股替代、表格解释和完成检查的唯一方法来源；本节只保留路由与验收顺序。
+
 显式`--section part2/§Q* --auto`直接执行单section worker,但必须先用交易所行业、主营和业务分部判定行业。主overlay优先级的兼容基线为`银行>高杠杆地产>资源/周期>公用事业>互联网>白酒>消费品（非白酒）>默认`;保险识别优先于该基线。每次只选择一个主overlay替换目标§Q schema;次级overlay只追加不冲突的披露和风险检查,不得覆盖主overlay的估值路线。
 
 1. **Auto mode**:无`--section`时默认直接走`bulk`,不offer。**Interactive mode**:无`--section`时offer`[bulk/by-section]`等用户选。
 2. **进入bulk前先判定行业路由**:根据§1.1业务类型和`references/industry-overlays.md`选择主overlay。优先级固定为`银行>保险>高杠杆地产>资源/周期>公用事业>互联网>白酒>消费品（非白酒）>默认`;保险公司专属schema替换全部通用§Q并固定为仅定性研究
-3. `bulk`→ONE子agent:A股读取每份年报第十节财务报告,港股按`Consolidated Financial Statements`和`Notes`语义标题定位。默认行业抽取通用指标;银行、周期、公用事业等按所选overlay整表替换。银行路由在解析§Q进度前先用`industry-overlays.md`§2.5替换§Q1-§Q12正文,不保留通用表的销售收现、CFO/NI、毛利率、存货或资本开支字段。按所选overlay构造prompt、字段清单和`N/A`规则,不得再要求银行CFO/毛利率/存货等不适用指标。每个cell的`**来源:**`带`年报-YYYY.pdf p.NN`
-4. **Auto mode**:子agent随机抽取5个适用cell与独立数据源校核并汇报;主agent按所选overlay抽样校核字段和单位。≥4/5一致时为各§Q*写`**置信度:**高/中/低`中的适当值,由Step 2派生`已完成`;否则不一致行写`**置信度:**需人工`,不问用户。Interactive mode呈给用户校核结果后按同一规则落盘
-5. ≥4/5一致→各§Q*持久写入`高/中/低`;否则不一致行写`需人工`,作为终态退出bulk循环并加入人工处理清单,不得再次自动选择同一§Q。
-6. `by-section`也先执行同一行业路由,为用户选择的单个§Q替换或补充对应overlay schema后再走Step 3;不得把通用模板直接交给worker。
+3. **建立事实底表**:`bulk`→ONE子agent读取选定窗口内全部年报。A股按财务报告和附注语义标题定位,港股按`Consolidated Financial Statements`和`Notes`定位。先保存报表原值、页码、单位、重列和定义断点,再计算指标;不得从旧profile反推缺失原值。存在10个可比完整财年时展示全部10年;窗口较短时写明上市历史、披露或可比性原因。
+4. **应用行业schema**:按所选overlay构造prompt,保留适用的共同财务骨架,再按主overlay替换无经济意义的指标并增加行业KPI。银行路由在解析§Q进度前先用`industry-overlays.md`§2.5替换§Q1-§Q12正文,不保留销售收现、常规CFO/NI、毛利率、存货或资本开支字段。港股不构造A股扣非净利润或毛额销售收现,按`quantitative-analysis.md`使用披露替代。
+5. **生成读者正文**:每个§Q按“表格→趋势→原因→影响→来源→证据等级”输出。正文不保留抽取、搜索、核对和无实质影响的差异解释。§Q12只综合§Q1-§Q11已经完成的结论。
+6. **主agent全量验收**:逐项完成`quantitative-analysis.md`§9的窗口覆盖、来源定位、公式与分母、单位与币种、跨表勾稽、可比性、行业适用性、解释完整性和综合依赖检查,并按所选overlay抽样校核。独立抽样可追加,但不能替代全表验收。
+7. **状态映射**:单行错误只使相关行与依赖结论进入`需人工`,其他已核实表格保留;单位、币种、公式或会计口径存在系统性错误时Part 2整体不完成。通过全量验收后,各§Q按证据等级写`高/中/低`。
+8. `by-section`也先执行同一行业路由,为用户选择的单个§Q替换或补充对应overlay schema后再走Step 3;不得把通用模板直接交给worker。
 
 ### Step 5 — 排雷清单模式 (§4.5)
 
@@ -603,12 +614,10 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 | Step 1.2 fetcher失败 | A股回退cninfo/上交所/深交所,港股回退HKEXnews,然后abort。**绝不生成无filings的破profile** |
 | 用户选的 section id 不在 template | 建议最近匹配（`1.3` → `§1.3 差异化`）; 不静默继续 |
 
-### §4.4 Graduation path (Phase 1落地后)
+### §4.4 当前取数与计算
 
-1. **Step 4 Part 2 bulk** → 子 agent 优先 `ah_research.DataRepository.get_fundamentals(<ticker>, start=<10y>)`, repo 未覆盖回退 PDF。
-2. **Step 5排雷纯数值项**（应收/营收, 商誉/净资产, 有息负债/CFO）→ DataRepository 算术。
-3. **定性 section**（§1-§5, §4.5定性项）继续 PDF。没有数据源能替代管理层原话。
-4. **`scripts/download_filings.py`** 挪进 `src/ah_research/integrations/cninfo_client.py`, 暴露为 repo 方法。
+按[共享取数指南](../source-discovery/references/akshare-aktools.md)执行：Step 4 Part 2 bulk优先通过AKTools批量取财务表、筛选可比财年并复用结果作为研究工作表，经审计结论仍绑定选中年报原值。Step 5排雷纯数值项（应收/营收、商誉/净资产、有息负债/CFO）用Python/pandas计算已核对原文并绑定的数值，保存公式和分子分母，不逐项重新联网取数。
+定性section和附注（§1-§5、§4.5定性项）读取缓存原文及页码，券商观点、评级和盈利预测与公司披露事实分开。正式证据发布继续使用现有filing/event/market manifest脚本，尚未就绪的`DataRepository`不是取数前置条件。
 
 ### §4.6 Profile写作与读者渲染
 

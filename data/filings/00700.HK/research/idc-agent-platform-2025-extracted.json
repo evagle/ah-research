@@ -1,0 +1,34 @@
+{
+  "retrieved_at": "2026-11-05T00:36:43.698005+00:00",
+  "url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+  "publisher": "IDC Consulting, hosted by Sina Finance",
+  "author": "Sun Zhenya, IDC China research manager",
+  "published_at": "2026-06-12",
+  "underlying_report": "China Agent Development Platform Market Shares, 2025",
+  "report_id": "CHC54534826",
+  "report_vintage": "2026-05",
+  "basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+  "private_deployment": {
+    "market_rmb_100m": 17.5,
+    "ranked_products": [
+      "Volcano HiAgent",
+      "Tencent ADP",
+      "Alibaba Bailian dedicated edition"
+    ],
+    "rank_corroboration_url": "https://finance.sina.com.cn/tech/2026-06-12/doc-iniccspt0246572.shtml"
+  },
+  "public_cloud": {
+    "market_rmb_100m_approx": 2.5,
+    "top_three_products": [
+      "Volcano Coze",
+      "Baidu Qianfan",
+      "Tencent ADP"
+    ],
+    "ordinal_order_not_disclosed": true
+  },
+  "limits": [
+    "No vendor percentages in the retrieved text",
+    "No paid retention or actual inference unit costs",
+    "Extracted facts, not a copy of the article or underlying report"
+  ]
+}

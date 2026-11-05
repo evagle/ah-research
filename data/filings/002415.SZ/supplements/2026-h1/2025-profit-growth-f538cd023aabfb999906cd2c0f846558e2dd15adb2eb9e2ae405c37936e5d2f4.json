@@ -1,0 +1,147 @@
+{
+  "source_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+  "source_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+  "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+  "source_pages": [
+    11,
+    88,
+    89,
+    90,
+    92,
+    151,
+    224,
+    225
+  ],
+  "input_periods": [
+    "2025",
+    "2024"
+  ],
+  "unit": "CNY",
+  "inputs": {
+    "main_products_revenue": [
+      "65012347191.96",
+      "67963258099.83"
+    ],
+    "main_products_cost": [
+      "33113545592.56",
+      "36860856267.41"
+    ],
+    "construction_revenue": [
+      "2049207766.03",
+      "2048116006.90"
+    ],
+    "construction_cost": [
+      "1461451806.53",
+      "1624213884.66"
+    ],
+    "innovation_revenue": [
+      "25446241111.95",
+      "22484151011.57"
+    ],
+    "innovation_cost": [
+      "15492439151.27",
+      "13468787760.14"
+    ],
+    "revenue": [
+      "92507796069.94",
+      "92495525118.30"
+    ],
+    "cost": [
+      "50067436550.36",
+      "51953857912.21"
+    ],
+    "sales": [
+      "12347888877.70",
+      "12051218102.62"
+    ],
+    "admin": [
+      "2994512052.02",
+      "3095939643.92"
+    ],
+    "rd": [
+      "11752624736.80",
+      "11864013392.27"
+    ],
+    "finance": [
+      "-525631319.14",
+      "-114817493.16"
+    ],
+    "credit": [
+      "-800561956.90",
+      "-1068789505.74"
+    ],
+    "tax": [
+      "1579783198.79",
+      "1202471579.49"
+    ],
+    "minority": [
+      "1238283345.41",
+      "1163695036.97"
+    ],
+    "parent": [
+      "14195371894.42",
+      "11977327023.54"
+    ],
+    "tax_surcharge": [
+      "767498479.84",
+      "692285927.36"
+    ],
+    "other_income": [
+      "2840300144.79",
+      "2653682810.87"
+    ],
+    "investment": [
+      "247684884.36",
+      "187021018.77"
+    ],
+    "fair_value": [
+      "-17915101.74",
+      "47759102.43"
+    ],
+    "asset_impairment": [
+      "-436805418.06",
+      "-445914387.59"
+    ],
+    "asset_disposal": [
+      "26913929.91",
+      "-14539975.31"
+    ],
+    "nonop_income": [
+      "80221086.73",
+      "63737582.35"
+    ],
+    "nonop_expense": [
+      "29865822.83",
+      "32490638.86"
+    ]
+  },
+  "gross_profit": {
+    "main_products": [
+      "31898801599.40",
+      "31102401832.42"
+    ],
+    "construction": [
+      "587755959.50",
+      "423902122.24"
+    ],
+    "innovation": [
+      "9953801960.68",
+      "9015363251.43"
+    ]
+  },
+  "parent_profit_change": "2218044870.88",
+  "bridge": {
+    "gross": "1898692313.49",
+    "operating_expenses": "-83854527.71",
+    "finance": "410813825.98",
+    "credit": "268227548.84",
+    "other": "176065638.02",
+    "tax": "-377311619.30",
+    "minority": "-74588308.44"
+  },
+  "checks": [
+    "48 input amounts located in annual source",
+    "segment gross profits sum to consolidated gross profit",
+    "profit bridge equals parent income change"
+  ]
+}

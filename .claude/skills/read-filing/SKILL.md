@@ -1,19 +1,29 @@
 ---
 name: read-filing
-description: Use when a user asks to read,梳理,解读,or extract evidence from a complete Shanghai/Shenzhen A-share or HK annual report,including requests such as "读年报600519.SH","读财报0700.HK",or "/read-filing 600519.SH 2024".
+description: Use when a user asks to read,梳理,解读,or extract evidence from a complete Shanghai/Shenzhen A-share or HK annual report,or a latest US SEC 10-K/10-Q,including "读年报600519.SH","读财报0700.HK",or "/read-filing ABNB.US --latest".
 ---
 
 # Read Filing Skill
 
-本skill是value-profile体系的**阅读层**子skill。v1仅支持完整年度报告。它回答:**"这份上市公司年报应该怎么读、按什么顺序读、每一段读出什么?"**允许执行预先定义的机械阈值比较和初筛特征标签,用于决定是否继续取数;这些结果不构成最终风险、护城河或投资结论。最终判断由`financial-redflag-scan`/`management-analysis`/`value-profile`完成。
+本skill是value-profile体系的**阅读层**子skill。A/H路径支持完整年度报告；US路径支持SEC最新10-K/10-Q研究。它回答:**"这份上市公司财报应该怎么读、按什么顺序读、每一段读出什么?"**允许执行预先定义的机械阈值比较和初筛特征标签,用于决定是否继续取数;这些结果不构成最终风险、护城河或投资结论。最终判断由`financial-redflag-scan`/`management-analysis`/`value-profile`完成。
 
 **交易所无关**: 本 skill 的 §1原则 + §2规则 + §3流程适用于沪深A股和港股。**结构差异在 reference**: 具体年报节次地图/披露时限见 `references/filing-structure-cn.md` (A 股) 或 `references/filing-structure-hk.md` (港股); 术语/公式/阈值速查见 `references/quick-lookup.md`。方法论来源: 各交易所监管披露规则 + 中文价值投资财报阅读教材 + 本项目前序 skill 的实战沉淀。
 
 **覆盖边界**:港股仅支持当前上市发行人;已退市港股发行人超出当前下载器和官方目录适配范围,不得声称可完成同等证据闭环。
 
+### US latest-report branch
+
+- **Invocation**:`/read-filing ABNB.US --latest --as-of YYYY-MM-DD`。US ticker为`<uppercase-symbol>.US`，仅属于研究身份，不进入现有交易或回测`Symbol`。
+- **Forms**:支持`10-K, 10-Q, 10-K/A, 10-Q/A`。最新10-Q未经审计，必须同时绑定latest 10-K作为audited baseline，并保留prior four comparable quarters；不得把10-Q写成年度审计报告。
+- **Evidence**:先运行`uv run python scripts/download_filings.py ABNB.US --latest --as-of AS_OF`，只消费`us-sec-filing-manifest/1.0`绑定的SEC submissions、目录index、Inline XBRL HTML和same-earnings-cycle 8-K exhibits。发布前运行`uv run python scripts/download_filings.py --revalidate <bound-us-manifest-path>`。
+- **Reading map**:完整读取`references/filing-structure-us.md`，保留quarter-only、YTD、TTM和instant context差异；公司自定义KPI必须来自filing或SEC-filed earnings exhibit的可归属原文。
+- **Research order**:`独立分析`先按最新报告→audited baseline→可比季度→8-K exhibits→当前IR→独立市场证据完成；`用户既有分析`只能在独立结论完成后用于补充和cross-validation，不得充当事实来源或提高证据等级。
+
 **共享证据契约**:运行前必须完整读取`.claude/skills/read-filing/references/evidence-contract.md`。身份、AS_OF、manifest绑定、引用、Mode B写入权、终态和证据漂移只以该文件为准;本skill只补充年报阅读特有规则。
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享目录、run隔离、无感resolver、Mode边界和旧路径兼容只以该文件为准。
+
+**默认取数**:新增财务表、券商研报及公司公告取数优先使用AKShare＋官方AKTools，先读[共享取数指南](../source-discovery/references/akshare-aktools.md)。结构化结果用于定位原文、构建工作表和交叉检查；年报选择、附注阅读、官方事件采集、manifest构建和在线重验仍执行本skill既有流程。US财报原值继续以SEC证据为准。
 
 ### source-discovery handoff
 
@@ -57,9 +67,10 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 
 1. `references/reading-principles.md` — 长期阅读信念、证据层级、归母口径、所有者利润和财报形态初筛。派任何子agent前主agent必须完整读取。
 2. `references/statement-reading.md` — 阅读顺序/资产负债表5分类 + 反直觉规则/金融资产4分类新准则/附注必读12项/利润表八大指标三档/特殊场景加读清单。子 agent 开工前主 agent 先 Read 这份。
-3. **按 exchange 二选一** (主 agent Step 1根据 ticker 后缀选):
+3. **按 exchange 三选一** (主 agent Step 1根据 ticker 后缀选):
    - A股 (`.SH` / `.SZ`) → `references/filing-structure-cn.md` — 证监会第2号准则10节结构 + 季报披露时限 + 业绩预告
    - 港股 (`.HK`) → `references/filing-structure-hk.md` — HKEX Main Board Appendix 16章节结构 + 中报披露时限 + profit alert
+   - 美股研究 (`.US`) → `references/filing-structure-us.md` — SEC 10-K/10-Q结构 + Inline XBRL context + HTML anchor引用
 4. `references/quick-lookup.md` — 术语/时间预算/新准则 / CFO 画像/所有者利润速算/自检 / 20条反模式。生成事件query plan前还必须完整读取`references/event-source-discovery.md`,按真实官方请求发现并验证source contract。
 5. `../financial-redflag-scan/references/fraud-library.md` — 风险10项 + 三表勾稽4条公式 + 5维度造假手法 + pattern 叙述。Step 5勾稽时必读
 

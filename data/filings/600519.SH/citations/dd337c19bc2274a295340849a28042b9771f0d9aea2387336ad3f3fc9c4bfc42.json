@@ -1,0 +1,442 @@
+[
+  {
+    "announcement_id": "1225652625",
+    "title": "贵州茅台关于召开2026年第三季度业绩说明会的公告",
+    "publication_date": "2026-11-03",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-03/1225652625.PDF",
+    "sha256": "565e9e36441e0dd59da36b23439f0f7d9df6b94f0bc6fa122fc64de1ad2c421a",
+    "receipt": {
+      "artifact_id": "7502bbd165bc6e5564202e02e3fe2e16d5b5ab7ed8c051ea4753a22ab6c4a0fc",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/7502bbd165bc6e5564202e02e3fe2e16d5b5ab7ed8c051ea4753a22ab6c4a0fc.pdf",
+      "sha256": "565e9e36441e0dd59da36b23439f0f7d9df6b94f0bc6fa122fc64de1ad2c421a"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/7502bbd165bc6e5564202e02e3fe2e16d5b5ab7ed8c051ea4753a22ab6c4a0fc/text.md",
+    "text_sha256": "433337520f950ed7341f5d3ed0fb2630f853667160369294df91605ea439365a",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225649906",
+    "title": "贵州茅台2026年第三季度主要经营数据公告",
+    "publication_date": "2026-10-31",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649906.PDF",
+    "sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9",
+    "receipt": {
+      "artifact_id": "33255ba13f4c0403cc0a4954562ec3f3b35d133518a48542ca8ee637c56aa2a9",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/33255ba13f4c0403cc0a4954562ec3f3b35d133518a48542ca8ee637c56aa2a9.pdf",
+      "sha256": "97a72f8015a116aa370abb2a9ca2b926215e54b77509d4932537b3e82d5fada9"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/33255ba13f4c0403cc0a4954562ec3f3b35d133518a48542ca8ee637c56aa2a9/text.md",
+    "text_sha256": "0f6f2f1d936cdd984ebefc3555d68233098eaf4f6134b4c653be6cb5e9ab777a",
+    "pages": 1,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225649896",
+    "title": "贵州茅台2026年第三季度报告",
+    "publication_date": "2026-10-31",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-31/1225649896.PDF",
+    "sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b",
+    "receipt": {
+      "artifact_id": "fea7a06af6fbf7b9ca037b43d58f0a895d3ff076a77b4aaa8b19c1da113b89aa",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/fea7a06af6fbf7b9ca037b43d58f0a895d3ff076a77b4aaa8b19c1da113b89aa.pdf",
+      "sha256": "96ba51ebf414f841bce79b3ba019927df2f795142392e12e96a9d559e96ebb9b"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/fea7a06af6fbf7b9ca037b43d58f0a895d3ff076a77b4aaa8b19c1da113b89aa/text.md",
+    "text_sha256": "26eb2d912ee8f37ea29c52240c018995fc9d71ce19476cc2813e274682653a08",
+    "pages": 12,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225475868",
+    "title": "贵州茅台2026年半年度报告",
+    "publication_date": "2026-08-15",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475868.PDF",
+    "sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6",
+    "receipt": {
+      "artifact_id": "3c1aaec1227872caf9feea4e4e66ad85d01e00c0486527101f067f5d266b9c9f",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/3c1aaec1227872caf9feea4e4e66ad85d01e00c0486527101f067f5d266b9c9f.pdf",
+      "sha256": "0e10aa26be46b1cf3cd03f06e834c7fb98d5dd0d661b96f8fddd4af7e846a4f6"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/3c1aaec1227872caf9feea4e4e66ad85d01e00c0486527101f067f5d266b9c9f/text.md",
+    "text_sha256": "2546f9afe51f0bc3caf166cb4df01ac48a81d811f40b26c92c4c2e7d553c6f92",
+    "pages": 110,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225475864",
+    "title": "贵州茅台关于会计政策变更的公告",
+    "publication_date": "2026-08-15",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475864.PDF",
+    "sha256": "1a12378ed0e4a803eae00e73c74bc20eb2d73821fc960d746d52476dbf80df1d",
+    "receipt": {
+      "artifact_id": "77c0c4d28441c075944f4938041015cbfc5de8074716a212743c41936ce876f1",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/77c0c4d28441c075944f4938041015cbfc5de8074716a212743c41936ce876f1.pdf",
+      "sha256": "1a12378ed0e4a803eae00e73c74bc20eb2d73821fc960d746d52476dbf80df1d"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/77c0c4d28441c075944f4938041015cbfc5de8074716a212743c41936ce876f1/text.md",
+    "text_sha256": "380061ec924760fbaec50fb8c7a52b72fe0fc8ef0b7947b08e697151a1920696",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225475863",
+    "title": "贵州茅台关于贵州茅台集团财务有限公司的风险评估报告",
+    "publication_date": "2026-08-15",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-08-15/1225475863.PDF",
+    "sha256": "cf2d50aa028fcf11ce9eb04746932b7a9be25c3e31d443295f77add844b1121b",
+    "receipt": {
+      "artifact_id": "1c10451d0708461bbaaaa1fc14b78e209d2afc480d48d7160d837acd8e9885f1",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/1c10451d0708461bbaaaa1fc14b78e209d2afc480d48d7160d837acd8e9885f1.pdf",
+      "sha256": "cf2d50aa028fcf11ce9eb04746932b7a9be25c3e31d443295f77add844b1121b"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/1c10451d0708461bbaaaa1fc14b78e209d2afc480d48d7160d837acd8e9885f1/text.md",
+    "text_sha256": "12fe92b5e80abb0b64a4f991792f94ef8b65a9c469d2abf9c34dd1622a614239",
+    "pages": 8,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225431263",
+    "title": "贵州茅台重大事项公告",
+    "publication_date": "2026-07-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-07-18/1225431263.PDF",
+    "sha256": "24e51c43dfc6da7d3a19c67b88081715a3a3b4a26c2d83ec51a557e3e5692873",
+    "receipt": {
+      "artifact_id": "ae7289c26af2b3f149bae7845d6e0fc7bd6a90de193c42ded842e08da06168da",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/ae7289c26af2b3f149bae7845d6e0fc7bd6a90de193c42ded842e08da06168da.pdf",
+      "sha256": "24e51c43dfc6da7d3a19c67b88081715a3a3b4a26c2d83ec51a557e3e5692873"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/ae7289c26af2b3f149bae7845d6e0fc7bd6a90de193c42ded842e08da06168da/text.md",
+    "text_sha256": "238df52a2c32661e7987e4686b71ec81992d6d571de191f1d4ca48c81767885a",
+    "pages": 1,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225379934",
+    "title": "贵州茅台2025年年度权益分派实施公告",
+    "publication_date": "2026-06-22",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-06-22/1225379934.PDF",
+    "sha256": "6b082b6a00db748f23b6dea166b0296cd69d8c10542d352e23d2e2c344ea516e",
+    "receipt": {
+      "artifact_id": "e8023bc74658234c3f59fa36bb2d79149a21d5216b8ab99f6471d8508f563fbe",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/e8023bc74658234c3f59fa36bb2d79149a21d5216b8ab99f6471d8508f563fbe.pdf",
+      "sha256": "6b082b6a00db748f23b6dea166b0296cd69d8c10542d352e23d2e2c344ea516e"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/e8023bc74658234c3f59fa36bb2d79149a21d5216b8ab99f6471d8508f563fbe/text.md",
+    "text_sha256": "f71882fd1d1daf9767210eb4ca34757f02a5069d71ecbfe0db22179f18972cac",
+    "pages": 4,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225366259",
+    "title": "贵州茅台关于聘任董事会秘书的公告",
+    "publication_date": "2026-06-12",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366259.PDF",
+    "sha256": "c61a951f524c5e6d7f26695eb743a4266d6369e10130d52ba74d98eb579d7014",
+    "receipt": {
+      "artifact_id": "686e2099ecc231a4714c1d7b0a279c8b3029c804649aa4c2b0fbac7518283999",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/686e2099ecc231a4714c1d7b0a279c8b3029c804649aa4c2b0fbac7518283999.pdf",
+      "sha256": "c61a951f524c5e6d7f26695eb743a4266d6369e10130d52ba74d98eb579d7014"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/686e2099ecc231a4714c1d7b0a279c8b3029c804649aa4c2b0fbac7518283999/text.md",
+    "text_sha256": "126fb53e93f095182eda9506ae661bd55d414cca33b8de0e2c3ef946b08ea1b6",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225347653",
+    "title": "贵州茅台关于调整2025年年度利润分配方案每股分红金额的公告",
+    "publication_date": "2026-06-03",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-06-03/1225347653.PDF",
+    "sha256": "f51131858f82005c9ed36dcb78ecca961f3f10cff71dc54039c4a37804ed5412",
+    "receipt": {
+      "artifact_id": "9ee8f076931dc0f9685bac43f0c93291edcfd0ec02877499e1cbaaa3dc1eeb5f",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/9ee8f076931dc0f9685bac43f0c93291edcfd0ec02877499e1cbaaa3dc1eeb5f.pdf",
+      "sha256": "f51131858f82005c9ed36dcb78ecca961f3f10cff71dc54039c4a37804ed5412"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/9ee8f076931dc0f9685bac43f0c93291edcfd0ec02877499e1cbaaa3dc1eeb5f/text.md",
+    "text_sha256": "04d63aec20f632aaed744c61c4b5e74e7d9c40d795687a800241a3b6ad3e2688",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225333825",
+    "title": "贵州茅台关于回购股份实施结果暨股份变动的公告",
+    "publication_date": "2026-05-28",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-28/1225333825.PDF",
+    "sha256": "c3d2cf8322ad4b8d8b69c914a0afd265bf0f85cdaa1f023d00109caa0a9721c1",
+    "receipt": {
+      "artifact_id": "7ed733ab52e0d521c034e17ae94082980d8bfab45d1f07316cf342ecdd45cbd3",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/7ed733ab52e0d521c034e17ae94082980d8bfab45d1f07316cf342ecdd45cbd3.pdf",
+      "sha256": "c3d2cf8322ad4b8d8b69c914a0afd265bf0f85cdaa1f023d00109caa0a9721c1"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/7ed733ab52e0d521c034e17ae94082980d8bfab45d1f07316cf342ecdd45cbd3/text.md",
+    "text_sha256": "bfaeb36c93f6262ec1f0eac2075981c21d1446e11ac98ab1290e6da9f3f56c49",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225324466",
+    "title": "贵州茅台关于聘任董事会秘书的公告",
+    "publication_date": "2026-05-22",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324466.PDF",
+    "sha256": "1d245b5097a321e362121f22b4c8aff1f81079d345ae445700d308240a00eae6",
+    "receipt": {
+      "artifact_id": "19cc125022c721a506fdc67e81256b9542e4dbe718d0eca6f7976adac4b4a066",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/19cc125022c721a506fdc67e81256b9542e4dbe718d0eca6f7976adac4b4a066.pdf",
+      "sha256": "1d245b5097a321e362121f22b4c8aff1f81079d345ae445700d308240a00eae6"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/19cc125022c721a506fdc67e81256b9542e4dbe718d0eca6f7976adac4b4a066/text.md",
+    "text_sha256": "c2107b7b1aacecb4d44d2f804c320a2c0788d6a19e4efe779e7ae1b0bdf867d5",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225324463",
+    "title": "贵州茅台关于与关联方签订《商标许可协议》的公告",
+    "publication_date": "2026-05-22",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-22/1225324463.PDF",
+    "sha256": "c9f210d9ef29b17256c0a7c4199aed31c5fb06a91e6cc472513db188a2a0692f",
+    "receipt": {
+      "artifact_id": "30bde49425b4e46fc8cf3d3a31c42dedf6a08e31db99aae3d4efaad28640f67e",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/30bde49425b4e46fc8cf3d3a31c42dedf6a08e31db99aae3d4efaad28640f67e.pdf",
+      "sha256": "c9f210d9ef29b17256c0a7c4199aed31c5fb06a91e6cc472513db188a2a0692f"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/30bde49425b4e46fc8cf3d3a31c42dedf6a08e31db99aae3d4efaad28640f67e/text.md",
+    "text_sha256": "ca8174f463f509626b63681d17eb740f821f2f3e9a55c3fa18c10f396c54a314",
+    "pages": 4,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225188174",
+    "title": "贵州茅台2026年第一季度主要经营数据公告",
+    "publication_date": "2026-04-25",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-25/1225188174.PDF",
+    "sha256": "6634383a0c0c5c25f23886407666c41333496f2d1f22797eccf54c01bb3ef700",
+    "receipt": {
+      "artifact_id": "854a1823b311fdbb48d3a39dbe8b5e64689451aa67fdc4fd91cdf1ee974ae2da",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/854a1823b311fdbb48d3a39dbe8b5e64689451aa67fdc4fd91cdf1ee974ae2da.pdf",
+      "sha256": "6634383a0c0c5c25f23886407666c41333496f2d1f22797eccf54c01bb3ef700"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/854a1823b311fdbb48d3a39dbe8b5e64689451aa67fdc4fd91cdf1ee974ae2da/text.md",
+    "text_sha256": "957fddbcafc58eb84400b64b6a04a27975d535cc28f62ee229059223e855c324",
+    "pages": 1,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225187851",
+    "title": "贵州茅台2026年第一季度报告",
+    "publication_date": "2026-04-25",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-25/1225187851.PDF",
+    "sha256": "ca10d0e4fb3a1e4e9f258c04fc4c62000968f337a9b0bf6f714d4f153536d363",
+    "receipt": {
+      "artifact_id": "3a81209159a5d8a57c624b44140f83bd29260885492ea3ea01d54b7b5bcd1295",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/3a81209159a5d8a57c624b44140f83bd29260885492ea3ea01d54b7b5bcd1295.pdf",
+      "sha256": "ca10d0e4fb3a1e4e9f258c04fc4c62000968f337a9b0bf6f714d4f153536d363"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/3a81209159a5d8a57c624b44140f83bd29260885492ea3ea01d54b7b5bcd1295/text.md",
+    "text_sha256": "b21d337b1c5e27deef382b98a26a87a3441935d3888bdf18f15679a0402a1426",
+    "pages": 12,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225114720",
+    "title": "贵州茅台关于2025年年度利润分配方案及2026年中期利润分配安排的公告",
+    "publication_date": "2026-04-17",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114720.PDF",
+    "sha256": "6433ce1670a7dd28902d3423563d819df515bd470c4a851bc66924d69e5ec054",
+    "receipt": {
+      "artifact_id": "9f484441cfbf168bd6fd42390313fe6b9be60b7517f69900b4a4ee5b3505d1b3",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/9f484441cfbf168bd6fd42390313fe6b9be60b7517f69900b4a4ee5b3505d1b3.pdf",
+      "sha256": "6433ce1670a7dd28902d3423563d819df515bd470c4a851bc66924d69e5ec054"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/9f484441cfbf168bd6fd42390313fe6b9be60b7517f69900b4a4ee5b3505d1b3/text.md",
+    "text_sha256": "f75eb8d1d9ea365ebdb3a77be390d39396638f1ee198c6e8bcacde37cd0a221c",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225114712",
+    "title": "贵州茅台关于“提质增效重回报”工作2025年度行动方案评估报告暨2026年度行动方案的公告",
+    "publication_date": "2026-04-17",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-17/1225114712.PDF",
+    "sha256": "5ce9b1680791a269769f7f5bdfcae94cd044181a95cef576ef93e91a54fabf69",
+    "receipt": {
+      "artifact_id": "01d3b910ef941b6113a8e54de68a1ac95af155b486a024e6a4c8910ae41e8d99",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/01d3b910ef941b6113a8e54de68a1ac95af155b486a024e6a4c8910ae41e8d99.pdf",
+      "sha256": "5ce9b1680791a269769f7f5bdfcae94cd044181a95cef576ef93e91a54fabf69"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/01d3b910ef941b6113a8e54de68a1ac95af155b486a024e6a4c8910ae41e8d99/text.md",
+    "text_sha256": "28748f1241ab15b30e02dd352ba1588bbb502d37bd250430542d6a09b28cfb76",
+    "pages": 5,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225055491",
+    "title": "贵州茅台重大事项公告",
+    "publication_date": "2026-03-31",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225055491.PDF",
+    "sha256": "1e0369d26c16a059ed9d21b06d20fa5e3dc43cb4ab922b8d90d607d787b84b1b",
+    "receipt": {
+      "artifact_id": "af149acf380274aee231b6c44e93844ea7a1ee6bdf2b854beb22217fcfdd1d78",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/af149acf380274aee231b6c44e93844ea7a1ee6bdf2b854beb22217fcfdd1d78.pdf",
+      "sha256": "1e0369d26c16a059ed9d21b06d20fa5e3dc43cb4ab922b8d90d607d787b84b1b"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/af149acf380274aee231b6c44e93844ea7a1ee6bdf2b854beb22217fcfdd1d78/text.md",
+    "text_sha256": "c35ec6787e3b9a1a8d26f40e144f6719c3834a235922256ca18860f9333222d3",
+    "pages": 1,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1224764517",
+    "title": "贵州茅台2025年第三季度报告",
+    "publication_date": "2025-10-30",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-10-30/1224764517.PDF",
+    "sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a",
+    "receipt": {
+      "artifact_id": "83579c3207ebcd100de3e4c53caa1a85ff653be046beab4e586816b4d65edbda",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/83579c3207ebcd100de3e4c53caa1a85ff653be046beab4e586816b4d65edbda.pdf",
+      "sha256": "622935d03b23310dcde1ba3c3d398b130c3fbf73b753fb79fab934999524307a"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/83579c3207ebcd100de3e4c53caa1a85ff653be046beab4e586816b4d65edbda/text.md",
+    "text_sha256": "b7d5976d145258655965a8ed0d314f7012780f7d387fb557aa4673fbf420feb6",
+    "pages": 12,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1224462930",
+    "title": "贵州茅台2025年半年度报告",
+    "publication_date": "2025-08-13",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-08-13/1224462930.PDF",
+    "sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c",
+    "receipt": {
+      "artifact_id": "b0e6ee68063d51ddba69ec23ca6a17137591c988c15862fa82f74a4c1b35d4be",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/b0e6ee68063d51ddba69ec23ca6a17137591c988c15862fa82f74a4c1b35d4be.pdf",
+      "sha256": "c80fb7180169469053c396e65315414368bcfa9f1f1d4e3bf793c8fb327e6b0c"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/b0e6ee68063d51ddba69ec23ca6a17137591c988c15862fa82f74a4c1b35d4be/text.md",
+    "text_sha256": "63b64ac768fa7ed2cefbc7115c601ed8376d8c8329c63cfedadf9cb5bc8b1222",
+    "pages": 103,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1223413786",
+    "title": "贵州茅台2025年第一季度报告",
+    "publication_date": "2025-04-30",
+    "url": "https://static.cninfo.com.cn/finalpage/2025-04-30/1223413786.PDF",
+    "sha256": "f3197b2a4ef7b617bec762b99613eecaf8ea27d1950d4bed5e9ce5f1943d1128",
+    "receipt": {
+      "artifact_id": "bdbaa7d870558185b342745e20f8f5cd6f7e7206fb1ce2edd308140ab7fdd2a9",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/bdbaa7d870558185b342745e20f8f5cd6f7e7206fb1ce2edd308140ab7fdd2a9.pdf",
+      "sha256": "f3197b2a4ef7b617bec762b99613eecaf8ea27d1950d4bed5e9ce5f1943d1128"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/bdbaa7d870558185b342745e20f8f5cd6f7e7206fb1ce2edd308140ab7fdd2a9/text.md",
+    "text_sha256": "8d633bf78508a3573726ff90ca4a03f800012fc43520fe3edcb9d33374029601",
+    "pages": 11,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225366264",
+    "title": "贵州茅台2025年度股东会决议公告",
+    "publication_date": "2026-06-12",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-06-12/1225366264.PDF",
+    "sha256": "6868e886abe37f8c844a9df980775cb667d7caf2935f5ca01ea08bb68e4312c9",
+    "receipt": {
+      "artifact_id": "8c6a6da5dc97f5b9e360ef9fc9b4df475292eb3e5692ce8d06627c205508488d",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/8c6a6da5dc97f5b9e360ef9fc9b4df475292eb3e5692ce8d06627c205508488d.pdf",
+      "sha256": "6868e886abe37f8c844a9df980775cb667d7caf2935f5ca01ea08bb68e4312c9"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/_extracted/8c6a6da5dc97f5b9e360ef9fc9b4df475292eb3e5692ce8d06627c205508488d/text.md",
+    "text_sha256": "452af0ff31daf6d6f666989b92f0865a39efbb232533929d3c3e565b38b705da",
+    "pages": 7,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  }
+]

@@ -6,6 +6,10 @@
 
 ---
 
+## 取数入口
+
+新增行情、财务表、研报和公告按[共享取数指南](../../source-discovery/references/akshare-aktools.md)优先调用AKTools。先复用已绑定证据和同次请求结果；批量表在本地筛选、计算后供各section消费。需要外部发现的缺口仍由`source-discovery`编排；需要正式filing/event/market绑定的结果仍走现有manifest流程。
+
 ## §3.pre — 三大前提 (§1 / §3 / §5 前置 gate)
 
 - **§3.pre 三大前提 judgement**: 子 agent 在 §1 / §3 / §5 定性段落前先输出3行判定, 依据 §2.2.1 (见 `references/rules.md`)。审计/CFO/ROE 属纯财务数据检查, 与业务理解无关, 所以可做前置 gate。三大前提为假或存疑只阻断数字估值；定性研究、产品分析和不依赖该前提的判断继续完成。
@@ -142,11 +146,20 @@ Acceptable 后写中文终稿, 填 `**引用:**` `**置信度:**` `**管理层�
 
 ## Step 4 — Part 2 bulk mode (§Q1-§Q12) (详细子步骤)
 
-1. **Auto mode**: 默认直接走 `bulk`, 不 offer。**Interactive mode**: offer `[bulk / by-section]` 等用户选。
-2. `bulk` → ONE 子 agent: Read 每个年报第五节, 逐年抽营收 / NI / 扣非 NI / 毛利率/净利率 / ROE / ROA / CFO / CapEx / 有息负债/现金/总资产/总负债/净资产/应收/存货, 就地填 Part 2 §Q1-§Q12 表, 每 cell `**来源:**` 带 `年报-YYYY.pdf p.NN`。顶行（ROE / 毛利/净利率）雪球 F10 联网交叉验证。
-3. **Auto mode**: 子 agent 在 prompt 里明确要求它自己执行 random-sample 5 cells 雪球校核 + 汇报结果, 主 agent 收到后自动按 ≥ 4/5 一致规则判决（≥ 4/5 → 所有 §Q* 标 `已完成`; 否则不一致行标 `需人工`）, 不问用户。**Interactive mode**: 呈给用户 `Random-sample 5 cells: given <ROE 2024 = X%>, does 雪球 agree? [all-match / mismatch: <details>]`, 用户回复后主 agent 按规则判决。
-4. ≥ 4/5 一致 → 所有 §Q* 标 `已完成`; 否则不一致行标 `需人工`。
-5. `by-section` (interactive only) → 走标准 Step 3。
+进入本步骤前完整读取`quantitative-analysis.md`，并把其窗口、公式、港股
+替代、行业适配、读者写法和完成检查放入worker prompt。
+
+1. **Auto mode**默认直接走`bulk`;**Interactive mode**提供`[bulk/by-section]`。
+2. 先建事实底表:逐年保存报表原值、页码、单位、重列和定义断点。存在10个
+   可比完整财年时展示全部10年;不得从profile旧数字或第三方摘要反推年报值。
+3. 再计算指标:公式、分子、分母和平均余额口径全部可复算;港股不构造A股
+   销售收现率或扣非净利润。
+4. 应用一个主行业overlay,保留适用的共同财务骨架,替换无经济意义指标并补
+   行业KPI。
+5. 每个§Q按`表格→趋势→原因→影响→来源→证据等级`输出;§Q12依赖§Q1-§Q11。
+6. 主agent执行方法文件§9的全量检查。单行错误局部阻断,系统性口径错误阻断
+   Part 2;抽样复核不能代替全量验收。
+7. `by-section`沿用相同方法和行业路由后走标准Step 3。
 
 ---
 

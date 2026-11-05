@@ -1,0 +1,80 @@
+{
+  "scope": "partial annual research; not full redflag or cross-statement acceptance",
+  "local_fact_and_formula_assertions": 741,
+  "remote_early_pdf_checks": [
+    {
+      "year": 2010,
+      "url": "https://static.cninfo.com.cn/finalpage/2011-04-09/59243061.PDF",
+      "sha256": "613779ed98205e7bf7ee8dfdfe91794ce84336297cbb42cbf5c4ad9f06a55312",
+      "bytes": 612640,
+      "remote_match": true
+    },
+    {
+      "year": 2011,
+      "url": "https://static.cninfo.com.cn/finalpage/2012-04-11/60811608.PDF",
+      "sha256": "0b63ee70ae66fd908e8239c2745d8036a5f3a47be1e711f1f557fcd6ffbc6b1b",
+      "bytes": 616082,
+      "remote_match": true
+    },
+    {
+      "year": 2012,
+      "url": "https://static.cninfo.com.cn/finalpage/2013-03-29/62296687.PDF",
+      "sha256": "9a8faef737d4dd64e8260325247b8ffe77e5de506f4b23b046f28c0758377eae",
+      "bytes": 1758264,
+      "remote_match": true
+    },
+    {
+      "year": 2013,
+      "url": "https://static.cninfo.com.cn/finalpage/2014-03-25/63720184.PDF",
+      "sha256": "26524de9281264e149c23bdc618a32820678c8d07c5dc7c88cbc7e19b3df0bff",
+      "bytes": 1898954,
+      "remote_match": true
+    },
+    {
+      "year": 2014,
+      "url": "https://static.cninfo.com.cn/finalpage/2015-04-21/1200877315.PDF",
+      "sha256": "89145ef5bd12256c4c75c122b1c8d59846a912434f1abd0570f678bdb1a20f24",
+      "bytes": 2278854,
+      "remote_match": true
+    },
+    {
+      "year": 2015,
+      "url": "https://static.cninfo.com.cn/finalpage/2016-03-24/1202072290.PDF",
+      "sha256": "11a32c1e7f02a54fc2eea3c0d852af59ad37af9a2cbe91857cd93a6208a96d6c",
+      "bytes": 2261535,
+      "remote_match": true
+    }
+  ],
+  "annual_manifest_live_revalidation": "23f3d3debda08d98ac84ea9d8cca4622c6d2aef86dfa59d24d071c7c70f5ca7d succeeded separately",
+  "full_year_table_sections": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    10
+  ],
+  "years": [
+    2010,
+    2011,
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "positive_governance_document": "independent official announcement, not completed event manifest",
+  "cash_bridge_remainder": 1086326741.7000122,
+  "status": "PASS_WITH_DECLARED_SCOPE"
+}

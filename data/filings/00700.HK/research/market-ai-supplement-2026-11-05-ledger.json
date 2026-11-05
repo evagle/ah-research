@@ -1,0 +1,2081 @@
+{
+  "IDC-ADP25-private-deployment-revenue-rank": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "revenue-rank",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "private-deployment enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "rank"
+      ],
+      "definition_constraints": [
+        "private-deployment enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "request_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+          "request_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+          "request_content_sha256": "039829b2c5c6d2a3aed1c8c1ac6678cda99211e058c68f9141fed6c032cd1589"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-idc-authored-extraction",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "6294978a29e3b480aeb73ad0802bb065f927b610daf06921223543e0938b03be"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "6151513e1b8e880714c9a6f9e61195eaf6616cc2f30fa3f3711033a5b1761359"
+      },
+      "planner_input_fingerprint": "fe815aeefa45db0399b3c2127dda3c08c014c1309b21efd3ead6f0f1acaf3742",
+      "route_inventory": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "00e6589c9343b40be6c418c442f8feec9c3c137b3580c5871ba2f3d7c9547030"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "request_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+          "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "CHC54534826-summary-20260612",
+        "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    "accepted_candidate": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-revenue-rank",
+      "metric": "revenue-rank",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 2,
+          "unit": "rank",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+          "canonical_value": {
+            "value": 2,
+            "unit": "rank",
+            "definition_scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "rank",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "private-deployment enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "74c00dd08f90a12c6c0ad710c885678d7988d9a050d422b8193d92787e5a4f1c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    }
+  },
+  "IDC-ADP25-private-deployment-market-size": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "market-size",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "private-deployment enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB 100 million"
+      ],
+      "definition_constraints": [
+        "private-deployment enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "request_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "IDC-ADP25-private-deployment-market-size",
+          "request_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+          "request_content_sha256": "0bb8ebc5f6c0bb47b1f5b38e170b3afc574623396340fed6b590d200a9129738"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-idc-authored-extraction",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "6294978a29e3b480aeb73ad0802bb065f927b610daf06921223543e0938b03be"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "6151513e1b8e880714c9a6f9e61195eaf6616cc2f30fa3f3711033a5b1761359"
+      },
+      "planner_input_fingerprint": "44d6ada3965c93626fecc914c031fc3e66288371eed7d3aee5cff62ead3bd02e",
+      "route_inventory": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "9ad5b4ba0ca3b83f2fbe4b5edd64f194261f6c148f558bbd332231fe0aaf0fd9"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "request_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+          "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "CHC54534826-summary-20260612",
+        "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    "accepted_candidate": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-private-deployment-market-size",
+      "metric": "market-size",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 17.5,
+          "unit": "RMB 100 million",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+          "canonical_value": {
+            "value": 17.5,
+            "unit": "RMB 100 million",
+            "definition_scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "RMB 100 million",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "private-deployment enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "c0e949f6a512ca82585fefe150522eb5d52ebc991e5c4d594b2fea33740f4b6a",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    }
+  },
+  "IDC-ADP25-public-cloud-revenue-rank-upper-bound": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "revenue-rank-upper-bound",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "public-cloud enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "rank"
+      ],
+      "definition_constraints": [
+        "public-cloud enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "request_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+          "request_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+          "request_content_sha256": "825a5ff95729724b56d1849fbb7603d3544983d726d778fb129ec6d304fd6ea6"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-idc-authored-extraction",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "6294978a29e3b480aeb73ad0802bb065f927b610daf06921223543e0938b03be"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "6151513e1b8e880714c9a6f9e61195eaf6616cc2f30fa3f3711033a5b1761359"
+      },
+      "planner_input_fingerprint": "2defcfae325cc4cb754a165210aba8269e08086dfed06a3a86b20a5d500c4151",
+      "route_inventory": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "5e6124429ec33a357f90f10724d7c3f4f67fe12be31f47ec66ef6fe556fa800f"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "request_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+          "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "CHC54534826-summary-20260612",
+        "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    "accepted_candidate": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-revenue-rank-upper-bound",
+      "metric": "revenue-rank-upper-bound",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 3,
+          "unit": "rank",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+          "canonical_value": {
+            "value": 3,
+            "unit": "rank",
+            "definition_scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "rank",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "public-cloud enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "ffee5dfb9f476c1700631a5b032e6155631c872670fd94c47b667d5fd4595352",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    }
+  },
+  "IDC-ADP25-public-cloud-market-size": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "market-size",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "public-cloud enterprise agent development platforms",
+      "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB 100 million"
+      ],
+      "definition_constraints": [
+        "public-cloud enterprise agent development platforms",
+        "Platform software product revenue; excludes implementation services and MaaS revenue"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "request_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "IDC-ADP25-public-cloud-market-size",
+          "request_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+          "request_content_sha256": "f4382a8be53d861beee072b33ebf08d487cc7372cacb47b455a5d89a6075a250"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-idc-authored-extraction",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "6294978a29e3b480aeb73ad0802bb065f927b610daf06921223543e0938b03be"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "6151513e1b8e880714c9a6f9e61195eaf6616cc2f30fa3f3711033a5b1761359"
+      },
+      "planner_input_fingerprint": "d0029dda5f65d01ee9608543726b58fe13a41096bac8e1d1ee2ad98a3ba0fb24",
+      "route_inventory": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "2322a8ff17cc032eb013cf3325fa4c4410c76756c3cc26fbe3073870696b8706"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "request_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-idc-authored-extraction",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+          "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "CHC54534826-summary-20260612",
+        "artifact_identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Positive snapshot accepted; no full historical-series claim"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    "accepted_candidate": {
+      "schema_version": "1.0",
+      "claim_id": "IDC-ADP25-public-cloud-market-size",
+      "metric": "market-size",
+      "frequency": "annual",
+      "period_semantics": "calendar-year",
+      "source": {
+        "immediate_publisher": "Sina Finance",
+        "original_publisher": "IDC",
+        "publisher_type": "original-research",
+        "source_class": "original-research",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "document": {
+        "document_id": "CHC54534826-summary-20260612",
+        "title": "IDC Agent Development Platform Market Shares 2025: authored summary",
+        "published_at": "2026-06-12",
+        "canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml"
+      },
+      "values": [
+        {
+          "period": "2025",
+          "value": 2.5,
+          "unit": "RMB 100 million",
+          "status": "historical-estimate",
+          "definition_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+          "canonical_value": {
+            "value": 2.5,
+            "unit": "RMB 100 million",
+            "definition_scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "RMB 100 million",
+      "scope": {
+        "geographies": [
+          "China"
+        ],
+        "industries": [
+          "Internet services"
+        ],
+        "product_scope": "public-cloud enterprise agent development platforms",
+        "population": "Providers in the specified market",
+        "measurement_basis": "Platform software product revenue; excludes implementation services and MaaS revenue"
+      },
+      "data_vintage": "2026-05-01",
+      "artifact": {
+        "identity": "sha256:c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/stock/relnews/hk/2026-06-12/doc-iniccnft3551692.shtml",
+        "document_id": "CHC54534826-summary-20260612",
+        "artifact_sha256": "c1cb86be5b8908a560ffdb0ce99c542f330889327933ab6e54dbc651ec46e825",
+        "binding_sha256": "e3024980a695818d58718b6d95a9ab4b409def03362856fc84b50713f0f68f82"
+      },
+      "scope_fingerprint": "c9c47f7d4c253a62ce7310f90c419f23a249b6968a1b4b626d5e7d9f1ee24b79",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "IDC",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CHC54534826"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "High",
+        "evidence_level": "High"
+      },
+      "lineage_id": "underlying:922868dc717eaabb826c0763a63e52e658813f6b85c05865491faea09fd71d8e"
+    }
+  },
+  "WEIXIN-GMV25-DEDUP": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "WEIXIN-GMV25-DEDUP",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "retail-gmv",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "All Weixin retail commerce, deduplicated by order",
+      "measurement_basis": "Retail orders, excluding non-retail services and repeat channel attribution",
+      "period_start": "2025",
+      "period_end": "2025",
+      "frequency": "annual",
+      "continuity_required": false,
+      "required_latest_period": "2025",
+      "accepted_units": [
+        "RMB"
+      ],
+      "definition_constraints": [
+        "All Weixin retail commerce, deduplicated by order",
+        "Retail orders, excluding non-retail services and repeat channel attribution"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "WEIXIN-GMV25-DEDUP",
+      "request_scope_fingerprint": "66b47b9cec36ab3f9054259babdec438f9edcf5184c042d48c10ff33e327f8c1",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "WEIXIN-GMV25-DEDUP",
+          "request_scope_fingerprint": "66b47b9cec36ab3f9054259babdec438f9edcf5184c042d48c10ff33e327f8c1",
+          "request_content_sha256": "458f7dd29c970f2d0600c1e5c3f5ca3742608171e8e699b810b4726adf06167c"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-q2-and-research-gap-review",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "32749d82a384ecae7821245b68c5be5dff00e31f90028edac98464f68fe85952"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "31936c3aebf48f52083e79680242b41c9f47e42f06c2ea38b64af77dca4d7584"
+      },
+      "planner_input_fingerprint": "715dd6a70600d356e8f15e06df8591168a94a045394960f3ca0cbd83fcf3fade",
+      "route_inventory": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "bf0138b498277ba29e1cce68a9d1a19ae3359be7d0fed80dea6963887c0637b6"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "WEIXIN-GMV25-DEDUP",
+      "request_scope_fingerprint": "66b47b9cec36ab3f9054259babdec438f9edcf5184c042d48c10ff33e327f8c1",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "All Weixin retail commerce, deduplicated by order",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    },
+    "accepted_candidate": null
+  },
+  "BUDDY-PAID-RETENTION26": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "BUDDY-PAID-RETENTION26",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "paid-retention",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "WorkBuddy and CodeBuddy paid subscriber cohorts",
+      "measurement_basis": "Paid cohort retention with stated observation window",
+      "period_start": "2026-Q2",
+      "period_end": "2026-Q2",
+      "frequency": "quarterly",
+      "continuity_required": false,
+      "required_latest_period": "2026-Q2",
+      "accepted_units": [
+        "percent"
+      ],
+      "definition_constraints": [
+        "WorkBuddy and CodeBuddy paid subscriber cohorts",
+        "Paid cohort retention with stated observation window"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "BUDDY-PAID-RETENTION26",
+      "request_scope_fingerprint": "75f481ae15489ccac98e395d3c863e83f5ff74ce77ed52faba50a88034d7a60c",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "BUDDY-PAID-RETENTION26",
+          "request_scope_fingerprint": "75f481ae15489ccac98e395d3c863e83f5ff74ce77ed52faba50a88034d7a60c",
+          "request_content_sha256": "ee1846066b564f89ca3356c3ab236f2ed8b321ef22e419d709a757abc135e410"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-q2-and-research-gap-review",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "32749d82a384ecae7821245b68c5be5dff00e31f90028edac98464f68fe85952"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "31936c3aebf48f52083e79680242b41c9f47e42f06c2ea38b64af77dca4d7584"
+      },
+      "planner_input_fingerprint": "8138457ff9232ff8cc7cd4e7c6fceca244bfc45bc4e7e2509d59950997295abc",
+      "route_inventory": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "bbb65edeb58564c30fd14087f6747f9c4376cdb1fdaf0da7c7c7580d604d11aa"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "BUDDY-PAID-RETENTION26",
+      "request_scope_fingerprint": "75f481ae15489ccac98e395d3c863e83f5ff74ce77ed52faba50a88034d7a60c",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "WorkBuddy and CodeBuddy paid subscriber cohorts",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    },
+    "accepted_candidate": null
+  },
+  "TENCENT-AI-UNIT-COST26": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "TENCENT-AI-UNIT-COST26",
+      "claim_type": "market-evidence",
+      "subject": "Tencent",
+      "metric": "task-cost",
+      "geographies": [
+        "China"
+      ],
+      "industries": [
+        "Internet services"
+      ],
+      "population": "Providers in the specified market",
+      "product_scope": "Tencent production AI agents",
+      "measurement_basis": "Actual cost per successfully completed task, not API sale price",
+      "period_start": "2026-Q2",
+      "period_end": "2026-Q2",
+      "frequency": "quarterly",
+      "continuity_required": false,
+      "required_latest_period": "2026-Q2",
+      "accepted_units": [
+        "RMB per task"
+      ],
+      "definition_constraints": [
+        "Tencent production AI agents",
+        "Actual cost per successfully completed task, not API sale price"
+      ],
+      "value_status_allowed": [
+        "observed",
+        "historical-estimate"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "TENCENT-AI-UNIT-COST26",
+      "request_scope_fingerprint": "66a2d2a04cb9c83076f462e0b68740dccfb75fc63a35bc436a51114ab999fcc9",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "TENCENT-AI-UNIT-COST26",
+          "request_scope_fingerprint": "66a2d2a04cb9c83076f462e0b68740dccfb75fc63a35bc436a51114ab999fcc9",
+          "request_content_sha256": "5b71009973cfc30b65c2019c9703a6b916cadc7e13264f6730ca2165af233bdf"
+        },
+        "source_function": "market-evidence",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-q2-and-research-gap-review",
+            "subject_relation": "bound-local",
+            "document_type": "bound-document",
+            "route_binding_sha256": "32749d82a384ecae7821245b68c5be5dff00e31f90028edac98464f68fe85952"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T00:36:43.698005+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "31936c3aebf48f52083e79680242b41c9f47e42f06c2ea38b64af77dca4d7584"
+      },
+      "planner_input_fingerprint": "733aa8b842e7e513ca51c55c10665bed3be998b7c0429331b96bade89462eec3",
+      "route_inventory": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "8feb029647a0e3eb7ceeb72e916ae6f8f1588363d8c28edf5fcaf7299dcd117e"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "TENCENT-AI-UNIT-COST26",
+      "request_scope_fingerprint": "66a2d2a04cb9c83076f462e0b68740dccfb75fc63a35bc436a51114ab999fcc9",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-q2-and-research-gap-review",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "bound-document",
+          "query_variant": "Tencent production AI agents",
+          "started_at": "2026-11-05T00:36:43.698005+00:00",
+          "completed_at": "2026-11-05T00:36:43.698005+00:00",
+          "artifact_identity": "no-qualified-numeric-artifact",
+          "lineage_id": "unresolved",
+          "terminal_reason": "request-budget-exhausted",
+          "acceptance_failures": [
+            "scope"
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "scope"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "scope"
+        ]
+      },
+      "next_escalation": {
+        "next_layer": 4,
+        "route_ids": [
+          "layer-4-prospectus",
+          "layer-4-listing-application",
+          "layer-4-industry-overview",
+          "layer-4-methodology-appendix",
+          "layer-4-association-report",
+          "layer-4-archive",
+          "layer-5-broad-dynamic"
+        ]
+      },
+      "skipped_after_acceptance": [],
+      "unattempted_routes": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "Partial research checkpoint; no exhaustive or absence conclusion"
+        }
+      ]
+    },
+    "accepted_candidate": null
+  }
+}

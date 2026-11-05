@@ -1,0 +1,193 @@
+{
+  "requests": [
+    {
+      "schema_version": "1.1",
+      "claim_id": "h1-2026-inventory-drivers",
+      "claim_type": "issuer-inventory-explanation",
+      "subject": "Hikvision 002415.SZ",
+      "metric": "Attributable explanation of H1 2026 strategic material reserves: components, prices, supply and delivery",
+      "geographies": [
+        "China",
+        "Global"
+      ],
+      "industries": [
+        "video surveillance"
+      ],
+      "population": "Hikvision consolidated business and named segments",
+      "product_scope": "Hikvision main and innovation businesses and their inventory procurement",
+      "channel_scope": "all",
+      "measurement_basis": "attributable management statement",
+      "denominator": "not applicable: documentary statement",
+      "period_start": "2026-01-01",
+      "period_end": "2026-09-29",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2026-01-01",
+      "accepted_units": [
+        "text"
+      ],
+      "definition_constraints": [
+        "Separate original issuer statements from media paraphrase; distinguish H1 2026 explanation from earlier or later circumstances; do not infer inventory allocation from revenue shares"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Low",
+      "minimum_independence": "Low",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-09-29",
+      "accepted_source_classes": [
+        "issuer-first-party",
+        "named-counterparty",
+        "media"
+      ]
+    },
+    {
+      "schema_version": "1.1",
+      "claim_id": "h1-2026-inventory-business-allocation",
+      "claim_type": "issuer-inventory-explanation",
+      "subject": "Hikvision 002415.SZ",
+      "metric": "Attributable disclosure of H1 2026 inventory growth split between main business and innovation businesses",
+      "geographies": [
+        "China",
+        "Global"
+      ],
+      "industries": [
+        "video surveillance"
+      ],
+      "population": "Hikvision consolidated business and named segments",
+      "product_scope": "Hikvision main and innovation businesses and their inventory procurement",
+      "channel_scope": "all",
+      "measurement_basis": "attributable management statement",
+      "denominator": "not applicable: documentary statement",
+      "period_start": "2026-01-01",
+      "period_end": "2026-09-29",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2026-01-01",
+      "accepted_units": [
+        "text"
+      ],
+      "definition_constraints": [
+        "Separate original issuer statements from media paraphrase; distinguish H1 2026 explanation from earlier or later circumstances; do not infer inventory allocation from revenue shares"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Low",
+      "minimum_independence": "Low",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-09-29",
+      "accepted_source_classes": [
+        "issuer-first-party",
+        "named-counterparty",
+        "media"
+      ]
+    }
+  ],
+  "accepted_candidates": [
+    {
+      "schema_version": "1.1",
+      "claim_id": "h1-2026-inventory-drivers",
+      "metric": "Attributable explanation of H1 2026 strategic material reserves: components, prices, supply and delivery",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "杭州海康威视数字技术股份有限公司",
+        "original_publisher": "杭州海康威视数字技术股份有限公司",
+        "publisher_type": "issuer-company",
+        "source_class": "issuer-first-party",
+        "canonical_url": "https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf"
+      },
+      "document": {
+        "document_id": "Hikvision-IR-2026-7-25",
+        "title": "2026年半年度网络业绩说明会纪要（投资者关系活动记录表，编号2026-7-25）",
+        "published_at": "2026-07-25",
+        "canonical_url": "https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf"
+      },
+      "values": [
+        {
+          "period": "2026-07-25",
+          "value": "管理层在2026年7月25日说明会称：全球AI大模型运算中心需求激增，带来存储和电子元器件大幅涨价及缺货（physical p4）；从2025年9月开始的存储等电子元器件价格暴涨，公司凭借上游供应商合作关系增加供货紧缺的物料存货，尽力保证产品稳定交付；为应对元器件普遍涨价和部分缺货，存货由年初204.72亿元增至年中294.88亿元（physical p5）。此为管理层归因的一手记录，不是独立验证采购必要性、效率或全部增量的因果分解；未披露主业与创新业务库存拆分及价格/数量贡献。",
+          "unit": "text",
+          "status": "observed",
+          "definition_scope_fingerprint": "52b8ada03624fb179b20ea1a5c91310efcc1348b69bdde4a93ca2fb378d65168",
+          "evidence_id": "Hikvision-IR-2026-7-25",
+          "event_key": "2026-07-25:hikvision:h1-2026-inventory-drivers",
+          "canonical_value": {
+            "value": "管理层在2026年7月25日说明会称：全球AI大模型运算中心需求激增，带来存储和电子元器件大幅涨价及缺货（physical p4）；从2025年9月开始的存储等电子元器件价格暴涨，公司凭借上游供应商合作关系增加供货紧缺的物料存货，尽力保证产品稳定交付；为应对元器件普遍涨价和部分缺货，存货由年初204.72亿元增至年中294.88亿元（physical p5）。此为管理层归因的一手记录，不是独立验证采购必要性、效率或全部增量的因果分解；未披露主业与创新业务库存拆分及价格/数量贡献。",
+            "unit": "text",
+            "definition_scope_fingerprint": "52b8ada03624fb179b20ea1a5c91310efcc1348b69bdde4a93ca2fb378d65168",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "text",
+      "scope": {
+        "geographies": [
+          "China",
+          "Global"
+        ],
+        "industries": [
+          "video surveillance"
+        ],
+        "product_scope": "Hikvision main and innovation businesses and their inventory procurement",
+        "population": "Hikvision consolidated business and named segments",
+        "measurement_basis": "attributable management statement",
+        "channel_scope": "all",
+        "denominator": "not applicable: documentary statement"
+      },
+      "data_vintage": "2026-07-25",
+      "artifact": {
+        "identity": "sha256:dca87a24a6d705add67c381675057185545cfdb45d7d67d17e1324d9801d864d",
+        "sha256": "dca87a24a6d705add67c381675057185545cfdb45d7d67d17e1324d9801d864d"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf",
+        "document_canonical_url": "https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf",
+        "document_id": "Hikvision-IR-2026-7-25",
+        "artifact_sha256": "dca87a24a6d705add67c381675057185545cfdb45d7d67d17e1324d9801d864d",
+        "binding_sha256": "7d8f512887fc9e69825afca1185735360d7cae1666447c92adacd715458686b0"
+      },
+      "scope_fingerprint": "52b8ada03624fb179b20ea1a5c91310efcc1348b69bdde4a93ca2fb378d65168",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "杭州海康威视数字技术股份有限公司",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Hikvision-IR-2026-7-25"
+        ],
+        "cited_source_ids": [],
+        "provider_table_id": null
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "Low",
+        "evidence_level": "High"
+      },
+      "market_definition_fingerprint": "cb5f2bf412f1b3ac0b77d8fa2c68269c5f82952aba259ab1cd8e623f53650f1b",
+      "series_fingerprint": "2dc91928778f6cbf63efb5b451ebc073285c1c2c6c4729ca30b8b80e9042bb43",
+      "lineage_id": "underlying:66ad3f406656b00c2467f73baa8f394efc2b52779676392973627b34f72b3fba"
+    }
+  ],
+  "unresolved_claims": [
+    {
+      "claim_id": "h1-2026-inventory-business-allocation",
+      "status": "blocked",
+      "reason": "No verified split in examined original, with public search/archive access limits; do not infer allocation",
+      "ledger_path": "/tmp/hikvision-inventory-public/h1-2026-inventory-business-allocation-ledger.json"
+    }
+  ],
+  "ledger_path": "/tmp/hikvision-inventory-public/ledger-manifest.json",
+  "ledger_sha256": "1c67582866f90aa4297c1de9693e8c84a10f1282ac300ddf47345f2e68787b9f",
+  "status": "partial",
+  "industry_bundle": null
+}
