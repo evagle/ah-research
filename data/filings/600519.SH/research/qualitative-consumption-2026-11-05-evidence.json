@@ -1,0 +1,3737 @@
+{
+  "as_of": "2026-11-05",
+  "scope": "attributed qualitative mechanisms and limited observations; no consumer proportions, valuation or market-size data",
+  "sources": [
+    {
+      "source_id": "Q-HX",
+      "original_author": "华鑫证券／孙山山",
+      "title": "国酒飘香恒久远，定海神针风向标",
+      "published_at": "2024-11-22",
+      "index_date": "2024-11-24",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+      "source_class": "original-research",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202411231641041501.pdf",
+      "raw_sha256": "df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202411231641041501.txt",
+      "text_sha256": "3512baa99eb204bc66fc1263fca2a0fa345852a3b77cfaa064575d8aba677b6f",
+      "excerpts": [
+        {
+          "text": "高端白酒需要更好地满足消费者对精神属性、社交属性的需求",
+          "pdf_page": 13,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "品牌力强的酒企天然具备消费者认知度高、口碑效应强的优势",
+          "pdf_page": 12,
+          "locator": "PDF页序"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "券商对品牌机制的解释；非消费者调查。封面日期优先于配送索引。"
+    },
+    {
+      "source_id": "Q-BQ",
+      "original_author": "酒业家团队；受访者信达证券张伟敬",
+      "title": "38度国窖、39度五粮液、42度青花汾……低度高端酒重构700+价格带竞争格局？",
+      "published_at": "2024-07-11",
+      "index_date": null,
+      "url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+      "source_class": "media",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/banquet-sina.html",
+      "raw_sha256": "b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/banquet-sina.txt",
+      "text_sha256": "ace85212bbd4a69526addbb609a86f39860e24205bfd11e0247300575884d5e3",
+      "excerpts": [
+        {
+          "text": "相比之前，如今更多的消费者觉得宴席上43度茅台有面子，能摆上台面。",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "新浪页面署名酒业家；搜狐快乐美食二三事及茅台时空均为同源转载，不增加独立证据数。观察针对43度茅台与部分地区，非全国比例。"
+    },
+    {
+      "source_id": "Q-GJ",
+      "original_author": "国金证券／刘宸倩、叶韬",
+      "title": "市场化转型专题：量价归位与渠道重构",
+      "published_at": "2026-03-22",
+      "index_date": "2026-03-23",
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+      "source_class": "original-research",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202603231820696581.pdf",
+      "raw_sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202603231820696581.txt",
+      "text_sha256": "b1005253f78c1a099a49dd70964258b45d69a230951adf78e1a5c4cb2fc3be25",
+      "excerpts": [
+        {
+          "text": "如票据处理、即时配送、产品组合配置、售后服务、私享品鉴等。",
+          "pdf_page": 10,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "尤其在礼赠场景中，购买方与受赠方分离，进一步放大该需求特征。",
+          "pdf_page": 10,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "不同年份茅台酒因稀缺性，以及存放过程中的陈化效应",
+          "pdf_page": 6,
+          "locator": "PDF页序"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "封面图像核验作者及2026-03-22日期。礼赠原文处于风险偏好与服务需求分层上下文，不能推导所有礼赠者都更重保真。"
+    },
+    {
+      "source_id": "Q-SD",
+      "original_author": "《葡萄酒》杂志WINEMAG／Susan；受访者蔡学飞、肖竹青",
+      "title": "1499直售，″茅台自由″不是梦?",
+      "published_at": "2026-01-09",
+      "index_date": null,
+      "url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+      "source_class": "media",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/self-body.html",
+      "raw_sha256": "977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/self-body.txt",
+      "text_sha256": "798ded3eb7ef2185030749fc3e8e98ecb2a1028c84967557164df6bbfdd99f08",
+      "excerpts": [
+        {
+          "text": "价格回归能降低消费门槛，吸引部分中产阶级及年轻消费者尝试购买。",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        },
+        {
+          "text": "短期内很难成为高频次、日常化的大众消费品",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "HTML meta author=葡萄酒杂志WINEMAG，正文文编Susan。采访属于具名专家观察；非消费者亲述。拒绝采用其金融属性消失、保值及抢购证明护城河等强结论。"
+    },
+    {
+      "source_id": "Q-CH",
+      "original_author": "澎湃新闻（东方财富全文转载）",
+      "title": "白酒春节动销“分化”：飞天茅台热销货源紧张 酒商坦言“不敢囤货”",
+      "published_at": "2026-02-05",
+      "index_date": null,
+      "url": "https://finance.eastmoney.com/a/202602053642939679.html",
+      "source_class": "media",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/consumer-2026.html",
+      "raw_sha256": "96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/consumer-2026.txt",
+      "text_sha256": "137f8297f3b6cceb0daa1dd51d922bae32597f491826cad2b1218ee529f7ae56",
+      "excerpts": [
+        {
+          "text": "终端渠道普遍反映飞天茅台等名酒春节礼赠、聚餐等需求依然旺盛",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        },
+        {
+          "text": "尽管价格降了很多，甚至有品牌推出买一赠一的活动，但和去年、前年相比，白酒整体卖得并不好",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "署明澎湃新闻来源，原站原稿未定位。使用其地方走访及匿名商超采访作有限反例，不代表全国全年。500–600元价位自饮观察不能移用于飞天茅台。"
+    },
+    {
+      "source_id": "Q-WD",
+      "original_author": "酒业家团队；受访者北京正一堂丁永征",
+      "title": "被重估的婚宴市场：茅台、五粮液、习酒、郎酒等头部品牌大力加码",
+      "published_at": "2025-04-15",
+      "index_date": null,
+      "url": "https://www.sohu.com/a/884573014_554374",
+      "source_class": "media",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/media-2-body.html",
+      "raw_sha256": "2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/media-2-body.txt",
+      "text_sha256": "15edcd8568f49ae199c6d4b816ca246433203988b1834e97190c2b94fb7db774",
+      "excerpts": [
+        {
+          "text": "围绕茅台1935和茅台王子酒两大品牌",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        },
+        {
+          "text": "现在不仅仅是靠品牌和性价比就能打动消费者的时候了。",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "酒业家传媒署名平台原作。产品活动针对系列酒，非53度飞天；竞争品牌亦推出服务。排除未追溯的全国宴席规模和场景占比。"
+    },
+    {
+      "source_id": "Q-DW",
+      "original_author": "东吴证券／苏铖、孙瑜",
+      "title": "营销改革复盘专题：笃行不怠，臻于至善",
+      "published_at": "2026-03-03",
+      "index_date": null,
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+      "source_class": "original-research",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202603031820234429.pdf",
+      "raw_sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202603031820234429.txt",
+      "text_sha256": "fc9fde333544cd5082e92c97b67383b8ea0beb65458c3ba32339aaf50d67883a",
+      "excerpts": [
+        {
+          "text": "从政务市场转向民间商务市场",
+          "pdf_page": 15,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "期待未来可相应加强新商务及年轻群体的培育转化。",
+          "pdf_page": 15,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "加强对政务意见领袖的定向供应",
+          "pdf_page": 15,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "整肃渠道腐败，扩大渠道触达面",
+          "pdf_page": 15,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "加强场景营销",
+          "pdf_page": 15,
+          "locator": "PDF页序"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "券商历史复盘及转化愿景。2013–2017、2018–2023、2024以来为报告分期，不是逐年消费者调查。"
+    },
+    {
+      "source_id": "Q-AJ",
+      "original_author": "爱建证券／范林泉",
+      "title": "推进市场化改革，龙头持续变革转型",
+      "published_at": "2026-04-01",
+      "index_date": null,
+      "url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+      "source_class": "original-research",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202604011820949486.pdf",
+      "raw_sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/broker/AP202604011820949486.txt",
+      "text_sha256": "5133a8920964947db21628f5a954d5d703e0bd507cac2b6b6292684d01dadb2e",
+      "excerpts": [
+        {
+          "text": "通过价格分层实现消费分层，匹配多样化需求。",
+          "pdf_page": 1,
+          "locator": "PDF页序"
+        },
+        {
+          "text": "若经济复苏节奏偏慢、商务宴请等核心消费场景修复滞后",
+          "pdf_page": 4,
+          "locator": "PDF页序"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "产品分层解释与条件性风险；非已确认需求下滑。与国金类似的产品观点不当独立消费者调查。"
+    },
+    {
+      "source_id": "Q-RS",
+      "original_author": "红星财经／刘谧、记者李伟铭；河南酒商采访",
+      "title": "贵州茅台再调查：价格场景的“变”与“不变”",
+      "published_at": "2025-08-10",
+      "index_date": null,
+      "url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+      "source_class": "media",
+      "raw_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/change-body.html",
+      "raw_sha256": "e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+      "text_cache": "/Users/brian_huang/repos/ah-research/tmp/moutai-qualitative-sources/change-body.txt",
+      "text_sha256": "daad8add871484a63e0190daabafbef0067b963006ede45ac91ee5a14d1ac954",
+      "excerpts": [
+        {
+          "text": "采购模式也从“百箱囤货”变为“按需单件购买”，更趋理性。",
+          "pdf_page": null,
+          "locator": "正文具名采访或报道段落"
+        }
+      ],
+      "evidence_level": "Medium",
+      "authority": "Medium",
+      "originality": "High",
+      "independence": "Medium",
+      "notes": "原站全文；地方渠道受访者未具名。具名专家的政务、年轻客群和场景占比缺原始调查口径，全部不采用。婚宴增长段涉及茅台1935，不外推飞天。"
+    }
+  ],
+  "scope_revisions": [
+    {
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "before": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-gift-business-reportage",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "商务招待和礼赠动机的具名采访观察",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Medium",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "media"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "after": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-gift-business-reportage",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Medium",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "original-research"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "reason": "用户要求收集定性材料；准确区分券商机制、专家观察与媒体记录，不冒充消费者采访或公司原始文件。"
+    },
+    {
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "before": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-selfdrink-reportage",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "自饮购买理由及社交溢价差异的采访观察",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Medium",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "media",
+          "original-research"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "after": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-selfdrink-reportage",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "自饮及日常化门槛的具名专家定性观察",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Medium",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "media"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "reason": "用户要求收集定性材料；准确区分券商机制、专家观察与媒体记录，不冒充消费者采访或公司原始文件。"
+    },
+    {
+      "claim_id": "moutai-qual-product-positioning",
+      "before": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-product-positioning",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "公司针对婚宴与社交消费的产品行动",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Low",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "issuer-first-party"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "after": {
+        "schema_version": "1.0",
+        "claim_id": "moutai-qual-product-positioning",
+        "claim_type": "qualitative-consumption",
+        "subject": "贵州茅台",
+        "metric": "行业媒体记录的系列酒婚宴产品与服务行动",
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "population": "中国白酒消费者与渠道受访者",
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+        "period_start": "2010-01-01",
+        "period_end": "2026-11-05",
+        "frequency": "event-driven",
+        "continuity_required": false,
+        "required_latest_period": "2010-01-01",
+        "accepted_units": [
+          "qualitative-excerpt"
+        ],
+        "definition_constraints": [
+          "quote must appear in opened original source",
+          "publication date must be on or before AS_OF",
+          "interpretation must not be represented as consumer survey"
+        ],
+        "value_status_allowed": [
+          "observed"
+        ],
+        "minimum_source_authority": "Medium",
+        "minimum_conclusion_evidence": "Medium",
+        "minimum_originality": "Medium",
+        "minimum_independence": "Medium",
+        "independent_cross_check_required": false,
+        "accepted_source_classes": [
+          "media"
+        ],
+        "absence_claim": false,
+        "as_of": "2026-11-05"
+      },
+      "reason": "用户要求收集定性材料；准确区分券商机制、专家观察与媒体记录，不冒充消费者采访或公司原始文件。"
+    }
+  ],
+  "requests": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "品牌溢价与社交价值的券商定性解释",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "婚宴和宴席用酒的具名采访观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "自饮及日常化门槛的具名专家定性观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2025至2026终端场景与偏好变化的观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2025-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2025-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media",
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2012年以来客群与渠道转向的券商历史复盘",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "商务场景修复及改革效果的条件性风险",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "original-research"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "claim_type": "qualitative-consumption",
+      "subject": "贵州茅台",
+      "metric": "2025地方酒商的按需采购模式观察",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "baijiu"
+      ],
+      "population": "中国白酒消费者与渠道受访者",
+      "product_scope": "贵州茅台酒；明确区分系列酒",
+      "measurement_basis": "qualitative attributable observation or interpretation; no population proportion",
+      "period_start": "2010-01-01",
+      "period_end": "2026-11-05",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2010-01-01",
+      "accepted_units": [
+        "qualitative-excerpt"
+      ],
+      "definition_constraints": [
+        "quote must appear in opened original source",
+        "publication date must be on or before AS_OF",
+        "interpretation must not be represented as consumer survey"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "Medium",
+      "minimum_conclusion_evidence": "Medium",
+      "minimum_originality": "Medium",
+      "minimum_independence": "Medium",
+      "independent_cross_check_required": false,
+      "accepted_source_classes": [
+        "media"
+      ],
+      "absence_claim": false,
+      "as_of": "2026-11-05"
+    }
+  ],
+  "candidates": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "metric": "品牌溢价与社交价值的券商定性解释",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "华鑫证券／孙山山",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-HX",
+        "title": "国酒飘香恒久远，定海神针风向标",
+        "published_at": "2024-11-22",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2024-11-22",
+      "artifact": {
+        "identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "sha256": "df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+        "document_id": "Q-HX",
+        "artifact_sha256": "df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "binding_sha256": "3417581c04d764ce815bc4dc9609750beb0cdaf66fb3a5526f0f75e597648bb1"
+      },
+      "scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "华鑫证券／孙山山",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-HX:2024-11-22"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd",
+      "values": [
+        {
+          "period": "2024-11-22",
+          "value": "高端白酒需要更好地满足消费者对精神属性、社交属性的需求 / 品牌力强的酒企天然具备消费者认知度高、口碑效应强的优势",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+          "event_key": "Q-HX:publication:2024-11-22",
+          "evidence_id": "Q-HX",
+          "canonical_value": {
+            "value": "高端白酒需要更好地满足消费者对精神属性、社交属性的需求 / 品牌力强的酒企天然具备消费者认知度高、口碑效应强的优势",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "metric": "婚宴和宴席用酒的具名采访观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "finance.sina.com.cn",
+        "original_publisher": "酒业家团队；受访者信达证券张伟敬",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml"
+      },
+      "document": {
+        "document_id": "Q-BQ",
+        "title": "38度国窖、39度五粮液、42度青花汾……低度高端酒重构700+价格带竞争格局？",
+        "published_at": "2024-07-11",
+        "canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2024-07-11",
+      "artifact": {
+        "identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "sha256": "b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+        "document_canonical_url": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+        "document_id": "Q-BQ",
+        "artifact_sha256": "b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "binding_sha256": "377acf4d8e221165705cbdd12e6c8ccd9ed8660639f3d29ca462565f550d29a3"
+      },
+      "scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "酒业家团队",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-BQ:2024-07-11"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea",
+      "values": [
+        {
+          "period": "2024-07-11",
+          "value": "相比之前，如今更多的消费者觉得宴席上43度茅台有面子，能摆上台面。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+          "event_key": "Q-BQ:publication:2024-07-11",
+          "evidence_id": "Q-BQ",
+          "canonical_value": {
+            "value": "相比之前，如今更多的消费者觉得宴席上43度茅台有面子，能摆上台面。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "metric": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "国金证券／刘宸倩、叶韬",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-GJ",
+        "title": "市场化转型专题：量价归位与渠道重构",
+        "published_at": "2026-03-22",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-03-22",
+      "artifact": {
+        "identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+        "document_id": "Q-GJ",
+        "artifact_sha256": "bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "binding_sha256": "431e335f7ae8a1c31fe9c0b6544e9fe5a46935f8f44b34d2b2a74fa080d82dcf"
+      },
+      "scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "国金证券／刘宸倩、叶韬",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-GJ:2026-03-22"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b",
+      "values": [
+        {
+          "period": "2026-03-22",
+          "value": "如票据处理、即时配送、产品组合配置、售后服务、私享品鉴等。 / 尤其在礼赠场景中，购买方与受赠方分离，进一步放大该需求特征。 / 不同年份茅台酒因稀缺性，以及存放过程中的陈化效应",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+          "event_key": "Q-GJ:publication:2026-03-22",
+          "evidence_id": "Q-GJ",
+          "canonical_value": {
+            "value": "如票据处理、即时配送、产品组合配置、售后服务、私享品鉴等。 / 尤其在礼赠场景中，购买方与受赠方分离，进一步放大该需求特征。 / 不同年份茅台酒因稀缺性，以及存放过程中的陈化效应",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "metric": "自饮及日常化门槛的具名专家定性观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "cj.sina.com.cn",
+        "original_publisher": "《葡萄酒》杂志WINEMAG／Susan；受访者蔡学飞、肖竹青",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k"
+      },
+      "document": {
+        "document_id": "Q-SD",
+        "title": "1499直售，″茅台自由″不是梦?",
+        "published_at": "2026-01-09",
+        "canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-01-09",
+      "artifact": {
+        "identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "sha256": "977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+        "document_canonical_url": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+        "document_id": "Q-SD",
+        "artifact_sha256": "977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "binding_sha256": "2b2363d3e7592402532d4075f18aeeecd866036ff9708b782cbdb214f4b4b373"
+      },
+      "scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "《葡萄酒》杂志WINEMAG／Susan",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-SD:2026-01-09"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071",
+      "values": [
+        {
+          "period": "2026-01-09",
+          "value": "价格回归能降低消费门槛，吸引部分中产阶级及年轻消费者尝试购买。 / 短期内很难成为高频次、日常化的大众消费品",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+          "event_key": "Q-SD:publication:2026-01-09",
+          "evidence_id": "Q-SD",
+          "canonical_value": {
+            "value": "价格回归能降低消费门槛，吸引部分中产阶级及年轻消费者尝试购买。 / 短期内很难成为高频次、日常化的大众消费品",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "metric": "2025至2026终端场景与偏好变化的观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "finance.eastmoney.com",
+        "original_publisher": "澎湃新闻（东方财富全文转载）",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html"
+      },
+      "document": {
+        "document_id": "Q-CH",
+        "title": "白酒春节动销“分化”：飞天茅台热销货源紧张 酒商坦言“不敢囤货”",
+        "published_at": "2026-02-05",
+        "canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-02-05",
+      "artifact": {
+        "identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "sha256": "96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html",
+        "document_canonical_url": "https://finance.eastmoney.com/a/202602053642939679.html",
+        "document_id": "Q-CH",
+        "artifact_sha256": "96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "binding_sha256": "2958f1851e772713cff1531f96f5ac9b6b4d809b11b970a02435e409bab648e4"
+      },
+      "scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "澎湃新闻（东方财富全文转载）",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-CH:2026-02-05"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10",
+      "values": [
+        {
+          "period": "2026-02-05",
+          "value": "终端渠道普遍反映飞天茅台等名酒春节礼赠、聚餐等需求依然旺盛 / 尽管价格降了很多，甚至有品牌推出买一赠一的活动，但和去年、前年相比，白酒整体卖得并不好",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+          "event_key": "Q-CH:publication:2026-02-05",
+          "evidence_id": "Q-CH",
+          "canonical_value": {
+            "value": "终端渠道普遍反映飞天茅台等名酒春节礼赠、聚餐等需求依然旺盛 / 尽管价格降了很多，甚至有品牌推出买一赠一的活动，但和去年、前年相比，白酒整体卖得并不好",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "metric": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "www.sohu.com",
+        "original_publisher": "酒业家团队；受访者北京正一堂丁永征",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://www.sohu.com/a/884573014_554374"
+      },
+      "document": {
+        "document_id": "Q-WD",
+        "title": "被重估的婚宴市场：茅台、五粮液、习酒、郎酒等头部品牌大力加码",
+        "published_at": "2025-04-15",
+        "canonical_url": "https://www.sohu.com/a/884573014_554374"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2025-04-15",
+      "artifact": {
+        "identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "sha256": "2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://www.sohu.com/a/884573014_554374",
+        "document_canonical_url": "https://www.sohu.com/a/884573014_554374",
+        "document_id": "Q-WD",
+        "artifact_sha256": "2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "binding_sha256": "31e160430374bbbff1a9b58a2c6c505776e45fbc5076570046a8af2c88ce11b5"
+      },
+      "scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "酒业家团队",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-WD:2025-04-15"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142",
+      "values": [
+        {
+          "period": "2025-04-15",
+          "value": "围绕茅台1935和茅台王子酒两大品牌 / 现在不仅仅是靠品牌和性价比就能打动消费者的时候了。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+          "event_key": "Q-WD:publication:2025-04-15",
+          "evidence_id": "Q-WD",
+          "canonical_value": {
+            "value": "围绕茅台1935和茅台王子酒两大品牌 / 现在不仅仅是靠品牌和性价比就能打动消费者的时候了。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "metric": "2012年以来客群与渠道转向的券商历史复盘",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "东吴证券／苏铖、孙瑜",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-DW",
+        "title": "营销改革复盘专题：笃行不怠，臻于至善",
+        "published_at": "2026-03-03",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-03-03",
+      "artifact": {
+        "identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+        "document_id": "Q-DW",
+        "artifact_sha256": "fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "binding_sha256": "07205571235cea0052e0bde3719d395087eb1be5634ce08dae1d673f6ce919f4"
+      },
+      "scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "东吴证券／苏铖、孙瑜",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-DW:2026-03-03"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7",
+      "values": [
+        {
+          "period": "2026-03-03",
+          "value": "从政务市场转向民间商务市场 / 期待未来可相应加强新商务及年轻群体的培育转化。 / 加强对政务意见领袖的定向供应 / 整肃渠道腐败，扩大渠道触达面 / 加强场景营销",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+          "event_key": "Q-DW:publication:2026-03-03",
+          "evidence_id": "Q-DW",
+          "canonical_value": {
+            "value": "从政务市场转向民间商务市场 / 期待未来可相应加强新商务及年轻群体的培育转化。 / 加强对政务意见领袖的定向供应 / 整肃渠道腐败，扩大渠道触达面 / 加强场景营销",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "metric": "商务场景修复及改革效果的条件性风险",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "东方财富PDF配送",
+        "original_publisher": "爱建证券／范林泉",
+        "publisher_type": "broker-research",
+        "source_class": "original-research",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf"
+      },
+      "document": {
+        "document_id": "Q-AJ",
+        "title": "推进市场化改革，龙头持续变革转型",
+        "published_at": "2026-04-01",
+        "canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2026-04-01",
+      "artifact": {
+        "identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+        "document_canonical_url": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+        "document_id": "Q-AJ",
+        "artifact_sha256": "6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "binding_sha256": "f6e19db05a10d02c7fc72bd9f9d99ab605fac7fb409d7c572be6e106e3052294"
+      },
+      "scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "爱建证券／范林泉",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-AJ:2026-04-01"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a",
+      "values": [
+        {
+          "period": "2026-04-01",
+          "value": "通过价格分层实现消费分层，匹配多样化需求。 / 若经济复苏节奏偏慢、商务宴请等核心消费场景修复滞后",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+          "event_key": "Q-AJ:publication:2026-04-01",
+          "evidence_id": "Q-AJ",
+          "canonical_value": {
+            "value": "通过价格分层实现消费分层，匹配多样化需求。 / 若经济复苏节奏偏慢、商务宴请等核心消费场景修复滞后",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "metric": "2025地方酒商的按需采购模式观察",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "static.cdsb.com",
+        "original_publisher": "红星财经／刘谧、记者李伟铭；河南酒商采访",
+        "publisher_type": "attributed-reportage",
+        "source_class": "media",
+        "canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html"
+      },
+      "document": {
+        "document_id": "Q-RS",
+        "title": "贵州茅台再调查：价格场景的“变”与“不变”",
+        "published_at": "2025-08-10",
+        "canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html"
+      },
+      "canonical_unit": "qualitative-excerpt",
+      "scope": {
+        "geographies": [
+          "CN"
+        ],
+        "industries": [
+          "baijiu"
+        ],
+        "product_scope": "贵州茅台酒；明确区分系列酒",
+        "population": "中国白酒消费者与渠道受访者",
+        "measurement_basis": "qualitative attributable observation or interpretation; no population proportion"
+      },
+      "data_vintage": "2025-08-10",
+      "artifact": {
+        "identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "sha256": "e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+        "document_canonical_url": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+        "document_id": "Q-RS",
+        "artifact_sha256": "e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "binding_sha256": "f0ad6ef50506382ffcdce055284b8572268c8c86b42ed9c966a9c1124bc2b56b"
+      },
+      "scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "红星财经／刘谧、记者李伟铭",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "Q-RS:2025-08-10"
+        ],
+        "cited_source_ids": []
+      },
+      "runtime_evidence": {
+        "source_authority": "Medium",
+        "conclusion_evidence": "Medium",
+        "originality": "High",
+        "independence": "Medium",
+        "evidence_level": "Medium"
+      },
+      "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa",
+      "values": [
+        {
+          "period": "2025-08-10",
+          "value": "采购模式也从“百箱囤货”变为“按需单件购买”，更趋理性。",
+          "unit": "qualitative-excerpt",
+          "status": "observed",
+          "definition_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+          "event_key": "Q-RS:publication:2025-08-10",
+          "evidence_id": "Q-RS",
+          "canonical_value": {
+            "value": "采购模式也从“百箱囤货”变为“按需单件购买”，更趋理性。",
+            "unit": "qualitative-excerpt",
+            "definition_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+            "reconciliation_id": null
+          }
+        }
+      ]
+    }
+  ],
+  "ledgers": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "request_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+          "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-HX",
+        "artifact_identity": "sha256:df1caaaa2c6789e6577c3ad6e0c9ea13ef33c01f5f2c528b6a0de5ae1204d5d1",
+        "lineage_id": "underlying:649f36225183b6bcb734a0bf53424d69d7e4cedb44097ee9eaac7fb3eddfa3dd"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "request_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+          "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-BQ",
+        "artifact_identity": "sha256:b50053f337957e590db6c423b88596569b9875732b2b65726d3bba6e1f39ba48",
+        "lineage_id": "underlying:92dc34e5b2c289794434a3a6985a3c0b8a77e5a4b9868eb7f5393fe77d34d1ea"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "request_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+          "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-GJ",
+        "artifact_identity": "sha256:bd34c3732e4430cfddaf57a0bd68068929b964d32272b2265c31fb0880277be6",
+        "lineage_id": "underlying:e6606ed29c3eb27ebbc6d56ce2afb70d4146c5cf3b6e39294536e3541106564b"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "request_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+          "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-SD",
+        "artifact_identity": "sha256:977b6896c8eac93a0c0dbfa5f79dba9ce8d933b71cae49b5c073074647b86813",
+        "lineage_id": "underlying:9da996f111344a9ac18a82519ddd95a394056deeb305efb0b25c3fad8ebb8071"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "request_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://finance.eastmoney.com/a/202602053642939679.html",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+          "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-CH",
+        "artifact_identity": "sha256:96302b120990be247c6bfb14a113ceaa14c7307a8b18a9f8699eb84dedf8261a",
+        "lineage_id": "underlying:b94499e15c880850aa8a9bf1277a554ba0dcf2a4108f5a50166b53df2e3d3a10"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "request_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://www.sohu.com/a/884573014_554374",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+          "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-WD",
+        "artifact_identity": "sha256:2d6848a28a31accff3fc315cca1a1193e465de6f0659e5353214615f2e6727a9",
+        "lineage_id": "underlying:ba4d7ebcfd5b5617071fca207fa02be5ba806139e86168f39d0b63435e7a3142"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "request_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+          "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-DW",
+        "artifact_identity": "sha256:fa12df415ee9233bd392f204cf2cc6ad82eeb788ab2cdaa032d6e5cef8cdace6",
+        "lineage_id": "underlying:23e79f10a018042f642474ff35df9376db65487e6f309a2a4c20297fdaaba1f7"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "request_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+          "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-AJ",
+        "artifact_identity": "sha256:6f71d70ebacb102f4c59085a37b6dde512e5ac50d801d926fa993bcd6cd82913",
+        "lineage_id": "underlying:a958fddef93e383181c58a46a16f6fa3c95c64ef11937c2ac7e8759b9408470a"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "request_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index",
+          "query_variant": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+          "started_at": "2026-11-05T01:08:01.028622+00:00",
+          "completed_at": "2026-11-05T01:08:01.028622+00:00",
+          "artifact_identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+          "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "Q-RS",
+        "artifact_identity": "sha256:e26018b257dcba3afda3e306958bd0a587c93c9b1e23d9674eef4ab54afc1cc7",
+        "lineage_id": "underlying:fbd7515fd7bb28fd6a611df5c34bf547599c3cdaa41c9946ba3f828e9c4201aa"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive claim accepted; no route exhaustion claimed"
+        }
+      ],
+      "unattempted_routes": []
+    }
+  ],
+  "planner_inventory_receipts": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-broker-brand",
+      "request_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-broker-brand",
+          "request_scope_fingerprint": "17804d84630cf29a44c772f351de53f4b59c895eb465a2fab43ff1c737b47f98",
+          "request_content_sha256": "9633513a7277e8833d076090801b81798f3c36c10d3e4f1b1ef2590c86cdf8f4"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "561a165d4ae08b2ff11de68d1c0b5ff4ece2d87faa39b4bcb766300df965d65a",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "58816e5a33a1824069af7f67800fad31f415adc071a6fc66159eceb84d123e73"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-banquet-reportage",
+      "request_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-banquet-reportage",
+          "request_scope_fingerprint": "61b7cb079b762c77100435a922406b05e4be694b214061f36c14a369806c528c",
+          "request_content_sha256": "5eaf56a47da35bb5dfe5e372be95b67562a0a92858345c23a496720b7ae9b0ab"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "0da36aff4b7dea528ac611bd52cf47b2c4d8210d40c132c03561535b33ef0742",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "55062ae161d28edbda19c7b8acf2cebf5997bd4f824319a62b6998633f49220a"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-gift-business-reportage",
+      "request_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-gift-business-reportage",
+          "request_scope_fingerprint": "7afec56b40d82f3a5bd8afe53e51b58958ef279389b1a14b8f8e7bff0406a204",
+          "request_content_sha256": "80b1fe758478044e8d9f3af8167b7f69a76fb32f9e6344d696ac7de6584032e1"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "b42da5532629d4cf01f06ac16a8df1fd84aa9fec8e358f83e967d45af38069b8",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "e7e9feb54152045fcf55d95e4854e6ac39d4aabc52c198da82a4b16eccdf278b"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-selfdrink-reportage",
+      "request_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-selfdrink-reportage",
+          "request_scope_fingerprint": "7d2d14cf7ec096870f1d3c928e7412f833d08976cfa01d3d8bbbda95b42c04ec",
+          "request_content_sha256": "424f58eb4c29e88920e886e9002c606e24169be065bc5d9786e6ab29173a2e53"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "acc832b979a4775b94ffb7466606995ead850252242a82f6f785a3154ce7f412",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "36f323f20175ba4860b82d779b6f00ddc82e028edcdb41149ba84a8858d3a873"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-change-reportage",
+      "request_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-change-reportage",
+          "request_scope_fingerprint": "e99378b149e1de0ad11947b7f3cfd9e2c7aa0361540bb3a03822d8d212a96d0c",
+          "request_content_sha256": "e80acc26afb72cde553556fa02a87be76b26d60bcdc1f426c7bc2f55d27f5404"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "fcfa99c1cd415288da65e39eebe389f9c01b48c40f6d280255b214070eddb89f",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "caa0387bdcbe25e2e356287c931bf6518dccf7ebe9a75a27d2ce9b3281aa1e2e"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-product-positioning",
+      "request_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-product-positioning",
+          "request_scope_fingerprint": "2e8e707d4661bd4b94b75fc984de7257653691fbe4325481fb8be3f31b4fec64",
+          "request_content_sha256": "db3d86fe9eb854d45bd246a1d5cd4a6980f599d3c75361b823e860c82defb2d8"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "523a781a5bb40baf6433ec051a1a73a251194566f868d71ce6a0524d610af777",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "424a1a2e543d13c16f71c63b9c23c6a012c2b01a908adc44248e4ac9c52ee6cf"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-history",
+      "request_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-history",
+          "request_scope_fingerprint": "7e7ea62616f7a9e8aeb5b89f0ab2e1e66ca3bbd27119ae54e32224932918c2c0",
+          "request_content_sha256": "9842dc0375942befcf43f6ec9a8d0fb795742c84626a64112d2c13540c9037a7"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "566a034861510ed27842bfa3fdcb3f74af8dc061b62391b032a1267354a50c2e",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "d319b4bead6b3dbf68a7a4b412359d54a49e8eb4e23647b8cfc065482a26b822"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-risk",
+      "request_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-risk",
+          "request_scope_fingerprint": "8db3edd4ca919d2ff94dacd5c0c70d57a2a72bcfcce2730407fb590de0ec144b",
+          "request_content_sha256": "ac996d0038633d31178a93947f16d8ec6a12740eaf520eae7be6974c2922ab9e"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "626a29f78813525bee6cf9cee408852b79aa5ca17c869e04791090e934deb832",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "0da05f2501cfd705c17fb64bdf9b52ba518b8a27aa515cef2ea9618db5085da3"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-qual-order-pattern",
+      "request_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-qual-order-pattern",
+          "request_scope_fingerprint": "1a157070ea33f78196c428dfdefba538f4a1957d92458b10bdd3ade69af8ec7c",
+          "request_content_sha256": "677115cedf866272e87a8d04c5657ae6489eafb9a4626ceaba322d3f5397b4c0"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "local-research-and-search-index",
+            "subject_relation": "bound-local",
+            "document_type": "cached-research-and-discovery-index",
+            "route_binding_sha256": "a7ef8c9d34474427b80df8f59079757d80b851aa192682752e3a97f8f010b6cc"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T01:08:01.028622+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "b071a8cd39d6ab7bcba2024cb2f93baa3e97afa0ac81f00aa3bccf03301574ae"
+      },
+      "planner_input_fingerprint": "e3e06b47d519fad46fedf081317ca31da579d17d0b7684ece01290509df6ceaf",
+      "route_inventory": [
+        {
+          "route_id": "local-research-and-search-index",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-research-and-discovery-index"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "9ead0d4571be6c67aadad77cb2c5f85a8264d806599ecfa0241a55e23f5dfc7b"
+    }
+  ],
+  "access_records": [
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202411231641041501_1.pdf",
+      "query": "品牌溢价与社交价值的券商定性解释",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "券商对品牌机制的解释；非消费者调查。封面日期优先于配送索引。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "品牌溢价与社交价值的券商定性解释",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+      "query": "婚宴和宴席用酒的具名采访观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "新浪页面署名酒业家；搜狐快乐美食二三事及茅台时空均为同源转载，不增加独立证据数。观察针对43度茅台与部分地区，非全国比例。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "婚宴和宴席用酒的具名采访观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202603231820696581_1.pdf",
+      "query": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "封面图像核验作者及2026-03-22日期。礼赠原文处于风险偏好与服务需求分层上下文，不能推导所有礼赠者都更重保真。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "商务与礼赠的渠道服务及购买者分离机制的券商解释",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+      "query": "自饮及日常化门槛的具名专家定性观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "HTML meta author=葡萄酒杂志WINEMAG，正文文编Susan。采访属于具名专家观察；非消费者亲述。拒绝采用其金融属性消失、保值及抢购证明护城河等强结论。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "自饮及日常化门槛的具名专家定性观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.eastmoney.com/a/202602053642939679.html",
+      "query": "2025至2026终端场景与偏好变化的观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "署明澎湃新闻来源，原站原稿未定位。使用其地方走访及匿名商超采访作有限反例，不代表全国全年。500–600元价位自饮观察不能移用于飞天茅台。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2025至2026终端场景与偏好变化的观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://www.sohu.com/a/884573014_554374",
+      "query": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "酒业家传媒署名平台原作。产品活动针对系列酒，非53度飞天；竞争品牌亦推出服务。排除未追溯的全国宴席规模和场景占比。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "行业媒体记录的系列酒婚宴产品与服务行动",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202603031820234429_1.pdf",
+      "query": "2012年以来客群与渠道转向的券商历史复盘",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "券商历史复盘及转化愿景。2013–2017、2018–2023、2024以来为报告分期，不是逐年消费者调查。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2012年以来客群与渠道转向的券商历史复盘",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://pdf.dfcfw.com/pdf/H3_AP202604011820949486_1.pdf",
+      "query": "商务场景修复及改革效果的条件性风险",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "产品分层解释与条件性风险；非已确认需求下滑。与国金类似的产品观点不当独立消费者调查。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "商务场景修复及改革效果的条件性风险",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+      "query": "2025地方酒商的按需采购模式观察",
+      "status": "opened",
+      "result": "attributed text verified against cached source",
+      "access_limitation": "原站全文；地方渠道受访者未具名。具名专家的政务、年轻客群和场景占比缺原始调查口径，全部不采用。婚宴增长段涉及茅台1935，不外推飞天。",
+      "access_conclusion": "全文/PDF可访问；定性内容可定位",
+      "source_authority": "Medium",
+      "practical_utility": "2025地方酒商的按需采购模式观察",
+      "current_reachability": "HTTP 200 recorded in cache receipt",
+      "conclusion_evidence": "Medium",
+      "evidence_level": "Medium",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://static.cdsb.com/micropub/Articles/202508/428ee252727c5f9e19e6b9542bdfc44d.html",
+      "query": "change",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://cj.sina.com.cn/articles/view/1922607521/7298a9a102701kj4k",
+      "query": "self",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://business.sohu.com/a/792574146_121119044",
+      "query": "banquet",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://www.sohu.com/a/253151200_492251",
+      "query": "position",
+      "status": "access-unavailable",
+      "result": "403",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "未取得正文，不接受",
+      "source_authority": "Low",
+      "practical_utility": "来源追溯",
+      "current_reachability": "403",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.sina.com.cn/wm/2024-07-11/doc-inccumyt5165524.shtml",
+      "query": "banquet-sina",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "https://finance.eastmoney.com/a/202602053642939679.html",
+      "query": "consumer-2026",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    },
+    {
+      "candidate_source": "http://finance.people.com.cn/stock/n/2013/0116/c222942-20214453.html",
+      "query": "gifting-2013",
+      "status": "opened",
+      "result": "200",
+      "access_limitation": "search index is discovery only; alternate syndicated copies share lineage",
+      "access_conclusion": "正文已读取",
+      "source_authority": "Medium",
+      "practical_utility": "来源追溯",
+      "current_reachability": "200",
+      "conclusion_evidence": "High",
+      "evidence_level": "High",
+      "next_fallback": null
+    }
+  ],
+  "limitations": [
+    "未建立2010–2026逐年消费场景调查；历史复盘与当期观察分开呈现",
+    "专家采访与券商解释不等于消费者总体调查",
+    "公司行动不等于消费者偏好转化已成功",
+    "同源转载只计一个lineage；跨报道重复专家意见不当独立消费者样本"
+  ]
+}

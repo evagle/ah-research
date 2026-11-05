@@ -1,0 +1,545 @@
+{
+  "as_of": "2026-09-29",
+  "sources": {
+    "2026-h1": {
+      "url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "fetched_at": "2026-09-29T08:16:05.452765+00:00",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b"
+    },
+    "2026-q1": {
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123071.PDF",
+      "sha256": "4d8ccd2b3f9ab078cd4d0a55f60d332d76cef8e9f0cad4cf5910252ec062d16b",
+      "fetched_at": "2026-09-29T08:16:26.820316+00:00",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-q1-4d8ccd2b3f9ab078cd4d0a55f60d332d76cef8e9f0cad4cf5910252ec062d16b.pdf",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-q1-4d8ccd2b3f9ab078cd4d0a55f60d332d76cef8e9f0cad4cf5910252ec062d16b.txt",
+      "text_sha256": "e0736c66eaa5f4114c0b81b7f5a7863651c814f69f256efb788d6d8f384bab33"
+    }
+  },
+  "directory_rows": 58,
+  "source_limit": "Quarterly and interim statements are unaudited. Annual profile scope is unchanged; this supplement does not complete annual/event binding.",
+  "facts": {
+    "revenue": {
+      "page": 7,
+      "current": "46822537847.07",
+      "previous": "41818040088.44",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "parent_net_income": {
+      "page": 7,
+      "current": "7895705450.11",
+      "previous": "5657349798.68",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "deducted_parent_net_income": {
+      "page": 7,
+      "current": "7711948685.90",
+      "previous": "5489000328.37",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "cfo": {
+      "page": 7,
+      "current": "3231411324.58",
+      "previous": "5343019637.89",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "cost": {
+      "page": 40,
+      "current": "23426598006.35",
+      "previous": "22919499439.04",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "sales_expense": {
+      "page": 40,
+      "current": "5822062529.86",
+      "previous": "5708759811.30",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "admin_expense": {
+      "page": 40,
+      "current": "1493403061.13",
+      "previous": "1386257017.69",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "rd_expense": {
+      "page": 40,
+      "current": "6168979406.20",
+      "previous": "5669772011.51",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "financial_expense": {
+      "page": 40,
+      "current": "346237439.98",
+      "previous": "-739368414.40",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "tax_surcharge": {
+      "page": 40,
+      "current": "431879104.73",
+      "previous": "378912693.73",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "other_income": {
+      "page": 40,
+      "current": "1296250218.51",
+      "previous": "1180671233.88",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "investment_income": {
+      "page": 40,
+      "current": "659367911.34",
+      "previous": "-36631451.99",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "fair_value": {
+      "page": 40,
+      "current": "42551138.65",
+      "previous": "-43117443.33",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "credit_impairment": {
+      "page": 40,
+      "current": "-529616772.52",
+      "previous": "-378694171.37",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "asset_impairment": {
+      "page": 40,
+      "current": "-233040536.21",
+      "previous": "-208566206.64",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "asset_disposal": {
+      "page": 40,
+      "current": "-38039.60",
+      "previous": "7386351.06",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "nonoperating_income": {
+      "page": 40,
+      "current": "56439035.42",
+      "previous": "32957197.92",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "nonoperating_expense": {
+      "page": 40,
+      "current": "20017277.06",
+      "previous": "7322434.53",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "income_tax": {
+      "page": 40,
+      "current": "1282273423.47",
+      "previous": "759413973.74",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "net_income": {
+      "page": 40,
+      "current": "9123000553.88",
+      "previous": "6281476630.83",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "minority_income": {
+      "page": 40,
+      "current": "1227295103.77",
+      "previous": "624126832.15",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "main": {
+      "page": 11,
+      "current": "31652826359.34",
+      "previous": "30052110945.83",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "main_products": {
+      "page": 11,
+      "current": "30616341900.37",
+      "previous": "29271794689.37",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "construction": {
+      "page": 11,
+      "current": "1036484458.97",
+      "previous": "780316256.46",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "innovation": {
+      "page": 11,
+      "current": "15169711487.73",
+      "previous": "11765929142.61",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "robotics": {
+      "page": 11,
+      "current": "4027882511.41",
+      "previous": "3138354805.04",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "thermal": {
+      "page": 11,
+      "current": "2964146065.61",
+      "previous": "2008057842.03",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "smart_home": {
+      "page": 11,
+      "current": "2817179848.17",
+      "previous": "2752441041.15",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "auto": {
+      "page": 11,
+      "current": "2763828320.43",
+      "previous": "2352287642.16",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "storage": {
+      "page": 11,
+      "current": "1944390380.66",
+      "previous": "1033275636.44",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "other_innovation": {
+      "page": 11,
+      "current": "652284361.45",
+      "previous": "481512175.79",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "main_products_cost": {
+      "page": 13,
+      "current": "14112358132.52",
+      "previous": "15069807832.83",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "construction_cost": {
+      "page": 13,
+      "current": "872049187.36",
+      "previous": "587229933.62",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "innovation_cost": {
+      "page": 13,
+      "current": "8442190686.47",
+      "previous": "7262461672.59",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "inventory_net": {
+      "page": 13,
+      "current": "29488147922.59",
+      "previous": "20472193858.80",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "ar_net": {
+      "page": 13,
+      "current": "27784134749.07",
+      "previous": "29812378945.77",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "raw_materials_net": {
+      "page": 90,
+      "current": "10018045512.57",
+      "previous": "5941675789.15",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "finished_goods_net": {
+      "page": 90,
+      "current": "17454952615.97",
+      "previous": "13172700090.45",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "sales_cash": {
+      "page": 42,
+      "current": "53936810738.77",
+      "previous": "49701456543.93",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "purchase_cash": {
+      "page": 42,
+      "current": "34945949636.68",
+      "previous": "30095263185.08",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "capex_cash": {
+      "page": 42,
+      "current": "1494742430.13",
+      "previous": "1977761423.32",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "cash_inventory_adjustment": {
+      "page": 113,
+      "current": "-9234611953.97",
+      "previous": "-251612593.04",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "cash_receivables_adjustment": {
+      "page": 113,
+      "current": "1853116763.58",
+      "previous": "3595520825.49",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "cash_payables_adjustment": {
+      "page": 113,
+      "current": "387487576.89",
+      "previous": "-5840272991.36",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "equity_method_income": {
+      "page": 109,
+      "current": "616257839.98",
+      "previous": "4673722.38",
+      "unit": "CNY",
+      "source": "2026-h1"
+    },
+    "fx_loss": {
+      "page": 109,
+      "current": "594714106.15",
+      "previous": "-606543396.00",
+      "unit": "CNY",
+      "source": "2026-h1"
+    }
+  },
+  "derived": {
+    "revenue_delta": "5004497758.63",
+    "revenue_pct_change": "11.96731780840542533855303080",
+    "parent_net_income_delta": "2238355651.43",
+    "parent_net_income_pct_change": "39.56544550157149343356395800",
+    "deducted_parent_net_income_delta": "2222948357.53",
+    "deducted_parent_net_income_pct_change": "40.49823692013006786971936850",
+    "cfo_delta": "-2111608313.31",
+    "cfo_pct_change": "-39.52087876180613369173596040",
+    "cost_delta": "507098567.31",
+    "cost_pct_change": "2.212520254461718708647471700",
+    "sales_expense_delta": "113302718.56",
+    "sales_expense_pct_change": "1.984716861545426988281531000",
+    "admin_expense_delta": "107146043.44",
+    "admin_expense_pct_change": "7.729161481075394677737438400",
+    "rd_expense_delta": "499207394.69",
+    "rd_expense_pct_change": "8.804717256294909985806410900",
+    "financial_expense_delta": "1085605854.38",
+    "financial_expense_pct_change": "-146.8288113525883937191894196",
+    "tax_surcharge_delta": "52966411.00",
+    "tax_surcharge_pct_change": "13.97852641952977730873550480",
+    "other_income_delta": "115578984.63",
+    "other_income_pct_change": "9.789260660664754773960869300",
+    "investment_income_delta": "695999363.33",
+    "investment_income_pct_change": "-1900.004846982315865334062069",
+    "fair_value_delta": "85668581.98",
+    "fair_value_pct_change": "-198.6865995841502506823147485",
+    "credit_impairment_delta": "-150922601.15",
+    "credit_impairment_pct_change": "39.85342594632710203468902150",
+    "asset_impairment_delta": "-24474329.57",
+    "asset_impairment_pct_change": "11.73456139624978701679090000",
+    "asset_disposal_delta": "-7424390.66",
+    "asset_disposal_pct_change": "-100.5149985383987421794706844",
+    "nonoperating_income_delta": "23481837.50",
+    "nonoperating_income_pct_change": "71.24949626178656635017713910",
+    "nonoperating_expense_delta": "12694842.53",
+    "nonoperating_expense_pct_change": "173.3691503555170741827035496",
+    "income_tax_delta": "522859449.73",
+    "income_tax_pct_change": "68.85038566712113237127697940",
+    "net_income_delta": "2841523923.05",
+    "net_income_pct_change": "45.23655965069691829609203810",
+    "minority_income_delta": "603168271.62",
+    "minority_income_pct_change": "96.64193887357771724347743220",
+    "main_delta": "1600715413.51",
+    "main_pct_change": "5.326465805997277619228563600",
+    "main_products_delta": "1344547211.00",
+    "main_products_pct_change": "4.593320038174051282403609000",
+    "construction_delta": "256168202.51",
+    "construction_pct_change": "32.82876659165584186911814480",
+    "innovation_delta": "3403782345.12",
+    "innovation_pct_change": "28.92914196460093074063775730",
+    "robotics_delta": "889527706.37",
+    "robotics_pct_change": "28.34375848586254722737300510",
+    "thermal_delta": "956088223.58",
+    "thermal_pct_change": "47.61258383939102810207708610",
+    "smart_home_delta": "64738807.02",
+    "smart_home_pct_change": "2.352050636221854099495939700",
+    "auto_delta": "411540678.27",
+    "auto_pct_change": "17.49533819308342303874869920",
+    "storage_delta": "911114744.22",
+    "storage_pct_change": "88.17731804449706395711559380",
+    "other_innovation_delta": "170772185.66",
+    "other_innovation_pct_change": "35.46580839411176128340204190",
+    "main_products_cost_delta": "-957449700.31",
+    "main_products_cost_pct_change": "-6.353430056514515815167094950",
+    "construction_cost_delta": "284819253.74",
+    "construction_cost_pct_change": "48.50216881558157106807330600",
+    "innovation_cost_delta": "1179729013.88",
+    "innovation_cost_pct_change": "16.24420295851661470282733590",
+    "inventory_net_delta": "9015954063.79",
+    "inventory_net_pct_change": "44.03999945474568690635165880",
+    "ar_net_delta": "-2028244196.70",
+    "ar_net_pct_change": "-6.803362456882302014097138580",
+    "raw_materials_net_delta": "4076369723.42",
+    "raw_materials_net_pct_change": "68.60639772475964025395698920",
+    "finished_goods_net_delta": "4282252525.52",
+    "finished_goods_net_pct_change": "32.50854036086774346637459320",
+    "sales_cash_delta": "4235354194.84",
+    "sales_cash_pct_change": "8.521589686403789093711600700",
+    "purchase_cash_delta": "4850686451.60",
+    "purchase_cash_pct_change": "16.11777382297414782000558430",
+    "capex_cash_delta": "-483018993.19",
+    "capex_cash_pct_change": "-24.42251059681266551280080612",
+    "cash_inventory_adjustment_delta": "-8982999360.93",
+    "cash_inventory_adjustment_pct_change": "3570.170813947269989948830583",
+    "cash_receivables_adjustment_delta": "-1742404061.91",
+    "cash_receivables_adjustment_pct_change": "-48.46040800424355769874331258",
+    "cash_payables_adjustment_delta": "6227760568.25",
+    "cash_payables_adjustment_pct_change": "-106.6347511060397775165961724",
+    "equity_method_income_delta": "611584117.60",
+    "equity_method_income_pct_change": "13085.58934131641768589601165",
+    "fx_loss_delta": "1201257502.15",
+    "fx_loss_pct_change": "-198.0497207738125303073945265",
+    "gross_profit": [
+      "23395939840.72",
+      "18898540649.40"
+    ],
+    "gross_margin": [
+      "0.4996726131576834371986526670",
+      "0.4519231558779874928177118329"
+    ],
+    "operating_expense": [
+      "13484444997.19",
+      "12764788840.50"
+    ],
+    "operating_expense_rate": [
+      "0.2879904767493035855781888061",
+      "0.3052459850701765333906990234"
+    ],
+    "innovation_increment_share": "0.6801446437357978079938321317",
+    "cfo_net_income": [
+      "0.3542048808936753886453004206",
+      "0.8505993020281287871824261020"
+    ],
+    "basic_fcf": [
+      "1736668894.45",
+      "3365258214.57"
+    ],
+    "profit_bridge": {
+      "gross_profit": "4497399191.32",
+      "operating_expense": "-719656156.69",
+      "financial_expense": "-1085605854.38",
+      "investment_income": "695999363.33",
+      "income_tax": "-522859449.73",
+      "minority_income": "-603168271.62",
+      "other": "-23753170.80"
+    },
+    "gross_profit_revenue_effect": "2261648420.664384517561412091",
+    "gross_profit_margin_effect": "2235750770.655615482438587906",
+    "segment_gross_margin": {
+      "main_products": [
+        "0.5390579913680199835759553171",
+        "0.4851764986482850052453828397"
+      ],
+      "construction": [
+        "0.1586471173657601493482429576",
+        "0.2474462389338903252201508031"
+      ],
+      "innovation": [
+        "0.4434837674204645108939019406",
+        "0.3827549371949565909013423905"
+      ]
+    }
+  },
+  "quarters": {
+    "revenue": {
+      "q1": [
+        "20715444490.55",
+        "18531863690.67"
+      ],
+      "q2": [
+        "26107093356.52",
+        "23286176397.77"
+      ],
+      "q2_yoy": "12.11412689899637207011632490"
+    },
+    "parent_net_income": {
+      "q1": [
+        "2781171173.25",
+        "2038683389.01"
+      ],
+      "q2": [
+        "5114534276.86",
+        "3618666409.67"
+      ],
+      "q2_yoy": "41.33754532312399306147452200"
+    },
+    "deducted_parent_net_income": {
+      "q1": [
+        "2647647238.10",
+        "1926435015.10"
+      ],
+      "q2": [
+        "5064301447.80",
+        "3562565313.27"
+      ],
+      "q2_yoy": "42.15322394052025328751061460"
+    },
+    "cfo": {
+      "q1": [
+        "-2220444411.11",
+        "-1737373005.70"
+      ],
+      "q2": [
+        "5451855735.69",
+        "7080392643.59"
+      ],
+      "q2_yoy": "-23.00065815381498916814367358"
+    }
+  },
+  "checks": [
+    "46 fact pairs located in source pages",
+    "main and innovation revenue sums",
+    "innovation subgroup sums",
+    "net income ownership split",
+    "profit change reconciliation",
+    "Q2 reconstructed from half year minus Q1"
+  ]
+}

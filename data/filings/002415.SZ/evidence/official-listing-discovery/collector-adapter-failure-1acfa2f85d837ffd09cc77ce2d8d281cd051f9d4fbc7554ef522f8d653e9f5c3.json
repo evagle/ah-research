@@ -1,0 +1,25 @@
+{
+  "status": "technical_failure_reproduced",
+  "scope": "Local collector identity normalization on unmodified saved real official responses; not a complete network collector invocation.",
+  "ticker": "002415.SZ",
+  "AS_OF": "2026-04-18",
+  "official_sources": [
+    {
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/16b6e0966442bbbb1e27068cadc6646cb62a7f8d53cc1c9730aad0a48a47dfc5-002415-profile-1.json",
+      "sha256": "16b6e0966442bbbb1e27068cadc6646cb62a7f8d53cc1c9730aad0a48a47dfc5",
+      "root_type": "list"
+    },
+    {
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/9328fcd8b81d438eb7813ee99e5577340e19b4d068b8e2003141be069e898a48-company-1.json",
+      "sha256": "9328fcd8b81d438eb7813ee99e5577340e19b4d068b8e2003141be069e898a48",
+      "root_type": "dict"
+    }
+  ],
+  "executed_function": "collect_event_evidence._normalize_plan_identity",
+  "actual_exception": {
+    "type": "CollectionError",
+    "message": "profile and roster responses must be JSON objects"
+  },
+  "effect": "Actual stock-list root array is rejected before any mapping. Alternate detailed object proves identity but does not itself provide required full historic subject roster.",
+  "next_step": "Current adapter support or additional actual official sources required; cannot claim absence of governance events."
+}

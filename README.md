@@ -4,9 +4,29 @@ Personal A-shares + HK stock research platform.
 
 ## Overview
 
-`ah-research` is a Python library for systematic research on Chinese A-shares and Hong Kong equities, with a focus on A/H premium strategies.
+`ah-research` is a Python library for systematic research on Chinese A-shares and Hong Kong equities, with a focus on A/H premium strategies. It also has a research-only US SEC filing path for latest-report analysis.
+
+## Company research
+
+- 海康威视（002415.SZ）：[HTML 阅读版](profiles/002415.SZ-2026-09-29-v2.html) · [Markdown 研究源文件](profiles/002415.SZ-2026-09-29-v2.md)。最新跟踪至2026-11-05，含三季报、现金与库存变化及治理补充；完整历史监管核查和行业可比序列仍待完善。
+- 贵州茅台（600519.SH）：[HTML 阅读版](profiles/600519.SH-2026-11-05.html) · [Markdown 研究源文件](profiles/600519.SH-2026-11-05.md)。历史版本保留在 `profiles/`。
+- 腾讯控股（00700.HK）：[HTML 阅读版](profiles/00700.HK-2026-08-02.html) · [Markdown 研究源文件](profiles/00700.HK-2026-08-02.md)。
+- Airbnb（ABNB.US）：[最新财报研究](profiles/ABNB.US-2026-09-18.md) · [来源与证据边界](data/filings/ABNB.US/research/source-index.md)。
 
 ## Features
+
+### US SEC latest-report research
+
+- Research tickers use the explicit `<SYMBOL>.US` form, for example `ABNB.US`. This path does not add US stocks to the trading or backtest `Symbol` model.
+- The downloader resolves SEC CIK identity, selects the latest `10-Q` or `10-K` as of a cutoff, binds the latest audited `10-K`, retains four prior comparable quarters, and discovers same-cycle `8-K` `EX-99.*` earnings exhibits.
+- Source responses and selected documents are stored as immutable SHA-256 artifacts in a `us-sec-filing-manifest/1.0` bundle.
+
+```bash
+python scripts/download_filings.py ABNB.US --latest --as-of 2026-09-18
+python scripts/download_filings.py --revalidate data/filings/ABNB.US/sec/filing-manifest-2026-09-18.json
+```
+
+Set `AH_RESEARCH_SEC_USER_AGENT` to a descriptive application and contact route when needed. A blocked SEC request is reported as a dependency failure and is never treated as proof that a filing is absent.
 
 
 ### Phase 5 — Research Chat UI

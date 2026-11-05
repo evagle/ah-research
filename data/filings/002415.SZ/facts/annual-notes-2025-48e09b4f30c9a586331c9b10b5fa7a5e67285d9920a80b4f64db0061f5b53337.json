@@ -1,0 +1,1547 @@
+{
+  "status": "partial_annual_facts",
+  "ticker": "002415.SZ",
+  "AS_OF": "2026-04-18",
+  "target_fiscal_year": 2025,
+  "annual_manifest_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/manifests/annual-reports-2026-04-18.json",
+  "annual_manifest_sha256": "2ac0a0d3341bd053195ac7911c6f0702f2b02fa0c652de79956a1d7ddacd10b2",
+  "binding_limitation": "Strict annual raw-catalogue revalidation failed despite identical ordered candidate IDs; event manifest absent. These are locally hash-verified selected annual facts for partial research only, not a completed Mode B schema result.",
+  "facts": [
+    {
+      "metric_id": "cash",
+      "label": "货币资金",
+      "fiscal_year": 2025,
+      "value": "46508328658.44",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "977711b3a3dce468b84fde275ed95a6319b659a3916e47f01bd686944a6d1cb1"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        194
+      ]
+    },
+    {
+      "metric_id": "restricted_cash",
+      "label": "受限货币资金",
+      "fiscal_year": 2025,
+      "value": "303989964.01",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "92350674d3e92365468af5ee482bc44f3ce9e99c6baffad8767f173ba5faddf0"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        194
+      ]
+    },
+    {
+      "metric_id": "ar_gross",
+      "label": "应收账款账面余额",
+      "fiscal_year": 2025,
+      "value": "34253908363.72",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "cc04fd2d8caa2fffeed91c040c03ef5a911b25f500e78305656e920638ae08d8"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        197
+      ]
+    },
+    {
+      "metric_id": "ar_allowance",
+      "label": "应收账款坏账准备",
+      "fiscal_year": 2025,
+      "value": "4441529417.95",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "1768324bdc363d0d9b576c64d01825d2f1127158d020177eac2ea5018b5f26de"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        197
+      ]
+    },
+    {
+      "metric_id": "ar_net",
+      "label": "应收账款账面价值",
+      "fiscal_year": 2025,
+      "value": "29812378945.77",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "ec4a95e4ceeaf9b3a245526c494aaea4388c56cf41ec4baaf9843f5ecef1cec9"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        197
+      ]
+    },
+    {
+      "metric_id": "ar_charge",
+      "label": "本年应收账款减值计提",
+      "fiscal_year": 2025,
+      "value": "728815826.60",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "b7392a710ca7c38b1e074329f5930db6980b3e715b5dbe3bc61e993749be639f"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        200
+      ]
+    },
+    {
+      "metric_id": "ar_writeoff",
+      "label": "本年应收账款转销核销",
+      "fiscal_year": 2025,
+      "value": "200034830.25",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "b7392a710ca7c38b1e074329f5930db6980b3e715b5dbe3bc61e993749be639f"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        200
+      ]
+    },
+    {
+      "metric_id": "notes_net",
+      "label": "应收票据账面价值",
+      "fiscal_year": 2025,
+      "value": "3051356562.64",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "d48ed0309a16813f9ced139716887449f3d0d599b714b526ce8b5be18aa03e6e"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        195
+      ]
+    },
+    {
+      "metric_id": "commercial_notes",
+      "label": "商业承兑汇票",
+      "fiscal_year": 2025,
+      "value": "233621545.41",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "292310580e71320cd94fc48032f7ff3515b3c8baf25c1a90cfde0f6a5fd8f18e"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        195
+      ]
+    },
+    {
+      "metric_id": "finance_company_notes",
+      "label": "财务公司承兑汇票",
+      "fiscal_year": 2025,
+      "value": "117842770.93",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "88ce10e8de20d6431901d3b68b03e4386ffbc0d11a2ed29b0f6da492240efca2"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        195
+      ]
+    },
+    {
+      "metric_id": "notes_gross",
+      "label": "应收票据账面余额",
+      "fiscal_year": 2025,
+      "value": "3053000478.83",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "245f4b9798cb2ea5527fe05a92491d5448e4b8fb5eb7740f8fed14d79f8dcf70"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        195
+      ]
+    },
+    {
+      "metric_id": "notes_discount_non_derecognized",
+      "label": "贴现未到期且未终止确认银行票据",
+      "fiscal_year": 2025,
+      "value": "82115586.20",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "999b932473f0ce17520ca83e06248bef9c2b3e9814fb72fb115511bc2b093227"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        195
+      ]
+    },
+    {
+      "metric_id": "receivables_financing",
+      "label": "应收款项融资",
+      "fiscal_year": 2025,
+      "value": "2430030662.65",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "8b69a6846c4e30ba8ea41d39f6a1a2062c2eb5409f5aa11ff80e08ca5ee7b131"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        201
+      ]
+    },
+    {
+      "metric_id": "notes_discount_derecognized",
+      "label": "贴现未到期已终止确认银行票据",
+      "fiscal_year": 2025,
+      "value": "1164771874.06",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "ccfa6d0fbccd7a99a34cc0425d05dc0948133899ce4ddd896c32fd0e3037d8da"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        201
+      ]
+    },
+    {
+      "metric_id": "prepayments",
+      "label": "预付款项",
+      "fiscal_year": 2025,
+      "value": "856749328.34",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "998fa8445966206e2799de804c179257868fbc1f68f9a214a5db6268fd628bfa"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        201
+      ]
+    },
+    {
+      "metric_id": "prepayment_top5",
+      "label": "前五名预付款项",
+      "fiscal_year": 2025,
+      "value": "279828055.41",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "58fdfe1c47074fa593034727ec28f1ff0a0980b4aef0060e4bfaecc5ea4f6aa0"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        201
+      ]
+    },
+    {
+      "metric_id": "other_receivables_net",
+      "label": "其他应收款账面价值",
+      "fiscal_year": 2025,
+      "value": "442502788.34",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "e033d09916575a83ae2af66e461698a822914cd308ec4b745018e101b14effe5"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        202
+      ]
+    },
+    {
+      "metric_id": "other_receivables_gross",
+      "label": "其他应收款账面余额",
+      "fiscal_year": 2025,
+      "value": "471709968.22",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "476144c4b0e8184d832e127e4a385c0f5d7b079a8a9b5d2161f628f436342e81"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        202
+      ]
+    },
+    {
+      "metric_id": "related_other_receivables",
+      "label": "关联方其他应收款账面余额",
+      "fiscal_year": 2025,
+      "value": "334345.20",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "4f8b368a8ada5c9e77d10854086188ee0b16c8e9ce400fc90e297f5e7917e6ce"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        245
+      ]
+    },
+    {
+      "metric_id": "inventory_net",
+      "label": "存货账面价值",
+      "fiscal_year": 2025,
+      "value": "20472193858.80",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "457db335358346efe66300aa5b90be4cb97f81714c0459dacaf8d997c4c552c1"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        203
+      ]
+    },
+    {
+      "metric_id": "inventory_allowance",
+      "label": "存货跌价准备",
+      "fiscal_year": 2025,
+      "value": "1443069174.66",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "457db335358346efe66300aa5b90be4cb97f81714c0459dacaf8d997c4c552c1"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        203
+      ]
+    },
+    {
+      "metric_id": "finished_goods_gross",
+      "label": "产成品账面余额",
+      "fiscal_year": 2025,
+      "value": "14307019021.95",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "13d2052d970472b9c0416ad1773d605de6caaa0b65b51c442789aba38de63451"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        203
+      ]
+    },
+    {
+      "metric_id": "finished_goods_net",
+      "label": "产成品账面价值",
+      "fiscal_year": 2025,
+      "value": "13172700090.45",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "13d2052d970472b9c0416ad1773d605de6caaa0b65b51c442789aba38de63451"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        203
+      ]
+    },
+    {
+      "metric_id": "equity_investments",
+      "label": "长期股权投资账面价值",
+      "fiscal_year": 2025,
+      "value": "1669074600.75",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "ca0c450e2457a04deb32d62bb32a45a116b10efcc1eb0b20896e6868acde779e"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        207
+      ]
+    },
+    {
+      "metric_id": "equity_investment_impairment",
+      "label": "长期股权投资减值准备",
+      "fiscal_year": 2025,
+      "value": "5129141.16",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "3072ba0b46c0738a8d4600900e5a9a5645944a2578cc8c9685889057439b209a"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        207
+      ]
+    },
+    {
+      "metric_id": "fvpl_equity",
+      "label": "其他非流动金融资产权益工具投资",
+      "fiscal_year": 2025,
+      "value": "589955315.74",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "c28a42db0733e5a87b7f0a97e82e961da4f4b6d582ad69b62565a0e47d9f6687"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        208
+      ]
+    },
+    {
+      "metric_id": "fixed_assets",
+      "label": "固定资产账面价值",
+      "fiscal_year": 2025,
+      "value": "20176914451.95",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "00accea5eb44499050460b1e760eab75eafdc5de4154a1545c078baebcce8252"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        208
+      ]
+    },
+    {
+      "metric_id": "fixed_asset_depreciation",
+      "label": "本年固定资产折旧",
+      "fiscal_year": 2025,
+      "value": "1646029560.21",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "75941e2312fbebd984af44e30d43f001d558a8efe4098269f70d5a40a448c4fd"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        208
+      ]
+    },
+    {
+      "metric_id": "construction_transfer",
+      "label": "本年在建转固",
+      "fiscal_year": 2025,
+      "value": "5753596826.82",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "1058870971f683483157cf056e35514c3ed40b0e4645a4a7760282ae06d3cf56"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        208
+      ]
+    },
+    {
+      "metric_id": "construction",
+      "label": "在建工程账面价值",
+      "fiscal_year": 2025,
+      "value": "1914110895.67",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "4e6728da6e2d38d016b51112cd64c63342656523ee80dafe6b092837e5e80d25"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        209
+      ]
+    },
+    {
+      "metric_id": "goodwill",
+      "label": "商誉账面价值",
+      "fiscal_year": 2025,
+      "value": "311187727.01",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "f6413534ceece79bd977f93734cff8b4a9683563c40bd92e35e30070f7746ff0"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        212
+      ]
+    },
+    {
+      "metric_id": "payables",
+      "label": "应付账款",
+      "fiscal_year": 2025,
+      "value": "19843949575.87",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "e181e8efb9e1cf5d32125f9b55e7ee57fc1c58821fb523bd00570201824c3a5c"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        216
+      ]
+    },
+    {
+      "metric_id": "contract_liabilities_all",
+      "label": "合同负债含非流动部分",
+      "fiscal_year": 2025,
+      "value": "4421579881.87",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "86caf5e67f0385cd03321a9d1c997e86103130073c8d594bf6502771a6abb2bb"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        216
+      ]
+    },
+    {
+      "metric_id": "contract_liabilities_current",
+      "label": "流动合同负债",
+      "fiscal_year": 2025,
+      "value": "4200490873.07",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "0a65b3afef5e10a4e09a8aa1b1568d9b480e364478bc1f3a020f1a41617e14f1"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        216
+      ]
+    },
+    {
+      "metric_id": "short_debt",
+      "label": "短期借款",
+      "fiscal_year": 2025,
+      "value": "2685866236.94",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "fc29fc47016dd9e1add90707b3313fc5efb6069a6491736130ccf1e14d566cc1"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        215
+      ]
+    },
+    {
+      "metric_id": "current_long_debt",
+      "label": "一年内到期长期借款",
+      "fiscal_year": 2025,
+      "value": "3610693121.74",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "e1f1413aa737c6bc0cf8069c03042faeb8c1b94a22bebda2f3950dc1afc9a0f3"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        219
+      ]
+    },
+    {
+      "metric_id": "long_debt_noncurrent",
+      "label": "非流动长期借款",
+      "fiscal_year": 2025,
+      "value": "1210564814.39",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "97e0f5966c375c04a033f7869e6c240863b85576508416b6e96bfa667e12c50c"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        219
+      ]
+    },
+    {
+      "metric_id": "leases_total",
+      "label": "租赁负债含一年内到期部分",
+      "fiscal_year": 2025,
+      "value": "455892181.48",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "791991cb34960bdbd8bae29339d90fe16e653ca26bc363a21dda1e43730a2539"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        219
+      ]
+    },
+    {
+      "metric_id": "related_purchases",
+      "label": "关联采购商品接受劳务",
+      "fiscal_year": 2025,
+      "value": "3449198653.12",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "d9125928c29d857794a15c9ee1900b3ec76133f00c92fe01c8ac3884620d7bee"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        242
+      ]
+    },
+    {
+      "metric_id": "related_sales",
+      "label": "关联销售商品提供劳务",
+      "fiscal_year": 2025,
+      "value": "264792460.32",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "e010ac7167f716107ed6be00ae91383a34c92a3d2143e727b3d2499e542c673f"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        242
+      ]
+    },
+    {
+      "metric_id": "related_finance_deposit",
+      "label": "电科财务公司存款",
+      "fiscal_year": 2025,
+      "value": "6296109949.06",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "33fb7e025f940eafddcd7f9ffd5bdfbed6672666b020736aba5f87c63ff2438a"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        243
+      ]
+    },
+    {
+      "metric_id": "related_ar_gross",
+      "label": "关联方应收账款账面余额",
+      "fiscal_year": 2025,
+      "value": "435455301.58",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "dd67c9f78d33adf3956e8499dd35dac7b4ecfd804010e82c7be232f004681a65"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        244
+      ]
+    },
+    {
+      "metric_id": "related_ar_allowance",
+      "label": "关联方应收账款坏账准备",
+      "fiscal_year": 2025,
+      "value": "223784269.43",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "dd67c9f78d33adf3956e8499dd35dac7b4ecfd804010e82c7be232f004681a65"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        244
+      ]
+    },
+    {
+      "metric_id": "rd_expense",
+      "label": "研发费用",
+      "fiscal_year": 2025,
+      "value": "11752624736.80",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "c33dbe9e4d9fa785f341ed14a0372f8f97e8f1371d997a6481068ed388d2da43"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        224
+      ]
+    },
+    {
+      "metric_id": "vat_refund",
+      "label": "增值税即征即退",
+      "fiscal_year": 2025,
+      "value": "1937264907.42",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "3a8f129cd5fbd4d1681503661db85c3192b66f9916ae73801c2d147e819c8b4c"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        224
+      ]
+    },
+    {
+      "metric_id": "special_grants",
+      "label": "专项补助款",
+      "fiscal_year": 2025,
+      "value": "823306512.02",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "e72b2adf9fe984d9ad3e9c74d1d66f27e5dd0b1de3bdecefb634eb1b5b8ea442"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        224
+      ]
+    },
+    {
+      "metric_id": "interest_expense",
+      "label": "借款利息支出不含租赁",
+      "fiscal_year": 2025,
+      "value": "177814711.78",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "b9ba077d21a86af16e7b696c20341d2337e104f73429260ed572b1f2320e2ce7"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        224
+      ]
+    },
+    {
+      "metric_id": "lease_interest",
+      "label": "租赁利息支出",
+      "fiscal_year": 2025,
+      "value": "23072089.23",
+      "unit": "CNY",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "b358198cec0ebdd31215b3fafb3d577c539f4f6aee82cba9c342eb8d62d4bab5"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        224
+      ]
+    },
+    {
+      "metric_id": "sharecount",
+      "label": "期末股份总数",
+      "fiscal_year": 2025,
+      "value": "9164871550.00",
+      "unit": "shares",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "5ad9e2b7f9121eb0298f0e13f933ae48c81b96939059cf7053bdf8309ce5fe27"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        220
+      ]
+    },
+    {
+      "metric_id": "cancelled_shares",
+      "label": "回购注销股份",
+      "fiscal_year": 2025,
+      "value": "68326776.00",
+      "unit": "shares",
+      "financial_basis": "合并口径",
+      "canonical_evidence_ids": [
+        "5ad9e2b7f9121eb0298f0e13f933ae48c81b96939059cf7053bdf8309ce5fe27"
+      ],
+      "evidence_level": "高",
+      "source_pages": [
+        220
+      ]
+    },
+    {
+      "metric_id": "audit",
+      "statement": "2025 年报由德勤华永出具标准无保留审计意见，签署日为 2026-04-16。",
+      "canonical_evidence_ids": [
+        "3d77e4b458b14b99ca1999f1f35cbaadac09cd0bbf5d10c3b54ba857232141fc"
+      ],
+      "source_pages": [
+        142
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "auditor_tenure",
+      "statement": "报告披露德勤华永连续审计服务年限为 10 年。",
+      "canonical_evidence_ids": [
+        "3ccde6a23126378810d1e49c1a0fa9dac669b35549c492708172e92f49dba0df"
+      ],
+      "source_pages": [
+        123
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "auditor_proposal",
+      "statement": "2026 年拟聘毕马威华振，截止年报披露仍需股东会审议。",
+      "canonical_evidence_ids": [
+        "86e833d5733f958bc68d0fb698928a81f23d733a22afdc1cd1bbcf60d88a8c12"
+      ],
+      "source_pages": [
+        124
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "period_sanctions",
+      "statement": "年报表述仅覆盖报告期；不能推导上市以来从无违法行为。",
+      "canonical_evidence_ids": [
+        "20b52b82fd1e265ad92b1ac18a43ca73f37421620221b1584b82d59222dcddee"
+      ],
+      "source_pages": [
+        124
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "fund_occupation",
+      "statement": "年报披露本报告期不存在非经营性资金占用。",
+      "canonical_evidence_ids": [
+        "57258eabd231c3f75a6b41d2cf4d1230c024381d011d4029c4d3454f4d0c8961"
+      ],
+      "source_pages": [
+        123
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "policy_changes",
+      "statement": "该问题在年报选择不适用；附注仍需核查政策解释和具体列报口径。",
+      "canonical_evidence_ids": [
+        "ee97f232eb359099b93c72333231c606063deb85a904694f9aefd9915b2b6439"
+      ],
+      "source_pages": [
+        123
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "goodwill_assumption",
+      "statement": "商誉减值测试现金流预测期 5 年，之后增长率 0–2%；本年未计商誉减值。",
+      "canonical_evidence_ids": [
+        "96b8cc96320dd7ae560173b9511657b1737d92fc0845271ad79d4d55dcc2b8fe"
+      ],
+      "source_pages": [
+        212
+      ],
+      "evidence_level": "高"
+    },
+    {
+      "metric_id": "contract_rebates",
+      "statement": "合同负债并非全是客户预付现金，包含向经销商提供的销售返点，现金勾稽必须考虑此披露。",
+      "canonical_evidence_ids": [
+        "5e8245dfd16cd2a2c233207f49e7e40e4a4f616eb5d0d85b23c88b10932a22ea"
+      ],
+      "source_pages": [
+        216
+      ],
+      "evidence_level": "高"
+    }
+  ],
+  "citations": [
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 194,
+      "quote": "合计                                         46,508,328,658.44                                36,271,488,337.03\n     其中：存放在境外的",
+      "section_id": "read-filing/notes/cash",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "977711b3a3dce468b84fde275ed95a6319b659a3916e47f01bd686944a6d1cb1"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 194,
+      "quote": "其他受限资金                     -         -          36,329,248.54                -         -       11,500,750.00\n     小计                                              303,989,964.01                                218,445,956.74",
+      "section_id": "read-filing/notes/restricted_cash",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "92350674d3e92365468af5ee482bc44f3ce9e99c6baffad8767f173ba5faddf0"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 197,
+      "quote": "超信用期 4 年以上                                               1,424,040,952.65             1,155,004,826.72\n     合计                                                     34,253,908,363.72             41,824,083,460.37\n     减：坏账准备                                                   4,441,529,417.95             3,913,954,724.95",
+      "section_id": "read-filing/notes/ar_gross",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "cc04fd2d8caa2fffeed91c040c03ef5a911b25f500e78305656e920638ae08d8"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 197,
+      "quote": "合计                                                     34,253,908,363.72             41,824,083,460.37\n     减：坏账准备                                                   4,441,529,417.95             3,913,954,724.95\n     账面价值                                                   29,812,378,945.77             37,910,128,735.42",
+      "section_id": "read-filing/notes/ar_allowance",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "1768324bdc363d0d9b576c64d01825d2f1127158d020177eac2ea5018b5f26de"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 197,
+      "quote": "减：坏账准备                                                   4,441,529,417.95             3,913,954,724.95\n     账面价值                                                   29,812,378,945.77             37,910,128,735.42",
+      "section_id": "read-filing/notes/ar_net",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "ec4a95e4ceeaf9b3a245526c494aaea4388c56cf41ec4baaf9843f5ecef1cec9"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 200,
+      "quote": "应收款项             3,913,954,724.95        728,815,826.60                 200,034,830.25         (1,206,303.35)       4,441,529,417.95\n     合计               3,913,954,724.95        728,815,826.60                 200,034,830.25         (1,206,303.35)       4,441,529,417.95",
+      "section_id": "read-filing/notes/ar_charge",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "b7392a710ca7c38b1e074329f5930db6980b3e715b5dbe3bc61e993749be639f"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 200,
+      "quote": "应收款项             3,913,954,724.95        728,815,826.60                 200,034,830.25         (1,206,303.35)       4,441,529,417.95\n     合计               3,913,954,724.95        728,815,826.60                 200,034,830.25         (1,206,303.35)       4,441,529,417.95",
+      "section_id": "read-filing/notes/ar_writeoff",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "b7392a710ca7c38b1e074329f5930db6980b3e715b5dbe3bc61e993749be639f"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 195,
+      "quote": "商业承兑汇票                                                     233,621,545.41            206,108,636.87\n     合计                                                       3,051,356,562.64          2,722,596,142.46",
+      "section_id": "read-filing/notes/notes_net",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "d48ed0309a16813f9ced139716887449f3d0d599b714b526ce8b5be18aa03e6e"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 195,
+      "quote": "财务公司承兑汇票                                                   117,842,770.93            150,839,104.68\n     商业承兑汇票                                                     233,621,545.41            206,108,636.87\n     合计                                                       3,051,356,562.64          2,722,596,142.46",
+      "section_id": "read-filing/notes/commercial_notes",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "292310580e71320cd94fc48032f7ff3515b3c8baf25c1a90cfde0f6a5fd8f18e"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 195,
+      "quote": "银行承兑汇票                                                   2,699,892,246.30          2,365,648,400.91\n     财务公司承兑汇票                                                   117,842,770.93            150,839,104.68\n     商业承兑汇票                                                     233,621,545.41            206,108,636.87",
+      "section_id": "read-filing/notes/finance_company_notes",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "88ce10e8de20d6431901d3b68b03e4386ffbc0d11a2ed29b0f6da492240efca2"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 195,
+      "quote": "按单项计提坏账准备                         -           -                 -              -                  -\n     按组合计提坏账准备          3,053,000,478.83    100.00        1,643,916.19           0.05   3,051,356,562.64\n     合计                 3,053,000,478.83    100.00        1,643,916.19           0.05   3,051,356,562.64",
+      "section_id": "read-filing/notes/notes_gross",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "245f4b9798cb2ea5527fe05a92491d5448e4b8fb5eb7740f8fed14d79f8dcf70"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 195,
+      "quote": "期的财务公司承兑汇票向供应商背书，无(2024 年：人民币 45,274.00 元)尚未到期的商业承兑汇票向供应\n    商背书，将人民币 82,115,586.20 元(2024 年：人民币 34,410,142.39 元)尚未到期的银行承兑汇票向银行贴\n    现，由于本集团没有转移金融资产所有权上几乎所有的风险和报酬，所以本集团没有对其予以终止确认，",
+      "section_id": "read-filing/notes/notes_discount_non_derecognized",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "999b932473f0ce17520ca83e06248bef9c2b3e9814fb72fb115511bc2b093227"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 201,
+      "quote": "应收账款债权凭证                                                     31,285,935.00      163,405,333.48\n     合计                                                         2,430,030,662.65    2,291,648,244.05",
+      "section_id": "read-filing/notes/receivables_financing",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "8b69a6846c4e30ba8ea41d39f6a1a2062c2eb5409f5aa11ff80e08ca5ee7b131"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 201,
+      "quote": "本集团将人民币 1,489,607,586.68 元尚未到期的银行承兑汇票向供应商背书，\n    人民币 15,555,925.83 元尚未到期的应收账款债权凭证向供应商背书，将人民币 1,164,771,874.06 元尚未\n    到期的银行承兑汇票向银行贴现。",
+      "section_id": "read-filing/notes/notes_discount_derecognized",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "ccfa6d0fbccd7a99a34cc0425d05dc0948133899ce4ddd896c32fd0e3037d8da"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 201,
+      "quote": "3 年以上                 3,787,550.82                  0.44       4,312,864.67                0.65\n     合计                  856,749,328.34             100.00       664,602,593.01              100.00",
+      "section_id": "read-filing/notes/prepayments",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "998fa8445966206e2799de804c179257868fbc1f68f9a214a5db6268fd628bfa"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 201,
+      "quote": "于本年末，本集团预付款项前五名单位合计金额为人民币 279,828,055.41 元，占预付款项年末余额合计\n    数的比例为 32.66%。",
+      "section_id": "read-filing/notes/prepayment_top5",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "58fdfe1c47074fa593034727ec28f1ff0a0980b4aef0060e4bfaecc5ea4f6aa0"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 202,
+      "quote": "减：坏账准备                                                             29,207,179.88     33,307,048.47\n     账面价值                                                              442,502,788.34    531,344,606.50",
+      "section_id": "read-filing/notes/other_receivables_net",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "e033d09916575a83ae2af66e461698a822914cd308ec4b745018e101b14effe5"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 202,
+      "quote": "4 年以上                                                              13,079,470.64     15,860,010.64\n     合计                                                                471,709,968.22    564,651,654.97\n     减：坏账准备                                                             29,207,179.88     33,307,048.47",
+      "section_id": "read-filing/notes/other_receivables_gross",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "476144c4b0e8184d832e127e4a385c0f5d7b079a8a9b5d2161f628f436342e81"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 245,
+      "quote": "其他应收款           合营企业         152,410.50      1,097.35            45,506.53            373.15\n     合计                           334,345.20      1,883.64       720,521.93            504,275.14",
+      "section_id": "read-filing/notes/related_other_receivables",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "4f8b368a8ada5c9e77d10854086188ee0b16c8e9ce400fc90e297f5e7917e6ce"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 203,
+      "quote": "合同履约成本        614,190,942.61       12,521,325.62      601,669,616.99      444,030,393.50           8,007,266.17       436,023,127.33\n     合计          21,915,263,033.46    1,443,069,174.66   20,472,193,858.80   20,430,912,444.34      1,320,200,486.23     19,110,711,958.11",
+      "section_id": "read-filing/notes/inventory_net",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "457db335358346efe66300aa5b90be4cb97f81714c0459dacaf8d997c4c552c1"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 203,
+      "quote": "合同履约成本        614,190,942.61       12,521,325.62      601,669,616.99      444,030,393.50           8,007,266.17       436,023,127.33\n     合计          21,915,263,033.46    1,443,069,174.66   20,472,193,858.80   20,430,912,444.34      1,320,200,486.23     19,110,711,958.11",
+      "section_id": "read-filing/notes/inventory_allowance",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "457db335358346efe66300aa5b90be4cb97f81714c0459dacaf8d997c4c552c1"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 203,
+      "quote": "在产品           756,148,362.21                    -     756,148,362.21      722,550,293.30                      -       722,550,293.30\n     产成品         14,307,019,021.95    1,134,318,931.50   13,172,700,090.45   13,151,518,051.53        990,672,547.73     12,160,845,503.80\n     合同履约成本        614,190,942.61       12,521,325.62      601,669,616.99      444,030,393.50           8,007,266.17       436,023,127.33",
+      "section_id": "read-filing/notes/finished_goods_gross",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "13d2052d970472b9c0416ad1773d605de6caaa0b65b51c442789aba38de63451"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 203,
+      "quote": "在产品           756,148,362.21                    -     756,148,362.21      722,550,293.30                      -       722,550,293.30\n     产成品         14,307,019,021.95    1,134,318,931.50   13,172,700,090.45   13,151,518,051.53        990,672,547.73     12,160,845,503.80\n     合同履约成本        614,190,942.61       12,521,325.62      601,669,616.99      444,030,393.50           8,007,266.17       436,023,127.33",
+      "section_id": "read-filing/notes/finished_goods_net",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "13d2052d970472b9c0416ad1773d605de6caaa0b65b51c442789aba38de63451"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 207,
+      "quote": "小计                   598,565,831.26     -     576,599.12     50,821,710.98        -   16,288,168.02      400,000.00    5,129,141.16                 -    659,569,969.98    5,129,141.16\n          合计                  1,527,223,390.79    -   22,009,891.77   216,251,673.19        -   38,156,263.94   71,263,281.24    5,129,141.16   (14,154,413.00)   1,669,074,600.75   5,129,141.16",
+      "section_id": "read-filing/notes/equity_investments",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "ca0c450e2457a04deb32d62bb32a45a116b10efcc1eb0b20896e6868acde779e"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 207,
+      "quote": "智广海联大数据技术有限公司         24,397,944.42     -               -     3,987,667.65        -               -      400,000.00               -                 -     27,985,612.07               -\n          太景科技(南京)有限公司          17,541,679.23     -               -    (1,928,982.74)       -               -               -    5,129,141.16                 -     10,483,555.33    5,129,141.16\n          其他                   493,954,327.67     -     576,599.12     52,142,141.78        -   15,713,554.77               -               -                 -    561,233,425.10               -",
+      "section_id": "read-filing/notes/equity_investment_impairment",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "3072ba0b46c0738a8d4600900e5a9a5645944a2578cc8c9685889057439b209a"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 208,
+      "quote": "项目                                       年末余额                            年初余额\n     权益工具投资(注)                                                  589,955,315.74                  472,000,082.76\n     合计                                                         589,955,315.74                  472,000,082.76",
+      "section_id": "read-filing/notes/fvpl_equity",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "c28a42db0733e5a87b7f0a97e82e961da4f4b6d582ad69b62565a0e47d9f6687"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 208,
+      "quote": "四、账面价值\n      1.年末账面价值        16,593,049,455.07   1,294,613,472.53   2,260,244,342.39     29,007,181.96   20,176,914,451.95\n      2.年初账面价值        11,877,889,569.71   1,131,825,558.51   2,023,010,641.23     31,026,527.04   15,063,752,296.49",
+      "section_id": "read-filing/notes/fixed_assets",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "00accea5eb44499050460b1e760eab75eafdc5de4154a1545c078baebcce8252"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 208,
+      "quote": "1.年初余额           2,424,520,975.54   1,333,180,015.45   2,494,483,298.03     75,738,647.78    6,327,922,936.80\n      2.本年增加金额           694,932,416.10     359,828,407.31     582,598,080.06      8,670,656.74    1,646,029,560.21\n        (1) 计提           694,932,416.10     359,828,407.31     582,598,080.06      8,670,656.74    1,646,029,560.21",
+      "section_id": "read-filing/notes/fixed_asset_depreciation",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "75941e2312fbebd984af44e30d43f001d558a8efe4098269f70d5a40a448c4fd"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 208,
+      "quote": "(1) 购置           286,193,641.81     524,811,708.60     252,119,738.20      6,477,185.56    1,069,602,274.17\n        (2) 在建工程转入     5,166,473,056.72      10,180,570.43     576,943,199.67                 -    5,753,596,826.82\n        (3) 存货转入                      -                  -        3,535,121.54                -        3,535,121.54",
+      "section_id": "read-filing/notes/construction_transfer",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "1058870971f683483157cf056e35514c3ed40b0e4645a4a7760282ae06d3cf56"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 209,
+      "quote": "其他                    767,098,679.47             -    767,098,679.47    1,018,414,535.48          -   1,018,414,535.48\n     合计                   1,914,110,895.67            -   1,914,110,895.67   4,699,473,381.21          -   4,699,473,381.21",
+      "section_id": "read-filing/notes/construction",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "4e6728da6e2d38d016b51112cd64c63342656523ee80dafe6b092837e5e80d25"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 212,
+      "quote": "其他                                   76,305,398.89                   -               -          853,160.71         77,158,559.60\n     合计                                  312,165,129.29                   -               -        (977,402.28)        311,187,727.01",
+      "section_id": "read-filing/notes/goodwill",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "f6413534ceece79bd977f93734cff8b4a9683563c40bd92e35e30070f7746ff0"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 216,
+      "quote": "应付工程设备款                                            1,729,684,708.39    1,027,002,447.56\n     合计                                                19,843,949,575.87   20,185,303,107.69",
+      "section_id": "read-filing/notes/payables",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "e181e8efb9e1cf5d32125f9b55e7ee57fc1c58821fb523bd00570201824c3a5c"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 216,
+      "quote": "预收其他服务款                                             788,958,524.94      544,032,069.70\n     小计                                                 4,421,579,881.87    3,427,973,003.08\n     减：计入其他非流动负债的合同负债(附注(五)、38)                          221,089,008.80       74,029,948.84",
+      "section_id": "read-filing/notes/contract_liabilities_all",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "86caf5e67f0385cd03321a9d1c997e86103130073c8d594bf6502771a6abb2bb"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 216,
+      "quote": "减：计入其他非流动负债的合同负债(附注(五)、38)                          221,089,008.80       74,029,948.84\n     合计                                                 4,200,490,873.07    3,353,943,054.24",
+      "section_id": "read-filing/notes/contract_liabilities_current",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "0a65b3afef5e10a4e09a8aa1b1568d9b480e364478bc1f3a020f1a41617e14f1"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 215,
+      "quote": "已贴现未到期票据(附注(五)、3)                               82,115,586.20      34,410,142.39\n     合计                                            2,685,866,236.94   1,031,895,812.62",
+      "section_id": "read-filing/notes/short_debt",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "fc29fc47016dd9e1add90707b3313fc5efb6069a6491736130ccf1e14d566cc1"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 219,
+      "quote": "项目                      年末余额                      年初余额\n     一年内到期的长期借款(附注(五)、34)                       3,610,693,121.74          586,589,318.45\n     一年内到期的预计负债(附注(五)、36)                        172,076,792.55                         -",
+      "section_id": "read-filing/notes/current_long_debt",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "e1f1413aa737c6bc0cf8069c03042faeb8c1b94a22bebda2f3950dc1afc9a0f3"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 219,
+      "quote": "减：一年内到期的长期借款(附注(五)、32)                    3,610,693,121.74           586,589,318.45\n     合计                                        1,210,564,814.39          5,119,185,000.00",
+      "section_id": "read-filing/notes/long_debt_noncurrent",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "97e0f5966c375c04a033f7869e6c240863b85576508416b6e96bfa667e12c50c"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 219,
+      "quote": "项目                        年末余额               年初余额\n     租赁负债                                              455,892,181.48     555,835,972.74\n     减：一年内到期的租赁负债(附注(五)、32)                            156,501,215.32     180,403,223.06",
+      "section_id": "read-filing/notes/leases_total",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "791991cb34960bdbd8bae29339d90fe16e653ca26bc363a21dda1e43730a2539"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 242,
+      "quote": "其他关联方                  采购材料、接受劳务            963,759,002.12       1,189,645,482.17\n     合计                                        3,449,198,653.12       3,376,737,205.57",
+      "section_id": "read-filing/notes/related_purchases",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "d9125928c29d857794a15c9ee1900b3ec76133f00c92fe01c8ac3884620d7bee"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 242,
+      "quote": "其他关联方                  销售产品、提供劳务             20,436,820.06         22,004,352.43\n     合计                                          264,792,460.32        310,638,303.57",
+      "section_id": "read-filing/notes/related_sales",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "e010ac7167f716107ed6be00ae91383a34c92a3d2143e727b3d2499e542c673f"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 243,
+      "quote": "关联方(注)      关联交易内容          本年发生额              年末余额              上年发生额               年初余额\n     电科下属企业          存入(取出)存款       2,295,926,223.32   6,296,109,949.06    (13,463,687.38)   4,000,183,725.74\n     合计                             2,295,926,223.32   6,296,109,949.06    (13,463,687.38)   4,000,183,725.74",
+      "section_id": "read-filing/notes/related_finance_deposit",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "33fb7e025f940eafddcd7f9ffd5bdfbed6672666b020736aba5f87c63ff2438a"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 244,
+      "quote": "应收账款             其他关联方      5,743,013.53       272,584.64      5,254,943.87       209,669.50\n     合计                        435,455,301.58   223,784,269.43    584,999,304.53    163,117,962.67",
+      "section_id": "read-filing/notes/related_ar_gross",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "dd67c9f78d33adf3956e8499dd35dac7b4ecfd804010e82c7be232f004681a65"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 244,
+      "quote": "应收账款             其他关联方      5,743,013.53       272,584.64      5,254,943.87       209,669.50\n     合计                        435,455,301.58   223,784,269.43    584,999,304.53    163,117,962.67",
+      "section_id": "read-filing/notes/related_ar_allowance",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "dd67c9f78d33adf3956e8499dd35dac7b4ecfd804010e82c7be232f004681a65"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 224,
+      "quote": "其他                                    123,907,345.14       98,738,668.64\n     合计                                  11,752,624,736.80   11,864,013,392.27",
+      "section_id": "read-filing/notes/rd_expense",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "c33dbe9e4d9fa785f341ed14a0372f8f97e8f1371d997a6481068ed388d2da43"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 224,
+      "quote": "项目                  本年发生额               上年发生额\n     增值税即征即退                              1,937,264,907.42    1,874,624,340.02\n     专项补助款                                 823,306,512.02      688,670,655.22",
+      "section_id": "read-filing/notes/vat_refund",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "3a8f129cd5fbd4d1681503661db85c3192b66f9916ae73801c2d147e819c8b4c"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 224,
+      "quote": "增值税即征即退                              1,937,264,907.42    1,874,624,340.02\n     专项补助款                                 823,306,512.02      688,670,655.22\n     其他                                     79,728,725.35       90,387,815.63",
+      "section_id": "read-filing/notes/special_grants",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "e72b2adf9fe984d9ad3e9c74d1d66f27e5dd0b1de3bdecefb634eb1b5b8ea442"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 224,
+      "quote": "项目                  本年发生额               上年发生额\n     利息支出                                  177,814,711.78      355,616,402.34\n     租赁负债利息支出                               23,072,089.23       41,603,299.47",
+      "section_id": "read-filing/notes/interest_expense",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "b9ba077d21a86af16e7b696c20341d2337e104f73429260ed572b1f2320e2ce7"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 224,
+      "quote": "利息支出                                  177,814,711.78      355,616,402.34\n     租赁负债利息支出                               23,072,089.23       41,603,299.47\n     减：利息收入                                550,539,471.08      878,035,430.32",
+      "section_id": "read-filing/notes/lease_interest",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "b358198cec0ebdd31215b3fafb3d577c539f4f6aee82cba9c342eb8d62d4bab5"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 220,
+      "quote": "发行新股        送股            公积金转股                其他                小计\n     股份总数     9,233,198,326.00          -            -                 -    (68,326,776.00)   (68,326,776.00)     9,164,871,550.00",
+      "section_id": "read-filing/notes/sharecount",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "5ad9e2b7f9121eb0298f0e13f933ae48c81b96939059cf7053bdf8309ce5fe27"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 220,
+      "quote": "发行新股        送股            公积金转股                其他                小计\n     股份总数     9,233,198,326.00          -            -                 -    (68,326,776.00)   (68,326,776.00)     9,164,871,550.00",
+      "section_id": "read-filing/notes/cancelled_shares",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "5ad9e2b7f9121eb0298f0e13f933ae48c81b96939059cf7053bdf8309ce5fe27"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 142,
+      "quote": "一、审计报告\n\n审计意见类型                                    标准的无保留意见\n\n审计报告签署日期                                   2026 年 4 月 16 日\n\n审计机构名称                              德勤华永会计师事务所（特殊普通合伙）",
+      "section_id": "read-filing/notes/audit",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "3d77e4b458b14b99ca1999f1f35cbaadac09cd0bbf5d10c3b54ba857232141fc"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 123,
+      "quote": "境内会计师事务所报酬（万元）                               440（不含税）\n\n境内会计师事务所审计服务的连续年限                               10\n\n境内会计师事务所注册会计师姓名                               陈彦 刘颖\n\n境内会计师事务所注册会计师审计服务的连续年限                 陈彦审计服务 3 年，刘颖审计服务 3 年",
+      "section_id": "read-filing/notes/auditor_tenure",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "3ccde6a23126378810d1e49c1a0fa9dac669b35549c492708172e92f49dba0df"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 124,
+      "quote": "（特殊普通合伙）为 2026 年度财务报告审计机构和内部控制审计机构。公司于 2026 年 4 月 16 日召开第六届董事会第九次\n会议，审议通过《关于拟变更会计师事务所的议案》\n                      ，该议案尚需提交公司股东会审议。\n\n\n当期是否改聘会计师事务所\n□ 是 √ 否",
+      "section_id": "read-filing/notes/auditor_proposal",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "86e833d5733f958bc68d0fb698928a81f23d733a22afdc1cd1bbcf60d88a8c12"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 124,
+      "quote": "□ 适用 √ 不适用\n公司报告期不存在处罚及整改情况。\n\n\n十三、公司及其控股股东、实际控制人的诚信状况",
+      "section_id": "read-filing/notes/period_sanctions",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "20b52b82fd1e265ad92b1ac18a43ca73f37421620221b1584b82d59222dcddee"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 123,
+      "quote": "□ 适用 √ 不适用\n公司报告期不存在控股股东及其他关联方对上市公司的非经营性占用资金。\n\n\n三、违规对外担保情况",
+      "section_id": "read-filing/notes/fund_occupation",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "57258eabd231c3f75a6b41d2cf4d1230c024381d011d4029c4d3454f4d0c8961"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 123,
+      "quote": "六、与上年度财务报告相比，会计政策、会计估计变更或重大会计差错更正的情况说明\n\n□ 适用 √ 不适用",
+      "section_id": "read-filing/notes/policy_changes",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "ee97f232eb359099b93c72333231c606063deb85a904694f9aefd9915b2b6439"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 212,
+      "quote": "包含分摊的商誉的资产组组合的可收回金额按照相关资产组组合预计未来现金流量的现值确定。其未来\n    现金流量的预测期年限均为 5 年。未来现金流量的预计是管理层基于过去的业绩和对市场发展的预期所\n    估计的预计期间的销售收入和销售成本、经营费用后得出的。超过 5 年的现金流量增长率为 0-2%。\n\n    本年度本集团未发现包含分摊的商誉的相关资产组组合的可收回金额低于其账面价值的情况，故认为无\n    需对商誉计提减值损失。",
+      "section_id": "read-filing/notes/goodwill_assumption",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "96b8cc96320dd7ae560173b9511657b1737d92fc0845271ad79d4d55dcc2b8fe"
+    },
+    {
+      "ticker": "002415.SZ",
+      "jurisdiction": "SZ",
+      "source_type": "filing_text",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "page": 216,
+      "quote": "(3)   对上述合同负债的定性和定量分析：\n\n          预收产品销售款为客户预先支付的货款和向经销商提供的销售返点。预收的货款将在商品被运送\n          至或被交付予客户时确认收入，向经销商提供的销售返点将在经销商使用销售返点抵扣价款时确\n          认收入。\n\n          预收工程结算款为根据合同规定就建造工程向客户按里程碑已收或应收的合同价款超过累计已",
+      "section_id": "read-filing/notes/contract_rebates",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "canonical_evidence_id": "5e8245dfd16cd2a2c233207f49e7e40e4a4f616eb5d0d85b23c88b10932a22ea"
+    }
+  ]
+}

@@ -1,0 +1,419 @@
+{
+  "claim_ledgers": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202611041831416424_1.pdf",
+          "started_at": "2026-11-05T03:21:33.267173+00:00",
+          "completed_at": "2026-11-05T03:21:33.267173+00:00",
+          "artifact_identity": "sha256:f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+          "lineage_id": "underlying:356608492c3bd0dbb390907913da83c56ed2306e9cea23414090332c7c8ffe48",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "AP202611041831416424",
+        "artifact_identity": "sha256:f1c0cc4ed1115f3a15611390b9aa1c55ebb64ec6b0dce519df3c0820784dd2b3",
+        "lineage_id": "underlying:356608492c3bd0dbb390907913da83c56ed2306e9cea23414090332c7c8ffe48"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        }
+      ],
+      "unattempted_routes": []
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+      "absence_claim": false,
+      "status": "accepted",
+      "applicable_routes": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report",
+          "query_variant": "https://pdf.dfcfw.com/pdf/H3_AP202611021831304660_1.pdf",
+          "started_at": "2026-11-05T03:21:33.267173+00:00",
+          "completed_at": "2026-11-05T03:21:33.267173+00:00",
+          "artifact_identity": "sha256:e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+          "lineage_id": "underlying:8bf41f1ec58f7b183c04ed292cd8742a4b6c5f2fa7885090d3f25d064c101215",
+          "terminal_reason": "accepted",
+          "acceptance_failures": []
+        }
+      ],
+      "acceptance_failures": [],
+      "accepted_evidence": {
+        "candidate_document_id": "AP202611021831304660",
+        "artifact_identity": "sha256:e55d0761ee7184cb1c13caf98cf9be971c38b9b928952a6837b96f62301658b2",
+        "lineage_id": "underlying:8bf41f1ec58f7b183c04ed292cd8742a4b6c5f2fa7885090d3f25d064c101215"
+      },
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "passed",
+        "failures": []
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "reason": "positive attributed interpretation accepted; no exhaustive search claimed"
+        }
+      ],
+      "unattempted_routes": []
+    }
+  ],
+  "planner_inventory_receipts": [
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611041831416424",
+      "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-last-year-AP202611041831416424",
+          "request_scope_fingerprint": "3590381291883e21b641358852355dc00ab3cca06ba78e85f8fa97cc84bcebf2",
+          "request_content_sha256": "79e30db2b253ea10f2a1ea9627b46e9ab30561242363c8b0c51ffb8537643019"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-aktools-broker-pdf",
+            "subject_relation": "bound-local",
+            "document_type": "cached-broker-report",
+            "route_binding_sha256": "262f31d74b44cffcbfb7188ba37425e7bef1f4f6a8f73e06844debce1fe6c85d"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T03:21:33.267173+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "1b0830d2852f269ce88d22c42b11186a62ef3a38d8ce55cbfdfd2533f6207a80"
+      },
+      "planner_input_fingerprint": "7e8591fc4dad4565a00db73c4cf1f458acd63908b3fbc206ae1c0b1eaa56ee92",
+      "route_inventory": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "a5ebd850897ac0f3203f10fda0003eeb86995af79e2eeda500be57a0c17f1679"
+    },
+    {
+      "schema_version": "1.0",
+      "claim_id": "moutai-last-year-AP202611021831304660",
+      "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "moutai-last-year-AP202611021831304660",
+          "request_scope_fingerprint": "9edc420a32579f736db3cebb6ae8cf49c24292cf8308a1ecc731574c00ec62b2",
+          "request_content_sha256": "7558bcc0bef0891316fff71ea207ccf2ce17177425f0de436a8141e5b0214cdf"
+        },
+        "source_function": "qualitative-consumption",
+        "maintained_profiles": [],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-aktools-broker-pdf",
+            "subject_relation": "bound-local",
+            "document_type": "cached-broker-report",
+            "route_binding_sha256": "262f31d74b44cffcbfb7188ba37425e7bef1f4f6a8f73e06844debce1fe6c85d"
+          }
+        ],
+        "as_of": "2026-11-05",
+        "effective_planning_time": "2026-11-05T03:21:33.267173+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+        },
+        "route_inventory_sha256": "1b0830d2852f269ce88d22c42b11186a62ef3a38d8ce55cbfdfd2533f6207a80"
+      },
+      "planner_input_fingerprint": "0231f3ec313b4b8ea1758dff6ca42aecc2c381208a8c1cf86a4f1cc8030f88f0",
+      "route_inventory": [
+        {
+          "route_id": "bound-aktools-broker-pdf",
+          "route_layer": 0,
+          "subject_relation": "bound-local",
+          "document_type": "cached-broker-report"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "4fcfc67e8716ca6b64058843f9b4c08969bb9ce091f16d1ca3c46a4858d31872"
+    }
+  ],
+  "scope": "two attributable broker interpretations only"
+}

@@ -1,0 +1,1686 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>价值投资个股研究 Profile - 贵州茅台 (600519.SH) 2026-08-02</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #dfe3e7;
+      --soft: #f6f7f8;
+      --accent: #0b57d0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: minmax(190px, 240px) minmax(0, 900px);
+      gap: 48px;
+      width: min(1240px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+    main { min-width: 0; }
+    h1, h2, h3, h4 {
+      line-height: 1.32;
+      letter-spacing: 0;
+      scroll-margin-top: 24px;
+    }
+    h1 { margin: 0 0 32px; font-size: 32px; }
+    h2 {
+      margin: 48px 0 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h3 { margin: 32px 0 12px; font-size: 19px; }
+    h4 { margin: 24px 0 10px; font-size: 16px; }
+    p, ul, ol, blockquote { margin: 0 0 16px; }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    blockquote {
+      margin-left: 0;
+      padding: 8px 16px;
+      border-left: 3px solid var(--line);
+      color: var(--muted);
+    }
+    .signal-list {
+      margin: 0 0 16px;
+      padding-left: 12px;
+    }
+    .signal-item {
+      display: grid;
+      grid-template-columns: 8px minmax(0, 1fr);
+      column-gap: 10px;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      margin-top: 0.7em;
+      border-radius: 50%;
+      background: var(--signal-color);
+      transform: translateY(-50%);
+    }
+    .signal-positive { --signal-color: #188038; }
+    .signal-negative { --signal-color: #d93025; }
+    .signal-pending { --signal-color: #d99a00; }
+    code {
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: var(--soft);
+      font-size: 0.9em;
+    }
+    pre { overflow: auto; padding: 16px; background: var(--soft); }
+    pre code { padding: 0; }
+    .toc {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      padding-right: 20px;
+    }
+    .toc h2 {
+      margin: 0 0 12px;
+      padding: 0;
+      border: 0;
+      font-size: 15px;
+    }
+    .toc ul { margin: 0; padding: 0; list-style: none; }
+    .toc li { margin: 7px 0; line-height: 1.35; }
+    .toc a { color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+    .toc-level-1 { font-weight: 600; }
+    .toc-level-3 { padding-left: 12px; font-size: 14px; }
+    .toc-level-4 { padding-left: 24px; font-size: 13px; }
+    .table-scroll {
+      max-width: 100%;
+      margin: 18px 0 24px;
+      overflow-x: auto;
+    }
+    .table-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px 0 10px;
+    }
+    .table-meta {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td {
+      min-width: 96px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--soft); font-weight: 600; }
+    td[rowspan] {
+      background: #fafafa;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+    .hierarchy-table {
+      font-variant-numeric: tabular-nums;
+    }
+    .hierarchy-table th,
+    .hierarchy-table td {
+      border-width: 0 0 1px;
+    }
+    .hierarchy-table th {
+      border-top: 1px solid var(--ink);
+    }
+    .hierarchy-table th:nth-child(n + 2),
+    .hierarchy-table td:nth-child(n + 2) {
+      text-align: right;
+    }
+    .hierarchy-table .hierarchy-level-2 {
+      padding-left: 30px;
+      font-weight: 600;
+    }
+    .hierarchy-table .hierarchy-level-3 {
+      padding-left: 50px;
+    }
+    .hierarchy-table .hierarchy-group td {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+    .hierarchy-table .hierarchy-subtotal td {
+      font-weight: 600;
+    }
+    .hierarchy-table .hierarchy-total td {
+      border-top: 1px solid var(--ink);
+      border-bottom: 3px double var(--ink);
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .page {
+        display: block;
+        width: min(100% - 28px, 760px);
+        padding-top: 20px;
+      }
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 32px;
+        padding: 0 0 20px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .toc-level-3, .toc-level-4 { padding-left: 0; }
+      .table-heading { align-items: flex-start; }
+      h1 { font-size: 27px; }
+      h2 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="toc" aria-label="目录"><h2>目录</h2><ul><li class="toc-level-1"><a href="#section-1">价值投资个股研究 Profile - 贵州茅台 (600519.SH) 2026-08-02</a></li>
+<li class="toc-level-2"><a href="#section-2">Part 0 - 封面与执行摘要</a></li>
+<li class="toc-level-3"><a href="#section-3">执行摘要</a></li>
+<li class="toc-level-2"><a href="#section-4">Part 1 - 定性分析</a></li>
+<li class="toc-level-2"><a href="#section-5">§1 商业模式</a></li>
+<li class="toc-level-3"><a href="#section-6">§1.1 公司核心资产、主营产品和服务</a></li>
+<li class="toc-level-3"><a href="#section-7">§1.2 公司客户</a></li>
+<li class="toc-level-3"><a href="#section-8">§1.3 差异化</a></li>
+<li class="toc-level-3"><a href="#section-9">§1.4 盈利模式</a></li>
+<li class="toc-level-3"><a href="#section-10">§1.5 生意特性</a></li>
+<li class="toc-level-3"><a href="#section-11">§1.6 现金流状况</a></li>
+<li class="toc-level-3"><a href="#section-12">§1.7 已知优秀商业模式特性</a></li>
+<li class="toc-level-3"><a href="#section-13">§1.8 能力圈四问</a></li>
+<li class="toc-level-2"><a href="#section-14">§2 成长空间与天花板</a></li>
+<li class="toc-level-3"><a href="#section-15">§2.1 行业基本情况与竞争格局</a></li>
+<li class="toc-level-4"><a href="#section-16">市场定义矩阵</a></li>
+<li class="toc-level-3"><a href="#section-17">§2.2 市场规模、增速与供需</a></li>
+<li class="toc-level-4"><a href="#section-18">历史市场规模与逐年增速</a></li>
+<li class="toc-level-4"><a href="#section-19">预测版本对照</a></li>
+<li class="toc-level-4"><a href="#section-20">集中度与竞争对手</a></li>
+<li class="toc-level-4"><a href="#section-21">当期部分期间</a></li>
+<li class="toc-level-4"><a href="#section-22">口径断点与未解决缺口</a></li>
+<li class="toc-level-3"><a href="#section-23">§2.3 竞争对手营收净利对比</a></li>
+<li class="toc-level-3"><a href="#section-24">§2.4 行业与公司成长空间</a></li>
+<li class="toc-level-3"><a href="#section-25">§2.5 历史成长动力分解</a></li>
+<li class="toc-level-3"><a href="#section-26">§2.6 未来成长动力</a></li>
+<li class="toc-level-2"><a href="#section-27">§3 护城河分析</a></li>
+<li class="toc-level-3"><a href="#section-28">§3.1 定性：公司的护城河有哪些</a></li>
+<li class="toc-level-3"><a href="#section-29">§3.2 护城河来源因素分析</a></li>
+<li class="toc-level-3"><a href="#section-30">§3.3 产品差异化</a></li>
+<li class="toc-level-3"><a href="#section-31">§3.4 波特五力</a></li>
+<li class="toc-level-3"><a href="#section-32">§3.5 ROE/ROIC分析</a></li>
+<li class="toc-level-3"><a href="#section-33">§3.6 ROE杜邦分析</a></li>
+<li class="toc-level-3"><a href="#section-34">§3.7 毛利率分析</a></li>
+<li class="toc-level-3"><a href="#section-35">§3.8 护城河发展趋势与定论</a></li>
+<li class="toc-level-3"><a href="#section-36">§3.9 非护城河因素</a></li>
+<li class="toc-level-3"><a href="#section-37">§3.10 政府政策分析</a></li>
+<li class="toc-level-2"><a href="#section-38">§4 管理质量与企业文化</a></li>
+<li class="toc-level-3"><a href="#section-39">§4.pre 风险一票否决前置扫描</a></li>
+<li class="toc-level-3"><a href="#section-40">§4.1 专注主业，眼光长远</a></li>
+<li class="toc-level-3"><a href="#section-41">§4.2 企业家评估</a></li>
+<li class="toc-level-3"><a href="#section-42">§4.3 企业家特征清单</a></li>
+<li class="toc-level-3"><a href="#section-43">§4.4 企业文化</a></li>
+<li class="toc-level-3"><a href="#section-44">§4.5 内部治理结构</a></li>
+<li class="toc-level-3"><a href="#section-45">§4.6 以股东利益为导向</a></li>
+<li class="toc-level-3"><a href="#section-46">§4.7 股权结构</a></li>
+<li class="toc-level-3"><a href="#section-47">§4.8 大股东与上市公司利益一致性检查</a></li>
+<li class="toc-level-2"><a href="#section-48">§5 风险分析</a></li>
+<li class="toc-level-3"><a href="#section-49">§5.1 产品和业务风险</a></li>
+<li class="toc-level-3"><a href="#section-50">§5.2 财务风险</a></li>
+<li class="toc-level-3"><a href="#section-51">§5.3 管理层风险</a></li>
+<li class="toc-level-3"><a href="#section-52">§5.4 造假风险</a></li>
+<li class="toc-level-3"><a href="#section-53">§5.5 成长风险</a></li>
+<li class="toc-level-2"><a href="#section-54">Part 2 - 定量分析</a></li>
+<li class="toc-level-3"><a href="#section-55">§Q1 盈利分析</a></li>
+<li class="toc-level-3"><a href="#section-56">§Q2 盈利能力</a></li>
+<li class="toc-level-3"><a href="#section-57">§Q3 盈利质量</a></li>
+<li class="toc-level-3"><a href="#section-58">§Q4 成长能力</a></li>
+<li class="toc-level-3"><a href="#section-59">§Q5 资产增速</a></li>
+<li class="toc-level-3"><a href="#section-60">§Q6 运营能力</a></li>
+<li class="toc-level-3"><a href="#section-61">§Q7 偿债能力</a></li>
+<li class="toc-level-3"><a href="#section-62">§Q8 现金流分析</a></li>
+<li class="toc-level-3"><a href="#section-63">§Q9 资产负债表结构分析</a></li>
+<li class="toc-level-3"><a href="#section-64">§Q10 简化利润表分析</a></li>
+<li class="toc-level-3"><a href="#section-65">§Q11 上下游分析</a></li>
+<li class="toc-level-3"><a href="#section-66">§Q12 定量分析总结</a></li>
+<li class="toc-level-2"><a href="#section-67">Part 3 - 未来</a></li>
+<li class="toc-level-3"><a href="#section-68">§3.1 未来市场可能的变化</a></li>
+<li class="toc-level-3"><a href="#section-69">§3.2 未来公司可能的变化</a></li>
+<li class="toc-level-3"><a href="#section-70">§3.3 未来净利润增长来源</a></li>
+<li class="toc-level-3"><a href="#section-71">§3.4 ROE提高的空间和来源</a></li>
+<li class="toc-level-3"><a href="#section-72">§3.5 其他环境变化</a></li>
+<li class="toc-level-3"><a href="#section-73">§3.6 如果我是董事长</a></li>
+<li class="toc-level-2"><a href="#section-74">Part 4 - 买入阶段检查清单</a></li>
+<li class="toc-level-3"><a href="#section-75">§4.1 市场估值分析</a></li>
+<li class="toc-level-3"><a href="#section-76">§4.2 当前公司估值情况</a></li>
+<li class="toc-level-3"><a href="#section-77">§4.3 三年后净利润及估值</a></li>
+<li class="toc-level-3"><a href="#section-78">§4.4 公司基本面再分析</a></li>
+<li class="toc-level-3"><a href="#section-79">§4.5 负面清单 - 排雷风险</a></li>
+<li class="toc-level-3"><a href="#section-80">§4.6 基准日价格与仓位</a></li>
+<li class="toc-level-3"><a href="#section-81">§4.7 买入后加仓/持有预案</a></li>
+<li class="toc-level-3"><a href="#section-82">§4.8 买入前最终检查</a></li>
+<li class="toc-level-3"><a href="#section-83">§4.9 心理偏误核查</a></li>
+<li class="toc-level-2"><a href="#section-84">Part 5 - 持有阶段检查清单</a></li>
+<li class="toc-level-3"><a href="#section-85">§5.1 组合健康检查</a></li>
+<li class="toc-level-3"><a href="#section-86">§5.2 持续关注经营状况</a></li>
+<li class="toc-level-3"><a href="#section-87">§5.3 是否触发卖出标准</a></li>
+<li class="toc-level-3"><a href="#section-88">§5.4 卖出动作心理偏误核查</a></li>
+<li class="toc-level-3"><a href="#section-89">§5.5 是否触发新的买入标准</a></li>
+<li class="toc-level-2"><a href="#section-90">证据索引</a></li></ul></nav>
+<main><h1 id="section-1">价值投资个股研究 Profile - 贵州茅台 (600519.SH) 2026-08-02</h1>
+<blockquote>
+<p>茅台仍是白酒行业盈利能力最强、供给约束最清晰的公司，但行业已经进入调整期。2025年收入和利润首次同步下降，2026年一季度收入恢复增长，利润增速仍只有1.47%。</p>
+</blockquote>
+<h2 id="section-2">Part 0 - 封面与执行摘要</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>股票代码（ticker）</strong></td>
+<td>600519.SH</td>
+</tr>
+<tr>
+<td><strong>公司名称</strong></td>
+<td>贵州茅台酒股份有限公司 / Kweichow Moutai Co., Ltd.</td>
+</tr>
+<tr>
+<td><strong>交易所/币种</strong></td>
+<td>SH / CNY</td>
+</tr>
+<tr>
+<td><strong>报告日期（report_date）</strong></td>
+<td>2026-08-02</td>
+</tr>
+<tr>
+<td><strong>信息截止日（AS_OF）</strong></td>
+<td>2026-08-02</td>
+</tr>
+<tr>
+<td><strong>目标财年（end_year）</strong></td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>研究者</strong></td>
+<td>Brian Huang</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>仍需补充:</strong> 2025年白酒行业收入和利润总额、飞天茅台终端成交价及社会库存的连续月度数据、蒋焰留置事项的最终结论。</p>
+<h3 id="section-3">执行摘要</h3>
+<p><strong>好生意：是</strong></p>
+<blockquote>
+<p>茅台以受限产区、至少五年的生产周期和长期品牌认知，换来接近零应收、超过90%的毛利率和很低的资本消耗。这仍是一门极好的生意，只是增长已经从高速转向低速。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2025年酒类毛利率91.23%、归母净利率48.75%、加权ROE 32.53%，且无银行借款、应付债券等传统有息负债。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>茅台酒收入1,464.99亿元，占总收入86.8%；单一核心产品贡献稳定，系列酒不是利润支柱。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2025年销售收现率1.09，资本开支仅占归母净利润3.8%，利润不依赖持续重投入。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>2025年收入下降1.21%、归母净利润下降4.53%；2026年一季度利润仅增长1.47%。</span></div>
+</div>
+<p><strong>护城河：宽</strong></p>
+<blockquote>
+<p>护城河来自核心产区、传统工艺和时间、品牌心智、老酒储备与渠道控制。资本可以买设备、建酒厂，却无法缩短陈化时间，也很难复制茅台的价格锚。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>茅台酒从生产到出厂至少五年，2025年末半成品酒及基础酒31.52万吨。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2026年销售合同价先由1,169元升至1,269元，7月再升至1,369元，提价能力仍在。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>近十年加权ROE始终高于24%，2020-2025年毛利率稳定在91%-92%。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>品牌很强不等于需求没有周期，2025年批发代理收入下降12.05%，系列酒收入下降9.76%。</span></div>
+</div>
+<p><strong>管理层：有保留</strong></p>
+<blockquote>
+<p>资本回报明显改善，但治理稳定性和高管合规仍需观察。蒋焰被留置并被免去副总经理、财务总监和董事会秘书职务，是当前最重要的治理风险。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2025年现金分红与回购合计711.53亿元，占归母净利润86.43%。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2021-2024年收入目标连续达成，管理层过去四年的目标兑现记录较好。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>2025年收入目标约增长9%，实际下降1.21%；2026年没有给出数字目标。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>2026年3月原财务总监蒋焰被留置并免职，最终调查结论尚未披露。</span></div>
+</div>
+<p><strong>财报排雷：1项中风险</strong></p>
+<blockquote>
+<p>财务报表整体干净，审计意见、现金、应收和负债都没有明显异常；需要持续跟踪存货增速、财务公司对现金流的扰动以及关联交易。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2025年财务报表和内部控制均为标准无保留意见，扣非净利润约等于归母净利润。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>无银行借款、应付债券等传统有息负债，零商誉，应收账款仅260.9万元。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>存货增长13.04%，高于收入增速；系列酒产量增长19.82%，收入却下降9.76%。</span></div>
+  <div class="signal-item signal-pending"><span class="signal-dot" role="img" aria-label="待验证" title="待验证"></span><span>关联交易合计89.13亿元，另支付商标使用权费24.81亿元，需长期关注定价和集团资金往来。</span></div>
+</div>
+<p><strong>能力圈四问：全过</strong></p>
+<blockquote>
+<p>产品、客户需求、竞争方式和关键变量都能理解。真正难预测的不是茅台能否继续赚钱，而是行业调整期内销量、提价与渠道库存如何组合。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>核心产品、工艺周期、产能、销量、渠道和价格均有连续披露。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>资本无法缩短五年陈化周期，也难以复制品牌形成的高端白酒价格锚。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>消费场景和渠道库存带来周期性，短期收入不能只按产能线性外推。</span></div>
+</div>
+<p><strong>估值三大前提：全真</strong></p>
+<p><strong>估值阻断:</strong> 否</p>
+<p><strong>管理层否决:</strong> 否 - 蒋焰留置事项尚无终局，不作无罪或有罪推断，但列为持续跟踪项</p>
+<p><strong>投资论点：好公司，当前价格接近合理区间下沿，但不是明显低估</strong></p>
+<blockquote>
+<p>2026年7月31日收盘价1,350.60元，对应2025年约20.6倍PE和3.84%现金股息率。行业仍在出清，当前更适合等待利润增速和渠道库存进一步确认。</p>
+</blockquote>
+<div class="signal-list">
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>当前PE低于25倍估值上限，股息率高于同期10年期国债收益率1.7141%。</span></div>
+  <div class="signal-item signal-positive"><span class="signal-dot" role="img" aria-label="正面" title="正面"></span><span>2026年一季度收入增长6.54%，3月和7月两次调价将影响后续季度。</span></div>
+  <div class="signal-item signal-negative"><span class="signal-dot" role="img" aria-label="负面" title="负面"></span><span>2026年一季度归母净利润仅增长1.47%，尚未证明利润重新进入中高速增长。</span></div>
+</div>
+<p><strong>估值现状:</strong> 2026年7月31日收盘价1,350.60元；静态PE约20.6倍；2025年度现金股息率约3.84%。</p>
+<p><strong>三项主要风险</strong></p>
+<ol>
+<li>白酒需求和渠道库存继续收缩，提价不能完全转化为销量与利润。</li>
+<li>管理层更换、高管留置及集团关联交易削弱治理稳定性。</li>
+<li>系列酒产销错配扩大，存货增长最终需要减值或降价消化。</li>
+</ol>
+<p><strong>确信度:</strong> 中高</p>
+<hr />
+<h2 id="section-4">Part 1 - 定性分析</h2>
+<h2 id="section-5">§1 商业模式</h2>
+<h3 id="section-6">§1.1 公司核心资产、主营产品和服务</h3>
+<p>公司的核心资产不是厂房本身，而是茅台镇核心产区、传统酱香工艺、老酒储备、品牌和渠道。茅台酒需要一年生产、分型贮存、勾兑和继续陈酿，从生产到出厂至少五年；今天能卖多少，主要取决于多年前形成的基酒。</p>
+<p>2025年收入结构如下。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>产品</th>
+<th style="text-align:right">收入（亿元）</th>
+<th style="text-align:right">占总收入</th>
+<th style="text-align:right">毛利率</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>茅台酒</td>
+<td style="text-align:right">1,464.99</td>
+<td style="text-align:right">86.8%</td>
+<td style="text-align:right">93.53%</td>
+<td style="text-align:right">0.39%</td>
+</tr>
+<tr>
+<td>系列酒</td>
+<td style="text-align:right">222.75</td>
+<td style="text-align:right">13.2%</td>
+<td style="text-align:right">76.11%</td>
+<td style="text-align:right">-9.76%</td>
+</tr>
+<tr>
+<td>其他</td>
+<td style="text-align:right">0.64</td>
+<td style="text-align:right">0.0%</td>
+<td style="text-align:right">-</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td><strong>合计</strong></td>
+<td style="text-align:right"><strong>1,688.38</strong></td>
+<td style="text-align:right"><strong>100.0%</strong></td>
+<td style="text-align:right"><strong>91.18%</strong></td>
+<td style="text-align:right"><strong>-1.21%</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>茅台酒是绝对利润池。系列酒虽然覆盖茅台1935、王子酒、汉酱和赖茅等价格带，但2025年收入和毛利率同时下降，说明品牌优势越离开核心茅台酒，强度越弱。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>2025年单位经济代理</th>
+<th style="text-align:right">茅台酒</th>
+<th style="text-align:right">系列酒</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>销量</td>
+<td style="text-align:right">4.68万吨</td>
+<td style="text-align:right">3.84万吨</td>
+</tr>
+<tr>
+<td>每吨收入</td>
+<td style="text-align:right">313.4万元</td>
+<td style="text-align:right">58.1万元</td>
+</tr>
+<tr>
+<td>每吨销售成本</td>
+<td style="text-align:right">20.3万元</td>
+<td style="text-align:right">13.9万元</td>
+</tr>
+<tr>
+<td>每吨毛利</td>
+<td style="text-align:right">293.1万元</td>
+<td style="text-align:right">44.2万元</td>
+</tr>
+</tbody>
+</table></div>
+<p>这是当年收入成本除以当年销量的经营代理，不是同一批次基酒的完整成本。它已经足以说明：公司的经济价值主要来自茅台酒的品牌价格，而不是粮食和包装成本。</p>
+<h3 id="section-7">§1.2 公司客户</h3>
+<p>客户包括社会经销商、商超、电商、企业客户和终端消费者。公司几乎不赊销，2025年应收账款仅260.9万元；前五大客户占销售额10.10%，不存在单一大客户依赖。</p>
+<p>2025年直销收入首次略高于批发代理：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>渠道</th>
+<th style="text-align:right">收入（亿元）</th>
+<th style="text-align:right">占酒类收入</th>
+<th style="text-align:right">同比</th>
+<th style="text-align:right">毛利率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>直销</td>
+<td style="text-align:right">845.43</td>
+<td style="text-align:right">50.1%</td>
+<td style="text-align:right">12.96%</td>
+<td style="text-align:right">94.58%</td>
+</tr>
+<tr>
+<td>批发代理</td>
+<td style="text-align:right">842.32</td>
+<td style="text-align:right">49.9%</td>
+<td style="text-align:right">-12.05%</td>
+<td style="text-align:right">87.86%</td>
+</tr>
+</tbody>
+</table></div>
+<p>直销提高了公司对价格和消费者的控制，也把一部分渠道利润收回公司。2025年“i茅台”收入下降34.92%，但直销总收入增长12.96%，说明增长转向直营网点和其他自营渠道，平台单项数据不能代表全部直销。</p>
+<h3 id="section-8">§1.3 差异化</h3>
+<p>差异化由五层叠加：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>层次</th>
+<th>经济作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心产区</td>
+<td>水源、气候、微生物群落和生产空间难以异地复制</td>
+</tr>
+<tr>
+<td>传统工艺</td>
+<td>“12987”工艺复杂，质量依赖长期经验和勾调能力</td>
+</tr>
+<tr>
+<td>时间</td>
+<td>从生产到出厂至少五年，新进入者无法用资本压缩周期</td>
+</tr>
+<tr>
+<td>老酒储备</td>
+<td>不同年份、轮次和浓度基酒共同决定成品稳定性</td>
+</tr>
+<tr>
+<td>品牌与渠道</td>
+<td>高端宴请、礼赠和收藏形成价格锚，直营与经销网络负责变现</td>
+</tr>
+</tbody>
+</table></div>
+<p>单独看任何一层都不是绝对壁垒，叠加后才形成茅台。竞争者可以酿酱香酒，也可以买广告，但很难同时复制产区、老酒、质量稳定性和消费者愿意支付的价格。</p>
+<h3 id="section-9">§1.4 盈利模式</h3>
+<p>利润由四个变量决定：</p>
+<ol>
+<li>多年前基酒产量决定可售量上限。</li>
+<li>核心产品合同价和产品结构决定每吨收入。</li>
+<li>直销占比决定渠道利润留在公司还是经销商。</li>
+<li>税费、销售费用和系列酒结构决定净利率。</li>
+</ol>
+<p>2025年茅台酒销量增长0.73%，收入增长0.39%；直销收入增长12.96%，但集团收入仍下降1.21%。这说明当期价格、渠道和产品结构的正面变化没有完全抵消系列酒与批发渠道走弱。</p>
+<p>2026年3月31日，飞天53度500ml销售合同价由1,169元升至1,269元；7月18日再升至1,369元，i茅台零售价升至1,639元。提价会增加收入，但真正的验证标准仍是销量、终端成交价和渠道库存，而不是公告价格本身。</p>
+<h3 id="section-10">§1.5 生意特性</h3>
+<p>这是高毛利、低周转、低杠杆、强现金流的品牌消费品。存货周转慢不是普通制造业意义上的滞销，因为基酒必须长期陈酿；但系列酒产量增长快于销量时，仍然会产生真实的库存风险。</p>
+<p>它的优点是利润率高、应收极低、资本开支少、核心产品生命周期长。缺点是供给扩张慢，增长高度依赖历史产量和提价；宏观消费、商务宴请和礼赠需求变化仍会影响销量。</p>
+<h3 id="section-11">§1.6 现金流状况</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标（亿元）</th>
+<th style="text-align:right">2020</th>
+<th style="text-align:right">2021</th>
+<th style="text-align:right">2022</th>
+<th style="text-align:right">2023</th>
+<th style="text-align:right">2024</th>
+<th style="text-align:right">2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>归母净利润</td>
+<td style="text-align:right">466.97</td>
+<td style="text-align:right">524.60</td>
+<td style="text-align:right">627.17</td>
+<td style="text-align:right">747.34</td>
+<td style="text-align:right">862.28</td>
+<td style="text-align:right">823.20</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td style="text-align:right">516.69</td>
+<td style="text-align:right">640.29</td>
+<td style="text-align:right">366.99</td>
+<td style="text-align:right">665.93</td>
+<td style="text-align:right">924.64</td>
+<td style="text-align:right">615.22</td>
+</tr>
+<tr>
+<td>经营现金流/归母净利润</td>
+<td style="text-align:right">1.11</td>
+<td style="text-align:right">1.22</td>
+<td style="text-align:right">0.59</td>
+<td style="text-align:right">0.89</td>
+<td style="text-align:right">1.07</td>
+<td style="text-align:right">0.75</td>
+</tr>
+<tr>
+<td>资本开支</td>
+<td style="text-align:right">20.90</td>
+<td style="text-align:right">34.09</td>
+<td style="text-align:right">53.07</td>
+<td style="text-align:right">26.20</td>
+<td style="text-align:right">46.79</td>
+<td style="text-align:right">31.28</td>
+</tr>
+</tbody>
+</table></div>
+<p>六年累计经营现金流3,729.76亿元，约为累计归母净利润4,052.56亿元的92.0%。2022和2025的波动主要来自集团财务公司吸收存款和同业存款变动，不能只看单年经营现金流判断酒业回款；销售商品收到的现金仍为1,839.90亿元，相当于收入的1.09倍。</p>
+<h3 id="section-12">§1.7 已知优秀商业模式特性</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>判断</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高毛利</td>
+<td>是</td>
+<td>六年毛利率稳定在91%-92%</td>
+</tr>
+<tr>
+<td>低资本消耗</td>
+<td>是</td>
+<td>六年资本开支通常低于净利润10%</td>
+</tr>
+<tr>
+<td>低应收</td>
+<td>是</td>
+<td>2025年应收账款260.9万元</td>
+</tr>
+<tr>
+<td>低杠杆</td>
+<td>是</td>
+<td>连续六年无银行借款、应付债券等传统有息负债</td>
+</tr>
+<tr>
+<td>产品长寿命</td>
+<td>是</td>
+<td>核心茅台酒长期稳定，提价间隔可跨多年</td>
+</tr>
+<tr>
+<td>弱周期</td>
+<td>部分</td>
+<td>核心产品抗压，但2025年收入与利润仍下降</td>
+</tr>
+<tr>
+<td>易扩张</td>
+<td>否</td>
+<td>产区和五年周期限制供给扩张</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-13">§1.8 能力圈四问</h3>
+<p><strong>问1，卖什么:</strong> 主要卖茅台酒和系列酒。茅台酒贡献86.8%收入、93.53%毛利率，是核心价值来源。</p>
+<p><strong>问2，客户为什么买:</strong> 品质稳定、品牌认知、高端社交与礼赠场景共同形成需求。购买并非合同锁定，但品牌价格锚让替代品很难获得同等认可。</p>
+<p><strong>问3，资本为什么没有抢走利润:</strong> 资本可以进入酱香酒，却无法缩短五年周期，也无法快速获得足量老酒和品牌信用。2025年五粮液、泸州老窖和洋河利润分别下降71.89%、19.61%和66.94%，茅台只下降4.53%，差异已经反映在周期中的盈利韧性。</p>
+<p><strong>问4，巨资进入能否守住:</strong> 假设大型消费集团投入500亿元、在仁怀周边建设新产能并持续营销十年，它仍要等待基酒成熟，并证明长期质量稳定。它可以侵蚀300-800元系列酒价格带，却很难在短期取代飞天茅台的价格锚。</p>
+<p><strong>四问结论:</strong> 全过。</p>
+<p><strong>好生意结论:</strong> 是</p>
+<h2 id="section-14">§2 成长空间与天花板</h2>
+<h3 id="section-15">§2.1 行业基本情况与竞争格局</h3>
+<p>白酒行业已经从增量扩张进入存量竞争。产量持续下降，收入增长主要依靠产品升级和集中度提升；2025年多数头部酒企也出现明显下滑。</p>
+<h4 id="section-16">市场定义矩阵</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>市场</th>
+<th>地理范围</th>
+<th>产品范围</th>
+<th>指标</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>规模以上白酒制造业</td>
+<td>中国</td>
+<td>白酒</td>
+<td>产量、销售收入、利润总额</td>
+<td>判断行业总量和周期</td>
+</tr>
+<tr>
+<td>高端白酒</td>
+<td>中国</td>
+<td>主流千元及以上产品</td>
+<td>收入、份额、批价</td>
+<td>判断茅台核心竞争</td>
+</tr>
+<tr>
+<td>上市白酒公司</td>
+<td>中国资本市场</td>
+<td>各公司披露业务</td>
+<td>收入、利润、ROE</td>
+<td>比较经营质量</td>
+</tr>
+</tbody>
+</table></div>
+<p>茅台的核心比较对象是高端白酒，不应把全行业产量下降直接等同于茅台销量下降；但全行业调整会通过宴请需求、渠道库存和经销商现金流传导到公司。</p>
+<h3 id="section-17">§2.2 市场规模、增速与供需</h3>
+<h4 id="section-18">历史市场规模与逐年增速</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>中国规模以上白酒企业</th>
+<th style="text-align:right">2020</th>
+<th style="text-align:right">2021</th>
+<th style="text-align:right">2022</th>
+<th style="text-align:right">2023</th>
+<th style="text-align:right">2024</th>
+<th style="text-align:right">2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>销售收入（亿元）</td>
+<td style="text-align:right">5,836.39</td>
+<td style="text-align:right">6,033.48</td>
+<td style="text-align:right">6,626.45</td>
+<td style="text-align:right">7,563.00</td>
+<td style="text-align:right">7,963.84</td>
+<td style="text-align:right">未披露</td>
+</tr>
+<tr>
+<td>同比</td>
+<td style="text-align:right">4.61%</td>
+<td style="text-align:right">3.38%</td>
+<td style="text-align:right">9.83%</td>
+<td style="text-align:right">14.13%</td>
+<td style="text-align:right">5.30%</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td>产量（万千升）</td>
+<td style="text-align:right">740.73</td>
+<td style="text-align:right">715.63</td>
+<td style="text-align:right">671.24</td>
+<td style="text-align:right">449.20</td>
+<td style="text-align:right">414.50</td>
+<td style="text-align:right">354.90</td>
+</tr>
+</tbody>
+</table></div>
+<p>2020-2024年收入仍增长，产量却持续下降，行业主线是量缩价升和份额向头部集中。2025年产量继续降至354.9万千升，而主要上市酒企收入普遍承压，行业已经从“量缩价升”进一步进入价格和库存调整。</p>
+<h4 id="section-19">预测版本对照</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>数据版本</th>
+<th>预测对象</th>
+<th>预测窗口</th>
+<th>主要结论</th>
+<th>当前使用方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2024年11月研报引用行业数据</td>
+<td>高端白酒</td>
+<td>2021-2026</td>
+<td>收入由952亿元增至1,664亿元</td>
+<td>预测窗口已到期，只作历史预期，不作为当前估值依据</td>
+</tr>
+</tbody>
+</table></div>
+<p>缺乏更新后的同口径高端白酒预测，无法分析行业未来规模。公司估值改用实际产能、销量、价格和利润情景，不用旧预测填补。</p>
+<h4 id="section-20">集中度与竞争对手</h4>
+<p>2025年主要上市酒企表现如下：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>公司</th>
+<th style="text-align:right">收入（亿元）</th>
+<th style="text-align:right">收入同比</th>
+<th style="text-align:right">归母净利润（亿元）</th>
+<th style="text-align:right">净利润同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>贵州茅台</td>
+<td style="text-align:right">1,688.38</td>
+<td style="text-align:right">-1.21%</td>
+<td style="text-align:right">823.20</td>
+<td style="text-align:right">-4.53%</td>
+</tr>
+<tr>
+<td>五粮液</td>
+<td style="text-align:right">405.29</td>
+<td style="text-align:right">-54.55%</td>
+<td style="text-align:right">89.54</td>
+<td style="text-align:right">-71.89%</td>
+</tr>
+<tr>
+<td>山西汾酒</td>
+<td style="text-align:right">387.18</td>
+<td style="text-align:right">7.52%</td>
+<td style="text-align:right">122.46</td>
+<td style="text-align:right">0.03%</td>
+</tr>
+<tr>
+<td>泸州老窖</td>
+<td style="text-align:right">257.31</td>
+<td style="text-align:right">-17.52%</td>
+<td style="text-align:right">108.31</td>
+<td style="text-align:right">-19.61%</td>
+</tr>
+<tr>
+<td>洋河股份</td>
+<td style="text-align:right">192.11</td>
+<td style="text-align:right">-33.47%</td>
+<td style="text-align:right">22.06</td>
+<td style="text-align:right">-66.94%</td>
+</tr>
+</tbody>
+</table></div>
+<p>这不是市场份额表，但能看出周期中的经营差异：茅台收入和利润也下降，却远比五粮液、泸州老窖和洋河稳定；山西汾酒仍有收入增长，利润已基本停滞。</p>
+<h4 id="section-21">当期部分期间</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>贵州茅台2026年一季度</th>
+<th style="text-align:right">金额（亿元）</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营业收入</td>
+<td style="text-align:right">539.09</td>
+<td style="text-align:right">6.54%</td>
+</tr>
+<tr>
+<td>归母净利润</td>
+<td style="text-align:right">272.43</td>
+<td style="text-align:right">1.47%</td>
+</tr>
+<tr>
+<td>扣非归母净利润</td>
+<td style="text-align:right">272.40</td>
+<td style="text-align:right">1.45%</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td style="text-align:right">269.10</td>
+<td style="text-align:right">205.48%</td>
+</tr>
+<tr>
+<td>茅台酒主营收入</td>
+<td style="text-align:right">460.05</td>
+<td style="text-align:right">-</td>
+</tr>
+<tr>
+<td>系列酒主营收入</td>
+<td style="text-align:right">78.81</td>
+<td style="text-align:right">-</td>
+</tr>
+</tbody>
+</table></div>
+<p>收入恢复增长，但利润增速明显落后，说明费用、税费或产品渠道结构仍在消化收入增量。3月31日和7月18日的提价对全年影响需要后续季度验证。</p>
+<h4 id="section-22">口径断点与未解决缺口</h4>
+<p>2025年行业销售收入、利润总额以及同口径高端白酒份额缺乏数据，无法分析。2022至2023年产量序列也出现明显口径断点，因此只用于判断总量方向，不据此计算长期复合增速。</p>
+<h3 id="section-23">§2.3 竞争对手营收净利对比</h3>
+<p>茅台在本轮调整中的优势不是“完全不跌”，而是跌得更少、利润率更高、现金和分红能力更强。2025年茅台归母净利润823.20亿元，超过其余四家公司合计342.37亿元的两倍。</p>
+<p>山西汾酒仍能增长，说明行业并非所有价格带同步衰退；五粮液、洋河和泸州老窖的明显下滑，则说明渠道和需求调整已经穿透头部公司。茅台的高端品牌和供给约束提供了缓冲，但没有让公司脱离行业周期。</p>
+<h3 id="section-24">§2.4 行业与公司成长空间</h3>
+<p>公司的增长空间来自量、价和渠道，而不是行业总量：</p>
+<ul>
+<li><strong>量:</strong> 2025年茅台酒基酒产量5.85万吨，销量4.68万吨；新增产能需要至少五年才能转化为成品供给。</li>
+<li><strong>价:</strong> 2026年合同价累计由1,169元升至1,369元，短期增长更依赖提价兑现。</li>
+<li><strong>渠道:</strong> 直销占比已经达到50.1%，继续提升仍有空间，但边际不会像早期那么大。</li>
+<li><strong>系列酒:</strong> 可扩张价格带更宽，却也是竞争最激烈、2025年最先走弱的业务。</li>
+<li><strong>海外:</strong> 2025年收入48.50亿元，占比仅2.9%，长期有空间，短期不是主要利润来源。</li>
+</ul>
+<p>未来三至五年更合理的增长中枢是中个位数，而不是过去十多年常见的双位数。只有销量释放、提价顺利和渠道结构改善同时发生，利润才有机会重回10%左右增长。</p>
+<h3 id="section-25">§2.5 历史成长动力分解</h3>
+<p>2020-2024年收入由949.15亿元增至1,708.99亿元，主要由茅台酒量价增长、系列酒扩张和直销占比提升共同推动。2025年这三条线开始分化：茅台酒收入基本持平，系列酒下降，直销增长但批发收缩。</p>
+<p>过去的增长公式是“量增+提价+直营化”；当前更接近“低量增+提价+渠道再平衡”。增长模式没有失效，但每个变量的边际贡献都在下降。</p>
+<h3 id="section-26">§2.6 未来成长动力</h3>
+<p>未来净利润主要看：</p>
+<ol>
+<li>2026年两次提价能否在不伤害销量和渠道利润的情况下兑现。</li>
+<li>2025年新增茅台酒和系列酒产能何时转化为可售成品。</li>
+<li>直销渠道能否继续提高效率，而不是依靠渠道间搬量。</li>
+<li>系列酒能否结束量增价跌。</li>
+<li>分红和注销式回购能否稳定提高每股价值。</li>
+</ol>
+<h2 id="section-27">§3 护城河分析</h2>
+<h3 id="section-28">§3.1 定性：公司的护城河有哪些</h3>
+<p>茅台的护城河有四个核心来源：产区与生态、工艺与时间、品牌与价格锚、老酒与渠道体系。它们共同作用，让公司在行业下行时仍保持93.53%的茅台酒毛利率和接近50%的归母净利率。</p>
+<p>护城河并不意味着收入永远增长。它更准确的作用是：在需求收缩时，公司仍能保住大部分销量、价格和利润，而竞争对手承受更大的业绩波动。2025年的同行横截面正好提供了这一验证。</p>
+<h3 id="section-29">§3.2 护城河来源因素分析</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>作用机制</th>
+<th>主要证据</th>
+<th>边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心产区</td>
+<td>限制合格供给，保持风味稳定</td>
+<td>公司持续在核心产区扩建，未异地复制茅台酒</td>
+<td>地理叙事不能替代终端需求</td>
+</tr>
+<tr>
+<td>工艺与时间</td>
+<td>新进入者至少等待五年，质量稳定还需更久</td>
+<td>茅台酒从生产到出厂至少五年</td>
+<td>同类酱酒可以竞争系列酒</td>
+</tr>
+<tr>
+<td>老酒储备</td>
+<td>支持跨年份勾调和产品稳定</td>
+<td>半成品酒及基础酒31.52万吨</td>
+<td>储备占用资金，需求下行时周转更慢</td>
+</tr>
+<tr>
+<td>品牌与价格锚</td>
+<td>消费者愿意支付远高于成本的价格</td>
+<td>茅台酒毛利率93.53%，2026年两次提价</td>
+<td>公告价需要终端成交验证</td>
+</tr>
+<tr>
+<td>渠道控制</td>
+<td>直营提高价格控制和消费者触达</td>
+<td>直销收入占50.1%</td>
+<td>渠道切换可能只是利润重新分配</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-30">§3.3 产品差异化</h3>
+<p>飞天茅台同时具有饮用、宴请、礼赠和收藏属性，价格本身也是品牌信号。五粮液、国窖1573和其他酱香酒能满足饮用需求，却没有形成同等的高端价格锚。</p>
+<p>系列酒的差异化明显弱于茅台酒。2025年系列酒销量增长3.88%，收入下降9.76%，隐含每吨收入下降，说明这部分业务需要用价格或结构换销量。</p>
+<h3 id="section-31">§3.4 波特五力</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>力量</th>
+<th>强弱</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>现有竞争</td>
+<td>中</td>
+<td>高端带竞争者有限，系列酒价格带竞争激烈</td>
+</tr>
+<tr>
+<td>新进入者</td>
+<td>弱</td>
+<td>产区、五年周期、老酒和品牌共同提高门槛</td>
+</tr>
+<tr>
+<td>替代品</td>
+<td>中</td>
+<td>其他白酒、葡萄酒和低度酒可替代饮用场景</td>
+</tr>
+<tr>
+<td>买方议价</td>
+<td>弱至中</td>
+<td>客户分散、几乎零应收，但行业调整提高渠道话语权</td>
+</tr>
+<tr>
+<td>供应商议价</td>
+<td>弱</td>
+<td>公司采购规模大，预付少、应付多；包装和原料仍需质量控制</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-32">§3.5 ROE/ROIC分析</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">2020</th>
+<th style="text-align:right">2021</th>
+<th style="text-align:right">2022</th>
+<th style="text-align:right">2023</th>
+<th style="text-align:right">2024</th>
+<th style="text-align:right">2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加权ROE</td>
+<td style="text-align:right">31.41%</td>
+<td style="text-align:right">29.90%</td>
+<td style="text-align:right">30.26%</td>
+<td style="text-align:right">34.19%</td>
+<td style="text-align:right">36.02%</td>
+<td style="text-align:right">32.53%</td>
+</tr>
+<tr>
+<td>资产负债率</td>
+<td style="text-align:right">21.40%</td>
+<td style="text-align:right">22.81%</td>
+<td style="text-align:right">19.42%</td>
+<td style="text-align:right">17.98%</td>
+<td style="text-align:right">19.05%</td>
+<td style="text-align:right">16.42%</td>
+</tr>
+<tr>
+<td>传统有息负债率</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">0%</td>
+</tr>
+</tbody>
+</table></div>
+<p>高ROE不是靠债务杠杆，而是接近50%的净利率。2025年ROE回落主要来自利润下降和股东权益增加，但仍远高于多数消费品公司。</p>
+<h3 id="section-33">§3.6 ROE杜邦分析</h3>
+<p>2025年归母净利率48.75%，总资产周转率约0.56次，平均权益乘数约1.21，三者共同形成约33%的ROE。真正的核心是净利率，资产周转并不快，杠杆也很低。</p>
+<p>这意味着护城河一旦弱化，最早会反映在茅台酒毛利率、销售费用率和净利率，而不是负债率。</p>
+<h3 id="section-34">§3.7 毛利率分析</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">2020</th>
+<th style="text-align:right">2021</th>
+<th style="text-align:right">2022</th>
+<th style="text-align:right">2023</th>
+<th style="text-align:right">2024</th>
+<th style="text-align:right">2025</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>综合毛利率</td>
+<td style="text-align:right">91.41%</td>
+<td style="text-align:right">91.54%</td>
+<td style="text-align:right">91.87%</td>
+<td style="text-align:right">91.96%</td>
+<td style="text-align:right">91.93%</td>
+<td style="text-align:right">91.18%</td>
+</tr>
+<tr>
+<td>归母净利率</td>
+<td style="text-align:right">49.20%</td>
+<td style="text-align:right">49.40%</td>
+<td style="text-align:right">50.54%</td>
+<td style="text-align:right">50.60%</td>
+<td style="text-align:right">50.46%</td>
+<td style="text-align:right">48.75%</td>
+</tr>
+</tbody>
+</table></div>
+<p>六年毛利率极其稳定，2025年下降0.75个百分点仍不改变高盈利特征。需要关注的是系列酒毛利率下降3.76个百分点，以及销售费用增长对净利率的进一步挤压。</p>
+<h3 id="section-35">§3.8 护城河发展趋势与定论</h3>
+<p><strong>最终标签：宽，短期略有收窄。</strong></p>
+<p>核心茅台酒的价格、毛利率和销量仍稳，2026年又完成两次调价，说明品牌与定价权没有消失。收窄来自行业需求、批发渠道和系列酒，而不是核心产品被竞争者替代。</p>
+<p>若未来两年茅台酒毛利率跌破90%、销量连续下降，或提价后终端价格长期低于合同价，才说明护城河开始出现结构性变化。</p>
+<h3 id="section-36">§3.9 非护城河因素</h3>
+<p>国企背景、资金充足、短期提价、单季增长和排行榜名次都不是独立护城河。真正的护城河必须持续转化为高毛利、高ROE、低资本消耗和相对同行更稳定的利润。</p>
+<h3 id="section-37">§3.10 政府政策分析</h3>
+<p>政策是双刃剑。国资背景有利于核心产区保护和长期投资，但反腐、公务消费限制、消费税调整和地方国资治理也可能影响需求、利润和管理层稳定性。</p>
+<p>当前消费税仍按酒类销售收入20%加0.5元/500ml计征。若税率或征收环节变化，公司能否通过提价转嫁，将取决于当时的终端需求。</p>
+<h2 id="section-38">§4 管理质量与企业文化</h2>
+<h3 id="section-39">§4.pre 风险一票否决前置扫描</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>判定</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>财务造假或虚假陈述</td>
+<td>未发现</td>
+<td>2025年财报与内部控制均为标准无保留意见</td>
+</tr>
+<tr>
+<td>大股东资金占用</td>
+<td>未发现</td>
+<td>年报未披露非经营性占用</td>
+</tr>
+<tr>
+<td>关联利益输送</td>
+<td>未证实</td>
+<td>关联交易规模较大，但披露了定价原则</td>
+</tr>
+<tr>
+<td>高管重大合规风险</td>
+<td>预警</td>
+<td>原副总经理、财务总监、董事会秘书蒋焰被留置并免职</td>
+</tr>
+</tbody>
+</table></div>
+<p>蒋焰被留置是明确事实，但调查终局未披露，不能推断其行为性质或对公司的最终影响。当前不触发一票否决，治理评价保留意见。</p>
+<h3 id="section-40">§4.1 专注主业，眼光长远</h3>
+<p>公司长期围绕白酒主业投入，2025年酒类收入占比99.96%。产能项目、原料体系、储酒和勾调中心都服务于核心业务，没有大规模跨行业并购。</p>
+<p>“贮足陈酿、不卖新酒”意味着公司愿意牺牲短期出货换长期质量，这与五年生产周期和持续增加的半成品酒相互印证。</p>
+<h3 id="section-41">§4.2 企业家评估</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指引年度</th>
+<th style="text-align:right">收入目标</th>
+<th style="text-align:right">实际营业总收入增速</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td style="text-align:right">约10.5%</td>
+<td style="text-align:right">11.71%</td>
+<td>达成</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">约15%</td>
+<td style="text-align:right">16.53%</td>
+<td>达成</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">约15%</td>
+<td style="text-align:right">18.04%</td>
+<td>达成</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">约15%</td>
+<td style="text-align:right">15.66%</td>
+<td>达成</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">约9%</td>
+<td style="text-align:right">-1.21%</td>
+<td>未达</td>
+</tr>
+<tr>
+<td>2026</td>
+<td style="text-align:right">未给数字目标</td>
+<td style="text-align:right">待观察</td>
+<td>-</td>
+</tr>
+</tbody>
+</table></div>
+<p>管理层过去四年目标兑现较好，2025年首次出现10.21个百分点缺口。未达标与行业调整一致，但2026年取消数字目标后，外部投资者少了一个可检验的承诺。</p>
+<h3 id="section-42">§4.3 企业家特征清单</h3>
+<p>陈华于2025年11月出任董事长，此前长期在贵州能源系统任职；王莉继续代行总经理职责，具有茅台技术和生产背景。现任组合是外部治理负责人加内部技术负责人。</p>
+<p>需要观察三件事：陈华任期是否稳定、公司是否恢复量化经营目标、价格和渠道改革能否兼顾消费者与经销商利益。</p>
+<h3 id="section-43">§4.4 企业文化</h3>
+<p>“质量是生命之魂”和长期陈酿有经营数据支持，不只是口号。2025年系列酒产量增长但销量和收入承压，公司仍保持基酒留存，说明质量与储备优先级较高。</p>
+<p>文化的薄弱处在治理层。董事长更换和高管留置会影响组织连续性，国企治理也可能让专业经营目标让位于行政安排。</p>
+<h3 id="section-44">§4.5 内部治理结构</h3>
+<p>控股股东茅台集团持股54.40%，贵州省国有资本运营公司持股4.55%，实际控制人为贵州省国资委。股权稳定，但管理层持股和股权激励不足，经营者与股东的经济绑定较弱。</p>
+<p>年报治理自查仍有两个问题：控股股东尚未履行实施股权激励计划的承诺，高级管理人员存在在控股股东兼职的情形。</p>
+<h3 id="section-45">§4.6 以股东利益为导向</h3>
+<p>2025年现金分红650.33亿元，回购计入现金分红61.20亿元，合计711.53亿元，占归母净利润86.43%。回购用于注销，能够提高剩余股东每股权益，不是管理层激励。</p>
+<p>在增长放缓、账面现金充足的阶段，提高分红和注销式回购是合理的资本配置。未来应避免为维持表面增长而进行低回报多元化投资。</p>
+<h3 id="section-46">§4.7 股权结构</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>股东</th>
+<th style="text-align:right">2026年一季度末持股</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国贵州茅台酒厂（集团）有限责任公司</td>
+<td style="text-align:right">54.40%</td>
+</tr>
+<tr>
+<td>香港中央结算有限公司</td>
+<td style="text-align:right">4.69%</td>
+</tr>
+<tr>
+<td>贵州省国有资本运营有限责任公司</td>
+<td style="text-align:right">4.55%</td>
+</tr>
+<tr>
+<td>茅台集团技术开发有限公司</td>
+<td style="text-align:right">2.22%</td>
+</tr>
+</tbody>
+</table></div>
+<p>控股权稳定，省属国资合计控制力强。小股东最需要关注的是关联交易、管理层任免和集团资金安排，而不是控制权争夺。</p>
+<h3 id="section-47">§4.8 大股东与上市公司利益一致性检查</h3>
+<p>茅台集团的核心价值主要来自上市公司，长期利益总体一致；但商标由母公司持有，上市公司2025年支付商标使用权费24.81亿元，同时存在集团销售、物流、包装、旅游和财务公司往来。</p>
+<p>这些交易均有披露，部分价格参照独立第三方或非关联供应商。风险不在于“存在关联交易”，而在于规模扩大后是否仍保持同等定价和上市公司利益优先。</p>
+<h2 id="section-48">§5 风险分析</h2>
+<h3 id="section-49">§5.1 产品和业务风险</h3>
+<p>最大风险是核心产品需求弱于提价和供给扩张。系列酒已经出现量增、收入降、毛利率降；如果飞天茅台也出现相同组合，公司的增长和估值中枢都会下移。</p>
+<h3 id="section-50">§5.2 财务风险</h3>
+<p>存货增长快于收入并不等于坏账，但需要销量和价格最终兑现。集团财务公司还会显著扰动合并经营现金流，使单年净现比失真。判断现金质量时应同时看销售收现、合同负债和财务公司科目。</p>
+<h3 id="section-51">§5.3 管理层风险</h3>
+<p>高管留置、董事长更换、股权激励长期未履行和集团兼职共同降低治理确定性。若留置事项扩大到财务报告、关联交易或更多管理人员，需要重新评估管理层否决条件。</p>
+<h3 id="section-52">§5.4 造假风险</h3>
+<p>目前没有看到收入、利润和现金流同时异常的造假模式。扣非利润接近归母利润、应收极低、审计和内控均为标准无保留意见。</p>
+<p>剩余风险集中在关联交易、集团财务公司和高管留置。它们要求持续核查，但现有证据不足以得出财务造假结论。</p>
+<h3 id="section-53">§5.5 成长风险</h3>
+<p>未来增长可能长期低于历史。行业产量下降、年轻消费者偏好变化、商务宴请需求波动、渠道去库存和系列酒竞争都会压低增长中枢。即使护城河仍宽，估值也应从“高增长消费股”转向“低增长高回报现金牛”。</p>
+<hr />
+<h2 id="section-54">Part 2 - 定量分析</h2>
+<p>金额单位：亿元。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">收入</th>
+<th style="text-align:right">归母净利润</th>
+<th style="text-align:right">经营现金流</th>
+<th style="text-align:right">总资产</th>
+<th style="text-align:right">归母净资产</th>
+<th style="text-align:right">存货</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020</td>
+<td style="text-align:right">949.15</td>
+<td style="text-align:right">466.97</td>
+<td style="text-align:right">516.69</td>
+<td style="text-align:right">2,133.96</td>
+<td style="text-align:right">1,613.23</td>
+<td style="text-align:right">288.69</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">1,061.90</td>
+<td style="text-align:right">524.60</td>
+<td style="text-align:right">640.29</td>
+<td style="text-align:right">2,551.68</td>
+<td style="text-align:right">1,895.39</td>
+<td style="text-align:right">333.94</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">1,240.99</td>
+<td style="text-align:right">627.17</td>
+<td style="text-align:right">366.99</td>
+<td style="text-align:right">2,543.65</td>
+<td style="text-align:right">1,975.07</td>
+<td style="text-align:right">388.24</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">1,476.94</td>
+<td style="text-align:right">747.34</td>
+<td style="text-align:right">665.93</td>
+<td style="text-align:right">2,727.00</td>
+<td style="text-align:right">2,156.69</td>
+<td style="text-align:right">464.35</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">1,708.99</td>
+<td style="text-align:right">862.28</td>
+<td style="text-align:right">924.64</td>
+<td style="text-align:right">2,989.45</td>
+<td style="text-align:right">2,331.06</td>
+<td style="text-align:right">543.43</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">1,688.38</td>
+<td style="text-align:right">823.20</td>
+<td style="text-align:right">615.22</td>
+<td style="text-align:right">3,038.35</td>
+<td style="text-align:right">2,446.38</td>
+<td style="text-align:right">614.27</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">收入增速</th>
+<th style="text-align:right">毛利率</th>
+<th style="text-align:right">归母净利率</th>
+<th style="text-align:right">加权ROE</th>
+<th style="text-align:right">经营现金流/归母利润</th>
+<th style="text-align:right">资本开支/归母利润</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020</td>
+<td style="text-align:right">11.10%</td>
+<td style="text-align:right">91.41%</td>
+<td style="text-align:right">49.20%</td>
+<td style="text-align:right">31.41%</td>
+<td style="text-align:right">1.11</td>
+<td style="text-align:right">4.48%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">11.88%</td>
+<td style="text-align:right">91.54%</td>
+<td style="text-align:right">49.40%</td>
+<td style="text-align:right">29.90%</td>
+<td style="text-align:right">1.22</td>
+<td style="text-align:right">6.50%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">16.87%</td>
+<td style="text-align:right">91.87%</td>
+<td style="text-align:right">50.54%</td>
+<td style="text-align:right">30.26%</td>
+<td style="text-align:right">0.59</td>
+<td style="text-align:right">8.46%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">19.01%</td>
+<td style="text-align:right">91.96%</td>
+<td style="text-align:right">50.60%</td>
+<td style="text-align:right">34.19%</td>
+<td style="text-align:right">0.89</td>
+<td style="text-align:right">3.51%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">15.71%</td>
+<td style="text-align:right">91.93%</td>
+<td style="text-align:right">50.46%</td>
+<td style="text-align:right">36.02%</td>
+<td style="text-align:right">1.07</td>
+<td style="text-align:right">5.43%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">-1.21%</td>
+<td style="text-align:right">91.18%</td>
+<td style="text-align:right">48.75%</td>
+<td style="text-align:right">32.53%</td>
+<td style="text-align:right">0.75</td>
+<td style="text-align:right">3.80%</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-55">§Q1 盈利分析</h3>
+<p>六年平均ROE约32.4%，且无银行借款、应付债券等传统有息负债。盈利能力来自品牌和产品经济性，不是财务杠杆。</p>
+<h3 id="section-56">§Q2 盈利能力</h3>
+<p>六年毛利率稳定在91%-92%，归母净利率约49%-51%。2025年仍极高，但毛利率和净利率同时下降，需要观察是否连续。</p>
+<h3 id="section-57">§Q3 盈利质量</h3>
+<p>六年经营现金流约为归母净利润的92%，扣非利润几乎等于归母利润。财务公司造成年度波动，但主营销售收现正常。</p>
+<h3 id="section-58">§Q4 成长能力</h3>
+<p>2020-2025年收入和归母净利润复合增速分别约12.2%和12.0%，但2025年首次全面负增长。历史复合增速已经不能直接外推。</p>
+<h3 id="section-59">§Q5 资产增速</h3>
+<p>2025年总资产增长1.64%，归母净资产增长4.95%，存货增长13.04%。资产扩张放缓，存货仍在较快增加。</p>
+<h3 id="section-60">§Q6 运营能力</h3>
+<p>应收接近零；存货周转约1,419天，主要由酱香酒长期陈酿决定。现金周期长是工艺特征，系列酒产销错配则是经营风险。</p>
+<h3 id="section-61">§Q7 偿债能力</h3>
+<p>2025年资产负债率16.42%，流动比率5.09，无银行借款、应付债券等传统有息负债。偿债不是主要风险。</p>
+<h3 id="section-62">§Q8 现金流分析</h3>
+<p>2025年经营现金流615.22亿元，资本开支31.28亿元，低资本消耗没有改变。现金流的主要判断应剔除财务公司存款科目波动。</p>
+<h3 id="section-63">§Q9 资产负债表结构分析</h3>
+<p>资产以现金类资产、存货和生产资产为主，无商誉和大额应收。存货是未来收入储备，也是需求走弱时最需要跟踪的资产。</p>
+<h3 id="section-64">§Q10 简化利润表分析</h3>
+<p>2025年营业成本率8.82%，归母净利率48.75%，非经常性损益影响不足0.1%。利润主要来自主营业务。</p>
+<h3 id="section-65">§Q11 上下游分析</h3>
+<p>公司对上下游均有较强话语权：应收几乎为零、前五客户占比10.10%；前五供应商占采购38.12%，其中关联方占15.22%。</p>
+<h3 id="section-66">§Q12 定量分析总结</h3>
+<p>茅台仍具有高毛利、高ROE、低应收、低负债和低资本消耗的财务组合。2025年的变化不是财务安全恶化，而是增长和利润率开始承压；后续重点从“能否赚钱”转向“利润何时恢复增长”。</p>
+<hr />
+<h2 id="section-67">Part 3 - 未来</h2>
+<h3 id="section-68">§3.1 未来市场可能的变化</h3>
+<p>白酒总量继续下降，行业从普遍提价转向品牌分化和库存出清。高端酒仍可能扩大收入占比，但价格上涨速度会更依赖真实消费，而不是渠道囤货。</p>
+<h3 id="section-69">§3.2 未来公司可能的变化</h3>
+<p>公司会继续提高直营和市场化投放比例，丰富i茅台产品，并通过新产能和老酒储备增加长期供给。资本回报将更多依赖分红和注销式回购。</p>
+<h3 id="section-70">§3.3 未来净利润增长来源</h3>
+<p>净利润增长依次来自提价、茅台酒销量、直销占比和费用控制。系列酒短期更可能拖累而不是拉动利润。2026年两次提价是最明确的增量，但必须观察销量和终端价格。</p>
+<h3 id="section-71">§3.4 ROE提高的空间和来源</h3>
+<p>经营端ROE继续上升的空间有限。更现实的来源是提高分红、注销回购和控制低回报资产，使权益增长放慢；不应依靠增加杠杆。</p>
+<h3 id="section-72">§3.5 其他环境变化</h3>
+<p>消费税、反腐与公务消费政策、人口与代际偏好、低度酒和其他饮品替代都会影响长期需求。它们变化慢，却可能改变十年增长中枢。</p>
+<h3 id="section-73">§3.6 如果我是董事长</h3>
+<p>优先做三件事：控制渠道库存和价差，避免公告价脱离真实成交；把系列酒从追求规模改为追求单品盈利；继续高分红和注销式回购，不做与白酒主业无关的大额投资。</p>
+<hr />
+<h2 id="section-74">Part 4 - 买入阶段检查清单</h2>
+<h3 id="section-75">§4.1 市场估值分析</h3>
+<p>2026年7月31日，贵州茅台收盘价1,350.60元；同日中债10年期国债收益率为1.7141%。按2025年归母净利润和期末股本计算：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align:right">数值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>市值</td>
+<td style="text-align:right">约1.69万亿元</td>
+</tr>
+<tr>
+<td>静态PE</td>
+<td style="text-align:right">约20.6倍</td>
+</tr>
+<tr>
+<td>2025现金股息率</td>
+<td style="text-align:right">约3.84%</td>
+</tr>
+<tr>
+<td>含回购股东回报率</td>
+<td style="text-align:right">约4.21%</td>
+</tr>
+<tr>
+<td>估值PE硬上限</td>
+<td style="text-align:right">25倍</td>
+</tr>
+</tbody>
+</table></div>
+<p>当前估值不贵，但“便宜”需要利润恢复增长来确认。若利润长期零增长，20倍PE仍然不算低；若未来三年恢复5%-10%增长，当前价格具备合理回报基础。</p>
+<h3 id="section-76">§4.2 当前公司估值情况</h3>
+<p>当前PE约20.6倍，低于25倍上限；现金股息率约3.84%，高于10年期国债收益率约2.13个百分点。估值已经反映部分行业悲观预期，但尚未达到只靠股息就有很高安全边际的水平。</p>
+<p>市场最核心的分歧是：2025年是否只是周期低点，还是未来低增长常态的开始。</p>
+<h3 id="section-77">§4.3 三年后净利润及估值</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>2028情景</th>
+<th style="text-align:right">归母净利润</th>
+<th style="text-align:right">三年复合增速</th>
+<th style="text-align:right">PE</th>
+<th style="text-align:right">合理市值</th>
+<th style="text-align:right">每股价值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>悲观</td>
+<td style="text-align:right">823亿元</td>
+<td style="text-align:right">0%</td>
+<td style="text-align:right">15倍</td>
+<td style="text-align:right">1.23万亿元</td>
+<td style="text-align:right">约986元</td>
+</tr>
+<tr>
+<td>中性</td>
+<td style="text-align:right">950亿元</td>
+<td style="text-align:right">4.9%</td>
+<td style="text-align:right">20倍</td>
+<td style="text-align:right">1.90万亿元</td>
+<td style="text-align:right">约1,517元</td>
+</tr>
+<tr>
+<td>乐观</td>
+<td style="text-align:right">1,100亿元</td>
+<td style="text-align:right">10.1%</td>
+<td style="text-align:right">25倍</td>
+<td style="text-align:right">2.75万亿元</td>
+<td style="text-align:right">约2,196元</td>
+</tr>
+</tbody>
+</table></div>
+<p>中性情景假设提价兑现、销量温和增长、净利率保持约49%；悲观情景假设行业长期停滞；乐观情景需要量、价和渠道同时改善。25倍是上限，不因品牌优秀继续上调。</p>
+<p>以1,350.60元看，价格介于悲观和中性价值之间，更接近合理而非极度低估。股息能提高持有回报，但不能代替对利润增长的判断。</p>
+<h3 id="section-78">§4.4 公司基本面再分析</h3>
+<p>基本面强项没有变化：核心产品毛利率高、应收低、无传统有息负债、资本消耗少。新增正面是2026年收入恢复和两次提价；新增负面是利润增速偏低、蒋焰被留置以及2025年同行大幅下滑所反映的行业压力。</p>
+<h3 id="section-79">§4.5 负面清单 - 排雷风险</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查项</th>
+<th>状态</th>
+<th>严重度</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>非标准审计意见</td>
+<td>否</td>
+<td>无</td>
+<td>财报和内控均为标准无保留意见</td>
+</tr>
+<tr>
+<td>财务造假历史</td>
+<td>未发现</td>
+<td>无</td>
+<td>现有证据未见正式认定</td>
+</tr>
+<tr>
+<td>存贷双高</td>
+<td>否</td>
+<td>无</td>
+<td>现金高，但无银行借款、应付债券等传统有息负债</td>
+</tr>
+<tr>
+<td>应收和回款异常</td>
+<td>否</td>
+<td>无</td>
+<td>应收极低，销售收现率1.09</td>
+</tr>
+<tr>
+<td>存货增速超收入</td>
+<td>是</td>
+<td>中</td>
+<td>存货增长13.04%，收入下降1.21%</td>
+</tr>
+<tr>
+<td>商誉和无形资产膨胀</td>
+<td>否</td>
+<td>无</td>
+<td>无商誉，核心增长为内生</td>
+</tr>
+<tr>
+<td>固定资产或在建工程异常</td>
+<td>否</td>
+<td>无</td>
+<td>项目与产能、储酒和勾调相关</td>
+</tr>
+<tr>
+<td>资本开支过高</td>
+<td>否</td>
+<td>无</td>
+<td>占归母净利润3.8%</td>
+</tr>
+<tr>
+<td>客户集中</td>
+<td>否</td>
+<td>无</td>
+<td>前五客户占10.10%</td>
+</tr>
+<tr>
+<td>供应商集中</td>
+<td>观察</td>
+<td>低</td>
+<td>前五供应商占38.12%</td>
+</tr>
+<tr>
+<td>关联交易</td>
+<td>观察</td>
+<td>中</td>
+<td>交易规模较大，定价需持续核查</td>
+</tr>
+<tr>
+<td>管理层道德风险</td>
+<td>观察</td>
+<td>中</td>
+<td>蒋焰被留置，终局未披露</td>
+</tr>
+<tr>
+<td>经营现金流持续弱于利润</td>
+<td>否</td>
+<td>低</td>
+<td>单年受财务公司扰动，六年累计比值92%</td>
+</tr>
+<tr>
+<td>利润依赖一次性收益</td>
+<td>否</td>
+<td>无</td>
+<td>扣非利润约等于归母利润</td>
+</tr>
+<tr>
+<td>ROE跌破长期门槛</td>
+<td>否</td>
+<td>无</td>
+<td>2025年仍为32.53%</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>排雷结论:</strong> 1项明确中风险为存货增速；关联交易和高管留置列为持续观察。现有证据未显示系统性财务造假。</p>
+<p><strong>估值阻断:</strong> 否</p>
+<h3 id="section-80">§4.6 基准日价格与仓位</h3>
+<p>缺乏个人组合、风险承受能力和资金期限，无法给出仓位。公司层面看，1,350.60元接近中性价值下方，仍应为行业和治理风险保留安全边际。</p>
+<h3 id="section-81">§4.7 买入后加仓/持有预案</h3>
+<p>加仓前至少确认两项：连续两个季度归母净利润恢复增长；提价后销量和终端成交价没有明显恶化。若利润继续下降或渠道价格倒挂，不因股价下跌机械加仓。</p>
+<h3 id="section-82">§4.8 买入前最终检查</h3>
+<p>公司质量过关，护城河仍宽，财务没有高风险触发项。当前没有过关的是“增长恢复已经被证明”这一点。买入判断应建立在可接受低增长和治理不确定性的前提下，而不是期待回到过去15%-20%的增长。</p>
+<h3 id="section-83">§4.9 心理偏误核查</h3>
+<p>最容易出现的偏误是把“伟大公司”自动等同于“任何价格都便宜”，以及用历史高增速否认行业已经变化。反向偏误则是看到一年负增长就忽略核心产品的长期盈利能力。</p>
+<hr />
+<h2 id="section-84">Part 5 - 持有阶段检查清单</h2>
+<h3 id="section-85">§5.1 组合健康检查</h3>
+<p>缺乏组合数据，无法分析。</p>
+<h3 id="section-86">§5.2 持续关注经营状况</h3>
+<p>每季度跟踪茅台酒销量、系列酒吨价、直销占比、i茅台收入、合同负债、存货、销售收现率、终端成交价、渠道库存和经销商数量。治理层面跟踪蒋焰留置终局、董事长任期和关联交易。</p>
+<h3 id="section-87">§5.3 是否触发卖出标准</h3>
+<p>出现以下任两项，需要重估而不是机械持有：</p>
+<ul>
+<li>茅台酒销量连续两年下降。</li>
+<li>茅台酒毛利率跌破90%且不能恢复。</li>
+<li>提价后终端成交价长期低于合同价。</li>
+<li>ROE连续两年低于25%。</li>
+<li>关联利益输送、财务造假或重大治理违法被正式认定。</li>
+<li>资本配置转向大额低回报多元化投资。</li>
+</ul>
+<h3 id="section-88">§5.4 卖出动作心理偏误核查</h3>
+<p>不要因为短期股价下跌否定长期护城河，也不要因为品牌信仰忽略利润、库存和治理证据。卖出应由投资逻辑变化触发，而不是价格波动本身。</p>
+<h3 id="section-89">§5.5 是否触发新的买入标准</h3>
+<p>新的买入机会来自两类组合：价格进入悲观价值附近而核心指标未恶化；或利润恢复增长、治理风险下降，而估值仍低于20倍。两者都应重新计算，不沿用本报告情景。</p>
+<hr />
+<h2 id="section-90">证据索引</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>证据</th>
+<th>文档或数据</th>
+<th>日期</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C20-C25</td>
+<td>贵州茅台2020-2025年年度报告</td>
+<td>2021-2026</td>
+</tr>
+<tr>
+<td>Q26</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-25/1225187851.PDF">贵州茅台2026年第一季度报告</a></td>
+<td>2026-04-25</td>
+</tr>
+<tr>
+<td>E26-RETENTION</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-03-14/1225009431.PDF">关于高级管理人员被实施留置的公告</a></td>
+<td>2026-03-14</td>
+</tr>
+<tr>
+<td>E26-REMOVE</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-03-31/1225055453.PDF">第四届董事会2026年度第四次会议决议公告</a></td>
+<td>2026-03-31</td>
+</tr>
+<tr>
+<td>E26-PRICE-MAR</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-03-31/1225055491.PDF">重大事项公告</a></td>
+<td>2026-03-31</td>
+</tr>
+<tr>
+<td>E26-PRICE-JUL</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-07-18/1225431263.PDF">重大事项公告</a></td>
+<td>2026-07-18</td>
+</tr>
+<tr>
+<td>P25-WLY</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-30/1225273091.PDF">五粮液2025年年度报告</a></td>
+<td>2026-04-30</td>
+</tr>
+<tr>
+<td>P25-LZLJ</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-29/1225240660.PDF">泸州老窖2025年年度报告</a></td>
+<td>2026-04-29</td>
+</tr>
+<tr>
+<td>P25-YH</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-28/1225219764.PDF">洋河股份2025年年度报告</a></td>
+<td>2026-04-28</td>
+</tr>
+<tr>
+<td>P25-FJ</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-23/1225156714.PDF">山西汾酒2025年年度报告</a></td>
+<td>2026-04-23</td>
+</tr>
+<tr>
+<td>MKT-SSE</td>
+<td><a href="https://yunhq.sse.com.cn:32042/v1/sh1/dayk/600519?begin=-10&amp;end=-1&amp;period=day">上海证券交易所600519行情</a></td>
+<td>2026-07-31</td>
+</tr>
+<tr>
+<td>RF-CB</td>
+<td><a href="https://yield.chinabond.com.cn/cbweb-pbc-web/pbc/historyQuery?startDate=2026-07-31&amp;endDate=2026-07-31&amp;gjqx=0&amp;qxId=hzsylqx&amp;locale=cn_ZH">中债国债收益率曲线历史数据</a></td>
+<td>2026-07-31</td>
+</tr>
+</tbody>
+</table></div>
+</main>
+  </div>
+</body>
+</html>

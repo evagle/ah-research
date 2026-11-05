@@ -1,0 +1,58 @@
+{
+  "ticker": "600519.SH",
+  "as_of": "2026-04-17",
+  "target_year": 2025,
+  "requested_start_year": 2010,
+  "state": "annual-only-partial",
+  "official_listing_date": "2001-08-27",
+  "annual_manifest_coverage": [
+    2016,
+    2025
+  ],
+  "annual_manifest_path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/manifests/annual-reports-2026-04-17-23f3d3debda08d98ac84ea9d8cca4622c6d2aef86dfa59d24d071c7c70f5ca7d.json",
+  "evidence_receipts": {
+    "evidence-index": {
+      "artifact_id": "15a934d635a93a25233a433819185f3f9700401e204c0118af4d5a9d325eff51",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/citations/15a934d635a93a25233a433819185f3f9700401e204c0118af4d5a9d325eff51.json",
+      "sha256": "dba2bb18ab834e853a63a2124f16d539c8601a90d0a30228be7e3112ea585e45"
+    },
+    "bootstrap-research-ledger": {
+      "artifact_id": "ebf1e349bf4ec224a2e84fd28d2cc608c6dc7e90aa5bba10a9050380fbc74711",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/analyses/ebf1e349bf4ec224a2e84fd28d2cc608c6dc7e90aa5bba10a9050380fbc74711.json",
+      "sha256": "293e8d9d960f31869d2bc28127ecb4bfb1f97e8fe8ab38e427993c6b2806e7be"
+    },
+    "bootstrap-attempt-observations": {
+      "artifact_id": "c76edaced118f6e5c3d1fdf8fbab4d0adf93729d99de322d8598f36420b5ce00",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/analyses/c76edaced118f6e5c3d1fdf8fbab4d0adf93729d99de322d8598f36420b5ce00.json",
+      "sha256": "12a4bc902888e0908850bb39bc0dbbc37907cf6ec112ab45e512800748094986"
+    },
+    "listing-live": {
+      "artifact_id": "4124475baada9db6d7760f420cb6c72161cd3459eb5d62fdc46a09ae6fc9fadc",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/4124475baada9db6d7760f420cb6c72161cd3459eb5d62fdc46a09ae6fc9fadc.json",
+      "sha256": "d3351117c41109b6b763cfa8f35dad29737db8d48929fb9bad18d61dfc8e7ce2"
+    },
+    "historical-candidates": {
+      "artifact_id": "4dcfee0d658f8e5a92516378050778854cf735c3036e1759d4b1993d81820dac",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/evidence/4dcfee0d658f8e5a92516378050778854cf735c3036e1759d4b1993d81820dac.json",
+      "sha256": "d838ef03c336613f6bd5b8e42030fa51fadcbbd6581f4bc4d0241ea7a811a078"
+    },
+    "citations": {
+      "artifact_id": "a13bde99ded19f0d1d171ea9c1f8b5fd50e18e43e4b32f474ca7e5a10f123a61",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/600519.SH/citations/a13bde99ded19f0d1d171ea9c1f8b5fd50e18e43e4b32f474ca7e5a10f123a61.json",
+      "sha256": "c92b0b0ec37f9eb24e643d587f8e91ab638e5cc1399ff55ae31ecbb069ccd8f4"
+    }
+  },
+  "blocking_dependency": "Official native complete historical roster HTTP contract for event collector",
+  "annual_extension_issue": "FY2010 corrected full report and correction notice same date with non-adjacent IDs; strict downloader rejects selection",
+  "next_steps": [
+    "Implement or discover official historical roster contract and collect_event_evidence plan without hand-created responses",
+    "Publish validated 2010-2025 annual manifest recognizing the actual 2010 revised report",
+    "Bind event manifest and run resolver, then execute management/product/redflag Mode B and full quantitative checks"
+  ],
+  "claims_not_made": [
+    "No historical regulatory events",
+    "No management misconduct",
+    "Complete redflag screening",
+    "Completed value-profile run"
+  ]
+}

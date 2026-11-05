@@ -1,0 +1,839 @@
+{
+  "600519:event-bootstrap-official-historical-roster": {
+    "request": {
+      "schema_version": "1.0",
+      "claim_id": "600519:event-bootstrap-official-historical-roster",
+      "claim_type": "official-source-contract",
+      "subject": "贵州茅台 600519.SH",
+      "metric": "Reproducible official structured historical subject roster HTTP contract",
+      "geographies": [
+        "CN"
+      ],
+      "industries": [
+        "cross-industry"
+      ],
+      "population": "Issuer, historical executives, controller and auditors since listing",
+      "product_scope": "Official native structured response accepted by event collector; manual PDF reconstruction excluded",
+      "measurement_basis": "Complete legal names, role, issuer connection, tenure and total/page count in official HTTP response",
+      "period_start": "2001-08-27",
+      "period_end": "2026-04-17",
+      "frequency": "event-driven",
+      "continuity_required": true,
+      "required_latest_period": "2026-04-17",
+      "accepted_units": [
+        "HTTP contract"
+      ],
+      "definition_constraints": [
+        "Must support repeatable live revalidation",
+        "No fabricated canonical roster response",
+        "Static or manually stitched PDF names are not a native official roster"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "High",
+      "minimum_conclusion_evidence": "High",
+      "minimum_originality": "High",
+      "minimum_independence": "Low",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-04-17"
+    },
+    "planner_inventory_receipt": {
+      "schema_version": "1.0",
+      "claim_id": "600519:event-bootstrap-official-historical-roster",
+      "request_scope_fingerprint": "5f5ab35035f30759b40bd64d3d26f3fa45af195f5578a50b6245ec9f00429544",
+      "planner_inputs": {
+        "request_identity": {
+          "claim_id": "600519:event-bootstrap-official-historical-roster",
+          "request_scope_fingerprint": "5f5ab35035f30759b40bd64d3d26f3fa45af195f5578a50b6245ec9f00429544",
+          "request_content_sha256": "25c5e77c68a50c7c0415b23b4d63d25e0d02ffe0806576f9d1333759c4753859"
+        },
+        "source_function": "historical-subject-roster",
+        "maintained_profiles": [
+          {
+            "source_id": "100ec",
+            "content_sha256": "0b33f6c2ff6684f437acc381a6c4a04295718c338ac5fe6227e48c4b59b019a4"
+          },
+          {
+            "source_id": "199it",
+            "content_sha256": "c6efe008d558258d73e34a3fd0d1115b673b00b2e20f9c53eb4a7cd0d2813059"
+          },
+          {
+            "source_id": "199it-housing-tools",
+            "content_sha256": "6128dca921d2dca517a531793be2c534f401919fed6c9f2ad1ff953b2a2debb6"
+          },
+          {
+            "source_id": "360-security-reports",
+            "content_sha256": "f126914b6e91ff3c67abcc4c7ef38ce8abe853ba576ba2565156ded70575d4aa"
+          },
+          {
+            "source_id": "36kr",
+            "content_sha256": "915f87673243d42a4325650b6d202de16f660140a1b3a3922a1c53675123b3a3"
+          },
+          {
+            "source_id": "3gpp",
+            "content_sha256": "dbdfc39677229ca3657e9d91fbb6040e3779996054952df3a911914b011b9677"
+          },
+          {
+            "source_id": "aastocks",
+            "content_sha256": "35cf5b476c7e7c9c632412894d9b28b745bba0e4f6e982949cbe56b96be816f5"
+          },
+          {
+            "source_id": "afrc",
+            "content_sha256": "2637387ee56f59546e95254242db46f59c1b982b46be06773a33d7a1a0834eed"
+          },
+          {
+            "source_id": "aladdin-index",
+            "content_sha256": "b43c0a9d1f84da32509ac8b2b66291e76b515bb30976c2eb1648093a461adf3a"
+          },
+          {
+            "source_id": "aliresearch",
+            "content_sha256": "a272cacd782bd3a6584ce358ec08313513f2aebe9189fe98f7860530e6101116"
+          },
+          {
+            "source_id": "analysys",
+            "content_sha256": "79b794f52d3efecbf6671af3a95a88bc1f909433a3ead786d50a96a058df0383"
+          },
+          {
+            "source_id": "aon-china",
+            "content_sha256": "5a4abdcd4710bf2c2ffde47c85635f44ee8c8cc7e604011034ce280ede17606c"
+          },
+          {
+            "source_id": "bain-china",
+            "content_sha256": "dd260e6d71d4f33980122d5bffb70062108641d29f01d67d97ef4f38393a488e"
+          },
+          {
+            "source_id": "bcg-china",
+            "content_sha256": "9498fb82b48be7b3e315d0346f2a5128c4a7c4955c7f79f4d72d4e745f8002aa"
+          },
+          {
+            "source_id": "beijing-government",
+            "content_sha256": "a9a892b4b6a804620b8659c5f720a1ba46ad6e1a5ef76a6d578220b8ebaea07c"
+          },
+          {
+            "source_id": "beijing-statistics",
+            "content_sha256": "e1a6e9ba181b9d9641b433f47caf7f3c1a34900175b28812dbc784520cd037e3"
+          },
+          {
+            "source_id": "business-group-health",
+            "content_sha256": "3302c367eea31c2c03c2dfe377bb017aeb19c1826feb44208a08807af6915671"
+          },
+          {
+            "source_id": "caac",
+            "content_sha256": "c12884b5127c1d00854f001f6e3cfef1856cad531534ec87a1b798644721926f"
+          },
+          {
+            "source_id": "caasdata",
+            "content_sha256": "be30bf0e0479465b8cda9a7e5dc58707248bddf6f2c6797201491b6b14f648b5"
+          },
+          {
+            "source_id": "cac",
+            "content_sha256": "643f0d08da530b7ef0c8416636756e236a8349445225ae92dad39e1f71e8f324"
+          },
+          {
+            "source_id": "cadas",
+            "content_sha256": "c1cddbb37e5445cdea38d0819b9277ede69f5c9521e6df336367b84bbdfd2bae"
+          },
+          {
+            "source_id": "caict",
+            "content_sha256": "00364ecbf25b6e53c5cf341aa713c89334a3c783694d63c5cd1cb5b5c0b26266"
+          },
+          {
+            "source_id": "china-money",
+            "content_sha256": "b88208d00d5d3e6263dcefa2e1ecd4b04753aca29bf3bcc51315cb1ba084a787"
+          },
+          {
+            "source_id": "china-venture",
+            "content_sha256": "21b731428be877507746f6698b748d26f10560604e721b6097a1bd6668324e0b"
+          },
+          {
+            "source_id": "cicc-research",
+            "content_sha256": "3cc52a0139cc021961b2af3e17def86df319e10350184598d2571e4286614127"
+          },
+          {
+            "source_id": "cninfo",
+            "content_sha256": "d8256934e7a4ce133e7637f19c67821aa88cfd1d22a45e39aded688586278ff3"
+          },
+          {
+            "source_id": "cnnic",
+            "content_sha256": "6008fe4ec363af49cfb337e98f1e97c68272cb823aae73e81eb23d4e5bc184f2"
+          },
+          {
+            "source_id": "companies-registry-hk",
+            "content_sha256": "1a9d5b6591fa11b35b6223ebe0cabb668154126a2daa3554819cf080e3d9f257"
+          },
+          {
+            "source_id": "csrc",
+            "content_sha256": "502e3193d280cb3f4f733bf09b426f86eec8ff84d89eaa9bfce52eb6b9e09eb1"
+          },
+          {
+            "source_id": "data-gov-hk",
+            "content_sha256": "eacd48bc01fcd3d46b8a41029e4dd3db1b7fbd40a281f5f4f833bd1100c4a387"
+          },
+          {
+            "source_id": "datayes-robo-research",
+            "content_sha256": "f6268ad013d810212a337ccc4f9b8b3e2b0b5966e1fdbcf487239d7df1c05d0d"
+          },
+          {
+            "source_id": "deloitte-china",
+            "content_sha256": "69a0bae144b3cc6bbbba39dd60ab9b4c198c2c4e8450e0a1999a2ba0312074ca"
+          },
+          {
+            "source_id": "dotour",
+            "content_sha256": "00c4d3ce55dbb895fbf323df3ddf7a0afee7d3dd284637284dfc652e6ce6fe9a"
+          },
+          {
+            "source_id": "eastmoney-announcement-index",
+            "content_sha256": "db7098ba0b49553965165f1ddaf7292a8bebec72d2ccc991c87140e274c33307"
+          },
+          {
+            "source_id": "eastmoney-pdf-delivery",
+            "content_sha256": "4fba5fe04ad598fa00be56d3b0cfbed02cc3db80b5dca6c814928f30ef598c6d"
+          },
+          {
+            "source_id": "eastmoney-quotes-f10",
+            "content_sha256": "7d81718b30d78e15fca9d01899deb9f6f32881626dff285311791c032a62c0e5"
+          },
+          {
+            "source_id": "eastmoney-research",
+            "content_sha256": "3b781b7daa8791df3065b40eaa515bdb2e86d52cd27dd729f161b12a57a00788"
+          },
+          {
+            "source_id": "eastmoney-securities",
+            "content_sha256": "cced6e5251d7829ddb967206fff663cb0d97370e35af5d63e0561069d57b2ea4"
+          },
+          {
+            "source_id": "endata",
+            "content_sha256": "ba8c61d246c701ad5ecf4a37add50fd44730ecb6a64ca02dd137ab969678b727"
+          },
+          {
+            "source_id": "etsi",
+            "content_sha256": "26b7c737156a1ba533cb79c92e8e4fef62be7403a27bf3c83be7f75f55c0212f"
+          },
+          {
+            "source_id": "eurostat",
+            "content_sha256": "29d670da96b82ded8e76315dccd45c7dc94adb52960c1e82701a7c112bfb8bf0"
+          },
+          {
+            "source_id": "ey-china",
+            "content_sha256": "f754adc21e91b2e5500fe0584d272f3fc53acacd924a9f29f38b678ae2d50438"
+          },
+          {
+            "source_id": "flurry",
+            "content_sha256": "6f9b6755b0306d2bebfe4dfeb6a49ad416bb860f35c06c77d858d3e2c67c120a"
+          },
+          {
+            "source_id": "frost-sullivan",
+            "content_sha256": "1803650a3288d4662d324fc6c1b8cdc49005853ad59b71a44128e1a5e738cd62"
+          },
+          {
+            "source_id": "gallagher",
+            "content_sha256": "c201727ada260ba06a6ba97a86bd884f5d9ea4657ad9949c88e60349727c7cfe"
+          },
+          {
+            "source_id": "gsma-mobile-economy",
+            "content_sha256": "64617c61acd873579eed51b3a7b90e8289b35875560f14505fac29511e1779ab"
+          },
+          {
+            "source_id": "guangdong-government",
+            "content_sha256": "f5eef2e925ac4964abc13bfe23f5205152cf9b9467d6c805064645e738069030"
+          },
+          {
+            "source_id": "guangdong-statistics",
+            "content_sha256": "7ebd75610f2bdce8a6c218f0cc9b2cf8b667e4157598850c78e94cdc8cb78e90"
+          },
+          {
+            "source_id": "hang-seng-indexes",
+            "content_sha256": "5eb5afc2ae21fd6bab95b2f26cf2538d89da42b630a8184a7b33ba7f4008592f"
+          },
+          {
+            "source_id": "hibor-research",
+            "content_sha256": "d74b2b4729d0ba366ae5b1766b652201ca09c2c2f3cf3672aa198fccdddfdba1"
+          },
+          {
+            "source_id": "hk-icac",
+            "content_sha256": "a5a314ce559675d2ba242c7f55c7d5edec07a441f4db6da898537467fe299f83"
+          },
+          {
+            "source_id": "hk-insurance-authority",
+            "content_sha256": "830961170e38715fe23d3185e55a15e678ee5cf8393428e3c6bdf1cbd8393dca"
+          },
+          {
+            "source_id": "hk-judiciary",
+            "content_sha256": "c445aeec6010806620c9b30ee93c0f199e9bed98835e764dad001500b65acfab"
+          },
+          {
+            "source_id": "hk-police",
+            "content_sha256": "41a1bd5aabe77394d5e4f688d203ad346a1c5cd845e801b2718c10bd931512dd"
+          },
+          {
+            "source_id": "hkex-ccass",
+            "content_sha256": "c0050f788111417d330503cbe18a56328f01ea60ab25ab2c9b2aea3b54f67b3d"
+          },
+          {
+            "source_id": "hkex-di",
+            "content_sha256": "2ab54d330b2546cb36382f9ed253d353011f00a22c8e4760a3298212cbfbed2a"
+          },
+          {
+            "source_id": "hkex-listing-applicants",
+            "content_sha256": "04eec13f3edb55567dc56451c07ec7faa754d5de2c82df7a46a3bca980daa52c"
+          },
+          {
+            "source_id": "hkex-market-data",
+            "content_sha256": "b2e7032d1339bda43a763c0c6ff458af1c798e417790c556ddde1cfc4cfc9649"
+          },
+          {
+            "source_id": "hkexnews",
+            "content_sha256": "57fa0762e38edb27b5a32e7b6786af201baf59e1c795ee831282a3a6367dd0ec"
+          },
+          {
+            "source_id": "hkma",
+            "content_sha256": "4d262c3a81416cb6b5ad3c4ab3899f94bd97f4786ad8a48eafb3438cf05a6440"
+          },
+          {
+            "source_id": "hksar-budget",
+            "content_sha256": "eb02490c10b9882b26ff2d0b4a2dc4a7fa4881e98b9ec7ce4a87ce4af4530d92"
+          },
+          {
+            "source_id": "hksar-policy-address",
+            "content_sha256": "b09a7abe6a93b8887cedc3c076c6c34058fbedb963b78b01e99c585a11f4d5ac"
+          },
+          {
+            "source_id": "hksar-press-releases",
+            "content_sha256": "d9d51d4984b95b25d6b9cc0509b295d7d1c55bfb50d58cca304ad07e3933b136"
+          },
+          {
+            "source_id": "hktdc-research",
+            "content_sha256": "112f380ed912f897d193e49fb385620622923f5ab6dc342bc1b41ab0f1d78fa6"
+          },
+          {
+            "source_id": "hong-kong-consumer-council",
+            "content_sha256": "468dd72ddb368a88da5f29f01a52ccaabc643f7cd78eb5337aebeb781e691a39"
+          },
+          {
+            "source_id": "hong-kong-e-gazette",
+            "content_sha256": "e471a956ae5916728265d21ea8525ac55f8333adbd81732ae65fd2a3664d7d92"
+          },
+          {
+            "source_id": "hong-kong-e-legislation",
+            "content_sha256": "e0263e2b42b00900d8d5e0adc41b1206dbb984850f631aaeed8836ea1143c8dc"
+          },
+          {
+            "source_id": "hong-kong-statistics",
+            "content_sha256": "285c02e8948575b0250680d17be8facdc93664e005fda6608b5c3a1626e77fa3"
+          },
+          {
+            "source_id": "idc",
+            "content_sha256": "35b99e4da248c76f8c75a3f9b15d3b104545c653a85621b6c0868ce8327daa30"
+          },
+          {
+            "source_id": "iimedia",
+            "content_sha256": "a6c5f6e4c16886b29e1ef76872fdb66a05dcd1a9c45ca5336a47f504e5b78063"
+          },
+          {
+            "source_id": "imf-data",
+            "content_sha256": "73953b746182cba8e2d2b7972456d84e83cd7303df119a622243bb4e644e6af8"
+          },
+          {
+            "source_id": "iresearch",
+            "content_sha256": "53e74d7ff105108de31b1862d9f8e88f2dcc458dbd5532f6cabf042eb7120efe"
+          },
+          {
+            "source_id": "itu-statistics",
+            "content_sha256": "3a5568c2b8f355d0c0e0f9a6c47b63ba2d60e79847f589ce6a98511df46ff07c"
+          },
+          {
+            "source_id": "jpmorgan",
+            "content_sha256": "8d9d93cda8b03a0a02456798a68b2f7916608ad98ca2dfe6f0744d84be02bc6a"
+          },
+          {
+            "source_id": "kpmg-china",
+            "content_sha256": "58f788c5bdbace4e0f9fb0483042bf14197a7329e4c492e417df905b0e7ec842"
+          },
+          {
+            "source_id": "mckinsey-china",
+            "content_sha256": "31ccac5b8c05be91767264f7772bf25332df56836a63d83bdcf358418df8cd80"
+          },
+          {
+            "source_id": "mercer-china",
+            "content_sha256": "66d4520c663ce13485ae4d71f96beefb6dc82aba441260366f20a9f4405f55f5"
+          },
+          {
+            "source_id": "miit-data",
+            "content_sha256": "c7c14449388dbfae7c7259e6def3d4e7229e05a4c8bc44d5e7aadbce1b955f39"
+          },
+          {
+            "source_id": "ministry-culture-tourism",
+            "content_sha256": "291b3d4734d6a93982b67b2169ed4123bef8436be5d2830af76452230c702817"
+          },
+          {
+            "source_id": "ministry-of-education",
+            "content_sha256": "5e3bd26777997ef648cda7da7e89f485230f3289b9cc11d6fc221ed083680e51"
+          },
+          {
+            "source_id": "ministry-of-finance",
+            "content_sha256": "ecb0a02ac0422965474700c5e3a6f8eee7009f0248df3e0be2bc86f999e43747"
+          },
+          {
+            "source_id": "mofcom",
+            "content_sha256": "c87ab195dbf9d60534b285925e3a7f64904565f6a6ed0baf19d7734b5a6f75ae"
+          },
+          {
+            "source_id": "national-bureau-statistics",
+            "content_sha256": "686609490cd307d7d0e3f9ab41c26238ac9e6ec93f364e0c44624540dfb01c52"
+          },
+          {
+            "source_id": "national-film-administration",
+            "content_sha256": "16c105943df202e52ac2516eaadef6137a82cdaa87887274bcd77c0bede2017f"
+          },
+          {
+            "source_id": "newrank",
+            "content_sha256": "6de9ab2ef5bc6cd2fd1c46880ba2df879462188e8564a3846402887d7a7d8dc9"
+          },
+          {
+            "source_id": "nfra",
+            "content_sha256": "a8124ae2a0766f1d45897ca570c57d24cefb025b343d5dcc93cc5e0257cd3982"
+          },
+          {
+            "source_id": "nrta",
+            "content_sha256": "5d58879ea44fabf99e80faf9dd62576ed63135d9c3e28a18851a2561c0bb4b34"
+          },
+          {
+            "source_id": "pbc",
+            "content_sha256": "771d333d000c1344485e190affb6b36da1ff0181af86ee536a73f2a254bab50f"
+          },
+          {
+            "source_id": "pew-research",
+            "content_sha256": "425e33d632c82e16b8975346b521e7a4e3da4df7a0e449c59bda4bf6790eca85"
+          },
+          {
+            "source_id": "pop-mart",
+            "content_sha256": "bf744e6c7acb2022cad18fa45a57d5246cb18454ad2735a4bddb0c6c70a67694"
+          },
+          {
+            "source_id": "pwc-china",
+            "content_sha256": "4868120b923b23d1277ce3ad7d3a6bbf0a5f6ee650d79adeb76d671a40fdc10b"
+          },
+          {
+            "source_id": "pwc-us-library",
+            "content_sha256": "5b83fb45ef0129f4cf5c52aa9ec0b4a0614d3040065e90c2d781c86d53eadac4"
+          },
+          {
+            "source_id": "qianzhan",
+            "content_sha256": "a11659cad43c2e56859b25fdb55532077facafb66b2e2b869502125a83837ef0"
+          },
+          {
+            "source_id": "questmobile",
+            "content_sha256": "753bc38746b087de8dd9c7bd48913363b5b8c04dd5ce1aefd4e7d7d4cee4f451"
+          },
+          {
+            "source_id": "roland-berger",
+            "content_sha256": "eb6a42f744c52ef4a42d128e52148a64ab26168def93dfb562075356564f8c81"
+          },
+          {
+            "source_id": "sec-edgar",
+            "content_sha256": "a3e88190fbeaeaa68180313c1e92c899ed35bee0634f3e4418dbfa041aade41f"
+          },
+          {
+            "source_id": "sfc",
+            "content_sha256": "f396219eb7c1029cb359b1d861121f05d8544a282064fb0e563d7bf61b0d4d2e"
+          },
+          {
+            "source_id": "shanghai-government",
+            "content_sha256": "e8dc106e27e628d75a66d707189606cf68496857e0253f3ec86be97bbec3b220"
+          },
+          {
+            "source_id": "shanghai-statistics",
+            "content_sha256": "0817baa31e54a4ee7e87907cd330b2a6a4baeed3b5319c0382afd3d7bea6f80b"
+          },
+          {
+            "source_id": "sina-finance",
+            "content_sha256": "d19e8485de07164770d7221098fc3120d9e0751f11e4c782918bf9cc8f009f18"
+          },
+          {
+            "source_id": "sse",
+            "content_sha256": "c9bd0f46a31292174ff543cffb085e17522c1adedae85af24e2a41e4247aa468"
+          },
+          {
+            "source_id": "state-council",
+            "content_sha256": "ea440cd48748be77c54ce2b1e6453cffe8a64b4aaf1c2bae924e211b305f502c"
+          },
+          {
+            "source_id": "state-post-bureau",
+            "content_sha256": "0d183d9f527b59ff2fa0164ad7d9c3e26773ba6046c9a5a6c1665aab3fa0388e"
+          },
+          {
+            "source_id": "szse",
+            "content_sha256": "333e0b34b740b59b011f08747ae7f9757b385f12c00b86869c1eabebfb6dae6f"
+          },
+          {
+            "source_id": "tencent-big-data",
+            "content_sha256": "2dd5e4ba8bd2e443f576dfcadc2e55084e4ef1fc5befd3628bf3fa84fa9c0339"
+          },
+          {
+            "source_id": "tencent-research",
+            "content_sha256": "4a4562f671adb860b32067891967422dc3b958b49dfdd7eea0966462d2b004f1"
+          },
+          {
+            "source_id": "toobigdata",
+            "content_sha256": "53e23ee513bbc48082fb7f6cfc92f38605b32e8ebdaad53ff588eb3ad1c55c8c"
+          },
+          {
+            "source_id": "un-comtrade",
+            "content_sha256": "88cf7bd7606c1825f72562c5b9a3e97ff7c4c0dab52ba6ccce3426d0fbee3802"
+          },
+          {
+            "source_id": "un-sdg-data",
+            "content_sha256": "99031b139d38ce47e922b1e981390233fc11835e6af0a6666ca1a2d2d3e225f5"
+          },
+          {
+            "source_id": "undata",
+            "content_sha256": "007df38483f03dc57b6a032688bee8c5e7319dd0e40a02606dd831be3f716ab5"
+          },
+          {
+            "source_id": "unsd-demographic-social",
+            "content_sha256": "d5749904b6ecc5649a2fda8c837bdb9b5798abad4a602a826c922050e0b86ccd"
+          },
+          {
+            "source_id": "us-bea",
+            "content_sha256": "0999f4eb85542dad93452f1b82ae0c608436513a78545b5fbd10885bfd70f01a"
+          },
+          {
+            "source_id": "us-census",
+            "content_sha256": "c1777765e0b109e564299ab9822ca1fda2baf49b8906fafa09f17662dc6ba117"
+          },
+          {
+            "source_id": "us-commerce",
+            "content_sha256": "2e36a15bdbbe8e92f4943520b0ca9714b8d0e7c08b9e1d6bca5455014e3fea07"
+          },
+          {
+            "source_id": "wef-china",
+            "content_sha256": "71beffff948b78820747d9e99a550f40a3726601e1607b9626b20c6216558311"
+          },
+          {
+            "source_id": "who-gho",
+            "content_sha256": "d709c4f68fb46818b1e0fd31c9d32292d75753fde91b379c0cbb99871ccf7fec"
+          },
+          {
+            "source_id": "world-bank-data",
+            "content_sha256": "b22499211a9dd0ff162b4511217707a80bc48bdd64b0fcba9ac23c0536a1c554"
+          },
+          {
+            "source_id": "worldpanel",
+            "content_sha256": "df2f1f1516849aab6a4992562de3cf409cd61ba74eebda1794531650f9d4404a"
+          },
+          {
+            "source_id": "wto-stats",
+            "content_sha256": "12907ac9a5f4d8cd4b7e0d034a4c8e934ef44f60c92025273901589e774e424d"
+          },
+          {
+            "source_id": "wtw",
+            "content_sha256": "8d1293fd1a5ac9863f2adc7f02f37f8af3e42e1e58bfe26815f1b7a6ff294af5"
+          },
+          {
+            "source_id": "xueqiu",
+            "content_sha256": "64d6d9c4f35e7b4fe87139ea78fae9bb63aa9045cf940c2ec0297558accf6caa"
+          }
+        ],
+        "relation_records": [],
+        "bound_routes": [
+          {
+            "route_id": "bound-official-annual-catalog-and-biographies",
+            "subject_relation": "issuer",
+            "document_type": "official-filings",
+            "route_binding_sha256": "6447ad267e7741ce9ab19d3be1b7ddab8599848ee75f7f872d17ebf47376bbfa"
+          },
+          {
+            "route_id": "bound-sse-company-response",
+            "subject_relation": "official-exchange",
+            "document_type": "native-company-profile",
+            "route_binding_sha256": "03625ab81765ef443c7b4e2db2583294322b0835dd4aad8e5fb34e781b9450d0"
+          }
+        ],
+        "as_of": "2026-04-17",
+        "effective_planning_time": "2026-11-04T15:24:41.473210+00:00",
+        "vocabulary_identity": {
+          "content_sha256": "185310e999802b2376bd39453abed44fd8351db16a9d65bee715c11d1bef9814"
+        },
+        "reachability_identity": {
+          "content_sha256": "13d04868e2ebd87eda88ed200df696cd27f2dc8903cbb1452fef6cbdf03f1a46"
+        },
+        "route_inventory_sha256": "535ae869c6b79a7288f97fb1a4f2ac3c5b363a40e647f843d07450c5dc95ec6b"
+      },
+      "planner_input_fingerprint": "cc4a0604af5c76b3acc3236b534a6efc001f893aff56bd3c3d2efe2e85a05eca",
+      "route_inventory": [
+        {
+          "route_id": "bound-official-annual-catalog-and-biographies",
+          "route_layer": 0,
+          "subject_relation": "issuer",
+          "document_type": "official-filings"
+        },
+        {
+          "route_id": "bound-sse-company-response",
+          "route_layer": 0,
+          "subject_relation": "official-exchange",
+          "document_type": "native-company-profile"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "content_sha256": "2d656bbfdf64ba9b16d4c470001bcda4706406dbc05e3efe0ecd9a077b7b6832"
+    },
+    "ledger": {
+      "schema_version": "1.0",
+      "claim_id": "600519:event-bootstrap-official-historical-roster",
+      "request_scope_fingerprint": "5f5ab35035f30759b40bd64d3d26f3fa45af195f5578a50b6245ec9f00429544",
+      "absence_claim": false,
+      "status": "blocked",
+      "applicable_routes": [
+        {
+          "route_id": "bound-official-annual-catalog-and-biographies",
+          "route_layer": 0,
+          "subject_relation": "issuer",
+          "document_type": "official-filings"
+        },
+        {
+          "route_id": "bound-sse-company-response",
+          "route_layer": 0,
+          "subject_relation": "official-exchange",
+          "document_type": "native-company-profile"
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus"
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application"
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview"
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix"
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report"
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive"
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic"
+        }
+      ],
+      "attempts": [
+        {
+          "route_id": "bound-official-annual-catalog-and-biographies",
+          "route_layer": 0,
+          "subject_relation": "issuer",
+          "document_type": "official-filings",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; official-filings",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:d838ef03c336613f6bd5b8e42030fa51fadcbbd6581f4bc4d0241ea7a811a078",
+          "lineage_id": "official-roster-contract-discovery:bound-official-annual-catalog-and-biographies",
+          "terminal_reason": "rejected",
+          "acceptance_failures": [
+            "Sixteen official annual filings and original catalog support individual biographies, but cannot supply an official native historical roster response; hand-created response is forbidden."
+          ]
+        },
+        {
+          "route_id": "bound-sse-company-response",
+          "route_layer": 0,
+          "subject_relation": "official-exchange",
+          "document_type": "native-company-profile",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; native-company-profile",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:d3351117c41109b6b763cfa8f35dad29737db8d48929fb9bad18d61dfc8e7ce2",
+          "lineage_id": "official-roster-contract-discovery:bound-sse-company-response",
+          "terminal_reason": "technical-failure",
+          "acceptance_failures": [
+            "Discovered real SSE request via isolated browser and independently repeated HTTP GET. Response has listing date 20010827 and current legal representative; no historical role tenures, subject roster total or auditor history. No response adapter meeting collector contract can be established."
+          ]
+        },
+        {
+          "route_id": "layer-4-prospectus",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "prospectus",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; prospectus",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-prospectus",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "prospectus cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-4-listing-application",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "listing-application",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; listing-application",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-listing-application",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "listing-application cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-4-industry-overview",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "industry-overview",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; industry-overview",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-industry-overview",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "industry-overview cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-4-methodology-appendix",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "methodology-appendix",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; methodology-appendix",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-methodology-appendix",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "methodology-appendix cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-4-association-report",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "association-report",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; association-report",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-association-report",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "association-report cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-4-archive",
+          "route_layer": 4,
+          "subject_relation": "document-type-expansion",
+          "document_type": "archive",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; archive",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:52e50977424fab39e1ef26cd14f3b8e8f6b2ed0f326d6b031740796ce15a4c28",
+          "lineage_id": "official-roster-contract-discovery:layer-4-archive",
+          "terminal_reason": "not-applicable",
+          "acceptance_failures": [
+            "archive cannot satisfy this deliberately native structured official HTTP roster-contract request; it is not a substitute for official historical tenure response. This does not declare the financial or governance facts absent."
+          ]
+        },
+        {
+          "route_id": "layer-5-broad-dynamic",
+          "route_layer": 5,
+          "subject_relation": "broad-dynamic",
+          "document_type": "broad-dynamic",
+          "query_variant": "贵州茅台 上交所 历史 董事 任期 接口; official native roster contract; broad-dynamic",
+          "started_at": "2026-11-04T15:24:41.473210+00:00",
+          "completed_at": "2026-11-04T15:24:41.473210+00:00",
+          "artifact_identity": "sha256:15259fc79487b40f63821b33577fed32f0c490c885cc87d191ed407248e75d0a",
+          "lineage_id": "official-roster-contract-discovery:layer-5-broad-dynamic",
+          "terminal_reason": "access-unavailable",
+          "acceptance_failures": [
+            "Baidu query returned 百度安全验证; Bing returned unrelated Google Translate results for the explicit Chinese roster/API query. Neither supplies a verifiable official native roster contract. No negative event conclusion is drawn."
+          ]
+        }
+      ],
+      "acceptance_failures": [
+        "Official native historical subject roster response contract unavailable; complete event-manifest binding cannot be established"
+      ],
+      "accepted_evidence": null,
+      "conflict_evidence": null,
+      "gate": {
+        "outcome": "unresolved",
+        "failures": [
+          "official-native-roster-contract-unavailable"
+        ]
+      },
+      "next_escalation": null,
+      "skipped_after_acceptance": [],
+      "unattempted_routes": []
+    },
+    "accepted_candidate": null
+  }
+}

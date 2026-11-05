@@ -1,0 +1,258 @@
+[
+  {
+    "announcement_id": "1225655731",
+    "title": "关于为子公司提供担保的进展公告",
+    "publication_date": "2026-11-04",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF",
+    "sha256": "17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056",
+    "receipt": {
+      "artifact_id": "7ae996c9fcfac359694e9d3f6269b305338cdcabff87869a1c8f4fcbf162fbd5",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/7ae996c9fcfac359694e9d3f6269b305338cdcabff87869a1c8f4fcbf162fbd5.pdf",
+      "sha256": "17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/7ae996c9fcfac359694e9d3f6269b305338cdcabff87869a1c8f4fcbf162fbd5/text.md",
+    "text_sha256": "896d1cf157425bbe38ff4558d3f768248005cb178bc30afbec8b4522a5172018",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225607861",
+    "title": "2026年三季度报告",
+    "publication_date": "2026-10-17",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+    "sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+    "receipt": {
+      "artifact_id": "6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d.pdf",
+      "sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+    "text_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+    "pages": 9,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225598337",
+    "title": "关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告",
+    "publication_date": "2026-10-10",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF",
+    "sha256": "23466655ad1e0b35f4cb0a1ccd3c3d87d59d70743d2df1bf90799f91966a926f",
+    "receipt": {
+      "artifact_id": "284a70d2b88ba9b39959558089f22e06d7152f09715f68e4de88dbe667b7df79",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/284a70d2b88ba9b39959558089f22e06d7152f09715f68e4de88dbe667b7df79.pdf",
+      "sha256": "23466655ad1e0b35f4cb0a1ccd3c3d87d59d70743d2df1bf90799f91966a926f"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/284a70d2b88ba9b39959558089f22e06d7152f09715f68e4de88dbe667b7df79/text.md",
+    "text_sha256": "01c977e7094e2c0892160d156f8aab6c70d27bf5cb60d8f283d36d72c70bf433",
+    "pages": 1,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225468251",
+    "title": "2026年半年度权益分派实施公告",
+    "publication_date": "2026-08-12",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF",
+    "sha256": "e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb",
+    "receipt": {
+      "artifact_id": "e7dc4e0203bb1ec4c465cc1c8fc01983f74bdbad673632fd11e7a5aac55e1b8a",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/e7dc4e0203bb1ec4c465cc1c8fc01983f74bdbad673632fd11e7a5aac55e1b8a.pdf",
+      "sha256": "e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/e7dc4e0203bb1ec4c465cc1c8fc01983f74bdbad673632fd11e7a5aac55e1b8a/text.md",
+    "text_sha256": "19af60c0b2f942256b72123799485a0baf4bb42eb9e4f26d010558f14033913f",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225440238",
+    "title": "关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告",
+    "publication_date": "2026-07-25",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF",
+    "sha256": "433953243faf7c4dba578b4ceb1a036018ea83424d2dcc1fe29bc3725db04897",
+    "receipt": {
+      "artifact_id": "bc26a72c19ff4b3bbf51c8dc460525241495df12d2a4e1421856f41eacb223d6",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/bc26a72c19ff4b3bbf51c8dc460525241495df12d2a4e1421856f41eacb223d6.pdf",
+      "sha256": "433953243faf7c4dba578b4ceb1a036018ea83424d2dcc1fe29bc3725db04897"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/bc26a72c19ff4b3bbf51c8dc460525241495df12d2a4e1421856f41eacb223d6/text.md",
+    "text_sha256": "57b122246e39045370ff70eb023a759141b4af7bce020037101507ebfcdb95cf",
+    "pages": 6,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225440237",
+    "title": "2026年半年度非经营性资金占用及其他关联资金往来情况汇总表",
+    "publication_date": "2026-07-25",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF",
+    "sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0",
+    "receipt": {
+      "artifact_id": "feb125298fad34a45d56d893d6c62c27f88a1997f6afc8ccdb2e6f9f3a7b5dd6",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/feb125298fad34a45d56d893d6c62c27f88a1997f6afc8ccdb2e6f9f3a7b5dd6.pdf",
+      "sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/feb125298fad34a45d56d893d6c62c27f88a1997f6afc8ccdb2e6f9f3a7b5dd6/text.md",
+    "text_sha256": "9454dc4d6bfa35b3f206af66dbcc18c7bb10137ee03cac3836523f414de3d72f",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225303075",
+    "title": "2025年度权益分派实施公告",
+    "publication_date": "2026-05-14",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF",
+    "sha256": "fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087",
+    "receipt": {
+      "artifact_id": "8ff8073768c46a28028c17400b57d9120f3d83ead117285851c65dfc3c0a516b",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/8ff8073768c46a28028c17400b57d9120f3d83ead117285851c65dfc3c0a516b.pdf",
+      "sha256": "fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/8ff8073768c46a28028c17400b57d9120f3d83ead117285851c65dfc3c0a516b/text.md",
+    "text_sha256": "62509b8e228013c1d661990e569ac81ef764cb4e956bcb7e8f7e30d414c5fdfc",
+    "pages": 3,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225285783",
+    "title": "2025年度股东会决议公告",
+    "publication_date": "2026-05-09",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF",
+    "sha256": "8d13591747444261d6e37afa1bdeaa2cb799aa00f7f27b8f461177b83d376730",
+    "receipt": {
+      "artifact_id": "52fd64328a521da5e8548137d0dd1a856233c6d20ca97c0781b769e785cd6c83",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/52fd64328a521da5e8548137d0dd1a856233c6d20ca97c0781b769e785cd6c83.pdf",
+      "sha256": "8d13591747444261d6e37afa1bdeaa2cb799aa00f7f27b8f461177b83d376730"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/52fd64328a521da5e8548137d0dd1a856233c6d20ca97c0781b769e785cd6c83/text.md",
+    "text_sha256": "27e892ae50afc724634775489b02b79e1de4bc10100224b1a9d6da3b8c2f4776",
+    "pages": 6,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225123097",
+    "title": "关于拟变更会计师事务所的公告",
+    "publication_date": "2026-04-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF",
+    "sha256": "17fefa35e55bc707e75c03d1b74a073274de78aeddd117d627b512573c6fdfc4",
+    "receipt": {
+      "artifact_id": "816da3550c977f3ae9642ccf853e9ed0bcbe43487c253a5b9492d83cdaf912e1",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/816da3550c977f3ae9642ccf853e9ed0bcbe43487c253a5b9492d83cdaf912e1.pdf",
+      "sha256": "17fefa35e55bc707e75c03d1b74a073274de78aeddd117d627b512573c6fdfc4"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/816da3550c977f3ae9642ccf853e9ed0bcbe43487c253a5b9492d83cdaf912e1/text.md",
+    "text_sha256": "53173f5820ebd80b39475d768df9f648e5cc39a2b96e8a922f6da60747ad61b8",
+    "pages": 5,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225123082",
+    "title": "关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告",
+    "publication_date": "2026-04-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF",
+    "sha256": "05a05ae9647f8fd87ae017071f0bd0c9544e625efcc4eacf257464239717dab3",
+    "receipt": {
+      "artifact_id": "9d7685c967a7516a29675f4c037599d6d158fb3f11e0bbc7876688fef0f979ed",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/9d7685c967a7516a29675f4c037599d6d158fb3f11e0bbc7876688fef0f979ed.pdf",
+      "sha256": "05a05ae9647f8fd87ae017071f0bd0c9544e625efcc4eacf257464239717dab3"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/9d7685c967a7516a29675f4c037599d6d158fb3f11e0bbc7876688fef0f979ed/text.md",
+    "text_sha256": "031f1f3add3138b6974f5de86608a715aac6fc6420799ba897a2064c38e98e24",
+    "pages": 6,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225123081",
+    "title": "关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告",
+    "publication_date": "2026-04-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF",
+    "sha256": "f05be05af2cc568e27de1c3011cbe8e89f4aae7a50792f1f5f0d4a64bcc2786f",
+    "receipt": {
+      "artifact_id": "6d88fe5ee2538cad27241ce45986d4fa1d551efcb61df94dcea27d854b927db9",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/6d88fe5ee2538cad27241ce45986d4fa1d551efcb61df94dcea27d854b927db9.pdf",
+      "sha256": "f05be05af2cc568e27de1c3011cbe8e89f4aae7a50792f1f5f0d4a64bcc2786f"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6d88fe5ee2538cad27241ce45986d4fa1d551efcb61df94dcea27d854b927db9/text.md",
+    "text_sha256": "5f7c9ac7b242a83edeee2c4672614b097269ce1af540088caa3c2c743b050c85",
+    "pages": 7,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225123066",
+    "title": "控股股东、实际控制人及其他关联方资金占用情况的专项说明",
+    "publication_date": "2026-04-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF",
+    "sha256": "d5774aa6b53e28e94855d8b39214766de37ad30939ed14e9ab2135da8bef539c",
+    "receipt": {
+      "artifact_id": "353fcb564e4ba9b6e5340d85fbe3ab03c534b75f80ead602dd22e36849a8a12f",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/353fcb564e4ba9b6e5340d85fbe3ab03c534b75f80ead602dd22e36849a8a12f.pdf",
+      "sha256": "d5774aa6b53e28e94855d8b39214766de37ad30939ed14e9ab2135da8bef539c"
+    },
+    "text_path": null,
+    "extraction_status": "failed",
+    "extraction_error": "",
+    "evidence_level": "High"
+  },
+  {
+    "announcement_id": "1225123065",
+    "title": "2025年度非经营性资金占用及其他关联资金往来情况汇总表",
+    "publication_date": "2026-04-18",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF",
+    "sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90",
+    "receipt": {
+      "artifact_id": "2467adfb5daef256e6526dad6a54ce536ec880566e0d72714dca8b16867d32ea",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/2467adfb5daef256e6526dad6a54ce536ec880566e0d72714dca8b16867d32ea.pdf",
+      "sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90"
+    },
+    "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/2467adfb5daef256e6526dad6a54ce536ec880566e0d72714dca8b16867d32ea/text.md",
+    "text_sha256": "3cebf647b6453e754a6358d8993bc510f529ed764e81a47baa9a0d3a13cd981f",
+    "pages": 2,
+    "source_authority": "High",
+    "practical_utility": "High",
+    "current_reachability": "High",
+    "conclusion_evidence": "High",
+    "evidence_level": "High"
+  }
+]

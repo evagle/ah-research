@@ -1,0 +1,37 @@
+{
+  "baseline": {
+    "/Users/brian_huang/repos/ah-research/profiles/002415.SZ-2026-09-29-v2.md": "a713967b0b177a6092f5b24c2ff0787d4dfe8b231faf5507bcf2c53ea5e413d5",
+    "/Users/brian_huang/repos/brian-huang-private/drafts/2026-09-29-hikvision-value-profile.md": "a713967b0b177a6092f5b24c2ff0787d4dfe8b231faf5507bcf2c53ea5e413d5",
+    "/Users/brian_huang/repos/brian-huang-private/drafts/2026-09-29-hikvision-value-profile.html": "35b308236ccbcdd9a8d2ea3bee08b9ceb15185ee15e87e324f39f24b8834dad8",
+    "/Users/brian_huang/repos/brian-huang-private/index.html": "10e213ef07431219131dfbbfbbb679d765420275cbed35ce85880d90c7e8e33f"
+  },
+  "draft": "/tmp/hikvision-inventory/profile-updated.md",
+  "analysis": {
+    "artifact_id": "725f79b095e3446d76aaa55e2c7445953c48bc359d88a2811b1afda1925f6ea8",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/analyses/725f79b095e3446d76aaa55e2c7445953c48bc359d88a2811b1afda1925f6ea8.json",
+    "sha256": "6eda2eecfb124dd442f8b1cccda64772ea47ef8dd444acb5e0740d8a6eaee93b"
+  },
+  "ledger": {
+    "artifact_id": "3e4779c66de92da59a758450161d8833b7dd08b949f9f197aa468cf25301f1d3",
+    "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/runs/value-profile-2025-20260929-v2/logs/research-ledger.json",
+    "sha256": "1a9ed2877b5e6ec5f4b0ece2aa82093929bddf73fc285a27ba2b216894c3bf92"
+  },
+  "changes": [
+    "Separate operating analysis from management evaluation",
+    "Add three-period inventory comparison and cash-flow reconciliation",
+    "Add official supply and price explanation with business-allocation limitation",
+    "Calibrate governance warning and capital-allocation assessment"
+  ],
+  "full_workflow_completed": false,
+  "published_profile_sha256": "fdbbfff2806d4aeeb673493217392deaa671c8d96abff735a64ef1d7fe68b293",
+  "published_html_sha256": "0320be5f50ae8381cce721f79d765a97d1ba37b88f4b9dbaaee419e8134e5a7a",
+  "canonical_html": "/Users/brian_huang/repos/ah-research/profiles/002415.SZ-2026-09-29-v2.html",
+  "private_html": "/Users/brian_huang/repos/brian-huang-private/drafts/2026-09-29-hikvision-value-profile.html",
+  "validation": {
+    "tables": 56,
+    "valid_internal_links": 114,
+    "unique_ids": 112,
+    "matching_source_and_reading_copies": true,
+    "full_workflow_completed": false
+  }
+}

@@ -1,0 +1,4572 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>价值投资个股研究 Profile — 海康威视 (002415.SZ) 2026-11-05</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #202124;
+      --muted: #5f6368;
+      --line: #dfe3e7;
+      --soft: #f6f7f8;
+      --accent: #0b57d0;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      font-size: 16px;
+      line-height: 1.72;
+      letter-spacing: 0;
+    }
+    .page {
+      display: grid;
+      grid-template-columns: minmax(190px, 240px) minmax(0, 900px);
+      gap: 48px;
+      width: min(1240px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 40px 0 80px;
+    }
+    main { min-width: 0; }
+    h1, h2, h3, h4 {
+      line-height: 1.32;
+      letter-spacing: 0;
+      scroll-margin-top: 24px;
+    }
+    h1 { margin: 0 0 32px; font-size: 32px; }
+    h2 {
+      margin: 48px 0 18px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 24px;
+    }
+    h3 { margin: 32px 0 12px; font-size: 19px; }
+    h4 { margin: 24px 0 10px; font-size: 16px; }
+    p, ul, ol, blockquote { margin: 0 0 16px; }
+    a {
+      color: var(--accent);
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+    blockquote {
+      margin-left: 0;
+      padding: 8px 16px;
+      border-left: 3px solid var(--line);
+      color: var(--muted);
+    }
+    .signal-list {
+      margin: 0 0 16px;
+      padding-left: 12px;
+    }
+    .signal-item {
+      display: grid;
+      grid-template-columns: 8px minmax(0, 1fr);
+      column-gap: 10px;
+      align-items: start;
+      margin-bottom: 8px;
+    }
+    .signal-dot {
+      width: 8px;
+      height: 8px;
+      margin-top: 0.7em;
+      border-radius: 50%;
+      background: var(--signal-color);
+      transform: translateY(-50%);
+    }
+    .signal-positive { --signal-color: #188038; }
+    .signal-negative { --signal-color: #d93025; }
+    .signal-pending { --signal-color: #d99a00; }
+    code {
+      padding: 2px 5px;
+      border-radius: 3px;
+      background: var(--soft);
+      font-size: 0.9em;
+    }
+    pre { overflow: auto; padding: 16px; background: var(--soft); }
+    pre code { padding: 0; }
+    .toc {
+      position: sticky;
+      top: 24px;
+      align-self: start;
+      max-height: calc(100vh - 48px);
+      overflow: auto;
+      border-right: 1px solid var(--line);
+      padding-right: 20px;
+    }
+    .toc h2 {
+      margin: 0 0 12px;
+      padding: 0;
+      border: 0;
+      font-size: 15px;
+    }
+    .toc ul { margin: 0; padding: 0; list-style: none; }
+    .toc li { margin: 7px 0; line-height: 1.35; }
+    .toc a { color: var(--muted); text-decoration: none; }
+    .toc a:hover { color: var(--accent); }
+    .toc-level-1 { font-weight: 600; }
+    .toc-level-3 { padding-left: 12px; font-size: 14px; }
+    .toc-level-4 { padding-left: 24px; font-size: 13px; }
+    .table-scroll {
+      max-width: 100%;
+      margin: 18px 0 24px;
+      overflow-x: auto;
+    }
+    .table-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px 0 10px;
+    }
+    .table-meta {
+      flex: 0 0 auto;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td {
+      min-width: 96px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+    th { background: var(--soft); font-weight: 600; }
+    td[rowspan] {
+      background: #fafafa;
+      font-weight: 600;
+      vertical-align: middle;
+    }
+    .hierarchy-table {
+      font-variant-numeric: tabular-nums;
+    }
+    .hierarchy-table th,
+    .hierarchy-table td {
+      border-width: 0 0 1px;
+    }
+    .hierarchy-table th {
+      border-top: 1px solid var(--ink);
+    }
+    .hierarchy-table th:nth-child(n + 2),
+    .hierarchy-table td:nth-child(n + 2) {
+      text-align: right;
+    }
+    .hierarchy-table .hierarchy-level-2 {
+      padding-left: 30px;
+      font-weight: 600;
+    }
+    .hierarchy-table .hierarchy-level-3 {
+      padding-left: 50px;
+    }
+    .hierarchy-table .hierarchy-group td {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+    .hierarchy-table.hierarchy-normal .hierarchy-group td,
+    .hierarchy-table.hierarchy-normal .hierarchy-level-2 {
+      font-weight: 400;
+    }
+    .hierarchy-table .hierarchy-subtotal td {
+      font-weight: 600;
+    }
+    .hierarchy-table .hierarchy-total td {
+      border-top: 1px solid var(--ink);
+      border-bottom: 3px double var(--ink);
+      font-weight: 700;
+    }
+    @media (max-width: 900px) {
+      .page {
+        display: block;
+        width: min(100% - 28px, 760px);
+        padding-top: 20px;
+      }
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 32px;
+        padding: 0 0 20px;
+        border: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .toc-level-3, .toc-level-4 { padding-left: 0; }
+      .table-heading { align-items: flex-start; }
+      h1 { font-size: 27px; }
+      h2 { font-size: 21px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <nav class="toc" aria-label="目录"><h2>目录</h2><ul><li class="toc-level-1"><a href="#section-1">价值投资个股研究 Profile — 海康威视 (002415.SZ) 2026-11-05</a></li>
+<li class="toc-level-2"><a href="#section-2">Part 0 — 封面 &amp; 执行摘要</a></li>
+<li class="toc-level-3"><a href="#section-3">执行摘要</a></li>
+<li class="toc-level-2"><a href="#section-4">经营业绩与现金流跟踪（2025—2026年前三季度）</a></li>
+<li class="toc-level-3"><a href="#section-5">2026年三季度更新：利润继续增长，库存尚未转成现金</a></li>
+<li class="toc-level-4"><a href="#section-6">收入与利润恢复延续到第三季度</a></li>
+<li class="toc-level-4"><a href="#section-7">新增利润主要来自毛利，投资收益和少数股东分成另有影响</a></li>
+<li class="toc-level-4"><a href="#section-8">采购付现增长超过销售收现，现金压力没有解除</a></li>
+<li class="toc-level-4"><a href="#section-9">库存进一步增加，主要风险是消化速度与跌价</a></li>
+<li class="toc-level-3"><a href="#section-10">2025年与2026年上半年的利润增长来源</a></li>
+<li class="toc-level-4"><a href="#section-11">2025年主业收入减少，毛利润仍增加</a></li>
+<li class="toc-level-4"><a href="#section-12">从新增毛利到归母利润，还受汇兑、减值和费用基数影响</a></li>
+<li class="toc-level-3"><a href="#section-13">2026年上半年经营更新</a></li>
+<li class="toc-level-4"><a href="#section-14">收入与盈利已经改善，现金表现有所回落</a></li>
+<li class="toc-level-4"><a href="#section-15">新增收入主要来自创新业务，境内三大客户群也转为增长</a></li>
+<li class="toc-level-4"><a href="#section-16">利润增长更快，核心在毛利改善与费用增长较慢</a></li>
+<li class="toc-level-4"><a href="#section-17">存货扩张、备货原因与现金流</a></li>
+<li class="toc-level-3"><a href="#section-18">积极变化的持续性与生意质量判断</a></li>
+<li class="toc-level-4"><a href="#section-19">“好生意存疑”指向长期回报的确定性</a></li>
+<li class="toc-level-4"><a href="#section-20">利润改善、保持利润水平与继续高速增长是三个不同问题</a></li>
+<li class="toc-level-4"><a href="#section-21">库存消化与现金回报将决定下一步判断</a></li>
+<li class="toc-level-2"><a href="#section-22">Part 1 — 定性分析</a></li>
+<li class="toc-level-2"><a href="#section-23">§1商业模式</a></li>
+<li class="toc-level-3"><a href="#section-24">§1.1公司核心资产、主营产品和服务</a></li>
+<li class="toc-level-3"><a href="#section-25">§1.2公司客户</a></li>
+<li class="toc-level-3"><a href="#section-26">§1.3差异化</a></li>
+<li class="toc-level-3"><a href="#section-27">§1.4盈利模式</a></li>
+<li class="toc-level-3"><a href="#section-28">§1.5生意特性</a></li>
+<li class="toc-level-3"><a href="#section-29">§1.6现金流状况</a></li>
+<li class="toc-level-3"><a href="#section-30">§1.7已知优秀商业模式特性</a></li>
+<li class="toc-level-3"><a href="#section-31">§1.8 能力圈四问 — 看得懂的标准</a></li>
+<li class="toc-level-2"><a href="#section-32">§2成长空间/天花板</a></li>
+<li class="toc-level-3"><a href="#section-33">§2.1行业基本情况 + 竞争格局</a></li>
+<li class="toc-level-4"><a href="#section-34">市场定义矩阵</a></li>
+<li class="toc-level-4"><a href="#section-35">历史市场规模与逐年增速</a></li>
+<li class="toc-level-4"><a href="#section-36">行业驱动因素</a></li>
+<li class="toc-level-4"><a href="#section-37">预测版本对照</a></li>
+<li class="toc-level-4"><a href="#section-38">集中度与竞争对手</a></li>
+<li class="toc-level-3"><a href="#section-39">§2.2市场规模、增速、供需</a></li>
+<li class="toc-level-4"><a href="#section-40">当期部分期间</a></li>
+<li class="toc-level-4"><a href="#section-41">口径与数据限制</a></li>
+<li class="toc-level-3"><a href="#section-42">§2.3竞争对手营收净利对比</a></li>
+<li class="toc-level-3"><a href="#section-43">§2.4行业与公司成长空间</a></li>
+<li class="toc-level-3"><a href="#section-44">§2.5历史成长动力分解</a></li>
+<li class="toc-level-3"><a href="#section-45">§2.6未来成长动力</a></li>
+<li class="toc-level-2"><a href="#section-46">§3护城河分析</a></li>
+<li class="toc-level-3"><a href="#section-47">§3.1定性：公司的护城河有哪些</a></li>
+<li class="toc-level-3"><a href="#section-48">§3.2护城河来源因素分析</a></li>
+<li class="toc-level-3"><a href="#section-49">§3.3产品差异化</a></li>
+<li class="toc-level-3"><a href="#section-50">§3.4波特五力</a></li>
+<li class="toc-level-3"><a href="#section-51">§3.5 ROE / ROIC 分析</a></li>
+<li class="toc-level-3"><a href="#section-52">§3.6 ROE 杜邦分析</a></li>
+<li class="toc-level-3"><a href="#section-53">§3.7毛利率分析</a></li>
+<li class="toc-level-3"><a href="#section-54">§3.8护城河发展趋势 + 宽/中/窄/弱定论</a></li>
+<li class="toc-level-3"><a href="#section-55">§3.9非护城河因素</a></li>
+<li class="toc-level-3"><a href="#section-56">§3.10政府政策分析</a></li>
+<li class="toc-level-2"><a href="#section-57">§4管理质量与企业文化</a></li>
+<li class="toc-level-3"><a href="#section-58">§4.pre 管理层与治理风险检查</a></li>
+<li class="toc-level-4"><a href="#section-59">2026年审计机构变更的后续状态</a></li>
+<li class="toc-level-3"><a href="#section-60">§4.1 专注主业与五年战略变化</a></li>
+<li class="toc-level-3"><a href="#section-61">§4.2 承诺与兑现：五次跨年比较</a></li>
+<li class="toc-level-3"><a href="#section-62">§4.3 言行一致与执行能力</a></li>
+<li class="toc-level-3"><a href="#section-63">§4.4 企业文化：技术投入与利益分配的实际安排</a></li>
+<li class="toc-level-3"><a href="#section-64">§4.5 内部治理结构</a></li>
+<li class="toc-level-3"><a href="#section-65">§4.6 股东回报与资本分配</a></li>
+<li class="toc-level-4"><a href="#section-66">2026年分红实施与当期现金回报</a></li>
+<li class="toc-level-3"><a href="#section-67">§4.7 股权结构与关键股东</a></li>
+<li class="toc-level-4"><a href="#section-68">控股股东一致行动人的可交换债计划</a></li>
+<li class="toc-level-3"><a href="#section-69">§4.8 大股东与上市公司利益一致性</a></li>
+<li class="toc-level-4"><a href="#section-70">关联财务公司与资金往来：存款不等于占款</a></li>
+<li class="toc-level-4"><a href="#section-71">2026年11月披露的子公司担保</a></li>
+<li class="toc-level-2"><a href="#section-72">§5风险分析</a></li>
+<li class="toc-level-3"><a href="#section-73">§5.1产品和业务风险</a></li>
+<li class="toc-level-3"><a href="#section-74">§5.2财务风险</a></li>
+<li class="toc-level-3"><a href="#section-75">§5.3管理层风险</a></li>
+<li class="toc-level-3"><a href="#section-76">§5.4造假风险</a></li>
+<li class="toc-level-3"><a href="#section-77">§5.5成长风险</a></li>
+<li class="toc-level-2"><a href="#section-78">Part 2 — 定量分析（10年财务指标检查）</a></li>
+<li class="toc-level-3"><a href="#section-79">§Q1盈利分析 — 资本回报：从高回报扩张转向利润修复</a></li>
+<li class="toc-level-3"><a href="#section-80">§Q2盈利能力 — 盈利能力：毛利仍高，净利率低于早期</a></li>
+<li class="toc-level-3"><a href="#section-81">§Q3盈利质量 — 利润质量：近三年回款覆盖利润，十年仍接近一比一</a></li>
+<li class="toc-level-3"><a href="#section-82">§Q4成长能力 — 成长：创新业务和海外抵消主业压力</a></li>
+<li class="toc-level-3"><a href="#section-83">§Q5资产增速 — 资产扩张：生产资产增长快于收入</a></li>
+<li class="toc-level-3"><a href="#section-84">§Q6运营能力 — 运营效率：回款改善，库存占用仍在</a></li>
+<li class="toc-level-3"><a href="#section-85">§Q7偿债能力 — 偿债：净现金足以覆盖当前有息债务</a></li>
+<li class="toc-level-3"><a href="#section-86">§Q8现金流分析 — 现金用途：研发、扩产和股东回报并行</a></li>
+<li class="toc-level-3"><a href="#section-87">§Q9资产负债表结构分析 — 资产负债结构：现金、应收与存货决定资金效率</a></li>
+<li class="toc-level-3"><a href="#section-88">§Q10简化利润表分析 — 百分比利润表：研发和销售费用消耗更多收入</a></li>
+<li class="toc-level-3"><a href="#section-89">§Q11上下游分析 — 上下游：客户分散，但尚需给予账期</a></li>
+<li class="toc-level-3"><a href="#section-90">§Q12定量分析总结 — 定量总结</a></li>
+<li class="toc-level-2"><a href="#section-91">Part 3 — 未来（前瞻）</a></li>
+<li class="toc-level-3"><a href="#section-92">§3.1未来市场可能的变化</a></li>
+<li class="toc-level-3"><a href="#section-93">§3.2未来公司可能的变化</a></li>
+<li class="toc-level-3"><a href="#section-94">§3.3未来净利润增长来源</a></li>
+<li class="toc-level-3"><a href="#section-95">§3.4 ROE 提高的空间和来源</a></li>
+<li class="toc-level-3"><a href="#section-96">§3.5其他环境变化</a></li>
+<li class="toc-level-3"><a href="#section-97">§3.6如果我是董事长</a></li>
+<li class="toc-level-2"><a href="#section-98">Part 4 — 买入阶段检查清单</a></li>
+<li class="toc-level-3"><a href="#section-99">§4.1市场估值分析</a></li>
+<li class="toc-level-3"><a href="#section-100">§4.2当前公司估值情况</a></li>
+<li class="toc-level-3"><a href="#section-101">§4.3 3年后净利润及估值</a></li>
+<li class="toc-level-3"><a href="#section-102">§4.4公司基本面再分析</a></li>
+<li class="toc-level-3"><a href="#section-103">§4.5负面清单 — 排雷风险（29项）</a></li>
+<li class="toc-level-4"><a href="#section-104">29项清单</a></li>
+<li class="toc-level-4"><a href="#section-105">6项高危附加检查</a></li>
+<li class="toc-level-4"><a href="#section-106">三张财务报表一致性检查</a></li>
+<li class="toc-level-4"><a href="#section-107">8类补充质检信号</a></li>
+<li class="toc-level-4"><a href="#section-108">造假识别5个维度</a></li>
+<li class="toc-level-4"><a href="#section-109">2026年新增风险与已解决事项</a></li>
+<li class="toc-level-3"><a href="#section-110">§4.6基准日价格与仓位</a></li>
+<li class="toc-level-3"><a href="#section-111">§4.7买入后加仓/持有预案</a></li>
+<li class="toc-level-3"><a href="#section-112">§4.8买入前最终检查</a></li>
+<li class="toc-level-3"><a href="#section-113">§4.9心理偏误核查</a></li>
+<li class="toc-level-2"><a href="#section-114">Part 5 — 持有阶段检查清单</a></li>
+<li class="toc-level-3"><a href="#section-115">§5.1组合健康检查</a></li>
+<li class="toc-level-3"><a href="#section-116">§5.2持续关注经营状况</a></li>
+<li class="toc-level-4"><a href="#section-117">截至2026年11月5日的跟踪补充</a></li>
+<li class="toc-level-3"><a href="#section-118">§5.3是否触发卖出标准</a></li>
+<li class="toc-level-3"><a href="#section-119">§5.4卖出动作心理偏误核查</a></li>
+<li class="toc-level-3"><a href="#section-120">§5.5是否触发新的买入标准</a></li>
+<li class="toc-level-2"><a href="#section-121">证据索引</a></li>
+<li class="toc-level-3"><a href="#section-122">2026年11月经营与治理补充来源</a></li></ul></nav>
+<main><h1 id="section-1">价值投资个股研究 Profile — 海康威视 (002415.SZ) 2026-11-05</h1>
+<h2 id="section-2">Part 0 — 封面 &amp; 执行摘要</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>字段</th>
+<th>值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>股票代码（ticker）</strong></td>
+<td>002415.SZ</td>
+</tr>
+<tr>
+<td><strong>公司名称</strong></td>
+<td>杭州海康威视数字技术股份有限公司 / Hangzhou Hikvision Digital Technology Co., Ltd.</td>
+</tr>
+<tr>
+<td><strong>交易所/币种</strong></td>
+<td>深圳证券交易所 / 人民币</td>
+</tr>
+<tr>
+<td><strong>报告日期（report_date）</strong></td>
+<td>2026-11-05</td>
+</tr>
+<tr>
+<td><strong>年度研究基准日（AS_OF）</strong></td>
+<td>2026-04-18</td>
+</tr>
+<tr>
+<td><strong>最新经营跟踪截止日</strong></td>
+<td>2026-11-05；最新财务期间为2026年前三季度</td>
+</tr>
+<tr>
+<td><strong>目标财年（end_year）:</strong></td>
+<td>2025</td>
+</tr>
+<tr>
+<td><strong>研究者</strong></td>
+<td>Brian Huang / Codex</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>研究状态：观察档案，部分核查尚未完成。</strong></p>
+<p>本报告保留2016—2025年年度研究，并补充2026年半年报、三季报及相关分红、审计机构和关联资金公告，最新跟踪截至2026年11月5日。年度研究基准仍为2026年4月18日，历史治理与行业资料没有全面更新至11月；各节注明补充证据的日期。未采用当前股价。金额除另有说明外均为人民币亿元，页码指PDF实际页码。</p>
+<p><strong>仍需补充:</strong> 完整历史监管核查、同口径市场份额与客户选择证据。已核实年报数据支持经营分析；这些缺口限制治理结论、强竞争力判断和数字估值。</p>
+<h3 id="section-3">执行摘要</h3>
+<p><strong>盈利恢复延续到第三季度，库存继续增加，现金回收仍未跟上利润。原始披露与复算核验：高；中期报表未经审计，盈利质量与持续性判断：中。</strong></p>
+<p><strong>好生意：存疑</strong></p>
+<blockquote>
+<p>现有盈利能力较强，经营恢复已获验证；长期高资本回报仍待验证。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>2026年前三季度收入740.44亿元，同比增长12.60%；归母净利润129.11亿元，同比增长38.55%。</div></div>
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>第三季度收入增长13.71%、归母利润增长36.97%；上半年主业与创新业务均增长，三季报未披露相同业务拆分。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>待验证的是毛利率改善能否保持、库存能否转成现金，以及创新业务的新增资本回报。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>前三季度经营现金流72.13亿元，同比下降47.34%；9月末库存净额333.34亿元，较年初增加62.83%，尚未出现总库存下降。</div></div>
+</div>
+<p><strong>护城河：窄</strong></p>
+<blockquote>
+<p>复杂项目中的产品组合和交付网络有价值，标准设备的保护较弱。证据等级：中。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>3万余型号、定制供货和本地售后，可降低安装商的选型与交付成本。</div></div>
+<div class="signal-item signal-negative"><span class="signal-dot"></span><div>开放接口和通用算法可能降低替代难度；第三季度毛利率同比改善但低于上半年，尚不足以证明持久定价权。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>2025年加权ROE修复至17.30%，仍低于早期约34%—35%的水平。</div></div>
+</div>
+<p><strong>管理层：3项需跟踪</strong></p>
+<blockquote>
+<p>战略执行与股东回报偏正面，资本配置效果与治理仍需跟踪。证据等级：中。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>2026年实施两笔普通股分红合计119.14亿元；此前两轮公开回购已注销。资本回报事实证据等级：高。</div></div>
+<div class="signal-item signal-negative"><span class="signal-dot"></span><div>2020年因未报告股份增减持相关融资安排被出具警示函；调查已结案，书面整改报告已提交。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>跟踪历史治理覆盖、关联资金与应收、创新投入及备货决策的股东回报；经营增速不单独决定管理层评价。</div></div>
+</div>
+<p><strong>财报排雷：证据需人工</strong></p>
+<blockquote>
+<p>利润增长已延续，库存和现金转化的压力也延续。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>2025年报为标准无保留审计意见；2026年三季报未经审计，前三季度扣非归母利润增长41.52%。</div></div>
+<div class="signal-item signal-negative"><span class="signal-dot"></span><div>2026年9月末库存净额333.34亿元，占总资产23.58%；比6月末再增38.46亿元，季度报告未披露构成与库龄。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>销售收现完整核对、长期建设项目与治理排除性核查尚未全部完成，不能给出整体通过结论。</div></div>
+</div>
+<p><strong>能力圈四问：问3、问4尚不足以支持投资</strong></p>
+<blockquote>
+<p>产品和赚钱方式可以解释，持续防守能力仍需更强证据。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div><strong>公司靠销售什么商品/服务获取利润？</strong> 出售感知设备、存储、软件及交付服务；2025年主业产品毛利318.99亿元，仍是主要利润池。<strong>证据等级：高。</strong></div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div><strong>客户为何从它这里采购，不选其他机构？</strong> 安装商可复用选型和调试经验，客户获得配套设备与本地服务；普通新项目仍受总价与兼容性影响。<strong>证据等级：中。</strong></div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div><strong>资本天性逐利，为什么别的资本没抢走它的份额或逼它降利？</strong> 研发、定制与服务网络需要积累，但毛利率上升还可能来自产品组合，尚不能证明持续提价与份额保护。<strong>证据等级：中。</strong></div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div><strong>假设同行/巨头挟巨资参与竞争，它能否保住乃至扩张份额？</strong> 较能守住的是设备、流程与服务结合较深的客户；新增标准设备更易被大华、华为或开放软件方案争夺。<strong>证据等级：中。</strong></div></div>
+</div>
+<p><strong>估值三大前提:</strong> 任一假或存疑—长期利润与正常现金回报尚不足以支持三年估值</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>前提</th>
+<th>判定</th>
+<th>主要依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>利润为真</td>
+<td>存疑（严格核验）；报表与现金有较强支持</td>
+<td>审计、扣非与累计现金支持；毛额销售收现尚未完成全部调整核对</td>
+</tr>
+<tr>
+<td>利润可持续</td>
+<td>存疑</td>
+<td>主业和毛利改善已确认；较高利润水平能否保持仍待验证，不将接近40%的增速作为长期假设</td>
+</tr>
+<tr>
+<td>维持利润不需大投入</td>
+<td>存疑</td>
+<td>2025年维持性投入近似20.54—21.57亿元的测算已完成；库存持续占用资金、扩产回报仍需验证，不能据低设备支出认定整体投入很轻</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>投资论点</strong></p>
+<blockquote>
+<p>保留观察档案，暂不形成买入结论。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-positive"><span class="signal-dot"></span><div>上半年主业与创新业务改善，第三季度集团收入和利润继续增长；长期回报仍取决于库存、回款与投入效率。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>继续验证主业增长持续性、创新归母回报、库存消化及投资收益的可重复性。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div>合理市值、目标价、买卖点与建议仓位均为N/A。</div></div>
+</div>
+<p><strong>Top 3风险</strong></p>
+<blockquote>
+<p>优先跟踪能改变利润和投资资格的三类变化。</p>
+</blockquote>
+<div class="signal-list">
+<div class="signal-item signal-negative"><span class="signal-dot"></span><div><strong>跟踪1：</strong>主业收入已恢复增长；若后续增长或毛利改善逆转，利润增速可能明显回落。</div></div>
+<div class="signal-item signal-negative"><span class="signal-dot"></span><div><strong>跟踪2：</strong>库存扩大延续到9月末，采购付现增长快于销售收现；关注库存消化、旧账回收与跌价损失。</div></div>
+<div class="signal-item signal-pending"><span class="signal-dot"></span><div><strong>跟踪3：</strong>海外准入、供应链及治理事项扩大经营成本或限制。</div></div>
+</div>
+<p><strong>确信度:</strong> 中</p>
+<p><strong>最近审阅日期:</strong> 2026-11-05</p>
+<p><strong>估值动摇即停手守则：</strong> 将来若形成买点，新证据使三年利润下限动摇时，先停止按原计划加仓，重审利润与投入假设，再重算安全边际。</p>
+<p><a id="operating-results"></a></p>
+<h2 id="section-4">经营业绩与现金流跟踪（2025—2026年前三季度）</h2>
+<p>本节分析收入、利润和现金如何变化，以及产品结构、成本、汇率和营运资金的影响。管理层的战略选择、承诺兑现、资本配置和治理另见<a href="#management-evaluation">管理质量与企业文化</a>；经营结果用于检验决策效果，单期利润增长不直接等于管理能力提升。</p>
+<h3 id="section-5">2026年三季度更新：利润继续增长，库存尚未转成现金</h3>
+<p>第三季度没有出现集团收入或利润增长中断，但也没有出现总库存下降。更值得关注的是，利润增长和现金回报走向不同：前三季度归母利润增加35.92亿元，经营现金流反而减少64.84亿元。<strong>证据等级：原始披露和复算核验为高；三季报未经审计，盈利质量与持续性判断为中。</strong></p>
+<h4 id="section-6">收入与利润恢复延续到第三季度</h4>
+<p>金额单位为亿元，下表比较相同的前三季度累计期间，不将九个月数据年化。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align:right">2025年前三季度</th>
+<th style="text-align:right">2026年前三季度</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营业收入</td>
+<td style="text-align:right">657.58</td>
+<td style="text-align:right">740.44</td>
+<td style="text-align:right">12.60%</td>
+</tr>
+<tr>
+<td>归母净利润</td>
+<td style="text-align:right">93.19</td>
+<td style="text-align:right">129.11</td>
+<td style="text-align:right">38.55%</td>
+</tr>
+<tr>
+<td>扣非归母净利润</td>
+<td style="text-align:right">89.71</td>
+<td style="text-align:right">126.96</td>
+<td style="text-align:right">41.52%</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td style="text-align:right">136.97</td>
+<td style="text-align:right">72.13</td>
+<td style="text-align:right">-47.34%</td>
+</tr>
+<tr>
+<td>购建长期资产现金支出</td>
+<td style="text-align:right">30.85</td>
+<td style="text-align:right">22.32</td>
+<td style="text-align:right">-27.64%</td>
+</tr>
+<tr>
+<td>综合毛利率</td>
+<td style="text-align:right">45.37%</td>
+<td style="text-align:right">49.63%</td>
+<td style="text-align:right">+4.26个百分点</td>
+</tr>
+<tr>
+<td>归母净利率</td>
+<td style="text-align:right">14.17%</td>
+<td style="text-align:right">17.44%</td>
+<td style="text-align:right">+3.27个百分点</td>
+</tr>
+<tr>
+<td>经营现金流/合并净利润</td>
+<td style="text-align:right">133.58%</td>
+<td style="text-align:right">49.02%</td>
+<td style="text-align:right">现金兑现减弱</td>
+</tr>
+<tr>
+<td>经营现金流减全部现金资本支出</td>
+<td style="text-align:right">106.12</td>
+<td style="text-align:right">49.81</td>
+<td style="text-align:right">减少56.31亿元</td>
+</tr>
+</tbody>
+</table></div>
+<p>扣非利润增长41.52%，快于归母利润增长，说明本期改善不能概括为非经常性收益增加。但扣非利润仍会受采购成本、产品组合、权益法收益和汇率影响，并不自动等于稳定的产品经营利润。</p>
+<p>单季数据能检验上半年的改善是否延续。收入与归母、扣非归母利润有三季报直接披露；现金流用九个月累计减上半年累计还原。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标，亿元</th>
+<th style="text-align:right">2025年第三季度</th>
+<th style="text-align:right">2026年第三季度</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营业收入</td>
+<td style="text-align:right">239.40</td>
+<td style="text-align:right">272.22</td>
+<td style="text-align:right">13.71%</td>
+</tr>
+<tr>
+<td>归母净利润</td>
+<td style="text-align:right">36.62</td>
+<td style="text-align:right">50.16</td>
+<td style="text-align:right">36.97%</td>
+</tr>
+<tr>
+<td>扣非归母净利润</td>
+<td style="text-align:right">34.82</td>
+<td style="text-align:right">49.84</td>
+<td style="text-align:right">43.13%</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td style="text-align:right">83.54</td>
+<td style="text-align:right">39.82</td>
+<td style="text-align:right">-52.33%</td>
+</tr>
+<tr>
+<td>综合毛利率</td>
+<td style="text-align:right">45.67%</td>
+<td style="text-align:right">49.05%</td>
+<td style="text-align:right">+3.38个百分点</td>
+</tr>
+</tbody>
+</table></div>
+<p>第三季度毛利率49.05%，同比仍高于45.67%，但比上半年的49.97%低0.92个百分点。盈利改善延续，毛利率却没有逐季持续抬升；不能将上半年毛利率提高的速度直接外推。三季报未给出主业、创新业务或地区收入的同口径明细，当前能确认集团增长延续，无法证明上半年每个业务和客户群都保持原增速。</p>
+<h4 id="section-7">新增利润主要来自毛利，投资收益和少数股东分成另有影响</h4>
+<p>前三季度收入增加82.87亿元，营业成本增加13.71亿元，新增毛利润69.16亿元。销售、管理、研发费用合计增加9.16亿元，增幅4.62%，低于收入增幅12.60%。在保留研发和渠道投入的同时，更多收入分摊费用，是利润增长的一项实际来源。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>对归母利润同比增量的影响，亿元</th>
+<th style="text-align:right">金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>毛利润增加</td>
+<td style="text-align:right">+69.16</td>
+</tr>
+<tr>
+<td>销售、管理、研发费用增加</td>
+<td style="text-align:right">−9.16</td>
+</tr>
+<tr>
+<td>财务费用转差</td>
+<td style="text-align:right">−11.45</td>
+</tr>
+<tr>
+<td>投资收益增加</td>
+<td style="text-align:right">+6.31</td>
+</tr>
+<tr>
+<td>信用减值损失增加</td>
+<td style="text-align:right">−2.25</td>
+</tr>
+<tr>
+<td>所得税费用增加</td>
+<td style="text-align:right">−7.56</td>
+</tr>
+<tr>
+<td>少数股东损益增加</td>
+<td style="text-align:right">−8.68</td>
+</tr>
+<tr>
+<td>其他收支净变化</td>
+<td style="text-align:right">−0.43</td>
+</tr>
+<tr>
+<td>归母净利润增加</td>
+<td style="text-align:right">+35.92</td>
+</tr>
+</tbody>
+</table></div>
+<p>权益法投资收益由1.72亿元增至7.11亿元，仍需与产品利润分开观察。少数股东损益由9.35亿元增至18.02亿元，也意味着集团盈利增长不会全部归属于海康股东。不能把创新业务收入增速直接当作海康股东收益增速。</p>
+<h4 id="section-8">采购付现增长超过销售收现，现金压力没有解除</h4>
+<p>前三季度销售收现由783.69亿元增至835.76亿元，增加52.07亿元；采购付现由439.89亿元增至539.57亿元，增加99.67亿元。前者增长6.64%，后者增长22.66%。公司在三季报中把经营现金流下降归因为采购备货支出增加，直接现金流数据支持这一方向；职工、税费支出增加也消耗了现金。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>经营现金流同比变化来源</th>
+<th style="text-align:right">对增量的影响，亿元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>销售商品、提供劳务收现</td>
+<td style="text-align:right">+52.07</td>
+</tr>
+<tr>
+<td>税费返还</td>
+<td style="text-align:right">+8.42</td>
+</tr>
+<tr>
+<td>其他经营流入</td>
+<td style="text-align:right">-0.82</td>
+</tr>
+<tr>
+<td>采购付现</td>
+<td style="text-align:right">-99.67</td>
+</tr>
+<tr>
+<td>职工支出</td>
+<td style="text-align:right">-8.51</td>
+</tr>
+<tr>
+<td>缴纳税费</td>
+<td style="text-align:right">-13.55</td>
+</tr>
+<tr>
+<td>其他经营支出</td>
+<td style="text-align:right">-2.78</td>
+</tr>
+<tr>
+<td>经营现金流合计变化</td>
+<td style="text-align:right">−64.84</td>
+</tr>
+</tbody>
+</table></div>
+<p>第三季度单季经营现金流39.82亿元，比上半年的季度平均金额高，却比去年第三季度83.54亿元下降52.33%。季度内产生正现金流，与相同期间的现金转化改善是两件事。前三季度经营现金流仅覆盖合并净利润的49.02%，低于去年同期133.58%；季报没有年度级别的间接法附注，不能把库存余额增加直接当作同额采购现金占用，也不能把九个月覆盖率套成“连续两年低于50%”的年度否决条件。</p>
+<h4 id="section-9">库存进一步增加，主要风险是消化速度与跌价</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>资产项目，亿元</th>
+<th style="text-align:right">2025年末</th>
+<th style="text-align:right">2026年6月末</th>
+<th style="text-align:right">2026年9月末</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存货净额</td>
+<td style="text-align:right">204.72</td>
+<td style="text-align:right">294.88</td>
+<td style="text-align:right">333.34</td>
+</tr>
+<tr>
+<td>应收账款净额</td>
+<td style="text-align:right">298.12</td>
+<td style="text-align:right">277.84</td>
+<td style="text-align:right">283.66</td>
+</tr>
+<tr>
+<td>货币资金</td>
+<td style="text-align:right">465.08</td>
+<td style="text-align:right">378.51</td>
+<td style="text-align:right">370.84</td>
+</tr>
+</tbody>
+</table></div>
+<p>9月末库存比年初增加128.62亿元、增长62.83%；比6月末再增38.46亿元、增长13.04%。库存占总资产23.58%，高于年末14.83%，也超过排雷清单20%的库存集中度预警线。应收账款净额仍低于年末，但第三季度增加5.82亿元，说明上半年应收下降并未逐季延续。余额下降或上升都不能替代逾期账龄与减值质量的检查。</p>
+<p>半年报已经显示原材料和产成品同时增加，三季报没有再次披露分项库存、库龄和跌价准备滚动。保供备货的动机有公开依据，后续仍需看紧缺物料能否投入生产、成品能否销售，以及新增采购成本是否压缩毛利。没有SKU明细本身不能证明滞销，也不能证明准备充足。</p>
+<p>若9月末存货净额中有5%、10%或20%需额外减记，税前账面损失分别约16.67、33.33、66.67亿元。这里假设对现有净额追加损失，未计算税项、少数股东分成和实际回收售价；它说明库存估计误差已可能影响利润，不能将这些假设损失认定为已发生跌价损失或新增现金流出。</p>
+<p>⚠️ **跟踪1：**总库存与产成品能否下降，销售收现能否跟上收入和利润。</p>
+<p>⚠️ **跟踪2：**低价库存逐步售出后，毛利率能否维持，追加采购成本能否转嫁。</p>
+<p>⚠️ **跟踪3：**旧账回收、逾期迁徙和库存跌价是否与业务扩张同时改善。</p>
+<p>**本次判断：**盈利恢复已延续三个季度；总库存消化与现金回报改善尚未获得同样验证。保留“好生意存疑、护城河窄”的观察结论，重点从利润增速转向正常现金回报和资本效率，不输出数字估值。</p>
+<h3 id="section-10">2025年与2026年上半年的利润增长来源</h3>
+<p><strong>2025年是收入基本停滞、利润率修复；2026年上半年则出现收入与毛利率共同改善。主业收入减少与集团净利润增长可以同时发生，因为收入还要扣除成本和费用才能形成利润。报表事实与可复算结果证据等级：高；改善持续性判断：中。</strong></p>
+<p>下表分别比较各期间与其上年同期。2025年为全年，2026年为上半年，不直接比较两个期间的利润金额。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>观察项目</th>
+<th>2025年相对2024年</th>
+<th>2026年上半年相对2025年上半年</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>集团收入</td>
+<td>+0.01%，基本持平</td>
+<td>+11.97%，恢复增长</td>
+</tr>
+<tr>
+<td>主业收入，含建造工程</td>
+<td>−4.21%</td>
+<td>+5.33%</td>
+</tr>
+<tr>
+<td>创新业务收入</td>
+<td>+13.17%</td>
+<td>+28.93%</td>
+</tr>
+<tr>
+<td>综合毛利率</td>
+<td>43.83% → 45.88%</td>
+<td>45.19% → 49.97%</td>
+</tr>
+<tr>
+<td>归母净利润</td>
+<td>+18.52%</td>
+<td>+39.57%</td>
+</tr>
+<tr>
+<td>扣非归母净利润</td>
+<td>约+15.98%</td>
+<td>+40.50%</td>
+</tr>
+<tr>
+<td>财务费用变化对税前利润的影响</td>
+<td>改善，贡献约4.11亿元</td>
+<td>转差，拖累约10.86亿元</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td>+91.04%，应收项目释放贡献显著</td>
+<td>−39.52%，备货占用现金</td>
+</tr>
+</tbody>
+</table></div>
+<p>2026年上半年新增毛利约一半来自收入增长，另一半来自综合毛利率提高；销售、管理和研发费用增长5.64%，也慢于收入增长。相比2025年，经营改善的范围扩大，但库存增加与投资收益的可重复性仍影响对未来利润和现金回报的判断。2026年中期财务报告未经审计。</p>
+<h4 id="section-11">2025年主业收入减少，毛利润仍增加</h4>
+<p>主业产品及服务收入由679.63亿元降至650.12亿元，减少29.51亿元；对应营业成本由368.61亿元降至331.14亿元，减少37.47亿元。成本减少得更多，使毛利率由45.76%升至49.07%，毛利润增加7.96亿元。</p>
+<p>创新业务收入增加29.62亿元，基本抵消了含工程主业的29.50亿元收入下降。创新业务毛利率虽然下降，收入扩张仍带来9.38亿元新增毛利；建造工程另贡献1.64亿元。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>业务，亿元</th>
+<th style="text-align:right">2024年毛利润</th>
+<th style="text-align:right">2025年毛利润</th>
+<th style="text-align:right">增量</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主业产品及服务</td>
+<td style="text-align:right">311.02</td>
+<td style="text-align:right">318.99</td>
+<td style="text-align:right">+7.96</td>
+</tr>
+<tr>
+<td>主业建造工程</td>
+<td style="text-align:right">4.24</td>
+<td style="text-align:right">5.88</td>
+<td style="text-align:right">+1.64</td>
+</tr>
+<tr>
+<td>创新业务</td>
+<td style="text-align:right">90.15</td>
+<td style="text-align:right">99.54</td>
+<td style="text-align:right">+9.38</td>
+</tr>
+<tr>
+<td>集团合计</td>
+<td style="text-align:right">405.42</td>
+<td style="text-align:right">424.40</td>
+<td style="text-align:right">+18.99</td>
+</tr>
+</tbody>
+</table></div>
+<p>毛利润是收入减营业成本，尚未扣除销售、管理、研发、减值和税项。表格使用原始金额计算后分别四舍五入。现有披露能确认成本下降快于收入，但不足以将毛利率改善精确分配给提价、采购降本或产品组合，也不能据此单独确认定价权增强。</p>
+<h4 id="section-12">从新增毛利到归母利润，还受汇兑、减值和费用基数影响</h4>
+<p>2025年归母净利润由119.77亿元增至141.95亿元，增加22.18亿元。下表先列税前收支变化，再扣除所得税和少数股东分成，说明这笔增量如何形成。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>变化项目</th>
+<th style="text-align:right">对利润增量的还原金额，亿元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>毛利润增加</td>
+<td style="text-align:right">+18.99</td>
+</tr>
+<tr>
+<td>销售、管理和研发费用合计增加</td>
+<td style="text-align:right">−0.84</td>
+</tr>
+<tr>
+<td>财务费用改善</td>
+<td style="text-align:right">+4.11</td>
+</tr>
+<tr>
+<td>信用减值损失减少</td>
+<td style="text-align:right">+2.68</td>
+</tr>
+<tr>
+<td>其余收支项目净变化</td>
+<td style="text-align:right">+1.76</td>
+</tr>
+<tr>
+<td>所得税费用增加</td>
+<td style="text-align:right">−3.77</td>
+</tr>
+<tr>
+<td>少数股东损益增加</td>
+<td style="text-align:right">−0.75</td>
+</tr>
+<tr>
+<td>归母净利润增加</td>
+<td style="text-align:right">+22.18</td>
+</tr>
+</tbody>
+</table></div>
+<p>汇兑由2024年损失2.91亿元转为2025年收益2.75亿元，结合利息等变化，使财务费用改善4.11亿元。信用减值损失由10.69亿元降至8.01亿元，另增加2.68亿元税前利润。销售、管理和研发费用合计仍略有增加，不能把利润增长概括为大幅削减这些费用。</p>
+<p>2024年因取消、修改股权激励计划一次性确认4.71亿元股份支付费用，压低了当年的利润基数；2025年没有这项一次性费用。这项变化已经反映在利润表相关成本费用中，不能在上表之外再次相加。扣非归母净利润仍增长约15.98%，说明改善并非全部来自该基数因素；汇兑、减值和产品毛利率的变化仍需分别判断可持续性。</p>
+<p>合并净利润由131.41亿元增至154.34亿元，其中包括少数股东的利润；归母净利润由119.77亿元增至141.95亿元，代表归属海康威视母公司股东的部分。2025年合并净利润中有12.38亿元归少数股东，因此研究海康股东回报时应重点看归母利润。</p>
+<h3 id="section-13">2026年上半年经营更新</h3>
+<p><strong>主业已恢复增长，利润增速明显高于收入，但经营现金流下降。报表事实及可复算结果的证据等级：高；增长持续性判断：中。</strong></p>
+<p>本节采用2026年7月25日披露的半年报及4月18日披露的一季报，公告检索截至2026年9月29日。两份财务报告均未经审计。损益与现金流比较2026年上半年和2025年上半年；资产余额比较2026年6月末和2025年末。</p>
+<h4 id="section-14">收入与盈利已经改善，现金表现有所回落</h4>
+<p>金额单位：亿元；毛利率、净利率及ROE的变化以百分点表示。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>指标</th>
+<th style="text-align:right">2025年上半年</th>
+<th style="text-align:right">2026年上半年</th>
+<th style="text-align:right">同比变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营业收入</td>
+<td style="text-align:right">418.18</td>
+<td style="text-align:right">468.23</td>
+<td style="text-align:right">+11.97%</td>
+</tr>
+<tr>
+<td>主业收入，含建造工程</td>
+<td style="text-align:right">300.52</td>
+<td style="text-align:right">316.53</td>
+<td style="text-align:right">+5.33%</td>
+</tr>
+<tr>
+<td>创新业务收入</td>
+<td style="text-align:right">117.66</td>
+<td style="text-align:right">151.70</td>
+<td style="text-align:right">+28.93%</td>
+</tr>
+<tr>
+<td>毛利润</td>
+<td style="text-align:right">188.99</td>
+<td style="text-align:right">233.96</td>
+<td style="text-align:right">+23.80%</td>
+</tr>
+<tr>
+<td>综合毛利率</td>
+<td style="text-align:right">45.19%</td>
+<td style="text-align:right">49.97%</td>
+<td style="text-align:right">+4.78个百分点</td>
+</tr>
+<tr>
+<td>归母净利润</td>
+<td style="text-align:right">56.57</td>
+<td style="text-align:right">78.96</td>
+<td style="text-align:right">+39.57%</td>
+</tr>
+<tr>
+<td>扣非归母净利润</td>
+<td style="text-align:right">54.89</td>
+<td style="text-align:right">77.12</td>
+<td style="text-align:right">+40.50%</td>
+</tr>
+<tr>
+<td>归母净利率</td>
+<td style="text-align:right">13.53%</td>
+<td style="text-align:right">16.86%</td>
+<td style="text-align:right">+3.33个百分点</td>
+</tr>
+<tr>
+<td>基本每股收益，元/股</td>
+<td style="text-align:right">0.615</td>
+<td style="text-align:right">0.862</td>
+<td style="text-align:right">+40.16%</td>
+</tr>
+<tr>
+<td>加权平均ROE，半年口径</td>
+<td style="text-align:right">6.85%</td>
+<td style="text-align:right">9.17%</td>
+<td style="text-align:right">+2.32个百分点</td>
+</tr>
+<tr>
+<td>经营活动现金流净额</td>
+<td style="text-align:right">53.43</td>
+<td style="text-align:right">32.31</td>
+<td style="text-align:right">−39.52%</td>
+</tr>
+<tr>
+<td>购建长期资产现金支出</td>
+<td style="text-align:right">19.78</td>
+<td style="text-align:right">14.95</td>
+<td style="text-align:right">−24.42%</td>
+</tr>
+<tr>
+<td>经营现金流减上述资本支出</td>
+<td style="text-align:right">33.65</td>
+<td style="text-align:right">17.37</td>
+<td style="text-align:right">−48.39%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年主业收入下降4.21%，2026年上半年同比增长5.33%，最新事实支持“主业恢复增长”的判断。现金流减全部资本支出是简化自由现金流，未拆分维持与扩张投入，不等于正常化股东收益。</p>
+<p>第二季度延续了增长。用半年累计减一季度，第二季度收入为261.07亿元，同比增长12.11%；归母净利润51.15亿元，同比增长41.34%。一季度收入和归母净利润分别增长11.78%和36.42%，改善延续了两个季度；这仍不足以确定全年增速。</p>
+<h4 id="section-15">新增收入主要来自创新业务，境内三大客户群也转为增长</h4>
+<p>总收入增加50.04亿元，其中创新业务增加34.04亿元，贡献约68%；主业增加16.01亿元，贡献约32%。创新业务仍是主要增长来源，主业的改善也已经能从收入中观察到。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>境内客户群与境外主业，按公司事业群表</th>
+<th style="text-align:right">2025年上半年收入</th>
+<th style="text-align:right">2026年上半年收入</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>境内公共服务事业群</td>
+<td style="text-align:right">55.73</td>
+<td style="text-align:right">58.33</td>
+<td style="text-align:right">+4.67%</td>
+</tr>
+<tr>
+<td>境内企事业事业群</td>
+<td style="text-align:right">74.62</td>
+<td style="text-align:right">77.33</td>
+<td style="text-align:right">+3.63%</td>
+</tr>
+<tr>
+<td>境内中小企业事业群</td>
+<td style="text-align:right">40.67</td>
+<td style="text-align:right">46.18</td>
+<td style="text-align:right">+13.55%</td>
+</tr>
+<tr>
+<td>境外主业</td>
+<td style="text-align:right">122.31</td>
+<td style="text-align:right">129.45</td>
+<td style="text-align:right">+5.84%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年下滑最明显的中小企业业务出现反弹，公共服务和企事业业务也恢复温和增长。境外主业增长5.84%；包括创新业务在内的境外总收入增长10.63%，两者代表不同范围。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>创新业务类别</th>
+<th style="text-align:right">2025年上半年收入</th>
+<th style="text-align:right">2026年上半年收入</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器人</td>
+<td style="text-align:right">31.38</td>
+<td style="text-align:right">40.28</td>
+<td style="text-align:right">+28.34%</td>
+</tr>
+<tr>
+<td>热成像</td>
+<td style="text-align:right">20.08</td>
+<td style="text-align:right">29.64</td>
+<td style="text-align:right">+47.61%</td>
+</tr>
+<tr>
+<td>智能家居</td>
+<td style="text-align:right">27.52</td>
+<td style="text-align:right">28.17</td>
+<td style="text-align:right">+2.35%</td>
+</tr>
+<tr>
+<td>汽车电子</td>
+<td style="text-align:right">23.52</td>
+<td style="text-align:right">27.64</td>
+<td style="text-align:right">+17.50%</td>
+</tr>
+<tr>
+<td>存储</td>
+<td style="text-align:right">10.33</td>
+<td style="text-align:right">19.44</td>
+<td style="text-align:right">+88.18%</td>
+</tr>
+<tr>
+<td>其他创新业务</td>
+<td style="text-align:right">4.82</td>
+<td style="text-align:right">6.52</td>
+<td style="text-align:right">+35.47%</td>
+</tr>
+</tbody>
+</table></div>
+<p>热成像、存储和机器人合计贡献约81%的创新业务新增收入。智能家居仅增长2.35%，各业务的增长力度并不一致。</p>
+<p>公司在半年报中将业务进展与场景数字化拓展、中小企业渠道运营改善、海外本地化及产品结构优化联系起来，并披露观澜大模型与软硬件产品融合。但半年报没有量化AI新增收入，也未给出完整销量、价格和终端库存分解。因此可以确认哪些业务增长，尚不能把11.97%的总收入增长归因于AI，或把渠道收入反弹等同于终端需求全面复苏。经营解释的证据等级：中。</p>
+<h4 id="section-16">利润增长更快，核心在毛利改善与费用增长较慢</h4>
+<p>收入增长11.97%，营业成本只增长2.21%，使毛利润增加44.97亿元。主业产品及服务毛利率由48.52%升至53.91%；创新业务毛利率由38.28%升至44.35%。两类业务内部的盈利能力都在改善。建造工程毛利率则由24.74%降至15.86%，并非所有业务都改善。</p>
+<p>按上年综合毛利率计算，新增收入对应约22.62亿元新增毛利；本期毛利率提高对应约22.36亿元新增毛利。这个拆分说明收入扩张和毛利率改善的作用大致相当，但不能据此区分涨价、采购成本下降或各业务内部产品组合的贡献。创新业务毛利率仍低于主业产品及服务，不能用“创新收入占比提高”单独解释综合毛利率上升。</p>
+<p>公司在7月25日业绩说明会上承认，前期部分低价库存销售增厚了上半年利润，同时将毛利率改善的主要原因归于产品竞争力、产品线梳理和行业竞争变化。各因素贡献没有量化拆分，因此不能将毛利率提升全部归于经营效率，也不能假定低价库存收益可以持续重复。管理层解释的证据等级：中。</p>
+<p>销售、管理和研发费用合计由127.65亿元增至134.84亿元，增长5.64%，慢于收入增长；三项合计费用率由30.52%降至28.80%。公司并未削减这些费用总额，而是用更大的收入和毛利覆盖了费用。其中研发投入由56.70亿元增至61.69亿元，同比增长8.80%。</p>
+<p>归母净利润的增加可以从利润表逐项还原。下表为2026年上半年相对2025年上半年的增量，金额单位为亿元；所得税和少数股东分成在末端统一扣除。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>变化项目</th>
+<th style="text-align:right">对归母利润增量的还原金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>毛利润增加</td>
+<td style="text-align:right">+44.97</td>
+</tr>
+<tr>
+<td>销售、管理和研发费用增加</td>
+<td style="text-align:right">−7.20</td>
+</tr>
+<tr>
+<td>投资收益增加</td>
+<td style="text-align:right">+6.96</td>
+</tr>
+<tr>
+<td>财务费用转差</td>
+<td style="text-align:right">−10.86</td>
+</tr>
+<tr>
+<td>其他经营及营业外项目净变动</td>
+<td style="text-align:right">−0.24</td>
+</tr>
+<tr>
+<td>所得税增加</td>
+<td style="text-align:right">−5.23</td>
+</tr>
+<tr>
+<td>少数股东损益增加</td>
+<td style="text-align:right">−6.03</td>
+</tr>
+<tr>
+<td>归母净利润增加</td>
+<td style="text-align:right">+22.38</td>
+</tr>
+</tbody>
+</table></div>
+<p>投资收益由亏损0.37亿元转为收益6.59亿元，其中权益法投资收益为6.16亿元；杭州海康智慧产业股权投资基金一项确认收益6.22亿元，是主要来源。这部分需要与产品经营分开观察，不能全部当作摄像机、机器人等产品销售带来的利润。半年报没有展开基金收益的底层来源与可重复性。</p>
+<p>扣非归母净利润增长40.50%，说明公司披露的非经常性损益并非利润增量的主要来源。不过，“扣非”也不等于剔除了全部投资收益。权益法收益和正常经营相关退税等仍需单独评估持续性。</p>
+<p>汇率对利润构成拖累：上年同期汇兑收益6.07亿元，本期转为汇兑损失5.95亿元，前后相差12.01亿元。连同利息等项目，财务费用从净收益7.39亿元转为净费用3.46亿元。因此本期利润增长并非汇兑收益推动。</p>
+<p><a id="inventory-analysis"></a></p>
+<h4 id="section-17">存货扩张、备货原因与现金流</h4>
+<p>经营现金流由2025年上半年的53.43亿元降至2026年上半年的32.31亿元。同期销售收现由497.01亿元增至539.37亿元，增长8.52%；购买商品、接受劳务支付的现金由300.95亿元增至349.46亿元，增加48.51亿元、增长16.12%。采购支出增长更快，职工和税费支出也增加。</p>
+<p>2025年上半年库存几乎未变，全年温和增加；2026年上半年出现明显扩张。下表金额均为亿元，存货净额已扣除跌价准备；现金流补充资料的负数统一列为存货增加额。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>期间</th>
+<th style="text-align:right">期初存货净额</th>
+<th style="text-align:right">期末存货净额</th>
+<th style="text-align:right">净额增加</th>
+<th style="text-align:right">现金流补充资料存货增加额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025年上半年</td>
+<td style="text-align:right">191.11</td>
+<td style="text-align:right">191.25</td>
+<td style="text-align:right">0.14</td>
+<td style="text-align:right">2.52</td>
+</tr>
+<tr>
+<td>2025年全年</td>
+<td style="text-align:right">191.11</td>
+<td style="text-align:right">204.72</td>
+<td style="text-align:right">13.61</td>
+<td style="text-align:right">18.04</td>
+</tr>
+<tr>
+<td>2026年上半年</td>
+<td style="text-align:right">204.72</td>
+<td style="text-align:right">294.88</td>
+<td style="text-align:right">90.16</td>
+<td style="text-align:right">92.35</td>
+</tr>
+</tbody>
+</table></div>
+<p>2026年6月末存货较2025年末增加44.04%，较2025年6月末增加54.19%。与上年同期相比，收入增长11.97%、营业成本增长2.21%，库存金额增长明显快于已实现销售和成本结转。上年同期库存基本稳定，不支持仅用常规上半年备货解释本期变化。</p>
+<p>净额增加90.16亿元，与现金流补充资料中的92.35亿元分别反映余额变化和营运资本调整。按附注数字核对如下，单位为亿元：</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>从存货净额变化到现金流调整</th>
+<th style="text-align:right">金额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存货净额增加</td>
+<td style="text-align:right">90.1595</td>
+</tr>
+<tr>
+<td>加：计入损益的存货跌价损失</td>
+<td style="text-align:right">2.2287</td>
+</tr>
+<tr>
+<td>加：存货转入固定资产</td>
+<td style="text-align:right">0.1593</td>
+</tr>
+<tr>
+<td>加：跌价准备外币折算差额</td>
+<td style="text-align:right">−0.2014</td>
+</tr>
+<tr>
+<td>现金流补充资料存货增加额</td>
+<td style="text-align:right">92.3461</td>
+</tr>
+</tbody>
+</table></div>
+<p>上述项目用原始金额相加与现金流附注一致。92.35亿元是将净利润调成经营现金流时的调整额，不是单独新增的采购现金支出；实际付款还受应付账款、预付款等变化影响。</p>
+<p>库存增加集中在原材料和产成品。下表按账面净额计算，金额为亿元。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>存货类别</th>
+<th style="text-align:right">2025全年增加</th>
+<th style="text-align:right">2026上半年增加</th>
+<th style="text-align:right">2026年6月末余额</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>原材料</td>
+<td style="text-align:right">1.50</td>
+<td style="text-align:right">40.76</td>
+<td style="text-align:right">100.18</td>
+</tr>
+<tr>
+<td>产成品</td>
+<td style="text-align:right">10.12</td>
+<td style="text-align:right">42.82</td>
+<td style="text-align:right">174.55</td>
+</tr>
+<tr>
+<td>在产品</td>
+<td style="text-align:right">0.34</td>
+<td style="text-align:right">4.55</td>
+<td style="text-align:right">12.11</td>
+</tr>
+<tr>
+<td>合同履约成本</td>
+<td style="text-align:right">1.66</td>
+<td style="text-align:right">2.02</td>
+<td style="text-align:right">8.04</td>
+</tr>
+<tr>
+<td>合计，按原始金额计算</td>
+<td style="text-align:right">13.61</td>
+<td style="text-align:right">90.16</td>
+<td style="text-align:right">294.88</td>
+</tr>
+</tbody>
+</table></div>
+<p>原材料和产成品分别贡献2026年上半年净增量的45.21%和47.50%。原材料增加符合提前备料的方向，产成品增加则还需要由销售和回款验证。</p>
+<p>供给紧张是公司明确披露的备货动机。7月25日业绩说明会将全球AI运算中心需求增长与存储、电子元器件涨价及缺货联系起来，并说明从2025年9月开始的涨价促使公司增加紧缺物料库存，保障产品稳定交付。原文直接写道：</p>
+<blockquote>
+<p>“为应对电子元器件的价格普遍上涨和部分缺货，公司的存货由年初的204.72亿元增长至年中的294.88亿元。”</p>
+</blockquote>
+<p>这支持主动保供备货的解释，但不能单独证明全部新增库存都必要、采购价格合理或最终能够顺利售出。涨价可能抬高新增采购的单位成本，存货金额增长不等于实物数量等幅增长；旧库存也不会仅因市场涨价自动调高账面价值。公司尚未量化价格与数量对本期增量的各自贡献。</p>
+<p>主业与创新业务的库存归属尚不能量化。已核对的半年报和7月说明会披露了分业务收入，但没有对应的分业务库存余额或增量。“存储物料”是采购品类，不等于创新业务中的“海康存储”；不能按收入占比分摊库存。因此目前能确认库存的会计类别及公司披露的保供动机，不能判断新增90.16亿元主要由哪一业务占用。</p>
+<p>应收账款净额由年末298.12亿元降至277.84亿元。现金流补充资料中，经营性应收项目释放18.53亿元，少于上年同期35.96亿元；经营性应付项目由上年同期占用58.40亿元转为释放3.87亿元，部分抵消了库存压力。经营现金流占合并净利润的比例由85.06%降至35.42%，经营现金流减全部现金资本支出由33.65亿元降至17.37亿元，现金转化有所减弱。</p>
+<p>⚠️ **跟踪1：**原材料和产成品能否随交付消化，并通过回款释放资金。</p>
+<p>⚠️ **跟踪2：**前期低价库存销售完毕后，毛利率能否保持；涨价是否抑制下游采购。</p>
+<p>⚠️ **跟踪3：**新增备货能否带来足以覆盖资金占用和跌价风险的收益。主动备货有经营依据，具体规模与回报仍需后续结果验证。</p>
+<p>**证据等级：**报表原文、金额计算及说明会陈述的核实为高；两份中报未经审计。备货合理性、库存消化和持续性判断为中；新老业务库存归属未核实。</p>
+<h3 id="section-18">积极变化的持续性与生意质量判断</h3>
+<p><strong>海康现有盈利能力较强，2025年至2026年上半年的经营改善已获验证；长期保持高资本回报仍待验证。报表事实证据等级：高；持续性判断：中。2026年中期财务报告未经审计。</strong></p>
+<h4 id="section-19">“好生意存疑”指向长期回报的确定性</h4>
+<p>持续研发和渠道投入本身不能作为生意不好的依据。海康是在扣除这些费用后仍实现较高利润；已经费用化的研发也不应再次从净利润中扣除。关键在于这些投入能否持续带来有竞争力的产品，以及新增收入需要增加多少库存、应收和长期资产，最终能留下多少归母利润和现金。</p>
+<p>现有证据已经支持经营恢复：2025年主业在收入下降时仍增加了毛利润；2026年上半年，主业与创新业务的收入和毛利率都改善了。对长期回报保留判断，主要涉及三个具体问题：毛利率提高中有多少可持续的定价、产品组合和成本改善；新增库存能否顺利交付回款；创新业务扣除再投资和少数股东分成后，能为海康股东贡献多少回报。研究资料尚不完整只限制相应结论，不能反过来证明公司不是好生意。</p>
+<h4 id="section-20">利润改善、保持利润水平与继续高速增长是三个不同问题</h4>
+<p>2026年上半年归母净利润增长39.57%，是已发生的事实。若毛利率保持在较高水平，它能够支撑较高利润；但若毛利率不再继续提高，就不会每年产生同样规模的新增毛利，后续利润增长会更依赖收入扩大和费用效率。较高利润可以持续，与接近40%的增速可以持续，不能画等号。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>积极变化</th>
+<th>对持续性的判断</th>
+<th>需要验证的条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主业恢复增长</td>
+<td>延续的可能性提高，长期趋势仍待确认</td>
+<td>2026年上半年境内三大客户群均转正；后续采购和回款需要继续支持收入增长</td>
+</tr>
+<tr>
+<td>创新业务扩张</td>
+<td>有持续增长基础，当前高增速不宜外推</td>
+<td>2025年收入增长13.17%、2026年上半年增长28.93%；需继续转成毛利、归母利润和现金</td>
+</tr>
+<tr>
+<td>毛利率提高</td>
+<td>较高利润率可能保持，提升速度不能长期照搬</td>
+<td>主业与创新业务均改善；公司承认部分低价库存收益，需观察旧库存消化后的成本及竞争变化</td>
+</tr>
+<tr>
+<td>费用率下降</td>
+<td>具有条件性的持续性</td>
+<td>收入持续增长快于费用，现有研发和渠道投入才能被更多收入分摊</td>
+</tr>
+<tr>
+<td>汇兑、一次性费用减少与基金收益</td>
+<td>不作为稳定增长来源</td>
+<td>2025年汇兑助推利润，2026年上半年已转为拖累；基金收益需单独评估底层来源与可重复性</td>
+</tr>
+<tr>
+<td>应收回收带来的现金释放</td>
+<td>回收成果有价值，现金增量不能每年重复</td>
+<td>收回旧账改善资产质量，但不代表每年都会释放同样规模的资金</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-21">库存消化与现金回报将决定下一步判断</h4>
+<p>备货已有应对涨价与缺货的公开解释，具体构成和现金影响见<a href="#inventory-analysis">存货分析</a>。若库存随交付销售并收回现金，就是支持经营的投入；若销售不及预期，则会继续占用资金并可能产生跌价损失。单个半年的现金波动不足以否定整个生意，后续库存消化与累计现金回报更有判断价值。</p>
+<p>后续几个报告期，以下变化若共同出现，将支持上调生意质量判断：</p>
+<ol>
+<li><strong>主业增长与毛利率保持。</strong> 境内客户群继续增长，较高毛利率没有以明显放宽信用或牺牲终端销售为代价。</li>
+<li><strong>库存转成现金。</strong> 原材料和产成品随交付消化，应收质量没有同步恶化，累计经营现金流与利润的匹配改善。</li>
+<li><strong>创新业务形成股东回报。</strong> 收入扩张能够覆盖研发、渠道、库存和长期资产投入，并在少数股东分成后增加海康股东的利润与现金回报。</li>
+</ol>
+<p>相反，若库存继续积压、现金转化迟迟不改善，或毛利率提高主要依赖难以重复的成本和投资因素，就应降低对持续回报的预期。当前保留观察结论，认可经营改善，并将接近40%的利润增速视为本期结果，不作为长期增长假设。</p>
+<h2 id="section-22">Part 1 — 定性分析</h2>
+<h2 id="section-23">§1商业模式</h2>
+<h3 id="section-24">§1.1公司核心资产、主营产品和服务</h3>
+<p>海康威视向企业、公共机构和家庭出售摄像机、录像与存储设备、传感器及配套软件，把现场画面和其他信号转成可检索的记录、告警和操作指令。企业或集成商为设备、软件、工程交付和服务付钱；海康从设计、生产、渠道和系统交付中赚取毛利。其核心不是单个摄像头，而是覆盖不同环境和任务的设备与软件组合。</p>
+<p class="table-heading"><strong>按业务划分</strong><span class="table-meta">2025年 · 亿元</span></p>
+<div class="table-scroll"><table class="hierarchy-table"><thead><tr><th>收入类别</th><th>收入</th><th>占总收入</th></tr></thead><tbody>
+<tr class="hierarchy-group"><td>主业</td><td>670.62</td><td>72.49%</td></tr>
+<tr><td class="hierarchy-level-2">产品及服务</td><td>650.12</td><td>70.28%</td></tr>
+<tr><td class="hierarchy-level-2">建造工程</td><td>20.49</td><td>2.22%</td></tr>
+<tr class="hierarchy-group"><td>创新业务</td><td>254.46</td><td>27.51%</td></tr>
+<tr><td class="hierarchy-level-2">机器人</td><td>64.52</td><td>6.97%</td></tr>
+<tr><td class="hierarchy-level-2">智能家居</td><td>56.84</td><td>6.14%</td></tr>
+<tr><td class="hierarchy-level-2">汽车电子</td><td>52.89</td><td>5.72%</td></tr>
+<tr><td class="hierarchy-level-2">热成像</td><td>44.43</td><td>4.80%</td></tr>
+<tr><td class="hierarchy-level-2">存储</td><td>23.80</td><td>2.57%</td></tr>
+<tr><td class="hierarchy-level-2">其他创新业务</td><td>11.98</td><td>1.30%</td></tr>
+<tr class="hierarchy-total"><td>合计</td><td>925.08</td><td>100.00%</td></tr>
+</tbody></table></div>
+<p>机器人业务包括机器视觉和移动机器人：前者在产线上检测、定位和测量，后者搬运货物。智能家居通过萤石摄像机、智能门锁等设备及相关服务面向家庭。汽车电子、热成像和存储分别面对车载感知、测温及工业/户外成像、数据存储等需求。它们可以复用部分技术与供应链，但客户、竞争者和盈利条件不同，不能全部按传统安防生意评价。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>利润池</th>
+<th style="text-align:right">收入</th>
+<th style="text-align:right">毛利额</th>
+<th style="text-align:right">毛利率</th>
+<th>经济意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主业产品及服务</td>
+<td style="text-align:right">650.12</td>
+<td style="text-align:right">318.99</td>
+<td style="text-align:right">49.07%</td>
+<td>仍是主要毛利来源，占集团毛利约75.2%</td>
+</tr>
+<tr>
+<td>主业建造工程</td>
+<td style="text-align:right">20.49</td>
+<td style="text-align:right">5.88</td>
+<td style="text-align:right">28.68%</td>
+<td>规模小，需额外关注验收和回款</td>
+</tr>
+<tr>
+<td>创新业务</td>
+<td style="text-align:right">254.46</td>
+<td style="text-align:right">99.54</td>
+<td style="text-align:right">39.12%</td>
+<td>收入增长较快，但毛利率低于主业</td>
+</tr>
+<tr>
+<td>合计</td>
+<td style="text-align:right">925.08</td>
+<td style="text-align:right">424.40</td>
+<td style="text-align:right">45.88%</td>
+<td>毛利尚需覆盖销售、研发、管理、减值和税项</td>
+</tr>
+</tbody>
+</table></div>
+<p>毛利额按收入减营业成本计算。年报没有把各创新子业务的归母净利润和现金流完整分开，收入占比不能充当利润贡献。</p>
+<p><strong>设计、生产和交付流程：</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>步骤</th>
+<th>输入与输出、责任主体</th>
+<th>成本与约束</th>
+<th>可观察结果及证据等级</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>场景需求与产品定义</td>
+<td>公司与客户、集成商把取证、巡检、质检需求转成成像、识别、存储规格</td>
+<td>场景碎片化，需求理解与部署成本不能省略</td>
+<td>年报披露公共服务和企业场景；高：产品范围，中：交付经济性推断</td>
+</tr>
+<tr>
+<td>研发、软件与试制</td>
+<td>自研感知、编码、算法、软硬件组合，再进入生产</td>
+<td>研发投入117.53亿元；具体试制周期及良率未披露</td>
+<td>研发资本化为零；高。试制效率尚不能量化</td>
+</tr>
+<tr>
+<td>采购与量产</td>
+<td>供应商供料，公司生产基地组织多品种、小批量定制</td>
+<td>物料、自动化设备、排产与备货；芯片供应限制会传导至设计和交期</td>
+<td>年产2.77亿台、3万余硬件型号，定制配置订单占75%，均为公司披露；高：披露值</td>
+</tr>
+<tr>
+<td>质控与出库</td>
+<td>公司以数字化质量管理和标准作业管控生产，再经仓网配送</td>
+<td>故障、返工、库存和物流费用；未披露可比较的故障率和单件成本</td>
+<td>公司披露区域仓24小时发货率95%以上；中：未经客户独立核实</td>
+</tr>
+<tr>
+<td>安装、验收与售后</td>
+<td>经销商、安装商、集成商及公司共同完成现场交付</td>
+<td>兼容性、现场调试、服务响应和客户付款</td>
+<td>国内近300个地市服务网点；高：网络数量，中：客户体验</td>
+</tr>
+<tr>
+<td>反馈与下一代产品</td>
+<td>现场问题反馈产品与算法迭代</td>
+<td>是否降低客户总成本，决定更新采购意愿</td>
+<td>年报有应用案例，未披露同类客户续购率；中</td>
+</tr>
+</tbody>
+</table></div>
+<p>集团销量2.665亿台/件涵盖大量不同产品，不能拿925亿元收入直接除以销量，声称得到了“摄像机平均售价”。现有证据能说明规模化定制的组织难度，不能证明单位成本最低。研发、销售和库存是维持竞争力的真实消耗，不因财务资本开支较低而消失。</p>
+<h3 id="section-25">§1.2公司客户</h3>
+<p>海康的购买者、使用者和付款者经常不是同一个主体。小商铺通过安装商买设备，企业与公共机构通常通过集成商或项目体系采购，家庭购买萤石等产品。客户看重的顺序随场景变化：普通门店首先关注总价、安装与维护；产线质检和安全生产更关心漏检、误报、停机与可靠交付；公共项目还要满足合规和采购资质。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>国内主业客户群</th>
+<th style="text-align:right">2023年收入</th>
+<th style="text-align:right">2024年收入</th>
+<th style="text-align:right">2025年收入</th>
+<th style="text-align:right">2025年变化</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>公共服务</td>
+<td style="text-align:right">153.54</td>
+<td style="text-align:right">134.67</td>
+<td style="text-align:right">129.12</td>
+<td style="text-align:right">−4.12%</td>
+</tr>
+<tr>
+<td>企事业</td>
+<td style="text-align:right">178.45</td>
+<td style="text-align:right">176.51</td>
+<td style="text-align:right">170.63</td>
+<td style="text-align:right">−3.33%</td>
+</tr>
+<tr>
+<td>中小企业</td>
+<td style="text-align:right">126.79</td>
+<td style="text-align:right">119.71</td>
+<td style="text-align:right">88.17</td>
+<td style="text-align:right">−26.35%</td>
+</tr>
+</tbody>
+</table></div>
+<p>单位：亿元；三类为境内主业披露口径，不含创新业务。前五大客户仅占集团收入2.00%，说明开票客户分散，却不能证明终端需求彼此独立：不同集成商仍可能共同受到地方财政、企业投资和门店开支的影响。</p>
+<h3 id="section-26">§1.3差异化</h3>
+<p>海康较有说服力的竞争基础是：同一个客户能够买齐感知、存储、显示、软件与服务，并由熟悉产品的渠道完成选型、调试和售后。对零散工程，这可能减少安装商的工作；对复杂系统，已有设备和工作流可能增加迁移成本。但这是场景相关的优势，普通新增摄像头订单仍容易被价格竞争影响。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>竞争层级</th>
+<th>具名对象或替代方式</th>
+<th>海康需要证明什么</th>
+<th>当前可下的判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>相近安防与物联产品</td>
+<td>大华股份</td>
+<td>同一项目总价、误报率、故障率、交期及服务是否更好</td>
+<td>不能只凭集团规模断定每个产品更强</td>
+</tr>
+<tr>
+<td>企业级系统与高端视频</td>
+<td>华为、Axis</td>
+<td>是否在相同合规和采购条件下更有价值</td>
+<td>必须按市场和项目区分，不能跨价格带强行比较</td>
+</tr>
+<tr>
+<td>工业视觉和物流自动化</td>
+<td>专业机器视觉、机器人供应商</td>
+<td>检测效果、产线适配、投资回收期、维护成本</td>
+<td>传统安防优势不会自动变成工业竞争优势</td>
+</tr>
+<tr>
+<td>完成相同任务的替代方案</td>
+<td>人工巡检、通用相机加第三方软件、继续使用旧设备</td>
+<td>节约的人力、损失与升级成本能否覆盖采购价</td>
+<td>不采购或延后采购也是重要竞争者</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>产品竞争力三问结论：</strong></p>
+<ol>
+<li><strong>客户为什么选择并持续选择公司的产品或服务？</strong> 现有安装商熟悉选型和调试，客户可复用设备、操作流程和服务网络；公司披露的区域仓发货速度与全国服务网络支持这种便利性解释。但续购率和提价后的留存未单列，持续选择应视为合理推断，不能写成客户被锁住。</li>
+<li><strong>现有对手为什么不能靠降价或更高性价比抢走客户？</strong> 复杂项目的兼容、交付和售后会抵消部分硬件价差，3万余型号的小批量供货也需要组织能力。不过国内中小企业收入下滑26.35%，已经说明渠道规模不足以隔绝需求和竞争压力；现有证据不支持“对手抢不走客户”。</li>
+<li><strong>新对手携巨资进入，公司凭什么守住并扩大市场？</strong> 资金可以购买芯片、模型和工厂，却不能立即复制现场知识、安装商熟练度与遍布各地的服务。反过来，通用模型若显著降低应用开发门槛，或者大客户偏好开放设备加独立软件，海康的整套交付优势也可能被削弱。扩大份额仍需订单、价格和客户数据证明。</li>
+</ol>
+<p>ONVIF开放标准支持不同厂商合规设备与客户端的基础视频互通，降低了部分基础连接的替代难度。它不保证海康每个型号合规，也不消除专有算法、业务流程和现场改造成本；因此客户黏性应按具体项目评价。</p>
+<p>核心价值机制是交付便利、复杂系统的迁移成本及质量信任。前两者有网络规模、渠道工具和交付披露作为代理支持；第三项缺少跨品牌故障/续购数据，不把它升级为已证实的品牌溢价。高毛利率本身不证明提价能力。</p>
+<h3 id="section-27">§1.4盈利模式</h3>
+<p>2025年每100元收入形成45.88元毛利，之后销售费用约13.35元、研发12.70元、管理3.24元，最终归母净利15.35元。海康的经济模型更接近持续研发和渠道投入支撑的设备与解决方案公司；尚不能把整个集团看成按年续费的软件公司。</p>
+<p>合并净利润154.34亿元中，12.38亿元归少数股东，归母利润141.95亿元。创新业务收入全部并表并不意味着其利润全部归海康普通股股东；不能把萤石等子公司价值全额相加，再叠加已包含其利润的集团估值。</p>
+<h3 id="section-28">§1.5生意特性</h3>
+<p>安防、生产安全和工业检测的需求有长期用途，但采购节奏受预算、建设投资、更新周期及合规条件影响。海康能够用技术升级创造新需求，也必须不断投入来防止产品落后。它不具备资源特许经营的排他性，也没有证据表明可以持续无损提价。</p>
+<p>2025年主业产品毛利率上升3.31个百分点，说明盈利结构改善；同时主业收入下降4.34%，创新毛利率下降0.98个百分点。更合理的判断是不同产品组合处于不同阶段，不能给整个集团贴上“稳定高增长”标签。</p>
+<h3 id="section-29">§1.6现金流状况</h3>
+<p>2025年经营现金流253.39亿元，比2024年增加120.75亿元。现金流附注中，经营性应收项目由占用42.05亿元转为释放80.12亿元，两年变化122.17亿元，几乎解释了经营现金流的全部增量。这里包含多类经营性应收，不能把它全部等同于应收账款一项。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>现金来源与投入</th>
+<th style="text-align:right">2024年</th>
+<th style="text-align:right">2025年</th>
+<th>对理解2025年的意义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>合并净利润</td>
+<td style="text-align:right">131.41</td>
+<td style="text-align:right">154.34</td>
+<td>利润恢复</td>
+</tr>
+<tr>
+<td>经营性应收项目变化</td>
+<td style="text-align:right">−42.05</td>
+<td style="text-align:right">80.12</td>
+<td>回收以前占用的资金贡献显著</td>
+</tr>
+<tr>
+<td>存货变化</td>
+<td style="text-align:right">−3.00</td>
+<td style="text-align:right">−18.04</td>
+<td>库存占用增加</td>
+</tr>
+<tr>
+<td>经营性应付项目变化</td>
+<td style="text-align:right">4.80</td>
+<td style="text-align:right">7.13</td>
+<td>供应链融资有所增加</td>
+</tr>
+<tr>
+<td>经营现金流</td>
+<td style="text-align:right">132.64</td>
+<td style="text-align:right">253.39</td>
+<td>不能把91.04%的增速外推</td>
+</tr>
+<tr>
+<td>现金资本开支</td>
+<td style="text-align:right">46.66</td>
+<td style="text-align:right">36.22</td>
+<td>固定资产等长期资产付款</td>
+</tr>
+<tr>
+<td>基础自由现金流</td>
+<td style="text-align:right">85.98</td>
+<td style="text-align:right">217.17</td>
+<td>经营现金流减全部现金资本开支</td>
+</tr>
+</tbody>
+</table></div>
+<p>单位：亿元。若仅把2025年应收项目释放80.12亿元调至零，其余不变，经营现金流降至173.28亿元，扣全部现金资本开支后约137.06亿元。这只说明对营运资金变化的敏感性，不是下一年的现金流预测，也不是已确认的股东可分配现金。</p>
+<h3 id="section-30">§1.7已知优秀商业模式特性</h3>
+<p>海康具有分散的开票客户、可复用的研发平台和销售服务网络，这些特征有利于分摊固定投入。相反，应收净额298.12亿元、存货净额204.72亿元表明，公司仍需替交付和信用周期投入大量资金。它并非“先收现金、几乎无库存、轻松涨价”的生意。</p>
+<p>评价重点应是：研发和渠道投入能否在下一轮产品竞争中持续换取足够毛利，以及客户愿不愿意按时付款。2025年利润与回款表现改善，2026年上半年主业也已恢复增长；增长持续性、库存消化及技术迭代的不确定性仍需观察。</p>
+<h3 id="section-31">§1.8 能力圈四问 — 看得懂的标准</h3>
+<p><strong>① 公司靠销售什么商品/服务获取利润？</strong> 公司主要出售摄像机、感知设备、存储和配套软件，并通过渠道及集成项目交付；2025年主业产品及服务收入650.12亿元、毛利318.99亿元，是主要毛利来源。机器人、智能家居、汽车电子等业务增加收入来源，但子业务净利润与归母分成不能用收入占比替代。<strong>证据等级：高。</strong></p>
+<p><strong>② 客户为何从它这里采购，不选其他机构？</strong> 对安装商和企业，统一选型、配套设备、熟悉的调试方式及本地服务可能降低交付风险；公司披露的区域仓、服务网点和产品矩阵支持这一解释。对于普通新增摄像头，价差和开放兼容性仍会影响选择；尚不能声称海康相对大华、Axis或华为在所有场景更优。<strong>证据等级：中。</strong></p>
+<p><strong>③ 资本天性逐利，为什么别的资本没抢走它的份额或逼它降利？</strong> 研发、规模化定制和碎片化渠道需要长期积累，主业产品及服务2025年毛利率49.07%、2026年上半年毛利率53.91%，支持现有能力仍有盈利价值。但毛利率提高中，定价、采购成本和内部产品组合的贡献尚未完整区分；盈利改善已被观察到，长期份额保护与定价能力仍需验证。<strong>证据等级：中。</strong></p>
+<p><strong>④ 假设同行/巨头挟巨资参与竞争，它能否保住乃至扩张份额？</strong> 如果华为等在企业系统加大投入，或大华在相同项目压低总价，海康较能守住的部分是已有设备、工作流、服务和安装经验结合较深的客户；新增标准化设备更容易受冲击。通用人工智能降低算法开发门槛也可能重分配价值，能否扩大份额仍需后续同场景订单和利润验证。<strong>证据等级：中。</strong></p>
+<p><strong>好生意结论:</strong> 存疑</p>
+<p>海康现有盈利能力较强，2025年至2026年上半年的经营恢复已获验证。保留判断的重点是毛利改善的持续来源、备货能否变成现金，以及创新业务的新增资本回报。研发和渠道投入本身不构成否定理由，已费用化的研发也不重复从净利润中扣除。“存疑”指长期高回报仍待验证，不是否定已经发生的经营改善，也不因研究资料尚不完整就认定生意不好。</p>
+<p>若后续主业持续增长、较高毛利率保持、库存消化并带动现金转化改善，应随证据上调生意质量判断。较高利润水平可能持续，但接近40%的利润增速不作为长期假设。</p>
+<h2 id="section-32">§2成长空间/天花板</h2>
+<h3 id="section-33">§2.1行业基本情况 + 竞争格局</h3>
+<p>海康横跨专业视频监控、智能家居和工业感知等市场。它们的购买者、竞争者与更新周期不同，集团收入不能直接对应一个统一的“安防市场占有率”。本报告对持续竞争力的评价主要围绕仍贡献大部分毛利的主业产品，同时单独观察创新业务。</p>
+<h4 id="section-34">市场定义矩阵</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>业务范围</th>
+<th>客户购买的主要用途</th>
+<th>比较时的边界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>专业视频监控与配套软件</td>
+<td>安全、取证、交通和经营管理</td>
+<td>按产品、地域及设备/软件分别比较</td>
+</tr>
+<tr>
+<td>家庭智能设备与服务</td>
+<td>家庭看护、门锁与生活安全</td>
+<td>与专业视频设备的渠道及购买者不同</td>
+</tr>
+<tr>
+<td>工业视觉、移动机器人等</td>
+<td>检测、定位、搬运和生产效率</td>
+<td>应按具体工业任务比较投入回报</td>
+</tr>
+</tbody>
+</table></div>
+<p>这是对公司产品和客户的分类，不能当作行业统计分母。</p>
+<h4 id="section-35">历史市场规模与逐年增速</h4>
+<p>尚未取得可核实的2021—2025年同口径完整市场规模序列，因此不计算五年行业增速。这个缺口限制市场空间的量化，不能反过来说明行业没有需求。</p>
+<h4 id="section-36">行业驱动因素</h4>
+<p>Omdia在2025年2月的智慧城市视频监控报告摘要中列出公共安全、交通管理、灾害和应急响应等用途。这些持续存在的任务解释了需求基础，但客户是否采购、采购多少，仍取决于预算和系统升级带来的效果。海康在这些场景中的产品供给已有年报支持，行业用途本身不等于公司的增长订单。</p>
+<h4 id="section-37">预测版本对照</h4>
+<p>尚未取得定义、发布日期和原始来源一致的2026—2030年预测及历史版本，因此不据此推算公司增长。</p>
+<h4 id="section-38">集中度与竞争对手</h4>
+<p>大华、Axis及企业系统厂商在不同场景中构成竞争；工业视觉、机器人和家庭产品还面对各自的专业供应商。现有证据不足以给出2021—2025年同口径份额、排名变化或2025年CR5/CR10，因此不将集团收入规模转换为市占率结论。</p>
+<p>基础视频互操作已有开放标准支持。ONVIF的2025年公告说明，不同厂商的合规摄像机与视频管理软件可以通过标准实现基础视频流互通。这使“设备天然锁定客户”的说法过强；更可能留下的迁移成本在于专用功能、业务流程、现场施工和培训，具体大小仍取决于项目。</p>
+<h3 id="section-39">§2.2市场规模、增速、供需</h3>
+<h4 id="section-40">当期部分期间</h4>
+<p>截至年度研究基准日2026年4月18日，尚未取得可核实的2026年一季度同口径行业数据。后续公司季报可以说明自身经营变化，不能代替整个行业的需求或份额统计。</p>
+<h4 id="section-41">口径与数据限制</h4>
+<p>设备销售、软件服务、完整工程和家庭产品的统计范围不同。对海康最有用的供需观察仍是客户实际预算、渠道库存和终端采购，而非把各类市场空间相加。2025年境内主业三类客户收入全部下降，与海外及创新业务增长形成分化，说明不能用单一行业增速解释集团表现。</p>
+<h3 id="section-42">§2.3竞争对手营收净利对比</h3>
+<p>海康和大华都能以感知设备、软件及行业解决方案创造收入，但业务组合与合并范围不同。海康2025年集团毛利率、归母净利润和加权ROE更高，说明其现有盈利能力较强；这种差异不能直接归结为相同产品具有更高溢价。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>2025年指标</th>
+<th style="text-align:right">海康威视</th>
+<th style="text-align:right">大华股份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>营业收入（亿元）</td>
+<td style="text-align:right">925.08</td>
+<td style="text-align:right">327.44</td>
+</tr>
+<tr>
+<td>归母净利润（亿元）</td>
+<td style="text-align:right">141.95</td>
+<td style="text-align:right">38.58</td>
+</tr>
+<tr>
+<td>扣非归母净利润（亿元）</td>
+<td style="text-align:right">137.03</td>
+<td style="text-align:right">27.30</td>
+</tr>
+<tr>
+<td>综合毛利率</td>
+<td style="text-align:right">45.88%</td>
+<td style="text-align:right">40.62%</td>
+</tr>
+<tr>
+<td>加权ROE</td>
+<td style="text-align:right">17.30%</td>
+<td style="text-align:right">10.42%</td>
+</tr>
+</tbody>
+</table></div>
+<p>两家收入均增长较慢、利润恢复较快，需分别核对毛利、费用与非经常性损益。大华2025年存在处置子公司导致合并范围变化；海康创新业务比重较高。比较行业竞争力，还需回到相同产品、客户与地域。</p>
+<h3 id="section-43">§2.4行业与公司成长空间</h3>
+<p>海康的机会不只取决于摄像机数量，还取决于设备能否从被动记录升级到工业检测、生产安全、巡检和运营控制。客户付费的理由应是减少损失、节省人工或提高质量，而不是单纯装上新模型。</p>
+<p>2025年汽车电子收入52.89亿元、增长34.95%，是已实现的较快增长来源；机器人64.52亿元、增长8.82%，热成像44.43亿元、增长6.01%。新品类的实际增速差异很大，不能把汽车电子的高增速推广到全部创新业务。</p>
+<h3 id="section-44">§2.5历史成长动力分解</h3>
+<p>2025年主业收入减少29.50亿元，创新业务增加29.62亿元，两者抵消后集团收入只增加0.12亿元。这比“营收保持稳定”更能说明结构变化。创新业务中汽车电子贡献约13.70亿元增量，占创新收入增量约46.2%。</p>
+<p>按另一分类轴，境内收入下降23.79亿元，境外增加23.92亿元。业务与地域是交叉分类，不能把创新增量和海外增量相加，声称二者合计贡献了53亿元增长。</p>
+<h3 id="section-45">§2.6未来成长动力</h3>
+<p>2026年上半年国内基本盘已恢复增长。未来三年需要看到这种改善持续、海外订单在合规约束下增长、创新业务把收入转成归母利润和现金。2025年年报提出的2026年工作重点包括提升海外非视频和非经销项目收入占比，半年报未单独量化这两项占比的实际变化。</p>
+<p>可观察的判断标准是：创新毛利率能否结束下滑；中小企业收入恢复时集团库存是否同步改善；海外增长是否靠健康回款而非延长信用期；新增固定资产是否带来相应收入和现金回报。这些条件比单独追踪人工智能产品发布数量更接近股东价值。</p>
+<h2 id="section-46">§3护城河分析</h2>
+<h3 id="section-47">§3.1定性：公司的护城河有哪些</h3>
+<p>最可能存在的优势来自“大”和“专”：把广泛产品、研发和渠道组合起来，服务大量小规模、不同规格的任务。2025年公司披露3万余硬件型号、定制配置订单占75%，这意味着竞争不只发生在单一产品参数，还发生在能否稳定配齐和交付。</p>
+<p>该优势需要持续投入维护。117.53亿元研发和123.48亿元销售费用不是护城河之外的偶发成本；它们正是维持产品与渠道体系的代价。技术或渠道若标准化，复制难度会下降。</p>
+<h3 id="section-48">§3.2护城河来源因素分析</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>候选优势</th>
+<th>可验证事实</th>
+<th>反证或限制</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>研发规模与产品组合</td>
+<td>研发117.53亿元、3万余型号</td>
+<td>创新业务毛利率下降，未披露单品成本优势</td>
+<td>有组织能力，未证明持续定价权</td>
+</tr>
+<tr>
+<td>渠道与服务密度</td>
+<td>国内近300个地市服务网点，区域仓快速交付</td>
+<td>中小企业收入大幅下降</td>
+<td>有交付价值，不能隔绝需求压力</td>
+</tr>
+<tr>
+<td>既有系统迁移成本</td>
+<td>设备、软件、流程共同交付</td>
+<td>客户可选择开放兼容产品，续购/迁移费用未量化</td>
+<td>复杂项目较强，标准设备较弱</td>
+</tr>
+<tr>
+<td>品牌与信任</td>
+<td>广泛业务覆盖与长期经营</td>
+<td>海外合规限制可能反过来提高购买顾虑</td>
+<td>地域和用途相关，不能一概而论</td>
+</tr>
+</tbody>
+</table></div>
+<p>资源垄断、网络效应和法定排他经营权没有足够证据，不列为已证实优势。</p>
+<h3 id="section-49">§3.3产品差异化</h3>
+<p>观澜编码、前后端协同、文搜存储和特定场景识别使产品功能更丰富。它们能否转成利润，取决于客户是否愿意为节省的存储、人工和风险付费，以及竞品需要多久达到相似效果。</p>
+<p>年报披露的识别准确率、内存优化等结果缺少统一测试集和竞品对照，不作为相对领先的定量证据。未来若功能增强但主业毛利率下降、费用率上升，则需要重新评估技术收益是否主要让给了客户。</p>
+<h3 id="section-50">§3.4波特五力</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>力量</th>
+<th>对海康的具体影响</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>同业竞争</td>
+<td>大华及场景专业厂商争夺同类项目；不同业务的竞争结构不一致</td>
+</tr>
+<tr>
+<td>新进入者</td>
+<td>工厂和渠道复制有成本，但通用芯片与模型可能降低开发门槛</td>
+</tr>
+<tr>
+<td>替代品</td>
+<td>不升级旧设备、人工巡检、相机加第三方算法均可分走预算</td>
+</tr>
+<tr>
+<td>客户议价</td>
+<td>开票客户分散，但项目招标、财政和企业投资周期形成共同压力</td>
+</tr>
+<tr>
+<td>供应商议价</td>
+<td>前五大采购占14.50%，但技术管制可使某些关键物料比总集中度更重要；关联采购需单独审视</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些力量决定海康的优势需要反复赢得，不能仅由历史规模确认。</p>
+<h3 id="section-51">§3.5 ROE / ROIC 分析</h3>
+<p>2025年披露加权ROE为17.30%，高于2024年的15.34%，但低于2023年的19.64%。利润恢复使回报改善，尚不能证明回到了历史高增长阶段。比较时必须同时看归母权益和回购，不能把权益缩减导致的ROE上升全部归因于经营能力。</p>
+<p>ROIC需要区分经营所需现金与富余现金，现有资料不足以精确划分；本报告保留十年ROE、ROA和资产周转分析，不用将所有现金剔除后的极高ROIC制造“超额回报”印象。同业对比只使用一致口径。</p>
+<h3 id="section-52">§3.6 ROE 杜邦分析</h3>
+<p>海康2025年回报修复首先来自净利率，集团收入基本持平，归母利润增长18.52%。毛利率上升、部分费用与财务项目改善共同发挥作用。经营效率不能只看年末应收余额：应收下降与库存增加同时发生，资产周转应使用年初年末平均余额计算。</p>
+<p>本报告的杜邦关系为归母净利率×总资产周转率×平均总资产/平均归母权益，所得为简单平均权益ROE；它与公司披露的加权ROE存在方法差异。详细计算在定量部分。</p>
+<h3 id="section-53">§3.7毛利率分析</h3>
+<p>2025年总毛利率45.88%，同比提高2.05个百分点。其中主业产品及服务升至49.07%，创新业务却降至39.12%。按收入减成本计算，主业产品及服务毛利增加约7.96亿元，创新业务毛利增加约9.38亿元，建造工程约增加1.64亿元。</p>
+<p>2025年创新业务在毛利率下降时仍靠收入扩张增加毛利，主业则在收入收缩时靠毛利率改善增加毛利。2026年上半年，两类业务的收入与毛利率均已提高，经营改善范围扩大。产品价格、采购成本与各业务内部组合尚无完整分解，不能把毛利率提升全部解释为涨价或技术溢价。</p>
+<h3 id="section-54">§3.8护城河发展趋势 + 宽/中/窄/弱定论</h3>
+<p><strong>护城河判断：窄，且需要持续维护。证据等级：中。</strong> 复杂场景的产品组合和交付网络有经济价值，但标准设备、新项目和海外受限市场没有同样强的保护。2025年至2026年上半年的盈利改善与主业恢复，增强了现有经营能力的证据；长期份额保护和新增资本回报仍需验证，不能仅凭利润增速认定优势已持久扩大。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>可证伪检验</th>
+<th>结果与含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>资本消耗检验</td>
+<td>2025年现金资本开支36.22亿元，仅占合并净利润约23.47%；研发117.53亿元已计入费用，不从利润中重复扣除。2026年上半年库存增加90.16亿元，关注新增投入能否随交付回收并形成回报</td>
+</tr>
+<tr>
+<td>回报检验</td>
+<td>加权ROE从2023年19.64%降至2024年15.34%，2025年回升至17.30%；2026年上半年收入和毛利共同改善。已有恢复证据，持续资本回报仍需跨期观察</td>
+</tr>
+<tr>
+<td>压力情景</td>
+<td>通用模型与开放软件使客户用更便宜硬件完成相同任务，导致新项目毛利、交叉销售和渠道忠诚下降</td>
+</tr>
+<tr>
+<td>后续观察窗口</td>
+<td>后续几个报告期观察主业增长、毛利保持与库存回款是否共同改善，据此调整判断；长期高回报还需跨周期验证</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-55">§3.9非护城河因素</h3>
+<p>国资背景、账面现金多、专利数量和工厂奖项都不能单独阻止客户转向竞争者。创新业务种类多可以分散某些需求风险，也会增加资本配置难度；海外国家覆盖多可以降低单一市场依赖，却不能消除共同的出口管制和声誉风险。</p>
+<h3 id="section-56">§3.10政府政策分析</h3>
+<p>软件增值税退税和所得税优惠对利润有实际贡献。2025年计入损益的政府补助合计27.62亿元，其中软件增值税即征即退19.37亿元、专项补助8.25亿元。它们是税前项目，不能直接与税后归母利润相减；也不能因部分被列为经常性收益而忽略政策依赖。</p>
+<p>海外限制分别影响关键物料采购、设备市场准入和政府等特定客户。BIS实体清单约束受美国出口管理条例管辖的物项供应；FCC相关规则约束设备授权及特定用途。二者都不能简化成“全球禁止销售海康产品”，但会提高替代供应、认证、渠道与客户信任的成本。</p>
+<p><a id="management-evaluation"></a></p>
+<h2 id="section-57">§4管理质量与企业文化</h2>
+<p>战略执行与股东回报偏正面，资本配置效果和治理仍需跟踪，综合判断证据等级为中。评价依据是管理层选择了什么、承诺是否兑现、投入能否增加股东回报，以及激励和监督是否有效。收入、毛利、利润与现金流的完整分析集中在<a href="#operating-results">经营业绩与现金流跟踪</a>；这些结果还受到需求、成本、汇率和产品结构影响，不能直接全部归功于管理层。</p>
+<p>持续分红、回购注销和项目落地是已兑现的行动；创新业务再投资和备货的最终资本回报仍需验证。2020年警示函作为具体信息披露问题保留，不单独据此否定管理层，历史治理核查也不因此视为完成。</p>
+<h3 id="section-58">§4.pre 管理层与治理风险检查</h3>
+<p>管理层评价暂为<strong>有保留</strong>。已核实的历史记录包括一次信息披露问题：2019年11月，胡扬忠、龚虹嘉因涉嫌信息披露违法违规收到调查通知；2020年3月13日收到结案告知书，同时被浙江证监局采取出具警示函的行政监管措施，并记入证券期货市场诚信档案。两人已于2020年3月19日提交书面整改报告。</p>
+<p>2020年公告明确的问题是，两人在股份买卖过程中为他人提供融资安排，未向公司报告，导致公司相关信息披露不完整。原文将处理称为“行政监管措施”，没有将其称为行政处罚或交易所纪律处分；因此不能据此直接触发本研究对正式处罚的一票否决，也不能把结案写成没有发生治理问题。</p>
+<p>另有两项早期记录值得保留。2010年浙江证监局治理检查指出若干制度缺项，公司2011年整改报告称已补建相关制度；这能证明整改行动的披露，不能代替监管验收。2013年公司更正2012年现金流量表：因关联交易抵销错误，销售收现和采购付现各调减17.84亿元，经营现金流净额和年度利润均未改变。该错误发生在本报告十年财务窗口之前，不能忽略，也不能直接等同于正式财务造假处罚。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>类别</th>
+<th>判定</th>
+<th>已核实证据与范围</th>
+<th>触发？</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>道德风险其他事项</td>
+<td>需人工</td>
+<td>本轮尚未完成上市以来欺诈、操纵股价、内幕交易等公开记录的完整核查；不能从2025年无报告期处罚推导历史不存在</td>
+<td>需人工</td>
+</tr>
+<tr>
+<td>大股东占款</td>
+<td>需人工</td>
+<td>2025年报明确披露报告期无非经营性资金占用；上市以来记录仍未完成核查。财务公司存款本身不等于占款</td>
+<td>需人工</td>
+</tr>
+<tr>
+<td>关联输送</td>
+<td>需人工</td>
+<td>年报可用于检查2025年关联交易和期末余额，尚不足以排除全部历史违规关联交易</td>
+<td>需人工</td>
+</tr>
+<tr>
+<td>虚假陈述处罚记录</td>
+<td>需人工</td>
+<td>2019—2020年事项已查明为结案并出具警示函；仍未完成上市以来其他正式处罚或生效纪律处分核查</td>
+<td>需人工</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>扫描结论:</strong> 已核实事项不支持把“调查仍未结案”或“正式处罚已触发否决”写成结论；历史治理核查尚不能整体通过。</p>
+<h4 id="section-59">2026年审计机构变更的后续状态</h4>
+<p>4月16日董事会提出由德勤华永改聘毕马威华振；5月8日股东会已经审议通过，按变更公告规定，自通过之日起生效。因此，年度研究基准日的状态仍是“提案待批准”，最新补充状态为“已获股东会批准”。毕马威承接2026年度财务报告与内部控制审计，2025年标准无保留意见仍由德勤出具，2026年三季报仍未经审计。</p>
+<p>公司披露，德勤已连续服务10年，本次变更依据会计师事务所选聘规定，前后任均无异议，不存在开展部分审计后解聘前任的情况。现有披露支持法定选聘程序的解释，不能仅因换所推定审计冲突；也不能以该说明替代全部历史治理核查。<strong>事件及程序证据等级：高；对管理层诚信的总体判断仍有保留。</strong></p>
+<h3 id="section-60">§4.1 专注主业与五年战略变化</h3>
+<p>海康的战略方向具有连贯性：从视频安防向多种感知技术、企业场景数字化和创新业务延伸，研发和国际化一直是主要投入方向。机器人、热成像、汽车电子、智能家居等业务与原有感知、图像处理、算法和供应链能力有联系，但客户、渠道和竞争对手不同，不能把技术相近直接理解为每个新业务都具有相同护城河。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年报</th>
+<th>董事会致股东的重点</th>
+<th>后续观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td>明确定位智能物联；继续研发、国际化和内部创新跟投</td>
+<td>创新业务扩张延续，但“未来10年继续快速发展”仍是长期愿景，并未形成逐年利润承诺</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>正面承认成立以来首次利润负增长，维持技术投入和营销体系建设</td>
+<td>2023年研发升至113.93亿元，创新业务继续增长</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>安防之外发展企业场景数字化，扩展感知技术和行业软件</td>
+<td>2024年海外主业和创新业务合计收入首次超过三大境内事业群收入</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>从关注规模转向效益改善，优化组织、资源和运营效率</td>
+<td>2025年收入基本持平，归母净利润增长18.52%，回款改善</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>未来三至五年把现有业务做实做强，推动大模型进入产品和内部运营</td>
+<td>截止日尚无之后完整年度结果，不评价未来承诺已兑现</td>
+</tr>
+</tbody>
+</table></div>
+<p>真正的变化是经营优先级：早期重点是扩大业务边界，最近两年更强调现有业务的盈利和现金。2025年创新业务收入254.46亿元，仍在增长；同时，集团研发费用小幅下降0.94%。这与提升经营质量的取向相符，也说明不能继续用过去研发逐年增加、收入快速扩张的叙事直接外推未来。</p>
+<p>五份致股东信均由董事会署名；2024年8月2日胡扬忠由总经理转任董事长，徐鹏出任总经理。因此五年战略应归于公司及董事会，不能全部归于同一位董事长个人。</p>
+<h3 id="section-61">§4.2 承诺与兑现：五次跨年比较</h3>
+<p>2020—2024年报的下一年度工作重点主要是定性经营方向，没有在这些经营计划中给出可计算偏差的年度收入或利润目标。因此以下比较检验行动是否沿着既定方向推进，不把实际增长率冒充事先承诺，也不计算虚假的兑现率。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>目标年度</th>
+<th>上一年报经营计划</th>
+<th>实际结果</th>
+<th>差异与判断</th>
+<th>来源PDF页码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2021</td>
+<td>持续技术创新、建设国内和海外销售服务网络</td>
+<td>研发63.79→82.52亿元；境外收入176.97→219.85亿元</td>
+<td>行动与方向一致；未设量化下限，百分比目标差异不适用</td>
+<td>2020年第79页；2021年第84、88页</td>
+</tr>
+<tr>
+<td>2022</td>
+<td>加大研发、做大创新业务规模</td>
+<td>研发82.52→98.14亿元；创新业务122.71→150.70亿元</td>
+<td>两项方向兑现；集团利润下降不能改写成未达到未披露的利润目标</td>
+<td>2021年第94—95页；2022年第77、80页</td>
+</tr>
+<tr>
+<td>2023</td>
+<td>保持高强度研发、提升效能、追求有效益增长</td>
+<td>研发98.14→113.93亿元；归母净利润增长9.89%</td>
+<td>研发投入和当年利润方向改善，未提供量化效能目标</td>
+<td>2022年第87—88页；2023年第96页及财务指标</td>
+</tr>
+<tr>
+<td>2024</td>
+<td>拓展产品品类、做大创新业务、提升运营效率</td>
+<td>创新业务185.53→224.84亿元；集团归母净利润下降15.10%</td>
+<td>业务扩张兑现，但整体效益转弱，不能给经营效果全面通过</td>
+<td>2023年第103页；2024年第9、90页</td>
+</tr>
+<tr>
+<td>2025</td>
+<td>组织变革、精细管理、提高效率与长期效益</td>
+<td>收入持平；归母净利润119.77→141.95亿元；经营现金流132.64→253.39亿元</td>
+<td>效益改善获得当年数据支持；现金增量主要来自应收释放，股份支付也存在低基数影响</td>
+<td>2024年第101页；2025年第9、92页及现金流量表</td>
+</tr>
+</tbody>
+</table></div>
+<p>连续计划没有从明确数字目标突然改成定性的可核实转变，但2024年致股东信明确弱化规模增长、转向效益。这是需要接受其商业后果的战略调整：以后应更关注正常利润、回款和资本回报，而非只看收入。</p>
+<p><strong>结论:</strong> 本表未形成同一量化指标连续三年严重未达指引的证据，不能触发“系统性画大饼”否决；也不能据五条定性计划推导100%量化兑现率。外部业绩说明会承诺不包含在本表的年报结论中。</p>
+<h3 id="section-62">§4.3 言行一致与执行能力</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>事件</th>
+<th>承诺和日期</th>
+<th>行动与结果</th>
+<th>判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>萤石网络分拆</td>
+<td>2021年1月8日董事会审议科创板分拆上市预案，2021年致股东信披露已递交申请</td>
+<td>2022年12月28日萤石网络上市</td>
+<td>完成明确项目里程碑；上市本身不证明每股价值已增加</td>
+</tr>
+<tr>
+<td>公开回购并注销</td>
+<td>2022年9月15日董事会、10月10日股东大会批准20—25亿元回购并注销</td>
+<td>2022年10—12月回购20.43亿元，2023年1月13日注销66,987,835股</td>
+<td>金额、用途和期限得到落实</td>
+</tr>
+<tr>
+<td>第二轮公开回购并注销</td>
+<td>2024年12月10日披露20—25亿元回购注销方案</td>
+<td>至2025年8月28日回购20.28亿元，2025年9月4日注销68,326,776股</td>
+<td>承诺得到执行，不是只留作库存股</td>
+</tr>
+</tbody>
+</table></div>
+<p>已核实的项目里程碑和两轮回购注销，支持执行能力偏正面的评价；这些行动是否提高每股价值，还需要结合投入和回报判断。海康机器人上市截至年度研究基准日仍处于推进阶段，未将其计为已完成的里程碑。</p>
+<h3 id="section-63">§4.4 企业文化：技术投入与利益分配的实际安排</h3>
+<p>最有事实支撑的文化特征是技术投入和内部创业。2016—2025年累计研发约750.49亿元；2025年研发及技术人员26,806人，占57,202名员工的46.86%。这是一套以技术人员、产品开发和行业交付为中心的组织，并非仅靠销售渠道推动规模。</p>
+<p>创新业务采用员工跟投：公司及下属公司的中高层、核心员工参与全部创新业务，业务子公司的核心员工参与所在业务；权益安排有五年等待条件，授予以收益法评估公允价值并确认股份支付。它把员工收益与新业务的结果联系起来，但同时意味着上市公司普通股股东并不独占创新业务的全部增量利润，评价时要同时看激励效果与少数股东分配。</p>
+<p>2025年研发人员比2024年减少1,466人，研发费用小幅减少，说明公司正调整资源效率。现有公开年报可以验证投入和激励安排，不能据此推断员工满意度、管理层私人动机或客户实际满意程度。</p>
+<h3 id="section-64">§4.5 内部治理结构</h3>
+<p>2025年末董事会有10名董事，其中4名独立董事、1名职工代表董事。2025年9月23日取消监事会后，审计委员会承接监督职责。审计委员会三名成员中独立董事占多数，由吕长江召集，全年召开7次会议；提名委员会由吴晓波召集，全年召开1次会议。制度上有财务监督和提名机制，但全年议案均获同意，不能仅凭会议次数证明监督的实际强度。</p>
+<p>财务负责人金艳的披露任职起点为2015年7月，2024—2025年保持连续；奉玮于2024年10月出任高级副总经理兼董事会秘书。2024年董事长和总经理换届、2025年监事会取消属于需要辨认性质的组织变化，现有年报没有支持将其直接归因为财务问题。</p>
+<p>2025年审计意见为标准无保留意见，德勤华永已连续审计10年。2026年4月16日董事会提出聘任毕马威华振为2026年审计机构，截止年报披露仍需股东会审议，不能写成已完成更换，也不能用尚未出具的2026年审计意见消除风险。</p>
+<p>薪酬披露口径下，董监高从公司领取的报酬合计由2024年3,190.31万元增至2025年3,709.00万元，增加16.26%，同期归母净利润增长18.52%。因人员和任职期间变化，合计增速只用于总量观察，不能当作同一批高管的加薪幅度。</p>
+<h3 id="section-65">§4.6 股东回报与资本分配</h3>
+<p>公司持续分红，并有两轮公开回购注销，不能归为长期囤积现金而不回报股东的公司。另一方面，资本回报从早期高位回落，新增投入的产出是比“是否有分红”更需要关注的问题。</p>
+<p>2026年增加备货是一项营运资金配置决策：在元器件涨价和缺货背景下，以更多资金保障交付有商业依据；管理层需要通过采购纪律、库存消化和现金回收证明这项投入的效果。库存增加本身不直接证明决策失误，短期利润改善也不直接证明备货规模最优。具体金额、会计口径和公司解释见<a href="#inventory-analysis">存货分析</a>，本节只评价决策与资本回报。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">加权ROE</th>
+<th style="text-align:right">已确认普通股分红（亿元）</th>
+<th style="text-align:right">分红/当年归母利润</th>
+<th style="text-align:right">商誉（亿元）</th>
+<th style="text-align:right">非流动长期借款（亿元）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">34.58%</td>
+<td style="text-align:right">28.11</td>
+<td style="text-align:right">37.86%</td>
+<td style="text-align:right">2.48</td>
+<td style="text-align:right">17.22</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">34.96%</td>
+<td style="text-align:right">37.29</td>
+<td style="text-align:right">39.62%</td>
+<td style="text-align:right">2.49</td>
+<td style="text-align:right">4.90</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">33.99%</td>
+<td style="text-align:right">46.14</td>
+<td style="text-align:right">40.64%</td>
+<td style="text-align:right">2.12</td>
+<td style="text-align:right">4.40</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">30.53%</td>
+<td style="text-align:right">56.01</td>
+<td style="text-align:right">45.12%</td>
+<td style="text-align:right">2.74</td>
+<td style="text-align:right">46.04</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">27.72%</td>
+<td style="text-align:right">65.40</td>
+<td style="text-align:right">48.86%</td>
+<td style="text-align:right">2.74</td>
+<td style="text-align:right">19.61</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">28.99%</td>
+<td style="text-align:right">74.58</td>
+<td style="text-align:right">44.39%</td>
+<td style="text-align:right">2.02</td>
+<td style="text-align:right">32.84</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">19.62%</td>
+<td style="text-align:right">84.83</td>
+<td style="text-align:right">66.08%</td>
+<td style="text-align:right">2.17</td>
+<td style="text-align:right">75.22</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">19.64%</td>
+<td style="text-align:right">64.31</td>
+<td style="text-align:right">45.59%</td>
+<td style="text-align:right">3.11</td>
+<td style="text-align:right">89.40</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">15.34%</td>
+<td style="text-align:right">81.54</td>
+<td style="text-align:right">68.08%</td>
+<td style="text-align:right">3.12</td>
+<td style="text-align:right">51.19</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">17.30%</td>
+<td style="text-align:right">100.96</td>
+<td style="text-align:right">71.12%</td>
+<td style="text-align:right">3.11</td>
+<td style="text-align:right">12.11</td>
+</tr>
+</tbody>
+</table></div>
+<p>表中普通股分红使用各年未分配利润附注中的“已分配普通股股利”，属于当年确认的分配决定；可能包含上一财年年度分红和当年中期分红。因此该列除以当年利润是观察资本分配力度，不是严格对应同一盈利年度的派息率，也不是银行付款流水。2016—2025年累计确认普通股分红639.17亿元。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>资本分配测试</th>
+<th>结果</th>
+<th>依据</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ROE稳定性</td>
+<td>不通过</td>
+<td>2016年34.58%降至2025年17.30%，虽2025年修复，十年回报整体下行；并非靠高有息杠杆维持</td>
+</tr>
+<tr>
+<td>分红与回购价格</td>
+<td>证据不足</td>
+<td>分红持续；2022和2024—2025两轮回购均注销。后一轮均价29.69元、最高32.70元，但未逐笔匹配回购日可得盈利和当时合理价值，不能宣称所有回购都低于25倍市盈率或内在价值</td>
+</tr>
+<tr>
+<td>并购克制</td>
+<td>证据不足</td>
+<td>商誉由2016年2.48亿元至2025年3.11亿元，没有持续大幅堆积；但投入资本回报率和完整并购对价序列未形成可比测算，不能满足严格的十年回报测试</td>
+</tr>
+<tr>
+<td>债务政策</td>
+<td>通过</td>
+<td>2025年长期借款48.21亿元、租赁负债4.56亿元（均含一年内到期部分），合计约为2021—2025年累计归母利润699.19亿元的7.55%；部分贷款以实际项目权益和收益担保，期末净现金充足，债务规模未呈现激进杠杆扩张特征</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>资本分配结论:</strong> 有保留—证据不足。回购注销和持续分红是明确的正面事实，ROE长期下降是负面事实；尚不能据现有价格与投入资本资料证明每轮回购和并购都创造了价值。这些测试本身不构成管理层诚信否决。</p>
+<h4 id="section-66">2026年分红实施与当期现金回报</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>分配事项</th>
+<th style="text-align:right">每股税前分红，元</th>
+<th style="text-align:right">总金额，亿元</th>
+<th>公告列示发放日</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025年度分配方案</td>
+<td style="text-align:right">0.75</td>
+<td style="text-align:right">68.74</td>
+<td>2026-05-20</td>
+</tr>
+<tr>
+<td>2026年中期分配方案</td>
+<td style="text-align:right">0.55</td>
+<td style="text-align:right">50.41</td>
+<td>2026-08-19</td>
+</tr>
+<tr>
+<td>2026年两笔实施合计</td>
+<td style="text-align:right">1.30</td>
+<td style="text-align:right">119.14</td>
+<td>两笔分别实施</td>
+</tr>
+</tbody>
+</table></div>
+<p>两笔分红合计119.14亿元，是2026年现金分配时点的统计，分别来自2025年度方案和2026年中期方案，不能全算作2025年的派息率。它们超过前三季度经营现金流72.13亿元，也超过扣除全部现金资本支出后的49.81亿元，当期现金产生不足以覆盖这两笔分配，需要动用此前积累资金或其他资金来源。</p>
+<p>三季报现金流中“分配股利、利润或偿付利息”123.52亿元，包含少数股东利润分配与利息，不能把全额写成普通股股息。同期借款流入25.78亿元、偿债支出51.90亿元，表现为净还债，现有现金流不支持简单认定为借新债支付分红。9月末货币资金仍有370.84亿元，但利润增长、库存扩张和分红同时发生，使现金储备继续减少；持续高分红最终需要正常经营现金流支撑。</p>
+<p>**证据等级：**分派条款、实施公告及现金流复算为高；资本分配可持续性的判断为中。</p>
+<h3 id="section-67">§4.7 股权结构与关键股东</h3>
+<p>公司由中央国资控制：中国电科通过全资的中电海康、第五十二研究所和中电科投资控股，分别持有37.28%、1.97%和2.71%，三者为一致行动人，合计约41.96%。上层由国务院国资委100%持有中国电科。2025年控股股东和实际控制人没有变化。</p>
+<p>龚虹嘉直接持有10.50%，并与持有1.99%的杭州璞康一致行动；胡扬忠直接持有1.70%，并与持有4.92%的杭州威讯一致行动。国资控制与创业团队持股并存，既有长期治理稳定的基础，也使关联交易和少数股东利益分配必须持续观察。</p>
+<p>中电海康质押5,000万股，约占其持股1.46%；龚虹嘉质押272,058,200股，约占其直接持股28.27%。两者风险程度不同，不能把全公司股权都写成高质押，也不能忽略重要自然人股东的融资安排。控制图未显示公司对上述控制主体的反向持股，现有股权资料不支持交叉持股环控制的判断。</p>
+<h4 id="section-68">控股股东一致行动人的可交换债计划</h4>
+<p>10月10日公告披露，电科投资拟以其持有的部分海康股份为交换标的，非公开发行期限不超过3年、规模不超过20亿元的可交换债，当时尚需取得深交所无异议函。公告列示其直接持股2.7100%，与一致行动人合计41.9661%。这笔债由股东发行，不能计入海康威视自身借款，也不是公司募集资金。潜在换股会改变该股东的持股安排；现有文件只能确认计划，不能认定截至11月5日已发行或已换股。</p>
+<h3 id="section-69">§4.8 大股东与上市公司利益一致性</h3>
+<p>2025年关联采购34.49亿元，占营业成本6.89%；关联销售2.65亿元，占收入0.29%，单从交易规模看尚未形成主要销售渠道被关联方控制的格局。更需关注的是资金和回款：电科财务公司存款从40.00亿元升至62.96亿元；关联应收账款原值4.35亿元，已计提坏账准备2.24亿元，准备比例51.39%。关联交易金额不大，不代表关联客户信用风险低。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>渠道</th>
+<th>状态</th>
+<th>严重度</th>
+<th>证据与限定判断</th>
+<th>引用PDF页码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>资金占用</td>
+<td>有异常迹象</td>
+<td>预警</td>
+<td>披露的关联其他应收款仅33.43万元，年报称无非经营性占用；财务公司存款62.96亿元相当于流动资产5.92%，形成资金集中风险，但不是侵占证明</td>
+<td>2025年第123、126、243、245页</td>
+</tr>
+<tr>
+<td>2</td>
+<td>关联采购不公允定价</td>
+<td>否</td>
+<td>无</td>
+<td>采购34.49亿元，占营业成本6.89%；披露参照市场价、货到付款且未超核准额度，应付关联账款12.01亿元。公开披露未出现可确认的不公允定价信号；没有独立单品报价，不据此反证全部价格公允</td>
+<td>2025年第125、242、245页</td>
+</tr>
+<tr>
+<td>3</td>
+<td>关联销售不公允定价</td>
+<td>有异常迹象</td>
+<td>预警</td>
+<td>销售占收入0.29%，但关联应收准备比例51.39%，特别是电科下属企业余额减值较高；显示回收风险，不直接证明销售定价不公允</td>
+<td>2025年第125、242、244页</td>
+</tr>
+<tr>
+<td>4</td>
+<td>商标/品牌授权费</td>
+<td>否</td>
+<td>无</td>
+<td>完整关联交易附注未列重大商标授权费，重大事项部分披露无其他重大关联交易；仅按2025年披露范围未见触发，不推导不存在任何授权合同</td>
+<td>2025年第127、241—246页</td>
+</tr>
+<tr>
+<td>5</td>
+<td>销售/采购渠道被控制</td>
+<td>否</td>
+<td>无</td>
+<td>关联采购占成本6.89%、销售占收入0.29%，低于20%初筛线；不能由此判断全部供应链可无成本替换</td>
+<td>2025年第91、242页</td>
+</tr>
+<tr>
+<td>6</td>
+<td>关联担保</td>
+<td>否</td>
+<td>无</td>
+<td>为股东、实控人及其关联方担保余额为零；集团担保余额36.54亿元、占归母净资产4.38%，对象为子公司</td>
+<td>2025年第127—129页</td>
+</tr>
+<tr>
+<td>7</td>
+<td>关联方长期预付款</td>
+<td>否</td>
+<td>无</td>
+<td>关联预付款由202.47万元降至77.26万元，规模远低于流动资产3%，不存在余额倍增的初筛信号</td>
+<td>2025年第245页</td>
+</tr>
+<tr>
+<td>8</td>
+<td>大股东主导合营项目沉淀</td>
+<td>否</td>
+<td>无</td>
+<td>年报披露报告期无共同对外投资关联交易；全部长期股权投资16.69亿元，仅为归母权益约2%，低于5%规模初筛线。并未据此评价每个项目的回报</td>
+<td>2025年第126、147、240页</td>
+</tr>
+<tr>
+<td>9</td>
+<td>集团代付/分担高管薪酬</td>
+<td>否</td>
+<td>无</td>
+<td>傅柏军、徐立兴等股东代表从关联方领薪，公司对其报酬为零；董事长、总经理及经营高管从公司领薪且未披露关联方领薪。没有证据把此治理安排归为以高额关联劳务费转移经营高管薪酬</td>
+<td>2025年第110、242—243页</td>
+</tr>
+<tr>
+<td>10</td>
+<td>大小股东分红权差异</td>
+<td>否</td>
+<td>无</td>
+<td>普通股按相同每股金额分红，回购专户不参与；无优先股。员工跟投发生在子公司权益层面，需要计入归母利润分配分析，不等于上市公司同股不同权</td>
+<td>2025年第114—115、140、246—247页</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>结论:</strong> 2025年披露范围内存在两项预警，未发现足以证实资金侵占、违规担保或非公允利益输送的事实。重点跟踪财务公司存款可取回性、关联客户回款及减值变化。本表不替代上市以来治理事件核查。</p>
+<h4 id="section-70">关联财务公司与资金往来：存款不等于占款</h4>
+<p>2025年度与2026年上半年资金往来汇总表，在控股股东、实控人及其他关联方的非经营性资金占用栏均列为不适用。表内对子公司的资金调拨和委托贷款另列“非经营性往来”，它们是上市公司对子公司的资金安排，不能因名称相似就归为控制人占用上市公司资金。这个结论只覆盖所列报告期间。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>与中国电科相关的资金项目，亿元</th>
+<th style="text-align:right">2025年末</th>
+<th style="text-align:right">2026年6月末</th>
+<th>性质与判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>财务公司存款</td>
+<td style="text-align:right">62.96</td>
+<td style="text-align:right">44.40</td>
+<td>有息存款，保留集中存放与可提取性观察</td>
+</tr>
+<tr>
+<td>关联销售形成的应收及合同等资产合计</td>
+<td style="text-align:right">4.99</td>
+<td style="text-align:right">3.73</td>
+<td>汇总表多科目口径，不能当作单一应收账款余额</td>
+</tr>
+</tbody>
+</table></div>
+<p>财务公司存款在上半年减少18.56亿元。续签协议约定，每日存款最高余额包括应计利息，不超过上一年度合并所有者权益的20%；同期限、同类型存款利率不低于同期国内主要商业银行挂牌利率，存取自由，另有50亿元综合授信和60亿元其他金融服务额度。限额和利率条款是约定，期末余额不能证明全年每一天都满足限额，披露条款也不能代替每笔实际利率与提款流水。</p>
+<p>7月25日风险持续评估披露，财务公司6月末资产1,041.44亿元、权益117.10亿元，存放同业495.32亿元、自营贷款256.24亿元；海康在该机构存款44.40亿元、贷款5.87亿元、对下属子公司委托贷款21.54亿元。公司称未发生头寸不足导致延迟付款，这是发行人的评估结论，财务公司的半年度经营数据未经审计；本报告不据此证明所有资金风险均已排除。</p>
+<p>德勤的2025年度专项说明将资金汇总表与经审计账务核对，称重大方面未发现不一致，同时明确未对汇总表执行年度财报关联交易审计程序以外的额外审计。这比仅有管理层表格提供更多核对支持，仍不是覆盖上市以来全部资金往来的独立无风险保证。</p>
+<p>**证据等级：**原始公告、表格与审计师专项说明的直接核验为高；存款安全性和长期利益一致性的判断为中。现有资料没有把所列存款认定为非经营性占用，仍保留实际利率、提款能力和历史资金核查。</p>
+<h4 id="section-71">2026年11月披露的子公司担保</h4>
+<p>11月4日公告列示担保余额12.95亿元，全部用于合并范围内子公司，占其披露口径的2025年末经审计净资产1.55%；公告称无其他对外担保或逾期、涉诉担保。对子公司担保仍有履约风险，但不能把额度70亿元全部当成已经发生的债务，也不能把担保余额再与合并子公司借款简单相加而重复计算集团敞口。</p>
+<h2 id="section-72">§5风险分析</h2>
+<h3 id="section-73">§5.1产品和业务风险</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>风险</th>
+<th>传导路径</th>
+<th>触发与观察</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内主业恢复增长后再度回落</td>
+<td>收入减少，固定研发和渠道成本难同步下降</td>
+<td>公共服务、企事业、中小企业收入连续恶化，毛利率改善不足以抵消</td>
+</tr>
+<tr>
+<td>技术功能趋同</td>
+<td>通用算法与开放软件压低硬件溢价</td>
+<td>同场景价格下行、主业毛利率转弱、费用率持续上升</td>
+</tr>
+<tr>
+<td>海外准入和供应约束</td>
+<td>认证/采购资格受限、关键物料替代成本增加</td>
+<td>新增或扩大限制、延迟交付、海外回款恶化</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-74">§5.2财务风险</h3>
+<p>2025年应收回收值得肯定，但超信用期四年以上的余额由11.55亿元升至14.24亿元。坏账准备占应收原值比例由9.36%升至12.97%，总体账面价值下降与长尾风险上升并不矛盾。账龄按超过合同信用期计算，不能当作开票后时间。</p>
+<p>2025年末存货净额204.72亿元，产成品原值143.07亿元，相关跌价准备11.34亿元。2026年上半年备货进一步增加，供给紧张背景及现金影响见<a href="#inventory-analysis">存货分析</a>。财务风险在于持有期间的资金占用，以及需求或价格变化后的销售与跌价损失；主动备货的解释并不能消除这些风险。</p>
+<h3 id="section-75">§5.3管理层风险</h3>
+<p>创新业务跟投、子公司分拆和关联采购，使“集团做大”与“母公司普通股每股价值增加”未必同步。应持续追踪股权稀释、关联交易条款、回购注销以及新业务投入回报。历史监管事项在治理章节集中说明，未完成核查不视为没有问题。</p>
+<h3 id="section-76">§5.4造假风险</h3>
+<p>2025年审计为标准无保留意见，收入确认与应收账款减值是关键审计事项。高额应收需要验证客户与回款，库存需要验证可销售性；这是重点审查领域，而非造假已发生的结论。审计意见也不能替代上市以来监管与关联交易核查。</p>
+<p>本次不作“排雷全部通过”或“公司没有财务造假”的否定性保证。具体触发项、未决项及影响在Part 4逐项列示。</p>
+<h3 id="section-77">§5.5成长风险</h3>
+<p>2026年上半年主业与创新业务的收入和毛利均已改善，2025年“主业缩减、创新抵消”的格局已经改变。需要防范的是复苏中断，以及新业务在扩大收入的同时占用更多库存、无法带来相应归母利润和现金。</p>
+<p>若后续主业增长或毛利改善逆转，创新业务增速又回落，利润增速可能明显下降。主业恢复已得到半年报支持；要提高对未来盈利的确定性，还需要看到库存消化与现金回报同步改善。</p>
+<h2 id="section-78">Part 2 — 定量分析（10年财务指标检查）</h2>
+<p>海康威视采用智能物联制造与技术服务的通用财务骨架。金额均为人民币亿元；现金含量以合并净利润为分母，归母口径另列。年报中的重列比较数优先于原披露值。研发、应收账款、库存和国内外业务结构是本公司的主要补充指标。2022年后续摘要重列与较早详细附注存在小额同一控制合并口径差异，资产核对残差约976.37万元，占总资产0.0082%；已记录差异，不宣称跨表精确一致，也不跨该断点计算长期复合增速。</p>
+<h3 id="section-79">§Q1盈利分析 — 资本回报：从高回报扩张转向利润修复</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">归母权益</th>
+<th style="text-align:right">披露加权 ROE</th>
+<th style="text-align:right">平均权益 ROE</th>
+<th style="text-align:right">ROA</th>
+<th style="text-align:right">总资产周转率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">242.86</td>
+<td style="text-align:right">34.58%</td>
+<td style="text-align:right">34.10%</td>
+<td style="text-align:right">20.72%</td>
+<td style="text-align:right">0.89</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">303.58</td>
+<td style="text-align:right">34.96%</td>
+<td style="text-align:right">34.44%</td>
+<td style="text-align:right">20.18%</td>
+<td style="text-align:right">0.90</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">375.89</td>
+<td style="text-align:right">33.99%</td>
+<td style="text-align:right">33.41%</td>
+<td style="text-align:right">19.78%</td>
+<td style="text-align:right">0.87</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">449.04</td>
+<td style="text-align:right">30.53%</td>
+<td style="text-align:right">30.10%</td>
+<td style="text-align:right">17.95%</td>
+<td style="text-align:right">0.83</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">537.94</td>
+<td style="text-align:right">27.72%</td>
+<td style="text-align:right">27.12%</td>
+<td style="text-align:right">16.67%</td>
+<td style="text-align:right">0.77</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">634.61</td>
+<td style="text-align:right">28.99%</td>
+<td style="text-align:right">28.66%</td>
+<td style="text-align:right">18.19%</td>
+<td style="text-align:right">0.85</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">683.89</td>
+<td style="text-align:right">19.62%</td>
+<td style="text-align:right">19.47%</td>
+<td style="text-align:right">12.15%</td>
+<td style="text-align:right">0.75</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">763.54</td>
+<td style="text-align:right">19.64%</td>
+<td style="text-align:right">19.49%</td>
+<td style="text-align:right">11.74%</td>
+<td style="text-align:right">0.69</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">806.69</td>
+<td style="text-align:right">15.34%</td>
+<td style="text-align:right">15.26%</td>
+<td style="text-align:right">9.70%</td>
+<td style="text-align:right">0.68</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">833.48</td>
+<td style="text-align:right">17.30%</td>
+<td style="text-align:right">17.31%</td>
+<td style="text-align:right">11.43%</td>
+<td style="text-align:right">0.69</td>
+</tr>
+</tbody>
+</table></div>
+<p>加权 ROE 从2016年的34.58%降至2024年的15.34%，2025年回升到17.30%。归母权益在此期间持续增加，利润却在2021年达到168.00亿元后未能重回该水平。2025年的改善来自盈利恢复，而过去十年的整体方向显示，新增资本获得的回报已经弱于早期。</p>
+<p>ROE 使用归母净利润，ROA 使用合并净利润；平均余额均为年初、年末算术平均。披露加权 ROE 另含年内分红、回购等权重变化。投入资本中经营所需现金与富余现金未能可靠分拆，因此不展示 ROIC。</p>
+<h3 id="section-80">§Q2盈利能力 — 盈利能力：毛利仍高，净利率低于早期</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">营业收入</th>
+<th style="text-align:right">合并净利润</th>
+<th style="text-align:right">归母净利润</th>
+<th style="text-align:right">扣非归母净利润</th>
+<th style="text-align:right">基本每股收益（元）</th>
+<th style="text-align:right">年末股本（亿股）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">319.35</td>
+<td style="text-align:right">74.24</td>
+<td style="text-align:right">74.24</td>
+<td style="text-align:right">72.71</td>
+<td style="text-align:right">1.23</td>
+<td style="text-align:right">61.03</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">419.05</td>
+<td style="text-align:right">93.78</td>
+<td style="text-align:right">94.11</td>
+<td style="text-align:right">91.77</td>
+<td style="text-align:right">1.03</td>
+<td style="text-align:right">92.29</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">498.37</td>
+<td style="text-align:right">113.80</td>
+<td style="text-align:right">113.52</td>
+<td style="text-align:right">109.83</td>
+<td style="text-align:right">1.24</td>
+<td style="text-align:right">92.27</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">576.58</td>
+<td style="text-align:right">124.65</td>
+<td style="text-align:right">124.15</td>
+<td style="text-align:right">120.38</td>
+<td style="text-align:right">1.34</td>
+<td style="text-align:right">93.45</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">635.03</td>
+<td style="text-align:right">136.78</td>
+<td style="text-align:right">133.86</td>
+<td style="text-align:right">128.06</td>
+<td style="text-align:right">1.45</td>
+<td style="text-align:right">93.43</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">814.20</td>
+<td style="text-align:right">175.11</td>
+<td style="text-align:right">168.00</td>
+<td style="text-align:right">164.45</td>
+<td style="text-align:right">1.81</td>
+<td style="text-align:right">93.36</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">831.67</td>
+<td style="text-align:right">135.58</td>
+<td style="text-align:right">128.38</td>
+<td style="text-align:right">123.31</td>
+<td style="text-align:right">1.37</td>
+<td style="text-align:right">94.31</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">893.41</td>
+<td style="text-align:right">151.56</td>
+<td style="text-align:right">141.08</td>
+<td style="text-align:right">136.66</td>
+<td style="text-align:right">1.52</td>
+<td style="text-align:right">93.31</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">924.96</td>
+<td style="text-align:right">131.41</td>
+<td style="text-align:right">119.77</td>
+<td style="text-align:right">118.15</td>
+<td style="text-align:right">1.30</td>
+<td style="text-align:right">92.33</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">925.08</td>
+<td style="text-align:right">154.34</td>
+<td style="text-align:right">141.95</td>
+<td style="text-align:right">137.03</td>
+<td style="text-align:right">1.55</td>
+<td style="text-align:right">91.65</td>
+</tr>
+</tbody>
+</table></div>
+<p>合并净利润包括归少数股东的利润，归母净利润才是归属海康威视母公司股东的部分。2025年合并净利润154.34亿元中有12.38亿元归少数股东，归母净利润为141.95亿元。2025年主业收入虽下降4.21%，主业产品及服务毛利润却增加7.96亿元，创新业务另增加9.38亿元毛利；集团毛利增加18.99亿元，是净利润增长的主要基础。2026年上半年主业收入已转为增长5.33%，集团收入与毛利率共同改善，归母净利润同比增长39.57%。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">收入</th>
+<th style="text-align:right">毛利率</th>
+<th style="text-align:right">营业利润率</th>
+<th style="text-align:right">归母净利率</th>
+<th style="text-align:right">扣非归母/归母</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">319.35</td>
+<td style="text-align:right">41.59%</td>
+<td style="text-align:right">21.40%</td>
+<td style="text-align:right">23.25%</td>
+<td style="text-align:right">97.94%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">419.05</td>
+<td style="text-align:right">44.00%</td>
+<td style="text-align:right">24.92%</td>
+<td style="text-align:right">22.46%</td>
+<td style="text-align:right">97.52%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">498.37</td>
+<td style="text-align:right">44.85%</td>
+<td style="text-align:right">24.75%</td>
+<td style="text-align:right">22.78%</td>
+<td style="text-align:right">96.75%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">576.58</td>
+<td style="text-align:right">45.99%</td>
+<td style="text-align:right">23.77%</td>
+<td style="text-align:right">21.53%</td>
+<td style="text-align:right">96.96%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">635.03</td>
+<td style="text-align:right">46.53%</td>
+<td style="text-align:right">23.93%</td>
+<td style="text-align:right">21.08%</td>
+<td style="text-align:right">95.67%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">814.20</td>
+<td style="text-align:right">44.33%</td>
+<td style="text-align:right">22.69%</td>
+<td style="text-align:right">20.63%</td>
+<td style="text-align:right">97.88%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">831.67</td>
+<td style="text-align:right">42.29%</td>
+<td style="text-align:right">17.77%</td>
+<td style="text-align:right">15.44%</td>
+<td style="text-align:right">96.05%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">893.41</td>
+<td style="text-align:right">44.33%</td>
+<td style="text-align:right">17.95%</td>
+<td style="text-align:right">15.79%</td>
+<td style="text-align:right">96.87%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">924.96</td>
+<td style="text-align:right">43.83%</td>
+<td style="text-align:right">15.47%</td>
+<td style="text-align:right">12.95%</td>
+<td style="text-align:right">98.64%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">925.08</td>
+<td style="text-align:right">45.88%</td>
+<td style="text-align:right">18.34%</td>
+<td style="text-align:right">15.35%</td>
+<td style="text-align:right">96.53%</td>
+</tr>
+</tbody>
+</table></div>
+<p>每股收益使用各年当年披露值，2017年等年份股本变动会影响跨年可比性，不据此计算每股收益复合增长率；期末股数也不等于每股收益使用的加权股数。十年毛利率均在40%以上，2025年从43.83%回升至45.88%，但归母净利率仅为15.35%，低于2016年的23.25%。销售、管理和研发投入消耗了更多毛利，收入规模扩大已不能直接转化为相同比例的利润增长。</p>
+<p>2025年主业产品及服务毛利率49.07%，创新业务39.12%。创新业务收入增长13.17%，毛利率却下降0.98个百分点；主业产品及服务收入下降4.34%，毛利率反而上升3.31个百分点。因此，利润修复来自不同业务的收入与盈利结构变化，不能把集团收入持平理解为所有业务停滞。</p>
+<h3 id="section-81">§Q3盈利质量 — 利润质量：近三年回款覆盖利润，十年仍接近一比一</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">经营现金流/合并净利</th>
+<th style="text-align:right">经营现金流/归母净利</th>
+<th style="text-align:right">销售收现/收入</th>
+<th style="text-align:right">资本开支/合并净利</th>
+<th style="text-align:right">研发/收入</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">0.84</td>
+<td style="text-align:right">0.84</td>
+<td style="text-align:right">1.02</td>
+<td style="text-align:right">12.28%</td>
+<td style="text-align:right">7.62%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">0.79</td>
+<td style="text-align:right">0.78</td>
+<td style="text-align:right">1.01</td>
+<td style="text-align:right">18.05%</td>
+<td style="text-align:right">7.62%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">0.80</td>
+<td style="text-align:right">0.80</td>
+<td style="text-align:right">1.04</td>
+<td style="text-align:right">18.06%</td>
+<td style="text-align:right">8.99%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">0.62</td>
+<td style="text-align:right">0.63</td>
+<td style="text-align:right">1.03</td>
+<td style="text-align:right">15.46%</td>
+<td style="text-align:right">9.51%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">1.18</td>
+<td style="text-align:right">1.20</td>
+<td style="text-align:right">1.07</td>
+<td style="text-align:right">14.65%</td>
+<td style="text-align:right">10.04%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">0.73</td>
+<td style="text-align:right">0.76</td>
+<td style="text-align:right">1.03</td>
+<td style="text-align:right">17.69%</td>
+<td style="text-align:right">10.13%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">0.75</td>
+<td style="text-align:right">0.79</td>
+<td style="text-align:right">1.04</td>
+<td style="text-align:right">27.70%</td>
+<td style="text-align:right">11.80%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">1.10</td>
+<td style="text-align:right">1.18</td>
+<td style="text-align:right">1.05</td>
+<td style="text-align:right">26.71%</td>
+<td style="text-align:right">12.75%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">1.01</td>
+<td style="text-align:right">1.11</td>
+<td style="text-align:right">1.07</td>
+<td style="text-align:right">35.51%</td>
+<td style="text-align:right">12.83%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">1.64</td>
+<td style="text-align:right">1.79</td>
+<td style="text-align:right">1.20</td>
+<td style="text-align:right">23.47%</td>
+<td style="text-align:right">12.70%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">研发投入</th>
+<th style="text-align:right">股份支付</th>
+<th style="text-align:right">研发/毛利</th>
+<th style="text-align:right">扣全部资本开支后现金</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">24.33</td>
+<td style="text-align:right">1.23</td>
+<td style="text-align:right">18.32%</td>
+<td style="text-align:right">53.05</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">31.94</td>
+<td style="text-align:right">1.91</td>
+<td style="text-align:right">17.32%</td>
+<td style="text-align:right">56.81</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">44.83</td>
+<td style="text-align:right">1.45</td>
+<td style="text-align:right">20.05%</td>
+<td style="text-align:right">70.57</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">54.84</td>
+<td style="text-align:right">2.68</td>
+<td style="text-align:right">20.68%</td>
+<td style="text-align:right">58.40</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">63.79</td>
+<td style="text-align:right">8.18</td>
+<td style="text-align:right">21.59%</td>
+<td style="text-align:right">140.85</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">82.52</td>
+<td style="text-align:right">3.69</td>
+<td style="text-align:right">22.86%</td>
+<td style="text-align:right">96.10</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">98.14</td>
+<td style="text-align:right">6.20</td>
+<td style="text-align:right">27.90%</td>
+<td style="text-align:right">64.10</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">113.93</td>
+<td style="text-align:right">2.08</td>
+<td style="text-align:right">28.76%</td>
+<td style="text-align:right">125.74</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">118.64</td>
+<td style="text-align:right">8.65</td>
+<td style="text-align:right">29.26%</td>
+<td style="text-align:right">85.98</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">117.53</td>
+<td style="text-align:right">1.62</td>
+<td style="text-align:right">27.69%</td>
+<td style="text-align:right">217.17</td>
+</tr>
+</tbody>
+</table></div>
+<p>2023—2025年累计经营现金流552.26亿元，覆盖合并净利润437.31亿元的1.26倍；十年累计经营现金流1,246.58亿元，约为合并净利润的96.54%、归母净利润的100.61%。近期回款改善是真实的，但十年历史还不能支持“利润长期明显少计了现金创造能力”的判断。</p>
+<p>2025年经营性应收项目释放80.12亿元，2024年则占用42.05亿元，两年变化达122.17亿元，超过经营现金流总增量120.75亿元。应收清理释放的是已形成利润对应的现金，不能每年重复。2025年253.39亿元经营现金流不宜直接用作长期正常值。</p>
+<p>设备等现金资本开支占十年归母净利润22.42%，但研发强度从7.62%增至12.70%，2025年研发占毛利27.69%，且研发全部费用化。生产设备投入不算沉重，持续技术投入却是主要经营成本。维持性与扩张性资本开支没有独立拆分，表内自由现金流采用扣除全部现金资本开支的口径。销售收现率包含税费和回款时点影响，不能单凭高于100%判定收入质量。</p>
+<h3 id="section-82">§Q4成长能力 — 成长：创新业务和海外抵消主业压力</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">收入增长</th>
+<th style="text-align:right">营业利润增长</th>
+<th style="text-align:right">归母净利增长</th>
+<th style="text-align:right">经营现金流增长</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">26.29%</td>
+<td style="text-align:right">24.38%</td>
+<td style="text-align:right">26.49%</td>
+<td style="text-align:right">93.25%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">31.22%</td>
+<td style="text-align:right">52.83%</td>
+<td style="text-align:right">26.77%</td>
+<td style="text-align:right">18.61%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">18.93%</td>
+<td style="text-align:right">18.11%</td>
+<td style="text-align:right">20.63%</td>
+<td style="text-align:right">23.60%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">15.69%</td>
+<td style="text-align:right">11.13%</td>
+<td style="text-align:right">9.36%</td>
+<td style="text-align:right">-14.76%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">10.14%</td>
+<td style="text-align:right">10.86%</td>
+<td style="text-align:right">7.82%</td>
+<td style="text-align:right">107.12%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">28.21%</td>
+<td style="text-align:right">21.57%</td>
+<td style="text-align:right">25.51%</td>
+<td style="text-align:right">-21.01%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">2.15%</td>
+<td style="text-align:right">-19.98%</td>
+<td style="text-align:right">-23.59%</td>
+<td style="text-align:right">-20.01%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">7.42%</td>
+<td style="text-align:right">8.50%</td>
+<td style="text-align:right">9.89%</td>
+<td style="text-align:right">63.52%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">3.53%</td>
+<td style="text-align:right">-10.77%</td>
+<td style="text-align:right">-15.10%</td>
+<td style="text-align:right">-20.20%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">0.01%</td>
+<td style="text-align:right">18.52%</td>
+<td style="text-align:right">18.52%</td>
+<td style="text-align:right">91.04%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>业务</th>
+<th style="text-align:right">2024年收入</th>
+<th style="text-align:right">2025年收入</th>
+<th style="text-align:right">同比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>主业产品及服务</td>
+<td style="text-align:right">679.63</td>
+<td style="text-align:right">650.12</td>
+<td style="text-align:right">-4.34%</td>
+</tr>
+<tr>
+<td>主业建造工程</td>
+<td style="text-align:right">20.48</td>
+<td style="text-align:right">20.49</td>
+<td style="text-align:right">0.05%</td>
+</tr>
+<tr>
+<td>创新业务</td>
+<td style="text-align:right">224.84</td>
+<td style="text-align:right">254.46</td>
+<td style="text-align:right">13.17%</td>
+</tr>
+<tr>
+<td>其中：机器人</td>
+<td style="text-align:right">59.29</td>
+<td style="text-align:right">64.52</td>
+<td style="text-align:right">8.82%</td>
+</tr>
+<tr>
+<td>其中：智能家居</td>
+<td style="text-align:right">51.90</td>
+<td style="text-align:right">56.84</td>
+<td style="text-align:right">9.51%</td>
+</tr>
+<tr>
+<td>其中：汽车电子</td>
+<td style="text-align:right">39.19</td>
+<td style="text-align:right">52.89</td>
+<td style="text-align:right">34.95%</td>
+</tr>
+<tr>
+<td>其中：热成像</td>
+<td style="text-align:right">41.91</td>
+<td style="text-align:right">44.43</td>
+<td style="text-align:right">6.01%</td>
+</tr>
+<tr>
+<td>其中：存储</td>
+<td style="text-align:right">23.14</td>
+<td style="text-align:right">23.80</td>
+<td style="text-align:right">2.85%</td>
+</tr>
+<tr>
+<td>其中：其他创新业务</td>
+<td style="text-align:right">9.40</td>
+<td style="text-align:right">11.98</td>
+<td style="text-align:right">27.47%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年主业产品及服务收入减少29.51亿元，创新业务增加29.62亿元，基本抵消。汽车电子收入增长34.95%，贡献创新业务收入增量近一半；机器人和智能家居增幅分别为8.82%和9.51%。公司已具有多个增长来源，但创新业务仍不足以让集团恢复早期的高增长。</p>
+<p>境内收入由606.01亿元降至582.22亿元，境外由318.95亿元增至342.86亿元。三大境内事业群中，中小企业事业群收入下降26.35%，公共服务与企事业事业群分别下降4.12%和3.33%。未来利润能否增长，取决于国内主业何时企稳，以及创新业务扩张是否保得住利润率。集团混合产品销量不用于推算单价。</p>
+<h3 id="section-83">§Q5资产增速 — 资产扩张：生产资产增长快于收入</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">总资产</th>
+<th style="text-align:right">资产增速</th>
+<th style="text-align:right">固定资产</th>
+<th style="text-align:right">在建工程</th>
+<th style="text-align:right">研发投入</th>
+<th style="text-align:right">现金资本开支</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">413.48</td>
+<td style="text-align:right">36.35%</td>
+<td style="text-align:right">28.54</td>
+<td style="text-align:right">3.16</td>
+<td style="text-align:right">24.33</td>
+<td style="text-align:right">9.11</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">515.71</td>
+<td style="text-align:right">24.72%</td>
+<td style="text-align:right">30.24</td>
+<td style="text-align:right">14.36</td>
+<td style="text-align:right">31.94</td>
+<td style="text-align:right">16.92</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">634.92</td>
+<td style="text-align:right">23.11%</td>
+<td style="text-align:right">50.82</td>
+<td style="text-align:right">4.16</td>
+<td style="text-align:right">44.83</td>
+<td style="text-align:right">20.56</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">753.58</td>
+<td style="text-align:right">18.69%</td>
+<td style="text-align:right">57.91</td>
+<td style="text-align:right">6.32</td>
+<td style="text-align:right">54.84</td>
+<td style="text-align:right">19.27</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">887.02</td>
+<td style="text-align:right">17.71%</td>
+<td style="text-align:right">58.76</td>
+<td style="text-align:right">14.25</td>
+<td style="text-align:right">63.79</td>
+<td style="text-align:right">20.04</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">1038.65</td>
+<td style="text-align:right">17.09%</td>
+<td style="text-align:right">66.96</td>
+<td style="text-align:right">23.23</td>
+<td style="text-align:right">82.52</td>
+<td style="text-align:right">30.98</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">1192.45</td>
+<td style="text-align:right">14.81%</td>
+<td style="text-align:right">85.40</td>
+<td style="text-align:right">37.71</td>
+<td style="text-align:right">98.14</td>
+<td style="text-align:right">37.56</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">1388.58</td>
+<td style="text-align:right">16.45%</td>
+<td style="text-align:right">115.08</td>
+<td style="text-align:right">43.08</td>
+<td style="text-align:right">113.93</td>
+<td style="text-align:right">40.48</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">1320.16</td>
+<td style="text-align:right">-4.93%</td>
+<td style="text-align:right">150.64</td>
+<td style="text-align:right">46.99</td>
+<td style="text-align:right">118.64</td>
+<td style="text-align:right">46.66</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">1380.50</td>
+<td style="text-align:right">4.57%</td>
+<td style="text-align:right">201.77</td>
+<td style="text-align:right">19.14</td>
+<td style="text-align:right">117.53</td>
+<td style="text-align:right">36.22</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年收入几乎不变，固定资产却由150.64亿元增至201.77亿元，在建工程由46.99亿元降至19.14亿元。生产与研发场地陆续投入使用后，需要后续收入和利润消化新增资产；固定资产与在建工程合计仍从197.63亿元增至220.91亿元。</p>
+<p>十年现金资本开支277.80亿元，研发投入750.49亿元。海康的再投入重点是研发人员和技术项目，资本开支只反映长期资产付款，不能代表全部竞争投入。</p>
+<h3 id="section-84">§Q6运营能力 — 运营效率：回款改善，库存占用仍在</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">应收账款天数</th>
+<th style="text-align:right">存货天数</th>
+<th style="text-align:right">应付账款天数</th>
+<th style="text-align:right">现金周转周期</th>
+<th style="text-align:right">总资产周转率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">110.7</td>
+<td style="text-align:right">65.1</td>
+<td style="text-align:right">124.1</td>
+<td style="text-align:right">51.6</td>
+<td style="text-align:right">0.89</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">113.0</td>
+<td style="text-align:right">68.2</td>
+<td style="text-align:right">131.4</td>
+<td style="text-align:right">49.8</td>
+<td style="text-align:right">0.90</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">114.7</td>
+<td style="text-align:right">70.8</td>
+<td style="text-align:right">133.8</td>
+<td style="text-align:right">51.7</td>
+<td style="text-align:right">0.87</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">120.0</td>
+<td style="text-align:right">99.6</td>
+<td style="text-align:right">133.2</td>
+<td style="text-align:right">86.4</td>
+<td style="text-align:right">0.83</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">124.4</td>
+<td style="text-align:right">122.2</td>
+<td style="text-align:right">139.7</td>
+<td style="text-align:right">107.0</td>
+<td style="text-align:right">0.77</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">107.9</td>
+<td style="text-align:right">118.6</td>
+<td style="text-align:right">116.9</td>
+<td style="text-align:right">109.6</td>
+<td style="text-align:right">0.85</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">123.1</td>
+<td style="text-align:right">140.6</td>
+<td style="text-align:right">119.4</td>
+<td style="text-align:right">144.3</td>
+<td style="text-align:right">0.75</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">134.3</td>
+<td style="text-align:right">140.2</td>
+<td style="text-align:right">126.5</td>
+<td style="text-align:right">148.0</td>
+<td style="text-align:right">0.69</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">145.5</td>
+<td style="text-align:right">134.6</td>
+<td style="text-align:right">132.9</td>
+<td style="text-align:right">147.2</td>
+<td style="text-align:right">0.68</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">133.6</td>
+<td style="text-align:right">144.3</td>
+<td style="text-align:right">135.9</td>
+<td style="text-align:right">142.0</td>
+<td style="text-align:right">0.69</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年应收账款天数从145.5天下降至133.6天，回款方向改善；存货天数则由134.6天升至144.3天。库存余额增加13.61亿元，而收入持平，意味着更多现金仍停留在原材料和产品中。</p>
+<p>周转天数按期初期末平均账面价值计算；应收账款和存货采用账面净额，应付仅用附注中的货款，排除工程设备应付款及票据。年末回款集中会让年末余额改善快于全年平均，因此现金释放与天数变化并不需要完全同步。</p>
+<h3 id="section-85">§Q7偿债能力 — 偿债：净现金足以覆盖当前有息债务</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">货币资金</th>
+<th style="text-align:right">受限资金</th>
+<th style="text-align:right">有息债务</th>
+<th style="text-align:right">净现金</th>
+<th style="text-align:right">流动比率</th>
+<th style="text-align:right">利息保障倍数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">136.38</td>
+<td style="text-align:right">1.16</td>
+<td style="text-align:right">47.24</td>
+<td style="text-align:right">87.98</td>
+<td style="text-align:right">3.01</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">164.68</td>
+<td style="text-align:right">4.39</td>
+<td style="text-align:right">52.54</td>
+<td style="text-align:right">107.75</td>
+<td style="text-align:right">2.60</td>
+<td style="text-align:right">106.41</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">265.60</td>
+<td style="text-align:right">5.29</td>
+<td style="text-align:right">70.81</td>
+<td style="text-align:right">189.50</td>
+<td style="text-align:right">2.17</td>
+<td style="text-align:right">81.45</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">270.72</td>
+<td style="text-align:right">5.56</td>
+<td style="text-align:right">73.14</td>
+<td style="text-align:right">192.02</td>
+<td style="text-align:right">2.72</td>
+<td style="text-align:right">72.37</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">354.60</td>
+<td style="text-align:right">4.35</td>
+<td style="text-align:right">94.47</td>
+<td style="text-align:right">255.78</td>
+<td style="text-align:right">2.39</td>
+<td style="text-align:right">76.45</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">347.22</td>
+<td style="text-align:right">1.18</td>
+<td style="text-align:right">82.73</td>
+<td style="text-align:right">263.31</td>
+<td style="text-align:right">2.58</td>
+<td style="text-align:right">81.31</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">400.12</td>
+<td style="text-align:right">1.96</td>
+<td style="text-align:right">120.09</td>
+<td style="text-align:right">278.07</td>
+<td style="text-align:right">2.85</td>
+<td style="text-align:right">48.73</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">496.38</td>
+<td style="text-align:right">2.10</td>
+<td style="text-align:right">172.15</td>
+<td style="text-align:right">322.13</td>
+<td style="text-align:right">2.55</td>
+<td style="text-align:right">36.18</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">362.71</td>
+<td style="text-align:right">2.18</td>
+<td style="text-align:right">72.94</td>
+<td style="text-align:right">287.60</td>
+<td style="text-align:right">2.72</td>
+<td style="text-align:right">37.65</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">465.08</td>
+<td style="text-align:right">3.04</td>
+<td style="text-align:right">79.63</td>
+<td style="text-align:right">382.41</td>
+<td style="text-align:right">2.42</td>
+<td style="text-align:right">85.77</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年货币资金465.08亿元，受限资金3.04亿元，扣除有息债务后净现金约382.41亿元。有息债务由2023年的172.15亿元降至2024年的72.94亿元，2025年小幅回升至79.63亿元。财务安全的主要支撑是现金储备与低净杠杆，当前问题更偏向资本回报和经营效率。</p>
+<p>有息债务包括短期及长期借款、债券、租赁负债和对应一年内到期部分。2025年一年内到期非流动负债中含1.72亿元预计负债，已排除；2021年起适用新租赁准则，之前与之后的租赁列报存在变化。利息保障倍数为税前利润加利息费用后除以利息费用。</p>
+<h3 id="section-86">§Q8现金流分析 — 现金用途：研发、扩产和股东回报并行</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">经营现金流</th>
+<th style="text-align:right">现金资本开支</th>
+<th style="text-align:right">基础自由现金流</th>
+<th style="text-align:right">当年确认普通股股利</th>
+<th style="text-align:right">现金回购流通股份</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">62.16</td>
+<td style="text-align:right">9.11</td>
+<td style="text-align:right">53.05</td>
+<td style="text-align:right">28.11</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">73.73</td>
+<td style="text-align:right">16.92</td>
+<td style="text-align:right">56.81</td>
+<td style="text-align:right">37.29</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">91.13</td>
+<td style="text-align:right">20.56</td>
+<td style="text-align:right">70.57</td>
+<td style="text-align:right">46.14</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">77.68</td>
+<td style="text-align:right">19.27</td>
+<td style="text-align:right">58.40</td>
+<td style="text-align:right">56.01</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">160.88</td>
+<td style="text-align:right">20.04</td>
+<td style="text-align:right">140.85</td>
+<td style="text-align:right">65.40</td>
+<td style="text-align:right">未单列</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">127.09</td>
+<td style="text-align:right">30.98</td>
+<td style="text-align:right">96.10</td>
+<td style="text-align:right">74.58</td>
+<td style="text-align:right">0.00</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">101.65</td>
+<td style="text-align:right">37.56</td>
+<td style="text-align:right">64.10</td>
+<td style="text-align:right">84.83</td>
+<td style="text-align:right">20.44</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">166.22</td>
+<td style="text-align:right">40.48</td>
+<td style="text-align:right">125.74</td>
+<td style="text-align:right">64.31</td>
+<td style="text-align:right">0.00</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">132.64</td>
+<td style="text-align:right">46.66</td>
+<td style="text-align:right">85.98</td>
+<td style="text-align:right">81.54</td>
+<td style="text-align:right">3.10</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">253.39</td>
+<td style="text-align:right">36.22</td>
+<td style="text-align:right">217.17</td>
+<td style="text-align:right">100.96</td>
+<td style="text-align:right">17.18</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年扣除全部现金资本开支后，基础自由现金流217.17亿元；当年确认普通股股利100.96亿元，现金回购流通股份17.18亿元。2025年回购注销金额20.29亿元还包括上一年已回购的库存股，不能当作当年新增现金支出。</p>
+<p>表中股利采用未分配利润附注“应付普通股股利”口径，反映当年利润分配确认额，不冒充现金流量表实付股利；现金流量表“分配股利、利润或偿付利息”还包含利息与少数股东分配。未取得早期独立回购现金行的年份不填零。</p>
+<h3 id="section-87">§Q9资产负债表结构分析 — 资产负债结构：现金、应收与存货决定资金效率</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">现金/资产</th>
+<th style="text-align:right">应收账款/资产</th>
+<th style="text-align:right">存货/资产</th>
+<th style="text-align:right">负债/资产</th>
+<th style="text-align:right">商誉/归母权益</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">32.98%</td>
+<td style="text-align:right">27.19%</td>
+<td style="text-align:right">9.26%</td>
+<td style="text-align:right">40.80%</td>
+<td style="text-align:right">1.02%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">31.93%</td>
+<td style="text-align:right">28.51%</td>
+<td style="text-align:right">9.58%</td>
+<td style="text-align:right">40.66%</td>
+<td style="text-align:right">0.82%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">41.83%</td>
+<td style="text-align:right">26.18%</td>
+<td style="text-align:right">9.02%</td>
+<td style="text-align:right">40.21%</td>
+<td style="text-align:right">0.56%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">35.92%</td>
+<td style="text-align:right">28.28%</td>
+<td style="text-align:right">14.95%</td>
+<td style="text-align:right">39.66%</td>
+<td style="text-align:right">0.61%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">39.98%</td>
+<td style="text-align:right">24.78%</td>
+<td style="text-align:right">12.94%</td>
+<td style="text-align:right">38.58%</td>
+<td style="text-align:right">0.51%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">33.43%</td>
+<td style="text-align:right">25.20%</td>
+<td style="text-align:right">17.31%</td>
+<td style="text-align:right">37.04%</td>
+<td style="text-align:right">0.32%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">33.55%</td>
+<td style="text-align:right">25.08%</td>
+<td style="text-align:right">15.93%</td>
+<td style="text-align:right">38.80%</td>
+<td style="text-align:right">0.32%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">35.75%</td>
+<td style="text-align:right">25.79%</td>
+<td style="text-align:right">13.84%</td>
+<td style="text-align:right">40.83%</td>
+<td style="text-align:right">0.41%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">27.48%</td>
+<td style="text-align:right">28.72%</td>
+<td style="text-align:right">14.48%</td>
+<td style="text-align:right">33.72%</td>
+<td style="text-align:right">0.39%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">33.69%</td>
+<td style="text-align:right">21.60%</td>
+<td style="text-align:right">14.83%</td>
+<td style="text-align:right">33.92%</td>
+<td style="text-align:right">0.37%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年货币资金、应收账款和存货合计占总资产约70.1%，资产价值主要取决于现金可用性、客户还款和库存变现，而非大额商誉。商誉3.11亿元，占归母权益不足0.4%。</p>
+<p>应收账款即使在2025年明显下降后仍接近300亿元，不能把低有息杠杆等同于低经营风险；回款放慢和库存积压会直接影响资金效率。</p>
+<h3 id="section-88">§Q10简化利润表分析 — 百分比利润表：研发和销售费用消耗更多收入</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">毛利率</th>
+<th style="text-align:right">销售费用/收入</th>
+<th style="text-align:right">管理费用/收入</th>
+<th style="text-align:right">研发费用/收入</th>
+<th style="text-align:right">营业利润率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">41.59%</td>
+<td style="text-align:right">9.37%</td>
+<td style="text-align:right">9.74%</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">21.40%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">44.00%</td>
+<td style="text-align:right">10.57%</td>
+<td style="text-align:right">2.41%</td>
+<td style="text-align:right">7.62%</td>
+<td style="text-align:right">24.92%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">44.85%</td>
+<td style="text-align:right">11.82%</td>
+<td style="text-align:right">2.76%</td>
+<td style="text-align:right">8.99%</td>
+<td style="text-align:right">24.75%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">45.99%</td>
+<td style="text-align:right">12.59%</td>
+<td style="text-align:right">3.16%</td>
+<td style="text-align:right">9.51%</td>
+<td style="text-align:right">23.77%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">46.53%</td>
+<td style="text-align:right">11.62%</td>
+<td style="text-align:right">2.82%</td>
+<td style="text-align:right">10.04%</td>
+<td style="text-align:right">23.93%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">44.33%</td>
+<td style="text-align:right">10.55%</td>
+<td style="text-align:right">2.62%</td>
+<td style="text-align:right">10.13%</td>
+<td style="text-align:right">22.69%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">42.29%</td>
+<td style="text-align:right">11.75%</td>
+<td style="text-align:right">3.18%</td>
+<td style="text-align:right">11.80%</td>
+<td style="text-align:right">17.77%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">44.33%</td>
+<td style="text-align:right">12.03%</td>
+<td style="text-align:right">3.10%</td>
+<td style="text-align:right">12.75%</td>
+<td style="text-align:right">17.95%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">43.83%</td>
+<td style="text-align:right">13.03%</td>
+<td style="text-align:right">3.35%</td>
+<td style="text-align:right">12.83%</td>
+<td style="text-align:right">15.47%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">45.88%</td>
+<td style="text-align:right">13.35%</td>
+<td style="text-align:right">3.24%</td>
+<td style="text-align:right">12.70%</td>
+<td style="text-align:right">18.34%</td>
+</tr>
+</tbody>
+</table></div>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">其他收益/收入</th>
+<th style="text-align:right">投资收益/收入</th>
+<th style="text-align:right">公允价值损益/收入</th>
+<th style="text-align:right">所得税/收入</th>
+<th style="text-align:right">归母净利率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">不适用</td>
+<td style="text-align:right">0.13%</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">2.79%</td>
+<td style="text-align:right">23.25%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">3.99%</td>
+<td style="text-align:right">0.11%</td>
+<td style="text-align:right">0.10%</td>
+<td style="text-align:right">2.65%</td>
+<td style="text-align:right">22.46%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">4.18%</td>
+<td style="text-align:right">0.10%</td>
+<td style="text-align:right">0.03%</td>
+<td style="text-align:right">2.12%</td>
+<td style="text-align:right">22.78%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">3.28%</td>
+<td style="text-align:right">0.06%</td>
+<td style="text-align:right">0.03%</td>
+<td style="text-align:right">2.24%</td>
+<td style="text-align:right">21.53%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">3.63%</td>
+<td style="text-align:right">0.27%</td>
+<td style="text-align:right">0.13%</td>
+<td style="text-align:right">2.51%</td>
+<td style="text-align:right">21.08%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">3.23%</td>
+<td style="text-align:right">0.21%</td>
+<td style="text-align:right">-0.05%</td>
+<td style="text-align:right">1.18%</td>
+<td style="text-align:right">20.63%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">2.98%</td>
+<td style="text-align:right">0.26%</td>
+<td style="text-align:right">-0.19%</td>
+<td style="text-align:right">1.56%</td>
+<td style="text-align:right">15.44%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">2.86%</td>
+<td style="text-align:right">0.07%</td>
+<td style="text-align:right">0.03%</td>
+<td style="text-align:right">1.06%</td>
+<td style="text-align:right">15.79%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">2.87%</td>
+<td style="text-align:right">0.20%</td>
+<td style="text-align:right">0.05%</td>
+<td style="text-align:right">1.30%</td>
+<td style="text-align:right">12.95%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">3.07%</td>
+<td style="text-align:right">0.27%</td>
+<td style="text-align:right">-0.02%</td>
+<td style="text-align:right">1.71%</td>
+<td style="text-align:right">15.35%</td>
+</tr>
+</tbody>
+</table></div>
+<p>2016年尚无单列其他收益项目，相关补助当时列入营业外收入，不将不适用项目解释为零收益。2016年的研发包含在管理费用中，2017年采用后来重列的单独研发费用，不能把2016年较高管理费用当作组织管理成本突然下降。2017年以来研发费用单列后，其占收入比持续抬升，是毛利率稳定而净利率回落的重要原因。</p>
+<p>2025年毛利增加18.99亿元，营业利润增加26.51亿元。股份支付由8.65亿元降至1.62亿元，同时财务费用因汇兑收益增加而改善。2024年存在终止限制性股票计划产生的4.71亿元一次性股份支付费用，基期因此偏低；利润修复包含经营改善和费用基数变化，后者不应连续外推。</p>
+<h3 id="section-89">§Q11上下游分析 — 上下游：客户分散，但尚需给予账期</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度</th>
+<th style="text-align:right">应收账款</th>
+<th style="text-align:right">应付账款</th>
+<th style="text-align:right">合同负债</th>
+<th style="text-align:right">前五客户占比</th>
+<th style="text-align:right">前五供应商占比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td style="text-align:right">112.44</td>
+<td style="text-align:right">70.09</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">3.64%</td>
+<td style="text-align:right">33.43%</td>
+</tr>
+<tr>
+<td>2017</td>
+<td style="text-align:right">147.05</td>
+<td style="text-align:right">100.40</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">5.31%</td>
+<td style="text-align:right">29.23%</td>
+</tr>
+<tr>
+<td>2018</td>
+<td style="text-align:right">166.19</td>
+<td style="text-align:right">103.02</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">3.83%</td>
+<td style="text-align:right">22.88%</td>
+</tr>
+<tr>
+<td>2019</td>
+<td style="text-align:right">213.08</td>
+<td style="text-align:right">127.00</td>
+<td style="text-align:right">未单列</td>
+<td style="text-align:right">3.47%</td>
+<td style="text-align:right">22.50%</td>
+</tr>
+<tr>
+<td>2020</td>
+<td style="text-align:right">219.79</td>
+<td style="text-align:right">135.94</td>
+<td style="text-align:right">21.61</td>
+<td style="text-align:right">3.09%</td>
+<td style="text-align:right">23.64%</td>
+</tr>
+<tr>
+<td>2021</td>
+<td style="text-align:right">261.75</td>
+<td style="text-align:right">158.90</td>
+<td style="text-align:right">25.81</td>
+<td style="text-align:right">3.39%</td>
+<td style="text-align:right">17.81%</td>
+</tr>
+<tr>
+<td>2022</td>
+<td style="text-align:right">299.06</td>
+<td style="text-align:right">160.26</td>
+<td style="text-align:right">26.44</td>
+<td style="text-align:right">2.43%</td>
+<td style="text-align:right">17.58%</td>
+</tr>
+<tr>
+<td>2023</td>
+<td style="text-align:right">358.17</td>
+<td style="text-align:right">191.63</td>
+<td style="text-align:right">29.78</td>
+<td style="text-align:right">2.26%</td>
+<td style="text-align:right">15.86%</td>
+</tr>
+<tr>
+<td>2024</td>
+<td style="text-align:right">379.10</td>
+<td style="text-align:right">201.85</td>
+<td style="text-align:right">33.54</td>
+<td style="text-align:right">2.53%</td>
+<td style="text-align:right">12.79%</td>
+</tr>
+<tr>
+<td>2025</td>
+<td style="text-align:right">298.12</td>
+<td style="text-align:right">198.44</td>
+<td style="text-align:right">42.00</td>
+<td style="text-align:right">2.00%</td>
+<td style="text-align:right">14.50%</td>
+</tr>
+</tbody>
+</table></div>
+<p>前五客户销售占比从2016年的3.64%降至2025年的2.00%，单一客户集中度低；但较大的应收余额说明客户分散并不自动等于先款后货或强收款议价权。2025年流动合同负债从33.54亿元增加至42.00亿元，仍远小于298.12亿元应收账款。附注明确预收产品销售款同时包括客户预付款与经销商销售返点，且另有非流动部分；因此合同负债增长不能全部解释为新增客户现金。</p>
+<p>前五供应商采购占比从2016年的33.43%降至2025年的14.50%，采购集中度降低。2025年前五供应商中的关联方采购占年度采购6.80%，需要与关联交易价格和付款条款共同评价，不能只凭供应商分散下结论。2020年前合同负债采用预收款列报，未将不同科目名称直接拼成同一精确序列。</p>
+<h3 id="section-90">§Q12定量分析总结 — 定量总结</h3>
+<ol>
+<li>毛利率十年保持40%以上，现金资本开支占累计归母利润22.42%，支持公司具有较强产品附加值、设备资本消耗相对较低的判断。</li>
+<li>加权 ROE 十年均值26.27%，最近三年均值仅17.43%；新增资本回报弱于早期，不能把历史平均回报当作当前常态。</li>
+<li>近三年经营现金流覆盖合并净利润1.26倍，但十年覆盖率只有96.54%。现金质量正在改善，2025年的突出表现高度依赖应收释放。</li>
+<li>研发占收入由7.62%升至12.70%，说明竞争优势依赖持续技术投入；低设备资本开支不代表不需要持续投入。</li>
+<li>国内主业压力与创新业务、海外增长同时存在。集团收入持平掩盖了业务结构变化，未来利润需要按板块观察。</li>
+<li>净现金充裕、有息债务负担不重，主要风险集中在需求、利润率、应收和库存，而非当前融资能力。</li>
+<li>分红与回购加强了股东回报；回购现金、注销库存股和确认股利分别列示，避免把会计注销额重复当作现金支出。</li>
+</ol>
+<h2 id="section-91">Part 3 — 未来（前瞻）</h2>
+<h3 id="section-92">§3.1未来市场可能的变化</h3>
+<p>未来增量可能更多来自设备更新与场景应用，而非单纯增加摄像机数量。关键变量是采购者能否从告警、检测和流程自动化中获得可计量收益，以及预算能否覆盖升级费用。低成本通用模型既可能扩大需求，也可能降低专有算法的溢价；方向不能预先只选有利的一面。</p>
+<h3 id="section-93">§3.2未来公司可能的变化</h3>
+<p>公司计划强化海外非视频和非经销项目、创新业务及内部效率。这会使海康更加多元，也增加执行难度：新客户要求不同的销售、工程、认证和服务能力。应该按业务评价投入与回报，而不是假定旧渠道可以无成本复制到所有领域。</p>
+<h3 id="section-94">§3.3未来净利润增长来源</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>变量</th>
+<th>正向情景</th>
+<th>反向情景</th>
+<th>最应观察的指标</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内主业</td>
+<td>去库存结束后恢复正常采购</td>
+<td>需求继续缩减，费用压降抵不过毛利流失</td>
+<td>分客户群收入、主业毛利和集团库存</td>
+</tr>
+<tr>
+<td>海外</td>
+<td>非视频与非经销项目带来增量</td>
+<td>准入受限、信用期限延长、交付成本增加</td>
+<td>海外收入、毛利率、应收与合规变化</td>
+</tr>
+<tr>
+<td>创新</td>
+<td>汽车电子、机器人等扩大规模并提高盈利</td>
+<td>增长放缓、价格竞争、少数股东分成增加</td>
+<td>子业务净利润、持股比例与投入资本</td>
+</tr>
+<tr>
+<td>费用与资产</td>
+<td>组织效率提高、已投产资产利用率改善</td>
+<td>研发削减损伤产品、固定资产闲置</td>
+<td>研发与销售费用率、新品产出、折旧和现金回报</td>
+</tr>
+</tbody>
+</table></div>
+<p>2025年归母利润141.95亿元是历史起点，不能当作已经验证的三年利润下限。分业务归母利润、维持性投入及正常营运资金尚不能充分拆开，本报告不输出2028年三档净利润或据此计算目标价。</p>
+<h3 id="section-95">§3.4 ROE 提高的空间和来源</h3>
+<p>更健康的提升路径是利润率与资产周转共同改善：国内收入企稳、创新业务利润率改善、旧应收收回后不再大量形成新的逾期款、库存与固定资产利用率提高。回购和分红可以优化富余资本，但单纯缩小权益分母不代表经营质量提升。</p>
+<h3 id="section-96">§3.5其他环境变化</h3>
+<p>政策支持、软件税收优惠、海外管制与汇率共同影响利润。2025年软件增值税即征即退19.37亿元，显示持续性政策对经营的贡献；海外收入占37.06%，币种和跨国运营也重要。公司使用外汇套期保值，但不能据此推定消除了所有汇率风险。</p>
+<h3 id="section-97">§3.6如果我是董事长</h3>
+<p>优先把国内基本盘的终端销售与渠道库存透明化，区分真实需求恢复和渠道搬库存；对创新业务披露更清晰的利润、归母分成与资本回报；继续追收旧账，但不以放宽新客户信用来弥补收入压力；把研发考核落在客户节省额、产品收入和毛利上。资本分配应围绕每股价值，避免仅以子业务规模考核成功。</p>
+<h2 id="section-98">Part 4 — 买入阶段检查清单</h2>
+<h3 id="section-99">§4.1市场估值分析</h3>
+<p>本研究的利润持续性和维持性投入前提尚未充分成立，护城河判断也不足以支持高确定性估值。因此暂不选定估值倍数；不能因为没有采用25倍PE，就任意改成15倍来绕过相同证据问题。</p>
+<h3 id="section-100">§4.2当前公司估值情况</h3>
+<p>本报告不进行价格比较，也未采用2026年4月18日的市场报价，不列当前PE、PB和股息率，也不把2026年9月价格与4月信息混用。此限制不影响对已披露经营事实的判断。</p>
+<h3 id="section-101">§4.3 3年后净利润及估值</h3>
+<p><strong>N/A—利润持续性与维持性投入尚存疑，治理核查仍有未决事项。</strong> 不输出合理市值、每股价值和买卖点。本次结论是观察研究，不能由217.17亿元单年基础自由现金流直接资本化成价值。</p>
+<h3 id="section-102">§4.4公司基本面再分析</h3>
+<p>值得继续研究的事实是：主业仍产生主要毛利，研发完全费用化，经营现金流和利润均改善。需要反复检验的事实是：国内三大客户群均下滑，创新毛利率下降，自身库存增加，长账龄应收尚在上升。任何买入判断都应同时解释这两组事实。</p>
+<h3 id="section-103">§4.5负面清单 — 排雷风险（29项）</h3>
+<p><strong>年报范围结论：有保留。</strong> 下列清单保留2026年4月18日的年度研究范围；2026年新增风险另列于后文。年报事实证据等级为高，整体检查仍未完成。维持性投入近似的输入和敏感性已核实，不因缺少报表“真实维持开支”而保持未完成；长期资本回报仍需单独判断。</p>
+<h4 id="section-104">29项清单</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>年报范围结果</th>
+<th>严重度</th>
+<th>证据与已执行动作/剩余工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 审计意见</td>
+<td>否</td>
+<td>无</td>
+<td>2025年度标准无保留意见，德勤华永，签署2026-04-16。 已读审计意见和收入、应收减值两项关键审计事项。 证据：2025年报PDF p.142、143、144。</td>
+</tr>
+<tr>
+<td>2. 历史财务造假正式处罚</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025年报当年处罚披露不能代替上市以来监管窗口。已发现2019调查/2020警示函，属于信披监管措施，不冒称财务造假处罚；完整历史事件核查尚未完成。 仍需完成上市以来监管记录与法律类别核查。 证据：2025年报PDF p.124。</td>
+</tr>
+<tr>
+<td>3. 存贷双高</td>
+<td>否</td>
+<td>无</td>
+<td>非受限现金462.04亿元，有息债务79.63亿元，归母权益833.48亿元；债务/权益9.55%&lt;30%，不满足两者均&gt;30%的合取条件。 债务已剔除一年内到期预计负债1.72亿元。 证据：2025年报PDF p.9、95、147、148、219。</td>
+</tr>
+<tr>
+<td>4. 存款收益率异常低</td>
+<td>需人工</td>
+<td>待定</td>
+<td>利息收入5.51亿元。按全部非受限现金直接相除得到的比率混合币种、期限与计息本金，不能与大华相应比率比较。电科财务存款从定期40.00亿元变为定期0.50亿元、活期62.46亿元，结构明显变化。 已查币种和关联财务公司期限结构；同交易所/币种/期限中位数仍未建立，不触发≥50%偏离结论。 证据：2025年报PDF p.194、224、243。</td>
+</tr>
+<tr>
+<td>5. 货币资金变动或收益率异常</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2023—2025货币资金同比24.06%、-26.93%、28.22%，均未超过绝对30%；2024偿债、2025应收回款均有现金流解释。收益率分支仍待同口径比较。 现金变动分支已核对三类现金流；收益率缺口不等于现金虚假。 证据：2023年报PDF p.160；2024年报PDF p.157；2025年报PDF p.147、153、229。</td>
+</tr>
+<tr>
+<td>6. 其他或受限货币资金无解释</td>
+<td>否</td>
+<td>无</td>
+<td>其他货币资金3.46亿元/货币资金465.08亿元=0.74%，受限资金3.04亿元=0.65%，均远低于30%。用途列明银行承兑保证金、保函、其他保证金与其他受限资金。 已拆分受限和非受限，避免将全部其他货币资金当作占用。 证据：2025年报PDF p.194。</td>
+</tr>
+<tr>
+<td>7. 借款高分红再融资链条</td>
+<td>否</td>
+<td>无</td>
+<td>2021—2025“分配股利、利润或偿付利息”合并现金支出/上一年归母净利润依次为58.60%、51.99%、55.18%、63.75%、88.21%。该总额是普通股现金分红的上界，仍全部&lt;100%，不满足触发链的必要分红条件。 以保守上界排除必要条件，没有将含利息总额冒充实际普通股分红。 证据：2022年报PDF p.152；2023年报PDF p.166；2024年报PDF p.163；2025年报PDF p.153。</td>
+</tr>
+<tr>
+<td>8. 定存集中且流动比率不足</td>
+<td>否</td>
+<td>无</td>
+<td>2025流动比率2.42&gt;1；不满足“定期&gt;70%且流动比率&lt;1”的合取条件。全集团定期结构不完整不影响此分支方向。 核对流动资产、流动负债及已披露定存。 证据：2025年报PDF p.147、148、243。</td>
+</tr>
+<tr>
+<td>9. 应收高增且收现低</td>
+<td>否</td>
+<td>无</td>
+<td>2025应收账款净额同比-21.36%，增长为负，不满足连续两年应收正增长&gt;收入1.5倍。 保留2025应收余额下降与老账风险并存的事实；不使用负增长倍数。 证据：2024年报PDF p.157；2025年报PDF p.9、147。</td>
+</tr>
+<tr>
+<td>10. 库存连续两年快于收入</td>
+<td>否</td>
+<td>无</td>
+<td>2024存货净额同比-0.52%，2025同比7.12%；2024为负，不满足连续两年正增长&gt;收入1.5倍。 进一步拆库存：产成品净额131.73亿元，占净库存64.34%；不把阈值未触发等同于无滞销风险。 证据：2024年报PDF p.157；2025年报PDF p.9、147、203。</td>
+</tr>
+<tr>
+<td>11. 控股股东质押</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025年末中电海康质押5,000万股/持股34.17亿股=1.46%，低于A股80%阈值；年末至2026年4月18日的质押变化尚未核实。 保留年末确定值，尚需核实截至2026年4月18日的状态。 证据：2025年报PDF p.136。</td>
+</tr>
+<tr>
+<td>12. 收现核对或净现比</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2024、2025经营现金流/归母净利润分别1.11、1.79倍，未触发连续两年&lt;0.5；销售现金完整桥缺加权增值税、票据流量和非现金重分类。 已读票据、合同负债、核销和现金流；不能将期末未到期贴现余额当全年贴现额，也不能默认调整为零。 证据：2025年报PDF p.9、195、200、201、216。</td>
+</tr>
+<tr>
+<td>13. 逾期应收持续恶化</td>
+<td>否</td>
+<td>无</td>
+<td>2021→2025净额应收天数107.94→133.60，增25.67天&lt;30。当前合取阈值未触发；2025超信用期1年以上余额66.75亿元，占毛额19.49%，高于2024的15.60%，老账不能忽视。账龄按超信用期，不是开票年龄。 已核对坏账准备12.97%和信用损失审计事项；继续跟踪超信用期老账迁徙。 证据：2021年报PDF p.154；2022年报PDF p.146；2023年报PDF p.10；2025年报PDF p.9、144、147、197。</td>
+</tr>
+<tr>
+<td>14. 库存集中或计提偏低</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025库存/资产14.83%&lt;20%，比例分支未触发。准备14.43亿元/原值219.15亿元=6.58%，产成品准备率7.93%。大华同期准备比例3.64%可作单家公司对照，但不是完整同业中位数。 已读成本与可变现净值政策、分项准备及转销；库存年龄/同业业务组合需继续公开核验，不能据比例较高证明足额。 证据：2025年报PDF p.9、147、189、203。</td>
+</tr>
+<tr>
+<td>15. 其他应收占比或关联长挂</td>
+<td>需人工</td>
+<td>待定</td>
+<td>其他应收净额4.43亿元/流动资产=0.42%&lt;10%；关联其他应收毛额33.43万元。附注未逐户连结关联性质与账龄，≥2年关联长挂分支未完成。 已读押金2.27亿元、暂付款1.37亿元、前五欠款人合计0.32亿元及准备；不能把小额关联余额定性为占款。 证据：2025年报PDF p.147、202、203、245。</td>
+</tr>
+<tr>
+<td>16. 商誉或激进减值假设</td>
+<td>需人工</td>
+<td>待定</td>
+<td>商誉3.11亿元/归母权益=0.37%&lt;20%。测试预测期5年、永续增长0—2%；未披露预测期增长率、折现率，不能完成激进假设与同业比较。 已核对各商誉资产组；金额阈值不触发，保留假设透明度限制。 证据：2025年报PDF p.9、147、212。</td>
+</tr>
+<tr>
+<td>17. 预付暴涨或关联长挂</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025预付款增长28.91%&lt;100%；93.56%在一年内，关联预付77.26万元，较上年202.47万元下降。关联预付逐户账龄未连结，≥1年分支未核实。 已排除翻倍分支，核对关联余额与总账龄；不将非关联长账龄误当关联输血。 证据：2025年报PDF p.201、245。</td>
+</tr>
+<tr>
+<td>18. 预付增速持续快于收入</td>
+<td>是</td>
+<td>预警</td>
+<td>2024、2025预付款增长30.79%、28.91%，收入增长3.53%、0.0133%，两年均为正且预付增幅&gt;收入2倍；预付总额8.57亿元，占流动资产0.81%。 已查账龄和关联余额：一年内93.56%，关联77.26万元；信号更多指向采购付款节奏变化，尚无资金输送证据。 证据：2024年报PDF p.157；2025年报PDF p.9、147、201、245。</td>
+</tr>
+<tr>
+<td>19. 软无形资产</td>
+<td>否</td>
+<td>无</td>
+<td>无形资产18.30亿元，其中土地使用权16.26亿元；知识产权、软件和特许经营权净额合计2.04亿元/归母权益0.24%&lt;10%，不满足软无形规模必要条件。 分别列土地与软资产，不用无形资产总额冒充商誉型软资产。 证据：2025年报PDF p.9、211。</td>
+</tr>
+<tr>
+<td>20. 生产资产集中或在建突增</td>
+<td>否</td>
+<td>无</td>
+<td>固定资产+在建220.91亿元/总资产=16.00%&lt;40%；在建减少27.85亿元，不超过当年正归母利润141.95亿元。 继续检查投产后的资产周转，比例不触发不抵消第21、22项。 证据：2025年报PDF p.9、147。</td>
+</tr>
+<tr>
+<td>21. 在建工程长期存在</td>
+<td>是</td>
+<td>预警</td>
+<td>2021—2025在建/固定资产依次34.70%、44.16%、37.43%、31.20%、9.49%，2021—2024连续&gt;30%。红外基地与机器人产业化项目自2022年末已有余额，2025末分别3.70、3.42亿元，进度47.44%、33.76%。2025全年已转固57.54亿元，武汉科技园等主要项目完工。毛利率分支未见连续两年下降≥3个百分点。 已穿透项目与转固进度；保留长建设期预警，不等同于故意延迟折旧。尚未到可使用状态的项目不能任意模拟全额应计折旧。 证据：2022年报PDF p.146、150；2023年报PDF p.10、160、164、222、223；2024年报PDF p.9、157、161、218、219；2025年报PDF p.9、147、151、208、209、210。</td>
+</tr>
+<tr>
+<td>22. 固定资产周转持续下滑</td>
+<td>是</td>
+<td>预警</td>
+<td>2021—2025收入/平均净固定资产依次12.95、10.92、8.91、6.96、5.25次；2022→2025连续三年下降，累计降51.91%，超过30%。 已核对大量园区转固与收入持平，主因新增资产尚待收入消化；在利润持续性/资本投入前提中保留限制。 证据：2021年报PDF p.154；2022年报PDF p.10、146；2023年报PDF p.10、160；2024年报PDF p.9、157；2025年报PDF p.9、147。</td>
+</tr>
+<tr>
+<td>23. 利息覆盖</td>
+<td>否</td>
+<td>无</td>
+<td>2025息税前利润/利息费用85.77倍&gt;2；经营现金流/利息费用126.25倍&gt;3。 利息包括损益内借款及租赁利息，已核对微量资本化利息，当前不提示偿债压力。 证据：2025年报PDF p.9、151、224。</td>
+</tr>
+<tr>
+<td>24. 客户供应商集中</td>
+<td>否</td>
+<td>无</td>
+<td>前五客户2.00%、前五供应商14.50%，均&lt;50%；即使最大一家等于前五合计也&lt;30%，单一集中阈值同样不触发。 已用集中度上界排除单一&gt;30%；关联供应商采购仍在第29项核对。 证据：2025年报PDF p.91。</td>
+</tr>
+<tr>
+<td>25. 研发资本化</td>
+<td>否</td>
+<td>无</td>
+<td>2025研发投入117.53亿元，资本化研发支出0，资本化比例0%，低于30%；资本化额/归母利润为0&lt;10%。 研发已全部进入损益，无需为资本化研发还原利润；技术再投入仍属于真实持续成本。 证据：2025年报PDF p.92。</td>
+</tr>
+<tr>
+<td>26. 主动改变折旧年限残值率</td>
+<td>否</td>
+<td>无</td>
+<td>2025重要判断附注明确：本年度管理层未发现需要缩短/延长固定资产使用寿命或改变预计净残值的情况。 已读年度折旧估计复核说明；未把强制准则变更列为主动调节。 证据：2025年报PDF p.189。</td>
+</tr>
+<tr>
+<td>27. 坏账计提骤降或高保理</td>
+<td>需人工</td>
+<td>待定</td>
+<td>A/B/C组合各信用期桶2025对比2024的平均损失率没有下降≥50%；整体准备率由9.36%升至12.97%。已披露未到期票据贴现不能代替全年应收账款保理总额，后者尚未核实。 已逐桶核对2025附注p.198—199；保理未披露不填0，不把比例上升证明足额。 证据：2025年报PDF p.195、197、198、199、201。</td>
+</tr>
+<tr>
+<td>28. 五年ROE门槛</td>
+<td>否</td>
+<td>无</td>
+<td>2021—2025披露加权ROE为28.99%、19.62%、19.64%、15.34%、17.30%，均值20.18%&gt;15%，最低15.34%&gt;10%。 保留回报明显低于早期的趋势，不以门槛通过代替资本回报分析。 证据：2023年报PDF p.10；2024年报PDF p.9；2025年报PDF p.9。</td>
+</tr>
+<tr>
+<td>29. 关联交易或控制人不透明</td>
+<td>否</td>
+<td>无</td>
+<td>关联采购34.49亿元/营业成本500.67亿元=6.89%&lt;15%；关联销售2.65亿元/收入925.08亿元=0.29%&lt;10%。中电海康为控股股东、实际控制人为中国电科，链条有明确披露。 已核对交易金额、货到付款条款和授权；财务公司存款62.96亿元与高拨备关联应收另外跟踪，规模未触发不代表定价已证明公允。 证据：2025年报PDF p.125、138、242、243、244。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-105">6项高危附加检查</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>年报范围结果</th>
+<th>严重度</th>
+<th>证据与已执行动作/剩余工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 商誉高占比</td>
+<td>否</td>
+<td>无</td>
+<td>商誉/归母权益0.37%，不触发20%预警或30%高风险；假设透明度限制见第16项。 已核对各商誉资产组；金额阈值不触发，保留假设透明度限制。 证据：2025年报PDF p.9、147、212。</td>
+</tr>
+<tr>
+<td>2. 其他应收或关联长挂</td>
+<td>需人工</td>
+<td>待定</td>
+<td>其他应收净额4.43亿元/流动资产=0.42%&lt;10%；关联其他应收毛额33.43万元。附注未逐户连结关联性质与账龄，≥2年关联长挂分支未完成。 已读押金2.27亿元、暂付款1.37亿元、前五欠款人合计0.32亿元及准备；不能把小额关联余额定性为占款。 证据：2025年报PDF p.147、202、203、245。</td>
+</tr>
+<tr>
+<td>3. 在建至少三年</td>
+<td>是</td>
+<td>预警</td>
+<td>2021—2025在建/固定资产依次34.70%、44.16%、37.43%、31.20%、9.49%，2021—2024连续&gt;30%。红外基地与机器人产业化项目自2022年末已有余额，2025末分别3.70、3.42亿元，进度47.44%、33.76%。2025全年已转固57.54亿元，武汉科技园等主要项目完工。毛利率分支未见连续两年下降≥3个百分点。 已穿透项目与转固进度；保留长建设期预警，不等同于故意延迟折旧。尚未到可使用状态的项目不能任意模拟全额应计折旧。 证据：2022年报PDF p.146、150；2023年报PDF p.10、160、164、222、223；2024年报PDF p.9、157、161、218、219；2025年报PDF p.9、147、151、208、209、210。</td>
+</tr>
+<tr>
+<td>4. 连续两年经营现金流/归母利润低于50%</td>
+<td>否</td>
+<td>无</td>
+<td>2021—2025经营现金流/归母利润依次0.76、0.79、1.18、1.11、1.79倍，没有连续两年&lt;0.50；全部归母利润为正。 已读票据、合同负债、核销和现金流；不能将期末未到期贴现余额当全年贴现额，也不能默认调整为零。 证据：2025年报PDF p.9、195、200、201、216。</td>
+</tr>
+<tr>
+<td>5. 生物资产可审计性</td>
+<td>不适用</td>
+<td>无</td>
+<td>智能物联制造及技术服务企业；合并资产负债表和存货构成无生物资产列项，生产性资产以固定资产、在建及物料产品组成。 已读资产表与库存分类，不套农林渔牧盘点风险。 证据：2025年报PDF p.147、148、203。</td>
+</tr>
+<tr>
+<td>6. 管理层道德否决历史</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025年报当年处罚披露不能代替上市以来监管窗口。已发现2019调查/2020警示函，属于信披监管措施，不冒称财务造假处罚；完整历史事件核查尚未完成。 仍需完成上市以来监管记录与法律类别核查。 证据：2025年报PDF p.124。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-106">三张财务报表一致性检查</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>年报范围结果</th>
+<th>严重度</th>
+<th>证据与已执行动作/剩余工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 应有销售收现与实际值</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025实际销售收现1,108.52亿元。境内税率有3%、5%、6%、9%、13%；海外各地及收入税率权重未确定。毛额应收下降75.70亿元、核销2.00亿元有披露，但票据全年流量、汇兑/重分类及合同负债中返点变化未补全，不能据不完整公式报一个“残差”。 已保存实际项及缺失清单；不能用应收净额替代毛额，也不能将期末票据余额当全年流量。 证据：2025年报PDF p.153、190、195、197、200、201、216。</td>
+</tr>
+<tr>
+<td>2. 含增值税销售收现比</td>
+<td>需人工</td>
+<td>待定</td>
+<td>按0—13%假设率，2025比率1.20—1.06倍，2024为1.07—0.94倍。区间仅是境内披露税率的压力测试，不能代替全集团境外税率与实际权重；没有依据认定连续两年收现低于1。 输出多税率敏感性；继续查地区和交易模式税基。 证据：2025年报PDF p.153、190。</td>
+</tr>
+<tr>
+<td>3. 合并净利润至经营现金流完整桥</td>
+<td>通过</td>
+<td>无</td>
+<td>2025合并净利润154.34亿元，加全部19项已披露调节后=253.39亿元经营现金流；2024同样精确核对，两年残差均0.00元（阈值5%）。2025经营应收释放80.12亿元是主要增量。 逐行相加保留在redflags-evidence.json；合并净利润作为起点，未混用归母利润。 证据：2025年报PDF p.229。</td>
+</tr>
+<tr>
+<td>4. 维持性资本开支近似</td>
+<td>通过</td>
+<td>无</td>
+<td>固定资产折旧16.46亿元、使用权资产摊销2.05亿元、无形资产摊销1.07亿元、长期待摊摊销0.97亿元，合计20.54亿元。按成本涨幅0%、2%、5%估算20.54、20.95、21.57亿元，对应2025经营现金流减估算投入232.85、232.44、231.82亿元。国内全年CPI为0，缺海外成本权重以区间处理；这是估算方法完成，不是实际维持投入认证，也不是常态现金流。使用权摊销作为替代投入计入一次，不再重复扣租赁本金；全额现金资本支出36.22亿元仅作更保守对照。证据：2025年报第153、208、211、212、229页；国家统计局2025年CPI公告。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-107">8类补充质检信号</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>年报范围结果</th>
+<th>严重度</th>
+<th>证据与已执行动作/剩余工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 员工薪酬合理性</td>
+<td>需人工</td>
+<td>待定</td>
+<td>应付职工薪酬本期增加206.54亿元/年末领取薪酬人数57,202≈36.11万元/人；人数不是年均全职当量，且金额含社会保险及可能资产成本。同业/职能地区结构尚未匹配。 已按附注本期增加计算，不用现金实付与期末应付混算；继续匹配历史与同业结构。 证据：2025年报PDF p.113、217。</td>
+</tr>
+<tr>
+<td>2. 运输海关配套费用</td>
+<td>需人工</td>
+<td>待定</td>
+<td>销售费用内运输交通车辆费4.12亿元，较4.43亿元下降6.95%；现金口径交通运输费4.54亿元较5.07亿元下降10.45%。收入持平、境外收入增7.50%；不能将混合交通费等同于物流吨公里/海关成本。 收入审计事项含出口报关抽样，但没有全部运费、装卸、关务独立核对；继续保留口径限制。 证据：2025年报PDF p.143、223、227。</td>
+</tr>
+<tr>
+<td>3. 其他经营现金流入</td>
+<td>未见异常</td>
+<td>无</td>
+<td>其他经营现金流入16.68亿元，较17.61亿元下降5.26%；由政府补助8.14亿元、利息4.30亿元、收回受限资金2.04亿元及其他2.21亿元组成。 已核对四项合计及对应性质，未出现此项突然增加推高经营现金流；这不是所有交易对手独立审计。 证据：2025年报PDF p.227。</td>
+</tr>
+<tr>
+<td>4. 其他收益与反复一次性项目</td>
+<td>异常</td>
+<td>预警</td>
+<td>其他收益28.40亿元含增值税即征即退19.37亿元、专项补助8.23亿元；该税惠应视为政策相关利润，不能当作完全可外推的纯产品利润。2024限制性股票终止一次性费用4.71亿元造成利润比较基数变化。 已分别列税惠、补助和费用基数；对政策延续、税率审批和费用正常化做独立判断，不将全部其他收益机械扣除。 证据：2024年报PDF p.259；2025年报PDF p.191、224。</td>
+</tr>
+<tr>
+<td>5. 长期待摊费用</td>
+<td>未见异常</td>
+<td>无</td>
+<td>期末1.48亿元较1.63亿元下降，其中资产改良1.28亿元、员工住房借款待摊利息0.20亿元；本年增加0.80亿元、摊销0.97亿元。 核对用途及滚动，不存在本项余额突然膨胀信号；未把余额下降证明每笔资本化合理。 证据：2025年报PDF p.212。</td>
+</tr>
+<tr>
+<td>6. 长期预付款</td>
+<td>需人工</td>
+<td>待定</td>
+<td>其他非流动资产中的预付设备0.41亿元、基建0.005亿元，预付房产和土地年末为0；流动预付款超过一年0.55亿元。关联预付款77.26万元的逐户账龄仍未连结。 已将长期设备/基建预付与流动贸易预付分开；继续核对对象和账龄，未推定关联占用。 证据：2025年报PDF p.201、214、245。</td>
+</tr>
+<tr>
+<td>7. 独董、财务负责人和审计机构异常变更</td>
+<td>需人工</td>
+<td>待定</td>
+<td>德勤已连续服务10年；2026-04-16董事会提议改聘毕马威为2026审计机构，尚需股东会批准。年报监事会取消属制度变更；不能把提案说成审计机构已更换。 治理事件全窗口及变更原因仍需完整核实；保留法定轮换解释与当前未生效状态。 证据：2025年报PDF p.103、123、124。</td>
+</tr>
+<tr>
+<td>8. 新客户与供应商真实性</td>
+<td>需人工</td>
+<td>待定</td>
+<td>前五客户仅2.00%、供应商14.50%；前五排名为匿名编号，无法据年报独立核验新主体工商身份。审计收入程序检查发票、合同、发运/签收和出口报关样本。 已读披露及审计程序；公开主体辨认未完成，不将匿名披露或审计程序当作造假/绝对真实结论。 证据：2025年报PDF p.91、143。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-108">造假识别5个维度</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>检查</th>
+<th>年报范围结果</th>
+<th>严重度</th>
+<th>证据与已执行动作/剩余工作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. 收入端</td>
+<td>需人工</td>
+<td>待定</td>
+<td>2025应收总量明显下降，尚未同时出现渠道压货的多项异常信号；老逾期占比上升且销售收现桥未核对完整。 保留收入风险范围，继续回款和票据/合同负债核验。 证据：2025年报PDF p.9、147、197、216。</td>
+</tr>
+<tr>
+<td>2. 成本端</td>
+<td>沾边</td>
+<td>预警</td>
+<td>第21、22项显示长建设期与投产后周转下滑；2025也有57.54亿元真实转固，研发资本化0，存货准备率提高。不能将两个资本效率信号升级为系统性造假。 跟踪项目达到可用状态、折旧及产能消化；未证明人为延迟转固。 证据：2025年报PDF p.92、203、208、210。</td>
+</tr>
+<tr>
+<td>3. 现金端</td>
+<td>需人工</td>
+<td>待定</td>
+<td>现金、受限款与经营现金流桥有明确披露；有息债务低于归母权益10%。收益率匹配与全窗口关联资金核验仍未完成。 继续关注电科财务存款期限和资金可提取性；余额本身不是占款证据。 证据：2025年报PDF p.194、229、243。</td>
+</tr>
+<tr>
+<td>4. 利润端</td>
+<td>沾边</td>
+<td>预警</td>
+<td>利润包含增值税退税、专项补助和限制性股票费用低基数；2025经营现金流大增主要为应收释放，不能稳定外推。 将正常化费用、政策收益和营运资本释放分别拆解，不把经营现金流当永久利润。 证据：2024年报PDF p.259；2025年报PDF p.224、229。</td>
+</tr>
+<tr>
+<td>5. 结构端</td>
+<td>需人工</td>
+<td>待定</td>
+<td>商誉只有3.11亿元、年度无新增商誉；历史同控并购造成小额比较数重列。全部历史重组与治理事件尚未核查完整。 商誉低占比并不代替完整交易历史核验；保留已核实结构与未完成窗口。 证据：2025年报PDF p.212。</td>
+</tr>
+</tbody>
+</table></div>
+<h4 id="section-109">2026年新增风险与已解决事项</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>项目</th>
+<th>最新事实</th>
+<th>本次判断</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>库存集中度</td>
+<td>9月末库存占总资产23.58%，高于20%预警线；年末为14.83%</td>
+<td>新增预警，检查消化与减值；不因此认定造假</td>
+</tr>
+<tr>
+<td>现金兑现</td>
+<td>前三季度经营现金流/合并净利润49.02%，同比明显下降</td>
+<td>盈利质量观察加强；不能套成连续两年年度阈值</td>
+</tr>
+<tr>
+<td>审计机构变更</td>
+<td>5月8日股东会批准毕马威承接2026年审计</td>
+<td>当前批准状态已核实；年度表保留4月18日提案状态</td>
+</tr>
+<tr>
+<td>非经营性资金占用</td>
+<td>2025、2026年上半年汇总表相关占用栏为不适用；子公司往来单列</td>
+<td>完成所列期间的区分，不升级为上市以来限定通过</td>
+</tr>
+<tr>
+<td>维持性开支近似</td>
+<td>20.54—21.57亿元投入假设与对应现金结果可复算</td>
+<td>近似方法检查通过；不能把2025回款释放当常态现金</td>
+</tr>
+</tbody>
+</table></div>
+<p>前三季度信用减值损失由3.47亿元增至5.72亿元。应收净额低于年末、信用损失却增加，说明单看净余额不能排除信用质量变化；需要后续年度附注的账龄迁徙与坏账准备解释。库存新增预警与三项年报资本效率预警分别保留，不把多个信号自动归并为一个造假模式。</p>
+<p><strong>发现的风险小结:</strong> 已确定的第18、21、22项分别是预付款相对收入增长过快、在建工程存在时间较长、固定资产周转持续下降。前者金额尚小且一年内账龄为主；后两项说明扩建完成后需要更高收入消化资产。2025集中转固事实削弱“全部在建项目均故意延迟折旧”的解释，三项不能机械合并为一个造假模式。</p>
+<p><strong>利润质量：</strong> 近三年经营现金流覆盖利润、完整合并净利润至经营现金流桥可精确核对；但2025回款释放是主要现金改善来源。增值税退税与研发持续投入也影响正常利润，不应把当前现金高点直接资本化。</p>
+<p><strong>整体结论边界：</strong> 现有证据支持“有经营效率预警、仍有取证未完成项”，不支持“无重大风险”，也没有直接证据支持财务造假一票否决。上市以来监管核查、同业比较和销售收现核对尚未全部完成，因此不输出买卖价格或仓位。</p>
+<p><strong>结论:</strong> 有保留</p>
+<h3 id="section-110">§4.6基准日价格与仓位</h3>
+<p>未形成买点，不给建仓或加仓比例。用户尚未提供持仓与资金安排，本节不作个人组合配置判断。</p>
+<h3 id="section-111">§4.7买入后加仓/持有预案</h3>
+<p>在估值前提成立之前，不设机械加仓档位。将来若形成买点，新信息使三年利润下限动摇时，应立即停止按原计划加仓，先重审利润下限和资本消耗，再决定是否继续。</p>
+<h3 id="section-112">§4.8买入前最终检查</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>问题</th>
+<th>本次结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>生意能否解释清楚</td>
+<td>可以，但不是单一摄像机生意</td>
+</tr>
+<tr>
+<td>护城河能否支持高确定性三年利润</td>
+<td>尚不足，暂评为窄</td>
+</tr>
+<tr>
+<td>2025年现金流是否可直接外推</td>
+<td>不可以，应收释放贡献显著</td>
+</tr>
+<tr>
+<td>历史治理与监管是否已经核查完整</td>
+<td>尚未完成</td>
+</tr>
+<tr>
+<td>是否形成估值与安全边际</td>
+<td>没有</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-113">§4.9心理偏误核查</h3>
+<p>避免被三个叙事带走：“人工智能”不等于新增利润已经兑现；“现金大增”不等于正常盈利能力翻倍；“大公司、国资背景”不等于治理核查可以省略。也应避免反向偏见：海外限制和主业收缩不等于公司所有业务都失去价值。</p>
+<h2 id="section-114">Part 5 — 持有阶段检查清单</h2>
+<h3 id="section-115">§5.1组合健康检查</h3>
+<p>未提供个人持仓、行业集中度和现金需求，跳过组合层面的建议。</p>
+<h3 id="section-116">§5.2持续关注经营状况</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>观察项目</th>
+<th>最新已核实情况</th>
+<th>下一步观察</th>
+<th>警示信号</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>国内主业</td>
+<td>2026年上半年中小企业46.18亿元、同比+13.55%；公共服务和企事业亦增长</td>
+<td>收入恢复对应终端需求与回款</td>
+<td>恢复依赖渠道压货或信用放宽</td>
+</tr>
+<tr>
+<td>主业毛利</td>
+<td>2026年上半年产品及服务53.91%，同比+5.39个百分点</td>
+<td>增长与毛利能否维持</td>
+<td>收入和毛利率同时下滑</td>
+</tr>
+<tr>
+<td>创新业务</td>
+<td>上半年收入151.70亿元、同比+28.93%，毛利率44.35%</td>
+<td>增长转成归母利润和现金</td>
+<td>收入扩大但资本回报下降</td>
+</tr>
+<tr>
+<td>应收</td>
+<td>2026年6月末净额277.84亿元，较年末下降6.80%</td>
+<td>新增逾期减少、长尾收回</td>
+<td>旧账回收停滞、新账继续恶化</td>
+</tr>
+<tr>
+<td>存货</td>
+<td>2026年6月末净额294.88亿元，较年末增长44.04%</td>
+<td>原材料和产成品随交付消化</td>
+<td>产成品持续积压、跌价损失增加</td>
+</tr>
+<tr>
+<td>现金</td>
+<td>上半年经营现金流32.31亿元，同比下降39.52%</td>
+<td>库存消化后现金跟上利润</td>
+<td>盈利增长长期不能转为现金</td>
+</tr>
+<tr>
+<td>投资收益</td>
+<td>上半年权益法收益6.16亿元，主要来自产业基金</td>
+<td>底层收益来源与可重复性</td>
+<td>将投资波动当成稳定产品经营利润</td>
+</tr>
+<tr>
+<td>资本分配</td>
+<td>上半年研发61.69亿元、现金资本开支14.95亿元</td>
+<td>创新投资与固定资产形成每股回报</td>
+<td>扩张、稀释和回报脱节</td>
+</tr>
+<tr>
+<td>合规</td>
+<td>年度研究已识别不同市场的准入限制</td>
+<td>官方条件、客户订单与交付</td>
+<td>限制扩大或关键物料供应中断</td>
+</tr>
+</tbody>
+</table></div>
+<p>这些是经营复核条件，不是自动交易触发器。</p>
+<h4 id="section-117">截至2026年11月5日的跟踪补充</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>观察项目</th>
+<th>2026年三季度最新情况</th>
+<th>下一步验证</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>收入与利润</td>
+<td>第三季度收入+13.71%、归母利润+36.97%</td>
+<td>业务与地区明细是否共同支持增长</td>
+</tr>
+<tr>
+<td>毛利率</td>
+<td>单季49.05%，高于去年同期、低于上半年</td>
+<td>低价库存消化后的成本与产品结构</td>
+</tr>
+<tr>
+<td>库存</td>
+<td>9月末333.34亿元，较6月末再增38.46亿元</td>
+<td>总库存、产成品、减值与交付回款</td>
+</tr>
+<tr>
+<td>应收</td>
+<td>9月末净额283.66亿元，较6月末增加5.82亿元</td>
+<td>逾期迁徙和坏账准备，而非只看净余额</td>
+</tr>
+<tr>
+<td>现金</td>
+<td>前三季度经营现金流72.13亿元，同比−47.34%</td>
+<td>采购增速放缓后能否形成正常现金回报</td>
+</tr>
+<tr>
+<td>资本分配</td>
+<td>两笔实施分红合计119.14亿元</td>
+<td>经营现金产生与分红、库存投入的长期匹配</td>
+</tr>
+</tbody>
+</table></div>
+<p>上述变化更新经营观察，不构成自动加仓或卖出信号。</p>
+<h3 id="section-118">§5.3是否触发卖出标准</h3>
+<p>本报告未建立初始估值和个人成本，因此不能判断已触发卖出。若未来主业竞争力、客户付款能力或治理事实推翻原投资论点，应重新评估；股价涨跌本身不改变上述经营判断。</p>
+<h3 id="section-119">§5.4卖出动作心理偏误核查</h3>
+<p>未提供持仓与卖出情境，跳过个体行为判断。</p>
+<h3 id="section-120">§5.5是否触发新的买入标准</h3>
+<p>需要先补齐治理未决事项，再看到国内基本盘、创新归母利润和正常现金创造的证据足以支撑三年判断，最后才讨论价格与安全边际。当前尚未达到该条件。</p>
+<h2 id="section-121">证据索引</h2>
+<p>年报及2026年季报、半年报所披露财务数值与可复算比率为高等级证据；2026年中期财务报告未经审计。客户选择、竞争防守、增长持续性和未来情景为中等级推断。历史事件按原文法律类别表述，完整历史覆盖尚未完成。</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>年度/文书</th>
+<th>官方来源</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2026年半年报，7月25日披露</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF">2026年半年度报告</a></td>
+<td>第7—13页经营数据；第35页审计状态；第40、42页报表；第90、94、109、113页存货、投资收益与现金流附注</td>
+</tr>
+<tr>
+<td>2025年半年报，8月2日披露</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF">2025年半年度报告</a></td>
+<td>第92页存货同期基数；第97、114、117、120页非现金调整与新并表库存</td>
+</tr>
+<tr>
+<td>2026年7月25日业绩说明会</td>
+<td><a href="https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf">海康官网原始纪要</a></td>
+<td>第4—5页供给紧张、主动备货与低价库存利润影响；公司解释与独立判断分开</td>
+</tr>
+<tr>
+<td>2026年一季报，4月18日披露</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123071.PDF">2026年第一季度报告</a></td>
+<td>第1、3页季度数据与利润增长解释；据此计算第二季度</td>
+</tr>
+<tr>
+<td>2016年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2017-04-14/1203296056.PDF">2016年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2017年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2018-04-21/1204675586.PDF">2017年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2018年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2019-04-20/1206061047.PDF">2018年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2019年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2020-04-25/1207602645.PDF">2019年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2020年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2021-04-17/1209712163.PDF">2020年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2021年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2022-04-16/1212941495.PDF">2021年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2022年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2023-04-15/1216417187.PDF">2022年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2023年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2024-04-20/1219703072.PDF">2023年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2024年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2025-04-19/1223153152.PDF">2024年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2025年报</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF">2025年年度报告</a></td>
+<td>十年财务、经营与治理比较</td>
+</tr>
+<tr>
+<td>2019年调查通知</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2019-11-14/1207087356.PDF">公司2019-056公告</a></td>
+<td>调查起点与涉事主体</td>
+</tr>
+<tr>
+<td>2020年结案与警示函</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2020-03-14/1207372360.PDF">公司2020-009公告</a></td>
+<td>结案、行政监管措施及行为说明</td>
+</tr>
+<tr>
+<td>美国供应限制</td>
+<td><a href="https://www.govinfo.gov/content/pkg/FR-2019-10-09/pdf/2019-22210.pdf">BIS 2019-22210</a></td>
+<td>受出口管理条例管辖物项的许可范围</td>
+</tr>
+<tr>
+<td>美国设备授权</td>
+<td><a href="https://docs.fcc.gov/public/attachments/FCC-22-84A1.pdf">FCC 22-84</a></td>
+<td>设备授权与特定用途限制</td>
+</tr>
+<tr>
+<td>国内通胀</td>
+<td><a href="https://www.stats.gov.cn/sj/zxfb/202601/t20260109_1962273.html">国家统计局2025年CPI</a></td>
+<td>维持性投入敏感性背景，不代表设备价格变化</td>
+</tr>
+<tr>
+<td>互操作标准</td>
+<td><a href="https://www.onvif.org/pressrelease/onvif-to-end-support-for-profile-s/">ONVIF 2025年Profile S/T公告</a></td>
+<td>基础视频跨厂商互操作，非特定型号认证证明</td>
+</tr>
+<tr>
+<td>行业用途</td>
+<td><a href="https://omdia.tech.informa.com/om128265/iot-application-analysis-video-surveillance-in-smart-cities">Omdia智慧城市视频监控摘要</a></td>
+<td>公共安全、交通与应急用途，不含可验证的规模预测</td>
+</tr>
+<tr>
+<td>同业财务</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225122378.PDF">大华2025年报</a></td>
+<td>收入、净利润、毛利率、ROE及附注对照</td>
+</tr>
+<tr>
+<td>早期治理整改</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF">2011-005公告</a></td>
+<td>治理检查及公司披露整改行动</td>
+</tr>
+<tr>
+<td>历史现金流更正</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2013-04-27/62438362.PDF">2012年度报告及年度审计报告更正公告</a></td>
+<td>更正毛额收付，净现金流及利润未改变</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="section-122">2026年11月经营与治理补充来源</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>来源</th>
+<th>原文</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>关于为子公司提供担保的进展公告，2026-11-04</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>2026年三季度报告，2026-10-17</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF">巨潮原文</a></td>
+<td>第1、3、5—9页；未经审计的三季报及报表原数</td>
+</tr>
+<tr>
+<td>关于公司控股股东一致行动人拟非公开发行可交换公司债券的提示性公告，2026-10-10</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-10-10/1225598337.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>2026年半年度权益分派实施公告，2026-08-12</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>关于与中国电子科技财务有限公司开展金融服务业务的风险持续评估报告，2026-07-25</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-07-25/1225440238.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>2026年半年度非经营性资金占用及其他关联资金往来情况汇总表，2026-07-25</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>2025年度权益分派实施公告，2026-05-14</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>2025年度股东会决议公告，2026-05-09</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-05-09/1225285783.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>关于拟变更会计师事务所的公告，2026-04-18</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123097.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>关于与中国电子科技财务有限公司开展金融服务业务的风险评估报告，2026-04-18</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123082.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>关于与中国电子科技财务有限公司续签《金融服务协议》暨关联交易的公告，2026-04-18</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123081.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+<tr>
+<td>控股股东、实际控制人及其他关联方资金占用情况的专项说明，2026-04-18</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123066.PDF">巨潮原文</a></td>
+<td>第1页扫描原件人工读图；专项核对程序及其限制</td>
+</tr>
+<tr>
+<td>2025年度非经营性资金占用及其他关联资金往来情况汇总表，2026-04-18</td>
+<td><a href="https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF">巨潮原文</a></td>
+<td>分红、审批、关联资金或股东事项的原始披露</td>
+</tr>
+</tbody>
+</table></div>
+</main>
+  </div>
+</body>
+</html>

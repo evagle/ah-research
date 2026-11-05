@@ -1,0 +1,675 @@
+{
+  "ticker": "002415.SZ",
+  "citations": {
+    "1bd2863db2621657b76641a6b2362d4f876393f9adae46dc23e08f25757f0bcb": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "一、营业总收入                            74,044,332,688.88    65,757,782,457.01",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "eaffb539ae2ebf44036871c82550256bc3ff79ba768e6c7ae8d4a88de385444c": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "其中：营业成本                          37,296,459,322.48    35,925,957,434.61",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "e9764ce273e2b25fb9730de9d9dbbe0b4c40b477b896cc44eb6cd49bad5b76ff": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "销售费用                           9,015,091,949.96     8,848,755,711.92",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "08168c8ff04dd35ccc6caf6039095ff03d51a33a5f642a28a37e4bb85017bf48": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "管理费用                           2,369,513,819.17     2,228,082,915.85",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "e7ffd10f98418db96fca53d33dde5b8f7efdb5ecffc385e36b32a9d5af25f918": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "研发费用                           9,346,283,132.75     8,738,019,947.93",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "48a7021896da9efa2f612a7af96721b2b74d8dad5cb32d920c7b810bbc996d33": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "财务费用                            510,849,960.43      (634,384,331.96)",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "fa60244ef216904eef7d9fb692d3773a8493600d129ce289405529655100dcbb": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "税金及附加                           650,724,444.39       580,526,397.79",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a2ed995ad0375cda8dc7c234494100b4e78dcfec7d2fce30c361093639c663fa": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "加：其他收益                            2,067,807,246.50     2,077,470,226.71",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "92ba373222a3141b3f375e957b66f02dcc45cc54be57f032eca878f8fd45256e": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "投资收益（损失以“-”号填列）                  772,713,474.59       142,210,131.47",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "9b2266bf63d116b69a26562d316c4855c01294cfbd58cbc18c6622b582d9e401": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "其中：对联营企业和合营企业的投资收益             710,608,634.70       171,642,463.57",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "ce1875d593346657a5449f3a69433f77d5eb4ee3db3c1403a326ab7e2a2df542": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "公允价值变动收益（损失以“-”号填列）               44,053,287.73       (26,762,278.99)",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "4f52872b3f1846df98d06a9c49655cdff57eb3cc5af8f4b3f4ecc1f2b7c60d4b": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "信用减值损失（损失以“-”号填列）               (572,260,387.91)     (346,820,752.43)",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "d8379445199a394ead5be5a08afa7f548f5b48e3960a6752b341914f6623ebed": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "资产减值损失（损失以“-”号填列）               (336,617,774.63)     (318,298,549.51)",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "d4e0c88d522c8ac3051a6a4350a50a061ad5d9f92867de84a7160094bf83b5fa": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "资产处置收益（损失以“-”号填列）                    718,740.45        19,524,387.58",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a6a0f8d68a3fe6ec1362990fc8695b25a0b1542d69255519d33365bbc7b475e5": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "加：营业外收入                             72,225,953.24        53,542,089.72",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a5fe9f81a063de16605d92c7afc57cbde57fcfeba71ef4734d99b8cf1236a0fb": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "减：营业外支出                             27,903,667.03        12,125,089.21",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "0f112a57fff3dfd46f1ea50dc199e12a287ae9e5dd0812e19cc41e7353539e37": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "减：所得税费用                           2,162,263,053.19     1,405,797,200.10",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "776333fe4fa50bfedac6cdb783ca41f67a95d76a3b2b0f4e4bb51e4aada2f996": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "五、净利润（净亏损以“-”号填列）                  14,713,883,879.45    10,253,767,346.11",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "1167a0e78f1ec8f99229f17fc48a90e362e008ad3c1871fe30d01ec34f491418": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "1.归属于母公司所有者的净利润                  12,911,386,245.87     9,319,124,728.48",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "5ea43dda36710bd2fd64bfb88f170551b0c6bfff5a5f8bf89cfad97bbd6a87a2": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 1,
+      "quote": "归属于上市公司股东的扣除非经常性损\n                     4,983,679,645.18           43.13%   12,695,628,331.08       41.52%\n益的净利润（元）",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "9ca008551d5b0c6f356f82ad1ed57055b1cb1f8d7f335f739e9674616389521b": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 7,
+      "quote": "2.少数股东损益                          1,802,497,633.58      934,642,617.63",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "b2c105c6eb2e4ebc2de2ccef52d5937abcdc2e7349d50f71af4a64f9f35b9aea": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "经营活动产生的现金流量净额                           7,213,412,301.86      13,697,028,509.05",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "9001986ded0d495813042efed6ac305b1b886a0a21532ca43061d150748b931a": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "销售商品、提供劳务收到的现金                       83,576,384,345.09      78,369,270,196.90",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "3c2e8e8d1a1a3f4f08c4dd3f9f81338ea11590930eeed28e393077aecc67d974": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "收到的税费返还                               4,079,167,094.43       3,236,882,063.37",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "b590f4fd8d8b1cb4622a767bd84974e97346e866bc9c8349636034e2eaf989de": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "收到其他与经营活动有关的现金                        1,104,760,791.75       1,186,697,756.92",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "2daffc598f976a5f308ec957cda01ede2b5501cbb5fab45d73012aae1fc395a3": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "购买商品、接受劳务支付的现金                       53,956,517,437.52      43,989,344,135.13",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "96b5d3833996acf1ae55f4f41c96b3c9834a37109b36bbfdd9cdc2df73b560e5": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "支付给职工以及为职工支付的现金                      15,871,601,533.09      15,020,772,578.45",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "ab8fefaff373221109e6c3f52e76f8b106327a4a0ecda235f7bca060806fe45d": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "支付的各项税费                               6,226,510,841.24       4,871,467,136.41",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "e6c2c37207f30390628005f5d51cfd215d4921e1a02437748a53c400ea682382": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 8,
+      "quote": "支付其他与经营活动有关的现金                        5,492,270,117.56       5,214,237,658.15",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "bc9ec927dce5de90847dd8cb266c77f83d656fbca07e0ef2ac0cf8113356b360": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 9,
+      "quote": "购建固定资产、无形资产和其他长期资产支付的现金              2,232,313,718.70         3,084,953,932.55",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "e0c6c0ede8f063dd04c9afde7ea8891bee8845289f157d44d69db25fc9f3f596": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 9,
+      "quote": "分配股利、利润或偿付利息支付的现金                   12,352,346,973.98         8,446,049,990.60",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "4e97ebde294a08656f15e4317675eac34394566157115e063bbc69800ddfa5ee": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 3,
+      "quote": "归属于上市公司股东的扣除非经常性                                                           率同比上升\n                      12,695,628,331.08    8,970,971,794.87      41.52%\n损益的净利润（元）",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "9c4a2ed2c56013d9b0fd8db0d53b891f25b693f8850027c141c965b682f2b51d": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 1,
+      "quote": "营业收入（元）             27,221,794,841.81           13.71%   74,044,332,688.88       12.60%",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "6ebf556eb1adf64cbe5fbb8a61bda44b4576c4f03374e75a8a2426a1bc2d7326": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 1,
+      "quote": "归属于上市公司股东的净利润（元）     5,015,680,795.76           36.97%   12,911,386,245.87       38.55%\n归属于上市公司股东的扣除非经常性损",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "9e8e012ef28d750060043647f6e2e37bfb101bf477c2b2c1fa3dc5e526f141a9": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "货币资金                   37,083,532,987.38         46,508,328,658.44",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "e031985f28baad2ea34b4fcfa454e4bcc0ef664ae117b1f5d39b817487f1c0e0": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "应收账款                   28,366,330,714.39         29,812,378,945.77",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "beefb681be4b3f0c51b2add08bcd9afc5640b6b428dfdf914a637237ced62026": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "存货                     33,334,042,945.46         20,472,193,858.80",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "eb98de4f28bf76ef1bf565f3ba6d5c1f48269487eae07d0d0bad8327f28ae753": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "资产总计                    141,391,040,510.18        138,049,655,334.62",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "ae494aaea4b2b7c8cd13ff4177df873506c4293ce243bd2fd443a7669861eab3": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "固定资产                   19,780,461,334.73         20,176,914,451.95",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "d0f60942f08d555b0b75c08c97978a1cc2864ff64bdc8012cde44f000de348f3": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 5,
+      "quote": "在建工程                    2,241,414,829.98          1,914,110,895.67",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "0c484537862dbbb3ea6e9ffe7a6abcef8c0a373fc5dab247bd8ee31671765ad4": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 6,
+      "quote": "应付账款                           21,161,507,372.33         19,843,949,575.87",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "da80c90fe8395b8e0ac204e16e3a89364cac652aa0d927d2a35f10fb2c78a326": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/6e3df176d911d0ddad06eab6d4699b34bd9a17db81adf3b46e26d656c932a35d/text.md",
+      "artifact_sha256": "c004237023aa47da77612a6f0920b4aa34b35264a69d612e7841ca7aae6a3e71",
+      "source_pdf_sha256": "e8f8cbc9ae47fa549b86e4dcadf98bf9c2635a575cd1ea1b6379e7fc6e0d0302",
+      "page": 6,
+      "quote": "合同负债                            5,274,420,860.66          4,200,490,873.07",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225607861.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "42a9551bbc840375328b273cdafefeea45505d6ec03e88cebdb4ecf694c8e411": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 7,
+      "quote": "营业收入（元）                 46,822,537,847.07      41,818,040,088.44              11.97%",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "94e3b6da7a4358411058d47b87d0d1728862be8f9284f7faf94ac0939ed9a5ca": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 40,
+      "quote": "一、营业收入                                   (五)44   46,822,537,847.07    41,818,040,088.44\n    减：营业成本                               (五)44   23,426,598,006.35    22,919,499,439.04\n       税金及附加                             (五)45     431,879,104.73       378,912,693.73",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "40ba3d9b30390d09d542ef0491122cc8b705fc21b777f279fdcfb1bb93a4af0c": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 40,
+      "quote": "税金及附加                             (五)45     431,879,104.73       378,912,693.73\n       销售费用                                       5,822,062,529.86     5,708,759,811.30\n       管理费用                                       1,493,403,061.13     1,386,257,017.69",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "01747347565bace85c09aa77d5d5598d730b0a1cc6600d76bac2f5e080214ce8": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 40,
+      "quote": "销售费用                                       5,822,062,529.86     5,708,759,811.30\n       管理费用                                       1,493,403,061.13     1,386,257,017.69\n       研发费用                                       6,168,979,406.20     5,669,772,011.51",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "5c993ca786436f12a91c13852c687aae4f017202c33a9a4ea0133911b6e01027": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 40,
+      "quote": "管理费用                                       1,493,403,061.13     1,386,257,017.69\n       研发费用                                       6,168,979,406.20     5,669,772,011.51\n       财务费用                              (五)46     346,237,439.98      (739,368,414.40)",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a15e4dbe58411f1039be61c3c302c59c701f277a9716ee8c5f64eac55832c896": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 7,
+      "quote": "归属于上市公司股东的净利润（元）         7,895,705,450.11       5,657,349,798.68              39.57%",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "12415e246ed6a284e7cca5f52411c1ed40bc8efa86c6f097ca448d1ff05a3af5": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 7,
+      "quote": "归属于上市公司股东的扣除非经常性\n                          7,711,948,685.90       5,489,000,328.37              40.50%\n 损益的净利润（元）",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "81dbc27902fe10c26686b633b46a075cc79402e9fac4e495b5f745aea21e8732": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 7,
+      "quote": "经营活动产生的现金流量净额（元）         3,231,411,324.58       5,343,019,637.89             -39.52%",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "086d8a4f6ce20fa7ccd76283a9984b27662751417a64ec8f42f07f3008e0cfab": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 42,
+      "quote": "投资活动现金流入小计                                  9,471,456,509.64      2,208,597,986.30\n    购建固定资产、无形资产和其他长期资产支付的现金                     1,494,742,430.13      1,977,761,423.32\n    投资支付的现金                                     9,455,501,310.79      2,109,648,712.07",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a21b077b53a99344e5185f1892951399a873bc9d2a1f929ac9e359989a6f22ad": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 40,
+      "quote": "减：所得税费用                              (五)54    1,282,273,423.47      759,413,973.74\n四、净利润                                             9,123,000,553.88     6,281,476,630.83\n    (一) 按持续经营性分类",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "7db9378bf03ec1bcd387a328553edf4d754dfc2f67e26df8494fec25d3aac9a7": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 36,
+      "quote": "其他应收款                (五)8                  501,788,186.74          442,502,788.34\n  存货                   (五)9               29,488,147,922.59       20,472,193,858.80\n  合同资产                 (五)5                  937,168,474.60          974,450,159.71",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "953f8d06f9cb6a3f23b300b985a17a9a032e38ab8516d275d12f023716a83b08": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 36,
+      "quote": "应收票据                 (五)3                2,667,589,974.83        3,051,356,562.64\n  应收账款                 (五)4               27,784,134,749.07       29,812,378,945.77\n  应收款项融资               (五)6                2,466,406,045.15        2,430,030,662.65",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "7e9c0b93d94a716164196ecf8f308d4325b5db8aff2ba8ac54a10ee765dd555e": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "artifact_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "page": 36,
+      "quote": "流动资产：\n  货币资金                 (五)1               37,851,366,962.87       46,508,328,658.44\n  衍生金融资产               (五)2                   31,694,623.01            4,792,243.40",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "ed1b4ed666753c5ed211bc6da742da4902b9cc7930c8995f054526048ea097ff": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/8ff8073768c46a28028c17400b57d9120f3d83ead117285851c65dfc3c0a516b/text.md",
+      "artifact_sha256": "62509b8e228013c1d661990e569ac81ef764cb4e956bcb7e8f7e30d414c5fdfc",
+      "source_pdf_sha256": "fef7214d1d0e05a6cb73dacfd25ac10c6a0506ab62622930ea46dc3e272e0087",
+      "page": 1,
+      "quote": "不送红股，不以资本公积转增股本。公司本次现金分红的总金额为\n6,873,653,662.50 元。\n    2、本次权益分派的股权登记日为 2026 年 5 月 19 日，除息日及现金红利发",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-05-14/1225303075.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "1d2d087084fe193e9939833734978ebb228b0f49f101ba495294e9f1802d1049": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/e7dc4e0203bb1ec4c465cc1c8fc01983f74bdbad673632fd11e7a5aac55e1b8a/text.md",
+      "artifact_sha256": "19af60c0b2f942256b72123799485a0baf4bb42eb9e4f26d010558f14033913f",
+      "source_pdf_sha256": "e9867c6ff67479a3fdb730f4201bebb90889b8ee332a61a9ec32df8240e734bb",
+      "page": 1,
+      "quote": "不送红股，不以资本公积转增股本。公司本次现金分红的总金额为\n5,040,679,352.50 元。\n    2、本次权益分派的股权登记日为 2026 年 8 月 18 日，除息日及现金红利发",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-08-12/1225468251.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a1727e87ec59d32d1e0e089963adf80843406379094713c4da496c1770b8e5fb": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/2467adfb5daef256e6526dad6a54ce536ec880566e0d72714dca8b16867d32ea/text.md",
+      "artifact_sha256": "3cebf647b6453e754a6358d8993bc510f529ed764e81a47baa9a0d3a13cd981f",
+      "source_pdf_sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90",
+      "page": 1,
+      "quote": "其他应收款              67.50             5.99               -            55.30         18.19      押金保证金     经营性往来\n                                                            货币资金         400,018.37     1,005,771.80        6,267.72       782,446.90    629,610.99    于财务公司存入存款   经营性往来\n            小计                                                           454,106.57     1,029,361.83        6,267.72       810,136.61    679,599.51",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "0a7c02bfc531fbb1e33883e7fe34b71a1e1b1298f11598fc105c61e30af80513": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/feb125298fad34a45d56d893d6c62c27f88a1997f6afc8ccdb2e6f9f3a7b5dd6/text.md",
+      "artifact_sha256": "9454dc4d6bfa35b3f206af66dbcc18c7bb10137ee03cac3836523f414de3d72f",
+      "source_pdf_sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0",
+      "page": 1,
+      "quote": "其他应收款              18.19            10.08              -               8.92         19.35      押金保证金     经营性往来\n                                              货币资金          629,610.99     1,430,074.96         265.24       1,615,942.16    444,009.03    于财务公司存入存款   经营性往来\n            小计                                              679,599.51     1,441,298.17         265.24       1,639,642.29    481,520.63",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "48398fcfa75b62f87e3b4d3e341ee79fd2b6a255f2936c198e7c1f65452f267f": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/2467adfb5daef256e6526dad6a54ce536ec880566e0d72714dca8b16867d32ea/text.md",
+      "artifact_sha256": "3cebf647b6453e754a6358d8993bc510f529ed764e81a47baa9a0d3a13cd981f",
+      "source_pdf_sha256": "1f8f8112fb09d9c9c78bbbee6c3b96814325609a3d08a289e5a9387f7fcdfc90",
+      "page": 1,
+      "quote": "他非流动资产的部分)/应收票\n                                                                          53,884.98       23,561.63                -       27,553.54      49,893.07    销售产品、提供劳务   经营性往来\n                                                      据/应收款项融资/长期应收款",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123065.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "dc1e9b4bad2259d64fa99a9c9926966f66cbc4788485f34ce91eef8d2b329680": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/feb125298fad34a45d56d893d6c62c27f88a1997f6afc8ccdb2e6f9f3a7b5dd6/text.md",
+      "artifact_sha256": "9454dc4d6bfa35b3f206af66dbcc18c7bb10137ee03cac3836523f414de3d72f",
+      "source_pdf_sha256": "eed530d1a978445a76af3962a1cfa7a4b245d71b027e20f33ba343bab36233f0",
+      "page": 1,
+      "quote": "他非流动资产的部分)/应收票\n                                                             49,893.07       11,100.40                 -       23,685.72      37,307.75    销售产品、提供劳务   经营性往来\n                                         据/应收款项融资/长期应收款",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440237.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "a375d5ee16ed5d1260eebcce56caa69853b3be02161cc3ac812c7460cf37f8e0": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/_extracted/7ae996c9fcfac359694e9d3f6269b305338cdcabff87869a1c8f4fcbf162fbd5/text.md",
+      "artifact_sha256": "896d1cf157425bbe38ff4558d3f768248005cb178bc30afbec8b4522a5172018",
+      "source_pdf_sha256": "17c7b2a4e84856e2086c89fc834d858cb300445f2f510bf3854e911db641b056",
+      "page": 2,
+      "quote": "三、累计对外担保及逾期担保的数量\n  截至目前，公司及控股子公司全部担保余额为 129,483.23 万元，占公司 2025\n年末经审计净资产的 1.55%，全部为对合并报表范围内子公司的担保。",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-11-04/1225655731.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "16744db7c48d0f1965cb6508e60bfff7c74190fda60d5a9348eeaea39c093750": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "page": 229,
+      "quote": "信用损失准备                                 800,561,956.90      1,068,789,505.74\n            固定资产折旧                               1,646,029,560.21      1,491,731,725.01\n            使用权资产摊销                                204,889,152.91        295,082,848.33",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "cb79e38ad39a764d54d97ea93aeb5a746eb74cf6da67c3b5db08d2053eda98d8": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "page": 229,
+      "quote": "固定资产折旧                               1,646,029,560.21      1,491,731,725.01\n            使用权资产摊销                                204,889,152.91        295,082,848.33\n            无形资产摊销                                 106,794,293.52         99,999,893.62",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "86597b5c36dc4837f8cda647124aa0d93fbef7d887eb2d2c9b9323c8ea56e135": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "page": 229,
+      "quote": "使用权资产摊销                                204,889,152.91        295,082,848.33\n            无形资产摊销                                 106,794,293.52         99,999,893.62\n            长期待摊费用摊销                                96,689,890.95         97,115,766.37",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "631966fa8acdf4ce180699d7a18558347ca772bb3714d8238a4afa6bb462e8c0": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "page": 229,
+      "quote": "无形资产摊销                                 106,794,293.52         99,999,893.62\n            长期待摊费用摊销                                96,689,890.95         97,115,766.37\n            处置固定资产、无形资产和其他长期资产的损失(收益)             (26,913,929.91)         14,539,975.31",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "section_id": "2026-11-05-supplement"
+    },
+    "dc1d575cfece192be326bf61a29b40156dab285083add63fbfe29325a2b31a0c": {
+      "source_type": "filing_text",
+      "artifact_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/_extracted/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2/text.md",
+      "artifact_sha256": "e343ebf716ff625a379dd6801c2af536f0be99e9911f55d0d2054b8a2db91c31",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "page": 229,
+      "quote": "递延收益的增加(减少)                            (11,248,411.00)       (91,747,518.81)\n          经营活动产生的现金流量净额                         25,339,411,083.10     13,264,092,022.73\n     2.现金及现金等价物净变动情况：",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "section_id": "2026-11-05-supplement"
+    }
+  }
+}

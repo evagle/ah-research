@@ -1,0 +1,715 @@
+{
+  "status": "verified_filing_supplement_with_explicit_fy2025_residual",
+  "AS_OF": "2026-09-29",
+  "scope_note": "Interim supplement only; no changes to original annual profile cutoff or parent binding. Interim figures unaudited.",
+  "sources": {
+    "2025H1": {
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "publication_date": "2025-08-02",
+      "audited": false,
+      "inventory_page": 92,
+      "fixed_page": 97,
+      "loss_page": 114,
+      "cash_page": 117,
+      "acquisition_page": 120,
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a"
+    },
+    "FY2025": {
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "publication_date": "2026-04-18",
+      "audited": true,
+      "inventory_page": 203,
+      "fixed_page": 208,
+      "loss_page": 225,
+      "cash_page": 229,
+      "acquisition_page": 232,
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f"
+    },
+    "2026H1": {
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "publication_date": "2026-07-25",
+      "audited": false,
+      "inventory_page": 90,
+      "fixed_page": 95,
+      "loss_page": 110,
+      "cash_page": 113,
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b"
+    }
+  },
+  "categories": {
+    "2025H1": {
+      "原材料": {
+        "gross_end": "6041672147.64",
+        "allowance_end": "320950116.18",
+        "net_end": "5720722031.46",
+        "gross_start": "6112813706.01",
+        "allowance_start": "321520672.33",
+        "net_start": "5791293033.68",
+        "citation_id": "f4c17b54f6a54a198c5677d8e080979c6de51a6ef17998a924b4bfadc5703cce"
+      },
+      "在产品": {
+        "gross_end": "1005502691.62",
+        "allowance_end": "0",
+        "net_end": "1005502691.62",
+        "gross_start": "722550293.30",
+        "allowance_start": "0",
+        "net_start": "722550293.30",
+        "citation_id": "e4fd0fab3b185b8ec39211f2f28311c0a959e34a0c7e73f323e1803c309175a6"
+      },
+      "产成品": {
+        "gross_end": "12975727080.43",
+        "allowance_end": "1058342747.37",
+        "net_end": "11917384333.06",
+        "gross_start": "13151518051.53",
+        "allowance_start": "990672547.73",
+        "net_start": "12160845503.80",
+        "citation_id": "b0d3a82d09aa645f78c6d442cbb387b76f47cafd0665a504f0ebb2ec5a13911e"
+      },
+      "合同履约成本": {
+        "gross_end": "487911581.34",
+        "allowance_end": "6595745.76",
+        "net_end": "481315835.58",
+        "gross_start": "444030393.50",
+        "allowance_start": "8007266.17",
+        "net_start": "436023127.33",
+        "citation_id": "725284eeff0e97a2cae3407fdf640c172377067c93237aa3b235452a54038815"
+      },
+      "合计": {
+        "gross_end": "20510813501.03",
+        "allowance_end": "1385888609.31",
+        "net_end": "19124924891.72",
+        "gross_start": "20430912444.34",
+        "allowance_start": "1320200486.23",
+        "net_start": "19110711958.11",
+        "citation_id": "d72793341d837e8ce41de6f9bcf6af1366f78e20a00b38bc195413cb9fd32150"
+      }
+    },
+    "FY2025": {
+      "原材料": {
+        "gross_end": "6237904706.69",
+        "allowance_end": "296228917.54",
+        "net_end": "5941675789.15",
+        "gross_start": "6112813706.01",
+        "allowance_start": "321520672.33",
+        "net_start": "5791293033.68",
+        "citation_id": "f8bad87a4727df470f085704e21d053af0742604eab97e1df8e734f88c41e401"
+      },
+      "在产品": {
+        "gross_end": "756148362.21",
+        "allowance_end": "0",
+        "net_end": "756148362.21",
+        "gross_start": "722550293.30",
+        "allowance_start": "0",
+        "net_start": "722550293.30",
+        "citation_id": "9dd6277fcad08d267aba4634e587a32a1c186011eb56252d64c7e5b2bb6f6571"
+      },
+      "产成品": {
+        "gross_end": "14307019021.95",
+        "allowance_end": "1134318931.50",
+        "net_end": "13172700090.45",
+        "gross_start": "13151518051.53",
+        "allowance_start": "990672547.73",
+        "net_start": "12160845503.80",
+        "citation_id": "ffb57cb0aad1c582927cf608d9e8fb5cee62e3af0660cc162d51628a7a146502"
+      },
+      "合同履约成本": {
+        "gross_end": "614190942.61",
+        "allowance_end": "12521325.62",
+        "net_end": "601669616.99",
+        "gross_start": "444030393.50",
+        "allowance_start": "8007266.17",
+        "net_start": "436023127.33",
+        "citation_id": "8205fc0d212eaa36cc752c1d78833d5f8d37a2ebb4d3f769cd3f510c7d036005"
+      },
+      "合计": {
+        "gross_end": "21915263033.46",
+        "allowance_end": "1443069174.66",
+        "net_end": "20472193858.80",
+        "gross_start": "20430912444.34",
+        "allowance_start": "1320200486.23",
+        "net_start": "19110711958.11",
+        "citation_id": "96f3ade108130e7d992d4e3ce79cb53284729cb0633cae50f8bbb1b8b37c0291"
+      }
+    },
+    "2026H1": {
+      "原材料": {
+        "gross_end": "10304835730.05",
+        "allowance_end": "286790217.48",
+        "net_end": "10018045512.57",
+        "gross_start": "6237904706.69",
+        "allowance_start": "296228917.54",
+        "net_start": "5941675789.15",
+        "citation_id": "fe519a6bfe99c0eb039e4fb80211922d6d13721f744810da542fe0137e8c6f08"
+      },
+      "在产品": {
+        "gross_end": "1211378867.48",
+        "allowance_end": "0",
+        "net_end": "1211378867.48",
+        "gross_start": "756148362.21",
+        "allowance_start": "0",
+        "net_start": "756148362.21",
+        "citation_id": "7ded3f9b81c2d2783d1b886e41375de987256127975c87cdf628ed9dd6b6936b"
+      },
+      "产成品": {
+        "gross_end": "18646613858.66",
+        "allowance_end": "1191661242.69",
+        "net_end": "17454952615.97",
+        "gross_start": "14307019021.95",
+        "allowance_start": "1134318931.50",
+        "net_start": "13172700090.45",
+        "citation_id": "15f89df74080e3135b543efa1c75204d449d4d0173d93977eac1f21d250223b6"
+      },
+      "合同履约成本": {
+        "gross_end": "815679986.65",
+        "allowance_end": "11909060.08",
+        "net_end": "803770926.57",
+        "gross_start": "614190942.61",
+        "allowance_start": "12521325.62",
+        "net_start": "601669616.99",
+        "citation_id": "872951ef7e85f61e9b2e025da37295eb5d73c56b7b06d22cc79ee365d26e0517"
+      },
+      "合计": {
+        "gross_end": "30978508442.84",
+        "allowance_end": "1490360520.25",
+        "net_end": "29488147922.59",
+        "gross_start": "21915263033.46",
+        "allowance_start": "1443069174.66",
+        "net_start": "20472193858.80",
+        "citation_id": "23440c5df9c7404319b9fb34a78d6bcec3e2efaa675517dae29577652d209aca"
+      }
+    }
+  },
+  "reconciliations": {
+    "2025H1": {
+      "net_change": "14212933.61",
+      "net_growth": "0.0007437155476548568306226347106",
+      "gross_change": "79901056.69",
+      "indirect_cf_inventory_increase": "251612593.04",
+      "pnl_inventory_loss": "205498860.45",
+      "inventory_to_fixed_assets": "639028.44",
+      "allowance_roll": {
+        "allowance_start": "1320200486.23",
+        "charge": "207698369.28",
+        "reversal_or_writeoff": "181293094.64",
+        "allowance_fx": "39282848.44",
+        "allowance_end": "1385888609.31",
+        "citation_id": "5b8a977442826c8838b7b0195303372185f5064cb20940d8750612dc38ed08b0"
+      },
+      "known_acquisition_inventory": "8021077.90",
+      "reconciliation_formula": "delta_net_inventory + pnl_inventory_loss + inventory_to_fixed_assets + allowance_fx - acquisition_inventory",
+      "known_item_sum": "251612593.04",
+      "residual_reported_minus_known_sum": "0.00",
+      "citation_ids": [
+        "d72793341d837e8ce41de6f9bcf6af1366f78e20a00b38bc195413cb9fd32150",
+        "71de671539a4221159ecd5c5880dfcb299fbd7d0f48ebd94f908168fe2d5d80b",
+        "a7eb19031ddd96d19879f5b7b478f07a241976e77d31a1e78d438dc152975d5e",
+        "5b8a977442826c8838b7b0195303372185f5064cb20940d8750612dc38ed08b0",
+        "43ce92dd537ce3e720001732f3aab259eafd6edf1e53829ddd1846e204874af2",
+        "a500d43f5fd7757ae57a3d7fa2c9b923ebe7a26f6aa9a7128a0d154126536247"
+      ],
+      "financial_interpretation": "现金流补充资料的营运资本调节，非单列现金采购付款额"
+    },
+    "FY2025": {
+      "net_change": "1361481900.69",
+      "net_growth": "0.07124181996329178307235715723",
+      "gross_change": "1484350589.12",
+      "indirect_cf_inventory_increase": "1804456641.20",
+      "pnl_inventory_loss": "409212092.39",
+      "inventory_to_fixed_assets": "3535121.54",
+      "allowance_roll": {
+        "allowance_start": "1320200486.23",
+        "charge": "422010615.43",
+        "reversal_or_writeoff": "337525130.95",
+        "allowance_fx": "38383203.95",
+        "allowance_end": "1443069174.66",
+        "citation_id": "faffb98a891a07ca6aa100398712c90d72725668b3221fabe226585e8b74c309"
+      },
+      "known_acquisition_inventory": "8021077.90",
+      "reconciliation_formula": "delta_net_inventory + pnl_inventory_loss + inventory_to_fixed_assets + allowance_fx - acquisition_inventory",
+      "known_item_sum": "1804591240.67",
+      "residual_reported_minus_known_sum": "-134599.47",
+      "citation_ids": [
+        "96f3ade108130e7d992d4e3ce79cb53284729cb0633cae50f8bbb1b8b37c0291",
+        "f511f2f82db5a898978b9fe9be843f66c2dde889fe11410bb80c252b19930f7c",
+        "d7211d55c6789402cfd0b5da18e3c53691e5bc09a207a0ecaf1ca1cffd7c7a14",
+        "faffb98a891a07ca6aa100398712c90d72725668b3221fabe226585e8b74c309",
+        "adc1af571f190fbf167d53ed6d43fb5d26b840135eee221ecc18bc0d3e83531d",
+        "a500d43f5fd7757ae57a3d7fa2c9b923ebe7a26f6aa9a7128a0d154126536247"
+      ],
+      "financial_interpretation": "现金流补充资料的营运资本调节，非单列现金采购付款额"
+    },
+    "2026H1": {
+      "net_change": "9015954063.79",
+      "net_growth": "0.4403999945474568690635165880",
+      "gross_change": "9063245409.38",
+      "indirect_cf_inventory_increase": "9234611953.97",
+      "pnl_inventory_loss": "222870220.26",
+      "inventory_to_fixed_assets": "15928343.28",
+      "allowance_roll": {
+        "allowance_start": "1443069174.66",
+        "charge": "234567025.98",
+        "reversal_or_writeoff": "167135007.03",
+        "allowance_fx": "-20140673.36",
+        "allowance_end": "1490360520.25",
+        "citation_id": "223abc86bd5fa7968477ec688438cca3b067d696cb0ca9b630db4c1715deead1"
+      },
+      "known_acquisition_inventory": null,
+      "reconciliation_formula": "delta_net_inventory + pnl_inventory_loss + inventory_to_fixed_assets + allowance_fx",
+      "known_item_sum": "9234611953.97",
+      "residual_reported_minus_known_sum": "0.00",
+      "citation_ids": [
+        "23440c5df9c7404319b9fb34a78d6bcec3e2efaa675517dae29577652d209aca",
+        "da4f40ffde132d7f2c2b26c690e172d9f63dbc0e747ecfac1b80d3633a79bb22",
+        "26794cca4d043753c4ae85000d8b9b868d59742f3ac992098b74458467412c73",
+        "223abc86bd5fa7968477ec688438cca3b067d696cb0ca9b630db4c1715deead1",
+        "0938fe8e0eb1a0bb370863ff83eb66d50cd497011187894c558aac59b7c59d9a"
+      ],
+      "financial_interpretation": "现金流补充资料的营运资本调节，非单列现金采购付款额",
+      "acquisition_note": "No acquisition adjustment required to reconcile these disclosed amounts; not an assertion of an exhaustive absence."
+    }
+  },
+  "comparisons": {
+    "原材料": {
+      "2026h1_net": "10018045512.57",
+      "2025h1_net": "5720722031.46",
+      "2025yearend_net": "5941675789.15",
+      "same_period_change": "4297323481.11",
+      "same_period_growth": "0.751185507262493080684914890",
+      "since_yearend_change": "4076369723.42",
+      "since_yearend_growth": "0.686063977247596402539569892",
+      "share_of_total_since_yearend_change": "0.4521284929557896407135815931"
+    },
+    "在产品": {
+      "2026h1_net": "1211378867.48",
+      "2025h1_net": "1005502691.62",
+      "2025yearend_net": "756148362.21",
+      "same_period_change": "205876175.86",
+      "same_period_growth": "0.204749502488457595243925897",
+      "since_yearend_change": "455230505.27",
+      "since_yearend_growth": "0.602038605148194307559551647",
+      "share_of_total_since_yearend_change": "0.05049166200816207364182884278"
+    },
+    "产成品": {
+      "2026h1_net": "17454952615.97",
+      "2025h1_net": "11917384333.06",
+      "2025yearend_net": "13172700090.45",
+      "same_period_change": "5537568282.91",
+      "same_period_growth": "0.464663060966175203770029281",
+      "since_yearend_change": "4282252525.52",
+      "since_yearend_growth": "0.325085403608677434663745932",
+      "share_of_total_since_yearend_change": "0.4749638801642126927804725188"
+    },
+    "合同履约成本": {
+      "2026h1_net": "803770926.57",
+      "2025h1_net": "481315835.58",
+      "2025yearend_net": "601669616.99",
+      "same_period_change": "322455090.99",
+      "same_period_growth": "0.669944903436289304728468373",
+      "since_yearend_change": "202101309.58",
+      "since_yearend_growth": "0.335900806477583873185299697",
+      "share_of_total_since_yearend_change": "0.02241596487183559286411704532"
+    },
+    "合计": {
+      "2026h1_net": "29488147922.59",
+      "2025h1_net": "19124924891.72",
+      "2025yearend_net": "20472193858.80",
+      "same_period_change": "10363223030.87",
+      "same_period_growth": "0.541869998943456431102211505",
+      "since_yearend_change": "9015954063.79",
+      "since_yearend_growth": "0.440399994547456869063516588",
+      "share_of_total_since_yearend_change": "1"
+    }
+  },
+  "citations": [
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     原材料          6,041,672,147.64     320,950,116.18     5,720,722,031.46    6,112,813,706.01       321,520,672.33      5,791,293,033.68",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "f4c17b54f6a54a198c5677d8e080979c6de51a6ef17998a924b4bfadc5703cce"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     在产品          1,005,502,691.62                   -    1,005,502,691.62     722,550,293.30                      -       722,550,293.30",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "e4fd0fab3b185b8ec39211f2f28311c0a959e34a0c7e73f323e1803c309175a6"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     产成品         12,975,727,080.43    1,058,342,747.37   11,917,384,333.06   13,151,518,051.53       990,672,547.73     12,160,845,503.80",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "b0d3a82d09aa645f78c6d442cbb387b76f47cafd0665a504f0ebb2ec5a13911e"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     合同履约成本        487,911,581.34         6,595,745.76     481,315,835.58      444,030,393.50           8,007,266.17       436,023,127.33",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "725284eeff0e97a2cae3407fdf640c172377067c93237aa3b235452a54038815"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     合计          20,510,813,501.03    1,385,888,609.31   19,124,924,891.72   20,430,912,444.34      1,320,200,486.23    19,110,711,958.11",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "d72793341d837e8ce41de6f9bcf6af1366f78e20a00b38bc195413cb9fd32150"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 92,
+      "quote": "     合计            1,320,200,486.23          207,698,369.28          181,293,094.64              39,282,848.44         1,385,888,609.31",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "5b8a977442826c8838b7b0195303372185f5064cb20940d8750612dc38ed08b0"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 97,
+      "quote": "        (3) 存货转入                      -                  -          639,028.44                    -          639,028.44",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "a7eb19031ddd96d19879f5b7b478f07a241976e77d31a1e78d438dc152975d5e"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 114,
+      "quote": "     存货跌价利得(损失)                                   (205,498,860.45)     (203,890,134.45)",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "71de671539a4221159ecd5c5880dfcb299fbd7d0f48ebd94f908168fe2d5d80b"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 117,
+      "quote": "            存货的减少(增加)                         (251,612,593.04)        (12,953,207.87)",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "43ce92dd537ce3e720001732f3aab259eafd6edf1e53829ddd1846e204874af2"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     原材料          6,237,904,706.69     296,228,917.54     5,941,675,789.15    6,112,813,706.01        321,520,672.33      5,791,293,033.68",
+      "evidence_level": "高—经审计年报",
+      "id": "f8bad87a4727df470f085704e21d053af0742604eab97e1df8e734f88c41e401"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     在产品           756,148,362.21                    -     756,148,362.21      722,550,293.30                      -       722,550,293.30",
+      "evidence_level": "高—经审计年报",
+      "id": "9dd6277fcad08d267aba4634e587a32a1c186011eb56252d64c7e5b2bb6f6571"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     产成品         14,307,019,021.95    1,134,318,931.50   13,172,700,090.45   13,151,518,051.53        990,672,547.73     12,160,845,503.80",
+      "evidence_level": "高—经审计年报",
+      "id": "ffb57cb0aad1c582927cf608d9e8fb5cee62e3af0660cc162d51628a7a146502"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     合同履约成本        614,190,942.61       12,521,325.62      601,669,616.99      444,030,393.50           8,007,266.17       436,023,127.33",
+      "evidence_level": "高—经审计年报",
+      "id": "8205fc0d212eaa36cc752c1d78833d5f8d37a2ebb4d3f769cd3f510c7d036005"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     合计          21,915,263,033.46    1,443,069,174.66   20,472,193,858.80   20,430,912,444.34      1,320,200,486.23     19,110,711,958.11",
+      "evidence_level": "高—经审计年报",
+      "id": "96f3ade108130e7d992d4e3ce79cb53284729cb0633cae50f8bbb1b8b37c0291"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 203,
+      "quote": "     合计           1,320,200,486.23          422,010,615.43          337,525,130.95               38,383,203.95         1,443,069,174.66",
+      "evidence_level": "高—经审计年报",
+      "id": "faffb98a891a07ca6aa100398712c90d72725668b3221fabe226585e8b74c309"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 208,
+      "quote": "        (3) 存货转入                      -                  -        3,535,121.54                -        3,535,121.54",
+      "evidence_level": "高—经审计年报",
+      "id": "d7211d55c6789402cfd0b5da18e3c53691e5bc09a207a0ecaf1ca1cffd7c7a14"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 225,
+      "quote": "     存货跌价利得(损失)及合同履约成本减值利得(损失)                   (409,212,092.39)     (444,233,922.43)",
+      "evidence_level": "高—经审计年报",
+      "id": "f511f2f82db5a898978b9fe9be843f66c2dde889fe11410bb80c252b19930f7c"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 229,
+      "quote": "            存货的减少(增加)                           (1,804,456,641.20)     (299,985,733.29)",
+      "evidence_level": "高—经审计年报",
+      "id": "adc1af571f190fbf167d53ed6d43fb5d26b840135eee221ecc18bc0d3e83531d"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       原材料         10,304,835,730.05       286,790,217.48    10,018,045,512.57      6,237,904,706.69        296,228,917.54       5,941,675,789.15",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "fe519a6bfe99c0eb039e4fb80211922d6d13721f744810da542fe0137e8c6f08"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       在产品          1,211,378,867.48                     -    1,211,378,867.48       756,148,362.21                         -     756,148,362.21",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "7ded3f9b81c2d2783d1b886e41375de987256127975c87cdf628ed9dd6b6936b"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       产成品         18,646,613,858.66      1,191,661,242.69   17,454,952,615.97    14,307,019,021.95       1,134,318,931.50      13,172,700,090.45",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "15f89df74080e3135b543efa1c75204d449d4d0173d93977eac1f21d250223b6"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       合同履约成本        815,679,986.65         11,909,060.08       803,770,926.57       614,190,942.61          12,521,325.62        601,669,616.99",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "872951ef7e85f61e9b2e025da37295eb5d73c56b7b06d22cc79ee365d26e0517"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       合计          30,978,508,442.84      1,490,360,520.25   29,488,147,922.59    21,915,263,033.46       1,443,069,174.66      20,472,193,858.80",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "23440c5df9c7404319b9fb34a78d6bcec3e2efaa675517dae29577652d209aca"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 90,
+      "quote": "       合计              1,443,069,174.66            234,567,025.98           167,135,007.03             (20,140,673.36)          1,490,360,520.25",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "223abc86bd5fa7968477ec688438cca3b067d696cb0ca9b630db4c1715deead1"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 95,
+      "quote": "            (3) 存货转入                         -                  -     15,928,343.28                       -       15,928,343.28",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "26794cca4d043753c4ae85000d8b9b868d59742f3ac992098b74458467412c73"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 110,
+      "quote": "      存货跌价利得(损失)                                   (222,870,220.26)       (205,498,860.45)",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "da4f40ffde132d7f2c2b26c690e172d9f63dbc0e747ecfac1b80d3633a79bb22"
+    },
+    {
+      "source": "2026H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-07-25/1225440236.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.pdf",
+      "source_pdf_sha256": "45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/supplements/2026-h1/2026-h1-45642c6bb43c573f04b61122cde1fa9d70eb9a18e66c044cb12f4933d68a3fe8.txt",
+      "text_sha256": "4cd06057f0866822df0fa7575cb7136e6bfd7341e4f4d182327e0a64f562cf4b",
+      "physical_page": 113,
+      "quote": "              存货的减少(增加)                            (9,234,611,953.97)     (251,612,593.04)",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "0938fe8e0eb1a0bb370863ff83eb66d50cd497011187894c558aac59b7c59d9a"
+    },
+    {
+      "source": "2025H1",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/4632d8ede53819fa458bc8b85627e1aa055a2b99b78fd67d13d417840e8b350b.pdf",
+      "source_pdf_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/56be782e0eac7bf0670ee45a4d44cefe264b8906adc234d0c86b2caa0598c0a0.txt",
+      "text_sha256": "b77f25e472dd4c273595c0014f5584797de2602637bfa7eb23f4b794bc0dea5a",
+      "physical_page": 120,
+      "quote": "           存货                               8,021,077.90          8,021,077.90",
+      "evidence_level": "高—原文直接披露；中报未经审计",
+      "id": "a500d43f5fd7757ae57a3d7fa2c9b923ebe7a26f6aa9a7128a0d154126536247"
+    },
+    {
+      "source": "FY2025",
+      "official_url": "https://static.cninfo.com.cn/finalpage/2026-04-18/1225123062.PDF",
+      "source_pdf": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/versions/年报-2025-a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2.pdf",
+      "source_pdf_sha256": "a805779efb81bea8158e119ad7c733c4669b8d492dc03c7613199970bfa4b8b2",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/eaea2f084d11b1f86cdf49544040d5d3ca935b3a4191f318f68b2ff133f17ad0.txt",
+      "text_sha256": "6f12819b273853439d011e0b4d7b284f00deecc507bb55d21dc9a8ad7932237f",
+      "physical_page": 232,
+      "quote": "杭州海康威视数字技术股份有限公司 2025 年年度报告全文\n财务报表附注\n2025 年 12 月 31 日止年度\n(六)    合并范围的变更 - 续\n\n    1、      非同一控制下企业合并 - 续\n\n    (2)     合并成本及商誉\n                                                                                            单位：人民币元\n     合并成本                                                                                  海视华跃\n     - 合并日之前持有的股权于合并日的公允价值                                                                    14,154,413.00\n     合并成本合计                                                                                   14,154,413.00\n     减：取得的可辨认净资产公允价值份额                                                                        14,154,413.00\n     商誉                                                                                                   -\n\n\n     (3)     被合并方于合并日可辨认资产、负债\n                                                                                            单位：人民币元\n                                                                                海视华跃\n                                                                   合并日                      合并日\n                                                                  公允价值                     账面价值\n      资产：\n      货币资金                                                            24,930,476.46           24,930,476.46\n      应收账款                                                            40,297,545.82           40,297,545.82\n      合同资产                                                            45,861,982.11           45,861,982.11\n      其他                                                              13,968,294.32           13,968,294.32\n      资产总计                                                           125,058,298.71          125,058,298.71\n      负债：\n      应付账款                                                            78,999,910.54           78,999,910.54\n      其他                                                              18,304,637.18           18,304,637.18\n      负债总计                                                            97,304,547.72           97,304,547.72\n      净资产                                                             27,753,750.99           27,753,750.99\n      减：少数股东权益                                                        13,599,337.99           13,599,337.99\n      取得的净资产                                                          14,154,413.00           14,154,413.00\n\n\n     注：      本集团管理层认为海视华跃的可辨认资产及负债的公允价值与账面价值接近，因此根据账面价值\n             确认相关可辨认资产及负债的公允价值。集团在本次合并中不存在需要承担的被合并方的或有负\n             债。\n\n     2、      其他原因的合并范围变动\n\n     (1)   本年新设立并纳入合并范围的子公司如下：\n\n                              公司名称                              设立时间                     注册资本\n      广州海康威视数字技术有限公司                                           2025 年 4 月             人民币 2,000 万元\n      杭州微影智控科技有限公司                                             2025 年 5 月             人民币 10,000 万元\n      Hikvision Kyrgyzstan Limited Liability Company           2025 年 5 月         吉尔吉斯斯坦索姆 874 万元\n      Hikvision System Limited                                 2025 年 8 月               港币 1 万元\n\n\n     注：      于本年末杭州微影智控科技有限公司及 Hikvision System Limited 尚未完成实缴。\n\n                                                       231",
+      "evidence_level": "高—经审计年报",
+      "id": "9a93a4c38ab349b3878286ec9bd2802aae15e432bfd952199e678d99761e8272"
+    }
+  ],
+  "validation": {
+    "source_pdf_hashes_pass": true,
+    "all_category_sums_pass": true,
+    "all_gross_less_allowance_equals_net_pass": true,
+    "all_allowance_rolls_pass": true,
+    "2025h1_bridge_exact": true,
+    "2026h1_bridge_exact": true,
+    "fy2025_remaining_residual": "-134599.47",
+    "fy2025_residual_ratio_abs_inventory_cf": "0.00007459279814586658187860923150"
+  },
+  "management_explanation_source": {
+    "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/368eb87e7627688c279001ef8d4445dbc07918b6192c7ed7c164a168c9419352.pdf",
+    "pdf_sha256": "dca87a24a6d705add67c381675057185545cfdb45d7d67d17e1324d9801d864d",
+    "url": "https://www.hikvision.com/content/dam/hikvision/cn/%E6%8A%95%E8%B5%84%E8%80%85%E5%85%B3%E7%B3%BB/ir%E4%BF%A1%E6%81%AF%E5%BA%93/06%E5%B9%B4%E5%BA%A6%E5%AD%A3%E5%BA%A6%E4%B8%9A%E7%BB%A9%E6%8A%A5%E5%91%8A/2026/2026%E5%B9%B4%E5%8D%8A%E5%B9%B4%E5%BA%A6%E4%B8%9A%E7%BB%A9%E8%AF%B4%E6%98%8E%E7%BA%BF%E4%B8%8A%E4%BC%9A%E8%AE%AE%E7%BA%AA%E8%A6%81.pdf",
+    "publication_date": "2026-07-25",
+    "pages": [
+      4,
+      5
+    ],
+    "claim_scope": "issuer explanation, not independent proof of inventory necessity"
+  },
+  "research_handoff_artifacts": [
+    {
+      "artifact_id": "2f27dd5b79dacc6e8d69a5771eb93e800b0fe2ca9875b4ce4ee59d964710f849",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/2f27dd5b79dacc6e8d69a5771eb93e800b0fe2ca9875b4ce4ee59d964710f849.json",
+      "sha256": "cabe419e471a4dfc64475001f292f726c4a16dc0e8531c780696d06c0908976c"
+    },
+    {
+      "artifact_id": "c9ad6b87d7b9ec03261691a53ea31bff7d55980b0b0ce30c8671d45c8d05d36c",
+      "path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/c9ad6b87d7b9ec03261691a53ea31bff7d55980b0b0ce30c8671d45c8d05d36c.json",
+      "sha256": "b2b1dda366b2d4af00b242e597976750f0a3797a2ce8fbd8665ca003d35d258e"
+    }
+  ]
+}

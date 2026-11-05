@@ -1,0 +1,75 @@
+{
+  "status": "original_official_documents_retrieved_for_classification",
+  "sources": [
+    {
+      "id": "62438362",
+      "title": "2012年度报告及年度审计报告更正公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2013-04-27/62438362.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.pdf",
+      "sha256": "b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/62438362-b44e666b4f62b53a119a287c45e2bdd2caad4a473da03714a48cb8e460844f08.txt",
+      "text_sha256": "f2c2910bd14c63b8ea236dd56854f33e2dcbddda1d1ec7a3b61aed998c830840",
+      "page_count": 2
+    },
+    {
+      "id": "60665281",
+      "title": "招商证券股份有限公司关于公司关联交易的核查意见",
+      "url": "https://static.cninfo.com.cn/finalpage/2012-03-14/60665281.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.pdf",
+      "sha256": "6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60665281-6b88c7b353910264177aecd0b0ff7d436a7b382c0ef7d059eca8fc8b75331d33.txt",
+      "text_sha256": "cc0887a7c2d12ef90c421639df5aa84325ae87bbd694274195b58470a47454e6",
+      "page_count": 5
+    },
+    {
+      "id": "60392469",
+      "title": "关联交易公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2011-12-31/60392469.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.pdf",
+      "sha256": "f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60392469-f131004d77fa9f21df88b7cd82ad9afda0860c02014f91b080595471b8660735.txt",
+      "text_sha256": "8f4655903608db4b643681b583b86dee3f5f1ba82cf71c632ab5be154586bd72",
+      "page_count": 3
+    },
+    {
+      "id": "60246881",
+      "title": "招商证券股份有限公司关于公司为中国电子科技集团公司提供反担保事项的核查意见",
+      "url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246881.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.pdf",
+      "sha256": "8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246881-8490045ea4633de41be709f2d28839760b202c504751510b17b140be562d5899.txt",
+      "text_sha256": "56671156df8526429324dddfafac275045d43452d4019495b1eb1630a126fe78",
+      "page_count": 2
+    },
+    {
+      "id": "60246880",
+      "title": "关于为实际控制人中国电子科技集团公司提供反担保的公告",
+      "url": "https://static.cninfo.com.cn/finalpage/2011-11-26/60246880.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.pdf",
+      "sha256": "905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/60246880-905ee923bc5ef65f958eea836969911cce1f71a183f4ddb13e0e7d664a077fa8.txt",
+      "text_sha256": "2bb982b5f833f16525b698b17cb6b15386cffe82bcc48d01b0d2a1252d37432d",
+      "page_count": 2
+    },
+    {
+      "id": "58913842",
+      "title": "公司治理专项活动整改报告",
+      "url": "https://static.cninfo.com.cn/finalpage/2011-01-18/58913842.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.pdf",
+      "sha256": "7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58913842-7f874f4e1b6426e5ddc847a6b2a93ea61d751475cf2483f46d27b48f99fc731c.txt",
+      "text_sha256": "e8e59a318f9fdb8e1ac94a4a26f0ae1a8203d9fc7ca564a79da47b34752f2596",
+      "page_count": 5
+    },
+    {
+      "id": "58297106",
+      "title": "公司治理专项活动自查报告和整改计划",
+      "url": "https://static.cninfo.com.cn/finalpage/2010-08-13/58297106.PDF",
+      "pdf_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.pdf",
+      "sha256": "a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055",
+      "text_path": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/lifetime-catalogue-2010-2014/documents/58297106-a9a88a3c82c35caeaf5220f801b2cbbd1eac16a85cd2b319594570d312085055.txt",
+      "text_sha256": "36982fe72177677cd877610e4b9c00bed23fb9e7335829826b2b26760ffd0d39",
+      "page_count": 3
+    }
+  ]
+}

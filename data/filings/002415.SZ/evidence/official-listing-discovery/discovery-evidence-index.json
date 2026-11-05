@@ -1,0 +1,53 @@
+{
+  "ticker": "002415.SZ",
+  "verified_listing_date": "2010-05-28",
+  "source_url": "https://www.szse.cn/api/report/ShowReport/data",
+  "http_method": "GET",
+  "query_params": {
+    "SHOWTYPE": "JSON",
+    "CATALOGID": "1110",
+    "TABKEY": "tab1",
+    "txtDMorJC": "002415"
+  },
+  "response_type": "array",
+  "result_total": 1,
+  "items": [
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/4e8896b5ce982ee5cb6f26625881df8b840669a22b69b9fefefb4509d97491b6-home.html",
+      "sha256": "4e8896b5ce982ee5cb6f26625881df8b840669a22b69b9fefefb4509d97491b6"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/db4419e0ba3e36f2a4d3e74ae6437fe259f62d323b231d40e2f21e2205178dbd-header.html",
+      "sha256": "db4419e0ba3e36f2a4d3e74ae6437fe259f62d323b231d40e2f21e2205178dbd"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/ce51450c3072976fb40683cc66f48eb7bb62da260b056383f2114065502579fd-stocklist.html",
+      "sha256": "ce51450c3072976fb40683cc66f48eb7bb62da260b056383f2114065502579fd"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/eebde357d093a18f59506deab8d0cc93c0899df45000f5bfd4eab3c54fced0f0-concat.js",
+      "sha256": "eebde357d093a18f59506deab8d0cc93c0899df45000f5bfd4eab3c54fced0f0"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/e5466cb1981aee69592030da07ba279d0e3c05ebc273014670a30fce3e4381d9-report.min.js",
+      "sha256": "e5466cb1981aee69592030da07ba279d0e3c05ebc273014670a30fce3e4381d9"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/4f239bbcfca57c1017e849b33d90e0665922169eedbe8d33208967e5123d6f2a-stocklist-response.json",
+      "sha256": "4f239bbcfca57c1017e849b33d90e0665922169eedbe8d33208967e5123d6f2a"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/16b6e0966442bbbb1e27068cadc6646cb62a7f8d53cc1c9730aad0a48a47dfc5-002415-profile-1.json",
+      "sha256": "16b6e0966442bbbb1e27068cadc6646cb62a7f8d53cc1c9730aad0a48a47dfc5"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/38fafb7a7e9f4b02bb7abd683887b59109ff8c41b65689e827270b928b6d81eb-profile-empty.json",
+      "sha256": "38fafb7a7e9f4b02bb7abd683887b59109ff8c41b65689e827270b928b6d81eb"
+    },
+    {
+      "file": "/Users/brian_huang/repos/ah-research/data/filings/002415.SZ/evidence/official-listing-discovery/8abd6066476512b48ea56c035fe1b20768e902ea76e20790218f0504ace170d3-profile-page2.json",
+      "sha256": "8abd6066476512b48ea56c035fe1b20768e902ea76e20790218f0504ace170d3"
+    }
+  ],
+  "collector_limitation": "Current listing-profile validator rejects root arrays; native mapping also requires cross-jurisdiction listing codes/dates object not directly present. No hand-authored collector bundle was made."
+}

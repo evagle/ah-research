@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta charset="utf-8">
+<!--   <title>深交所主页</title>   -->
+<script>
+    var title = '<a href="./" class="CurrChnlCls">个股产品</a> ';
+    title = title.substring(title.indexOf('>')+1,title.indexOf('</'));
+    document.write('<title>深圳证券交易所-'+ title +'</title>')
+</script>
+<script>
+  if(location.protocol == 'https:'){
+    document.write('<link href="https://res.szse.cn/common/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />');
+  }else{
+    document.write('<link href="http://res.static.szse.cn/common/images/favicon.ico" rel="shortcut icon" type="image/x-icon" />');
+  }
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0" />
+<meta http-equiv="cache-control" content="max-age=0">
+<meta http-equiv="cache-control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="expires" content="Web, 26 Feb 1997 08:21:57 GMT">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="author" content="www.szse.cn">
+<meta name="description" content="深交所官网">
+<meta name="keywords" content="深交所,深交所官网,深圳证券交易所,交易所,交易所官网,深圳证券交易所官网">
+<meta name="renderer" content=webkit>
+<meta name="X-UA-Compatible" content="IE=edge">
+<meta name="google" value="notranslate"> 
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="screen-orientation" content="portrait">
+<meta name="full-screen" content="yes">
+<meta name="browermode" content="application">
+<meta name="x5-orientation" content="portrait">
+<meta name="HandheldFriendly" content="true">
+<script type="text/javascript">
+	var u = navigator.userAgent;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1;//android终端
+
+	function addElementMeta(name,  content) {
+		var head = document.getElementsByTagName('head')[0];
+		var meta = document.createElement('meta');
+
+		meta.setAttribute('name', name);
+		meta.setAttribute('content', content);
+		head.appendChild(meta);
+	}
+	if(isAndroid) {
+		addElementMeta('x5-fullscreen', 'true');
+		addElementMeta('x5-page-mode', 'app');
+	}
+</script> 
+    <script>
+  (function () {
+    var _versionDate = new Date().getTime();
+    if (location.protocol == 'https:') {
+      var _path = 'https://res.szse.cn';
+    } else {
+      var _path = 'http://res.static.szse.cn';
+    }
+    // _path = _path.replace(".static.", ".");
+    //var _path = 'http://res.szse.cn';
+    //document.write( " <script src='" + _path + "/common/js/first.js?random=" + _versionDate + "'> <\/script> ");
+    var _host = 'http://www.szse.cn';
+    if (location.protocol == 'https:') {
+      _host = 'https://www.szse.cn';
+    }
+
+
+    var backDomain = 'http://www.sse.org.cn'
+    var reg = /([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)\.?(:\d+)?/;
+    if (backDomain && window.location.host.match(reg)[2] === backDomain.match(reg)[2]) {
+      _host = 'http://www.sse.org.cn';
+      _path = 'http://res.static.sse.org.cn';
+      if (location.protocol == 'https:') {
+        _host = 'https://www.sse.org.cn';
+        _path = 'https://res.static.sse.org.cn';
+      }
+
+    }
+
+    _path = _path.replace(".static.", ".");
+
+    document.write(" <script src='" + _host + "/szsePath.js?random=" + _versionDate + "'> <\/script> "
+      + " <script src='" + _path + "/common/js/concatversion.js?random=" + _versionDate + "'> <\/script> ");
+  }());
+</script>
+
+<script>
+
+  function backDomainLinkSwitch(value, type) {
+    var _port = location.port ? (":" + location.port) : "";
+    var reg = /([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)\.?(:\d+)?/;
+    var urlRegx = /(.*)(http:|https:)(\/\/)(([a-zA-Z0-9][-a-zA-Z0-9]{0,62})((\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+))\.?(:\d+)?(.*)/;
+
+    // html字符串替换
+    if (type == 'str') {
+      var strArr = value.split("=");
+      strArr = strArr.map(function (v) {
+        var host = reg.test(v) ? v.match(reg)[0] : null;
+        if (pathObj.szseHosts.indexOf(host) > -1) {
+          if (window.location.protocol == 'https:' && urlRegx.test(v)) {
+            v = v.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+          };
+          if (pathObj.current_host === pathObj.back_host) {
+            v = v.replace(pathObj.main_host, pathObj.back_host);
+          }
+        }
+        return v
+      });
+      value = strArr.join("=");
+      return value;
+    }
+
+    // a标签地址替换
+    if (type === 'A') {
+      var eleA = document.querySelectorAll(value);
+      for (var i = 0; i < eleA.length; i++) {
+        var href = eleA[i].getAttribute("href");
+        var host = reg.test(href) ? href.match(reg)[0] : null;
+        if (href && pathObj.szseHosts.indexOf(host) > -1) {
+          if (window.location.protocol == 'https:') {
+            href = href.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+          };
+          if (pathObj.current_host === pathObj.back_host) {
+            href = href.replace(pathObj.main_host, pathObj.back_host);
+          }
+          eleA[i].setAttribute('href', href);
+        }
+      }
+    }
+
+    // 单链接替换
+    if (type === "link") {
+      if (window.location.protocol == 'https:' && !!value) {
+        value = value.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+      };
+      if (pathObj.current_host === pathObj.back_host) {
+        var host = reg.test(value) ? value.match(reg)[0] : null;
+        if (value && pathObj.szseHosts.indexOf(host) > -1) {
+          value = value.replace(pathObj.main_host, pathObj.back_host);
+        }
+      }
+      return value;
+    }
+
+    // 背景图地址更换
+    if (type === "background") {
+      var eleBg = document.querySelectorAll(value);
+      for (var i = 0; i < eleBg.length; i++) {
+        var href = eleBg[i].style.backgroundImage;
+        if (window.location.protocol == 'https:' && !!href) {
+          href = href.replace(urlRegx, '$1https:$3$4' + _port + '$9');
+        };
+        var host = reg.test(href) ? href.match(reg)[0] : null;
+        if (href && pathObj.szseHosts.indexOf(host) > -1) {
+          if (pathObj.current_host === pathObj.back_host) {
+            href = href.replace(pathObj.main_host, pathObj.back_host);
+          }
+          eleBg[i].style.backgroundImage = href;
+        }
+      }
+    }
+
+  }
+
+</script>
+
+<script>
+   if(document.cookie.indexOf('ft_language=1')>-1){
+    var style = document.createElement('style');
+    style.textContent='body{visibility:hidden;}';
+    document.head.appendChild(style);
+  }
+</script>
+<script>
+    addComCssFile()
+</script>
+    <script>
+        changeVertion('/modules/application/shareCertificate/individualShare/css/index.css','css');
+        changeVertion('/modules/marketdata/index/css/index.css','css');
+    </script>
+</head>
+<body>
+<script>
+  navMenuAJAX('/application/publicindex/header/index.html', '/application/publicindex/header/index.html', 'header', 'www');
+  changeVertion('/common/js/toggleBig5.js','js');
+</script>
+<div class="g-locationnav">
+    <div class="banner-wrap">
+        <img src="http://res.static.szse.cn/common/images/legalrules-banner.jpg" />
+    </div>
+    <div class="g-container">
+        <div class="g-banner-txt">
+            <h2></h2>
+            <p>
+                <img src="http://res.static.szse.cn/common/icon/er-banneradr.png" />位置：
+                <a href="../" target="_blank">股票</a>
+                <a class="plate"></a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="g-container-wrap">
+    <div class="g-container">
+        <div class=" clearfix">
+            <div class="g-conbox-col g-conbox-col4">
+                <div class="g-conbox g-conbox-reset company-info h595">
+                    <script id="company_info" type="text/html">
+                        <%if(code == 0 && data != null){%>
+                            <div class="g-contitle g-contitle-reset mt30">
+                            <h2 class="stock-code"><%=(data.gsqc==null||data.gsqc==undefined?' ':data.gsqc)%></h2>
+                            <h4 class="english-title"><%=(data.ywqc==null||data.ywqc==undefined?' ':data.ywqc)%></h4>
+                            </div>
+                            <div class="g-content-list mt10">
+                                <%if(plateType.isDG===true || plateType.isDM===true){%>
+                                    <table class="table table-border table-companyInfo">
+                                        <tbody>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>注册地址</td>
+                                                <td colspan="3" class="f12"><%=(data.zcdz==null||data.zcdz==undefined?' ':data.zcdz)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>CDR代码</td>
+                                                <td colspan="3" class="f12"><%=(data.agdm==null||data.agdm==undefined?' ':data.agdm)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>CDR简称</td>
+                                                <td colspan="3" class="f12"><%=(data.agjc==null||data.agjc==undefined?' ':data.agjc)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>CDR总份数</td>
+                                                <td colspan="3" class="f12"><%=(data.agzgb==null||data.agzgb==undefined?' ':data.agzgb)%>万份</td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>CDR流通份数</td>
+                                                <td colspan="3" class="f12"><%=(data.agltgb==null||data.agltgb==undefined?' ':data.agltgb)%>万份</td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>每份CDR对应基础<br>股份数量</td>
+                                                <td colspan="3" class="f12"><%=(data.zhbl==null||data.zhbl==undefined?' ':data.zhbl)%></td>
+                                            </tr>   
+                                            <%if(isDelisting!==true){%>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>是否目前尚未盈利</td>
+                                                <td colspan="3" class="f12"><%=(data.ylbz==null||data.ylbz===''?'-':(data.ylbz==='0'?"是（U）":"否"))%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>是否具有表决权差异安排</td>
+                                                <td colspan="3" class="f12"><%=(data.sfjybjqcy==null||data.sfjybjqcy===''?'-':(data.sfjybjqcy==='1'?"是（W）":"否"))%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="40%"><span class="profile-flag"></span>是否具有协议控制架构</td>
+                                                <td colspan="3" class="f12"><%=(data.gskzjglx==null||data.gskzjglx===''?'-':(data.gskzjglx==='1'?"是（V）":"否"))%></td>
+                                            </tr>
+                                            <% } %>
+                                            <tr class="f12 tr-bottom">
+                                                <td width="40%"><span class="profile-flag"></span>所属行业</td>
+                                                <td colspan="3" class="f12"><%=(data.sshymc==null||data.sshymc==undefined?' ':data.sshymc)%></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <%if(isDelisting!==true){%>
+                                        <p class="annotation"><%=(data.ylbz==='0'?"(U)表示目前尚未盈利；":"")%><%=(data.sfjybjqcy==='1'?"(W)表示具有表决权差异安排；":"")%><%=(data.gskzjglx==='1'?"(V)表示具有协议控制架构；":"")%>(D)表示存托凭证；</p>
+                                    <% } %>
+                                <%}else{%>
+                                    <table class="table table-border table-companyInfo">
+                                        <tbody>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>注册地址</td>
+                                                <td colspan="3" class="f12"><%=(data.zcdz==null||data.zcdz==undefined?' ':data.zcdz)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股代码</td>
+                                                <td width="25%" class="s-border-right"><%=(data.agdm==null||data.agdm==undefined?' ':data.agdm)%></td>
+                                                <td width="25%"><span class="profile-flag"></span>B股代码</td>
+                                                <td width="25%"><%=(data.bgdm==null||data.bgdm==undefined?' ':data.bgdm)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股扩位证券简称</td>
+                                                <td width="25%" class="s-border-right"><%=(data.agjc==null||data.agjc==undefined?' ':data.agjc)%></td>
+                                                <td width="25%"><span class="profile-flag"></span>B股扩位证券简称</td>
+                                                <td width="25%"><%=(data.bgjc==null||data.bgjc==undefined?' ':data.bgjc)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股证券简称</td>
+                                                <td width="25%" class="s-border-right"><%=(data.agdjc==null||data.agdjc==undefined?' ':data.agdjc)%></td>
+                                                <td width="25%"><span class="profile-flag"></span>B股证券简称</td>
+                                                <td width="25%"><%=(data.bgdjc==null||data.bgdjc==undefined?' ':data.bgdjc)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股上市日期</td> 
+                                                <td width="25%" class="s-border-right"><%=(data.agssrq==null||data.agssrq==undefined?' ':data.agssrq)%></td>
+                                                <td width="25%"><span class="profile-flag"></span>B股上市日期</td>
+                                                <td width="25%"><%=(data.bgssrq==null||data.bgssrq==undefined?' ':data.bgssrq)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股总股本</td>
+                                                <td width="25%" class="s-border-right"><%=(data.agzgb==null||data.agzgb==undefined?' ':data.agzgb)%>万股</td>
+                                                <td width="25%"><span class="profile-flag"></span>B股总股本</td>
+                                                <td width="25%"><%=(data.bgzgb==null||data.bgzgb==undefined?' ':data.bgzgb)%>万股</td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>A股流通股本</td>
+                                                <td width="25%" class="s-border-right"><%=(data.agltgb==null||data.agltgb==undefined?' ':data.agltgb)%>万股</td>
+                                                <td width="25%"><span class="profile-flag"></span>B股流通股本 </td>
+                                                <td width="25%"><%=(data.bgltgb==null||data.bgltgb==undefined?' ':data.bgltgb)%>万股</td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>地区</td> 
+                                                <td width="25%" class="s-border-right"><%=(data.dldq==null||data.dldq==undefined?' ':data.dldq)%></td>
+                                                <td width="25%"><span class="profile-flag"></span>省份</td>
+                                                <td width="25%"><%=(data.sheng==null||data.sheng==undefined?' ':data.sheng)%></td>
+                                            </tr>
+                                            <tr class="f12">
+                                                <td width="25%"><span class="profile-flag"></span>城市</td>
+                                                <td width="25%" class="s-border-right"><%=(data.shi==null||data.shi==undefined?' ':data.shi)%></td> 
+                                                <td width="25%"> <span class="profile-flag"></span>所属行业</td>
+                                                <td width="25%"><%=(data.sshymc==null||data.sshymc==undefined?' ':data.sshymc)%></td>
+                                            </tr>
+                                            <% if((plateType.isChinext || plateType.isXA)&&isDelisting!==true){ %>
+                                                <tr class="tr-bottom f12">
+                                                    <td width="25%"> <span class="profile-flag"></span>是否目前尚未盈利</td>
+                                                    <td width="25%" class="s-border-right"><%=(data.ylbz==null||data.ylbz===''?'-':(data.ylbz==='0'?"是（U）":"否"))%></td>
+                                                    <td width="25%"> <span class="profile-flag"></span>是否具有表决权差异安排</td>
+                                                    <td width="25%"><%=(data.sfjybjqcy==null||data.sfjybjqcy===''?'-':(data.sfjybjqcy==='1'?"是（W）":"否"))%></td>
+                                                </tr>
+                                                <tr class="tr-bottom f12">
+                                                    <td colspan="2"> <span class="profile-flag"></span>是否具有协议控制架构</td>
+                                                    <td><%=(data.gskzjglx==null||data.gskzjglx===''?'-':(data.gskzjglx==='1'?'是（V）':'否'))%></td>
+                                                </tr>
+                                            <% } %>
+                                                <tr class="tr-bottom f12">
+                                                    <td width="25%"> <span class="profile-flag"></span>公司网址</td>
+                                                    <td colspan="3"><a target="_blank" href="<%=(data.http==null||data.http==undefined?'': ('http://'+data.http))%>"><%=(data.http==null||data.http==undefined?'':data.http)%></a></td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                                    <% if((plateType.isChinext || plateType.isXA)&&isDelisting!==true){ %>
+                                        <p class="annotation"><%=(data.ylbz==='0'?"(U)表示目前尚未盈利；":"")%><%=(data.sfjybjqcy==='1'?"(W)表示具有表决权差异安排；":"")%><%=(data.gskzjglx==='1'?"(V)表示具有协议控制架构；":"")%></p>
+                                    <% } %> 
+                                <%}%>
+                            </div>
+                        <%}else{%>
+                            <div class="g-contitle g-contitle-reset mt30">
+                                <h2 class="stock-code"></h2>
+                                <h4 class="english-title"></h4>
+                            </div>
+                            <div class="g-content-list mt10">
+                                <table class="table table-border">
+                                    <tbody>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>注册地址</td>
+                                            <td colspan="3" class="f12"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股代码</td>
+                                            <td width="25%" class="s-border-right"></td>
+                                            <td width="25%"><span class="profile-flag"></span>B股代码</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股扩位证券简称</td>
+                                            <td width="25%" class="s-border-right"></td>
+                                            <td width="25%"><span class="profile-flag"></span>B股扩位证券简称</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股证券简称</td>
+                                            <td width="25%" class="s-border-right"></td>
+                                            <td width="25%"><span class="profile-flag"></span>B股证券简称</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股上市日期</td> 
+                                            <td width="25%" class="s-border-right"></td>
+                                            <td width="25%"><span class="profile-flag"></span>B股上市日期</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股总股本</td>
+                                            <td width="25%" class="s-border-right">万股</td>
+                                            <td width="25%"><span class="profile-flag"></span>B股总股本</td>
+                                            <td width="25%">万股</td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>A股流通股本</td>
+                                            <td width="25%" class="s-border-right">万股</td>
+                                            <td width="25%"><span class="profile-flag"></span>B股流通股本 </td>
+                                            <td width="25%">万股</td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>地区</td> 
+                                            <td width="25%" class="s-border-right"></td>
+                                            <td width="25%"><span class="profile-flag"></span>省份</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="f12">
+                                            <td width="25%"><span class="profile-flag"></span>城市</td>
+                                            <td width="25%" class="s-border-right"></td> 
+                                            <td width="25%"> <span class="profile-flag"></span>所属行业</td>
+                                            <td width="25%"></td>
+                                        </tr>
+                                        <tr class="tr-bottom f12">
+                                            <td width="25%"> <span class="profile-flag"></span>公司网址</td>
+                                            <td colspan="3"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <%}%>
+                    </script>
+                </div>
+            </div>
+            <div class="g-conbox-col g-conbox-col8-reset">
+                <div class="g-conbox trend-wrap">
+                    <div class="more market_url">查看更多行情<span class="glyphicon glyphicon-menu-right"></span></div>
+                    <div class="trend-detail-wrap clearfix">
+                        <div class="detail-info">
+                            <script id="trendTemplate" type="text/html">
+                                <span class="newest <%= newIsDown ? 'new-down' : null %>"><%= now === null ? '--' : now %></span>
+                                <ul class="item-right <% if(isChinext&&isDelisting!==true || thColumns || isXA) { %>detail-chinext<% } %>">
+                                    <li>
+                                        <span>成交量(<%= volumeUnit %>手)</span>
+                                        <span class="blue"><%= volume === null ? '--' : volume %></span>
+                                        <br/>
+                                        <span>成交额(<%= amountUnit %>元)</span>
+                                        <span class="blue"><%= amount === null ? '--' : amount %></span>
+                                    </li>
+                                    <li class="<%= newIsDown ? 'new-down' : null %>">
+                                        <span>涨跌</span>
+                                        <span class="value"><%= delta === null ? '--' : delta %></span>
+                                        <br/>
+                                        <span>涨跌幅</span>
+                                        <span class="value"><%= deltaPercent === null ? '--' : deltaPercent + '%' %></span>
+                                    </li>
+                                    <li class="<%= openIsDown ? 'open-down' : null %>">
+                                        <span>今开</span>
+                                        <span class="value"><%= open === null ? '--' : open %></span>
+                                        <br/>
+                                        <span>昨收</span>
+                                        <span class="blue"><%= close === null ? '--' : close %></span>
+                                    </li>
+                                    <% if (isChinext&&isDelisting!==true || isXA) { %>
+                                        <li>
+                                            <span>盘后成交量(<%= volumeAhTUnit %>手)</span>
+                                            <span class="blue"><%= volumeAhT === null ? '--' : volumeAhT %></span>
+                                            <br/>
+                                            <span>盘后成交额(<%= amountAhTUnit %>元)</span>
+                                            <span class="blue"><%= amountAhT === null ? '--' : amountAhT %></span>
+                                        </li>
+                                    <% } %>	
+                                    <% if(thColumns){ %>
+                                        <li>
+                                            <span class="<%= highIsDown ? 'high-down' : null %>">
+                                                <span>最高<%= isIndex ? null : '价' %></span>
+                                                <span class="value"><%= high === null ? '--' : high %></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span class="<%= lowIsDown ? 'low-down' : null %>">
+                                                <span>最低<%= isIndex ? null : '价' %></span>
+                                                <span class="value"><%= low === null ? '--' : low %></span>
+                                            </span>
+                                        </li>
+                                        <li>
+                                            <span>交易状态</span>
+                                            <span class="blue"><%= tradingPhaseCode1 %></span>
+                                        </li>
+                                    <% }else{ %>
+                                        <li>
+                                            <span class="<%= highIsDown ? 'high-down' : null %>">
+                                                <span>最高<%= isIndex ? null : '价' %></span>
+                                                <span class="value"><%= high === null ? '--' : high %></span>
+                                            </span>
+                                                                        <br/>
+                                            <span class="<%= lowIsDown ? 'low-down' : null %>">
+                                                <span>最低<%= isIndex ? null : '价' %></span>
+                                                <span class="value"><%= low === null ? '--' : low %></span>
+                                            </span>
+                                        </li>
+                                    <% } %>
+                                    <% if (isChinext&&isDelisting!==true || isXA) { %>
+                                        <li>
+                                            <span>交易状态</span>
+                                            <span class="blue"><%= tradingPhaseCode1 %></span>
+                                            <br/>
+                                            <span>盘后交易状态</span>
+                                            <span class="blue"><%= tradingPhaseCode2 %></span>
+                                        </li>
+                                    <% } %>	
+                                    <li class="gemSign">
+                                        
+                                    </li>
+                                </ul>
+                            </script>
+                        </div>
+                    </div>
+                    <ul class="pic-tabs clearfix">
+                        <li class="active">
+                            <a href="javascript: void(0);">分时</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">日线</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">周线</a>
+                        </li>
+                        <li>
+                            <a href="javascript: void(0);">月线</a>
+                        </li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div class="update-time"></div>
+                        <div id="minutely" class="tab-panel active"></div>
+                        <div id="daily" class="tab-panel"></div>
+                        <div id="weekly" class="tab-panel"></div>
+                        <div id="monthly" class="tab-panel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class=" clearfix">
+            <div class="g-conbox-col g-conbox-col8">
+                <div class="g-conbox">
+                    <div class="g-contitle link_info">
+                        <a class="more check_more listedNotice"  target="_blank" >更多<span class="glyphicon glyphicon-menu-right"></span></a>
+                        <a class="more check_more fixed"  target="_blank" >更多<span class="glyphicon glyphicon-menu-right"></span></a>
+                        <h2 class="title">信息披露公告</h2>
+                    </div>
+                    <div class="content-tabs">
+                        <ul class="nav nav-tabs clearfix">
+                            <li class="active">
+                                <a href="#nav1" class="tab">最新公告</a>
+                            </li>
+                            <li>
+                                <a href="#nav2" class="tab">定期报告</a>
+                            </li>
+                        </ul>
+                        <div class=" tab-content h387 loadwait_disc">
+                            <div  id="nav1" class="tab-pane fade active in"><!--class="ipo-news-detail active-tabs"-->
+                                <div class="article-list">
+                                    <div class="g-content-list">
+                                        <ul class="newslist date-right listedNotice_disc">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div  id="nav2" class="tab-pane fade">
+                                <div class="article-list">
+                                    <div class="g-content-list">
+                                        <ul class="newslist date-right fixed_disc">
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="g-conbox-col g-conbox-col4 gjzb">
+                <div class="g-conbox">
+                    <div class="g-contitle">
+                        <h2 class="title">关键指标
+                            <span class="date-tit"></span>
+                        </h2>
+                    </div>
+                    <div class="article-list h454 pt10 loadwait_kpis">
+                        <table class="table table-bordered">
+                            <tbody class="kpis">
+                            <tr>
+                                <td class="text-left" width="27%">指标名称</td>
+                                <td class="text-center" width="25%">本日数值</td>
+                                <td class="text-center" width="25%">上日数值</td>
+                                <td class="text-center" width="23%">比上日增减</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+            <div class="g-conbox">
+                <div class="g-contitle">
+                    <!--<a class="more" href="" target="_blank">更多 &gt;</a>-->
+                    <h2 class="title">快速链接</h2>
+                </div>
+                <ul class="g-con-link clearfix">
+                    <li class="">
+                        <img src="http://res.static.szse.cn/modules/application/shareCertificate/individualShare/image/1.png" width="76" height="76" class="link-img" />
+                        <a href="http://www.cninfo.com.cn/new/commonUrl?url=data/yypl" class="clearfix ellipsis" target="_blank">
+                            定期报告预约时间表
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                        <!-- <a href="http://xbrl.cninfo.com.cn" class="clearfix mt10 ellipsis"  target="_blank">
+                            XBRL上市公司信息服务平台
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a> -->
+                    </li>
+                    <li class="">
+                        <img src="http://res.static.szse.cn/modules/application/shareCertificate/individualShare/image/3.png" width="76" height="76" class="link-img" />
+                        <a class="clearfix ellipsis" target="_blank" href="../../disclosure/supervision/measure/measure/">
+                            监管信息
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                        <a class="clearfix mt10 ellipsis" target="_blank" href="../../disclosure/listed/credit/record/">
+                            上市公司诚信档案
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <img src="http://res.static.szse.cn/modules/application/shareCertificate/individualShare/image/2.png" width="76" height="76" class="link-img" />
+                        <a class="clearfix secretary ellipsis">
+                            董秘信息
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                        <a class="clearfix mt10 director ellipsis">
+                            独董信息
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  changeVertion('/common/js/toggleBig5.js', 'js');
+  navMenuAJAX('/application/publicindex/footer/index.html','/application/publicindex/footer/index.html', 'footer','www');
+  addComJsFile();
+</script>
+<script>
+    if(!isDevModel){
+        changeVertion('/lib/echarts/3.x/echarts.js', 'js');
+        changeVertion('/modules/marketdata/trend/js/k.min.js', 'js');
+    }else {
+        changeVertion('/lib/echarts/3.x/echarts.js', 'js');
+        changeVertion('/modules/marketdata/trend/js/mLineChart.js', 'js');
+        changeVertion('/modules/marketdata/trend/js/kLineChart.js', 'js');
+    }
+
+ 
+</script>
+
+
+<script>
+    changeVertion('/modules/application/shareCertificate/individualShare/js/individual.js','js')
+</script>
+</body>
+</html>

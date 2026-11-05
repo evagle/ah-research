@@ -12,8 +12,9 @@ source constraints. This Skill returns structured source-discovery handoff
 only; it never writes company analysis.
 
 Read `references/source-catalog.md` before selecting the current layer.
-The catalog supplies seed routes and audited access facts, not an allowlist or
-runtime claim grades. Then read the detailed route guidance in
+The catalog supplies seed routes and audited access facts. It is never a
+website boundary: a domain does not need a source profile before discovery,
+retrieval, or evaluation. Then read the detailed route guidance in
 `references/search-playbook.md`.
 
 For a direct site workflow, read the matching guide before retrieving:
@@ -24,6 +25,20 @@ For a direct site workflow, read the matching guide before retrieving:
 - `references/site-guides/hkexnews.md`
 - `references/site-guides/hong-kong-regulatory.md`
 - `references/site-guides/official-statistics.md`
+
+## Default Data Retrieval
+
+For new market data, financial tables, broker reports, and issuer announcements,
+prefer installed AKShare through official AKTools. Read
+[akshare-aktools.md](references/akshare-aktools.md) for interface selection,
+pagination, local Python fallback, original PDFs, and provenance.
+Reuse validated local evidence before fetching. AKTools is a retrieval adapter
+for an applicable source route, not a new authority or planner layer: retain
+the current inventory receipt, route identity, acceptance gate, and ledger.
+Warn briefly and automatically continue through the existing same-function
+sources or web discovery for unsupported facts, coverage gaps, and failed
+interfaces. Preserve accepted partial evidence and continue unaffected work;
+an adapter failure is a progress notice, not a stop condition.
 
 ## Contracts And Helpers
 
@@ -114,7 +129,9 @@ reason:
    original sources named in every citation trail.
 6. Broad discovery: uncataloged original publishers found through exact-title,
    document-ID, table-name, bibliography, official-directory, archive, and
-   multilingual query variants.
+   multilingual query variants. This family includes open-internet search
+   through general and regional search engines. Search-result domains are not
+   limited to the source catalog or to previously known planner routes.
 
 For each family, search the requested fact, each required period, the subject,
 every named competitor, category synonyms, local-language and English terms,
@@ -222,6 +239,67 @@ discarding the qualified broker or listing-document observation. A
 portal-hosted PDF may preserve report contents, but Eastmoney, Hibor, Datayes,
 Sina, and other distributors do not become the report author. Attribute the
 claim to the named broker and retain the distributor as access lineage.
+
+When an identifiable original association or professional-research report is
+terminally paywalled or membership-only, keep the original claim `blocked` and
+open `<claim_id>:secondary-reconstruction` instead of silently lowering the
+original request thresholds. The child claim keeps the same metric, period,
+geography, population, product scope, channel, and denominator, but permits
+`Medium` originality and conclusion evidence. Accept it only when:
+
+- the original publisher, exact report title, publication vintage, and paid
+  access limitation are confirmed;
+- at least two separately edited public publications reproduce the same value
+  and explicitly attribute it to that original report or publisher;
+- at least one reproduction is an authenticated listing document, named
+  broker report, major financial publication, or established business or
+  technology publication rather than an anonymous aggregation or encyclopedia;
+- the reproductions preserve enough context to identify the metric, parties,
+  period, geography, population or denominator, and whether the figure measures
+  transaction value, transaction count, user usage, merchant coverage, or
+  another basis; and
+- no same-scope reproduction conflicts with the value.
+
+For every `:secondary-reconstruction` claim, run open-internet discovery rather
+than searching only cataloged publishers. Use at least one Chinese-language
+general search index and one additional independent web index when reachable;
+generate exact-value, exact-title, provider, metric, period, company, table,
+and quoted-sentence variants. Follow results into any relevant public domain,
+including uncataloged media, broker and prospectus mirrors, conference decks,
+academic papers, newsletters, company documents, forums, and social posts.
+These are discovery candidates, not automatically acceptable evidence.
+Evaluate every candidate under the same attribution, scope, date, lineage, and
+quality rules. A weak page may expose a strong citation trail; trace it rather
+than discarding the route because the immediate publisher is weak.
+
+The planner inventory must declare an `open-web-search` route family for this
+child claim. Individual result domains do not need to be known when the
+inventory is created: record the query and search index as the route, then add
+each fitting result URL to the attempt ledger before retrieval. Search results
+are discovered candidates under that declared route family, not undeclared
+static fallback edges. Continue query and citation chasing until a full pass
+over the required periods and metrics yields no new fitting lineage.
+
+Record every immediate publisher and URL, but assign all reproductions of the
+same underlying report one `lineage_id`. They corroborate transcription and
+attribution, not the original methodology, so they never satisfy an independent
+methodology cross-check and `conclusion_evidence` is capped at `Medium`.
+Agreement across three or more genuinely separately edited reproductions may
+be described as high confidence that the number and ranking were transcribed
+correctly, while the underlying claim remains `Medium` evidence from one
+methodology lineage. Deduplicate syndicated, copied, or near-identical articles
+before counting reproductions. One reproduction, vague attribution, missing
+metric scope, conflicting original-source attribution, or unexplained
+same-scope disagreement remains `Low` and cannot be accepted.
+
+Store `data_period`, `original_report_publication_date`, and
+`reproduction_publication_date` separately. The period shown in a time-series
+table is always `data_period`; never infer it from the report year, article
+date, URL date, or access date. A report published in 2025 about 2024
+transactions is a 2024 observation. Different metrics are separate claims:
+never reconcile or average a user-usage share with transaction-value or
+transaction-count share, and never supply “transaction count” when the
+reproduction says only “market share”.
 
 Do not divide issuer accounting revenue by industry GMV, RSV, retail value,
 shipments, users, or another non-identical denominator. Calculate a share only
@@ -382,7 +460,9 @@ and the final error for the exhausted route.
 
 The source catalog is a seed registry, not a closed allowlist.
 
-Do not reject a source solely because it is absent from the catalog.
+Do not restrict search queries, result domains, retrieval, or candidate
+evaluation to catalog entries. Do not reject a source solely because it is
+absent from the catalog.
 
 Use uncataloged sources when the question requires them and they pass validation.
 
@@ -485,6 +565,13 @@ indexes, app mirrors, and portal indexes can help locate a document, but
 conclusions must cite the original publisher whenever the original can be
 identified and read.
 
+The paywalled-report secondary-reconstruction rule is the only exception for
+using media or portal reproductions as substantive numeric support. It applies
+only after the original identity and access block are documented, uses multiple
+public reproductions from the same disclosed lineage, and carries at most
+`Medium` conclusion evidence. It does not turn republishers into original or
+methodologically independent sources.
+
 A verified-mirror exception applies only when official exchange or regulator
 metadata identifies the exact document but the official document body is
 technically unreadable. Require that the mirror's identity fields match the
@@ -508,15 +595,23 @@ document/announcement ID, status, URL, and replacement relationship.
 
 One failed request never proves permanent closure.
 
-Only declared `fallbacks` are executable route transitions. Adjacent
-alternatives are guidance only: they may help with a changed or related claim,
-but they cannot stand in for an unavailable same-function route. Record the
-scope change and source boundary before using any adjacent evidence.
+For static source-to-source transitions, only declared `fallbacks` are
+executable. Broad dynamic discovery and `:secondary-reconstruction` use the
+declared `open-web-search` route family instead: search-result domains may be
+uncataloged and need not be enumerated in advance. Adjacent alternatives remain
+guidance only; they may help with a changed or related claim, but they cannot
+stand in for an unavailable same-function route. Record the scope change and
+source boundary before using any adjacent evidence.
 
 If a source returns no result, is paywalled, requires unavailable access, or
 fails technically, record its terminal result and continue through the remaining
 applicable routes in the current layer. Escalate to another category only when
 the planner returns it for an unresolved claim.
+
+For a paid original report with consistent public reproductions, preserve both
+outcomes: the original claim remains `blocked`, while the scoped
+`:secondary-reconstruction` child may be `accepted` at `Medium`. Never rewrite
+the paid report as directly inspected.
 
 Report a source gap only after recording every compliant route attempted, its query, access result, and final error.
 
@@ -532,6 +627,9 @@ metric definition, period, geography, denominator, measurement limits, and
 evidence level. Repository records must not depend on local raw-file paths.
 Official filing workflow artifacts continue to follow the separate
 `read-filing` evidence and manifest contracts.
+
+For reproduced paid research, version all three dates separately: the data
+period, original-report publication date, and reproduction publication date.
 
 ## Evidence Levels And Ledger Contract
 

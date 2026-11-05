@@ -1,0 +1,137 @@
+{
+  "requests": [
+    {
+      "schema_version": "1.1",
+      "claim_id": "hikvision-inventory-2025-h1",
+      "claim_type": "interim-filing-inventory",
+      "subject": "杭州海康威视数字技术股份有限公司",
+      "metric": "2025年6月30日合并存货及跌价准备",
+      "geographies": [
+        "Global"
+      ],
+      "industries": [
+        "video surveillance"
+      ],
+      "population": "Hikvision consolidated group",
+      "product_scope": "inventory including contract fulfilment cost",
+      "channel_scope": "all",
+      "measurement_basis": "consolidated balance sheet book value and allowance",
+      "denominator": "not applicable",
+      "period_start": "2025-06-30",
+      "period_end": "2025-06-30",
+      "frequency": "event-driven",
+      "continuity_required": false,
+      "required_latest_period": "2025-06-30",
+      "accepted_units": [
+        "text"
+      ],
+      "definition_constraints": [
+        "Only original dated official statements; publication on or before AS_OF"
+      ],
+      "value_status_allowed": [
+        "observed"
+      ],
+      "minimum_source_authority": "High",
+      "minimum_conclusion_evidence": "High",
+      "minimum_originality": "High",
+      "minimum_independence": "Low",
+      "independent_cross_check_required": false,
+      "absence_claim": false,
+      "as_of": "2026-09-29",
+      "accepted_source_classes": [
+        "issuer-first-party"
+      ]
+    }
+  ],
+  "accepted_candidates": [
+    {
+      "schema_version": "1.1",
+      "claim_id": "hikvision-inventory-2025-h1",
+      "metric": "2025年6月30日合并存货及跌价准备",
+      "frequency": "event-driven",
+      "period_semantics": "event-date",
+      "source": {
+        "immediate_publisher": "杭州海康威视数字技术股份有限公司",
+        "original_publisher": "杭州海康威视数字技术股份有限公司",
+        "publisher_type": "issuer-company",
+        "source_class": "issuer-first-party",
+        "canonical_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF"
+      },
+      "document": {
+        "document_id": "CNINFO-1224368773",
+        "title": "2025年半年度报告",
+        "published_at": "2025-08-02",
+        "canonical_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF"
+      },
+      "values": [
+        {
+          "period": "2025-06-30",
+          "value": "2025年6月30日合并存货账面余额20,510,813,501.03元、跌价准备1,385,888,609.31元、净额19,124,924,891.72元；原材料净额5,720,722,031.46元、在产品1,005,502,691.62元、产成品11,917,384,333.06元、合同履约成本481,315,835.58元。原始半年度报告PDF物理第92页，未经审计。",
+          "unit": "text",
+          "status": "observed",
+          "definition_scope_fingerprint": "4d403859e2905b568c492b12b4ba19dddb5a568ca1299811ad22867673556112",
+          "evidence_id": "CNINFO-1224368773",
+          "event_key": "2025-06-30:hikvision:inventory",
+          "canonical_value": {
+            "value": "2025年6月30日合并存货账面余额20,510,813,501.03元、跌价准备1,385,888,609.31元、净额19,124,924,891.72元；原材料净额5,720,722,031.46元、在产品1,005,502,691.62元、产成品11,917,384,333.06元、合同履约成本481,315,835.58元。原始半年度报告PDF物理第92页，未经审计。",
+            "unit": "text",
+            "definition_scope_fingerprint": "4d403859e2905b568c492b12b4ba19dddb5a568ca1299811ad22867673556112",
+            "reconciliation_id": null
+          }
+        }
+      ],
+      "canonical_unit": "text",
+      "scope": {
+        "geographies": [
+          "Global"
+        ],
+        "industries": [
+          "video surveillance"
+        ],
+        "product_scope": "inventory including contract fulfilment cost",
+        "population": "Hikvision consolidated group",
+        "measurement_basis": "consolidated balance sheet book value and allowance",
+        "channel_scope": "all",
+        "denominator": "not applicable"
+      },
+      "data_vintage": "2025-08-02",
+      "artifact": {
+        "identity": "sha256:2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+        "sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7"
+      },
+      "source_document_identity": {
+        "source_canonical_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+        "document_canonical_url": "https://static.cninfo.com.cn/finalpage/2025-08-02/1224368773.PDF",
+        "document_id": "CNINFO-1224368773",
+        "artifact_sha256": "2e46b4a1b0d2870cc51176668b9a85f6d671929f6ba01320173ef80ba0d462c7",
+        "binding_sha256": "d1ba7f26bfdcf7af28352d504467a0108a64e1b6f172d3d673bcbf788918ad19"
+      },
+      "scope_fingerprint": "4d403859e2905b568c492b12b4ba19dddb5a568ca1299811ad22867673556112",
+      "reconciliations": [],
+      "lineage": {
+        "methodology_owner": "杭州海康威视数字技术股份有限公司",
+        "underlying_dataset_ids": [],
+        "underlying_report_ids": [
+          "CNINFO-1224368773"
+        ],
+        "cited_source_ids": [],
+        "provider_table_id": null
+      },
+      "runtime_evidence": {
+        "source_authority": "High",
+        "conclusion_evidence": "High",
+        "originality": "High",
+        "independence": "Low",
+        "evidence_level": "High"
+      },
+      "market_definition_fingerprint": "819cc2a1d34ba9e893bd8203d0c4f64dba9fcda8cd2ce1225da9cc6263b90872",
+      "series_fingerprint": "259027da70aab1f9f6566be0b5bcff4bbd377edc6c9440409a0c48a327fb5365",
+      "lineage_id": "underlying:1b5653c39bddf5d554dab5cdd58fdb80de695b7a881d6ad048eaf3aa776c59ae"
+    }
+  ],
+  "unresolved_claims": [],
+  "ledger_path": "/tmp/hikvision-inventory/ledger.json",
+  "ledger_sha256": "13ab6bc39bdf6563d29c9b92f16dae2386667883323e9528d14b4eba2721cd01",
+  "status": "accepted",
+  "industry_bundle": null
+}
