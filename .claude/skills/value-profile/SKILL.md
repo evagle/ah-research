@@ -17,6 +17,8 @@ description: Use when a user asks for a complete value-investing profile or full
 
 **操作与写作契约**:详细执行只以`references/operations.md`为准；面向读者的正文只以`references/profile-writing-style.md`为准。主skill只保留编排、验收和所有权边界，不复制两份reference的正文。
 
+**默认取数**:需要新取行情、财务表、券商研报或公司公告时，优先使用已安装的AKShare＋官方AKTools；执行前读取[共享取数指南](../source-discovery/references/akshare-aktools.md)。先复用已绑定证据和同次取数结果，再调用结构化接口；接口缺失、失败或覆盖不足时简短告警并自动切换对应官方来源、其他数据源及网页发现，不停下无关研究。取数通道不改变AS_OF、原文核验、manifest绑定或`source-discovery`编排边界。
+
 ## §0 Skill 运行方式
 
 This skill runs as the **main Claude Code session agent** and orchestrates research via `general-purpose` subagents. It is an instruction document for the main model, not library code. The main agent owns file I/O, user 确认节点, and review; subagents do scoped PDF reads and web research.
@@ -603,12 +605,12 @@ Acceptable后写中文终稿,填可见的`**引用:**`、`**置信度:**`和`**�
 | Step 1.2 fetcher失败 | A股回退cninfo/上交所/深交所,港股回退HKEXnews,然后abort。**绝不生成无filings的破profile** |
 | 用户选的 section id 不在 template | 建议最近匹配（`1.3` → `§1.3 差异化`）; 不静默继续 |
 
-### §4.4 Graduation path (Phase 1落地后)
+### §4.4 当前取数与计算
 
-1. **Step 4 Part 2 bulk** → 子 agent 优先 `ah_research.DataRepository.get_fundamentals(<ticker>, start=<10y>)`, repo 未覆盖回退 PDF。
-2. **Step 5排雷纯数值项**（应收/营收, 商誉/净资产, 有息负债/CFO）→ DataRepository 算术。
-3. **定性 section**（§1-§5, §4.5定性项）继续 PDF。没有数据源能替代管理层原话。
-4. **`scripts/download_filings.py`** 挪进 `src/ah_research/integrations/cninfo_client.py`, 暴露为 repo 方法。
+1. **Step 4 Part 2 bulk** → 优先通过AKTools批量获取所需财务表，按共享取数指南筛选可比财年并复用结果；作为研究工作表，经审计结论仍绑定选中年报原值。
+2. **Step 5排雷纯数值项**（应收/营收、商誉/净资产、有息负债/CFO）→ 对已核对原文并绑定的数值用Python/pandas计算，保存公式和分子分母，不逐项重新联网取数。
+3. **定性section和附注**（§1-§5、§4.5定性项）→ 读取已缓存的原文及页码；券商观点、评级和盈利预测与公司披露事实分开。
+4. **正式证据发布** → 继续使用现有filing/event/market manifest脚本；尚未就绪的`DataRepository`不是取数前置条件。
 
 ### §4.6 Profile写作与读者渲染
 

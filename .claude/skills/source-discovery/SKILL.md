@@ -25,6 +25,20 @@ For a direct site workflow, read the matching guide before retrieving:
 - `references/site-guides/hong-kong-regulatory.md`
 - `references/site-guides/official-statistics.md`
 
+## Default Data Retrieval
+
+For new market data, financial tables, broker reports, and issuer announcements,
+prefer installed AKShare through official AKTools. Read
+[akshare-aktools.md](references/akshare-aktools.md) for interface selection,
+pagination, local Python fallback, original PDFs, and provenance.
+Reuse validated local evidence before fetching. AKTools is a retrieval adapter
+for an applicable source route, not a new authority or planner layer: retain
+the current inventory receipt, route identity, acceptance gate, and ledger.
+Warn briefly and automatically continue through the existing same-function
+sources or web discovery for unsupported facts, coverage gaps, and failed
+interfaces. Preserve accepted partial evidence and continue unaffected work;
+an adapter failure is a progress notice, not a stop condition.
+
 ## Contracts And Helpers
 
 Use the version `1.0` schemas in `references/` without restating their fields:

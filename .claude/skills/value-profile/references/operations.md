@@ -6,6 +6,10 @@
 
 ---
 
+## 取数入口
+
+新增行情、财务表、研报和公告按[共享取数指南](../../source-discovery/references/akshare-aktools.md)优先调用AKTools。先复用已绑定证据和同次请求结果；批量表在本地筛选、计算后供各section消费。需要外部发现的缺口仍由`source-discovery`编排；需要正式filing/event/market绑定的结果仍走现有manifest流程。
+
 ## §3.pre — 三大前提 (§1 / §3 / §5 前置 gate)
 
 - **§3.pre 三大前提 judgement**: 子 agent 在 §1 / §3 / §5 定性段落前先输出3行判定, 依据 §2.2.1 (见 `references/rules.md`)。审计/CFO/ROE 属纯财务数据检查, 与业务理解无关, 所以可做前置 gate。三大前提为假或存疑只阻断数字估值；定性研究、产品分析和不依赖该前提的判断继续完成。

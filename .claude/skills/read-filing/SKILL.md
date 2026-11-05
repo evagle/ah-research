@@ -15,6 +15,8 @@ description: Use when a user asks to read,梳理,解读,or extract evidence from
 
 **共享运行契约**:运行前必须完整读取`.claude/skills/read-filing/references/run-store-contract.md`。共享目录、run隔离、无感resolver、Mode边界和旧路径兼容只以该文件为准。
 
+**默认取数**:新增财务表、券商研报及公司公告取数优先使用AKShare＋官方AKTools，先读[共享取数指南](../source-discovery/references/akshare-aktools.md)。结构化结果用于定位原文、构建工作表和交叉检查；年报选择、附注阅读、官方事件采集、manifest构建和在线重验仍执行本skill既有流程。US财报原值继续以SEC证据为准。
+
 ### source-discovery handoff
 
 `source-discovery`只补充官方交易所证据链之外的同行与行业背景。

@@ -5,6 +5,20 @@ describes routes for that layer; it does not authorize an always-broad search.
 After each layer, validate candidates and use the acceptance gate before asking
 the planner for another layer.
 
+## Structured Retrieval First
+
+For an applicable market-data, financial-table, broker-report, or announcement
+route, prefer AKShare through official AKTools before constructing a new web
+scraper or opening a portal UI. Follow [akshare-aktools.md](akshare-aktools.md).
+This selects the access method within the current route and layer; it does not
+move an aggregator ahead of an applicable official source. For Eastmoney
+A-share report-list retrieval, the installed `stock_research_report_em`
+adapter is preferred over the catalog's older visible-search recipe when it
+works. Record the actual method and outcome; it is not a stable vendor API
+guarantee. Fetch and inspect the PDF before accepting document contents.
+If the interface is absent, fails, or lacks the required coverage, use the
+catalog and site guides for the remaining same-function routes.
+
 ## Gate-Driven Layers
 
 `plan_next_layer` returns only the earliest unresolved applicable layer:
